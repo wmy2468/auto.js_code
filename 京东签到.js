@@ -32,7 +32,7 @@ function jd_sign(){
     // 尝试点击首页
     className("android.view.View").desc("首页").findOnce().click();
     //领京豆
-    var target = className("android.widget.TextView").depth("13").drawingOrder("2").text("领京豆").findOne().bounds();
+    let target = className("android.widget.TextView").depth("13").drawingOrder("2").text("领京豆").findOne().bounds();
     sleep(800);
     click(target.centerX(), target.centerY());
 
@@ -87,14 +87,14 @@ function openInTask() {
             sleep(2000);
         }
     }
-    for (var d = 10; d > 0; d--) {
+    for (let d = 10; d > 0; d--) {
         if (id("com.jingdong.app.mall:id/fd").text("种豆得豆").findOnce() != null && className("android.view.View").text("培养").findOnce() != null) { //8.5.6
-            var d = 0;
+            let d = 0;
         } else if (currentActivity() == "com.jingdong.app.mall.WebActivity") {
             toast("正在等待“种豆得豆”活动界面加载，剩余" + d + "秒……");
             sleep(2000);
         } else {
-            var d = 0;
+            let d = 0;
             toast("当前未处于“种豆得豆”活动加载界面，正在重试……");
         }
     }
@@ -139,7 +139,7 @@ function DoTask() {
                 toast("已尝试点击“可收取营养液”");
                 sleep(2000);
             }
-            var A = className("android.view.View").text("培养").findOnce();
+            let A = className("android.view.View").text("培养").findOnce();
             if (A != null) {
                 toast("A控件查找当前正常");
             } else {
@@ -153,7 +153,7 @@ function DoTask() {
                 toast("当前培养液" + A.parent().child(2).text() + "，已尝试点击培养");
                 sleep(2000);
                 try {
-                    var A = className("android.view.View").text("培养").findOnce();
+                    let A = className("android.view.View").text("培养").findOnce();
                 } catch (e) {
                     console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
                     toast("错误0:1！未处于种豆得豆界面，正在重新尝试……");
@@ -165,8 +165,8 @@ function DoTask() {
         }
         Shou();
         try {
-            var A = className("android.view.View").text("培养").findOnce();
-            var B = A.parent().parent().parent().parent().parent().parent().parent().child(0).child(0);
+            let A = className("android.view.View").text("培养").findOnce();
+            let B = A.parent().parent().parent().parent().parent().parent().parent().child(0).child(0);
         } catch (e) {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
             toast("错误0！未处于种豆得豆界面，正在重新尝试……");
@@ -247,7 +247,7 @@ function DoTask() {
             DoTask();
         }
         try {
-            var B = A.parent().parent().parent().parent().parent().parent().parent().child(0).child(0);
+            let B = A.parent().parent().parent().parent().parent().parent().parent().child(0).child(0);
         } catch (e) {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
             toast("错误1！未处于种豆得豆界面，正在重新尝试……");
@@ -267,21 +267,21 @@ function DoTask() {
             sleep(3000);
             if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce() != null) {
                 if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount() == 3) {
-                    var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
+                    let C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
                 } else if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount() == 2) {
-                    var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
+                    let C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
                 }
                 if (C.child(0).child(0).child(0).childCount() == 2 && C.child(0).child(0).child(0).child(1).text() == "x1" || C.child(0).child(0).child(0).childCount() == 3 && C.child(0).child(0).child(0).child(2).text() == "x1") { //浏览店铺
                     toast("当前浏览店铺：" + C.child(0).child(0).child(0).child(1).text()); //上限
                     let sx = C.child(0).child(0).child(0).child(1).text();
-                    var limit = sx.replace("每日上限", "");
+                    let limit = sx.replace("每日上限", "");
                     let m = C.child(0).child(0).child(0).child(0).bounds();
                     click(m.centerX(), m.centerY());
                     toast("已尝试点击“浏览店铺”按钮");
                     sleep(3000);
-                    var over = 0;
+                    let over = 0;
                     try {
-                        var X = className("android.view.View").scrollable(true).findOnce().bounds();
+                        let X = className("android.view.View").scrollable(true).findOnce().bounds();
                     } catch (e) {
                         console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
                         toast("未成功进入“进店并关注”菜单界面，正在重试中……");
@@ -289,9 +289,9 @@ function DoTask() {
                         DoTask();
 
                     }
-                    var ALL = className("android.view.View").text("进店并关注").find().size();
+                    let ALL = className("android.view.View").text("进店并关注").find().size();
                     toast("【“进店并关注”数量】：" + ALL + "【可点击区域】：" + X.top, X.bottom);
-                    for (var i = 0; i <= ALL; i++) {
+                    for (let i = 0; i <= ALL; i++) {
                         while (true) {
                             if (over >= limit) {
                                 toast("“进店并关注”获得营养液已达每日上限" + limit + "，返回继续进行下一任务");
@@ -301,7 +301,7 @@ function DoTask() {
                                     Justback();
                                 }
                                 sleep(3000);
-                                var i = ALL;
+                                let i = ALL;
                                 break;
                             } else if (i >= ALL) {
                                 toast("已找完全部" + ALL + "个店铺，在浏览" + i + "个店铺后共找到" + over + "瓶营养液，但未达到今日" + limit + "个上限")
@@ -324,13 +324,13 @@ function DoTask() {
                                     click(a.bounds().centerX(), a.bounds().centerY());
                                     sleep(3000);
                                     if (currentActivity() == "com.jd.lib.jshop.jshop.JshopMainShopActivity" || className("android.widget.EditText").findOnce() != null) {
-                                        for (var z = 5; z > 0; z--) {
+                                        for (let z = 5; z > 0; z--) {
                                             if (className("android.view.View").text("营养液走丢了～").findOnce() != null) {
-                                                var z = 0;
+                                                let z = 0;
                                                 if (className("android.view.View").text("营养液走丢了～").findOnce().parent().parent().childCount() == 3) {
-                                                    var za = className("android.view.View").text("营养液走丢了～").findOnce().parent().parent().child(2).child(1);
+                                                    let za = className("android.view.View").text("营养液走丢了～").findOnce().parent().parent().child(2).child(1);
                                                 } else if (className("android.view.View").text("营养液走丢了～").findOnce().parent().parent().childCount() == 2) {
-                                                    var za = className("android.view.View").text("营养液走丢了～").findOnce().parent().parent().child(1).child(1);
+                                                    let za = className("android.view.View").text("营养液走丢了～").findOnce().parent().parent().child(1).child(1);
                                                 }
                                                 if (za.clickable() == true) {
                                                     za.click();
@@ -342,19 +342,19 @@ function DoTask() {
                                                 }
                                                 sleep(3000);
                                             } else if (className("android.view.View").text("1个营养液").findOnce() != null || className("android.view.View").textContains("个营养液").findOnce() != null) {
-                                                var z = 0;
+                                                let z = 0;
                                                 if (className("android.view.View").text("1个营养液").findOnce() != null && className("android.view.View").text("1个营养液").findOnce().parent().parent().childCount() == 3) {
-                                                    var zat = className("android.view.View").text("1个营养液").findOnce();
-                                                    var za = className("android.view.View").text("1个营养液").findOnce().parent().parent().child(2).child(1);
+                                                    let zat = className("android.view.View").text("1个营养液").findOnce();
+                                                    let za = className("android.view.View").text("1个营养液").findOnce().parent().parent().child(2).child(1);
                                                 } else if (className("android.view.View").textContains("个营养液").findOnce() != null && className("android.view.View").textContains("个营养液").findOnce().parent().parent().childCount() == 3) {
-                                                    var zat = className("android.view.View").textContains("个营养液").findOnce();
-                                                    var za = className("android.view.View").textContains("个营养液").findOnce().parent().parent().child(2).child(1);
+                                                    let zat = className("android.view.View").textContains("个营养液").findOnce();
+                                                    let za = className("android.view.View").textContains("个营养液").findOnce().parent().parent().child(2).child(1);
                                                 } else if (className("android.view.View").text("1个营养液").findOnce() != null && className("android.view.View").text("1个营养液").findOnce().parent().parent().childCount() == 2) {
-                                                    var zat = className("android.view.View").text("1个营养液").findOnce();
-                                                    var za = className("android.view.View").text("1个营养液").findOnce().parent().parent().child(1).child(1);
+                                                    let zat = className("android.view.View").text("1个营养液").findOnce();
+                                                    let za = className("android.view.View").text("1个营养液").findOnce().parent().parent().child(1).child(1);
                                                 } else if (className("android.view.View").textContains("个营养液").findOnce() != null && className("android.view.View").textContains("个营养液").findOnce().parent().parent().childCount() == 2) {
-                                                    var zat = className("android.view.View").textContains("个营养液").findOnce();
-                                                    var za = className("android.view.View").textContains("个营养液").findOnce().parent().parent().child(1).child(1);
+                                                    let zat = className("android.view.View").textContains("个营养液").findOnce();
+                                                    let za = className("android.view.View").textContains("个营养液").findOnce().parent().parent().child(1).child(1);
                                                 }
                                                 if (za.clickable() == true) {
                                                     za.click();
@@ -400,9 +400,9 @@ function DoTask() {
             DoTask();
         }
         //挑选商品任务
-        var A = className("android.view.View").text("培养").findOnce();
+        let A = className("android.view.View").text("培养").findOnce();
         try {
-            var B = A.parent().parent().parent().parent().parent().parent().parent().child(0).child(0);
+            let B = A.parent().parent().parent().parent().parent().parent().parent().child(0).child(0);
         } catch (e) {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
             toast("错误1！未处于种豆得豆界面，正在重新尝试……");
@@ -422,23 +422,23 @@ function DoTask() {
             sleep(3000);
             if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce() != null) {
                 if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount() == 3) {
-                    var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
+                    let C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
                 } else if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount() == 2) {
-                    var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
+                    let C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
                 }
                 if (C.child(1).child(0).child(0).childCount() == 2 && C.child(1).child(0).child(0).child(1).text() == "x1" || C.child(1).child(0).child(0).childCount() == 3 && C.child(1).child(0).child(0).child(2).text() == "x1") { //挑选商品
                     toast("当前挑选商品：" + C.child(1).child(0).child(0).child(1).text()); //上限
                     let sx = C.child(1).child(0).child(0).child(1).text();
-                    var limit = sx.replace("每日上限", "");
+                    let limit = sx.replace("每日上限", "");
                     let m = C.child(1).child(0).child(0).child(0).bounds();
                     click(m.centerX(), m.centerY());
                     toast("已尝试点击“挑选商品”按钮");
                     sleep(3000);
-                    var over = 0;
-                    var i = 1;
+                    let over = 0;
+                    let i = 1;
                     while (true) {
                         try {
-                            var C = className("android.webkit.WebView").text("种豆得豆").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).child(0).parent().child(3).child(0);
+                            let C = className("android.webkit.WebView").text("种豆得豆").findOnce().child(0).child(0).child(0).child(0).child(0).child(0).child(0).parent().child(3).child(0);
                         } catch (e) {
                             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
                             toast("未处于进入“选ta并关注”菜单界面，正在重试中……");
@@ -446,21 +446,21 @@ function DoTask() {
                             DoTask();
                             break;
                         }
-                        var str = C.child(1).text(); // N/总数
+                        let str = C.child(1).text(); // N/总数
                         let x = str.search("/");
-                        var ALL = null;
-                        for (var a = str.length; a > 0; a--) {
+                        let ALL = null;
+                        for (let a = str.length; a > 0; a--) {
                             if (a == x) {
-                                var a = 0;
+                                let a = 0;
                             } else {
                                 if (ALL == null) {
-                                    var ALL = str[a];
+                                    let ALL = str[a];
                                 } else {
-                                    var ALL = str[a] + ALL;
+                                    let ALL = str[a] + ALL;
                                 }
                             }
                         }
-                        var Now = str.replace("/" + ALL, "");
+                        let Now = str.replace("/" + ALL, "");
                         toast("当前为第" + Now + "个卡片，卡片总数为" + ALL);
                         if (over >= limit) {
                             toast("“选ta并关注”获得营养液已达每日上限" + limit + "，返回继续进行下一任务");
@@ -493,9 +493,9 @@ function DoTask() {
                                     toast("关注成功，获得1瓶营养液");
                                     over++;
                                 }
-                                for (var loop = 5; loop > 0; loop--) {
+                                for (let loop = 5; loop > 0; loop--) {
                                     if (currentActivity() == "com.jd.lib.productdetail.ProductDetailActivity" || id("com.jd.lib.productdetail:id/akl").findOnce() != null) {
-                                        var loop = 0;
+                                        let loop = 0;
                                         sleep(2000);
                                         if (className("android.widget.ImageView").desc("返回").clickable(true).findOnce() != null) {
                                             className("android.widget.ImageView").desc("返回").clickable(true).findOnce().click();
@@ -529,8 +529,8 @@ function DoTask() {
         }
         //关注频道
         try {
-            var A = className("android.view.View").text("培养").findOnce();
-            var B = A.parent().parent().parent().parent().parent().parent().parent().child(0).child(0);
+            let A = className("android.view.View").text("培养").findOnce();
+            let B = A.parent().parent().parent().parent().parent().parent().parent().child(0).child(0);
         } catch (e) {
             console.warn("当前活动：" + currentActivity() + "\n当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
             toast("错误1！未处于种豆得豆界面，正在重新尝试……");
@@ -550,21 +550,21 @@ function DoTask() {
             sleep(3000);
             if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce() != null) {
                 if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount() == 3) {
-                    var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
+                    let C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(2);
                 } else if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().childCount() == 2) {
-                    var C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
+                    let C = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().parent().parent().parent().child(1);
                 }
                 if (C.child(2).child(0).child(0).childCount() == 2 && C.child(2).child(0).child(0).child(1).text() == "x1" || C.child(2).child(0).child(0).childCount() == 3 && C.child(2).child(0).child(0).child(2).text() == "x1") { //关注频道
                     toast("当前关注频道：" + C.child(2).child(0).child(0).child(1).text()); //上限
                     let sx = C.child(2).child(0).child(0).child(1).text();
-                    var limit = sx.replace("每日上限", "");
+                    let limit = sx.replace("每日上限", "");
                     let m = C.child(2).child(0).child(0).child(0).bounds();
                     click(m.centerX(), m.centerY());
                     toast("已尝试点击“关注频道”按钮");
                     sleep(3000);
-                    var over = 0;
+                    let over = 0;
                     try {
-                        var X = id("com.jingdong.app.mall:id/fd").text("关注频道任务").findOnce().parent().bounds();
+                        let X = id("com.jingdong.app.mall:id/fd").text("关注频道任务").findOnce().parent().bounds();
                     } catch (e) {
                         console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
                         toast("未成功进入“进入并关注”菜单界面，正在重试中……");
@@ -572,9 +572,9 @@ function DoTask() {
                         DoTask();
 
                     }
-                    var ALL = className("android.view.View").text("进入并关注").find().size();
+                    let ALL = className("android.view.View").text("进入并关注").find().size();
                     toast("【“进入并关注”数量】：" + ALL + "【可点击区域】：" + X.bottom, device.height);
-                    for (var i = 0; i <= ALL; i++) {
+                    for (let i = 0; i <= ALL; i++) {
                         while (true) {
                             if (over >= limit) {
                                 toast("“进入并关注”获得营养液已达每日上限" + limit + "，返回继续进行下一任务");
@@ -584,7 +584,7 @@ function DoTask() {
                                     Justback();
                                 }
                                 sleep(3000);
-                                var i = ALL;
+                                let i = ALL;
                                 break;
                             } else if (i >= ALL) {
                                 toast("已找完全部" + ALL + "个店铺，在浏览" + i + "个店铺后共找到" + over + "瓶营养液，但未达到今日" + limit + "个上限")
@@ -682,8 +682,8 @@ function DoTask() {
         sleep(2000);
     }
     try {
-        var A = className("android.view.View").text("培养").findOnce();
-        var B = A.parent().parent().parent().parent().parent().parent().parent().child(0).child(0);
+        let A = className("android.view.View").text("培养").findOnce();
+        let B = A.parent().parent().parent().parent().parent().parent().parent().child(0).child(0);
     } catch (e) {
         console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
         toast("错误2！未处于种豆得豆界面，正在重新尝试……");
@@ -700,7 +700,7 @@ function DoTask() {
             toast("已尝试点击蒙版“逛逛会场”按钮");
             sleep(2000);
         }
-        for (var w = 10; w > 0; w--) {
+        for (let w = 10; w > 0; w--) {
             toast("正在等待“会场”加载，剩余" + w + "秒……");
             sleep(1000);
         }
@@ -723,8 +723,8 @@ function DoTask() {
     }
 
     try {
-        var A = className("android.view.View").text("培养").findOnce();
-        var B = A.parent().parent().parent().parent().parent().parent().parent().child(0).child(0);
+        let A = className("android.view.View").text("培养").findOnce();
+        let B = A.parent().parent().parent().parent().parent().parent().parent().child(0).child(0);
     } catch (e) {
         console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
         toast("错误4！未处于种豆得豆界面，正在重新尝试……");
@@ -738,9 +738,9 @@ function DoTask() {
         sleep(2000);
         try {
             if (className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().childCount() == 3) {
-                var b = className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().child(2);
+                let b = className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().child(2);
             } else if (className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().childCount() == 2) {
-                var b = className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().child(1);
+                let b = className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().parent().parent().parent().child(1);
             }
         } catch (e) {
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
