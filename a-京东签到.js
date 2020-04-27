@@ -1,8 +1,10 @@
-var func = require('./function_list.js');
+var func = require('./function_list');
 
-jd_sign();
-openInTask();
-DoTask();
+function JD(){
+    jd_sign();
+    openInTask();
+    DoTask();
+}
 
 function Justback(){
     sleep(800);
@@ -37,8 +39,24 @@ function jd_sign(){
         func.wait_item_load(pkg, 'text', text, className);
         toastLog('签到成功');
     }
-
-    func.go_back(); 
+    text = '首页';
+    while (!func.wait_item_load(pkg, 'text', text, className)){
+        func.go_back();
+        sleep(2000);
+    }
+    text = '领京豆';
+    func.wait_load_click(pkg, 'text', text, className);
+    desc = '领券中心';
+    className = 'android.widget.ImageView';
+    func.wait_item_load(pkg, 'desc', desc, className);
+    text = '立即签到';
+    className = 'android.widget.TextView';
+    if (!func.item_is_load(pkg, 'text', text, className)) {
+        func.wait_load_click(pkg, 'text', text, className);
+        desc = '关闭弹窗';
+        className = 'android.widget.ImageView';
+        func.wait_load_click(pkg, 'desc', desc, className);
+    }
 }
 
 function openInTask() {
@@ -92,8 +110,6 @@ function openInTask() {
         }
     }
 }
-
-//log(className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce());//关注任务悬浮按钮
 
 function DoTask() {
     if (id("com.jingdong.app.mall:id/fd").text("种豆得豆").findOnce() != null && className("android.view.View").text("收京豆啦!").findOnce() != null) {
@@ -784,3 +800,5 @@ function DoTask() {
     Shou();
     dialogs.alert("种豆得豆自动脚本：\n脚本已运行完成");
 }
+
+module.exports = JD

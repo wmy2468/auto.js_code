@@ -4,8 +4,8 @@ function getMaid (packageName) {
     launch () {
       launch(packageName)
       sleep(1000)
-      if (currentPackage() === 'com.miui.securitycenter') {
-        click('允许')
+      if (currentPackage() === 'com.android.settings') {
+        click('强行停止')
       }
     },
     close () {

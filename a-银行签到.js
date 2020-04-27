@@ -1,5 +1,6 @@
-var func = require('function_list.js');
+var func = require('./function_list');
 
+spdbccc();
 icbc_elife();
 
 // ---------------------浦发签到---------------------------
