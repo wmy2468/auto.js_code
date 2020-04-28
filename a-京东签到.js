@@ -44,16 +44,16 @@ function jd_sign(){
     }
     text = '领券';
     func.wait_load_click('text', text, clsName);
-    desc = '领券中心';
+    descs = '领券中心';
     clsName = 'android.widget.ImageView';
-    func.wait_item_load('desc', desc, clsName);
+    func.wait_item_load('desc', descs, clsName);
     text = '立即签到';
     clsName = 'android.widget.TextView';
     if (func.item_is_load('text', text, clsName)) {
         func.wait_load_click('text', text, clsName);
-        desc = '关闭弹窗';
+        descs = '关闭弹窗';
         clsName = 'android.widget.ImageView';
-        func.wait_load_click('desc', desc, clsName);
+        func.wait_load_click('desc', descs, clsName);
         Justback();
     }
     else {

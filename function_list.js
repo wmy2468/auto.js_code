@@ -103,10 +103,10 @@ function run_app (pkg) {
     while (true) {
         if (currentPackage() != pkg) {
             log(pkg + '--未打开，执行打开...');
-            app.launch(pkg);
-            sleep(3000);
+            let apps = getAppName(pkg);
+            app.launchApp(apps);
+            sleep(2000);
         } else {
-            sleep(1000);
             break;
         }
     }
@@ -119,7 +119,7 @@ function act_is_load(act) {
 
 function go_back (){
     back();
-    sleep(2000);
+    sleep(1000);
 }
 
 module.exports = {
