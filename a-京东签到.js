@@ -1,61 +1,63 @@
 var func = require('./function_list');
 
-function JD(){
-    jd_sign();
-    openInTask();
-    DoTask();
-}
+jd_sign();
+openInTask();
+DoTask();
 
 function Justback(){
-    sleep(800);
     back();
-    sleep(1500);
+    sleep(3000);
 }
 
 function jd_sign(){
-    let pkg, act, className,text;
+    let pkg, act, clsName,text;
     pkg = 'com.jingdong.app.mall';
     func.run_app('com.jingdong.app.mall');
+    toastLog('等待APP 跳过广告');
+    sleep(4000);
     act = 'com.jingdong.app.mall.MainFrameActivity';
-    if (!func.check_activity(act)) {
+    if (currentActivity != act) {
         func.go_back();
     }
-    sleep(1000);
-    className = 'android.widget.TextView';
+    clsName = 'android.widget.TextView';
     text = '首页';
-    func.item_click(pkg, 'text', text, className);
+    func.wait_load_click('text', text, clsName);
     text = '领京豆';
-    func.wait_load_click(pkg, 'text', text, className);
+    func.wait_load_click('text', text, clsName);
     text = '进店领豆';
-    func.wait_item_load(pkg, 'text', text, className);
+    func.wait_item_load('text', text, clsName);
     text = '已连续签到';
-    if (func.item_is_load(pkg, 'text', text, className)) {
+    if (func.item_is_load('text', text, clsName)) {
         toastLog('今日已签到');
     }
     else {
         text = '签到领京豆';
-        func.item_click(pkg, 'text', text, className);
+        func.wait_load_click('text', text, clsName);
         text = '签到提醒';
-        func.wait_item_load(pkg, 'text', text, className);
+        func.wait_item_load('text', text, clsName);
         toastLog('签到成功');
     }
     text = '首页';
-    while (!func.wait_item_load(pkg, 'text', text, className)){
+    while (!func.item_is_load('text', text, clsName)){
         func.go_back();
         sleep(2000);
     }
-    text = '领京豆';
-    func.wait_load_click(pkg, 'text', text, className);
+    text = '领券';
+    func.wait_load_click('text', text, clsName);
     desc = '领券中心';
-    className = 'android.widget.ImageView';
-    func.wait_item_load(pkg, 'desc', desc, className);
+    clsName = 'android.widget.ImageView';
+    func.wait_item_load('desc', desc, clsName);
     text = '立即签到';
-    className = 'android.widget.TextView';
-    if (!func.item_is_load(pkg, 'text', text, className)) {
-        func.wait_load_click(pkg, 'text', text, className);
+    clsName = 'android.widget.TextView';
+    if (func.item_is_load('text', text, clsName)) {
+        func.wait_load_click('text', text, clsName);
         desc = '关闭弹窗';
-        className = 'android.widget.ImageView';
-        func.wait_load_click(pkg, 'desc', desc, className);
+        clsName = 'android.widget.ImageView';
+        func.wait_load_click('desc', desc, clsName);
+        Justback();
+    }
+    else {
+        toastLog('今日已领券');
     }
 }
 
@@ -83,7 +85,7 @@ function openInTask() {
             // app.startActivity({
             //     action: "android.intent.action.VIEW", //此处可为其他值
             //     packageName: "com.jingdong.app.mall",
-            //     className: "com.jingdong.app.mall.main.MainActivity"
+            //     clsName: "com.jingdong.app.mall.main.MainActivity"
             // });
             log("当前未处于京东APP中，正在重新打开京东……");
             console.warn("当前活动：" + currentActivity() + "，当前包名：" + currentPackage() + "当前应用名：" + getAppName(currentPackage()));
@@ -800,5 +802,3 @@ function DoTask() {
     Shou();
     dialogs.alert("种豆得豆自动脚本：\n脚本已运行完成");
 }
-
-module.exports = JD

@@ -1,170 +1,137 @@
 auto.waitFor();
 // Function list-----------------------------------------------------------
+function find_child_item(type, val, clsName) {
+    if (clsName == undefined || clsName == '') {
+        clsName = 'android.widget.TextView';
+    }
+    let target = null;
+    switch (type){
+        case 'text':
+            if (text(val).findOnce() != null) {
+            text(val).findOnce().children().forEach(
+                child => {target = child.findOne(className(clsName));});
+            }
+            break;
+        case 'id':
+            if (id(val).findOnce() != null) {
+                id(val).findOnce().children().forEach(
+                child => {target = child.findOne(className(clsName));});
+            }
+            break;
+    }
+    if (target != null) {return target;}
+    else {return false;}
+}
 
-function func() {
-    return {
-        wait_load_click(pkg, type, value, className ,value_id) {
-            wait_item_load(pkg, type, value, className,value_id);
-            if (item_is_load(pkg, type, value, className,value_id)) {
-                item_click(pkg, type, value, className,value_id);
-                return true;
-            }
-            else {return false;}
-        },
-
-        load_click(pkg, type, value, className ,value_id) {
-            if (item_is_load(pkg, type, value, className,value_id)) {
-                item_click(pkg, type, value, className,value_id);
-                return true;
-            }
-            else {return false;}
-        },
-        // 判断元素是否加载
-        item_is_load(pkg, type, value, className, value_id) {
-            // 设置classname 默认值
-            if (className == undefined || className == '') {
-                className = 'android.widget.TextView';
-            }
-            let result;
-            switch (type) {
-                case 'text':
-                    result = packageName(pkg).text(value).className(className).findOnce();
-                    break;
-                case 'id':
-                    result = packageName(pkg).id(value).className(className).findOnce();
-                    break;
-                case 'desc':
-                    result = packageName(pkg).desc(value).className(className).findOnce();
-                    break;
-                case 'text+id':
-                    result = packageName(pkg).text(value).id(value_id).className(className).findOnce();
-                    break;
-            }
-            if (result != null) {
-                toastLog(type + '--' + value + '--已加载');
-                return true;
-            } 
-            else {
-                toastLog(type + '--' + value + '--未加载');
-                return false;
-            }
-        },
-        // 等待元素加载
-        wait_item_load(pkg, type, value, className, value_id) {
-            // 设置classname 默认值
-            if (className == undefined || className == '') {
-                className = 'android.widget.TextView';
-            }
-            let result;
-            switch (type) {
-                case 'text':
-                    result = packageName(pkg).text(value).className(className).findOne();
-                    break;
-                case 'id':
-                    result = packageName(pkg).id(value).className(className).findOne();
-                    break;
-                case 'desc':
-                    result = packageName(pkg).desc(value).className(className).findOne();
-                    break;
-                case 'text+id':
-                    result = packageName(pkg).text(value).id(value_id).className(className).findOne();
-                    break;
-            }
-            if (result != null) {
-                toastLog(type + '--' + value + '--已加载');
-                return true;
-            } 
-            else {
-                toastLog(type + '--' + value + '--未加载');
-                return false;
-            }
-        },
-        // 点击元素
-        item_click(pkg, type, value, className, value_id) {
-            let point;
-            // 设置classname 默认值
-            if (className == undefined || className == '') {
-                className = 'android.widget.TextView';
-            }
-            switch (type) {
-                case 'id':
-                    point = packageName(pkg).className(className).id(value).findOnce();
-                    if (point != null) {
-                        if (point.clickable()) {
-                            point.click();
-                        }
-                        else {
-                            click(point.bounds().centerX(), point.bounds().centerY());
-                        }
-                    }
-                    sleep(800);
-                    break;
-                case 'text':
-                    point = packageName(pkg).className(className).text(value).findOnce();
-                    if (point != null) {
-                        if (point.clickable()) {
-                            point.click();
-                        }
-                        else {
-                            click(point.bounds().centerX(), point.bounds().centerY());
-                        }
-                    }
-                    sleep(800);
-                    break;
-                case 'desc':
-                    point = packageName(pkg).className(className).desc(value).findOnce();
-                    if (point != null) {
-                        if (point.clickable()) {
-                            point.click();
-                        }
-                        else {
-                            click(point.bounds().centerX(), point.bounds().centerY());
-                        }
-                    }
-                    sleep(800);
-                    break;
-                case 'text+id':
-                    point = packageName(pkg).className(className).text(value).id(value_id).findOnce();
-                    if (point != null) {
-                        if (point.clickable()) {
-                            point.click();
-                        }
-                        else {
-                            click(point.bounds().centerX(), point.bounds().centerY());
-                        }
-                    }
-                    sleep(800);
-                    break;
-            }
-        },
-        // 判断是否启动app
-        run_app(pkg) {
-            while (true) {
-                if (currentPackage() != pkg) {
-                    toastLog(pkg + '--未打开，执行打开...');
-                    app.launch(pkg);
-                    sleep(3000);
-                } else {
-                    sleep(1000);
-                    break;
-                }
-            }
-        },
-
-        check_activity(act) {
-            if (currentActivity() == act) {return true;}
-            else {return false;}
-        },
-
-        go_back(){
-            back();
+function wait_load_click (type, val, clsName) {
+    let po = wait_item_load(type, val, clsName);
+    item_click(po);
+}
+// 判断元素是否加载
+function item_is_load (type, val, clsName) {
+    // 设置classname 默认值
+    if (clsName == undefined || clsName == '') {
+        clsName = 'android.widget.TextView';
+    }
+    let target;
+    switch (type) {
+        case 'text':
+            target = text(val).className(clsName).findOnce();
+            break;
+        case 'id':
+            target = id(val).className(clsName).findOnce();
+            break;
+        case 'desc':
+            target = desc(val).className(clsName).findOnce();
+            break;
+        case 'text+id':
+            let text_id = val.split('+');
+            let text_val = text_id[0];
+            let id_val = text_id[1];
+            target = text(text_val).id(id_val).className(clsName).findOnce();
+            break;
+    }
+    if (target != null) {
+        log(type + '--' + val + '--已加载');
+        return target;
+    } 
+    else {
+        log(type + '--' + val + '--未加载');
+        return false;
+    }
+}
+// 等待元素加载
+function wait_item_load (type, val, clsName) {
+    // 设置classname 默认值
+    if (clsName == undefined || clsName == '') {
+        clsName = 'android.widget.TextView';
+    }
+    let target;
+    switch (type) {
+        case 'text':
+            target = text(val).className(clsName).findOne();
+            break;
+        case 'id':
+            target = id(val).className(clsName).findOne();
+            break;
+        case 'desc':
+            target = desc(val).className(clsName).findOne();
+            break;
+        case 'text+id':
+            let text_id = val.split('+');
+            let text_val = text_id[0];
+            let id_val = text_id[1];
+            target = text(text_val).id(id_val).className(clsName).findOne();
+            break;
+    }
+    log(type + '--' + val + '--已加载');
+    return target;
+}
+// 点击元素
+function item_click (po) {
+    if (po.clickable()) {
+        sleep(800);
+        po.click();
+    }
+    else {
+        sleep(800);
+        click(po.bounds().centerX(), po.bounds().centerY());
+    }
+}
+// 判断是否启动app
+function run_app (pkg) {
+    while (true) {
+        if (currentPackage() != pkg) {
+            log(pkg + '--未打开，执行打开...');
+            app.launch(pkg);
+            sleep(3000);
+        } else {
             sleep(1000);
+            break;
         }
     }
 }
 
-global.func = func
-module.exports = func
+function act_is_load(act) {
+    if (currentActivity() === act) {return true;}
+    else {return false;}
+}
+
+function go_back (){
+    back();
+    sleep(2000);
+}
+
+module.exports = {
+    wait_load_click:wait_load_click,
+    item_is_load:item_is_load,
+    wait_item_load:wait_item_load,
+    item_click:item_click,
+    run_app:run_app,
+    go_back:go_back,
+    act_is_load:act_is_load,
+    find_child_item:find_child_item
+}
 
 //例子
 // const square = require('square.js');
@@ -173,7 +140,7 @@ module.exports = func
 // square 模块定义在 square.js 中：
 
 // 赋值给 `exports` 不会修改模块，必须使用 `module.exports`
-// module.exports = function(width) {
+// module.exports (width) {
 //   return {
 //     area: () => width ** 2
 //   };
