@@ -89,12 +89,18 @@ function wait_item_load (type, val, clsName) {
 }
 // 点击元素
 function item_click (po) {
+    if (po == null) {
+        log('输入点为null 无法点击');
+        return;
+    }
     if (po.clickable()) {
-        sleep(800);
+        log('已点击clickable');
+        sleep(2000);
         po.click();
     }
     else {
-        sleep(800);
+        log('已点击centerXY');
+        sleep(2000);
         click(po.bounds().centerX(), po.bounds().centerY());
     }
 }
@@ -103,9 +109,10 @@ function run_app (pkg) {
     while (true) {
         if (currentPackage() != pkg) {
             log(pkg + '--未打开，执行打开...');
-            let apps = getAppName(pkg);
-            app.launchApp(apps);
-            sleep(2000);
+            app.launch(pkg)
+            //let apps = getAppName(pkg);
+            //app.launchApp(apps);
+            sleep(4000);
         } else {
             break;
         }
@@ -122,7 +129,14 @@ function go_back (){
     sleep(1000);
 }
 
+
+function go_home() {
+    home();
+    sleep(1500);
+}
+
 module.exports = {
+    go_home:go_home,
     wait_load_click:wait_load_click,
     item_is_load:item_is_load,
     wait_item_load:wait_item_load,
