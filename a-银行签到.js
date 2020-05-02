@@ -79,7 +79,7 @@ function jdjr() {
         return;
     } 
     else {
-        po = func.item_is_load('desc', descs, clsName);
+        po = func.item_is_load('text', texts, clsName);
         func.item_click(po);
         return;
     }
