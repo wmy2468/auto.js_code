@@ -2,12 +2,12 @@ var func = require('./function_list');
 
 pufa();
 func.go_home();
-gonghang();
 zhaohang();
 yunshanfu();
 youchu();
 jiaohang();
 jdjr();
+gonghang();
 alert('执行完成');
 
 // ---------------------京东金融签到---------------------------
@@ -73,13 +73,13 @@ function jdjr() {
     descs = '可领取';
     texts = '可领取';
     // 判断是否已领券
-    po = func.item_is_load('desc', descs, clsName);
+    po = func.item_is_load('text', texts, clsName);
     if (po != false) {
         func.item_click(po);
         return;
     } 
     else {
-        po = func.item_is_load('text', texts, clsName);
+        po = func.item_is_load('desc', descs, clsName);
         func.item_click(po);
         return;
     }
@@ -104,7 +104,7 @@ function yunshanfu() {
     ids = 'frog_float_notgif';
     clsName = 'android.widget.ImageView';
     if (func.item_is_load('id', ids, clsName) == false) {
-        home();
+        func.go_home();
         sleep(1000);
         func.run_app(pkg);
     }
@@ -202,7 +202,7 @@ function youchu() {
     clsName = 'android.widget.ImageView';
     ids = 'module_08000000_iv';
     if (func.item_is_load('id', ids ,clsName) == false) {
-        home();
+        func.go_home();
         sleep(1000);
         func.run_app(pkg);
         }
@@ -243,7 +243,7 @@ function pufa() {
     ids = 'iv_user_leader_title_3';
     clsName = 'android.widget.ImageView';
     if (func.item_is_load('id', ids, clsName) == false) {
-        home();
+        func.go_home();
         func.run_app(pkg);
     }
     func.wait_load_click('id', ids, clsName);
@@ -293,11 +293,14 @@ function gonghang() {
     
     // 循环判断是否已加载
     clsName = 'android.view.View';
-    texts = '已签到';
-    while (func.item_is_load('text', texts, clsName) == false) {
+    texts1 = '已签到';
+    texts2 = '非签到日，周一见';
+    while (func.item_is_load('text', texts1, clsName) == false
+    &&
+     func.item_is_load('text', texts2, clsName) == false) {
         texts = '点击签到';
         func.wait_load_click('text', texts, clsName);
-        texts = '已签到';
+        sleep(2000);
     }
     console.log('工行完成');
 }
@@ -342,4 +345,3 @@ function jiaohang() {
     }
 }
 // ---------------------买单吧签到---------------------------
-

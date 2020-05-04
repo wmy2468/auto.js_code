@@ -131,8 +131,9 @@ function go_back (){
 
 
 function go_home() {
-    home();
-    sleep(1500);
+    sleep(800);
+    launchApp("Auto.js");
+    sleep(2000);
 }
 
 module.exports = {
