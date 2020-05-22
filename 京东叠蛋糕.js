@@ -8,8 +8,9 @@ main();
 // });
 function main() {
     run_app('京东');
-    //jd_sign();
+    jd_sign();
     cakes();
+    alert('已完成！');
 }
 
 function run_app(act_name) {
@@ -61,7 +62,6 @@ function jd_sign() {
 }
 
 
-
 function cakes() {
     // 等待蛋糕界面加载
     while (className('android.view.View').text('当前蛋糕：').findOnce() == null) {
@@ -71,7 +71,6 @@ function cakes() {
     }
     sleep(1000);
     // 检测弹窗是否有立即签到
-    // TODO 待检查:
     sign_immediately = textContains('立即签到').findOnce();
     if (sign_immediately != null) {
         center_click(sign_immediately);
@@ -80,11 +79,12 @@ function cakes() {
     let mission = className('android.view.View').text('做任务领金币').findOne();
     center_click(mission);
     let idx = 1;
-    let idxText;
+    let idxText, unComplete;
     while (true) {
         // 等待任务界面出现
         className('android.view.View').textContains('签到').findOne();
-        var unComplete = text('去完成').find();
+        sleep(3500);
+        unComplete = text('去完成').find();
         if (unComplete.nonEmpty()) {
             if (unComplete.length == 1) { break; }
             idxText = unComplete[idx].parent().parent().parent().child(0).child(1).text();
@@ -101,12 +101,14 @@ function cakes() {
     }
 }
 
-//toastLog(textContains('点击加购以下').findOnce());
+//toastLog(desc('关注有礼按钮').id('com.jd.lib.jshop:id/nu').findOnce());
 
 function after_click() {
     sleep(3500);
     let ddPets = textContains('东东萌宠').findOnce();
     let beans = className('TextView').text('豆豆成长值').findOnce();
+    let beans2 = className('TextView').text('豆苗成长值').findOnce();
+    let beans3 = className('TextView').text('记得点击气泡浇灌营养液哦！！').findOnce();
     let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
     let getBeans = className('TextView').text('领京豆').findOnce();
     let palyPlay = className('TextView').text('玩一玩').id('fd').findOnce();
@@ -136,7 +138,8 @@ function after_click() {
         back_way();
     }
     else if (ddPets != null || beans != null || getBeans != null
-        || couponCenter != null || palyPlay != null) {
+        || couponCenter != null || palyPlay != null || beans2 != null 
+        || beans3 != null) {
         sleep(1000);
         back_way();
     }
@@ -144,17 +147,11 @@ function after_click() {
         wait_complete();
         back_way();
     }
-
-    sleep(1500);
 }
 
 function add_cart() {
     log('add_cart');
     let carts
-    // let x1 = device.width / 2;
-    // let y1 = device.height / 2 + 300;
-    // let x2 = x1;
-    // let y2 = y1 * 0.6;
     i = 0;
     while (i <= 4 && (text('已完成').findOnce() == null)) {
         //点击商品加购物车按钮
@@ -165,9 +162,6 @@ function add_cart() {
             }
             sleep(2500);
         }                   //加购等待已完成 
-        // if (i == 4) {
-        //     swipe(x1, y1, x2, y2, 800);///每4个向下滑动一次
-        // }
         i = i + 1;
     }
 }
@@ -181,7 +175,7 @@ function view_list() {
         //点击商品加购物车按钮
         if (idContains('view_').findOnce() != null) {
             idContains('view_').find()[i].click();
-            text('加入购物车').findOne();
+            textContains('购物车').findOne();
             sleep(1500);
             back_way();
             sleep(2500);
@@ -192,8 +186,11 @@ function view_list() {
 
 function wait_complete() {
     //等待恭喜完成
-    textContains('恭喜完成').findOne();
-    sleep(1000);
+    while (textContains('恭喜完成').findOnce() == null) {
+        sleep(1000);
+        center_click(id('com.jd.lib.jshop:id/nu').desc('关注有礼按钮').findOnce());
+    }
+    
 }
 
 
