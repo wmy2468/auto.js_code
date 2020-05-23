@@ -1,9 +1,0 @@
-{
-  "name": "嗷呜",
-  "main": "main.js",
-  "ignore": ["build","node_modules"],
-  "packageName": "org.loveonelong.aowu",
-  "versionName": "0.5.0",
-  "versionCode": 7,
-  "author": "onelong"
-}
