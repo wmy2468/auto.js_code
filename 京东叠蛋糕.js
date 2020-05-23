@@ -1,7 +1,7 @@
 auto.waitFor();
 
 main();
-//toastLog(textContains('继续领红包').findOnce());
+//toastLog(textContains('确认').findOnce());
 // textContains('去完成').findOnce().parent().children().forEach(function (child) {
 //     toastLog(child.text());
 //     toastLog(child.desc());
@@ -69,9 +69,9 @@ function cakes() {
         center_click(cake_view);
         sleep(2000);
     }
-    sleep(1000);
+    sleep(3000);
     // 检测弹窗是否有立即签到
-    sign_immediately = textContains('立即签到').findOnce();
+    sign_immediately = text('立即签到').findOnce();
     if (sign_immediately != null) {
         center_click(sign_immediately);
     }
@@ -101,7 +101,6 @@ function cakes() {
     }
 }
 
-//toastLog(desc('关注有礼按钮').id('com.jd.lib.jshop:id/nu').findOnce());
 
 function after_click() {
     sleep(3500);
@@ -138,7 +137,7 @@ function after_click() {
         back_way();
     }
     else if (ddPets != null || beans != null || getBeans != null
-        || couponCenter != null || palyPlay != null || beans2 != null 
+        || couponCenter != null || palyPlay != null || beans2 != null
         || beans3 != null) {
         sleep(1000);
         back_way();
@@ -184,13 +183,21 @@ function view_list() {
     }
 }
 
+//toastLog(id('com.jd.lib.jshop:id/arv').findOnce().click());
+
 function wait_complete() {
+    let focuseBtn = true;
     //等待恭喜完成
     while (textContains('恭喜完成').findOnce() == null) {
         sleep(1000);
-        center_click(id('com.jd.lib.jshop:id/nu').desc('关注有礼按钮').findOnce());
+        if (focuseBtn) {
+            focuseBtn = false;
+            center_click(id('com.jd.lib.jshop:id/nu').desc('关注有礼按钮').findOnce());
+        }
+        let closeBtn = id('com.jd.lib.jshop:id/arv').findOnce();
+        center_click(closeBtn);
     }
-    
+
 }
 
 
