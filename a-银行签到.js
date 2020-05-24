@@ -4,23 +4,33 @@ auto.waitFor();
 //main();
 
 function main() {
-    maiDanBa();
+    买单吧();
+    浦发信用卡();
 }
 
 
-function backHome(appName) {
-    let pkg = getPackageName(appName);
-    if (currentPackage() != pkg) {
-        home();
+function ToAutojs() {
+    if (currentPackage() != getPackageName('Auto.js')) {
+        launchApp('Auto.js');
         sleep(1500);
     }
 }
 
+
+function ToApp(appName) {
+    if (currentPackage() != getPackageName(appName)) {
+        launchApp(appName);
+        sleep(1500);
+    }
+}
+
+
 // 买单吧
-function maiDanBa() {
-    appName = '买单吧';
-    backHome(appName);
-    launchApp(appName);
+function 买单吧() {
+    let appName = '买单吧';
+    ToAutojs();
+    closeApp(appName);
+    ToApp(appName);
     while (className('TextView').id('tv_title').text('我的').findOnce() == null) {
         let passAD = className('TextView').text('跳过').findOnce();
         if (passAD != null) {
@@ -38,36 +48,46 @@ function maiDanBa() {
         }
     }
     if (text('客官明天再来呦').findOnce() == null) {
-        toastLog('签到');
+        center_click(id('bt_signin').text('签到').findOnce());
+        center_click(id('com.bankcomm.maidanba:id/bt_signin').text('抽奖').findOnce());
     } else {
         toastLog(appName + '已签到');
     }
 }
 
-
-toastLog(text('每日签到').findOnce());
+//toastLog(className('ImageView').id('iv_user_leader_title_3').findOnce());
+//log(className('ImageView').id('iv_user_leader_title_3').findOnce());
 // 浦发
-function puFa() {
-    appName = '浦发信用卡';
-    backHome(appName);
-    launchApp(appName);
-    while (id('tv_tab_name').text('我的').findOnce() == null) {
+function 浦发信用卡() {
+    let appName = '浦发信用卡';
+    closeApp(appName);
+    ToAutojs();
+    ToApp(appName);
+    while (text('我的').findOnce() == null) {
         let passAD = className('TextView').text('跳过').findOnce();
         if (passAD != null) {
             center_click(passAD);
         }
     }
-    center_click(className('TextView').id('tv_tab_name').text('我的').findOne());
+    center_click(text('我的').findOne());
+    // 等待我的页面加载
+    text('我的订单').findOne();
+    while (className('ImageView').id('iv_user_leader_title_3').findOnce() == null) {
+        ToAutojs();
+        ToApp(appName);
+        sleep(3000);
+    }
     center_click(className('ImageView').id('iv_user_leader_title_3').findOne());
+
     // 等待签到页面加载
     text('每日签到').findOne();
-    while (text('请输入手势密码').findOnce() == null) {
-        log(appName + '等待登录');
-        if (text('请输入手势密码').findOnce() != null) {
-            gesture_pwd(appName);
-            sleep(3000);
-        }
-    }
+    text('周一').findOne();
+    text('周一').find()[1].parent().parent().child(3).click();
+    text('请输入手势密码').findOne()
+    sleep(3000);
+    gesture_pwd(appName);
+    sleep(3000);
+    text('周一').findOne();
     if (text('今日已签到，明天再来吧！').findOnce() == null) {
         // 立即签到按钮
         text('周一').find()[1].parent().parent().child(3).click();
@@ -75,32 +95,84 @@ function puFa() {
         toastLog(appName + '已签到');
     }
 }
+
 // 邮储信用卡
-function youChu() {
-    backHome();
-    appName = '邮储信用卡';
-    luanchApp(appName);
-    gesture_pwd(appName);
+function 邮储信用卡() {
+    let appName = '邮储信用卡';
+    ToAutojs();
+    closeApp(appName);
+    ToApp(appName);
+    while (className('TextView').id('tv_title').text('我的').findOnce() == null) {
+        let passAD = className('TextView').textContains('跳过').findOnce();
+        if (passAD != null) {
+            center_click(passAD);
+        }
+        let Continue = className('TextView').text('继续使用').findOnce();
+        if (Continue != null) {
+            center_click(Continue);
+        }
+    }
+    center_click(className('TextView').id('tv_title').text('我的').findOne());
+    // 等待我的页面加载
+    center_click(id('user_mycard').text('我的账单').findOne());
+    id('module_08000000_iv').findOne().click()
+
+    while (text('每日签到即得88积分').findOnce() == null) {
+        log(appName + '等待登录');
+        if (text('手势登录').findOnce() != null) {
+            gesture_pwd(appName);
+            sleep(3000);
+        }
+    }
+    if (text('今日已签到').findOnce() == null) {
+        center_click(text('马上签到').findOnce());
+    } else {
+        toastLog(appName + '已签到');
+    }
 }
+
 // 云闪付
-function yunShanfu() {
-    backHome();
-    appName = '云闪付';
-    luanchApp(appName);
+function 云闪付() {
+    let appName = '云闪付';
+    closeApp(appName);
+    ToAutojs();
+    ToApp(appName);
+    while (className('TextView').id('tv_tab_name').text('我 的').findOnce() == null) {
+        let passAD = className('TextView').textContains('跳过').findOnce();
+        if (passAD != null) {
+            center_click(passAD);
+        }
+    }
+    center_click(className('TextView').text('首 页').findOnce());
+    //点击签到按钮
+    id('frog_float_notgif').findOne().click();
+    // 等待签到页面加载
+    className('TextView').textContains('已连续签到').findOne();
+
+    if (text('已签到').findOnce() == null) {
+        center_click(className('TextView').text('立即签到').findOnce());
+        // TODO 抽奖
+    } else {
+        toastLog(appName + '已签到');
+    }
 }
-// 京东金融
-function jinRong() {
-    backHome();
-    appName = '买单吧';
-    luanchApp(appName);
-    gesture_pwd(appName);
-}
+
+log(id('cpcRoot').findOnce());
 // 淘宝
-function taoBao() {
-    backHome();
-    appName = '买单吧';
-    luanchApp(appName);
-    gesture_pwd(appName);
+function 手机淘宝() {
+    let appName = '手机淘宝';
+    closeApp(appName);
+    ToAutojs();
+    ToApp(appName);
+    while (desc('扫一扫').findOnce() == null) {
+        let passAD = className('TextView').textContains('跳过').findOnce();
+        if (passAD != null) {
+            center_click(passAD);
+        }
+    }
+    center_click(className('TextView').text('领淘金币').findOnce());
+    textContains('您已连续签到').findOne();
+    className('android.view.View').text('立即签到').findOnce().click()
 }
 
 
@@ -171,4 +243,27 @@ function gesture_pwd(appName) {
     execStr = execStr + ')';
     //toastLog(execStr);
     engines.execScript('hello', execStr);
+}
+
+
+function closeApp(appName) {
+    let packageName = app.getPackageName(appName);
+    app.openAppSetting(packageName);
+    text(app.getAppName(packageName)).waitFor();
+    let is_sure = textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).findOne();
+    if (is_sure.enabled()) {
+        textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).findOne().click();
+        sleep(1000);
+        if (textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).find().length > 1) {
+            textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).find()[1].click();
+        } else {
+            textMatches(/(.*确.*|.*定.*)/).findOne().click();
+        }
+        log(app.getAppName(packageName) + "应用已被关闭");
+        sleep(1000);
+        back();
+    } else {
+        log(app.getAppName(packageName) + "应用不能被正常关闭或不在后台运行");
+        back();
+    }
 }

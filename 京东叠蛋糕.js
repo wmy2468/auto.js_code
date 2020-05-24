@@ -19,10 +19,8 @@ function run_app(act_name) {
         app.launch(act_pkg);
     }
     // 等待京东主界面加载
-    while (currentPackage() == act_pkg) {
-        if (className('TextView').id('ic').text('首页').findOnce() == null) {
-            sleep(1000);
-        }
+    while (className('TextView').id('ic').text('首页').findOnce() == null) {
+        sleep(1000);
     }
 }
 
@@ -79,16 +77,18 @@ function cakes() {
     let mission = className('android.view.View').text('做任务领金币').findOne();
     center_click(mission);
     let idx = 1;
-    let idxText, unComplete;
+    let idxText, indexTeam, unComplete;
     while (true) {
         // 等待任务界面出现
         className('android.view.View').textContains('签到').findOne();
         sleep(4500);
         unComplete = text('去完成').find();
         if (unComplete.nonEmpty()) {
-            if (unComplete.length == 1) { break; }
+            if (unComplete.length <= 1) { break; }
             idxText = unComplete[idx].parent().parent().parent().child(0).child(1).text();
             if (idxText.indexOf('去玩AR吃') == -1) {
+                if (idxText.indexOf('所在战队') != -1) { idx = 2; }
+                if (idx >= unComplete.length) { break; }
                 sleep(1500);
                 if (textContains('继续领红包').findOnce() != null) {
                     textContains('继续领红包').findOnce().click();
