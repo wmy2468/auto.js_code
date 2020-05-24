@@ -1,18 +1,20 @@
 auto.waitFor();
-//toastLog(id('pattern_lock_body_layout').findOnce());
 
-//main();
+main();
 
 function main() {
     买单吧();
     浦发信用卡();
+    邮储信用卡();
+    云闪付();
+    手机淘宝();
 }
 
 
 function ToAutojs() {
     if (currentPackage() != getPackageName('Auto.js')) {
         launchApp('Auto.js');
-        sleep(1500);
+        sleep(1000);
     }
 }
 
@@ -20,7 +22,7 @@ function ToAutojs() {
 function ToApp(appName) {
     if (currentPackage() != getPackageName(appName)) {
         launchApp(appName);
-        sleep(1500);
+        sleep(1000);
     }
 }
 
@@ -51,11 +53,11 @@ function 买单吧() {
         center_click(id('bt_signin').text('签到').findOnce());
         center_click(id('com.bankcomm.maidanba:id/bt_signin').text('抽奖').findOnce());
     } else {
-        toastLog(appName + '已签到');
+        log(appName + '已签到');
     }
 }
 
-//toastLog(className('ImageView').id('iv_user_leader_title_3').findOnce());
+//log(className('ImageView').id('iv_user_leader_title_3').findOnce());
 //log(className('ImageView').id('iv_user_leader_title_3').findOnce());
 // 浦发
 function 浦发信用卡() {
@@ -92,7 +94,7 @@ function 浦发信用卡() {
         // 立即签到按钮
         text('周一').find()[1].parent().parent().child(3).click();
     } else {
-        toastLog(appName + '已签到');
+        log(appName + '已签到');
     }
 }
 
@@ -114,12 +116,16 @@ function 邮储信用卡() {
     }
     center_click(className('TextView').id('tv_title').text('我的').findOne());
     // 等待我的页面加载
-    center_click(id('user_mycard').text('我的账单').findOne());
-    id('module_08000000_iv').findOne().click()
-
+    text('我的账单').findOne();
+    while (id('module_08000000_iv').findOnce() == null) {
+        ToAutojs();
+        ToApp(appName);
+        sleep(3000);
+    }
+    center_click(id('module_08000000_iv').findOnce());
     while (text('每日签到即得88积分').findOnce() == null) {
         log(appName + '等待登录');
-        if (text('手势登录').findOnce() != null) {
+        if (text('忘记手势密码').findOnce() != null) {
             gesture_pwd(appName);
             sleep(3000);
         }
@@ -127,17 +133,19 @@ function 邮储信用卡() {
     if (text('今日已签到').findOnce() == null) {
         center_click(text('马上签到').findOnce());
     } else {
-        toastLog(appName + '已签到');
+        log(appName + '已签到');
     }
 }
 
+//云闪付();
+//log(id('com.unionpay:id/frog_float_notgif').findOnce().click());
 // 云闪付
 function 云闪付() {
     let appName = '云闪付';
     closeApp(appName);
     ToAutojs();
     ToApp(appName);
-    while (className('TextView').id('tv_tab_name').text('我 的').findOnce() == null) {
+    while (className('TextView').text('我 的').findOnce() == null) {
         let passAD = className('TextView').textContains('跳过').findOnce();
         if (passAD != null) {
             center_click(passAD);
@@ -145,7 +153,7 @@ function 云闪付() {
     }
     center_click(className('TextView').text('首 页').findOnce());
     //点击签到按钮
-    id('frog_float_notgif').findOne().click();
+    id('com.unionpay:id/frog_float_notgif').findOne().click();
     // 等待签到页面加载
     className('TextView').textContains('已连续签到').findOne();
 
@@ -153,12 +161,10 @@ function 云闪付() {
         center_click(className('TextView').text('立即签到').findOnce());
         // TODO 抽奖
     } else {
-        toastLog(appName + '已签到');
+        log(appName + '已签到');
     }
 }
 
-log(id('cpcRoot').findOnce());
-// 淘宝
 function 手机淘宝() {
     let appName = '手机淘宝';
     closeApp(appName);
@@ -171,8 +177,13 @@ function 手机淘宝() {
         }
     }
     center_click(className('TextView').text('领淘金币').findOnce());
-    textContains('您已连续签到').findOne();
-    className('android.view.View').text('立即签到').findOnce().click()
+    text('偷金币').findOne();
+    sleep(1000);
+    if (textContains('您已连续签到').findOnce() != null) {
+        className('android.view.View').text('立即签到').findOnce().click();
+    } else {
+        log(appName + '已签到');;
+    }
 }
 
 
@@ -241,7 +252,7 @@ function gesture_pwd(appName) {
     }
     //gesture(1000, [0, 0], [500, 500], [500, 1000])
     execStr = execStr + ')';
-    //toastLog(execStr);
+    //log(execStr);
     engines.execScript('hello', execStr);
 }
 
@@ -253,7 +264,7 @@ function closeApp(appName) {
     let is_sure = textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).findOne();
     if (is_sure.enabled()) {
         textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).findOne().click();
-        sleep(1000);
+        sleep(1500);
         if (textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).find().length > 1) {
             textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).find()[1].click();
         } else {
