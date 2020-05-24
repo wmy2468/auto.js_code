@@ -19,17 +19,17 @@ function run_app(act_name) {
     let act_pkg = app.getPackageName(act_name);
     if (currentPackage() == act_pkg) {
         home();
+        sleep(1000);
     } 
     app.launch(act_pkg);
+}
+
+// 做任务集瓜瓜卡
+    //center_click(textContains('刮刮卡').findOnce().parent().parent().child(2))
+function cards() {
     // 等待口令主界面加载
     id('com.jingdong.app.mall:id/bci').text('立即查看').findOne().click();
     text('我也要集红包').findOne().click();
-    // 做任务集瓜瓜卡
-    //center_click(textContains('刮刮卡').findOnce().parent().parent().child(2))
-}
-
-
-function cards() {
     idx = 0;
     while (true) {
         // 等待任务界面出现
@@ -37,14 +37,14 @@ function cards() {
         if (unComplete.nonEmpty()) {
             unComplete[idx].click();
             //} else { break; }
-            after_click();
+            card_after_click();
         } else { break; }
     }
 }
 
 //log(id('com.jd.lib.jshop:id/aay').text('商品').findOnce());
 
-function after_click() {
+function card_after_click() {
     sleep(3500);
     let menberCard = textContains('会员卡').findOnce();
     let shopCart = text('购物车').findOnce();
@@ -59,7 +59,7 @@ function after_click() {
         back_way();
     }
     else {
-        wait_complete();
+        card_wait_complete();
         back_way();
     }
     //等待返回界面
@@ -75,7 +75,7 @@ function continueCard() {
 
 //toastLog(id('com.jd.lib.jshop:id/arv').findOnce());
 
-function wait_complete() {
+function card_wait_complete() {
     //等待恭喜完成
     text('任务已完成').findOne();
 }

@@ -15,18 +15,19 @@ function main() {
 
 function run_app(act_name) {
     let act_pkg = app.getPackageName(act_name);
-    if (currentPackage() != act_pkg) {
-        app.launch(act_pkg);
-    }
-    // 等待京东主界面加载
-    while (className('TextView').id('ic').text('首页').findOnce() == null) {
+    if (currentPackage() == act_pkg) {
+        home();
         sleep(1000);
     }
+    app.launch(act_pkg);
 }
 
 function jd_sign() {
     //等待首页加载
-    className('TextView').id('ic').text('首页').findOne();
+    while (className('TextView').id('ic').text('首页').findOnce() == null) {
+        center_click(id('xk').findOnce());
+        sleep(1000);
+    }
     center_click(className('TextView').text('领京豆').findOne());
     //等待进店领豆加载
     className('TextView').text('进店领豆').findOne();
@@ -203,6 +204,7 @@ function wait_complete() {
 
 
 function back_way() {
+    sleep(800);
     if (desc('返回').id('fe').findOnce() == null) {
         back();
     } else {
