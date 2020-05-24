@@ -83,7 +83,7 @@ function cakes() {
     while (true) {
         // 等待任务界面出现
         className('android.view.View').textContains('签到').findOne();
-        sleep(3500);
+        sleep(4500);
         unComplete = text('去完成').find();
         if (unComplete.nonEmpty()) {
             if (unComplete.length == 1) { break; }
@@ -183,7 +183,7 @@ function view_list() {
     }
 }
 
-//toastLog(id('com.jd.lib.jshop:id/arv').findOnce().click());
+//toastLog(id('com.jd.lib.jshop:id/arv').findOnce());
 
 function wait_complete() {
     let focuseBtn = true;
@@ -193,9 +193,10 @@ function wait_complete() {
         if (focuseBtn) {
             focuseBtn = false;
             center_click(id('com.jd.lib.jshop:id/nu').desc('关注有礼按钮').findOnce());
+            sleep(2000);
+            center_click(id('com.jd.lib.jshop:id/arv').findOnce());
+            center_click(id('mj').desc('关闭页面').findOnce());
         }
-        let closeBtn = id('com.jd.lib.jshop:id/arv').findOnce();
-        center_click(closeBtn);
     }
 
 }
@@ -207,11 +208,13 @@ function back_way() {
     } else {
         desc('返回').id('fe').click();
     }
+    sleep(800);
 }
 
 function center_click(element) {
     if (element != null) {
         click(element.bounds().centerX(), element.bounds().centerY());
+        sleep(800);
         return true;
     } else { return false; }
 }
