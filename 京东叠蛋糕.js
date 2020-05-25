@@ -22,11 +22,14 @@ function run_app(act_name) {
     app.launch(act_pkg);
 }
 
+//log(center_click(id('xk').findOnce()));
+
 function jd_sign() {
     //等待首页加载
     while (className('TextView').id('ic').text('首页').findOnce() == null) {
         center_click(id('xk').findOnce());
-        sleep(1000);
+        toastLog('等待首页...');
+        sleep(4500);
     }
     center_click(className('TextView').text('领京豆').findOne());
     //等待进店领豆加载
@@ -102,7 +105,6 @@ function cakes() {
     }
 }
 
-//log(className('android.webkit.WebView').text('全民开红包').findOnce());
 
 function after_click() {
     sleep(3500);
