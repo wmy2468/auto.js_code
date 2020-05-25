@@ -1,6 +1,6 @@
 auto.waitFor();
 
-main();
+//main();
 //toastLog(textContains('确认').findOnce());
 // textContains('去完成').findOnce().parent().children().forEach(function (child) {
 //     toastLog(child.text());
@@ -102,6 +102,7 @@ function cakes() {
     }
 }
 
+log(className('android.webkit.WebView').text('全民开红包').findOnce());
 
 function after_click() {
     sleep(3500);
@@ -109,11 +110,12 @@ function after_click() {
     let beans = className('TextView').text('豆豆成长值').findOnce();
     let beans2 = className('TextView').text('豆苗成长值').findOnce();
     let beans3 = className('TextView').text('记得点击气泡浇灌营养液哦！！').findOnce();
-    let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
     let getBeans = className('TextView').text('领京豆').findOnce();
     let palyPlay = className('TextView').text('玩一玩').id('fd').findOnce();
-    let couponCenter = className('ImageView').id('com.jd.lib.coupon:id/abz').desc('领券中心').findOnce();
+    let couponCeenter = className('ImageView').id('com.jd.lib.coupon:id/abz').desc('领券中心').findOnce();
+    let openRedPack = className('android.webkit.WebView').text('全民开红包').findOnce();
 
+    let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
     let viewList = text('浏览以下5个商品').depth(17).findOnce(); //恭喜完成
     let addCart = textContains('点击加购以下').findOnce();  //idContains(str)
 
@@ -137,9 +139,9 @@ function after_click() {
         wait_complete();
         back_way();
     }
-    else if (ddPets != null || beans != null || getBeans != null
-        || couponCenter != null || palyPlay != null || beans2 != null
-        || beans3 != null) {
+    else if (ddPets != null || beans != null || beans2 != null
+        || beans3 != null || getBeans != null || palyPlay != null
+        || couponCenter != null || openRedPack != null) {
         sleep(1000);
         back_way();
     }
