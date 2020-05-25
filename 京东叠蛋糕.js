@@ -112,7 +112,7 @@ function after_click() {
     let beans3 = className('TextView').text('记得点击气泡浇灌营养液哦！！').findOnce();
     let getBeans = className('TextView').text('领京豆').findOnce();
     let palyPlay = className('TextView').text('玩一玩').id('fd').findOnce();
-    let couponCeenter = className('ImageView').id('com.jd.lib.coupon:id/abz').desc('领券中心').findOnce();
+    let couponCenter = className('ImageView').id('com.jd.lib.coupon:id/abz').desc('领券中心').findOnce();
     let openRedPack = className('android.webkit.WebView').text('全民开红包').findOnce();
 
     let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
