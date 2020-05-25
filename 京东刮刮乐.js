@@ -1,11 +1,7 @@
 auto.waitFor();
 
 main();
-//toastLog(textContains('确认').findOnce());
-// textContains('去完成').findOnce().parent().children().forEach(function (child) {
-//     toastLog(child.text());
-//     toastLog(child.desc());
-// });
+
 function main() {
     setClip('只需要今日内馥zんí%V5nyr53rFa!这段話后去最新版（京ぃ東）');
     run_app('京东');
@@ -13,19 +9,7 @@ function main() {
     alert('已完成！');
 }
 
-
-function run_app(act_name) {
-    //closeApp(act_name);
-    let act_pkg = app.getPackageName(act_name);
-    if (currentPackage() == act_pkg) {
-        home();
-        sleep(1000);
-    } 
-    app.launch(act_pkg);
-}
-
 // 做任务集瓜瓜卡
-    //center_click(textContains('刮刮卡').findOnce().parent().parent().child(2))
 function cards() {
     // 等待口令主界面加载
     id('com.jingdong.app.mall:id/bci').text('立即查看').findOne().click();
@@ -41,8 +25,6 @@ function cards() {
         } else { break; }
     }
 }
-
-//log(id('com.jd.lib.jshop:id/aay').text('商品').findOnce());
 
 function card_after_click() {
     sleep(3500);
@@ -73,11 +55,19 @@ function continueCard() {
     center_click(textContains('继续逛逛').findOnce());
 }
 
-//toastLog(id('com.jd.lib.jshop:id/arv').findOnce());
-
 function card_wait_complete() {
     //等待恭喜完成
     text('任务已完成').findOne();
+}
+
+function run_app(act_name) {
+    //closeApp(act_name);
+    let act_pkg = app.getPackageName(act_name);
+    if (currentPackage() == act_pkg) {
+        home();
+        sleep(1000);
+    } 
+    app.launch(act_pkg);
 }
 
 

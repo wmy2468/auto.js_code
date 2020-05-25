@@ -1,14 +1,18 @@
-auto.waitFor();
-
 main();
 
 function main() {
     run_app('京东');
+    //签到
     jd_sign();
+    //叠蛋糕
     cakes();
+    //刮刮卡
+    scratchCard();
     alert('已完成！');
 }
 
+
+// ======================签到代码==================================
 function jd_sign() {
     //等待首页加载
     while (className('TextView').id('ic').text('首页').findOnce() == null) {
@@ -48,7 +52,7 @@ function jd_sign() {
     }
 }
 
-
+// ======================叠蛋糕代码==================================
 function cakes() {
     // 等待蛋糕界面加载
     while (className('android.view.View').text('当前蛋糕：').findOnce() == null) {
@@ -139,7 +143,6 @@ function after_click() {
 }
 
 function add_cart() {
-    log('add_cart');
     let carts
     i = 0;
     while (i <= 4 && (text('已完成').findOnce() == null)) {
@@ -157,7 +160,6 @@ function add_cart() {
 
 
 function view_list() {
-    log('view_list');
     i = 0;
     while (i <= 4 && (text('已完成').findOnce() == null)) {
         idContains('view_').findOne();
@@ -187,6 +189,67 @@ function wait_complete() {
             center_click(id('mj').desc('关闭页面').findOnce());
         }
     }
+}
+
+
+// ======================刮刮卡代码==================================
+function scratchCard() {
+    home();
+    setClip('只需要今日内馥zんí%V5nyr53rFa!这段話后去最新版（京ぃ東）');
+    sleep(1500);
+    run_app('京东');
+    cards();
+}
+
+// 做任务集瓜瓜卡
+function cards() {
+    // 等待口令主界面加载
+    id('com.jingdong.app.mall:id/bci').text('立即查看').findOne().click();
+    text('我也要集红包').findOne().click();
+    idx = 0;
+    while (true) {
+        // 等待任务界面出现
+        unComplete = text('随机逛').find();
+        if (unComplete.nonEmpty()) {
+            unComplete[idx].click();
+            //} else { break; }
+            card_after_click();
+        } else { break; }
+    }
+}
+
+function card_after_click() {
+    sleep(3500);
+    let menberCard = textContains('会员卡').findOnce();
+    let shopCart = text('购物车').findOnce();
+    let shop = id('com.jd.lib.jshop:id/aay').text('商品').findOnce();
+    
+    if (menberCard != null) {
+        center_click(textContains('确认授权并加入').findOne());
+        sleep(2000);
+        center_click(text('我知道了').findOnce());
+    }
+    else if (shopCart != null || shop != null) {
+        back_way();
+    }
+    else {
+        card_wait_complete();
+        back_way();
+    }
+    //等待返回界面
+    className('android.webkit.WebView').text('集刮刮乐 赢千万红包').findOne();
+    sleep(3000);
+    continueCard();
+}
+
+function continueCard() {
+    center_click(textContains('继续集刮刮卡').findOnce());
+    center_click(textContains('继续逛逛').findOnce());
+}
+
+function card_wait_complete() {
+    //等待恭喜完成
+    text('任务已完成').findOne();
 }
 
 function run_app(act_name) {
