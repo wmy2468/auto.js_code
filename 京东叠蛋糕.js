@@ -1,6 +1,6 @@
 auto.waitFor();
 
-//main();
+main();
 //toastLog(textContains('确认').findOnce());
 // textContains('去完成').findOnce().parent().children().forEach(function (child) {
 //     toastLog(child.text());
@@ -102,7 +102,7 @@ function cakes() {
     }
 }
 
-log(className('android.webkit.WebView').text('全民开红包').findOnce());
+//log(className('android.webkit.WebView').text('全民开红包').findOnce());
 
 function after_click() {
     sleep(3500);
