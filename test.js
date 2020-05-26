@@ -1,0 +1,1 @@
+log(className('TextView').textContains('出错').findOnce());

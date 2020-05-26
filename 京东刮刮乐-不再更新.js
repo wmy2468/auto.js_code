@@ -57,7 +57,12 @@ function continueCard() {
 
 function card_wait_complete() {
     //等待恭喜完成
-    text('任务已完成').findOne();
+    while (text('任务已完成').findOnce() == null) {
+        if (className('TextView').textContains('出错').findOnce() != null) {
+            break;
+        }
+        sleep(1500);
+    }
 }
 
 function run_app(act_name) {

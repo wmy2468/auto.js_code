@@ -178,13 +178,18 @@ function wait_complete() {
     let focuseBtn = true;
     //等待恭喜完成
     while (textContains('恭喜完成').findOnce() == null) {
-        sleep(1000);
         if (focuseBtn) {
-            focuseBtn = false;
-            center_click(id('com.jd.lib.jshop:id/nu').desc('关注有礼按钮').findOnce());
-            sleep(2000);
-            center_click(id('com.jd.lib.jshop:id/arv').findOnce());
-            center_click(id('mj').desc('关闭页面').findOnce());
+            if (center_click(id('com.jd.lib.jshop:id/nu').desc('关注有礼按钮').findOnce())) {
+                focuseBtn = false;
+                sleep(2000);
+                center_click(id('com.jd.lib.jshop:id/arv').findOnce());
+                sleep(1000);
+                center_click(id('mj').desc('关闭页面').findOnce());
+            }
+        }
+        sleep(1000);
+        if (className('TextView').textContains('出错').findOnce() != null) {
+            break;
         }
     }
 }
