@@ -33,7 +33,7 @@ function ToApp(appName) {
 function 买单吧() {
     let appName = '买单吧';
     ToAutojs();
-    closeApp(appName);
+    //closeApp(appName);
     ToApp(appName);
     while (className('TextView').id('tv_title').text('我的').findOnce() == null) {
         let passAD = className('TextView').text('跳过').findOnce();
@@ -58,15 +58,14 @@ function 买单吧() {
         center_click(id('com.bankcomm.maidanba:id/bt_signin').text('抽奖').findOnce());
         sleep(1000);
         id('com.bankcomm.maidanba:id/bt_welfare_lottery').text('去抽奖').findOne().click();
-    } else {
-        toastLog(appName + '已签到');
     }
+    toastLog(appName + '已签到');
 }
 
 // 浦发
 function 浦发信用卡() {
     let appName = '浦发信用卡';
-    closeApp(appName);
+    //closeApp(appName);
     ToAutojs();
     ToApp(appName);
     while (text('我的').findOnce() == null) {
@@ -84,36 +83,33 @@ function 浦发信用卡() {
         sleep(3000);
     }
     center_click(className('ImageView').id('iv_user_leader_title_3').findOne());
-
-    // 等待签到页面加载
-    text('每日签到').findOne();
-    text('周一').findOne();
-    sleep(2000);
-    let signNow;
-    if (text('周一').find().length == 1) {
-        signNow = text('周二').find()[1];
-    } else {
-        signNow = text('周一').find()[1];
-    }
-    signNow.parent().parent().child(3).click();
+    // 输入手势密码
     text('请输入手势密码').findOne();
-    sleep(2000);
+    sleep(1000);
     gesture_pwd(appName);
     sleep(3000);
+    // 等待签到页面加载
+    text('每日签到').findOne();
+    sleep(2000);
     text('周一').findOne();
     if (text('今日已签到，明天再来吧！').findOnce() == null) {
         // 立即签到按钮
-        text('周一').find()[1].parent().parent().child(3).click();
-    } else {
-        toastLog(appName + '已签到');
+        let signNow;
+        if (text('周一').find().length == 1) {
+            signNow = text('周二').find()[1];
+        } else {
+            signNow = text('周一').find()[1];
+        }
+        signNow.parent().parent().child(3).click();
     }
+    toastLog(appName + '已签到');
 }
 
 // 邮储信用卡
 function 邮储信用卡() {
     let appName = '邮储信用卡';
     ToAutojs();
-    closeApp(appName);
+    //closeApp(appName);
     ToApp(appName);
     while (className('TextView').id('tv_title').text('我的').findOnce() == null) {
         let passAD = className('TextView').textContains('跳过').findOnce();
@@ -144,15 +140,14 @@ function 邮储信用卡() {
     }
     if (text('今日已签到').findOnce() == null) {
         center_click(text('马上签到').findOnce());
-    } else {
-        toastLog(appName + '已签到');
     }
+    toastLog(appName + '已签到');
 }
 
 // 云闪付
 function 云闪付() {
     let appName = '云闪付';
-    closeApp(appName);
+    //closeApp(appName);
     ToAutojs();
     ToApp(appName);
     while (className('TextView').text('我 的').findOnce() == null) {
@@ -169,15 +164,20 @@ function 云闪付() {
 
     if (text('已签到').findOnce() == null) {
         center_click(className('TextView').text('立即签到').findOnce());
-        // TODO 抽奖
-    } else {
-        toastLog(appName + '已签到');
+        sleep(1500);
+        if (text('去抽奖').findOnce() != null) {
+            center_click(text('去抽奖').findOnce());
+            id('com.unionpay:id/tv_title').text('签到抽奖专区').findOne();
+            center_click(text('31864c5e43cb4e0883c90d2692d33ad2').findOnce());
+            idContains('resultBtn').findOne();
+        }
     }
+    toastLog(appName + '已签到');
 }
 
 function 手机淘宝() {
     let appName = '手机淘宝';
-    closeApp(appName);
+    //closeApp(appName);
     ToAutojs();
     ToApp(appName);
     while (className('TextView').text('领淘金币').findOnce() == null) {
@@ -197,14 +197,13 @@ function 手机淘宝() {
             sleep(1000);
         }
         className('android.view.View').text('立即签到').findOnce().click();
-    } else {
-        toastLog(appName + '已签到');;
     }
+    toastLog(appName + '已签到');
 }
 
 function 苏宁易购() {
     let appName = '苏宁易购';
-    closeApp(appName);
+    //closeApp(appName);
     ToAutojs();
     ToApp(appName);
     while (className('TextView').text('首页').findOnce() == null) {
@@ -215,11 +214,15 @@ function 苏宁易购() {
         sleep(1000);
     }
     sleep(2000);
+    let cancelBtn = id('com.suning.mobile.ebuy:id/marketing_cancel_img').findOnce();
+    if (cancelBtn != null ) {
+        cancelBtn.click();
+    }
     //签到天天红包
     center_click(className('TextView').text('天天红包').findOnce());
     className('android.webkit.WebView').text('天天领红包').findOne();
     sleep(1500);
-    if (text('已领取').findOnce() == null) {
+    if (text('今日').findOnce().parent().child(2).text() != '已领取') {
         text('开心收下').findOnce().click();
     }
     while (className('TextView').text('首页').findOnce() == null) {
@@ -308,6 +311,7 @@ function closeApp(appName) {
     text(app.getAppName(packageName)).waitFor();
     let is_sure = textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).findOne();
     if (is_sure.enabled()) {
+        sleep(1000);
         textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).findOne().click();
         sleep(2000);
         if (textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).find().length > 1) {

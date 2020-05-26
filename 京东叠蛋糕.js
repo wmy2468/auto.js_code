@@ -1,16 +1,13 @@
+auto.waitFor();
+
 main();
 
 function main() {
     run_app('京东');
-    //签到
     jd_sign();
-    //叠蛋糕
     cakes();
-    //刮刮卡
-    scratchCard();
     alert('已完成！');
 }
-
 
 // ======================签到代码==================================
 function jd_sign() {
@@ -20,6 +17,7 @@ function jd_sign() {
         toastLog('等待首页...');
         sleep(4500);
     }
+    sleep(1000);
     center_click(className('TextView').text('领京豆').findOne());
     //等待进店领豆加载
     className('TextView').text('进店领豆').findOne();
@@ -104,7 +102,8 @@ function after_click() {
     let getBeans = className('TextView').text('领京豆').findOnce();
     let palyPlay = className('TextView').text('玩一玩').id('fd').findOnce();
     let couponCenter = className('ImageView').id('com.jd.lib.coupon:id/abz').desc('领券中心').findOnce();
-    let openRedPack = className('android.webkit.WebView').text('全民开红包').findOnce();
+    let openRedPack = textContains('亿红包').findOnce();
+    let openRedPack2 = className('android.webkit.WebView').text('全民开红包').findOnce();
 
     let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
     let viewList = text('浏览以下5个商品').depth(17).findOnce(); //恭喜完成
@@ -132,7 +131,7 @@ function after_click() {
     }
     else if (ddPets != null || beans != null || beans2 != null
         || beans3 != null || getBeans != null || palyPlay != null
-        || couponCenter != null || openRedPack != null) {
+        || couponCenter != null || openRedPack != null || openRedPack2 != null) {
         sleep(1000);
         back_way();
     }
@@ -183,10 +182,10 @@ function wait_complete() {
         if (focuseBtn) {
             if (center_click(id('com.jd.lib.jshop:id/nu').desc('关注有礼按钮').findOnce())) {
                 focuseBtn = false;
-                sleep(2000);
+                sleep(3000);
                 center_click(id('com.jd.lib.jshop:id/arv').findOnce());
-                sleep(1000);
-                center_click(id('mj').desc('关闭页面').findOnce());
+                //sleep(1000);
+                //center_click(id('mj').desc('关闭页面').findOnce());
             }
         }
         sleep(1000);
@@ -196,72 +195,7 @@ function wait_complete() {
     }
 }
 
-
-// ======================刮刮卡代码==================================
-function scratchCard() {
-    home();
-    setClip('只需要今日内馥zんí%V5nyr53rFa!这段話后去最新版（京ぃ東）');
-    sleep(1500);
-    run_app('京东');
-    cards();
-}
-
-// 做任务集瓜瓜卡
-function cards() {
-    // 等待口令主界面加载
-    id('com.jingdong.app.mall:id/bci').text('立即查看').findOne().click();
-    text('我也要集红包').findOne().click();
-    idx = 0;
-    while (true) {
-        // 等待任务界面出现
-        unComplete = text('随机逛').find();
-        if (unComplete.nonEmpty()) {
-            unComplete[idx].click();
-            //} else { break; }
-            card_after_click();
-        } else { break; }
-    }
-}
-
-function card_after_click() {
-    sleep(3500);
-    let menberCard = textContains('会员卡').findOnce();
-    let shopCart = text('购物车').findOnce();
-    let shop = id('com.jd.lib.jshop:id/aay').text('商品').findOnce();
-    
-    if (menberCard != null) {
-        center_click(textContains('确认授权并加入').findOne());
-        sleep(2000);
-        center_click(text('我知道了').findOnce());
-    }
-    else if (shopCart != null || shop != null) {
-        back_way();
-    }
-    else {
-        card_wait_complete();
-        back_way();
-    }
-    //等待返回界面
-    className('android.webkit.WebView').text('集刮刮乐 赢千万红包').findOne();
-    sleep(3000);
-    continueCard();
-}
-
-function continueCard() {
-    center_click(textContains('继续集刮刮卡').findOnce());
-    center_click(textContains('继续逛逛').findOnce());
-}
-
-function card_wait_complete() {
-    //等待恭喜完成
-    while (text('任务已完成').findOnce() == null) {
-        if (className('TextView').textContains('出错').findOnce() != null) {
-            break;
-        }
-        sleep(1500);
-    }
-}
-
+// -------------通用部分--------------------
 function run_app(act_name) {
     let act_pkg = app.getPackageName(act_name);
     if (currentPackage() == act_pkg) {

@@ -1,1 +1,1 @@
-log(className('TextView').textContains('出错').findOnce());
+log(idContains('marketing_cancel').findOnce());

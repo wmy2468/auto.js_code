@@ -31,14 +31,14 @@ function card_after_click() {
     let menberCard = textContains('会员卡').findOnce();
     let shopCart = text('购物车').findOnce();
     let shop = id('com.jd.lib.jshop:id/aay').text('商品').findOnce();
-    
-    if (menberCard != null) {
+
+    if (shopCart != null || shop != null) {
+        back_way();
+    }
+    else if (menberCard != null) {
         center_click(textContains('确认授权并加入').findOne());
         sleep(2000);
         center_click(text('我知道了').findOnce());
-    }
-    else if (shopCart != null || shop != null) {
-        back_way();
     }
     else {
         card_wait_complete();
@@ -65,6 +65,8 @@ function card_wait_complete() {
     }
 }
 
+
+// -------------通用部分--------------------
 function run_app(act_name) {
     //closeApp(act_name);
     let act_pkg = app.getPackageName(act_name);
