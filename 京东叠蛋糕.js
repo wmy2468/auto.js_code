@@ -95,7 +95,7 @@ function cakes() {
 
 function after_click() {
     sleep(3500);
-    let ddPets = textContains('东东萌宠').findOnce();
+    let ddPets = className('TextView').text('东东萌宠').findOnce();
     let beans = className('TextView').text('豆豆成长值').findOnce();
     let beans2 = className('TextView').text('豆苗成长值').findOnce();
     let beans3 = className('TextView').text('记得点击气泡浇灌营养液哦！！').findOnce();

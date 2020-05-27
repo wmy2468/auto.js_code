@@ -1,1 +1,1 @@
-log(id('com.jd.lib.jshop:id/arv').findOnce().click());
+log(text('东东萌宠').findOnce());
