@@ -12,7 +12,7 @@ function main() {
 // ======================签到代码==================================
 function jd_sign() {
     //等待首页加载
-    while (className('TextView').id('ic').text('首页').findOnce() == null) {
+    while (className('TextView').text('首页').findOnce() == null) {
         center_click(id('xk').findOnce());
         toastLog('等待首页...');
         sleep(4500);
@@ -29,22 +29,22 @@ function jd_sign() {
         className('TextView').text('签到提醒').findOne();
         toastLog('签到成功');
     }
-    while (className('TextView').id('ic').text('首页').findOnce() == null) {
+    while (className('TextView').text('首页').findOnce() == null) {
         back_way();
         sleep(4000);
     }
     center_click(className('TextView').text('领券').findOnce());
-    className('ImageView').id('com.jd.lib.coupon:id/abz').desc('领券中心').findOne();
+    className('ImageView').desc('领券中心').findOne();
 
-    if (className('TextView').id('com.jd.lib.coupon:id/a7y').text('立即签到').findOnce() == null) {
+    if (className('TextView').text('立即签到').findOnce() == null) {
         toastLog('今日已领券');
     }
     else {
-        className('TextView').id('com.jd.lib.coupon:id/a7y').text('立即签到').findOnce().click();
-        className('ImageView').id('com.jd.lib.coupon:id/kz').desc('关闭弹窗').findOne();
-        className('ImageView').id('com.jd.lib.coupon:id/kz').desc('关闭弹窗').findOne().click();
+        className('TextView').text('立即签到').findOnce().click();
+        className('ImageView').desc('关闭弹窗').findOne();
+        className('ImageView').desc('关闭弹窗').findOne().click();
     }
-    while (className('TextView').id('ic').text('首页').findOnce() == null) {
+    while (className('TextView').text('首页').findOnce() == null) {
         back_way();
         sleep(4000);
     }
@@ -100,10 +100,11 @@ function after_click() {
     let beans2 = className('TextView').text('豆苗成长值').findOnce();
     let beans3 = className('TextView').text('记得点击气泡浇灌营养液哦！！').findOnce();
     let getBeans = className('TextView').text('领京豆').findOnce();
-    let palyPlay = className('TextView').text('玩一玩').id('fd').findOnce();
-    let couponCenter = className('ImageView').id('com.jd.lib.coupon:id/abz').desc('领券中心').findOnce();
+    let palyPlay = className('TextView').text('玩一玩').findOnce();
+    let couponCenter = className('ImageView').desc('领券中心').findOnce();
     let openRedPack = textContains('亿红包').findOnce();
     let openRedPack2 = className('android.webkit.WebView').text('全民开红包').findOnce();
+    let goodThing = textContains('互动好物').findOnce();
 
     let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
     let viewList = text('浏览以下5个商品').depth(17).findOnce(); //恭喜完成
@@ -131,7 +132,8 @@ function after_click() {
     }
     else if (ddPets != null || beans != null || beans2 != null
         || beans3 != null || getBeans != null || palyPlay != null
-        || couponCenter != null || openRedPack != null || openRedPack2 != null) {
+        || couponCenter != null || openRedPack != null || openRedPack2 != null
+        || goodThing != null) {
         sleep(1000);
         back_way();
     }
@@ -180,12 +182,19 @@ function wait_complete() {
     //等待恭喜完成
     while (textContains('恭喜完成').findOnce() == null) {
         if (focuseBtn) {
-            if (center_click(id('com.jd.lib.jshop:id/nu').desc('关注有礼按钮').findOnce())) {
+            if (center_click(className('ImageView').desc('关注有礼按钮').findOnce())) {
                 focuseBtn = false;
                 sleep(3000);
-                center_click(id('com.jd.lib.jshop:id/arv').findOnce());
-                //sleep(1000);
-                //center_click(id('mj').desc('关闭页面').findOnce());
+                let sureBtn = className('TextView').text('确认').findOnce();
+                if (sureBtn != null) {
+                    sureBtn.click();
+                    sleep(1000);
+                }
+                let closeBtn = className('ImageView').id('asj').findOnce();
+                if (closeBtn != null) {
+                    closeBtn.click();
+                    sleep(1000);
+                }
             }
         }
         sleep(1000);

@@ -1,1 +1,1 @@
-log(idContains('marketing_cancel').findOnce());
+log(id('com.jd.lib.jshop:id/arv').findOnce().click());
