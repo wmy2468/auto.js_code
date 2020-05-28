@@ -104,7 +104,7 @@ function after_click() {
     let couponCenter = className('ImageView').desc('领券中心').findOnce();
     let openRedPack = textContains('亿红包').findOnce();
     let openRedPack2 = className('android.webkit.WebView').text('全民开红包').findOnce();
-    let goodThing = textContains('互动好物').findOnce();
+    let goodThing = textContains('互动好物会场').findOnce();
     let newGoods = className('android.webkit.WebView').text('逛新品 赚京豆').findOnce();
 
     let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
