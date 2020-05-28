@@ -105,6 +105,7 @@ function after_click() {
     let openRedPack = textContains('亿红包').findOnce();
     let openRedPack2 = className('android.webkit.WebView').text('全民开红包').findOnce();
     let goodThing = textContains('互动好物').findOnce();
+    let newGoods = className('android.webkit.WebView').text('逛新品 赚京豆').findOnce();
 
     let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
     let viewList = text('浏览以下5个商品').depth(17).findOnce(); //恭喜完成
@@ -133,7 +134,7 @@ function after_click() {
     else if (ddPets != null || beans != null || beans2 != null
         || beans3 != null || getBeans != null || palyPlay != null
         || couponCenter != null || openRedPack != null || openRedPack2 != null
-        || goodThing != null) {
+        || goodThing != null || newGoods != null) {
         sleep(1000);
         back_way();
     }
