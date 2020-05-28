@@ -1,1 +1,1 @@
-log(text('东东萌宠').findOnce());
+log(text('今天').findOnce().parent().child(1).text());

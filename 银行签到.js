@@ -1,7 +1,7 @@
 auto.waitFor();
 
-main();
-
+//main();
+浦发信用卡();
 function main() {
     云闪付();
     手机淘宝();
@@ -90,9 +90,10 @@ function 浦发信用卡() {
     sleep(3000);
     // 等待签到页面加载
     text('每日签到').findOne();
-    sleep(2000);
+    sleep(1000);
     text('周一').findOne();
-    if (text('今日已签到，明天再来吧！').findOnce() == null) {
+    sleep(1000);
+    if (text('今天').findOnce().parent().child(1).text() == '待签到') {
         // 立即签到按钮
         let signNow;
         if (text('周一').find().length == 1) {
@@ -101,6 +102,7 @@ function 浦发信用卡() {
             signNow = text('周一').find()[1];
         }
         signNow.parent().parent().child(3).click();
+        sleep(800);
     }
     toastLog(appName + '已签到');
 }
@@ -140,6 +142,7 @@ function 邮储信用卡() {
     }
     if (text('今日已签到').findOnce() == null) {
         center_click(text('马上签到').findOnce());
+        sleep(800);
     }
     toastLog(appName + '已签到');
 }
@@ -197,6 +200,7 @@ function 手机淘宝() {
             sleep(1000);
         }
         className('android.view.View').text('立即签到').findOnce().click();
+        sleep(800);
     }
     toastLog(appName + '已签到');
 }
@@ -218,6 +222,7 @@ function 苏宁易购() {
     if (cancelBtn != null ) {
         cancelBtn.click();
     }
+    sleep(3000);
     //签到天天红包
     center_click(className('TextView').text('天天红包').findOnce());
     className('android.webkit.WebView').text('天天领红包').findOne();
