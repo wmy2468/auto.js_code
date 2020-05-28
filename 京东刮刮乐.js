@@ -18,7 +18,15 @@ function cards() {
         // 等待任务界面出现
         unComplete = text('随机逛').find();
         if (unComplete.nonEmpty()) {
-            idx = unComplete.length - 1;
+            if (unComplete.length >= 2) {
+                for (i = 0; i <= (unComplete.length - 1); i++) {
+                    idx = unComplete[i].parent().child(0).text().indexOf('个免费会员');
+                    if (idx == -1) {
+                        idx = i;
+                        break;
+                    }
+                }
+            } else { idx = 0; }
             unComplete[idx].click();
             //} else { break; }
             card_after_click();
@@ -75,7 +83,7 @@ function run_app(act_name) {
     if (currentPackage() == act_pkg) {
         home();
         sleep(1000);
-    } 
+    }
     app.launch(act_pkg);
 }
 
