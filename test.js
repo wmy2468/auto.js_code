@@ -1,1 +1,23 @@
-log(text('???').find().nonEmpty());
+let ddPets = className('TextView').text('????').findOnce();
+let beans = className('TextView').text('?????').findOnce();
+let beans2 = className('TextView').text('?????').findOnce();
+let beans3 = className('TextView').text('??????????????').findOnce();
+let getBeans = className('TextView').text('???').findOnce();
+let palyPlay = className('TextView').text('???').findOnce();
+let couponCenter = className('ImageView').desc('????').findOnce();
+let openRedPack = textContains('???').findOnce();
+let openRedPack2 = className('android.webkit.WebView').text('?????').findOnce();
+let goodThing = textContains('??????').findOnce();
+let newGoods = className('android.webkit.WebView').text('??? ???').findOnce();
+
+log(ddPets);
+log(beans);
+log(beans2);
+log(beans3);
+log(getBeans);
+log(palyPlay);
+log(couponCenter);
+log(openRedPack);
+log(openRedPack2);
+log(goodThing);
+log(newGoods);

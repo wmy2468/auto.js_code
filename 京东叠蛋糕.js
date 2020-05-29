@@ -102,7 +102,7 @@ function after_click() {
     let getBeans = className('TextView').text('领京豆').findOnce();
     let palyPlay = className('TextView').text('玩一玩').findOnce();
     let couponCenter = className('ImageView').desc('领券中心').findOnce();
-    let openRedPack = textContains('亿红包').findOnce();
+    let openRedPack = textContains('瓜分20亿红包').findOnce();
     let openRedPack2 = className('android.webkit.WebView').text('全民开红包').findOnce();
     let goodThing = textContains('互动好物会场').findOnce();
     let newGoods = className('android.webkit.WebView').text('逛新品 赚京豆').findOnce();
