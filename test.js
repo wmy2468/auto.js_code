@@ -1,1 +1,1 @@
-log(idContains('cart_').findOnce().child(2).click());
+log(className('android.webkit.WebView').text('?????').findOnce());

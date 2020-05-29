@@ -102,7 +102,8 @@ function after_click() {
     let getBeans = className('TextView').text('领京豆').findOnce();
     let palyPlay = className('TextView').text('玩一玩').findOnce();
     let couponCenter = className('ImageView').desc('领券中心').findOnce();
-    let openRedPack = textContains('瓜分20亿红包').findOnce();
+    let cityFeast = className('android.webkit.WebView').text('城市嘉年华').findOnce();
+    //let openRedPack = textContains('瓜分20亿红包').findOnce();
     let openRedPack2 = className('android.webkit.WebView').text('全民开红包').findOnce();
     let goodThing = textContains('互动好物会场').findOnce();
     let newGoods = className('android.webkit.WebView').text('逛新品 赚京豆').findOnce();
@@ -133,7 +134,7 @@ function after_click() {
     }
     else if (ddPets != null || beans != null || beans2 != null
         || beans3 != null || getBeans != null || palyPlay != null
-        || couponCenter != null || openRedPack != null || openRedPack2 != null
+        || couponCenter != null || openRedPack2 != null || cityFeast != null
         || goodThing != null || newGoods != null) {
         sleep(1000);
         back_way();
@@ -152,8 +153,7 @@ function add_cart() {
         if (idContains('cart_').findOnce() != null) {
             carts = idContains('cart_').find()[i];
             //if (carts.child(0).text() != '已加购') {
-            if (carts.child(2) != null) { carts.child(2).click(); }
-            else { carts.click(); }
+            carts.click();
             //}
             sleep(2500);
         }                   //加购等待已完成 
