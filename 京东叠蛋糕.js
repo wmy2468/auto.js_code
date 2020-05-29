@@ -151,9 +151,10 @@ function add_cart() {
         //点击商品加购物车按钮
         if (idContains('cart_').findOnce() != null) {
             carts = idContains('cart_').find()[i];
-            if (carts.child(0).text() != '已加购') {
-                carts.child(2).click();
-            }
+            //if (carts.child(0).text() != '已加购') {
+            if (carts.child(2) != null) { carts.child(2).click(); }
+            else { carts.click(); }
+            //}
             sleep(2500);
         }                   //加购等待已完成 
         i = i + 1;
