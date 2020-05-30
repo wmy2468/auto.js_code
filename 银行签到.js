@@ -1,7 +1,7 @@
 auto.waitFor();
 
-//main();
-浦发信用卡();
+main();
+//浦发信用卡();
 function main() {
     云闪付();
     手机淘宝();
@@ -219,15 +219,16 @@ function 苏宁易购() {
     }
     sleep(2000);
     let cancelBtn = id('com.suning.mobile.ebuy:id/marketing_cancel_img').findOnce();
-    if (cancelBtn != null ) {
+    if (cancelBtn != null) {
         cancelBtn.click();
     }
     sleep(3000);
     //签到天天红包
     center_click(className('TextView').text('天天红包').findOnce());
     className('android.webkit.WebView').text('天天领红包').findOne();
-    sleep(1500);
-    if (text('今日').findOnce().parent().child(2).text() != '已领取') {
+    sleep(2500);
+    if (text('开心收下').findOnce() != null) {
+        //if (text('今日').findOnce().parent().child(2).text() != '已领取') {
         text('开心收下').findOnce().click();
     }
     while (className('TextView').text('首页').findOnce() == null) {
