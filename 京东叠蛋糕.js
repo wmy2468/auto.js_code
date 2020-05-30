@@ -68,7 +68,7 @@ function cakes() {
     let mission = className('android.view.View').text('做任务领金币').findOne();
     center_click(mission);
     let idx = 1;
-    let idxText, indexTeam, unComplete;
+    let idxText, unComplete;
     while (true) {
         // 等待任务界面出现
         className('android.view.View').textContains('签到').findOne();
@@ -85,16 +85,23 @@ function cakes() {
                     textContains('继续领红包').findOnce().click();
                     sleep(1500);
                 }
-                unComplete[idx].click();
-            } else { break; }
+                while (text('去完成').findOnce() != null) {
+                    unComplete[idx].click();
+                    sleep(1000);
+                }
+            } else {
+                break;
+            }
             after_click();
-        } else { break; }
+        } else {
+            break;
+        }
     }
 }
 
 
 function after_click() {
-    sleep(3500);
+    sleep(4500);
     let ddPets = className('TextView').text('东东萌宠').findOnce();
     let beans = className('TextView').text('豆豆成长值').findOnce();
     let beans2 = className('TextView').text('豆苗成长值').findOnce();
@@ -103,7 +110,8 @@ function after_click() {
     let palyPlay = className('TextView').text('玩一玩').findOnce();
     let couponCenter = className('ImageView').desc('领券中心').findOnce();
     let cityFeast = className('android.webkit.WebView').text('城市嘉年华').findOnce();
-    //let openRedPack = textContains('瓜分20亿红包').findOnce();
+    let oneRnb = className('android.webkit.WebView').text('京东1元包邮').findOnce();
+    let millionCoupon = className('android.webkit.WebView').text('618万券齐发').findOnce();
     let openRedPack2 = className('android.webkit.WebView').text('全民开红包').findOnce();
     let goodThing = textContains('互动好物会场').findOnce();
     let newGoods = className('android.webkit.WebView').text('逛新品 赚京豆').findOnce();
@@ -135,7 +143,7 @@ function after_click() {
     else if (ddPets != null || beans != null || beans2 != null
         || beans3 != null || getBeans != null || palyPlay != null
         || couponCenter != null || openRedPack2 != null || cityFeast != null
-        || goodThing != null || newGoods != null) {
+        || goodThing != null || newGoods != null || oneRnb != null || millionCoupon != null) {
         sleep(1000);
         back_way();
     }
