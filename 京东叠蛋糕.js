@@ -109,11 +109,12 @@ function after_click() {
     let getBeans = className('TextView').text('领京豆').findOnce();
     let palyPlay = className('TextView').text('玩一玩').findOnce();
     let couponCenter = className('ImageView').desc('领券中心').findOnce();
-    let cityFeast = className('android.webkit.WebView').text('城市嘉年华').findOnce();
+    let cityFeast = className('android.view.View').text('线上线下同款同价').findOnce();
     let oneRnb = className('android.webkit.WebView').text('京东1元包邮').findOnce();
     let millionCoupon = className('android.webkit.WebView').text('618万券齐发').findOnce();
     let openRedPack2 = className('android.webkit.WebView').text('全民开红包').findOnce();
     let goodThing = textContains('互动好物会场').findOnce();
+    //let magCube = className('android.webkit.WebView').text('京东小魔方').findOnce();
     let newGoods = className('android.webkit.WebView').text('逛新品 赚京豆').findOnce();
 
     let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
@@ -143,7 +144,8 @@ function after_click() {
     else if (ddPets != null || beans != null || beans2 != null
         || beans3 != null || getBeans != null || palyPlay != null
         || couponCenter != null || openRedPack2 != null || cityFeast != null
-        || goodThing != null || newGoods != null || oneRnb != null || millionCoupon != null) {
+        || goodThing != null || newGoods != null || oneRnb != null 
+        || millionCoupon != null) {
         sleep(1000);
         back_way();
     }
