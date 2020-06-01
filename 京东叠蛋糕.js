@@ -119,6 +119,8 @@ function after_click() {
     let report = textContains('趋势报告').findOnce();
     let sixOne = className('android.webkit.WebView').text('京东618榜单会场').findOnce();
     let newGoods = className('android.webkit.WebView').text('逛新品 赚京豆').findOnce();
+    let gold20 = className('android.webkit.WebView').text('瓜分20亿金贴').findOnce();
+    let my618 = text('我的618').findOnce();
 
     let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
     let viewList = text('浏览以下5个商品').depth(17).findOnce(); //恭喜完成
@@ -148,7 +150,8 @@ function after_click() {
         || beans3 != null || getBeans != null || palyPlay != null
         || couponCenter != null || openRedPack2 != null || cityFeast != null
         || goodThing != null || newGoods != null || oneRnb != null 
-        || millionCoupon != null || sixOne != null || report != null) {
+        || millionCoupon != null || sixOne != null || report != null
+        || gold20 != null || my618 != null) {
         sleep(1000);
         back_way();
     }
