@@ -204,7 +204,7 @@ function wait_complete() {
                     sureBtn.click();
                     sleep(1000);
                 }
-                let closeBtn = className('ImageView').id('asj').findOnce();
+                let closeBtn = className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce();
                 if (closeBtn != null) {
                     closeBtn.click();
                     sleep(1000);
