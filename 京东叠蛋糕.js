@@ -26,7 +26,9 @@ function jd_sign() {
     }
     else {
         center_click(className('TextView').text('签到领京豆').findOnce());
-        className('TextView').text('签到提醒').findOne();
+        while (className('TextView').text('签到提醒').findOnce() == null && text('全民抢京豆').findOnce() == null) {
+            sleep(1000);
+        }
         toastLog('签到成功');
     }
     while (className('TextView').text('首页').findOnce() == null) {
@@ -114,7 +116,7 @@ function after_click() {
     let millionCoupon = className('android.webkit.WebView').text('618万券齐发').findOnce();
     let openRedPack2 = className('android.webkit.WebView').text('全民开红包').findOnce();
     let goodThing = textContains('互动好物会场').findOnce();
-    //let magCube = className('android.webkit.WebView').text('京东小魔方').findOnce();
+    let sixOne = className('android.webkit.WebView').text('京东618榜单会场').findOnce();
     let newGoods = className('android.webkit.WebView').text('逛新品 赚京豆').findOnce();
 
     let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
@@ -145,7 +147,7 @@ function after_click() {
         || beans3 != null || getBeans != null || palyPlay != null
         || couponCenter != null || openRedPack2 != null || cityFeast != null
         || goodThing != null || newGoods != null || oneRnb != null 
-        || millionCoupon != null) {
+        || millionCoupon != null || sixOne != null) {
         sleep(1000);
         back_way();
     }
