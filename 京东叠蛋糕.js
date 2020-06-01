@@ -70,8 +70,9 @@ function cakes() {
     let mission = className('android.view.View').text('做任务领金币').findOne();
     center_click(mission);
     let idx = 1;
-    let idxText, unComplete;
+    let idxText, unComplete, textStr;
     while (true) {
+        textStr = '';
         // 等待任务界面出现
         className('android.view.View').textContains('签到').findOne();
         sleep(4500);
@@ -91,10 +92,12 @@ function cakes() {
                     unComplete[idx].click();
                     sleep(1000);
                 }
+                if (idxText.indexOf('浏览可得') != -1) { textStr = '直接返回' }
+                if (idxText.indexOf('秒可得') != -1) { textStr = '等待返回' }
             } else {
                 break;
             }
-            after_click();
+            after_click(textStr);
         } else {
             break;
         }
@@ -102,25 +105,25 @@ function cakes() {
 }
 
 
-function after_click() {
+function after_click(textStr) {
     sleep(4500);
-    let ddPets = className('TextView').text('东东萌宠').findOnce();
-    let beans = className('TextView').text('豆豆成长值').findOnce();
-    let beans2 = className('TextView').text('豆苗成长值').findOnce();
-    let beans3 = className('TextView').text('记得点击气泡浇灌营养液哦！！').findOnce();
-    let getBeans = className('TextView').text('领京豆').findOnce();
-    let palyPlay = className('TextView').text('玩一玩').findOnce();
-    let couponCenter = className('ImageView').desc('领券中心').findOnce();
-    let cityFeast = className('android.view.View').text('线上线下同款同价').findOnce();
-    let oneRnb = className('android.webkit.WebView').text('京东1元包邮').findOnce();
-    let millionCoupon = className('android.webkit.WebView').text('618万券齐发').findOnce();
-    let openRedPack2 = className('android.webkit.WebView').text('全民开红包').findOnce();
-    let goodThing = textContains('互动好物会场').findOnce();
-    let report = textContains('趋势报告').findOnce();
-    let sixOne = className('android.webkit.WebView').text('京东618榜单会场').findOnce();
-    let newGoods = className('android.webkit.WebView').text('逛新品 赚京豆').findOnce();
-    let gold20 = className('android.webkit.WebView').text('瓜分20亿金贴').findOnce();
-    let my618 = text('我的618').findOnce();
+    // let ddPets = className('TextView').text('东东萌宠').findOnce();
+    // let beans = className('TextView').text('豆豆成长值').findOnce();
+    // let beans2 = className('TextView').text('豆苗成长值').findOnce();
+    // let beans3 = className('TextView').text('记得点击气泡浇灌营养液哦！！').findOnce();
+    // let getBeans = className('TextView').text('领京豆').findOnce();
+    // let palyPlay = className('TextView').text('玩一玩').findOnce();
+    // let couponCenter = className('ImageView').desc('领券中心').findOnce();
+    // let cityFeast = className('android.view.View').text('线上线下同款同价').findOnce();
+    // let oneRnb = className('android.webkit.WebView').text('京东1元包邮').findOnce();
+    // let millionCoupon = className('android.webkit.WebView').text('618万券齐发').findOnce();
+    // let openRedPack2 = className('android.webkit.WebView').text('全民开红包').findOnce();
+    // let goodThing = textContains('互动好物会场').findOnce();
+    // let report = textContains('趋势报告').findOnce();
+    // let sixOne = className('android.webkit.WebView').text('京东618榜单会场').findOnce();
+    // let newGoods = className('android.webkit.WebView').text('逛新品 赚京豆').findOnce();
+    // let gold20 = className('android.webkit.WebView').text('瓜分20亿金贴').findOnce();
+    // let my618 = text('我的618').findOnce();
 
     let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
     let viewList = text('浏览以下5个商品').depth(17).findOnce(); //恭喜完成
@@ -128,11 +131,9 @@ function after_click() {
 
     if (addCart != null) {
         add_cart();
-        back_way();
     }
     else if (viewList != null) {
         view_list();
-        back_way();
     }
     else if (city_player != null) {
         sleep(1000);
@@ -144,21 +145,17 @@ function after_click() {
             if (happy_get != null) { happy_get.click() }
         }
         wait_complete();
-        back_way();
     }
-    else if (ddPets != null || beans != null || beans2 != null
-        || beans3 != null || getBeans != null || palyPlay != null
-        || couponCenter != null || openRedPack2 != null || cityFeast != null
-        || goodThing != null || newGoods != null || oneRnb != null 
-        || millionCoupon != null || sixOne != null || report != null
-        || gold20 != null || my618 != null) {
+    else if (textStr == '直接返回') {
         sleep(1000);
-        back_way();
+    }
+    else if (textStr == '等待返回') {
+        wait_complete();
     }
     else {
         wait_complete();
-        back_way();
     }
+    back_way();
 }
 
 function add_cart() {

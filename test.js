@@ -1,4 +1,4 @@
-log(className('android.webkit.WebView').text('??20???').findOnce());
+log(text('???').find()[1].parent().parent().parent().child(0).child(1).text());
 
 // let ddPets = className('TextView').text('东东蝌宠').findOnce();
 // let beans = className('TextView').text('豆豆戝长值').findOnce();
