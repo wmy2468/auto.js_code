@@ -81,7 +81,10 @@ function cakes() {
             if (unComplete.length <= 1) { break; }
             idxText = unComplete[idx].parent().parent().parent().child(0).child(1).text();
             if (idxText.indexOf('去玩AR吃') == -1) {
-                if (idxText.indexOf('所在战队') != -1) { idx = 2; }
+                // 如果有战队相关则+1
+                if (idxText.indexOf('所在战队') != -1) { idx = idx + 1; }
+                if (idxText.indexOf('为战队拉人助力') != -1) { idx = idx + 1; }
+
                 if (idx >= unComplete.length) { break; }
                 sleep(1500);
                 if (textContains('继续领红包').findOnce() != null) {
@@ -107,24 +110,6 @@ function cakes() {
 
 function after_click(textStr) {
     sleep(4500);
-    // let ddPets = className('TextView').text('东东萌宠').findOnce();
-    // let beans = className('TextView').text('豆豆成长值').findOnce();
-    // let beans2 = className('TextView').text('豆苗成长值').findOnce();
-    // let beans3 = className('TextView').text('记得点击气泡浇灌营养液哦！！').findOnce();
-    // let getBeans = className('TextView').text('领京豆').findOnce();
-    // let palyPlay = className('TextView').text('玩一玩').findOnce();
-    // let couponCenter = className('ImageView').desc('领券中心').findOnce();
-    // let cityFeast = className('android.view.View').text('线上线下同款同价').findOnce();
-    // let oneRnb = className('android.webkit.WebView').text('京东1元包邮').findOnce();
-    // let millionCoupon = className('android.webkit.WebView').text('618万券齐发').findOnce();
-    // let openRedPack2 = className('android.webkit.WebView').text('全民开红包').findOnce();
-    // let goodThing = textContains('互动好物会场').findOnce();
-    // let report = textContains('趋势报告').findOnce();
-    // let sixOne = className('android.webkit.WebView').text('京东618榜单会场').findOnce();
-    // let newGoods = className('android.webkit.WebView').text('逛新品 赚京豆').findOnce();
-    // let gold20 = className('android.webkit.WebView').text('瓜分20亿金贴').findOnce();
-    // let my618 = text('我的618').findOnce();
-
     let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
     let viewList = text('浏览以下5个商品').depth(17).findOnce(); //恭喜完成
     let addCart = textContains('点击加购以下').findOnce();  //idContains(str)
