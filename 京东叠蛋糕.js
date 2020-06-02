@@ -219,6 +219,11 @@ function back_way() {
     if (desc('返回').id('fe').findOnce() == null) {
         back();
     } else {
+        let closeBtn = className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce();
+        if (closeBtn != null) {
+            closeBtn.click();
+            sleep(1000);
+        }
         desc('返回').id('fe').click();
     }
     sleep(800);

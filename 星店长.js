@@ -67,9 +67,13 @@ function manager(starts) {
             if (taskName == '开通品牌会员') {
                 taskGoBtn.click();
                 text('会员卡详情').findOne();
-                sleep(1000);
-                back_way();
-                text('为他加人气 >').findOne().click();
+                sleep(3000);
+                if (center_click(textContains('确认授权并加入').findOnce())) {
+                    sleep(2000);
+                } else {
+                    back_way();
+                    text('为他加人气 >').findOne().click();
+                }
             }
             else if (taskName != '好友助力') {
                 taskGoBtn.click();
