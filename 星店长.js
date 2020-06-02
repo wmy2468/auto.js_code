@@ -16,19 +16,25 @@ function managers() {
     //等待加载
     className('android.view.View').text('星店长首页').findOne();
     //1. 找各个店长
-    let managerPNG = className('Image').textContains('.png').find();
-    let managerJPG = className('Image').textContains('.jpg').find();
+    let managerPNG = className('Image').textContains('.png').findOnce();
+    let managerJPG = className('Image').textContains('.jpg').findOnce();
     //有找到元素才执行
-    let mngs;
-    if (managerPNG.nonEmpty()) {
-        mngs = managerPNG[0].parent().parent().parent();
-        for (i = 0; i < mngs.childCount(); i++) {
+    let mngs, count;
+    if (managerPNG != null) {
+        count = managerPNG.parent().parent().parent().childCount();
+        for (i = 0; i < count; i++) {
+            //等待加载
+            className('android.view.View').text('星店长首页').findOne();
+            mngs = className('Image').textContains('.png').findOnce().parent().parent().parent();
             manager(mngs.child(i));
         }
     }
-    else if (managerJPG.nonEmpty()) {
-        mngs = managerJPG[0].parent().parent().parent();
-        for (i = 0; i < mngs.childCount(); i++) {
+    else if (managerJPG != null) {
+        count = managerJPG.parent().parent().parent().childCount();
+        for (i = 0; i < count; i++) {
+            //等待加载
+            className('android.view.View').text('星店长首页').findOne();
+            mngs = className('Image').textContains('.png').findOnce().parent().parent().parent();
             manager(mngs.child(i));
         }
     }
@@ -69,13 +75,17 @@ function manager(starts) {
                 text('会员卡详情').findOne();
                 sleep(3000);
                 if (center_click(textContains('确认授权并加入').findOnce())) {
-                    sleep(2000);
+                    sleep(2500);
+                    if (center_click(textContains('我知道了').findOnce())) { sleep(2000); };
                 } else {
                     back_way();
-                    text('为他加人气 >').findOne().click();
                 }
+                text('为他加人气 >').findOne().click();
             }
-            else if (taskName != '好友助力') {
+            else if (taskName == '提醒签到') {
+                taskGoBtn.click();
+                sleep(2000);
+            } else if (taskName != '好友助力') {
                 taskGoBtn.click();
                 sleep(2000);
                 back_way();

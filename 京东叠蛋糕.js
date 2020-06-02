@@ -78,12 +78,18 @@ function cakes() {
         sleep(4500);
         unComplete = text('去完成').find();
         if (unComplete.nonEmpty()) {
-            if (unComplete.length <= 1) { break; }
+            if (unComplete.length <= 1 || idx >= unComplete.length) { break; }
             idxText = unComplete[idx].parent().parent().parent().child(0).child(1).text();
             if (idxText.indexOf('去玩AR吃') == -1) {
                 // 如果有战队相关则+1
-                if (idxText.indexOf('所在战队') != -1) { idx = idx + 1; }
-                if (idxText.indexOf('为战队拉人助力') != -1) { idx = idx + 1; }
+                if (idxText.indexOf('所在战队') != -1) {
+                    idx = idx + 1;
+                    continue;
+                }
+                if (idxText.indexOf('为战队拉人助力') != -1) {
+                    idx = idx + 1;
+                    continue;
+                }
 
                 if (idx >= unComplete.length) { break; }
                 sleep(1500);
