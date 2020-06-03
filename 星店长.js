@@ -12,9 +12,11 @@ function main() {
 
 
 function managers() {
+    let i;
     id('com.jingdong.app.mall:id/bci').text('立即查看').findOne().click();
     //等待加载
     className('android.view.View').text('星店长首页').findOne();
+    sleep(2500);
     //1. 找各个店长
     let managerPNG = className('Image').textContains('.png').findOnce();
     let managerJPG = className('Image').textContains('.jpg').findOnce();
@@ -43,7 +45,7 @@ function managers() {
 
 function manager(starts) {
     //切换到店长
-    //for (i = 0; i < 5; i++) {
+    let i;
     starts.click();
     sleep(500);
     //点击为他加人气
