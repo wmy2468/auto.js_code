@@ -15,7 +15,7 @@ function managers() {
     let i;
     id('com.jingdong.app.mall:id/bci').text('立即查看').findOne().click();
     //等待加载
-    className('android.view.View').text('星店长首页').findOne();
+    text('为他加人气 >').findOne()
     sleep(2500);
     //1. 找各个店长
     let managerPNG = className('Image').textContains('.png').findOnce();
@@ -26,7 +26,7 @@ function managers() {
         count = managerPNG.parent().parent().parent().childCount();
         for (i = 0; i < count; i++) {
             //等待加载
-            className('android.view.View').text('星店长首页').findOne();
+            text('为他加人气 >').findOne()
             mngs = className('Image').textContains('.png').findOnce().parent().parent().parent();
             manager(mngs.child(i));
         }
@@ -35,7 +35,7 @@ function managers() {
         count = managerJPG.parent().parent().parent().childCount();
         for (i = 0; i < count; i++) {
             //等待加载
-            className('android.view.View').text('星店长首页').findOne();
+            text('为他加人气 >').findOne()
             mngs = className('Image').textContains('.png').findOnce().parent().parent().parent();
             manager(mngs.child(i));
         }
