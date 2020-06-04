@@ -192,6 +192,16 @@ function wait_complete() {
                     sureBtn.click();
                     sleep(1000);
                 }
+                let closeBtn2 = text('收下好礼').findOnce();
+                if (closeBtn2 != null) {
+                    closeBtn2.click();
+                    sleep(1000);
+                }
+                let closeBtn3 = textContains('领取奖励').findOnce();
+                if (closeBtn3 != null) {
+                    closeBtn3.click();
+                    sleep(1000);
+                }
                 let closeBtn = className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce();
                 if (closeBtn != null) {
                     closeBtn.click();
