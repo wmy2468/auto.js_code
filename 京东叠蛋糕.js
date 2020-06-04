@@ -148,7 +148,7 @@ function after_click(textStr) {
 function add_cart() {
     let carts
     i = 0;
-    while (i <= 4 && (text('已完成').findOnce() == null)) {
+    while (text('已完成').findOnce() == null) {
         //点击商品加购物车按钮
         if (idContains('cart_').findOnce() != null) {
             carts = idContains('cart_').find()[i];
@@ -164,7 +164,7 @@ function add_cart() {
 
 function view_list() {
     i = 0;
-    while (i <= 4 && (text('已完成').findOnce() == null)) {
+    while (text('已完成').findOnce() == null) {
         idContains('view_').findOne();
         //点击商品加购物车按钮
         if (idContains('view_').findOnce() != null) {
