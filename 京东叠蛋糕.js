@@ -99,6 +99,7 @@ function cakes() {
                 }
                 if (idxText.indexOf('浏览可得') != -1) { textStr = '直接返回' }
                 if (idxText.indexOf('秒可得') != -1) { textStr = '等待返回' }
+                if (idxText.indexOf('成功开通得') != -1) { textStr = '会员' }
             } else {
                 break;
             }
@@ -135,14 +136,18 @@ function after_click(textStr) {
     }
     else if (textStr == '直接返回') {
         sleep(1000);
+        back_way();
     }
     else if (textStr == '等待返回') {
         wait_complete();
     }
+    else if (textStr == '会员') {
+        member_card();
+    }
     else {
         wait_complete();
     }
-    back_way();
+
 }
 
 function add_cart() {
@@ -159,6 +164,7 @@ function add_cart() {
         }                   //加购等待已完成 
         i = i + 1;
     }
+    back_way();
 }
 
 
@@ -176,8 +182,19 @@ function view_list() {
         }
         i = i + 1;
     }
+    back_way();
 }
 
+function member_card() {
+    sleep(3600);
+    if (text('去完成').findOnce() == null) {
+        center_click(textContains('确认授权并加入').findOne());
+        sleep(4500);
+        if (text('去完成').findOnce() == null) {
+            back_way();
+        }
+    }
+}
 
 function wait_complete() {
     let focuseBtn = true;
@@ -214,6 +231,7 @@ function wait_complete() {
             break;
         }
     }
+    back_way();
 }
 
 // -------------通用部分--------------------
