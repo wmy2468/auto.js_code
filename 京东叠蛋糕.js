@@ -98,8 +98,8 @@ function cakes() {
                     sleep(1000);
                 }
                 if (idxText.indexOf('浏览可得') != -1) { textStr = '直接返回' }
-                if (idxText.indexOf('秒可得') != -1) { textStr = '等待返回' }
-                if (idxText.indexOf('成功开通得') != -1) { textStr = '会员' }
+                else if (idxText.indexOf('秒可得') != -1) { textStr = '等待返回' }
+                else if (idxText.indexOf('成功开通得') != -1) { textStr = '会员' }
             } else {
                 break;
             }
@@ -186,13 +186,20 @@ function view_list() {
 }
 
 function member_card() {
-    sleep(3600);
-    if (text('去完成').findOnce() == null) {
-        center_click(textContains('确认授权并加入').findOne());
-        sleep(4500);
-        if (text('去完成').findOnce() == null) {
+    let count = 0;
+    //toastLog('会员卡');
+    sleep(3000);
+    while (text('去完成').findOnce() == null) {
+        if (count >= 4) {
             back_way();
+            sleep(4000);
         }
+        if (center_click(textContains('确认授权并加入').findOnce())) {
+            sleep(3000);
+            center_click(text('我知道了').findOnce())
+        }
+        count = count + 1;
+        sleep(3000);
     }
 }
 
