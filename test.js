@@ -4,4 +4,4 @@
 // 商品点击
 //log(text('逛商品').findOnce().parent().parent().child(3).child(1).click());
 
-log(className('android.view.View').textContains('签到').findOnce());
+log(desc('返回').findOnce().click());

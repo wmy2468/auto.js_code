@@ -156,15 +156,17 @@ function add_cart() {
     while (text('已完成').findOnce() == null) {
         //点击商品加购物车按钮
         if (idContains('cart_').findOnce() != null) {
-            carts = idContains('cart_').find()[i];
+            carts = idContains('cart_').find()[i].click();
             //if (carts.child(0).text() != '已加购') {
-            carts.click();
             //}
-            sleep(2500);
+            sleep(2000);
         }                   //加购等待已完成 
         i = i + 1;
     }
-    back_way();
+    while (className('android.view.View').textContains('签到').findOnce() == null) {
+        back_way();
+        sleep(2000);
+    }
 }
 
 
@@ -182,7 +184,10 @@ function view_list() {
         }
         i = i + 1;
     }
-    back_way();
+    while (className('android.view.View').textContains('签到').findOnce() == null) {
+        back_way();
+        sleep(2000);
+    }
 }
 
 function member_card() {
@@ -253,7 +258,7 @@ function run_app(act_name) {
 
 function back_way() {
     sleep(800);
-    if (desc('返回').id('fe').findOnce() == null) {
+    if (desc('返回').findOnce() == null) {
         back();
     } else {
         let closeBtn = className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce();
@@ -261,7 +266,7 @@ function back_way() {
             closeBtn.click();
             sleep(1000);
         }
-        desc('返回').id('fe').click();
+        desc('返回').click();
     }
     sleep(800);
 }
