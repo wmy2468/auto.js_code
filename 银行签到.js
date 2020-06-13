@@ -41,7 +41,7 @@ function 买单吧() {
             center_click(passAD);
         }
     }
-    center_click(className('TextView').id('tv_title').text('我的').findOne());
+    center_click(text('我的').findOne());
     center_click(id('com.bankcomm.maidanba:id/tv_sign').text('每日签到').findOne());
 
     while (id('rl_title_white').findOnce() == null) {
@@ -171,7 +171,7 @@ function 云闪付() {
         if (text('去抽奖').findOnce() != null) {
             center_click(text('去抽奖').findOnce());
             id('com.unionpay:id/tv_title').text('签到抽奖专区').findOne();
-            center_click(text('31864c5e43cb4e0883c90d2692d33ad2').findOnce());
+            center_click(id('com.unionpay:id/drawMainWheel').findOnce());
             idContains('resultBtn').findOne();
         }
     }

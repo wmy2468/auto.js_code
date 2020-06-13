@@ -258,7 +258,8 @@ function run_app(act_name) {
 
 function back_way() {
     sleep(800);
-    if (desc('返回').findOnce() == null) {
+    let backBtn = desc('返回').findOnce();
+    if (backBtn == null) {
         back();
     } else {
         let closeBtn = className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce();
@@ -266,7 +267,11 @@ function back_way() {
             closeBtn.click();
             sleep(1000);
         }
-        desc('返回').click();
+        if (backBtn.clickable()) {
+            backBtn.click();
+        } else {
+            center_click(backBtn);
+        }
     }
     sleep(800);
 }
