@@ -57,10 +57,10 @@ function cakes() {
     // 等待蛋糕界面加载
     while (className('android.view.View').text('当前蛋糕：').findOnce() == null) {
         let cake_view = className('ImageView').desc('浮层活动').findOnce();
-        center_click(cake_view);
+        center_click(cake_view, false);
         sleep(2000);
     }
-    sleep(3000);
+    sleep(4500);
     // 检测弹窗是否有立即签到
     sign_immediately = text('立即签到').findOnce();
     if (sign_immediately != null) {
@@ -274,12 +274,27 @@ function back_way() {
         }
     }
     sleep(800);
+    center_click(textContains('离开').findOnce());
+    center_click(textContains('知道了').findOnce());
 }
 
-function center_click(element) {
+
+
+function center_click(element, centerClick) {
     if (element != null) {
-        click(element.bounds().centerX(), element.bounds().centerY());
-        sleep(800);
-        return true;
+        if (centerClick == null) {
+            if (element.clickable()) {
+                element.click();
+                return true;
+            } else {
+                click(element.bounds().centerX(), element.bounds().centerY());
+                sleep(800);
+                return true;
+            }
+        } else {
+            click(element.bounds().centerX(), element.bounds().centerY());
+            sleep(800);
+            return true;
+        }
     } else { return false; }
 }
