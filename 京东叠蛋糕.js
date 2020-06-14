@@ -209,40 +209,8 @@ function member_card() {
 }
 
 function wait_complete() {
-    let focuseBtn = true;
     //等待恭喜完成
-    while (textContains('恭喜完成').findOnce() == null) {
-        if (focuseBtn) {
-            if (center_click(className('ImageView').desc('关注有礼按钮').findOnce())) {
-                focuseBtn = false;
-                sleep(3000);
-                let sureBtn = className('TextView').text('确认').findOnce();
-                if (sureBtn != null) {
-                    sureBtn.click();
-                    sleep(1000);
-                }
-                let closeBtn2 = text('收下好礼').findOnce();
-                if (closeBtn2 != null) {
-                    closeBtn2.click();
-                    sleep(1000);
-                }
-                let closeBtn3 = textContains('领取奖励').findOnce();
-                if (closeBtn3 != null) {
-                    closeBtn3.click();
-                    sleep(1000);
-                }
-                let closeBtn = className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce();
-                if (closeBtn != null) {
-                    closeBtn.click();
-                    sleep(1000);
-                }
-            }
-        }
-        sleep(1000);
-        if (className('TextView').textContains('出错').findOnce() != null) {
-            break;
-        }
-    }
+    textContains('恭喜完成').findOne();
     back_way();
 }
 
