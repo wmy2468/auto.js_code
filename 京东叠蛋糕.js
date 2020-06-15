@@ -100,9 +100,12 @@ function cakes() {
                 if (idxText.indexOf('浏览可得') != -1) { textStr = '直接返回' }
                 else if (idxText.indexOf('秒可得') != -1) { textStr = '等待返回' }
                 else if (idxText.indexOf('成功开通得') != -1) { textStr = '会员' }
+                else if (idxText.indexOf('浏览5个商品可得') != -1) { textStr = '浏览' }
+                else if (idxText.indexOf('加购5个商品可得') != -1) { textStr = '加购' }
             } else {
                 break;
             }
+            toastLog(textStr);
             after_click(textStr);
         } else {
             break;
@@ -114,13 +117,13 @@ function cakes() {
 function after_click(textStr) {
     sleep(4500);
     let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
-    let viewList = text('浏览以下5个商品').depth(17).findOnce(); //恭喜完成
-    let addCart = textContains('点击加购以下').findOnce();  //idContains(str)
+    //let viewList = text('浏览以下5个商品').depth(17).findOnce(); //恭喜完成
+    //let addCart = textContains('点击加购以下').findOnce();  //idContains(str)
 
-    if (addCart != null) {
+    if (textStr == '加购') {
         add_cart();
     }
-    else if (viewList != null) {
+    else if (textStr == '浏览') {
         view_list();
     }
     else if (city_player != null) {
