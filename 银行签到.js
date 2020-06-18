@@ -4,8 +4,8 @@ main();
 //浦发信用卡();
 function main() {
     云闪付();
-    手机淘宝();
-    苏宁易购();
+    //手机淘宝();
+    //苏宁易购();
     浦发信用卡();
     邮储信用卡();
     买单吧();
@@ -64,7 +64,7 @@ function 买单吧() {
 
 // 浦发
 function 浦发信用卡() {
-    let appName = '浦发信用卡';
+    let appName = '浦大喜奔';
     //closeApp(appName);
     ToAutojs();
     ToApp(appName);
@@ -263,7 +263,7 @@ function gesture_pwd(appName) {
             point = id('com.yitong.mbank.psbc.creditcard:id/lock_pattern').findOnce();
             log('邮储信用卡');
             break;
-        case '浦发信用卡':
+        case '浦大喜奔':
             point = id('com.spdbccc.app:id/pattern_lock_body_layout').findOnce();
             log('浦发信用卡');
             break;
