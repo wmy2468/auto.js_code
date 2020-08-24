@@ -4,6 +4,7 @@ auto.waitFor();
 main();
 //买单吧();
 function main() {
+    什么值得买();
     jd_sign();
     云闪付();
     浦发银行();
@@ -26,6 +27,7 @@ function ToAutojs() {
 }
 
 function passAd() {
+    sleep(500);
     sClick(textContains('跳过').findOnce());
     sClick(descContains('跳过').findOnce());
     sClick(id('iv_adclose').findOnce());
@@ -63,7 +65,7 @@ function 邮储银行() {
         }
     }
     //toastLog('找签到');
-    while(text('已签到').findOnce() == null) {
+    while (text('已签到').findOnce() == null) {
         sClick(id('tvName').text('签到有礼').findOnce());
         sleep(1200);
         sClick(text('签 到').findOnce());
@@ -373,7 +375,21 @@ function 招商银行() {
     sleep(1200);
     back();
     sleep(800);
-    toastLog('招行已签到');
+    setClip('');
+    toastLog(appName + '已签到');
+    sleep(1200);
+}
+
+function 什么值得买() {
+    let appName = '什么值得买';
+    ToApp(appName);
+    passAd();
+    sClick(id('tab_usercenter').text('我的').findOne());
+    sleep(1000);
+    sClick(id('tv_login_sign').findOne());
+    sleep(1000);
+    text('已连续签到').findOne();
+    toastLog(appName + '已签到');
     sleep(1200);
 }
 
