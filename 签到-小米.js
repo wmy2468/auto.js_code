@@ -1,6 +1,6 @@
 auto.waitFor();
 
-//toastLog(text('我的成长').findOne());
+//cmb_gua();
 main();
 //买单吧();
 function main() {
@@ -12,6 +12,7 @@ function main() {
         jd_sign();
         i = i + 1;
     }
+    招商银行();
     lockScr();
 }
 
@@ -41,7 +42,6 @@ function ToApp(appName) {
 
 // ======================签到代码==================================
 function jd_sign() {
-    ToApp("京东");
     //等待首页加载
     while (className('TextView').text('首页').findOnce() == null) {
         sClick(id('xk').findOnce());
@@ -65,7 +65,7 @@ function jd_sign() {
     }
     while (className('TextView').text('首页').findOnce() == null) {
         back();
-        sleep(4000);
+        sleep(3000);
     }
     sClick(text('领券').findOnce().parent());
     className('ImageView').desc('领券中心').findOne();
@@ -80,8 +80,31 @@ function jd_sign() {
     }
     while (className('TextView').text('首页').findOnce() == null) {
         back();
-        sleep(4000);
+        sleep(3000);
     }
+}
+
+function 招商银行() {
+    let appName = '招商银行';
+    setClip('＆https://t.cmbchina.com/RZV7f2＆');
+    ToApp(appName);
+    passAd();
+    sClick(text('立即查看').findOne());
+    sleep(1000);
+    id('ivBigHeadImage').findOne();
+    sleep(800);
+    gesture_pwd(appName);
+    sleep(2000);
+    text('周日').findOne();
+    sleep(2000);
+    let monday = text('周一').findOne();
+    sClick(monday.parent().parent().parent().child(3));
+    text('医保电子凭证').findOne();
+    sleep(1200);
+    back();
+    sleep(800);
+    toastLog('招行已签到');
+    sleep(1200);
 }
 
 function cClick(element) {
@@ -104,6 +127,7 @@ function sClick(element) {
 
 // xy为中心点坐标，offset为滑动区域 两个点之间的距离
 function gesture_pwd(appName) {
+    let pwd = '147895';
     let execStr = 'gesture(850';
     let pointX, pointY, point;
     let offSet = device.width * 0.25;
@@ -128,15 +152,14 @@ function gesture_pwd(appName) {
             point = id('com.HuaXiaBank.HuaCard:id/gesture_container').findOnce();
             log('华彩生活');
             break;
-        case '邮储银行':
-            point = id('lockPatternLogin').findOnce();
-            log('邮储银行');
+        case '招商银行':
+            point = id('cmb.pb:id/vGestureContentView').findOnce();
+            log('招商银行');
             break;
     }
     if (point == null) { return false; }
     x = point.bounds().centerX();
     y = point.bounds().centerY();
-    let pwd = '147895';
     let arr = pwd.split('');
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] == 1) {

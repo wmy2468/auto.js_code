@@ -12,6 +12,7 @@ function main() {
     浦发信用卡();
     邮储信用卡();
     华彩生活();
+    招商银行();
     买单吧();
     alert('已完成.');
 }
@@ -134,7 +135,7 @@ function jd_sign() {
     }
     while (className('TextView').text('首页').findOnce() == null) {
         back();
-        sleep(4000);
+        sleep(3000);
     }
     sClick(text('领券').findOnce().parent());
     className('ImageView').desc('领券中心').findOne();
@@ -149,7 +150,7 @@ function jd_sign() {
     }
     while (className('TextView').text('首页').findOnce() == null) {
         back();
-        sleep(4000);
+        sleep(3000);
     }
 }
 
@@ -316,9 +317,9 @@ function 云闪付() {
         if (text('去抽奖').findOnce() != null) {
             sClick(text('去抽奖').findOnce());
             id('com.unionpay:id/tv_title').text('签到抽奖专区').findOne();
-            sleep(4500);
-            cClick(text('签到抽奖专区').findOnce().parent().parent().child(2).
-                child(0).child(0).child(0).child(0).child(0).child(3));
+            sleep(5000);
+            let area = id('com.unionpay:id/tv_title').text('签到抽奖专区').findOne();
+            cClick(area.parent().parent().child(2).child(0).child(0).child(0).child(0).child(0).child(3));
             idContains('resultBtn').findOne();
         }
     }
@@ -353,6 +354,28 @@ function 工银e生活() {
     sleep(1000);
 }
 
+function 招商银行() {
+    let appName = '招商银行';
+    setClip('＆https://t.cmbchina.com/RZV7f2＆');
+    ToApp(appName);
+    passAd();
+    sClick(text('立即查看').findOne());
+    sleep(1000);
+    id('ivBigHeadImage').findOne();
+    sleep(800);
+    gesture_pwd(appName);
+    sleep(2000);
+    text('周日').findOne();
+    sleep(2000);
+    let monday = text('周一').findOne();
+    sClick(monday.parent().parent().parent().child(3));
+    text('医保电子凭证').findOne();
+    sleep(1200);
+    back();
+    sleep(800);
+    toastLog('招行已签到');
+    sleep(1200);
+}
 
 function cClick(element) {
     if (element != null) {
@@ -374,6 +397,7 @@ function sClick(element) {
 
 // xy为中心点坐标，offset为滑动区域 两个点之间的距离
 function gesture_pwd(appName) {
+    let pwd = '147895';
     let execStr = 'gesture(850';
     let pointX, pointY, point;
     let offSet = device.width * 0.25;
@@ -398,15 +422,14 @@ function gesture_pwd(appName) {
             point = id('com.HuaXiaBank.HuaCard:id/gesture_container').findOnce();
             log('华彩生活');
             break;
-        case '邮储银行':
-            point = id('lockPatternLogin').findOnce();
-            log('邮储银行');
+        case '招商银行':
+            point = id('cmb.pb:id/vGestureContentView').findOnce();
+            log('招商银行');
             break;
     }
     if (point == null) { return false; }
     x = point.bounds().centerX();
     y = point.bounds().centerY();
-    let pwd = '147895';
     let arr = pwd.split('');
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] == 1) {
