@@ -90,7 +90,7 @@ function 交行贴金() {
         }
         let cnt = 0;
         while (1) {
-            if (elements[cnt].parent().parent().child(1).text == '满5元可用') {
+            if (elements[cnt].parent().parent().child(1).text == '满10元可用') {
                 clickEle = elements[cnt];
                 break;
             }

@@ -8,7 +8,7 @@ function main() {
     云闪付();
     浦发银行();
     工银e生活();
-    //苏宁易购();
+    邮储银行();
     浦发信用卡();
     邮储信用卡();
     华彩生活();
@@ -25,16 +25,12 @@ function ToAutojs() {
 }
 
 function passAd() {
-    let passAD = textContains('跳过').findOnce();
-    let descpassAD = descContains('跳过').findOnce();
-    if (passAD != null) {
-        sClick(passAD);
-        sleep(800);
-    }
-    if (descpassAD != null) {
-        sClick(descpassAD);
-        sleep(800);
-    }
+    sClick(textContains('跳过').findOnce());
+    sClick(descContains('跳过').findOnce());
+    sClick(id('iv_adclose').findOnce());
+    sClick(id('btn_closed').findOnce());
+    sClick(id('img_close').findOnce());
+    sClick(text('放弃转账').findOnce());
 }
 
 function ToApp(appName) {
@@ -45,6 +41,37 @@ function ToApp(appName) {
 }
 
 // ======================签到代码==================================
+// 邮储银行
+function 邮储银行() {
+    let appName = '邮储银行';
+    ToAutojs();
+    //closeApp(appName);
+    ToApp(appName);
+    while (className('RadioButton').text('我的').findOnce() == null) {
+        passAd();
+    }
+    sleep(1000);
+    sClick(text('我的').findOnce());
+    // 签到按钮
+    //toastLog('我的已点击');
+    while (textContains('上次登录').findOnce() == null) {
+        if (text('忘记手势').findOnce() != null) {
+            //toastLog('滑动手势');
+            gesture_pwd(appName);
+            sleep(1500);
+        }
+    }
+    //toastLog('找签到');
+    while(text('已签到').findOnce() == null) {
+        sClick(id('tvName').text('签到有礼').findOnce());
+        sleep(1200);
+        sClick(text('签 到').findOnce());
+        sleep(1200);
+    }
+    toastLog(appName + '已签到');
+    sleep(1000);
+}
+
 // 浦发金豆签到
 function 浦发银行() {
     let appName = '浦发银行';
@@ -79,6 +106,7 @@ function 浦发银行() {
 
     }
     toastLog(appName + '已签到');
+    sleep(1000);
 }
 
 function jd_sign() {
@@ -140,7 +168,8 @@ function 买单吧() {
     while (id('rl_title_white').findOnce() == null) {
         sClick(id('com.bankcomm.maidanba:id/tv_sign').text('每日签到').findOnce());
         sleep(1000);
-        cClick(id('ivADClose').findOnce());
+        sClick(idContains('Close').findOnce());
+        sClick(idContains('close').findOnce());
         log(appName + '等待登录');
         sleep(1500);
         if (text('手势登录').findOnce() != null) {
@@ -156,6 +185,7 @@ function 买单吧() {
         sClick(id('com.bankcomm.maidanba:id/bt_welfare_lottery').text('去抽奖').findOnce());
     }
     toastLog(appName + '已签到');
+    sleep(1000);
 }
 
 // 浦发
@@ -198,13 +228,13 @@ function 浦发信用卡() {
         sleep(800);
     }
     toastLog(appName + '已签到');
+    sleep(1000);
 }
 
 // 邮储信用卡
 function 邮储信用卡() {
     let appName = '邮储信用卡';
     ToAutojs();
-    //closeApp(appName);
     ToApp(appName);
     while (text('我的').findOnce() == null) {
         passAd();
@@ -217,14 +247,6 @@ function 邮储信用卡() {
     sClick(className('TextView').text('我的').findOne());
     // 等待我的页面加载
     let myBill = text('我的账单').findOne();
-    /*while (id('module_08000000_iv').findOnce() == null) {
-        ToAutojs();
-        ToApp(appName);
-        sleep(3000);
-    }
-    sleep(800);
-    sClick(id('module_08000000_iv').findOnce());
-*/
     sleep(800);
     sClick(myBill.parent().parent().parent().child(4));
     while (text('今日已签到').findOnce() == null) {
@@ -236,6 +258,7 @@ function 邮储信用卡() {
         }
     }
     toastLog(appName + '已签到');
+    sleep(1000);
 }
 
 // 华彩生活
@@ -269,6 +292,7 @@ function 华彩生活() {
         }
     }
     toastLog(appName + '已签到');
+    sleep(1000);
 }
 
 // 云闪付
@@ -299,6 +323,7 @@ function 云闪付() {
         }
     }
     toastLog(appName + '已签到');
+    sleep(1000);
 }
 
 function 工银e生活() {
@@ -311,53 +336,23 @@ function 工银e生活() {
     }
     sleep(1000);
     sClick(id('radio_button1').text('生活').findOnce());
-    
+
     text('商城').findOne();
     sleep(800);
-    sClick(text('商城').findOnce());
+    sClick(text('商城').findOne());
 
     text('mall_banner_1').findOne();
     sleep(1000);
-    sClick(text('mall_banner_1').findOnce());
+    cClick(text('mall_banner_1').findOnce());
 
     text('点击签到').findOne();
     sleep(2000);
     sClick(text('点击签到').findOnce());
-    
+
     toastLog(appName + '已签到');
+    sleep(1000);
 }
 
-function 苏宁易购() {
-    let appName = '苏宁易购';
-    //closeApp(appName);
-    ToAutojs();
-    ToApp(appName);
-    while (className('TextView').text('首页').findOnce() == null) {
-        passAd();
-        sleep(1000);
-    }
-    sleep(2000);
-    let cancelBtn = id('com.suning.mobile.ebuy:id/marketing_cancel_img').findOnce();
-    if (cancelBtn != null) {
-        sClick(cancelBtn);
-    }
-    sleep(3000);
-    //签到天天红包
-    sClick(className('TextView').text('天天红包').findOnce());
-    className('android.webkit.WebView').text('天天领红包').findOne();
-    sleep(2500);
-    if (text('开心收下').findOnce() != null) {
-        //if (text('今日').findOnce().parent().child(2).text() != '已领取') {
-        sClick(text('开心收下').findOnce());
-    }
-    while (className('TextView').text('首页').findOnce() == null) {
-        back();
-        sleep(3000);
-    }
-    sClick(className('TextView').text('现金签到').findOnce());
-    className('TextView').text('云钻魔法狮').findOne();
-    toastLog(appName + '已签到');
-}
 
 function cClick(element) {
     if (element != null) {
@@ -371,7 +366,7 @@ function cClick(element) {
 function sClick(element) {
     if (element != null) {
         if (!element.click()) {
-            click(element.bounds().centerX(), element.bounds().centerY());
+            return click(element.bounds().centerX(), element.bounds().centerY());
         }
         return true;
     } else { return false; }
@@ -402,6 +397,10 @@ function gesture_pwd(appName) {
         case '华彩生活':
             point = id('com.HuaXiaBank.HuaCard:id/gesture_container').findOnce();
             log('华彩生活');
+            break;
+        case '邮储银行':
+            point = id('lockPatternLogin').findOnce();
+            log('邮储银行');
             break;
     }
     if (point == null) { return false; }

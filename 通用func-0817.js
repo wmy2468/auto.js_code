@@ -47,32 +47,12 @@ function sClick(element) {
 }
 
 function passAd() {
-    let passAD = textContains('跳过').findOnce();
-    let descpassAD = descContains('跳过').findOnce();
-    let floatAD = id('iv_adclose').findOnce();
-    let shopAD = id('btn_closed').findOnce();
-    let imgAD = id('img_close').findOnce();
-    if (passAD != null) {
-        sClick(passAD);
-        return 0;
-    }
-    if (descpassAD != null) {
-        sClick(descpassAD);
-        return 0;
-    }
-    if (floatAD != null) {
-        sClick(floatAD);
-        return 0;
-    }
-    if (shopAD != null) {
-        sClick(shopAD);
-        return 0;
-    }
-    if (imgAD != null) {
-        sClick(imgAD);
-        return 0;
-    }
-    return 1;
+    sClick(textContains('跳过').findOnce());
+    sClick(descContains('跳过').findOnce());
+    sClick(id('iv_adclose').findOnce());
+    sClick(id('btn_closed').findOnce());
+    sClick(id('img_close').findOnce());
+    sClick(text('放弃转账').findOnce());
 }
 
 
