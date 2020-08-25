@@ -7,7 +7,6 @@ function main() {
     xiaomiUnlock();
     let i = 1;
     while (i < 3) {
-        ToAutojs();
         toAppMulti("京东", i);
         jd_sign();
         i = i + 1;
@@ -34,6 +33,7 @@ function passAd() {
 }
 
 function ToApp(appName) {
+    ToAutojs();
     if (currentPackage() != getPackageName(appName)) {
         launchApp(appName);
         sleep(1000);
@@ -42,6 +42,7 @@ function ToApp(appName) {
 
 // ======================签到代码==================================
 function jd_sign() {
+    ToApp("京东");
     //等待首页加载
     while (className('TextView').text('首页').findOnce() == null) {
         sClick(id('xk').findOnce());
@@ -49,7 +50,8 @@ function jd_sign() {
         passAd();
         sleep(2000);
     }
-    sClick(className('TextView').text('领京豆').findOnce().parent());
+    let getBeans = className('TextView').text('领京豆').findOne();
+    sClick(getBeans.parent());
     //等待进店领豆加载
     className('TextView').text('进店领豆').findOne();
     if (className('TextView').text('已连续签到').findOnce()) {
@@ -67,7 +69,8 @@ function jd_sign() {
         back();
         sleep(3000);
     }
-    sClick(text('领券').findOnce().parent());
+    let getCon = text('领券').findOne();
+    sClick(getCon.parent());
     className('ImageView').desc('领券中心').findOne();
 
     if (className('TextView').text('立即签到').findOnce() == null) {
@@ -86,16 +89,19 @@ function jd_sign() {
 
 function 招商银行() {
     let appName = '招商银行';
+    ToAutojs();
     setClip('＆https://t.cmbchina.com/RZV7f2＆');
     ToApp(appName);
     passAd();
     sClick(text('立即查看').findOne());
     sleep(1000);
-    id('ivBigHeadImage').findOne();
-    sleep(800);
-    gesture_pwd(appName);
-    sleep(2000);
-    text('周日').findOne();
+    while (text('周日').findOnce() == null) {
+        if (id('ivBigHeadImage').findOnce() != null) {
+            sleep(800);
+            gesture_pwd(appName);
+        }
+        sleep(1000);
+    }
     sleep(2000);
     let monday = text('周一').findOne();
     sClick(monday.parent().parent().parent().child(3));
@@ -103,7 +109,8 @@ function 招商银行() {
     sleep(1200);
     back();
     sleep(800);
-    toastLog('招行已签到');
+    setClip('');
+    toastLog(appName + '已签到');
     sleep(1200);
 }
 
@@ -199,6 +206,7 @@ function gesture_pwd(appName) {
 }
 
 function toAppMulti(appName, cnt) {
+    ToAutojs();
     launchApp(appName);
     if (cnt != 0) {
         // 等待弹窗

@@ -5,6 +5,7 @@ main();
 //买单吧();
 function main() {
     什么值得买();
+    招商银行();
     jd_sign();
     云闪付();
     浦发银行();
@@ -13,7 +14,6 @@ function main() {
     浦发信用卡();
     邮储信用卡();
     华彩生活();
-    招商银行();
     买单吧();
     alert('已完成.');
 }
@@ -121,7 +121,8 @@ function jd_sign() {
         passAd();
         sleep(2000);
     }
-    sClick(className('TextView').text('领京豆').findOnce().parent());
+    let getBeans = className('TextView').text('领京豆').findOne();
+    sClick(getBeans.parent());
     //等待进店领豆加载
     className('TextView').text('进店领豆').findOne();
     if (className('TextView').text('已连续签到').findOnce()) {
@@ -139,7 +140,8 @@ function jd_sign() {
         back();
         sleep(3000);
     }
-    sClick(text('领券').findOnce().parent());
+    let getCon = text('领券').findOne();
+    sClick(getCon.parent());
     className('ImageView').desc('领券中心').findOne();
 
     if (className('TextView').text('立即签到').findOnce() == null) {
@@ -358,16 +360,19 @@ function 工银e生活() {
 
 function 招商银行() {
     let appName = '招商银行';
+    ToAutojs();
     setClip('＆https://t.cmbchina.com/RZV7f2＆');
     ToApp(appName);
     passAd();
     sClick(text('立即查看').findOne());
     sleep(1000);
-    id('ivBigHeadImage').findOne();
-    sleep(800);
-    gesture_pwd(appName);
-    sleep(2000);
-    text('周日').findOne();
+    while (text('周日').findOnce() == null) {
+        if (id('ivBigHeadImage').findOnce() != null) {
+            sleep(800);
+            gesture_pwd(appName);
+        }
+        sleep(1000);
+    }
     sleep(2000);
     let monday = text('周一').findOne();
     sClick(monday.parent().parent().parent().child(3));
@@ -382,13 +387,21 @@ function 招商银行() {
 
 function 什么值得买() {
     let appName = '什么值得买';
+    ToAutojs();
     ToApp(appName);
     passAd();
-    sClick(id('tab_usercenter').text('我的').findOne());
+    let signBtn = null;
+    while (signBtn == null) {
+        signBtn = id('tv_login_sign').findOnce();
+        sClick(id('tab_usercenter').text('我的').findOnce());
+        sleep(800);
+        sClick(id('dialog_home_ads_close').findOnce());
+        sleep(800);
+    }
+    sleep(800);
+    sClick(signBtn);
     sleep(1000);
-    sClick(id('tv_login_sign').findOne());
-    sleep(1000);
-    text('已连续签到').findOne();
+    textContains('已连续签到').findOne();
     toastLog(appName + '已签到');
     sleep(1200);
 }
