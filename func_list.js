@@ -1,5 +1,3 @@
-main()
-
 function main() {
     if (device.brand == 'HUAWEI') {
         mainHuawei();
@@ -8,38 +6,29 @@ function main() {
     }
 }
 
-
-function mainXiaomi() {
-    let appName = '招商银行';
-    ToAutojs();
-    toApp(appName);
-    passAd();
-    toCommunity();
-}
-
-function mainHuawei() {
-
-}
-
 // ----------------------通用功能区-----------------------
 // 切换到autojs
-function ToAutojs() {
+function toAutojs() {
     if (currentPackage() != getPackageName('Auto.js')) {
         launchApp('Auto.js');
         sleep(1200);
     }
 }
+
 function cClick(element) {
-    //toastLog(elementt.click());
     if (element != null) {
         click(element.bounds().centerX(), element.bounds().centerY());
+        log('cClick_center');
     }
 }
 
 function sClick(element) {
     if (element != null) {
-        if (!element.click()) {
+        if (element.click()) {
+            log('sClick');
+        } else {
             click(element.bounds().centerX(), element.bounds().centerY());
+            log('sClick_center');
         }
         return true;
     }
@@ -49,14 +38,14 @@ function sClick(element) {
 function passAd() {
     sClick(textContains('跳过').findOnce());
     sClick(descContains('跳过').findOnce());
-    sClick(id('iv_adclose').findOnce());
-    sClick(id('btn_closed').findOnce());
-    sClick(id('img_close').findOnce());
+    sClick(idContains('close').findOnce());
     sClick(text('放弃转账').findOnce());
 }
 
 
 function toApp(appName) {
+    toAutojs();
+    sleep(800);
     while (currentPackage() != getPackageName(appName)) {
         launchApp(appName);
         sleep(3000);
@@ -67,6 +56,8 @@ function toApp(appName) {
     小米使用参数1，2，华为使用0
 */
 function toAppMulti(appName, cnt) {
+    toAutojs();
+    sleep(800);
     launchApp(appName);
     if (cnt != 0) {
         // 等待弹窗
@@ -170,6 +161,10 @@ function gesture_pwd(appName) {
             point = id('cmb.pb:id/vGestureContentView').findOnce();
             log('招商银行');
             break;
+        case '邮储银行':
+            point = id('lockPatternLogin').findOnce();
+            log('招商银行');
+            break;
     }
     if (point == null) { return false; }
     x = point.bounds().centerX();
@@ -213,15 +208,29 @@ function gesture_pwd(appName) {
 }
 
 //生成从minNum到maxNum的随机数
-function randomNum(minNum,maxNum){ 
-    switch(arguments.length){ 
-        case 1: 
-            return parseInt(Math.random()*minNum+1,10); 
-        case 2: 
-            return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
-        default: 
-            return 0; 
-    } 
-} 
+function randomNum(minNum, maxNum) {
+    switch (arguments.length) {
+        case 1:
+            return parseInt(Math.random() * minNum + 1, 10);
+        case 2:
+            return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+        default:
+            return 0;
+    }
+}
 
 // -----------通用功能区------------------
+
+module.exports = {
+    toAutojs: toAutojs,
+    cClick: cClick,
+    sClick: sClick,
+    passAd: passAd,
+    toApp: toApp,
+    toAppMulti: toAppMulti,
+    huaweiUnlock: huaweiUnlock,
+    xiaomiUnlock: xiaomiUnlock,
+    gesture_pwd: gesture_pwd,
+    randomNum: randomNum,
+    lockScr: lockScr
+}
