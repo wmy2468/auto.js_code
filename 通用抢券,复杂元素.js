@@ -3,13 +3,14 @@ auto.waitFor();
 var func = require('func_list.js');
 
 var selectedArr = [
+    '淘宝测试',
     '交行贴金',
     '天猫茅台',
     '中行赞卡微信',
     '中行赞卡缤纷'
 ];
 
-
+//淘宝测试();
 main();
 
 //---------------配置区域-----------------
@@ -19,7 +20,9 @@ function main() {
         exit();
     }
     let scriptName = selectedArr[selectIndex];
-    engines.execScript(scriptName, (eval(scriptName + '()')).toString);
+    //engines.execScript(scriptName, (eval(scriptName + '()')));
+    eval(scriptName + '()');
+    toastLog('结束');
 }
 
 function 模板() {
@@ -50,6 +53,8 @@ function isInApp(appName) {
         log('等待APP加载');
         sleep(500);
     }
+    toastLog('APP已加载');
+    sleep(400);
 }
 // 判断时间
 function isInTime(targetTime) {
@@ -64,6 +69,25 @@ function isInTime(targetTime) {
     }
 }
 // ------------------------------------------------------
+
+
+function 淘宝测试() {
+    let appName = '手机淘宝';
+    let targetTime = '21,46,23,100';
+    let elements;
+    isInApp(appName);
+    //   定位元素
+    while (1) {
+        elements = text('加入购物车').findOnce();
+        if (elements == null) {
+            toastLog('已找到点击的元素');
+            continue;
+        }
+        break;
+    }
+    isInTime(targetTime);
+    func.sClick(elements);
+}
 
 // 等待页面变价
 function 交行贴金() {
@@ -81,6 +105,7 @@ function 交行贴金() {
         while (1) {
             if (elements[cnt].parent().parent().child(1).text == '满10元可用') {
                 clickEle = elements[cnt];
+                toastLog('已找到点击的元素');
                 break;
             }
             cnt = cnt + 1;
@@ -107,12 +132,14 @@ function 天猫茅台() {
         if (elements == null) {
             continue;
         }
+        toastLog('已找到点击的元素');
         break;
     }
     isInTime(targetTime);
     func.sClick(elements);
     func.sClick(className("TextView").text("提交订单").findOne());
 }
+
 
 // 准点进页面
 function 中行赞卡微信() {
@@ -126,6 +153,7 @@ function 中行赞卡微信() {
         if (elements == null) {
             continue;
         }
+        toastLog('已找到点击的元素');
         break;
     }
     // 确认时间
@@ -148,6 +176,7 @@ function 中行赞卡缤纷() {
         if (elements == null) {
             continue;
         }
+        toastLog('已找到点击的元素');
         break;
     }
     // 确认时间

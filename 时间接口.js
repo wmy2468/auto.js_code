@@ -14,9 +14,11 @@
 getTimeDiff();
 
 function getTimeDiff(area) {
+    console.show();
     let i = 10;
     let cnt = i;
     let c = 0;
+    //10次取均值
     while (i--) {
         if (area == '京东') {
             c = c + jdTime();
@@ -26,8 +28,13 @@ function getTimeDiff(area) {
             sleep(50);
         }
     }
+    console.log('总值：' + c);
     c = Math.trunc(c / cnt);
-    return c;
+    console.log('均值：' + c);
+    while (1) {
+        console.log(new Date(new Date().getTime() + c));
+        sleep(1000);
+    }
 }
 
 function jdTime() {
