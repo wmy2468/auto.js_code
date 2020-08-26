@@ -218,8 +218,58 @@ function randomNum(minNum, maxNum) {
             return 0;
     }
 }
-
 // -----------通用功能区------------------
+
+// 时间校准 获取时间差函数
+function getTimeDiff(area) {
+    let i = 10;
+    let cnt = i;
+    let c = 0;
+    while (i--) {
+        if (area == '京东') {
+            c = c + jdTime();
+            sleep(50);
+        } else {
+            c = c + tbTime();
+            sleep(50);
+        }
+    }
+    c = Math.trunc(c / cnt);
+    return c;
+}
+
+function jdTime() {
+    // 获取取一次时间耗时
+    stTimestamp = new Date().getTime();
+    let res = http.get('https://a.jd.com//ajax/queryServerData.html');
+    edTimestamp = new Date().getTime()
+    let resTime, resTimestamp;
+    if (res.statusCode != 200) {
+        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+        return 0;
+    }
+    resTime = res.body.json();
+    resTimestamp = Number(resTime.serverTime);
+    //返回时间差
+    return (Math.trunc((edTimestamp - stTimestamp) / 2) + resTimestamp) - edTimestamp
+}
+
+function tbTime() {
+    // 获取取一次时间耗时
+    stTimestamp = new Date().getTime();
+    let res = http.get('http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp');
+    edTimestamp = new Date().getTime()
+    let resTime, resTimestamp;
+    if (res.statusCode != 200) {
+        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+        return 0;
+    }
+    resTime = res.body.json();
+    resTimestamp = Number(resTime.data.t);
+    //返回时间差
+    return (Math.trunc((edTimestamp - stTimestamp) / 2) + resTimestamp) - edTimestamp
+}
+// 时间校准 获取时间差函数
 
 module.exports = {
     toAutojs: toAutojs,
@@ -232,5 +282,6 @@ module.exports = {
     xiaomiUnlock: xiaomiUnlock,
     gesture_pwd: gesture_pwd,
     randomNum: randomNum,
-    lockScr: lockScr
+    lockScr: lockScr,
+    getTimeDiff: getTimeDiff
 }

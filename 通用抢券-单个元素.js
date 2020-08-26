@@ -1,3 +1,6 @@
+auto.waitFor();
+// 导入模块
+var func = require('func_list.js');
 //---------------配置区域-----------------
 var dic = new Array();
 /*  
@@ -15,12 +18,12 @@ var dic = new Array();
 // 任务列表，有新的就加入到这里来
 dic['光大天猫'] = [
     '阳光惠生活',
-    '10,00,00,000',
+    '10,00,00,100',
     ['确认购买', 2, 1, 'TEXT']
 ];
 dic['工行京东199-100'] = [
     '京东金融',
-    '10,00,00,000',
+    '10,00,00,100',
     ['javascript: void 0;', 100, 1, 'TEXT']
 ];
 dic['e生活30-10'] = [
@@ -30,7 +33,7 @@ dic['e生活30-10'] = [
 ];
 dic['e生活50-25'] = [
     '工银e生活',
-    '10,30,00,000',
+    '10,30,00,100',
     ['去支付', 2, 1, 'TEXT']
 ];
 /*
@@ -93,10 +96,11 @@ function getElementText(sText, elementPos, txOrTxC) {
     }
 }
 
-function singleEleClick(element, timeFlag, targetTimestamp) {
+function singleEleClick(element, timeFlag, targetTimestamp, timeArea) {
     //element 要点击位置的文本，    点击的次数， 如存在多个相同文本的按钮      设置点击第几个文本，默认1 
     let eleSearchFlag = 1;
     let clickP, clickCnt, curTimestamp;
+    let timeDiff = func.getTimeDiff(timeArea);
     while (1) {
         if (eleSearchFlag) {
             clickP = getElementText(element[0], element[2], element[3]);
@@ -111,7 +115,7 @@ function singleEleClick(element, timeFlag, targetTimestamp) {
         }
         if (timeFlag) {
             // 获取时间戳
-            curTimestamp = new Date().getTime();
+            curTimestamp = new Date().getTime() + timeDiff;
             // 如果时间不符合条件
             if (curTimestamp < targetTimestamp) {
                 continue;
@@ -138,7 +142,14 @@ function main() {
     //如果数据在字典中不存在则退出
     //exit();
     device.keepScreenOn(1000 * 60 * 10);              //设置屏幕6分钟常亮
-    let appName = selectVal[0]          // 抢购软件名称
+    let appName = selectVal[0];          // 抢购软件名称
+    let timeArea;
+    if (appName.indexOf('京东') == -1) {
+        timeArea = 'others';
+    } else {
+        timeArea = '京东';
+    }
+
     // 等待APP启动
     while (currentPackage() != getPackageName(appName)) {
         sleep(500);
@@ -157,12 +168,12 @@ function main() {
     let targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
     //alert(targetTimestamp);
     // 等待点击第一个元素
-    singleEleClick(selectVal[2], 1, targetTimestamp);
+    singleEleClick(selectVal[2], 1, targetTimestamp, timeArea);
     // 判断是否有多个元素
     if (mClickFlag) {
         let startPos = 4;       // 从第4个元素开始点击
         while (startPos <= selectValLen) {
-            singleEleClick(selectVal[startPos - 1], 0, 0);
+            singleEleClick(selectVal[startPos - 1], 0, 0, 0);
             startPos = startPos + 1;
         }
     }

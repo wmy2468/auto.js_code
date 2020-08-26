@@ -1,4 +1,9 @@
-var selectedArr = ['交行贴金',
+auto.waitFor();
+// 导入模块
+var func = require('func_list.js');
+
+var selectedArr = [
+    '交行贴金',
     '天猫茅台',
     '中行赞卡微信',
     '中行赞卡缤纷'
@@ -20,32 +25,15 @@ function main() {
 function 模板() {
     let appName = '交通银行';
     let targetTime = '12,00,00,000';
-    let elements, clickEle;
+    let clickEle;
     isInApp(appName);
     //   定位元素
     isInTime(targetTime);
-    sClick(clickEle);
-    sClick(text('确认兑换').findOne());
+    func.sClick(clickEle);
+    func.sClick(text('确认兑换').findOne());
 }
 
 // ------------------------------------------------------
-function cClick(element) {
-    if (element != null) {
-        click(element.bounds().centerX(), element.bounds().centerY());
-        return true;
-    } else { return false; }
-}
-
-function sClick(element) {
-    if (element != null) {
-        if (!element.click()) {
-            click(element.bounds().centerX(), element.bounds().centerY());
-        }
-        sleep(500);
-        return true;
-    } else { return false; }
-}
-
 function getToday() {
     var date = new Date();
     var seperator1 = ",";
@@ -68,10 +56,11 @@ function isInTime(targetTime) {
     let tDate = getToday() + ',' + targetTime;
     stDate = tDate.split(',');
     let targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
-    curTimestamp = new Date().getTime();
+    let timeDiff = func.getTimeDiff('a');
+    curTimestamp = new Date().getTime() + timeDiff;
     // 等待时间
     while (curTimestamp < targetTimestamp) {
-        curTimestamp = new Date().getTime();
+        curTimestamp = new Date().getTime() + timeDiff;
     }
 }
 // ------------------------------------------------------
@@ -79,7 +68,7 @@ function isInTime(targetTime) {
 // 等待页面变价
 function 交行贴金() {
     let appName = '交通银行';
-    let targetTime = '12,00,00,000';
+    let targetTime = '12,00,00,100';
     let elements, clickEle;
     isInApp(appName);
     //   定位元素
@@ -102,14 +91,14 @@ function 交行贴金() {
         break;
     }
     isInTime(targetTime);
-    sClick(clickEle);
-    sClick(text('确认兑换').findOne());
+    func.sClick(clickEle);
+    func.sClick(text('确认兑换').findOne());
 }
 
 // 跳转页面提交订单
 function 天猫茅台() {
     let appName = '手机淘宝';
-    let targetTime = '20,00,00,000';
+    let targetTime = '20,00,00,100';
     let elements;
     isInApp(appName);
     //   定位元素
@@ -121,14 +110,14 @@ function 天猫茅台() {
         break;
     }
     isInTime(targetTime);
-    sClick(elements);
-    sClick(className("TextView").text("提交订单").findOne());
+    func.sClick(elements);
+    func.sClick(className("TextView").text("提交订单").findOne());
 }
 
 // 准点进页面
 function 中行赞卡微信() {
     let appName = '微信';
-    let targetTime = '10,00,00,000';
+    let targetTime = '10,00,00,100';
     let elements;
     isInApp(appName);
     //   定位元素
@@ -142,15 +131,15 @@ function 中行赞卡微信() {
     // 确认时间
     isInTime(targetTime);
     // 加载第一个
-    sClick(elements);
+    func.sClick(elements);
     // 查找并 点击立即获取
-    sClick(className('Button').text('立即获取').findOne());
+    func.sClick(className('Button').text('立即获取').findOne());
 }
 
 // 准点进页面
 function 中行赞卡缤纷() {
     let appName = '缤纷生活';
-    let targetTime = '10,00,00,000';
+    let targetTime = '10,00,00,100';
     let elements;
     isInApp(appName);
     //   定位元素
@@ -164,7 +153,7 @@ function 中行赞卡缤纷() {
     // 确认时间
     isInTime(targetTime);
     // 加载第一个
-    sClick(elements);
+    func.sClick(elements);
     // 查找并 点击立即获取
-    sClick(className('TextView').id('tvExchangetext').text('立即获取').findOne());
+    func.sClick(className('TextView').id('tvExchangetext').text('立即获取').findOne());
 }
