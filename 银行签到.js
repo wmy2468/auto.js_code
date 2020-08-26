@@ -314,13 +314,12 @@ function 工银e生活() {
     sleep(1000);
     func.sClick(id('radio_button1').text('生活').findOnce());
 
-    text('商城').findOne();
     sleep(800);
     func.sClick(text('商城').findOne());
 
-    text('mall_banner_1').findOne();
+    let shopMall = text('购物商城').findOne();
     sleep(1000);
-    func.cClick(text('mall_banner_1').findOnce());
+    func.sClick(shopMall.parent().parent().parent().child(0));
 
     text('点击签到').findOne();
     sleep(2000);
