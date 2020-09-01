@@ -94,7 +94,10 @@ function jd_sign() {
         func.sClick(id('xk').findOnce());
         toastLog('等待首页...');
         func.passAd();
-        sleep(2000);
+        func.sClick(textContains('取消').findOnce());
+        sleep(500);
+        func.sClick(descContains('取消').findOnce());
+        sleep(1500);
     }
     let getBeans = className('TextView').text('领京豆').findOne();
     func.sClick(getBeans.parent());
@@ -332,6 +335,7 @@ function 工银e生活() {
 function 招商银行() {
     let appName = '招商银行';
     setClip('＆https://t.cmbchina.com/RZV7f2＆');
+    sleep(600);
     func.toApp(appName);
     func.passAd();
     func.sClick(text('立即查看').findOne());
@@ -358,7 +362,6 @@ function 招商银行() {
 function 什么值得买() {
     let appName = '什么值得买';
     func.toApp(appName);
-    func.passAd();
     let signBtn = null;
     while (signBtn == null) {
         signBtn = id('tv_login_sign').findOnce();
@@ -366,6 +369,7 @@ function 什么值得买() {
         sleep(800);
         func.sClick(id('dialog_home_ads_close').findOnce());
         sleep(800);
+        func.passAd();
     }
     sleep(800);
     func.sClick(signBtn);
