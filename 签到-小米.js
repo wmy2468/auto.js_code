@@ -2,7 +2,6 @@ auto.waitFor();
 // 导入模块
 var func = require('func_list.js');
 
-//cmb_gua();
 main();
 //买单吧();
 function main() {

@@ -95,7 +95,6 @@ function jd_sign() {
         toastLog('等待首页...');
         func.passAd();
         func.sClick(textContains('取消').findOnce());
-        sleep(500);
         func.sClick(descContains('取消').findOnce());
         sleep(1500);
     }
@@ -150,8 +149,7 @@ function 买单吧() {
     while (id('rl_title_white').findOnce() == null) {
         func.sClick(id('com.bankcomm.maidanba:id/tv_sign').text('每日签到').findOnce());
         sleep(1000);
-        func.sClick(idContains('Close').findOnce());
-        func.sClick(idContains('close').findOnce());
+        func.sClick(idContains('lose').findOnce());
         log(appName + '等待登录');
         sleep(1500);
         if (text('手势登录').findOnce() != null) {

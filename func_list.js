@@ -9,8 +9,9 @@ function main() {
 // ----------------------通用功能区-----------------------
 // 切换到autojs
 function toAutojs() {
-    if (currentPackage() != getPackageName('Auto.js')) {
+    while (currentPackage() != getPackageName('Auto.js')) {
         launchApp('Auto.js');
+        toastLog('启动autoJS');
         sleep(1200);
     }
 }
@@ -38,8 +39,8 @@ function sClick(element) {
 function passAd() {
     sClick(textContains('跳过').findOnce());
     sClick(descContains('跳过').findOnce());
-    sClick(idContains('close').findOnce());
-    sClick(text('放弃转账').findOnce());
+    sClick(idContains('lose').findOnce());
+    //sClick(text('放弃转账').findOnce());*/
 }
 
 
