@@ -236,6 +236,7 @@ function getTimeDiff(area) {
         }
     }
     c = Math.trunc(c / cnt);
+    toastLog('时间差为：' + c);
     return c;
 }
 
@@ -246,7 +247,7 @@ function jdTime() {
     edTimestamp = new Date().getTime()
     let resTime, resTimestamp;
     if (res.statusCode != 200) {
-        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+        toastLog("请求失败: " + res.statusCode + " " + res.statusMessage);
         return 0;
     }
     resTime = res.body.json();
@@ -262,7 +263,7 @@ function tbTime() {
     edTimestamp = new Date().getTime()
     let resTime, resTimestamp;
     if (res.statusCode != 200) {
-        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+        toastLog("请求失败: " + res.statusCode + " " + res.statusMessage);
         return 0;
     }
     resTime = res.body.json();
