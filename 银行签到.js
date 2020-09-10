@@ -294,11 +294,19 @@ function 云闪付() {
         sleep(1500);
         if (text('去抽奖').findOnce() != null) {
             func.sClick(text('去抽奖').findOnce());
-            id('com.unionpay:id/tv_title').text('签到抽奖专区').findOne();
-            sleep(5000);
-            let area = id('com.unionpay:id/tv_title').text('签到抽奖专区').findOne();
-            func.cClick(area.parent().parent().child(2).child(0).child(0).child(0).child(0).child(0).child(3));
-            idContains('resultBtn').findOne();
+            let area, areaP;
+            while (1) {
+                try {
+                    area = id('com.unionpay:id/tv_title').text('签到抽奖专区').findOnce();
+                    areaP = area.parent();
+                    sleep(2000);
+                    func.cClick(areaP.parent().child(2).child(0).child(0).child(0).child(0).child(0).child(3));
+                    idContains('resultBtn').findOnce();
+                    break;
+                } catch (err) {
+                    sleep(2500);
+                }
+            }
         }
     }
     toastLog(appName + '已签到');
