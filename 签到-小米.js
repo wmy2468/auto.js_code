@@ -6,13 +6,13 @@ main();
 //买单吧();
 function main() {
     func.xiaomiUnlock();
+    招商银行();
     let i = 1;
     while (i < 3) {
         func.toAppMulti("京东", i);
         jd_sign();
         i = i + 1;
     }
-    招商银行();
     func.lockScr();
 }
 
@@ -71,7 +71,7 @@ function 招商银行() {
     func.sClick(text('立即查看').findOne());
     sleep(1000);
     while (text('周日').findOnce() == null) {
-        if (id('ivBigHeadImage').findOnce() != null) {
+        if (id('cmb.pb:id/vGestureContentView').findOnce() != null) {
             sleep(800);
             func.gesture_pwd(appName);
         }

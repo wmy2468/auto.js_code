@@ -99,7 +99,7 @@ function huaweiUnlock() {
 
 function xiaomiUnlock() {
     let pwd = "081573" //解锁密码
-    let stDelay = 70;
+    let stDelay = 90;
     if (!device.isScreenOn()) {
         while (!device.isScreenOn()) {
             device.wakeUp();
@@ -137,6 +137,15 @@ function gesture_pwd(appName) {
     let execStr = 'gesture(850';
     let pointX, pointY, point;
     let offSet = device.width * 0.25;
+    // 增加判断，避免小米手机判断成0的情况
+    if (offSet == 0) {
+        switch (device.model) {
+            case 'Redmi Note 7':
+                offSet = 1080 * 0.25; break;
+            default:
+                offSet = 1080 * 0.25; break;
+        }
+    }
     switch (appName) {
         case '买单吧':
             point = id('com.bankcomm.maidanba:id/login_gestureLockView_rl').findOnce();
@@ -148,7 +157,7 @@ function gesture_pwd(appName) {
             break;
         case '浦大喜奔':
             point = id('com.spdbccc.app:id/pattern_lock_body_layout').findOnce();
-            log('浦发信用卡');
+            log('浦大喜奔');
             break;
         case '浦发银行':
             point = id('lpv_pattern_loginunlock').findOnce();
@@ -164,13 +173,16 @@ function gesture_pwd(appName) {
             break;
         case '邮储银行':
             point = id('lockPatternLogin').findOnce();
-            log('招商银行');
+            log('邮储银行');
             break;
     }
     if (point == null) { return false; }
     x = point.bounds().centerX();
     y = point.bounds().centerY();
     let arr = pwd.split('');
+    toastLog('x=', x);
+    toastLog('y=', y);
+    toastLog('offset=', offSet);
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] == 1) {
             pointX = x - offSet;
