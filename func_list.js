@@ -11,7 +11,7 @@ function main() {
 function toAutojs() {
     while (currentPackage() != getPackageName('Auto.js')) {
         launchApp('Auto.js');
-        toastLog('启动autoJS');
+        log('启动autoJS');
         sleep(1200);
     }
 }
@@ -179,10 +179,11 @@ function gesture_pwd(appName) {
     if (point == null) { return false; }
     x = point.bounds().centerX();
     y = point.bounds().centerY();
+    log('x =', x);
+    log('y =', y);
+    log('offSet =', offSet);
+
     let arr = pwd.split('');
-    toastLog('x=', x);
-    toastLog('y=', y);
-    toastLog('offset=', offSet);
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] == 1) {
             pointX = x - offSet;
