@@ -24,6 +24,8 @@ function jd_sign() {
         toastLog('等待首页...');
         func.passAd();
         sleep(2000);
+        func.sClick(textContains('取消').findOnce());
+        func.sClick(descContains('取消').findOnce());
     }
     let getBeans = className('TextView').text('领京豆').findOne();
     func.sClick(getBeans.parent());
