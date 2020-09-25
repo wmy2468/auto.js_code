@@ -66,18 +66,18 @@ function jd_sign() {
 
 function 招商银行() {
     let appName = '招商银行';
-    func.toAutojs();
     setClip('＆https://t.cmbchina.com/RZV7f2＆');
+    sleep(600);
     func.toApp(appName);
     func.passAd();
     func.sClick(text('立即查看').findOne());
     sleep(1000);
     while (text('周日').findOnce() == null) {
-        if (id('cmb.pb:id/vGestureContentView').findOnce() != null) {
-            sleep(800);
+        if (id('ivBigHeadImage').findOnce() != null) {
+            sleep(500);
             func.gesture_pwd(appName);
+            sleep(1000);
         }
-        sleep(1000);
     }
     sleep(2000);
     let monday = text('周一').findOne();
