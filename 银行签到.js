@@ -289,9 +289,10 @@ function 云闪付() {
     // 等待签到页面加载
     className('TextView').textContains('已连续签到').findOne();
 
-    if (text('已签到').findOnce() == null) {
+    if (text('今日已签到').findOnce() == null) {
         func.sClick(className('TextView').text('立即签到').findOnce());
         sleep(1500);
+        /*
         if (text('去抽奖').findOnce() != null) {
             func.sClick(text('去抽奖').findOnce());
             let area, areaP;
@@ -308,6 +309,7 @@ function 云闪付() {
                 }
             }
         }
+        */
     }
     toastLog(appName + '已签到');
     sleep(1000);
