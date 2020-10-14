@@ -204,7 +204,7 @@ function 浦发信用卡() {
         } else {
             signNow = text('周一').find()[1];
         }
-        func.sClick(signNow.parent().parent().child(3));
+        func.sClick(signNow.parent().parent().child(4));
         sleep(800);
     }
     toastLog(appName + '已签到');
