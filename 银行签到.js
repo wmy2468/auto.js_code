@@ -382,7 +382,7 @@ function 什么值得买() {
     sleep(800);
     func.sClick(signBtn);
     sleep(1000);
-    textContains('已连续签到').findOne();
+    //textContains('已连续签到').findOne();
     toastLog(appName + '已签到');
     sleep(1200);
 }
