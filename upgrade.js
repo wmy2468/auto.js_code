@@ -10,13 +10,18 @@ var jsFiles = files.listDir(dir, function(name){
 });
 
 var selectedArr = jsFiles;
-
+var fileName;
 var selectIndex = dialogs.select('选择需要更新的文件', selectedArr);
 if (selectIndex == -1) {
-    exit();
+    fileName = console.input("请输入要下载的文件名,例:XXX.JS");
+    if (fileName == null) {
+        toastLog("未输入文件名，退出");
+        exit();
+    }
+} else {
+    fileName = selectedArr[selectIndex];
 }
 
-var fileName = selectedArr[selectIndex];
 var filePath = dir + '/' + fileName;
 var fileUrl = originUrl + fileName;
 
