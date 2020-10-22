@@ -13,7 +13,7 @@ var selectedArr = jsFiles;
 var fileName;
 var selectIndex = dialogs.select('选择需要更新的文件', selectedArr);
 if (selectIndex == -1) {
-    fileName = console.input("请输入要下载的文件名,例:XXX.JS");
+    fileName = rawInput("请输入要下载的文件名,例:XXX.JS");
     if (fileName == null) {
         toastLog("未输入文件名，退出");
         exit();
