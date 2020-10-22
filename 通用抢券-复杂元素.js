@@ -1,7 +1,7 @@
 auto.waitFor();
 // 导入模块
 var func = require('func_list.js');
-
+// 123
 var selectedArr = [
     '淘宝测试',
     '交行贴金',
