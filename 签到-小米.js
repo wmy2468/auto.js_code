@@ -49,7 +49,8 @@ function jd_sign() {
     let getCon = text('领券').findOne();
     func.sClick(getCon.parent());
     className('ImageView').desc('领券中心').findOne();
-
+    sleep(1200);
+    func.sClick(className('ImageView').id('com.jd.lib.coupon.feature:id/dg').findOnce());
     if (className('TextView').text('立即签到').findOnce() == null) {
         toastLog('今日已领券');
     }
