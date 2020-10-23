@@ -15,13 +15,15 @@ if (clipText.indexOf("＆") == 0) {
     clipText = clipText.substr(1, clipText.length - 2);
 }
 log(clipText);
-
+log(encodeURI(clipText))
+log(decodeURI(clipText))
 // <img id = "ewm" src="https://img.zcool.cn/community/010ad7575faad10000012e7e0be5bb.gif"/>
 ui.layout(
     <frame>     
         <img id = "ewm"/>
     </frame>
 );
+
 
 
 var imgUrl = "https://my.tv.sohu.com/user/a/wvideo/getQRCode.do?width=600&height=600&text=" + encodeURI(clipText);
