@@ -227,7 +227,7 @@ function 邮储信用卡() {
     // 等待我的页面加载
     let myBill = text('我的账单').findOne();
     sleep(800);
-    func.sClick(myBill.parent().parent().parent().child(4));
+    func.sClick(myBill.parent().parent().parent().child(8));
     while (text('今日已签到').findOnce() == null) {
         func.sClick(text('马上签到').findOnce());
         sleep(800);
