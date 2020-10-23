@@ -24,7 +24,7 @@ ui.layout(
 );
 
 
-var imgUrl = "https://my.tv.sohu.com/user/a/wvideo/getQRCode.do?width=500&height=500&text=" + clipText;
+var imgUrl = "https://my.tv.sohu.com/user/a/wvideo/getQRCode.do?width=600&height=600&text=" + encodeURI(clipText);
 //必须线程运行
 threads.start(function() {
     //在新线程执行的代码
