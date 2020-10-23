@@ -10,7 +10,7 @@ ui.layout(
     </frame>
 );
 let str = "我是要生成的二维码内容";
-var imgUrl = "http://qr.topscan.com/api.php?text=" +str;
+var imgUrl = "https://my.tv.sohu.com/user/a/wvideo/getQRCode.do?width=200&height=200&text=" +str;
 //必须线程运行
 threads.start(function() {
     //在新线程执行的代码
