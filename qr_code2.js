@@ -4,13 +4,27 @@ importClass(java.net.URL);
 importClass(android.graphics.BitmapFactory);
 importClass(android.graphics.Bitmap);
 
+let clipText = getClip();
+// 判断剪贴板内容，如果为空，则退出
+if (clipText == "") {
+    exit();
+    toastLog('剪贴板无数据');
+}
+
+if (clipText.indexOf("＆") == 0) {
+    clipText = clipText.substr(1, clipText.length - 2);
+}
+log(clipText);
+
+// <img id = "ewm" src="https://img.zcool.cn/community/010ad7575faad10000012e7e0be5bb.gif"/>
 ui.layout(
-    <frame>
-        <img id = "ewm" src="https://img.zcool.cn/community/010ad7575faad10000012e7e0be5bb.gif"/>
+    <frame>     
+        <img id = "ewm"/>
     </frame>
 );
-let str = "我是要生成的二维码内容";
-var imgUrl = "https://my.tv.sohu.com/user/a/wvideo/getQRCode.do?width=200&height=200&text=" +str;
+
+
+var imgUrl = "https://my.tv.sohu.com/user/a/wvideo/getQRCode.do?width=500&height=500&text=" + clipText;
 //必须线程运行
 threads.start(function() {
     //在新线程执行的代码
