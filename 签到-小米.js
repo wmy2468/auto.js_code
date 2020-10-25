@@ -50,15 +50,23 @@ function jd_sign() {
     func.sClick(getCon.parent());
     className('ImageView').desc('领券中心').findOne();
     sleep(1200);
-    func.sClick(className('ImageView').id('com.jd.lib.coupon.feature:id/dg').findOnce());
-    if (className('TextView').text('立即签到').findOnce() == null) {
+
+    let closeBtn = id('com.jd.lib.coupon.feature:id/db').findOnce();
+    let sighBtn1 = id('com.jd.lib.coupon.feature:id/dg').findOnce();
+    let signBtn2 = className('TextView').text('立即签到').findOnce();
+
+    if ((sighBtn1 == null || signBtn2 == null) && closeBtn == null) {
         toastLog('今日已领券');
     }
     else {
-        func.sClick(className('TextView').text('立即签到').findOnce());
+        func.sClick(closeBtn);
+        sleep(800);
+        func.sClick(sighBtn1);
+        func.sClick(signBtn2);
         className('ImageView').desc('关闭弹窗').findOne();
         func.sClick(className('ImageView').desc('关闭弹窗').findOne());
     }
+    
     while (className('TextView').text('首页').findOnce() == null) {
         back();
         sleep(3000);
