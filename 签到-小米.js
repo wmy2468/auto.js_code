@@ -61,7 +61,7 @@ function jd_sign() {
     let sighBtn1 = id('com.jd.lib.coupon.feature:id/dg').findOnce();
     let signBtn2 = className('TextView').text('立即签到').findOnce();
 
-    if (sighBtn1 == null || signBtn2 == null) {
+    if (sighBtn1 == null && signBtn2 == null) {
         toastLog('今日已领券');
     }
     else {
