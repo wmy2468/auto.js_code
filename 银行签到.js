@@ -119,19 +119,23 @@ function jd_sign() {
     }
     let getCon = text('领券').findOne();
     func.sClick(getCon.parent());
-    className('ImageView').desc('领券中心').findOne();
+
+    while (className('ImageView').desc('领券中心').findOnce() == null) {
+        let closeBtn = id('com.jd.lib.coupon.feature:id/db').findOnce();
+        if (closeBtn != null) {
+            func.sClick(closeBtn.parent().child(1));
+        }
+        sleep(800);
+    }
     sleep(1200);
 
-    let closeBtn = id('com.jd.lib.coupon.feature:id/db').findOnce();
     let sighBtn1 = id('com.jd.lib.coupon.feature:id/dg').findOnce();
     let signBtn2 = className('TextView').text('立即签到').findOnce();
 
-    if ((sighBtn1 == null || signBtn2 == null) && closeBtn == null) {
+    if (sighBtn1 == null || signBtn2 == null) {
         toastLog('今日已领券');
     }
     else {
-        func.sClick(closeBtn);
-        sleep(800);
         func.sClick(sighBtn1);
         func.sClick(signBtn2);
         className('ImageView').desc('关闭弹窗').findOne();
