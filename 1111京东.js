@@ -14,8 +14,11 @@ func.toApp(appName);
 log("正在等待进入活动页面");
 //等待点击 立即查看按钮
 func.sClick(className("TextView").text("立即查看").findOne());
+
 // 助力关闭按钮
-func.sClick(className('android.view.View').textContains('的助力邀请').findOne().parent().parent().parent().child(1));
+let closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne();
+sleep(500);
+func.sClick(closeBtnHelp.parent().parent().parent().child(1));
 
 let getGold = text('领金币').findOne();
 sleep(800);
@@ -24,7 +27,7 @@ func.sClick(getGold);
 textContains('邀请好友助力').waitFor();
 sleep(800);
 
-func.sClick(text('签到'.findOnce()));
+func.sClick(text('签到').findOnce());
 let idx = 2;
 
 taskList.forEach(task => {
