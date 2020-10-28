@@ -60,7 +60,7 @@ function after_click(textStr) {
 	switch (textStr) {
 		case '等待8秒':
 			gold8000 = textContains('000金币').findOne().parent();
-			while (gold8000.length() == 5) {
+			while (gold8000.length != 6) {
 				gold8000 = textContains('000金币').findOne().parent();
 				sleep(800);
 			}
