@@ -33,14 +33,13 @@ func.sClick(text('签到').findOnce());
 taskList.forEach(task => {
 	while (textContains(task).exists()) {
 		let nextStep;
-		let index = 2;
-		let i = 1;
 		unComplete = text('去完成').find();
 		//toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
 			if (unComplete.length == 2) {
 				break;
 			} else {
+				let index = 2;
 				indexText = unComplete[index].parent().child((index*4 + 2)).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
 				toastLog(indexText);
 				if (indexText.indexOf('秒') != -1) { nextStep = '等待8秒' }
