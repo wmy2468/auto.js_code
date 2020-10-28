@@ -40,13 +40,13 @@ taskList.forEach(task => {
 				break;
 			} else {
 				let index = 2;
-				indexText = unComplete[index].parent().child((index*4 + 2)).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
+				indexText = unComplete[index].parent().child((index * 4 + 2)).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
 				toastLog(indexText);
 				if (indexText.indexOf('秒') != -1) { nextStep = '等待8秒' }
 				if (indexText.indexOf('浏览可得') != -1) { nextStep = '浏览返回' }
 				if (indexText.indexOf('浏览5个') != -1) { nextStep = '浏览商品' }
 				func.sClick(unComplete);
-				sleep(800);
+				sleep(1000);
 				after_click(nextStep);
 			}
 		}
@@ -55,17 +55,16 @@ taskList.forEach(task => {
 });
 
 function after_click(textStr) {
-	let gold8000;
+	let gold000, gold001 = 1;
 	switch (textStr) {
 		case '等待8秒':
-			gold8000 = textContains('000金币').findOne().parent();
-			while (gold8000.length != 6) {
-				gold8000 = textContains('000金币').findOne().parent();
+			gold000 = textContains('000金币').findOne().parent().childCount();
+			while (gold001 == (gold000 + 1)) {
+				gold001 = textContains('000金币').findOne().parent().childCount();
 				sleep(800);
 			}
 			sleep(400);
-			func.sClick(gold8000.child(5))
-			sleep(400);
+			back_way();
 			break;
 		case '浏览返回':
 			sleep(5000);
