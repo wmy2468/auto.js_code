@@ -15,7 +15,7 @@ log("正在等待进入活动页面");
 //等待点击 立即查看按钮
 func.sClick(className("TextView").text("立即查看").findOne());
 // 助力关闭按钮
-func.sClick(className('android.view.View').textContains('的助力邀请').findOne().parent().parent().child(1));
+func.sClick(className('android.view.View').textContains('的助力邀请').findOne().parent().parent().parent().child(1));
 
 let getGold = text('领金币').findOne();
 sleep(800);
