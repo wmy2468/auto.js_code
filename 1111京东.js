@@ -31,17 +31,85 @@ func.sClick(text('签到').findOnce());
 let idx = 2;
 
 taskList.forEach(task => {
-    while (textContains(task).exists()) {
+	while (textContains(task).exists()) {
+		let nextStep;
 		unComplete = text('去完成').find();
-		toastLog(unComplete.length);
+		//toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
-			idxText = unComplete[idx].parent().parent().parent().child(0).child(1).text();
-			toastLog(idxText);
-			if (idxText.indexOf('去玩AR吃') == -1) {
+			if (unComplete.length == 2) {
+				break;
+			} else {
+				idxText = unComplete[idx].parent().child(2).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
+				toastLog(idxText);
+				if (idxText.indexOf('秒') != -1) { nextStep = '等待8秒' }
+				if (idxText.indexOf('浏览可得') != -1) { nextStep = '浏览返回' }
+				if (idxText.indexOf('浏览5个') != -1) { nextStep = '浏览商品' }
+				func.sClick(unComplete);
+				sleep(800);
+				after_click(nextStep);
 			}
 		}
-    }
+
+	}
 });
 
-log("Done!");
-exit();
+function after_click(textStr) {
+	switch (textStr) {
+		case '等待8秒':
+			let backNow = text('立即返回').findOne();
+			sleep(800);
+			func.sClick(backNow);
+			break;
+		case '浏览返回':
+			sleep(5000);
+			back_way()
+			break;
+		case '浏览商品':
+			view_list();
+			break;
+		default:
+			break;
+	}
+}
+
+function view_list() {
+	i = 0;
+	while (text('已完成').findOnce() == null) {
+		idContains('view_').findOne();
+		//点击商品加购物车按钮
+		if (idContains('view_').findOnce() != null) {
+			idContains('view_').find()[i].click();
+			textContains('购物车').findOne();
+			sleep(1500);
+			back_way();
+			sleep(2500);
+		}
+		i = i + 1;
+	}
+	textContains('邀请好友助力').waitFor();
+	back_way();
+	sleep(2000);
+}
+
+
+function back_way() {
+    sleep(800);
+    let backBtn = desc('返回').findOnce();
+    if (backBtn == null) {
+        back();
+    } else {
+        let closeBtn = className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce();
+        if (closeBtn != null) {
+            closeBtn.click();
+            sleep(1000);
+        }
+        if (backBtn.clickable()) {
+            backBtn.click();
+        } else {
+            center_click(backBtn);
+        }
+    }
+    sleep(800);
+    center_click(textContains('离开').findOnce());
+    center_click(textContains('知道了').findOnce());
+}
