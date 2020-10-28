@@ -36,12 +36,6 @@ taskList.forEach(task => {
 		let index = 2;
 		let i = 1;
 		unComplete = text('去完成').find();
-		unComplete.forEach(unc => {
-			i = 0
-			toastLog(unc.parent().child(4*i+2).text());
-			i = i + 1;
-			}
-		);
 		//toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
 			if (unComplete.length == 2) {
