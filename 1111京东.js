@@ -1,4 +1,5 @@
 auto.waitFor();
+var func = require('func_list.js');
 
 var i = 0;
 var j = 0;
