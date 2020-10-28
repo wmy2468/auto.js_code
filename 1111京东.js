@@ -34,14 +34,20 @@ taskList.forEach(task => {
 	while (textContains(task).exists()) {
 		let nextStep;
 		let index = 2;
+		let i = 1;
 		unComplete = text('去完成').find();
-		unComplete.forEach(unc => toastLog(unc.parent().child(2).text()))
+		unComplete.forEach(unc => {
+			i = 0
+			toastLog(unc.parent().child(4*i+2).text());
+			i = i + 1;
+			}
+		);
 		//toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
 			if (unComplete.length == 2) {
 				break;
 			} else {
-				indexText = unComplete[index].parent().child(2).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
+				indexText = unComplete[index].parent().child((index*4 + 2)).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
 				toastLog(indexText);
 				if (indexText.indexOf('秒') != -1) { nextStep = '等待8秒' }
 				if (indexText.indexOf('浏览可得') != -1) { nextStep = '浏览返回' }
@@ -95,23 +101,23 @@ function view_list() {
 
 
 function back_way() {
-    sleep(800);
-    let backBtn = desc('返回').findOnce();
-    if (backBtn == null) {
-        back();
-    } else {
-        let closeBtn = className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce();
-        if (closeBtn != null) {
-            closeBtn.click();
-            sleep(1000);
-        }
-        if (backBtn.clickable()) {
-            backBtn.click();
-        } else {
-            center_click(backBtn);
-        }
-    }
-    sleep(800);
-    center_click(textContains('离开').findOnce());
-    center_click(textContains('知道了').findOnce());
+	sleep(800);
+	let backBtn = desc('返回').findOnce();
+	if (backBtn == null) {
+		back();
+	} else {
+		let closeBtn = className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce();
+		if (closeBtn != null) {
+			closeBtn.click();
+			sleep(1000);
+		}
+		if (backBtn.clickable()) {
+			backBtn.click();
+		} else {
+			center_click(backBtn);
+		}
+	}
+	sleep(800);
+	center_click(textContains('离开').findOnce());
+	center_click(textContains('知道了').findOnce());
 }
