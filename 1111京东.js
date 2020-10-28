@@ -21,8 +21,9 @@ sleep(500);
 func.sClick(closeBtnHelp.parent().parent().parent().child(1));
 
 let getGold = text('领金币').findOne();
-sleep(2500);
+sleep(500);
 func.sClick(getGold);
+sleep(2000);
 
 textContains('邀请好友助力').waitFor();
 sleep(800);
@@ -45,12 +46,12 @@ taskList.forEach(task => {
 				if (indexText.indexOf('秒') != -1) { nextStep = '等待8秒' }
 				if (indexText.indexOf('浏览可得') != -1) { nextStep = '浏览返回' }
 				if (indexText.indexOf('浏览5个') != -1) { nextStep = '浏览商品' }
-				func.sClick(unComplete);
+				func.sClick(unComplete[index]);
 				sleep(1000);
 				after_click(nextStep);
 			}
 		}
-		text('去完成').findOne();
+		sleep(1000);
 	}
 });
 
@@ -58,12 +59,12 @@ function after_click(textStr) {
 	let gold000, gold001 = 1;
 	switch (textStr) {
 		case '等待8秒':
-			gold000 = textContains('000金币').findOne().parent().childCount();
-			toastLog('gold000' + gold000);
-			while (gold001 == (gold000 + 1)) {
-				gold001 = textContains('000金币').findOne().parent().childCount();
-				toastLog('gold001' + gold001);
-				sleep(800);
+			gold000 = (textContains('000金币').findOne()).parent().childCount();
+			//toastLog('gold000' + gold000);
+			while (gold001 != (gold000 + 1)) {
+				gold001 = (textContains('000金币').findOne()).parent().childCount();
+				//toastLog('gold001' + gold001);
+				sleep(1000);
 			}
 			sleep(400);
 			back_way();
@@ -78,25 +79,23 @@ function after_click(textStr) {
 		default:
 			break;
 	}
+	back_way();
+	textContains('邀请好友助力').waitFor();
+	sleep(2000);
 }
 
 function view_list() {
 	i = 0;
 	while (text('已完成').findOnce() == null) {
-		idContains('view_').findOne();
+		textContains('¥').findOne();
 		//点击商品加购物车按钮
-		if (idContains('view_').findOnce() != null) {
-			idContains('view_').find()[i].click();
-			textContains('购物车').findOne();
-			sleep(1500);
-			back_way();
-			sleep(2500);
-		}
+		(textContains('¥').find()[i]).parent().parent();
+		textContains('购物车').findOne();
+		sleep(1500);
+		back_way();
+		sleep(2500);
 		i = i + 1;
 	}
-	textContains('邀请好友助力').waitFor();
-	back_way();
-	sleep(2000);
 }
 
 
