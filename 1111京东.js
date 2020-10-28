@@ -17,7 +17,7 @@ func.sClick(className("TextView").text("立即查看").findOne());
 
 // 助力关闭按钮
 let closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne();
-sleep(500);
+sleep(2000);
 func.sClick(closeBtnHelp.parent().parent().parent().child(1));
 
 let getGold = text('领金币').findOne();
