@@ -57,9 +57,9 @@ taskList.forEach(task => {
 function after_click(textStr) {
 	switch (textStr) {
 		case '等待8秒':
-			let backNow = className('TextView').textContains('0000金币').findOne();
+			textContains('任务已完成').waitFor();
 			sleep(800);
-			func.sClick(backNow);
+			back_way();
 			break;
 		case '浏览返回':
 			sleep(5000);
