@@ -62,11 +62,17 @@ taskList.forEach(task => {
 });
 
 function after_click(textStr) {
+	let gold8000;
 	switch (textStr) {
 		case '等待8秒':
-			textContains('任务已完成').waitFor();
-			sleep(800);
-			back_way();
+			gold8000 = textContains('000金币').findOne().parent();
+			while (gold8000.length() == 5) {
+				gold8000 = textContains('000金币').findOne().parent();
+				sleep(800);
+			}
+			sleep(400);
+			func.sClick(gold8000.child(5))
+			sleep(400);
 			break;
 		case '浏览返回':
 			sleep(5000);
@@ -114,10 +120,10 @@ function back_way() {
 		if (backBtn.clickable()) {
 			backBtn.click();
 		} else {
-			center_click(backBtn);
+			func.sClick(backBtn);
 		}
 	}
 	sleep(800);
-	center_click(textContains('离开').findOnce());
-	center_click(textContains('知道了').findOnce());
+	func.sClick(textContains('离开').findOnce());
+	func.sClick(textContains('知道了').findOnce());
 }
