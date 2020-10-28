@@ -44,18 +44,19 @@ switch (selected) {
 		开宝箱();
 		break;
 }
-
+alert('已完成');
 
 
 function 营业版图() {
 	func.sClick(text('可领金币').findOne());
 	sleep(2000);
 	text('营业版图').waitFor();
+	log('营业版图已加载');
 	sleep(800);
 
 	let view1 = (text('北京').findOne()).parent().parent();
 	let view1Cnt = view1.childCount();
-	
+	log('开始第一组');
 	i = 1
 	while (i <= (view1Cnt - 1)) {
 		func.sClick(view1.child(i));
@@ -63,19 +64,21 @@ function 营业版图() {
 		sleep(1500);
 		营业版图_去完成();
 		back_way();
+
 		view1 = (text('北京').findOne()).parent().parent();
 		i = i + 1;
 	}
+	log('开始第二组');
 	i = 0
 	let view2 = (text('热爱城').findOne()).parent().parent();
 	let view2Cnt = view2.childCount();
 	while (i <= (view2Cnt - 1)) {
+		log(view2.child(i).child(2).text());
 		func.sClick(view2.child(i));
 		text('签到得最高500金币').findOne();
 		sleep(1500);
 		营业版图_去完成();
 		back_way();
-		toastLog('backway')
 		view2 = (text('热爱城').findOne()).parent().parent();
 		i = i + 1;
 	}
@@ -85,9 +88,11 @@ function 营业版图_去完成() {
 	let index = 0;
 	while (textContains('去完成').exists()) {
 		unComplete = text('去完成').find();
-		toastLog('去完成length = ' + unComplete.length);
+		toastLog('去完成剩余 = ' + unComplete.length);
 		if (unComplete.nonEmpty()) {
 			func.sClick(unComplete[index]);
+			log('点击去完成');
+			while (text('签到得最高500金币').findOnce() != null) { sleep(300); }
 			sleep(2000);
 			back_way();
 			text('签到得最高500金币').findOne();
@@ -112,16 +117,14 @@ function 开宝箱() {
 }
 
 function 每日任务() {
-	let getGold = text('领金币').findOne();
-	sleep(500);
-	func.sClick(getGold);
+	log('等待加载');
+	func.sClick(text('领金币').findOne());
 	sleep(2000);
-
 	textContains('邀请好友助力').waitFor();
 	sleep(800);
 
 	func.sClick(text('签到').findOnce());
-
+	log('签到');
 	while (textContains('去完成').exists()) {
 		let nextStep;
 		unComplete = text('去完成').find();
@@ -146,34 +149,38 @@ function 每日任务() {
 		}
 		sleep(1000);
 	}
-	alert('已完成');
 }
 
 function after_click(textStr) {
 	let gold000, gold001 = 1;
 	switch (textStr) {
 		case '等待8秒':
+			log('等待8秒');
 			gold000 = (textContains('000金币').findOne()).parent().childCount();
-			//toastLog('gold000' + gold000);
+			log('gold000 = ' + gold000);
 			while (gold001 != (gold000 + 1)) {
 				gold001 = (textContains('000金币').findOne()).parent().childCount();
-				//toastLog('gold001' + gold001);
+				log('gold001 = ' + gold001);
 				sleep(500);
 			}
 			sleep(400);
 			break;
 		case '浏览返回':
+			log('浏览返回');
 			sleep(5000);
 			let viewBack = id('com.tencent.mm:id/d8').findOnce();
 			func.sClick(viewBack);
 			break;
 		case '浏览商品':
+			log('浏览商品');
 			view_list();
 			break;
 		case '加购物车':
+			log('加购物车');
 			add_cart();
 			break;
 		case '加入会员':
+			log('加入会员');
 			member_card();
 			break;
 		default:
@@ -252,4 +259,5 @@ function back_way() {
 	sleep(800);
 	func.sClick(textContains('离开').findOnce());
 	func.sClick(textContains('知道了').findOnce());
+	log('返回');
 }
