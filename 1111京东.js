@@ -21,7 +21,7 @@ sleep(500);
 func.sClick(closeBtnHelp.parent().parent().parent().child(1));
 
 let getGold = text('领金币').findOne();
-sleep(800);
+sleep(2500);
 func.sClick(getGold);
 
 textContains('邀请好友助力').waitFor();
@@ -50,7 +50,7 @@ taskList.forEach(task => {
 				after_click(nextStep);
 			}
 		}
-
+		text('去完成').findOne();
 	}
 });
 
@@ -59,8 +59,10 @@ function after_click(textStr) {
 	switch (textStr) {
 		case '等待8秒':
 			gold000 = textContains('000金币').findOne().parent().childCount();
+			toastLog('gold000' + gold000);
 			while (gold001 == (gold000 + 1)) {
 				gold001 = textContains('000金币').findOne().parent().childCount();
+				toastLog('gold001' + gold001);
 				sleep(800);
 			}
 			sleep(400);
