@@ -33,6 +33,7 @@ let idx = 2;
 taskList.forEach(task => {
     while (textContains(task).exists()) {
 		unComplete = text('去完成').find();
+		toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
 			idxText = unComplete[idx].parent().parent().parent().child(0).child(1).text();
 			toastLog(idxText);
