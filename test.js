@@ -1,2 +1,1 @@
-//toastLog(textContains('¥').findOne().parent().parent().click());
-swipe(500, 800, 500, 300, 300);
+toastLog(text('北京').findOne())

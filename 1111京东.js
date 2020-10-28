@@ -2,14 +2,18 @@ auto.waitFor();
 var func = require('func_list.js');
 
 var i = 0;
-var j = 0;
-var taskList = ['去完成'];
+
+var selectedArr = ['每日任务', '营业版图', '开宝箱'];
+var selectIndex = dialogs.select('选择启动的功能', selectedArr);
+if (selectIndex == -1) { exit() };
+// 数字从0开始。
+var selected = selectedArr[selectIndex];
 
 let kouLing = '28.0复制整段话 Https:/JYDWNoVro4qHi1【全民在线营业啦，帮我助力，11.11一起来分京东10亿】￥N2Jae9a23b%→打开（京つ東】';
 let appName = '京东';
 setClip(kouLing);
 sleep(1000);
-log("正在打开淘宝");
+log("正在打开");
 func.toApp(appName);
 log("正在等待进入活动页面");
 //等待点击 立即查看按钮
@@ -18,21 +22,107 @@ func.sClick(className("TextView").text("立即查看").findOne());
 // 助力关闭按钮
 let closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne();
 sleep(2000);
-func.sClick(closeBtnHelp.parent().parent().parent().child(1));
+if (textContains('为TA助力').findOnce() != null) {
+	func.sClick(closeBtnHelp.parent().parent().parent().parent().child(1));
+} else {
+	func.sClick(closeBtnHelp.parent().parent().parent().child(1));
+}
 
-let getGold = text('领金币').findOne();
-sleep(500);
-func.sClick(getGold);
-sleep(2000);
+//等待完全加载后
+text('领金币').findOne();
+//延迟3秒
+sleep(3000);
 
-textContains('邀请好友助力').waitFor();
-sleep(800);
+switch (selected) {
+	case '每日任务':
+		每日任务();
+		break;
+	case '营业版图':
+		营业版图();
+		break;
+	case '开宝箱':
+		开宝箱();
+		break;
+}
 
-func.sClick(text('签到').findOnce());
 
 
-taskList.forEach(task => {
-	while (textContains(task).exists()) {
+function 营业版图() {
+	func.sClick(text('可领金币').findOne());
+	sleep(2000);
+	text('营业版图').waitFor();
+	sleep(800);
+
+	let view1 = (text('北京').findOne()).parent().parent();
+	let view1Cnt = view1.childCount();
+	
+	i = 1
+	while (i <= (view1Cnt - 1)) {
+		func.sClick(view1.child(i));
+		text('签到得最高500金币').findOne();
+		sleep(1500);
+		营业版图_去完成();
+		back_way();
+		view1 = (text('北京').findOne()).parent().parent();
+		i = i + 1;
+	}
+	i = 0
+	let view2 = (text('热爱城').findOne()).parent().parent();
+	let view2Cnt = view2.childCount();
+	while (i <= (view2Cnt - 1)) {
+		func.sClick(view2.child(i));
+		text('签到得最高500金币').findOne();
+		sleep(1500);
+		营业版图_去完成();
+		back_way();
+		toastLog('backway')
+		view2 = (text('热爱城').findOne()).parent().parent();
+		i = i + 1;
+	}
+}
+
+function 营业版图_去完成() {
+	let index = 0;
+	while (textContains('去完成').exists()) {
+		unComplete = text('去完成').find();
+		toastLog('去完成length = ' + unComplete.length);
+		if (unComplete.nonEmpty()) {
+			func.sClick(unComplete[index]);
+			sleep(2000);
+			back_way();
+			text('签到得最高500金币').findOne();
+			sleep(1200);
+		}
+	}
+	toastLog('营业版图_当前_已完成');
+}
+
+function 开宝箱() {
+	i = 0;
+	let boxlist = (text('寻宝箱 领金币').findOne()).parent().child(2);
+	let boxLen = boxlist.childCount();
+	while (i <= (boxLen - 1)) {
+		func.sClick(boxlist.child(i));
+		text('签到得500金币').findOne();
+		sleep(600);
+		back_way();
+		boxlist = (text('寻宝箱 领金币').findOne()).parent().child(2);
+		i = i + 1;
+	}
+}
+
+function 每日任务() {
+	let getGold = text('领金币').findOne();
+	sleep(500);
+	func.sClick(getGold);
+	sleep(2000);
+
+	textContains('邀请好友助力').waitFor();
+	sleep(800);
+
+	func.sClick(text('签到').findOnce());
+
+	while (textContains('去完成').exists()) {
 		let nextStep;
 		unComplete = text('去完成').find();
 		//toastLog(unComplete.length);
@@ -49,6 +139,7 @@ taskList.forEach(task => {
 				if (indexText.indexOf('加购5个') != -1) { nextStep = '加购物车' }
 				if (indexText.indexOf('成功入会') != -1) { nextStep = '加入会员' }
 				func.sClick(unComplete[index]);
+				toastLog(nextStep);
 				sleep(1000);
 				after_click(nextStep);
 			}
@@ -56,7 +147,7 @@ taskList.forEach(task => {
 		sleep(1000);
 	}
 	alert('已完成');
-});
+}
 
 function after_click(textStr) {
 	let gold000, gold001 = 1;
@@ -67,12 +158,14 @@ function after_click(textStr) {
 			while (gold001 != (gold000 + 1)) {
 				gold001 = (textContains('000金币').findOne()).parent().childCount();
 				//toastLog('gold001' + gold001);
-				sleep(1000);
+				sleep(500);
 			}
 			sleep(400);
 			break;
 		case '浏览返回':
 			sleep(5000);
+			let viewBack = id('com.tencent.mm:id/d8').findOnce();
+			func.sClick(viewBack);
 			break;
 		case '浏览商品':
 			view_list();
@@ -83,7 +176,6 @@ function after_click(textStr) {
 		case '加入会员':
 			member_card();
 			break;
-
 		default:
 			break;
 	}
@@ -117,7 +209,7 @@ function member_card() {
 	while (textContains('已集齐所有会员卡').findOnce() == null) {
 		func.sClick(textContains('确认授权并加入').findOnce())
 		count = count + 1;
-		sleep(4000);
+		sleep(5500);
 	}
 }
 //加购5个商品
@@ -145,11 +237,12 @@ function back_way() {
 	if (backBtn == null) {
 		back();
 	} else {
-		let closeBtn = className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce();
-		if (closeBtn != null) {
-			closeBtn.click();
-			sleep(1000);
-		}
+		func.sClick(className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce());
+		func.sClick(className('ImageView').id('com.jd.lib.jshop.feature:id/gd').findOnce());
+		func.sClick(className('ImageView').id('com.jd.lib.jshop.feature:id/mj').findOnce());
+		func.sClick(className('ImageView').desc('关闭页面').findOnce());
+
+		sleep(1000);
 		if (backBtn.clickable()) {
 			backBtn.click();
 		} else {
