@@ -35,14 +35,14 @@ taskList.forEach(task => {
 		let nextStep;
 		let index = 2;
 		unComplete = text('去完成').find();
-		unComplete.forEach(unc => toastLog(unc.text()))
+		unComplete.forEach(unc => toastLog(unc.parent().child(2).text()))
 		//toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
 			if (unComplete.length == 2) {
 				break;
 			} else {
 				indexText = unComplete[index].parent().child(2).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
-				toastLog(idxText);
+				toastLog(indexText);
 				if (indexText.indexOf('秒') != -1) { nextStep = '等待8秒' }
 				if (indexText.indexOf('浏览可得') != -1) { nextStep = '浏览返回' }
 				if (indexText.indexOf('浏览5个') != -1) { nextStep = '浏览商品' }
