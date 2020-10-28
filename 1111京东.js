@@ -13,18 +13,18 @@ log("正在打开淘宝");
 func.toApp(appName);
 log("正在等待进入活动页面");
 //等待点击 立即查看按钮
-func.click(className("TextView").text("立即查看").findOne());
+func.sClick(className("TextView").text("立即查看").findOne());
 // 助力关闭按钮
-func.click(className('android.view.View').textContains('的助力邀请').findOne().parent().parent().child(1));
+func.sClick(className('android.view.View').textContains('的助力邀请').findOne().parent().parent().child(1));
 
 let getGold = text('领金币').findOne();
 sleep(800);
-func.click(getGold);
+func.sClick(getGold);
 
 textContains('邀请好友助力').waitFor();
 sleep(800);
 
-func.click(text('签到'.findOnce()));
+func.sClick(text('签到'.findOnce()));
 let idx = 2;
 
 taskList.forEach(task => {
