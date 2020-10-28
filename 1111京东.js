@@ -28,11 +28,12 @@ textContains('邀请好友助力').waitFor();
 sleep(800);
 
 func.sClick(text('签到').findOnce());
-let idx = 2;
+
 
 taskList.forEach(task => {
 	while (textContains(task).exists()) {
 		let nextStep;
+		let idx = 2;
 		unComplete = text('去完成').find();
 		//toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
@@ -56,7 +57,7 @@ taskList.forEach(task => {
 function after_click(textStr) {
 	switch (textStr) {
 		case '等待8秒':
-			let backNow = text('立即返回').findOne();
+			let backNow = className('TextView').textContains('0000金币').findOne();
 			sleep(800);
 			func.sClick(backNow);
 			break;
