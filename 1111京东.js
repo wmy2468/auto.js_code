@@ -219,7 +219,7 @@ function 每日任务() {
 }
 
 function after_click(textStr) {
-	let gold000, gold001 = 1;
+	let gold001Parent, gold000, gold001 = 1;
 	let jyqFlag = false;
 	switch (textStr) {
 		case '等待8秒':
@@ -227,12 +227,18 @@ function after_click(textStr) {
 			gold000 = (textContains('000金币').findOne()).parent().childCount();
 			log('gold000 = ' + gold000);
 			while (gold001 != (gold000 + 1)) {
-				if (!jyqFlag) {
-					if (text('京友券').findOnce() != null) {
+				if (jyqFlag == false) {
+					if (text('京友圈').findOnce() != null) {
 						jyqFlag = true;
 					}
 				}
-				gold001 = (textContains('000金币').findOne()).parent().childCount();
+				gold001Parent = null;
+				while (gold001Parent == null) {
+					gold001Parent = (textContains('000金币').findOne()).parent();
+					log('wait for gold001Parent');
+					sleep(800);
+				}
+				gold001 = gold001Parent.childCount();
 				log('gold001 = ' + gold001);
 				sleep(400);
 			}
