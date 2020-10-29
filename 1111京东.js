@@ -8,7 +8,7 @@ var selectIndex = dialogs.select('选择启动的功能', selectedArr);
 if (selectIndex == -1) { exit() };
 // 数字从0开始。
 var selected = selectedArr[selectIndex];
-
+var devBrand = device.brand;
 main();
 
 function main(appName) {
@@ -17,10 +17,10 @@ function main(appName) {
 	setClip(kouLing);
 	sleep(1000);
 	log("正在打开");
-	if (device.brand == 'HUAWEI') {
+	if (devBrand == 'HUAWEI') {
 		func.toApp(appName);
 		process();
-	} else if (device.brand == 'xiaomi') {
+	} else if (devBrand == 'xiaomi') {
 		func.toAppMulti(appName, 1);
 		process();
 		func.toAppMulti(appName, 2);
@@ -118,14 +118,14 @@ function 营业版图_去完成() {
 
 function 开宝箱() {
 	text('寻宝箱 领金币').findOne();
-	i = 8;
-	while (i--) {
-		scrollDown();
-		sleep(600);
-	}
 	sleep(3000);
 	i = 0;
-	let boxlist = (text('寻宝箱 领金币').findOne()).parent().child(2);
+	let boxlist;
+	if (devBrand == 'HUAWEI') {
+		boxlist = (text('寻宝箱 领金币').findOne()).parent().child(2);
+	} else if (devBrand == 'xiaomi') {
+		boxlist = (text('寻宝箱 领金币').findOne()).parent().parent().child(2);
+	}
 	let boxLen = boxlist.childCount();
 	while (i <= (boxLen - 1)) {
 		func.sClick(boxlist.child(i));
@@ -134,7 +134,11 @@ function 开宝箱() {
 			break;
 		}
 		back_way();
-		boxlist = (text('寻宝箱 领金币').findOne()).parent().child(2);
+		if (devBrand == 'HUAWEI') {
+			boxlist = (text('寻宝箱 领金币').findOne()).parent().child(2);
+		} else if (devBrand == 'xiaomi') {
+			boxlist = (text('寻宝箱 领金币').findOne()).parent().parent().child(2);
+		}
 		i = i + 1;
 	}
 }
