@@ -229,6 +229,7 @@ function after_click(textStr) {
 			while (gold001 != (gold000 + 1)) {
 				if (jyqFlag == false) {
 					if (text('京友圈').findOnce() != null) {
+						log('京友圈');
 						jyqFlag = true;
 					}
 				}
@@ -244,7 +245,8 @@ function after_click(textStr) {
 			}
 			if (jyqFlag) {
 				back_way();
-				sleep(1600);
+				log('京友圈返回')
+				sleep(3500);
 			}
 			sleep(400);
 			break;
