@@ -226,11 +226,11 @@ function 邮储信用卡() {
         }
     }
     sleep(800);
-    func.sClick(className('TextView').text('我的').findOne());
+    func.sClick(className('TextView').text('精选').findOne());
     // 等待我的页面加载
-    let myBill = text('我的账单').findOne();
+    let myBill = text('热门活动').findOne();
     sleep(800);
-    func.sClick(myBill.parent().parent().parent().child(8));
+    func.sClick(myBill.parent().parent().child(7));
     while (text('今日已签到').findOnce() == null) {
         func.sClick(text('马上签到').findOnce());
         sleep(800);
