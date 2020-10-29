@@ -73,7 +73,7 @@ function 营业版图() {
 	let view1 = (text('北京').findOne()).parent().parent();
 	let view1Cnt = view1.childCount();
 	log('开始第一组');
-	i = 1
+	i = 1;
 	while (i <= (view1Cnt - 1)) {
 		func.sClick(view1.child(i));
 		text('签到得最高500金币').findOne();
@@ -85,7 +85,7 @@ function 营业版图() {
 		i = i + 1;
 	}
 	log('开始第二组');
-	i = 0
+	i = 0;
 	let view2 = (text('热爱城').findOne()).parent().parent();
 	let view2Cnt = view2.childCount();
 	while (i <= (view2Cnt - 1)) {
