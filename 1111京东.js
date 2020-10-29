@@ -27,6 +27,9 @@ function main(appName) {
 		sleep(1000);
 		func.toAppMulti(appName, 2);
 		process();
+	} else {
+		func.toApp(appName);
+		process();
 	}
 	alert('已完成');
 }
@@ -69,7 +72,19 @@ function 营业版图() {
 	text('营业版图').waitFor();
 	log('营业版图已加载');
 	sleep(800);
-
+	// 检查营业版图是否完成
+	let view2 = (text('热爱城').findOne()).parent().parent();
+	let view2Cnt = view2.childCount() - 1;
+	func.sClick(view2.child(view2Cnt));
+	text('签到得最高500金币').findOne();
+	sleep(1500);
+	if (text('去完成').findOnce() == null) {
+		sleep(800);
+		exit();
+	} else {
+		back_way();
+	}
+	
 	let view1 = (text('北京').findOne()).parent().parent();
 	let view1Cnt = view1.childCount();
 	log('开始第一组');
@@ -86,8 +101,8 @@ function 营业版图() {
 	}
 	log('开始第二组');
 	i = 0;
-	let view2 = (text('热爱城').findOne()).parent().parent();
-	let view2Cnt = view2.childCount();
+	view2 = (text('热爱城').findOne()).parent().parent();
+	view2Cnt = view2.childCount();
 	while (i <= (view2Cnt - 1)) {
 		log(view2.child(i).child(2).text());
 		func.sClick(view2.child(i));
@@ -108,12 +123,12 @@ function 营业版图_去完成() {
 		if (unComplete.nonEmpty()) {
 			func.sClick(unComplete[index]);
 			log('点击去完成');
-			while (text('签到得最高500金币').findOnce() != null) { 
+			while (text('签到得最高500金币').findOnce() != null) {
 				if (cnt >= 10) {
 					func.sClick(text('去完成').findOnce());
 					cnt = 0;
 				}
-				sleep(400); 
+				sleep(400);
 				cnt = cnt + 1;
 			}
 			sleep(2000);
@@ -125,30 +140,40 @@ function 营业版图_去完成() {
 	toastLog('营业版图_当前_已完成');
 }
 
-function 开宝箱() {
-	text('寻宝箱 领金币').findOne();
-	sleep(3000);
-	i = 0;
-	let boxlist;
+function getBoxList() {
 	if (devBrand == 'HUAWEI') {
 		boxlist = (text('寻宝箱 领金币').findOne()).parent().child(2);
 	} else if (devBrand == 'xiaomi') {
 		boxlist = (text('寻宝箱 领金币').findOne()).parent().parent().child(2);
+	} else {
+		boxlist = (text('寻宝箱 领金币').findOne()).parent().child(2);
 	}
-	let boxLen = boxlist.childCount();
-	while (i <= (boxLen - 1)) {
+	return boxlist;
+}
+
+function 开宝箱() {
+	text('寻宝箱 领金币').findOne();
+	sleep(3000);
+	i = 0;
+	let k = 0;
+	let boxlist, boxLen;
+	var myList = new Array();
+	boxlist = getBoxList();
+	while (true) {
+		boxLen = boxlist.childCount();
+		i = random(0, boxLen - 1);
+		while (myList.includes(i)) {
+			i = random(0, boxLen - 1);
+		}
 		func.sClick(boxlist.child(i));
 		text('签到得500金币').findOne();
 		if (textContains('今日签到已达上限').findOnce()) {
 			break;
 		}
+		myList[k] = i;
 		back_way();
-		if (devBrand == 'HUAWEI') {
-			boxlist = (text('寻宝箱 领金币').findOne()).parent().child(2);
-		} else if (devBrand == 'xiaomi') {
-			boxlist = (text('寻宝箱 领金币').findOne()).parent().parent().child(2);
-		}
-		i = i + 1;
+		boxlist = getBoxList();
+		k = k + 1;
 	}
 }
 
@@ -216,11 +241,11 @@ function after_click(textStr) {
 			sleep(5000);
 			let viewBack = id('com.tencent.mm:id/d8').findOnce();
 			if (viewBack != null) {
-				while(currentPackage() != getPackageName('京东')) {
+				while (currentPackage() != getPackageName('京东')) {
 					back_way();
 					sleep(3500);
 				}
-			}; 
+			};
 			break;
 		case '浏览商品':
 			log('浏览商品');
