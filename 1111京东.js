@@ -5,6 +5,7 @@ var 小米双开 = true;
 
 var i = 0;
 var k;
+var appName = '京东';
 var selectedArr = ['每日任务', '营业版图', '开宝箱'];
 var selectIndex = dialogs.select('选择启动的功能', selectedArr);
 if (selectIndex == -1) { exit() };
@@ -15,7 +16,6 @@ main();
 
 function main(appName) {
 	let kouLing = '28.0复制整段话 Https:/JYDWNoVro4qHi1【全民在线营业啦，帮我助力，11.11一起来分京东10亿】￥N2Jae9a23b%→打开（京つ東】';
-	let appName = '京东';
 	setClip(kouLing);
 	sleep(1000);
 	log("正在打开");
@@ -239,6 +239,7 @@ function after_click(textStr) {
 				sleep(400);
 			}
 			sleep(400);
+			back_way();
 			break;
 		case '浏览返回':
 			i = 6;
@@ -256,8 +257,8 @@ function after_click(textStr) {
 				log('京友圈返回')
 				sleep(3500);
 			}
-			let viewBack = id('com.tencent.mm:id/d8').findOnce();
-			if (viewBack != null) {
+			// 判断是否被微信小程序跳转到了微信
+			if (getAppName(currentPackage()) != appName) {
 				log('微信返回');
 				if (devBrand == 'HUAWEI') {
 					func.toApp(appName);
@@ -271,24 +272,28 @@ function after_click(textStr) {
 					func.toApp(appName);
 				}
 				sleep(5000);
+			} else {
+				back_way();
 			}
 			break;
 		case '浏览商品':
 			log('浏览商品');
 			view_list();
+			back_way();
 			break;
 		case '加购物车':
 			log('加购物车');
 			add_cart();
+			back_way();
 			break;
 		case '加入会员':
 			log('加入会员');
 			member_card();
+			back_way();
 			break;
 		default:
 			break;
 	}
-	back_way();
 	log('等待邀请好友助力');
 	textContains('邀请好友助力').waitFor();
 	sleep(2000);
