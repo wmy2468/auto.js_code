@@ -155,9 +155,8 @@ function 开宝箱() {
 	text('寻宝箱 领金币').findOne();
 	sleep(3000);
 	i = 0;
-	let k = 0;
 	let boxlist, boxLen;
-	var myList = new Array();
+	var myList = [0];
 	boxlist = getBoxList();
 	while (true) {
 		boxLen = boxlist.childCount();
@@ -170,10 +169,9 @@ function 开宝箱() {
 		if (textContains('今日签到已达上限').findOnce()) {
 			break;
 		}
-		myList[k] = i;
+		myList.push(i);
 		back_way();
 		boxlist = getBoxList();
-		k = k + 1;
 	}
 }
 
