@@ -80,7 +80,7 @@ function 营业版图() {
 	sleep(1500);
 	if (text('去完成').findOnce() == null) {
 		sleep(800);
-		exit();
+		return 0;
 	} else {
 		back_way();
 	}
@@ -286,7 +286,7 @@ function member_card() {
 	//toastLog('会员卡');
 	sleep(4000);
 	if (textContains('邀请好友助力').findOnce() != null) {
-		exit();
+		return 0;
 	}
 	while (textContains('已集齐所有会员卡').findOnce() == null) {
 		func.sClick(textContains('确认授权并加入').findOnce())
