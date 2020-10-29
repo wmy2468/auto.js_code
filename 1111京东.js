@@ -153,15 +153,25 @@ function 每日任务() {
 
 function after_click(textStr) {
 	let gold000, gold001 = 1;
+	let jyqFlag = false;
 	switch (textStr) {
 		case '等待8秒':
 			log('等待8秒');
 			gold000 = (textContains('000金币').findOne()).parent().childCount();
 			log('gold000 = ' + gold000);
 			while (gold001 != (gold000 + 1)) {
+				if (!jyqFlag) {
+					if (text('京友券').findOnce() != null) { 
+						jyqFlag = true; 
+					}
+				}
 				gold001 = (textContains('000金币').findOne()).parent().childCount();
 				log('gold001 = ' + gold001);
-				sleep(500);
+				sleep(400);
+			}
+			if (jyqFlag) { 
+				back_way();
+				sleep(1600); 
 			}
 			sleep(400);
 			break;
