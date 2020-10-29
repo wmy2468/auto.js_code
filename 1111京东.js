@@ -4,7 +4,7 @@ var func = require('func_list.js');
 var 小米双开 = true;
 
 var i = 0;
-
+var k;
 var selectedArr = ['每日任务', '营业版图', '开宝箱'];
 var selectIndex = dialogs.select('选择启动的功能', selectedArr);
 if (selectIndex == -1) { exit() };
@@ -24,11 +24,13 @@ function main(appName) {
 		process();
 	} else if (devBrand == 'xiaomi') {
 		if (小米双开) {
-			func.toAppMulti(appName, 1);
+			k = 1;
+			func.toAppMulti(appName, k);
 			process();
+			k = k + 1;
 			setClip(kouLing);
 			sleep(1000);
-			func.toAppMulti(appName, 2);
+			func.toAppMulti(appName, k);
 			process();
 		} else {
 			func.toApp(appName);
@@ -255,11 +257,20 @@ function after_click(textStr) {
 			sleep(5000);
 			let viewBack = id('com.tencent.mm:id/d8').findOnce();
 			if (viewBack != null) {
-				while (currentPackage() != getPackageName('京东')) {
-					back_way();
-					sleep(3500);
+				log('微信返回');
+				if (devBrand == 'HUAWEI') {
+					func.toApp(appName);
+				} else if (devBrand == 'xiaomi') {
+					if (小米双开) {
+						func.toAppMulti(appName, k);
+					} else {
+						func.toApp(appName);
+					}
+				} else {
+					func.toApp(appName);
 				}
-			};
+				sleep(5000);
+			}
 			break;
 		case '浏览商品':
 			log('浏览商品');
