@@ -14,7 +14,7 @@ var selected = selectedArr[selectIndex];
 var devBrand = device.brand;
 main();
 
-function main(appName) {
+function main() {
 	let kouLing = '28.0复制整段话 Https:/JYDWNoVro4qHi1【全民在线营业啦，帮我助力，11.11一起来分京东10亿】￥N2Jae9a23b%→打开（京つ東】';
 	setClip(kouLing);
 	sleep(1000);
