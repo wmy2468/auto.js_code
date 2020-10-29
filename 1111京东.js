@@ -84,7 +84,7 @@ function 营业版图() {
 	} else {
 		back_way();
 	}
-	
+
 	let view1 = (text('北京').findOne()).parent().parent();
 	let view1Cnt = view1.childCount();
 	log('开始第一组');
@@ -161,7 +161,7 @@ function 开宝箱() {
 	while (true) {
 		boxLen = boxlist.childCount();
 		i = random(0, boxLen - 1);
-		while (myList.includes(i)) {
+		while (myList.indexOf(i) != -1) {
 			i = random(0, boxLen - 1);
 		}
 		func.sClick(boxlist.child(i));
