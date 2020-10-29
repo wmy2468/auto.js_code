@@ -36,4 +36,4 @@ if (req.statusCode != '200') {
 
 files.write(filePath, req.body.string());
 
-alert('更新完成');
+alert(fileName + '更新完成');
