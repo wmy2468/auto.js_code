@@ -1,6 +1,8 @@
 auto.waitFor();
 var func = require('func_list.js');
 
+var 小米双开 = true;
+
 var i = 0;
 
 var selectedArr = ['每日任务', '营业版图', '开宝箱'];
@@ -21,12 +23,17 @@ function main(appName) {
 		func.toApp(appName);
 		process();
 	} else if (devBrand == 'xiaomi') {
-		func.toAppMulti(appName, 1);
-		process();
-		setClip(kouLing);
-		sleep(1000);
-		func.toAppMulti(appName, 2);
-		process();
+		if (小米双开) {
+			func.toAppMulti(appName, 1);
+			process();
+			setClip(kouLing);
+			sleep(1000);
+			func.toAppMulti(appName, 2);
+			process();
+		} else {
+			func.toApp(appName);
+			process();
+		}
 	} else {
 		func.toApp(appName);
 		process();
@@ -159,7 +166,7 @@ function 开宝箱() {
 	var myList = new Array();
 	boxlist = getBoxList();
 	while (true) {
-		boxLen = boxlist.childCount();i
+		boxLen = boxlist.childCount(); i
 		i = random(0, boxLen - 1);
 		while (myList.indexOf(i) != -1) {
 			i = random(0, boxLen - 1);
