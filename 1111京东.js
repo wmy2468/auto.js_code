@@ -117,9 +117,10 @@ function 营业版图_去完成() {
 }
 
 function 开宝箱() {
-	i = 4;
+	text('寻宝箱 领金币').findOne();
+	i = 8;
 	while (i--) {
-		swipe(500, 800, 500, 300, 300);
+		scrollDown();
 		sleep(600);
 	}
 	sleep(3000);
