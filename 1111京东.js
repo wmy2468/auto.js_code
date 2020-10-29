@@ -9,43 +9,57 @@ if (selectIndex == -1) { exit() };
 // 数字从0开始。
 var selected = selectedArr[selectIndex];
 
-let kouLing = '28.0复制整段话 Https:/JYDWNoVro4qHi1【全民在线营业啦，帮我助力，11.11一起来分京东10亿】￥N2Jae9a23b%→打开（京つ東】';
-let appName = '京东';
-setClip(kouLing);
-sleep(1000);
-log("正在打开");
-func.toApp(appName);
-log("正在等待进入活动页面");
-//等待点击 立即查看按钮
-func.sClick(className("TextView").text("立即查看").findOne());
+main();
 
-// 助力关闭按钮
-let closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne();
-sleep(2000);
-if (textContains('为TA助力').findOnce() != null) {
-	func.sClick(closeBtnHelp.parent().parent().parent().parent().child(1));
-} else {
-	func.sClick(closeBtnHelp.parent().parent().parent().child(1));
+function main(appName) {
+	let kouLing = '28.0复制整段话 Https:/JYDWNoVro4qHi1【全民在线营业啦，帮我助力，11.11一起来分京东10亿】￥N2Jae9a23b%→打开（京つ東】';
+	let appName = '京东';
+	setClip(kouLing);
+	sleep(1000);
+	log("正在打开");
+	if (device.brand == 'HUAWEI') {
+		func.toApp(appName);
+		process();
+	} else if (device.brand == 'xiaomi') {
+		func.toAppMulti(appName, 1);
+		process();
+		func.toAppMulti(appName, 2);
+		process();
+	}
 }
 
-//等待完全加载后
-text('领金币').findOne();
-//延迟3秒
-sleep(3000);
+function process() {
+	log("正在等待进入活动页面");
+	//等待点击 立即查看按钮
+	func.sClick(className("TextView").text("立即查看").findOne());
 
-switch (selected) {
-	case '每日任务':
-		每日任务();
-		break;
-	case '营业版图':
-		营业版图();
-		break;
-	case '开宝箱':
-		开宝箱();
-		break;
+	// 助力关闭按钮
+	let closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne();
+	sleep(2000);
+	if (textContains('为TA助力').findOnce() != null) {
+		func.sClick(closeBtnHelp.parent().parent().parent().parent().child(1));
+	} else {
+		func.sClick(closeBtnHelp.parent().parent().parent().child(1));
+	}
+
+	//等待完全加载后
+	text('领金币').findOne();
+	//延迟3秒
+	sleep(3000);
+
+	switch (selected) {
+		case '每日任务':
+			每日任务();
+			break;
+		case '营业版图':
+			营业版图();
+			break;
+		case '开宝箱':
+			开宝箱();
+			break;
+	}
+	alert('已完成');
 }
-alert('已完成');
-
 
 function 营业版图() {
 	func.sClick(text('可领金币').findOne());
@@ -161,17 +175,17 @@ function after_click(textStr) {
 			log('gold000 = ' + gold000);
 			while (gold001 != (gold000 + 1)) {
 				if (!jyqFlag) {
-					if (text('京友券').findOnce() != null) { 
-						jyqFlag = true; 
+					if (text('京友券').findOnce() != null) {
+						jyqFlag = true;
 					}
 				}
 				gold001 = (textContains('000金币').findOne()).parent().childCount();
 				log('gold001 = ' + gold001);
 				sleep(400);
 			}
-			if (jyqFlag) { 
+			if (jyqFlag) {
 				back_way();
-				sleep(1600); 
+				sleep(1600);
 			}
 			sleep(400);
 			break;
