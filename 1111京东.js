@@ -156,14 +156,15 @@ function 开宝箱() {
 	sleep(3000);
 	i = 0;
 	let boxlist, boxLen;
-	var myList = [0];
+	var myList = new Array();
 	boxlist = getBoxList();
 	while (true) {
-		boxLen = boxlist.childCount();
+		boxLen = boxlist.childCount();i
 		i = random(0, boxLen - 1);
 		while (myList.indexOf(i) != -1) {
 			i = random(0, boxLen - 1);
 		}
+		log('随机数字为=' + i);
 		func.sClick(boxlist.child(i));
 		text('签到得500金币').findOne();
 		if (textContains('今日签到已达上限').findOnce()) {
