@@ -222,19 +222,12 @@ function 每日任务() {
 
 function after_click(textStr) {
 	let gold001Parent, gold000, gold001 = 1;
-	let jyqFlag = false;
 	switch (textStr) {
 		case '等待8秒':
 			log('等待8秒');
 			gold000 = (textContains('000金币').findOne()).parent().childCount();
 			log('gold000 = ' + gold000);
 			while (gold001 != (gold000 + 1)) {
-				if (jyqFlag == false) {
-					if (text('京友圈').findOnce() != null) {
-						log('京友圈');
-						jyqFlag = true;
-					}
-				}
 				gold001Parent = null;
 				while (gold001Parent == null) {
 					gold001Parent = (textContains('000金币').findOne()).parent();
@@ -245,16 +238,24 @@ function after_click(textStr) {
 				log('gold001 = ' + gold001);
 				sleep(400);
 			}
+			sleep(400);
+			break;
+		case '浏览返回':
+			i = 6;
+			log('浏览返回');
+			let jyqFlag = false;
+			while (i--) {
+				sleep(1000);
+				if (text('京友圈').findOnce() != null) {
+					log('京友圈');
+					jyqFlag = true;
+				}
+			}
 			if (jyqFlag) {
 				back_way();
 				log('京友圈返回')
 				sleep(3500);
 			}
-			sleep(400);
-			break;
-		case '浏览返回':
-			log('浏览返回');
-			sleep(5000);
 			let viewBack = id('com.tencent.mm:id/d8').findOnce();
 			if (viewBack != null) {
 				log('微信返回');
@@ -288,6 +289,7 @@ function after_click(textStr) {
 			break;
 	}
 	back_way();
+	log('等待邀请好友助力');
 	textContains('邀请好友助力').waitFor();
 	sleep(2000);
 }
@@ -308,17 +310,17 @@ function view_list() {
 }
 // 加入会员
 function member_card() {
-	let count = 0;
 	//toastLog('会员卡');
 	sleep(4000);
 	if (textContains('邀请好友助力').findOnce() != null) {
 		return 0;
 	}
 	while (textContains('已集齐所有会员卡').findOnce() == null) {
+		log('加会员');
 		func.sClick(textContains('确认授权并加入').findOnce())
-		count = count + 1;
-		sleep(5500);
+		sleep(1000);
 	}
+	sleep(2000);
 }
 //加购5个商品
 function add_cart() {
