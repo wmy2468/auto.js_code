@@ -26,6 +26,7 @@ function main(appName) {
 		func.toAppMulti(appName, 2);
 		process();
 	}
+	alert('已完成');
 }
 
 function process() {
@@ -58,7 +59,6 @@ function process() {
 			开宝箱();
 			break;
 	}
-	alert('已完成');
 }
 
 function 营业版图() {
@@ -123,7 +123,9 @@ function 开宝箱() {
 	while (i <= (boxLen - 1)) {
 		func.sClick(boxlist.child(i));
 		text('签到得500金币').findOne();
-		sleep(600);
+		if (textContains('今日签到已达上限').findOnce()) {
+			break;
+		}
 		back_way();
 		boxlist = (text('寻宝箱 领金币').findOne()).parent().child(2);
 		i = i + 1;
