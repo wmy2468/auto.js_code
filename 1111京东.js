@@ -23,6 +23,8 @@ function main(appName) {
 	} else if (devBrand == 'xiaomi') {
 		func.toAppMulti(appName, 1);
 		process();
+		setClip(kouLing);
+		sleep(1000);
 		func.toAppMulti(appName, 2);
 		process();
 	}
