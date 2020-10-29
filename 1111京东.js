@@ -193,7 +193,12 @@ function after_click(textStr) {
 			log('浏览返回');
 			sleep(5000);
 			let viewBack = id('com.tencent.mm:id/d8').findOnce();
-			func.sClick(viewBack);
+			if (viewBack != null) {
+				while(currentPackage() != getPackageName('京东')) {
+					back_way();
+					sleep(3500);
+				}
+			}; 
 			break;
 		case '浏览商品':
 			log('浏览商品');
