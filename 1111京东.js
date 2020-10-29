@@ -117,6 +117,12 @@ function 营业版图_去完成() {
 }
 
 function 开宝箱() {
+	i = 4;
+	while (i--) {
+		swipe(500, 800, 500, 300, 300);
+		sleep(600);
+	}
+	sleep(3000);
 	i = 0;
 	let boxlist = (text('寻宝箱 领金币').findOne()).parent().child(2);
 	let boxLen = boxlist.childCount();
