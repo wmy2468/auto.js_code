@@ -57,8 +57,12 @@ function process() {
 		func.sClick(closeBtnHelp.parent().parent().parent().child(1));
 	}
 
-	//等待完全加载后
-	text('领金币').findOne();
+	//等待完全加载后，如果出现取消按钮会找不到
+	while (text('领金币').findOnce() == null) {
+		func.sClick(text('取消').findOnce());
+		sleep(300);
+		func.sClick(text('立即手下').findOnce());
+	}
 	//延迟3秒
 	sleep(3000);
 
@@ -225,11 +229,16 @@ function after_click(textStr) {
 	switch (textStr) {
 		case '等待8秒':
 			log('等待8秒');
+			while (textContains('000金币').findOnce() == null) {
+				func.sClick(className('ImageView').id('com.jd.lib.jshop.feature:id/gd').findOnce());
+				sleep(200);
+			}
 			gold000 = (textContains('000金币').findOne()).parent().childCount();
 			log('gold000 = ' + gold000);
 			while (gold001 != (gold000 + 1)) {
 				gold001Parent = null;
 				while (gold001Parent == null) {
+					
 					gold001Parent = (textContains('000金币').findOne()).parent();
 					log('wait for gold001Parent');
 					sleep(800);
