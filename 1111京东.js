@@ -16,39 +16,26 @@ main();
 
 function main() {
 	let kouLing;
-	
+	kouLing = 'LP→復Ζнi#2FnQ36Fema%←全部文本后Da开（京ㄇ東）';
+	setClip(kouLing);
+	sleep(1000);
 	log("正在打开");
 	if (devBrand == 'HUAWEI') {
-		kouLing = 'LP→復Ζнi#2FnQ36Fema%←全部文本后Da开（京ㄇ東）';
-		setClip(kouLing);
-		sleep(1000);
 		func.toApp(appName);
 		process();
 	} else if (devBrand == 'xiaomi') {
 		if (小米双开) {
-			kouLing = '￥N2Jae9a23b%→打开（京つ東】';
-			setClip(kouLing);
-			sleep(1000);
 			k = 1;
 			func.toAppMulti(appName, k);
 			process();
 			k = k + 1;
-			kouLing = '￥N2Jae9a23b%→打开（京つ東】';
-			setClip(kouLing);
-			sleep(1000);
 			func.toAppMulti(appName, k);
 			process();
 		} else {
-			kouLing = '￥N2Jae9a23b%→打开（京つ東】';
-			setClip(kouLing);
-			sleep(1000);
 			func.toApp(appName);
 			process();
 		}
 	} else {
-		kouLing = '￥N2Jae9a23b%→打开（京つ東】';
-		setClip(kouLing);
-		sleep(1000);
 		func.toApp(appName);
 		process();
 	}
@@ -64,25 +51,16 @@ function process() {
 	let closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne();
 	sleep(2000);
 	if (textContains('为TA助力').findOnce() != null) {
-		func.sClick(textContains('为TA助力').findOnce());
-		sleep();
 		func.sClick(closeBtnHelp.parent().parent().parent().parent().child(1));
-		func.sClick(closeBtnHelp.parent().parent().parent().child(1));
 	} else {
 		func.sClick(closeBtnHelp.parent().parent().parent().child(1));
-		func.sClick(closeBtnHelp.parent().parent().child(1));
 	}
 
 	//等待完全加载后，如果出现取消按钮会找不到
 	while (text('领金币').findOnce() == null) {
-		closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOnce();
-		if (closeBtnHelp != null) {
-			func.sClick(closeBtnHelp.parent().parent().parent().child(1));
-			func.sClick(closeBtnHelp.parent().parent().child(1));
-		}
 		func.sClick(text('取消').findOnce());
 		sleep(300);
-		func.sClick(text('立即手下').findOnce());
+		func.sClick(text('立即收下').findOnce());
 	}
 	//延迟3秒
 	sleep(3000);
