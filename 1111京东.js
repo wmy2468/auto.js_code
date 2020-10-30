@@ -198,8 +198,10 @@ function 每日任务() {
 
 	func.sClick(text('签到').findOnce());
 	log('签到');
+	let indexText, detailText;
 	while (textContains('去完成').exists()) {
-		let nextStep;
+		let nextStep, nextStepDetail;
+		nextStepDetail = '';
 		unComplete = text('去完成').find();
 		//toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
@@ -208,37 +210,46 @@ function 每日任务() {
 			} else {
 				let index = 2;
 				indexText = unComplete[index].parent().child((index * 4 + 2)).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
+				detailText = unComplete[index].parent().child((index * 4 + 2) - 1).text();
 				toastLog(indexText);
 				if (indexText.indexOf('秒') != -1) { nextStep = '等待8秒' }
 				if (indexText.indexOf('浏览可得') != -1) { nextStep = '浏览返回' }
 				if (indexText.indexOf('浏览5个') != -1) { nextStep = '浏览商品' }
 				if (indexText.indexOf('加购5个') != -1) { nextStep = '加购物车' }
 				if (indexText.indexOf('成功入会') != -1) { nextStep = '加入会员' }
+				// 详细描述校验
+				if (detailText.indexOf('去小程序领更多') != -1) { nextStepDetail = '小程序' }
+				if (detailText.indexOf('去逛京友圈') != -1) { nextStepDetail = '京友圈' }
 				func.sClick(unComplete[index]);
 				toastLog(nextStep);
-				sleep(1000);
-				after_click(nextStep);
+				sleep(2000);
+				after_click(nextStep, nextStepDetail);
 			}
 		}
 		sleep(1000);
 	}
 }
 
-function after_click(textStr) {
+function after_click(textStr, details) {
 	let gold001Parent, gold000, gold001 = 1;
 	switch (textStr) {
 		case '等待8秒':
 			log('等待8秒');
 			while (textContains('000金币').findOnce() == null) {
 				func.sClick(className('ImageView').id('com.jd.lib.jshop.feature:id/gd').findOnce());
-				sleep(200);
+				if (details == '京友圈') {
+					toastLog('京友圈，等待10秒');
+					sleep(8000);
+					back_way();
+					sleep(4000);
+				}
 			}
 			gold000 = (textContains('000金币').findOne()).parent().childCount();
 			log('gold000 = ' + gold000);
 			while (gold001 != (gold000 + 1)) {
 				gold001Parent = null;
 				while (gold001Parent == null) {
-					
+
 					gold001Parent = (textContains('000金币').findOne()).parent();
 					log('wait for gold001Parent');
 					sleep(800);
@@ -247,37 +258,29 @@ function after_click(textStr) {
 				log('gold001 = ' + gold001);
 				sleep(400);
 			}
+
 			sleep(400);
 			back_way();
 			break;
 		case '浏览返回':
-			i = 6;
 			log('浏览返回');
-			let jyqFlag = false;
-			while (i--) {
-				sleep(1000);
-				if (text('京友圈').findOnce() != null) {
-					log('京友圈');
-					jyqFlag = true;
-				}
-			}
-			if (jyqFlag) {
-				back_way();
-				log('京友圈返回')
-				sleep(3500);
-			}
 			// 判断是否被微信小程序跳转到了微信
-			if (getAppName(currentPackage()) != appName) {
+			if (details == '小程序') {
 				log('微信返回');
+				toastLog('跳转到小程序，等待20秒');
 				if (devBrand == 'HUAWEI') {
+					sleep(20000);
 					func.toApp(appName);
 				} else if (devBrand == 'xiaomi') {
 					if (小米双开) {
+						sleep(30000);
 						func.toAppMulti(appName, k);
 					} else {
+						sleep(30000);
 						func.toApp(appName);
 					}
 				} else {
+					sleep(30000);
 					func.toApp(appName);
 				}
 				sleep(5000);
