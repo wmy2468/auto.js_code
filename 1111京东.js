@@ -52,13 +52,22 @@ function process() {
 	let closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne();
 	sleep(2000);
 	if (textContains('为TA助力').findOnce() != null) {
+		func.sClick(textContains('为TA助力').findOnce());
+		sleep();
 		func.sClick(closeBtnHelp.parent().parent().parent().parent().child(1));
+		func.sClick(closeBtnHelp.parent().parent().parent().child(1));
 	} else {
 		func.sClick(closeBtnHelp.parent().parent().parent().child(1));
+		func.sClick(closeBtnHelp.parent().parent().child(1));
 	}
 
 	//等待完全加载后，如果出现取消按钮会找不到
 	while (text('领金币').findOnce() == null) {
+		closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOnce();
+		if (closeBtnHelp != null) {
+			func.sClick(closeBtnHelp.parent().parent().parent().child(1));
+			func.sClick(closeBtnHelp.parent().parent().child(1));
+		}
 		func.sClick(text('取消').findOnce());
 		sleep(300);
 		func.sClick(text('立即手下').findOnce());
@@ -108,7 +117,6 @@ function 营业版图() {
 		sleep(1500);
 		营业版图_去完成();
 		back_way();
-
 		view1 = (text('北京').findOne()).parent().parent();
 		i = i + 1;
 	}
@@ -333,9 +341,8 @@ function member_card() {
 	while (textContains('已集齐所有会员卡').findOnce() == null) {
 		log('加会员');
 		func.sClick(textContains('确认授权并加入').findOnce())
-		sleep(1000);
 	}
-	sleep(2000);
+	sleep(1500);
 }
 //加购5个商品
 function add_cart() {
