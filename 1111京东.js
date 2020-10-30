@@ -15,28 +15,40 @@ var devBrand = device.brand;
 main();
 
 function main() {
-	let kouLing = '28.0复制整段话 Https:/JYDWNoVro4qHi1【全民在线营业啦，帮我助力，11.11一起来分京东10亿】￥N2Jae9a23b%→打开（京つ東】';
-	setClip(kouLing);
-	sleep(1000);
+	let kouLing;
+	
 	log("正在打开");
 	if (devBrand == 'HUAWEI') {
+		kouLing = 'LP→復Ζнi#2FnQ36Fema%←全部文本后Da开（京ㄇ東）';
+		setClip(kouLing);
+		sleep(1000);
 		func.toApp(appName);
 		process();
 	} else if (devBrand == 'xiaomi') {
 		if (小米双开) {
+			kouLing = '￥N2Jae9a23b%→打开（京つ東】';
+			setClip(kouLing);
+			sleep(1000);
 			k = 1;
 			func.toAppMulti(appName, k);
 			process();
 			k = k + 1;
+			kouLing = '￥N2Jae9a23b%→打开（京つ東】';
 			setClip(kouLing);
 			sleep(1000);
 			func.toAppMulti(appName, k);
 			process();
 		} else {
+			kouLing = '￥N2Jae9a23b%→打开（京つ東】';
+			setClip(kouLing);
+			sleep(1000);
 			func.toApp(appName);
 			process();
 		}
 	} else {
+		kouLing = '￥N2Jae9a23b%→打开（京つ東】';
+		setClip(kouLing);
+		sleep(1000);
 		func.toApp(appName);
 		process();
 	}
