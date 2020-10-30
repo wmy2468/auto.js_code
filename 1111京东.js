@@ -16,7 +16,7 @@ main();
 
 function main() {
 	let kouLing;
-	kouLing = 'LP→復Ζнi#2FnQ36Fema%←全部文本后Da开（京ㄇ東）';
+	let kouLing = '28.0复制整段话 Https:/JYDWNoVro4qHi1【全民在线营业啦，帮我助力，11.11一起来分京东10亿】￥N2Jae9a23b%→打开（京つ東】';
 	setClip(kouLing);
 	sleep(1000);
 	log("正在打开");
@@ -28,6 +28,8 @@ function main() {
 			k = 1;
 			func.toAppMulti(appName, k);
 			process();
+			setClip(kouLing);
+			sleep(1000);
 			k = k + 1;
 			func.toAppMulti(appName, k);
 			process();
