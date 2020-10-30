@@ -238,10 +238,10 @@ function after_click(textStr, details) {
 			while (textContains('000金币').findOnce() == null) {
 				func.sClick(className('ImageView').id('com.jd.lib.jshop.feature:id/gd').findOnce());
 				if (details == '京友圈') {
-					toastLog('京友圈，等待10秒');
-					sleep(8000);
-					back_way();
-					sleep(4000);
+					if (text('京友圈').findOnce() != null) {
+						sleep(200);
+						back_way();
+					}
 				}
 			}
 			gold000 = (textContains('000金币').findOne()).parent().childCount();
@@ -249,7 +249,6 @@ function after_click(textStr, details) {
 			while (gold001 != (gold000 + 1)) {
 				gold001Parent = null;
 				while (gold001Parent == null) {
-
 					gold001Parent = (textContains('000金币').findOne()).parent();
 					log('wait for gold001Parent');
 					sleep(800);
@@ -258,7 +257,6 @@ function after_click(textStr, details) {
 				log('gold001 = ' + gold001);
 				sleep(400);
 			}
-
 			sleep(400);
 			back_way();
 			break;
