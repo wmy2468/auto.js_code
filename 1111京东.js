@@ -65,7 +65,7 @@ function process() {
 	sleep(2000);
 	if (textContains('为TA助力').findOnce() != null) {
 		func.sClick(textContains('为TA助力').findOnce());
-		sleep();
+		sleep(1000);
 		func.sClick(closeBtnHelp.parent().parent().parent().parent().child(1));
 		func.sClick(closeBtnHelp.parent().parent().parent().child(1));
 	} else {
