@@ -222,6 +222,7 @@ function 每日任务() {
 				if (detailText.indexOf('去逛京友圈') != -1) { nextStepDetail = '京友圈' }
 				func.sClick(unComplete[index]);
 				toastLog(nextStep);
+				log(nextStepDetail);
 				sleep(2000);
 				after_click(nextStep, nextStepDetail);
 			}
@@ -230,19 +231,26 @@ function 每日任务() {
 	}
 }
 
+function waitLog(cnt, textDetail) {
+	while (cnt--) {
+		toastLog(textDetail);
+		sleep(2000);
+	}
+}
+
 function after_click(textStr, details) {
 	let gold001Parent, gold000, gold001 = 1;
 	switch (textStr) {
 		case '等待8秒':
 			log('等待8秒');
+			if (details == '京友圈') {
+				log('京友圈');
+				//if (text('京友圈').findOnce() == null) {
+				back_way();
+				//}
+			}
 			while (textContains('000金币').findOnce() == null) {
 				func.sClick(className('ImageView').id('com.jd.lib.jshop.feature:id/gd').findOnce());
-				if (details == '京友圈') {
-					if (text('京友圈').findOnce() != null) {
-						sleep(200);
-						back_way();
-					}
-				}
 			}
 			gold000 = (textContains('000金币').findOne()).parent().childCount();
 			toastLog('gold000 = ' + gold000);
@@ -255,7 +263,7 @@ function after_click(textStr, details) {
 				}
 				gold001 = gold001Parent.childCount();
 				log('gold001 = ' + gold001);
-				sleep(400);
+				sleep(400); 
 			}
 			toastLog('last gold001 = ' + gold001);
 			sleep(400);
@@ -266,20 +274,21 @@ function after_click(textStr, details) {
 			// 判断是否被微信小程序跳转到了微信
 			if (details == '小程序') {
 				log('微信返回');
+				i = 10;
 				toastLog('跳转到小程序，等待20秒');
 				if (devBrand == 'HUAWEI') {
-					sleep(20000);
+					waitLog(8, '等待一会儿..跳转回JD');
 					func.toApp(appName);
 				} else if (devBrand == 'xiaomi') {
 					if (小米双开) {
-						sleep(30000);
+						waitLog(15, '等待一会儿..跳转回JD');
 						func.toAppMulti(appName, k);
 					} else {
-						sleep(30000);
+						waitLog(15, '等待一会儿..跳转回JD');
 						func.toApp(appName);
 					}
 				} else {
-					sleep(30000);
+					waitLog(15, '等待一会儿..跳转回JD');
 					func.toApp(appName);
 				}
 				sleep(5000);
