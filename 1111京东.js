@@ -245,7 +245,7 @@ function after_click(textStr, details) {
 				}
 			}
 			gold000 = (textContains('000金币').findOne()).parent().childCount();
-			log('gold000 = ' + gold000);
+			toastLog('gold000 = ' + gold000);
 			while (gold001 != (gold000 + 1)) {
 				gold001Parent = null;
 				while (gold001Parent == null) {
@@ -257,6 +257,7 @@ function after_click(textStr, details) {
 				log('gold001 = ' + gold001);
 				sleep(400);
 			}
+			toastLog('last gold001 = ' + gold001);
 			sleep(400);
 			back_way();
 			break;
