@@ -207,9 +207,9 @@ function 每日任务() {
 			if (unComplete.length == 2) {
 				break;
 			} else {
-				index = 3;
-				indexText = unComplete[index].parent().child((index * 4 + 2)).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
-				detailText = unComplete[index].parent().child((index * 4 + 2) - 1).text();
+				index = 4;
+				indexText = unComplete[index].parent().child(((index - 1) * 4 + 2)).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
+				detailText = unComplete[index].parent().child(((index - 1) * 4 + 2) - 1).text();
 				toastLog(indexText);
 				if (indexText.indexOf('秒') != -1) { nextStep = '等待8秒' }
 				if (indexText.indexOf('浏览可得') != -1) { nextStep = '浏览返回' }
