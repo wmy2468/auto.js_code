@@ -199,7 +199,7 @@ function 每日任务() {
 	log('签到');
 	let indexText, detailText;
 	while (textContains('去完成').exists()) {
-		let nextStep, nextStepDetail;
+		let nextStep, nextStepDetail, index;
 		nextStepDetail = '';
 		unComplete = text('去完成').find();
 		//toastLog(unComplete.length);
@@ -207,7 +207,7 @@ function 每日任务() {
 			if (unComplete.length == 2) {
 				break;
 			} else {
-				let index = 2;
+				index = 3;
 				indexText = unComplete[index].parent().child((index * 4 + 2)).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
 				detailText = unComplete[index].parent().child((index * 4 + 2) - 1).text();
 				toastLog(indexText);
