@@ -204,10 +204,11 @@ function 每日任务() {
 		unComplete = text('去完成').find();
 		//toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
-			if (unComplete.length == 2) {
+			index = 4;
+			if (unComplete.length <= index) {
+				toastLog('去完成长度剩余:' + unComplete.length);
 				break;
 			} else {
-				index = 4;
 				indexText = unComplete[index].parent().child(((index - 2) * 4 + 2)).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
 				detailText = unComplete[index].parent().child(((index - 2) * 4 + 2) - 1).text();
 				toastLog(indexText);
