@@ -198,13 +198,14 @@ function 每日任务() {
 	func.sClick(text('签到').findOnce());
 	log('签到');
 	let indexText, detailText;
+	let index = 3;
 	while (textContains('去完成').exists()) {
-		let nextStep, nextStepDetail, index;
+		let nextStep, nextStepDetail;
 		nextStepDetail = '';
 		unComplete = text('去完成').find();
 		//toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
-			index = 4;
+
 			if (unComplete.length <= index) {
 				toastLog('去完成长度剩余:' + unComplete.length);
 				break;
@@ -213,6 +214,11 @@ function 每日任务() {
 				detailText = unComplete[index].parent().child(((index - 2) * 4 + 2) - 1).text();
 				toastLog(indexText);
 				log(detailText);
+				if (indexText.indexOf('扩大商圈可得') != -1) {
+					index = index + 1;
+					continue;
+				}
+				
 				if (indexText.indexOf('秒') != -1) { nextStep = '等待8秒' }
 				if (indexText.indexOf('浏览可得') != -1) { nextStep = '浏览返回' }
 				if (indexText.indexOf('浏览5个') != -1) { nextStep = '浏览商品' }
@@ -264,7 +270,7 @@ function after_click(textStr, details) {
 				}
 				gold001 = gold001Parent.childCount();
 				log('gold001 = ' + gold001);
-				sleep(400); 
+				sleep(400);
 			}
 			toastLog('last gold001 = ' + gold001);
 			sleep(400);
