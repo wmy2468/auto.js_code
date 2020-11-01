@@ -205,7 +205,6 @@ function 每日任务() {
 		unComplete = text('去完成').find();
 		//toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
-
 			if (unComplete.length <= index) {
 				toastLog('去完成长度剩余:' + unComplete.length);
 				break;
@@ -218,7 +217,7 @@ function 每日任务() {
 					index = index + 1;
 					continue;
 				}
-				
+
 				if (indexText.indexOf('秒') != -1) { nextStep = '等待8秒' }
 				if (indexText.indexOf('浏览可得') != -1) { nextStep = '浏览返回' }
 				if (indexText.indexOf('浏览5个') != -1) { nextStep = '浏览商品' }
@@ -230,11 +229,11 @@ function 每日任务() {
 				func.sClick(unComplete[index]);
 				toastLog(nextStep);
 				log(nextStepDetail);
-				sleep(2000);
+				sleep(1500);
 				after_click(nextStep, nextStepDetail);
 			}
 		}
-		sleep(1000);
+		sleep(1500);
 	}
 }
 
@@ -298,7 +297,7 @@ function after_click(textStr, details) {
 					waitLog(15, '等待一会儿..跳转回JD');
 					func.toApp(appName);
 				}
-				sleep(5000);
+				sleep(2500);
 			} else {
 				back_way();
 			}
