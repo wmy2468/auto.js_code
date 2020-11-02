@@ -27,9 +27,9 @@ function main() {
 			k = 1;
 			func.toAppMulti(appName, k);
 			process();
-			k = k + 1;
 			setClip(kouLing);
 			sleep(1000);
+			k = k + 1;
 			func.toAppMulti(appName, k);
 			process();
 		} else {
@@ -57,8 +57,12 @@ function process() {
 		func.sClick(closeBtnHelp.parent().parent().parent().child(1));
 	}
 
-	//等待完全加载后
-	text('领金币').findOne();
+	//等待完全加载后，如果出现取消按钮会找不到
+	while (text('领金币').findOnce() == null) {
+		func.sClick(text('取消').findOnce());
+		sleep(300);
+		func.sClick(text('立即收下').findOnce());
+	}
 	//延迟3秒
 	sleep(3000);
 
@@ -104,7 +108,6 @@ function 营业版图() {
 		sleep(1500);
 		营业版图_去完成();
 		back_way();
-
 		view1 = (text('北京').findOne()).parent().parent();
 		i = i + 1;
 	}
@@ -194,40 +197,70 @@ function 每日任务() {
 
 	func.sClick(text('签到').findOnce());
 	log('签到');
+	let indexText, detailText;
+	let index = 3;
 	while (textContains('去完成').exists()) {
-		let nextStep;
+		let nextStep, nextStepDetail;
+		nextStepDetail = '';
 		unComplete = text('去完成').find();
 		//toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
-			if (unComplete.length == 2) {
+			if (unComplete.length <= index) {
+				toastLog('去完成长度剩余:' + unComplete.length);
 				break;
 			} else {
-				let index = 2;
-				indexText = unComplete[index].parent().child((index * 4 + 2)).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
+				indexText = unComplete[index].parent().child(((index - 2) * 4 + 2)).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
+				detailText = unComplete[index].parent().child(((index - 2) * 4 + 2) - 1).text();
 				toastLog(indexText);
+				log(detailText);
+				if (indexText.indexOf('扩大商圈可得') != -1) {
+					index = index + 1;
+					continue;
+				}
+
 				if (indexText.indexOf('秒') != -1) { nextStep = '等待8秒' }
 				if (indexText.indexOf('浏览可得') != -1) { nextStep = '浏览返回' }
 				if (indexText.indexOf('浏览5个') != -1) { nextStep = '浏览商品' }
 				if (indexText.indexOf('加购5个') != -1) { nextStep = '加购物车' }
 				if (indexText.indexOf('成功入会') != -1) { nextStep = '加入会员' }
+				// 详细描述校验
+				if (detailText.indexOf('去小程序领更多') != -1) { nextStepDetail = '小程序' }
+				if (detailText.indexOf('去逛京友圈') != -1) { nextStepDetail = '京友圈' }
 				func.sClick(unComplete[index]);
 				toastLog(nextStep);
-				sleep(1000);
-				after_click(nextStep);
+				log(nextStepDetail);
+				sleep(1500);
+				after_click(nextStep, nextStepDetail);
 			}
 		}
-		sleep(1000);
+		sleep(1500);
 	}
 }
 
-function after_click(textStr) {
-	let gold001Parent, gold000, gold001 = 1, cnt = 1;
+function waitLog(cnt, textDetail) {
+	while (cnt--) {
+		toastLog(textDetail);
+		sleep(2000);
+	}
+}
+
+function after_click(textStr, details) {
+	let gold001Parent, gold000, gold001 = 1;
 	switch (textStr) {
 		case '等待8秒':
 			cnt = 1;
 			log('等待8秒');
+			if (details == '京友圈') {
+				log('京友圈');
+				//if (text('京友圈').findOnce() == null) {
+				back_way();
+				//}
+			}
+			while (textContains('000金币').findOnce() == null) {
+				func.sClick(className('ImageView').id('com.jd.lib.jshop.feature:id/gd').findOnce());
+			}
 			gold000 = (textContains('000金币').findOne()).parent().childCount();
-			log('gold000 = ' + gold000);
+			toastLog('gold000 = ' + gold000);
 			while (gold001 != (gold000 + 1)) {
 				gold001Parent = null;
 				while (gold001Parent == null) {
@@ -255,40 +288,33 @@ function after_click(textStr) {
 				}
 				sleep(400);
 			}
+			toastLog('last gold001 = ' + gold001);
 			sleep(400);
 			back_way();
 			break;
 		case '浏览返回':
-			i = 6;
 			log('浏览返回');
-			let jyqFlag = false;
-			while (i--) {
-				sleep(1000);
-				if (text('京友圈').findOnce() != null) {
-					log('京友圈');
-					jyqFlag = true;
-				}
-			}
-			if (jyqFlag) {
-				back_way();
-				log('京友圈返回')
-				sleep(3500);
-			}
 			// 判断是否被微信小程序跳转到了微信
-			if (getAppName(currentPackage()) != appName) {
+			if (details == '小程序') {
 				log('微信返回');
+				i = 10;
+				toastLog('跳转到小程序，等待20秒');
 				if (devBrand == 'HUAWEI') {
+					waitLog(8, '等待一会儿..跳转回JD');
 					func.toApp(appName);
 				} else if (devBrand == 'xiaomi') {
 					if (小米双开) {
+						waitLog(15, '等待一会儿..跳转回JD');
 						func.toAppMulti(appName, k);
 					} else {
+						waitLog(15, '等待一会儿..跳转回JD');
 						func.toApp(appName);
 					}
 				} else {
+					waitLog(15, '等待一会儿..跳转回JD');
 					func.toApp(appName);
 				}
-				sleep(5000);
+				sleep(2500);
 			} else {
 				back_way();
 			}
@@ -340,9 +366,8 @@ function member_card() {
 	while (textContains('已集齐所有会员卡').findOnce() == null) {
 		log('加会员');
 		func.sClick(textContains('确认授权并加入').findOnce())
-		sleep(1000);
 	}
-	sleep(2000);
+	sleep(1500);
 }
 //加购5个商品
 function add_cart() {
