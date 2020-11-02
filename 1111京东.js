@@ -221,9 +221,10 @@ function 每日任务() {
 }
 
 function after_click(textStr) {
-	let gold001Parent, gold000, gold001 = 1;
+	let gold001Parent, gold000, gold001 = 1, cnt = 1;
 	switch (textStr) {
 		case '等待8秒':
+			cnt = 1;
 			log('等待8秒');
 			gold000 = (textContains('000金币').findOne()).parent().childCount();
 			log('gold000 = ' + gold000);
@@ -236,6 +237,22 @@ function after_click(textStr) {
 				}
 				gold001 = gold001Parent.childCount();
 				log('gold001 = ' + gold001);
+				if (gold001 > 20) {
+					cnt = cnt + 1;
+					if (cnt >= 2) {
+						i = 5;
+						while (i--) {
+							toastLog('等待10秒...')
+							sleep(2000);
+						}
+						gold001Parent = (textContains('000金币').findOne()).parent();
+						gold001 = gold001Parent.childCount();
+						if (gold001 > 20) {
+							toastLog('已经完成了, 退出');
+							break;
+						}
+					}
+				}
 				sleep(400);
 			}
 			sleep(400);
