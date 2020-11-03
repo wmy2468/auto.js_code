@@ -27,6 +27,7 @@ function main() {
 			k = 1;
 			func.toAppMulti(appName, k);
 			process();
+			toastLog('第一个已完成');
 			setClip(kouLing);
 			sleep(1000);
 			k = k + 1;
@@ -60,7 +61,20 @@ function process() {
 	}
 
 	//等待完全加载后，如果出现取消按钮会找不到
-	while (text('领金币').findOnce() == null) {
+	let lottery, iKnow;
+	while (!(text('领金币').findOnce() != null && (text('我知道了').findOnce() == null) && text('立即抽奖').findOnce() == null)) {
+		iKnow = text('我知道了').findOnce();
+		if (iKnow != null) {
+			log('我知道了取消');
+			func.sClick(iKnow.parent().child(4));
+			sleep(800);
+		}
+		lottery = text('立即抽奖').findOnce();
+		if (lottery != null) {
+			log('立即抽奖取消');
+			func.sClick(lottery.parent().parent().parent().child(1))
+			sleep(800);
+		}
 		func.sClick(text('取消').findOnce());
 		sleep(300);
 		func.sClick(text('立即收下').findOnce());
@@ -94,6 +108,7 @@ function 营业版图() {
 	text('签到得最高500金币').findOne();
 	sleep(1500);
 	if (text('去完成').findOnce() == null) {
+		toastLog('检测到当前账号已经完成，下一个');
 		sleep(800);
 		return 0;
 	} else {
