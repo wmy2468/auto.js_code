@@ -247,9 +247,10 @@ function waitLog(cnt, textDetail) {
 }
 
 function after_click(textStr, details) {
-	let gold001Parent, gold000, gold001 = 1;
+	let gold001Parent, cnt, gold000, gold001 = 1;
 	switch (textStr) {
 		case '等待8秒':
+			cnt = 1;
 			log('等待8秒');
 			if (details == '京友圈') {
 				log('京友圈');
@@ -271,6 +272,16 @@ function after_click(textStr, details) {
 				}
 				gold001 = gold001Parent.childCount();
 				log('gold001 = ' + gold001);
+				if (gold001 > 15) {
+					cnt = cnt + 1;
+					sleep(2200);
+					if (cnt > 4) {
+						cnt = 1;
+						toastLog('应该是完成了..准备退出')
+						sleep(1000);
+						break;
+					}
+				}
 				sleep(400);
 			}
 			toastLog('last gold001 = ' + gold001);
