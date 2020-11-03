@@ -30,7 +30,7 @@ var fileUrl = originUrl + fileName;
 
 var req = http.get(fileUrl);
 if (req.statusCode != '200') {
-    toastLog('网络读取错误，可能文件不存在，退出' + res_script.statusMessage)
+    toastLog('网络读取错误，可能文件不存在，退出' + req.statusMessage)
     exit();
 }
 
