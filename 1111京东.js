@@ -152,9 +152,9 @@ function 营业版图_去完成() {
 		toastLog('去完成剩余 = ' + unComplete.length);
 		if (unComplete.nonEmpty()) {
 			let goUnComplete = unComplete[index];
-			if (unComplete[index].parent().child([goUnComplete.indexInParent() - 2]).text() == '去逛真五折秘籍清单(0/1)') {
+			/*if (unComplete[index].parent().child([goUnComplete.indexInParent() - 2]).text() == '去逛真五折秘籍清单(0/1)') {
 				break;
-			}
+			}*/
 			func.sClick(goUnComplete);
 			log('点击去完成');
 			while (text('签到得最高500金币').findOnce() != null) {
