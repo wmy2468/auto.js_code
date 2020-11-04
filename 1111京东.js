@@ -152,7 +152,7 @@ function 营业版图_去完成() {
 		toastLog('去完成剩余 = ' + unComplete.length);
 		if (unComplete.nonEmpty()) {
 			let goUnComplete = unComplete[index];
-			if (unComplete[index].parent().child([goUnComplete.indexInParent()-2]).text() == '去逛真五折秘籍清单(0/1)') {
+			if (unComplete[index].parent().child([goUnComplete.indexInParent() - 2]).text() == '去逛真五折秘籍清单(0/1)') {
 				break;
 			}
 			func.sClick(goUnComplete);
@@ -361,10 +361,20 @@ function after_click(textStr, details) {
 // 浏览5个商品
 function view_list() {
 	i = 0;
+	let findDoller;
 	while (text('已完成').findOnce() == null) {
 		textContains('¥').findOne();
 		//点击商品加购物车按钮
-		func.cClick((textContains('¥').find()[i]).parent().parent());
+		while (1) {
+			try {
+				findDoller = (textContains('¥').find()[i]).parent().parent();
+				break;
+			}
+			catch (e) {
+				continue;
+			}
+		}
+		func.cClick(findDoller);
 		textContains('购物车').findOne();
 		sleep(800);
 		back_way();
@@ -388,6 +398,7 @@ function member_card() {
 //加购5个商品
 function add_cart() {
 	i = 0;
+	let findDoller;
 	textContains('当前页任意加购5个商品').findOne();
 	while (text('已完成').findOnce() == null) {
 		if (i >= 4) {
@@ -396,7 +407,16 @@ function add_cart() {
 		}
 		textContains('¥').findOne();
 		//点击商品加购物车按钮
-		func.sClick((textContains('¥').find()[i]).parent().parent().child(4));
+		while (1) {
+			try {
+				findDoller = (textContains('¥').find()[i]).parent().parent().child(4);
+				break;
+			}
+			catch (e) {
+				continue;
+			}
+		}
+		func.sClick(findDoller);
 		//textContains('购物车').findOne();
 		//back_way();
 		sleep(2000);
