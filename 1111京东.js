@@ -120,6 +120,7 @@ function 营业版图() {
 	log('开始第一组');
 	i = 1;
 	while (i <= (view1Cnt - 1)) {
+		toastLog('当前正在完成第 ' + i + '个，共' + (view1Cnt - 1) + '个，城市：' + view1.child(i).child(2).text());
 		func.sClick(view1.child(i));
 		text('签到得最高500金币').findOne();
 		sleep(1500);
@@ -133,7 +134,7 @@ function 营业版图() {
 	view2 = (text('热爱城').findOne()).parent().parent();
 	view2Cnt = view2.childCount();
 	while (i <= (view2Cnt - 1)) {
-		log(view2.child(i).child(2).text());
+		toastLog('当前正在完成第 ' + i + '个，共' + (view2Cnt - 1) + '个，城市：' + view2.child(i).child(2).text());
 		func.sClick(view2.child(i));
 		text('签到得最高500金币').findOne();
 		sleep(1500);
