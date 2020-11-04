@@ -150,7 +150,9 @@ function 营业版图_去完成() {
 		unComplete = text('去完成').find();
 		toastLog('去完成剩余 = ' + unComplete.length);
 		if (unComplete.nonEmpty()) {
-			func.sClick(unComplete[index]);
+			let goUnComplete = unComplete[index];
+			toastLog(unComplete[goUnComplete.indexInParent()-1].text());
+			func.sClick(goUnComplete);
 			log('点击去完成');
 			while (text('签到得最高500金币').findOnce() != null) {
 				if (cnt >= 10) {
@@ -160,10 +162,10 @@ function 营业版图_去完成() {
 				sleep(400);
 				cnt = cnt + 1;
 			}
-			sleep(2000);
+			sleep(1700);
 			back_way();
 			text('签到得最高500金币').findOne();
-			sleep(1200);
+			sleep(1500);
 		}
 	}
 	toastLog('营业版图_当前_已完成');
