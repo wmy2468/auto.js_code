@@ -249,7 +249,7 @@ function 华彩生活() {
     let appName = '华彩生活';
     //closeApp(appName);
     func.toApp(appName);
-    while (className('RadioButton').text('我的').findOnce() == null) {
+    while (text('我的').findOnce() == null) {
         func.passAd();
     }
     sleep(1000);
