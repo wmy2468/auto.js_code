@@ -1,1 +1,1 @@
-toastLog(text('北京').findOne())
+toastLog(text('我的').findOnce());
