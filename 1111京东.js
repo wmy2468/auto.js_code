@@ -255,7 +255,6 @@ function 每日任务() {
 				after_click(nextStep, nextStepDetail);
 			}
 		}
-		sleep(1500);
 	}
 }
 
@@ -355,7 +354,7 @@ function after_click(textStr, details) {
 	}
 	log('等待邀请好友助力');
 	textContains('邀请好友助力').waitFor();
-	sleep(2000);
+	sleep(1000);
 }
 
 // 浏览5个商品
