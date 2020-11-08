@@ -101,7 +101,7 @@ function 营业版图() {
 	text('营业版图').waitFor();
 	log('营业版图已加载');
 	sleep(800);
-	// 检查营业版图是否完成
+	// 检查营业版图是否完成一个是查结尾，一个查中间
 	let view2 = (text('热爱城').findOne()).parent().parent();
 	let view2Cnt = view2.childCount() - 1;
 	func.sClick(view2.child(view2Cnt));
@@ -113,12 +113,30 @@ function 营业版图() {
 		return 0;
 	} else {
 		back_way();
+		let view2 = (text('热爱城').findOne()).parent().parent();
+		// 取中间的检查
+		let view2Cnt = Math.floor(view2.childCount() / 2);
+		func.sClick(view2.child(view2Cnt));
+		text('签到得最高500金币').findOne();
+		sleep(1500);
+		if (text('去完成').findOnce() == null) {
+			toastLog('当前账号已经完成一半');
+			back_way();
+			营业2(view2Cnt);
+		} else {
+			back_way();
+			营业1(0);
+			营业2(0);
+		}
 	}
 
+
+}
+
+function 营业1(i) {
+	log('开始第一组');
 	let view1 = (text('北京').findOne()).parent().parent();
 	let view1Cnt = view1.childCount();
-	log('开始第一组');
-	i = 1;
 	while (i <= (view1Cnt - 1)) {
 		toastLog('当前正在完成第 ' + i + '个，共' + (view1Cnt - 1) + '个，城市：' + view1.child(i).child(2).text());
 		func.sClick(view1.child(i));
@@ -129,8 +147,10 @@ function 营业版图() {
 		view1 = (text('北京').findOne()).parent().parent();
 		i = i + 1;
 	}
+}
+
+function 营业2(i) {
 	log('开始第二组');
-	i = 0;
 	view2 = (text('热爱城').findOne()).parent().parent();
 	view2Cnt = view2.childCount();
 	while (i <= (view2Cnt - 1)) {
