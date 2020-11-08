@@ -247,6 +247,7 @@ function 每日任务() {
 				if (indexText.indexOf('成功入会') != -1) { nextStep = '加入会员' }
 				// 详细描述校验
 				if (detailText.indexOf('去小程序领更多') != -1) { nextStepDetail = '小程序' }
+				if (detailText.indexOf('去逛美妆护肤爆款会场') != -1) { nextStepDetail = '小程序' }
 				if (detailText.indexOf('去逛京友圈') != -1) { nextStepDetail = '京友圈' }
 				func.sClick(unComplete[index]);
 				toastLog(nextStep);
@@ -354,7 +355,7 @@ function after_click(textStr, details) {
 	}
 	log('等待邀请好友助力');
 	textContains('邀请好友助力').waitFor();
-	sleep(1000);
+	sleep(2000);
 }
 
 // 浏览5个商品
