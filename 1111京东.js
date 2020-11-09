@@ -52,7 +52,7 @@ function process() {
 	// 助力关闭按钮
 	let closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne();
 	sleep(3000);
-	if (textContains('为TA助力').findOnce() != null) {
+	if (textContains('为TA助力').findOnce() != null || textContains('您今天的助力次数已用完').findOnce() != null) {
 		log('为TA助力不为空')
 		func.sClick(closeBtnHelp.parent().parent().parent().parent().child(1));
 	} else {
