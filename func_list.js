@@ -176,9 +176,7 @@ function gesture_pwd(appName) {
             log('邮储银行');
             break;
         case '中国农业银行':
-            toastLog("12345");
-            toastLog(className("TextView").text('切换登陆方式').findOne());
-            point = (className("TextView").text('切换登陆方式').findOne()).parent().parent().parent().child(0);
+            point = (text('切换登录方式').findOne()).parent().parent().parent().child(0);
             log('中国农业银行');
             break;
     }

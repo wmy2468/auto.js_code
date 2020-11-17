@@ -38,7 +38,7 @@ function 中国农业银行() {
     func.sClick(id("tv_my_haidou_unlogin").text("小豆").findOne());
     //toastLog("我的已点击");
     while (textContains("小豆秒杀").findOnce() == null) {
-        if (text("切换登陆方式").findOnce() != null) {
+        if (text("切换登录方式").findOnce() != null) {
             //toastLog("滑动手势");
             sleep(500);
             func.gesture_pwd(appName);
