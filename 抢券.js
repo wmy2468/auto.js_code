@@ -107,6 +107,6 @@ function 中信9积分() {
         break;
     }
     func.sClick(text("去兑换").findOne());
-    func.sClick(text("确定支付").findOne());
+    func.sClick(text("去支付").findOne());
     sleep(800);
 }
