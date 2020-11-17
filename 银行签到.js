@@ -25,11 +25,14 @@ function 中国农业银行() {
     let appName = "中国农业银行";
     //closeApp(appName);
     func.toApp(appName);
-    while (text("我的").findOnce() == null) {
+    lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator");
+    while (lineBtn == null) {
+        lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator");
         func.passAd();
     }
     sleep(1000);
-    func.sClick(text("我的").findOnce());
+    //点击我的按钮
+    func.sClick(lineBtn.child(4));
     // 签到按钮
     func.sClick(id("tv_my_haidou_unlogin").text("小豆").findOne());
     //toastLog("我的已点击");
