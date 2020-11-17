@@ -33,6 +33,7 @@ function 中国农业银行() {
     sleep(1000);
     //点击我的按钮
     func.sClick(lineBtn.child(4));
+    sleep(1200);
     // 签到按钮
     func.sClick(id("tv_my_haidou_unlogin").text("小豆").findOne());
     //toastLog("我的已点击");
