@@ -175,6 +175,10 @@ function gesture_pwd(appName) {
             point = id('lockPatternLogin').findOnce();
             log('邮储银行');
             break;
+        case '中国农业银行':
+            point = (text('切换登陆方式').findOnce()).parent().parent().parent().child(0).child(0);
+            log('中国农业银行');
+            break;
     }
     if (point == null) { return false; }
     x = point.bounds().centerX();

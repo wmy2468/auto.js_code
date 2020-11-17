@@ -4,6 +4,7 @@ var func = require("func_list.js");
 main();
 //买单吧();
 function main() {
+    中国农业银行();
     什么值得买();
     招商银行();
     jd_sign();
@@ -19,6 +20,36 @@ function main() {
 }
 
 // ======================签到代码==================================
+// 农行小豆
+function 中国农业银行() {
+    let appName = "中国农业银行";
+    //closeApp(appName);
+    func.toApp(appName);
+    while (text("我的").findOnce() == null) {
+        func.passAd();
+    }
+    sleep(1000);
+    func.sClick(text("我的").findOnce());
+    // 签到按钮
+    func.sClick(id("tv_my_haidou_unlogin").text("小豆").findOne());
+    //toastLog("我的已点击");
+    while (textContains("小豆秒杀").findOnce() == null) {
+        if (text("切换登陆方式").findOnce() != null) {
+            //toastLog("滑动手势");
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(1000);
+        }
+    }
+    //toastLog("找签到");
+    while (text("已签到").findOnce() == null) {
+        func.sClick(text("签到得豆").findOnce());
+        sleep(1200);
+    }
+    toastLog(appName + "已签到");
+    sleep(1000);
+}
+
 // 邮储银行
 function 邮储银行() {
     let appName = "邮储银行";
@@ -333,6 +364,8 @@ function 工银e生活() {
     id("tv_title").text("历史搜索").findOne();
     sleep(1200);
     func.sClick(className("TextView").id("tv_name").text("商城").findOne());
+    sleep(1000);
+    id("tv_title").text("特色活动").findOne();
     sleep(1000);
     // 第二个商城
     func.sClick(id("tv_name").text("商城").findOne());
