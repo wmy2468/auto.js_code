@@ -330,7 +330,8 @@ function 工银e生活() {
     // 点击输入框
     func.sClick(text("扫一扫").findOne().parent().child(1));
     // 商城
-    toastLog(id("tv_name").text("商城").findOne());
+    id("tv_title").text("历史搜索").findOne();
+    sleep(1200);
     func.sClick(className("TextView").id("tv_name").text("商城").findOne());
     sleep(1000);
     // 第二个商城
