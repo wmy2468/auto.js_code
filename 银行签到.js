@@ -46,7 +46,7 @@ function 中国农业银行() {
         }
     }
     //toastLog("找签到");
-    while (text("已签到").findOnce() == null) {
+    while (text("已经签到").findOnce() == null) {
         func.sClick(text("签到得豆").findOnce());
         sleep(1200);
     }
