@@ -1,2 +1,4 @@
-let closeBtnHelp;
-toastLog(closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne());
+var func = require("func_list.js");
+
+func.toJdSku("69630661624");
+// launchApp('京东');

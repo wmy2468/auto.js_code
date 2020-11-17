@@ -53,6 +53,18 @@ function toApp(appName) {
     }
 }
 
+function toJdSku(sellId) {
+    // let appName = '京东';
+    // while (currentPackage() != getPackageName(appName)) {
+    //     launchApp(appName);
+    //     sleep(300);
+    // }
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        data: "openapp.jdmobile://virtual?params=%7B%22sourceValue%22:%220_productDetail_97%22,%22des%22:%22productDetail%22,%22skuId%22:%22" + sellId + "%22,%22category%22:%22jump%22,%22sourceType%22:%22PCUBE_CHANNEL%22%7D",
+    });
+}
+
 /*
     小米使用参数1，2，华为使用0
 */
@@ -302,5 +314,6 @@ module.exports = {
     gesture_pwd: gesture_pwd,
     randomNum: randomNum,
     lockScr: lockScr,
+    toJdSku: toJdSku,
     getTimeDiff: getTimeDiff
 }
