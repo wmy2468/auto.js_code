@@ -81,14 +81,15 @@ function 每日10点光大天猫() {
     //   定位元素
     toastLog(text('提醒我').findOnce());
     while (1) {
-        if (text('提醒我').findOnce()) {
+        if !(text('提醒我').findOnce()) {
             sleep(300);
             continue;
         }
         break;
     }
-    toastLog(text('确认购买').findOnce());
-    func.sClick(elements);
+    func.sClick(text('确认购买').findOne());
+    toastLog('结束');
+    sleep(800);
 }
 
 // 等待页面变价
