@@ -1,7 +1,2 @@
-let t1 = new Date().getTime();
-
-let t2 = new Date().getTime();
-//toastLog(t2-t1);
-
-toastLog(Math.floor(7/2));
-
+let closeBtnHelp;
+toastLog(closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne());
