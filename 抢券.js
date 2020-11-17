@@ -4,9 +4,7 @@ var func = require("func_list.js");
 // 123
 var selectedArr = [
     "每日10点光大天猫",
-    "中信9积分",
-    "中行赞卡微信",
-    "中行赞卡缤纷"
+    "中信9积分"
 ];
 
 //淘宝测试();
@@ -79,9 +77,9 @@ function 每日10点光大天猫() {
     toastLog("已到达指定页面，等待");
     sleep(800);
     //   定位元素
-    toastLog(text("提醒我").findOnce());
+    //toastLog(text("提醒我").findOnce());
     while (1) {
-        if (!text("提醒我").findOnce()) {
+        if (text("提醒我").findOnce()) {
             sleep(300);
             continue;
         }
@@ -93,99 +91,22 @@ function 每日10点光大天猫() {
 }
 
 // 等待页面变价
-function 交行贴金() {
-    let appName = "交通银行";
-    let targetTime = "12,00,00,100";
-    let elements, clickEle;
+function 中信9积分() {
+    let appName = "动卡空间";
     isInApp(appName);
+    // 等待进入指定页面
+    text("价格: 1个权益+9个积分").findOne();
+    toastLog("已到达指定页面，等待");
     //   定位元素
     while (1) {
-        elements = text("立即抢兑").find();
-        if (elements.empty()) {
+        if (text("未开始").findOnce()) {
+            sleep(300);
             continue;
         }
-        let cnt = 0;
-        while (1) {
-            if (elements[cnt].parent().parent().child(1).text == "满10元可用") {
-                clickEle = elements[cnt];
-                toastLog("已找到点击的元素");
-                break;
-            }
-            cnt = cnt + 1;
-            if (cnt == elements.length) {
-                cnt = 0;
-            }
-        }
+        sleep(100);
         break;
     }
-    isInTime(targetTime);
-    func.sClick(clickEle);
-    func.sClick(text("确认兑换").findOne());
-}
-
-// 跳转页面提交订单
-function 天猫茅台() {
-    let appName = "手机淘宝";
-    let targetTime = "20,00,00,100";
-    let elements;
-    isInApp(appName);
-    //   定位元素
-    while (1) {
-        elements = text("结算(1)").findOnce();
-        if (elements == null) {
-            continue;
-        }
-        toastLog("已找到点击的元素");
-        break;
-    }
-    isInTime(targetTime);
-    func.sClick(elements);
-    func.sClick(className("TextView").text("提交订单").findOne());
-}
-
-
-// 准点进页面
-function 中行赞卡微信() {
-    let appName = "微信";
-    let targetTime = "10,00,00,100";
-    let elements;
-    isInApp(appName);
-    //   定位元素
-    while (1) {
-        elements = text("【赞卡专享】全国三网通用话费30元电子券").findOnce();
-        if (elements == null) {
-            continue;
-        }
-        toastLog("已找到点击的元素");
-        break;
-    }
-    // 确认时间
-    isInTime(targetTime);
-    // 加载第一个
-    func.sClick(elements);
-    // 查找并 点击立即获取
-    func.sClick(className("Button").text("立即获取").findOne());
-}
-
-// 准点进页面
-function 中行赞卡缤纷() {
-    let appName = "缤纷生活";
-    let targetTime = "10,00,00,100";
-    let elements;
-    isInApp(appName);
-    //   定位元素
-    while (1) {
-        elements = text("【赞卡专享】全国三网通用话费30元电子券").findOnce();
-        if (elements == null) {
-            continue;
-        }
-        toastLog("已找到点击的元素");
-        break;
-    }
-    // 确认时间
-    isInTime(targetTime);
-    // 加载第一个
-    func.sClick(elements);
-    // 查找并 点击立即获取
-    func.sClick(className("TextView").id("tvExchangetext").text("立即获取").findOne());
+    func.sClick(text("去兑换").findOne());
+    func.sClick(text("确定支付").findOne());
+    sleep(800);
 }
