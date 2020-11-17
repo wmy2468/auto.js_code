@@ -25,9 +25,9 @@ function 中国农业银行() {
     let appName = "中国农业银行";
     //closeApp(appName);
     func.toApp(appName);
-    lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator");
+    lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
     while (lineBtn == null) {
-        lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator");
+        lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
         func.passAd();
     }
     sleep(1000);
