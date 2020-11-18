@@ -68,21 +68,22 @@ function isInTime(targetTime) {
 // 等待页面变价
 function 每日10点光大天猫() {
     let appName = "阳光惠生活";
-    let elements;
-    isInApp(appName);
+    launchApp(appName);
     // 等待进入指定页面
     text("【活动编号】23851").findOne();
     toastLog("已到达指定页面，等待");
-    sleep(800);
     //   定位元素
-    //toastLog(text("提醒我").findOnce());
     while (1) {
         if (text("提醒我").findOnce()) {
             continue;
         }
         break;
     }
-    func.sClick(text("确认购买").findOne());
+    while (1) {
+        if (func.sClick(text("确认购买").findOnce())) {
+            break;
+        }
+    }
     toastLog("结束");
     sleep(800);
 }
@@ -94,7 +95,10 @@ function 中信9积分() {
     // 等待进入指定页面
     text("价格: 1个权益+9个积分").findOne();
     toastLog("已到达指定页面，等待");
+    func.sClick(className("android.view.View").text("去兑换").findOne());
+    func.sClick(className("android.view.View").text("去支付").findOnce());
     //   定位元素
+    /*
     while (1) {
         if (func.sClick(className("android.view.View").text("去兑换").findOnce())) {
             break;
@@ -104,6 +108,6 @@ function 中信9积分() {
         if (func.sClick(className("android.view.View").text("去支付").findOnce())) {
             break;
         }
-    }
+    }*/
     sleep(800);
 }
