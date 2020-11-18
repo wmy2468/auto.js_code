@@ -74,16 +74,12 @@ function 每日10点光大天猫() {
     toastLog("已到达指定页面，等待");
     //   定位元素
     while (1) {
-        if (text("提醒我").findOnce()) {
+        if (className("android.view.View").text("提醒我").findOnce()) {
             continue;
         }
         break;
     }
-    while (1) {
-        if (func.sClick(text("确认购买").findOnce())) {
-            break;
-        }
-    }
+    func.sClick(className("android.view.View").text("确认购买").findOne())
     toastLog("结束");
     sleep(800);
 }
@@ -95,19 +91,8 @@ function 中信9积分() {
     // 等待进入指定页面
     text("价格: 1个权益+9个积分").findOne();
     toastLog("已到达指定页面，等待");
+    //点击元素
     func.sClick(className("android.view.View").text("去兑换").findOne());
     func.sClick(className("android.view.View").text("去支付").findOnce());
-    //   定位元素
-    /*
-    while (1) {
-        if (func.sClick(className("android.view.View").text("去兑换").findOnce())) {
-            break;
-        }
-    }
-    while (1) {
-        if (func.sClick(className("android.view.View").text("去支付").findOnce())) {
-            break;
-        }
-    }*/
     sleep(800);
 }
