@@ -90,7 +90,7 @@ function 每日10点光大天猫() {
 // 等待页面变价
 function 中信9积分() {
     let appName = "动卡空间";
-    luanchApp(appName);
+    launchApp(appName);
     // 等待进入指定页面
     text("价格: 1个权益+9个积分").findOne();
     toastLog("已到达指定页面，等待");
