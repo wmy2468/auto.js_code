@@ -377,7 +377,7 @@ function 工银e生活() {
     func.sClick(id("tv_name").text("商城").findOne());
     sleep(800);
 
-    let shopMall = text("品质好物|正品保障").findOne();
+    let shopMall = text("品质好物 | 正品保障").findOne();
     sleep(1000);
     func.sClick(shopMall.parent().parent().parent().child(0));
 
