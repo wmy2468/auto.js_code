@@ -80,7 +80,6 @@ function 每日10点光大天猫() {
     //toastLog(text("提醒我").findOnce());
     while (1) {
         if (text("提醒我").findOnce()) {
-            sleep(300);
             continue;
         }
         break;
@@ -99,14 +98,14 @@ function 中信9积分() {
     toastLog("已到达指定页面，等待");
     //   定位元素
     while (1) {
-        if (text("未开始").findOnce()) {
-            sleep(300);
-            continue;
+        if (func.sClick(className("android.view.View").text("去兑换").findOnce())) {
+            break;
         }
-        sleep(100);
-        break;
     }
-    func.sClick(text("去兑换").findOne());
-    func.sClick(text("去支付").findOne());
+    while (1) {
+        if (func.sClick(className("android.view.View").text("去支付").findOnce())) {
+            break;
+        }
+    }
     sleep(800);
 }
