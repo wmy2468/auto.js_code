@@ -362,6 +362,7 @@ function 工银e生活() {
     while (id("radio_button1").text("生活").findOnce() == null) {
         func.passAd();
     }
+    func.sClick(id("radio_button1").text("生活").findOne());
     // 点击输入框
     func.sClick(text("扫一扫").findOne().parent().child(1));
     // 商城
