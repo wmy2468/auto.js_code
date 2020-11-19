@@ -362,25 +362,18 @@ function 工银e生活() {
     while (id("radio_button1").text("生活").findOnce() == null) {
         func.passAd();
     }
-    sleep(1000);
-    func.sClick(id("radio_button1").text("生活").findOnce());
     // 点击输入框
     func.sClick(text("扫一扫").findOne().parent().child(1));
     // 商城
     id("tv_title").text("历史搜索").findOne();
-    sleep(1200);
-    func.sClick(className("TextView").id("tv_name").text("商城").findOne());
+    sleep(1000);
+    func.sClick(className("TextView").id("tv_name").text("购物日").findOne());
     sleep(1000);
     id("tv_title").text("特色活动").findOne();
     sleep(1000);
     // 第二个商城
-    func.sClick(id("tv_name").text("商城").findOne());
+    func.sClick(id("tv_name").text("购物日").findOne());
     sleep(800);
-
-    let shopMall = text("品质好物 | 正品保障").findOne();
-    sleep(1000);
-    func.sClick(shopMall.parent().parent().parent().child(0));
-
     text("点击签到").findOne();
     sleep(2000);
     func.sClick(text("点击签到").findOnce());

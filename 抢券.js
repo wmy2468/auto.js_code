@@ -93,6 +93,7 @@ function 中信9积分() {
     toastLog("已到达指定页面，等待");
     //点击元素
     func.sClick(className("android.view.View").text("去兑换").findOne());
-    func.sClick(className("android.view.View").text("去支付").findOnce());
+    func.sClick(className("android.view.View").text("去支付").findOne());
+    toastLog("结束");
     sleep(800);
 }
