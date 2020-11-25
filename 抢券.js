@@ -97,3 +97,17 @@ function 中信9积分() {
     toastLog("结束");
     sleep(800);
 }
+
+// 等待页面变价
+function 中信365() {
+    let appName = "动卡空间";
+    launchApp(appName);
+    // 等待进入指定页面
+    text("适用门店").findOne();
+    toastLog("已到达指定页面，等待");
+    //点击元素
+    func.sClick(className("android.widget.Button").text("立即购买").findOne());
+    func.sClick(className("android.view.View").text("确认").findOne());
+    toastLog("结束");
+    sleep(800);
+}
