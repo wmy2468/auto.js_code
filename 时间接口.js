@@ -19,7 +19,7 @@ let selectedArr = [
 
 let selectIndex = dialogs.select("选择时间", selectedArr);
 
-getTimeDiff()
+getTimeDiff(selectedArr[selectIndex]);
 
 function getTimeDiff(area) {
     console.show();
