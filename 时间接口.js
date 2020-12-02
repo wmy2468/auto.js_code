@@ -52,15 +52,18 @@ function getTimeDiff(area) {
 function jdTime() {
     let res, resTime, resTimestamp;
     // 获取取一次时间耗时
-    stTimestamp = new Date().getTime();
-    res = http.get('https://a.jd.com//ajax/queryServerData.html');
-    edTimestamp = new Date().getTime()
+    while (cnt--) {
+        stTimestamp = new Date();
+        res = http.get('https://a.jd.com//ajax/queryServerData.html');
+        edTimestamp = new Date();
 
-    if (res.statusCode != 200) {
-        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
-        exit();
+        console.log("时间差", edTimestamp - stTimestamp);
+        if (res.statusCode != 200) {
+            toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+            exit();
+        }
     }
-    console.log(edTimestamp - stTimestamp);
+
     resTime = res.body.json();
     resTimestamp = Number(resTime.serverTime);
     //返回时间差
@@ -72,21 +75,23 @@ function beiJingTime() {
     let res, resTime, resTimestamp, cnt = 10;
     // 获取取一次时间耗时
     while (cnt--) {
-        stTimestamp = new Date().getTime();
+        stTimestamp = new Date();
         res = http.get('http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1');
-        edTimestamp = new Date().getTime()
+        edTimestamp = new Date();
+
+        console.log("时间差", edTimestamp - stTimestamp);
 
         if (res.statusCode != 200) {
             toast("请求失败: " + res.statusCode + " " + res.statusMessage);
             exit();
         }
-        console.log("时间差", edTimestamp - stTimestamp);
+
         if (edTimestamp - stTimestamp <= 50) {
             break;
         }
     }
 
-    resTime = res.body;
+    resTime = res.body.string();
     resTimestamp = Number(resTime.replace("0=", ""));
     //返回时间差
     return (Math.trunc((edTimestamp - stTimestamp) / 2) + resTimestamp) - edTimestamp
@@ -96,12 +101,16 @@ function beiJingTime() {
 function tbTime() {
     let res, resTime, resTimestamp;
     // 获取取一次时间耗时
-    stTimestamp = new Date().getTime();
-    res = http.get('http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp');
-    edTimestamp = new Date().getTime()
-    if (res.statusCode != 200) {
-        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
-        exit();
+    while (cnt--) {
+        stTimestamp = new Date();
+        res = http.get('http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp');
+        edTimestamp = new Date();
+        console.log("时间差", edTimestamp - stTimestamp);
+
+        if (res.statusCode != 200) {
+            toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+            exit();
+        }
     }
     resTime = res.body.json();
     resTimestamp = Number(resTime.data.t);
