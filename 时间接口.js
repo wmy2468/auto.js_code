@@ -50,7 +50,7 @@ function getTimeDiff(area) {
 }
 
 function jdTime() {
-    let res, resTime, resTimestamp;
+    let res, resTime, resTimestamp, cnt = 10;
     // 获取取一次时间耗时
     while (cnt--) {
         stTimestamp = new Date();
@@ -99,7 +99,7 @@ function beiJingTime() {
 
 // 淘宝时间
 function tbTime() {
-    let res, resTime, resTimestamp;
+    let res, resTime, resTimestamp, cnt = 10;
     // 获取取一次时间耗时
     while (cnt--) {
         stTimestamp = new Date();
