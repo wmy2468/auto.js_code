@@ -25,7 +25,6 @@ function main() {
 }
 
 function getTimeDiff(area) {
-    //console.show();
     let i = 10;
     let cnt = i;
     let c = 0;
@@ -43,9 +42,9 @@ function getTimeDiff(area) {
                 break;
         }
     }
-    //console.log('总值：' + c);
+    log('总值：' + c);
     c = Math.trunc(c / cnt);
-    //console.log('均值：' + c);
+    log('均值：' + c);
     // while (1) {
     //     console.log(new Date(new Date().getTime() + c));
     //     sleep(1000);
@@ -66,15 +65,15 @@ function jdTime() {
             toast("请求失败: " + res.statusCode + " " + res.statusMessage);
             exit();
         }
-        //console.log("请求总时长", edTimestamp - stTimestamp);
+        log("请求总时长", edTimestamp - stTimestamp);
 
         if (edTimestamp - stTimestamp <= timeLimit) {
             resTime = res.body.json();
             resTimestamp = Number(resTime.serverTime);
             sigma = edTimestamp - stTimestamp;
             delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
-            //console.log("时延", sigma);
-            //console.log("误差", delta);
+            log("时延", sigma);
+            log("误差", delta);
             break;
         }
         sleep(200);
@@ -98,15 +97,15 @@ function beiJingTime() {
             toast("请求失败: " + res.statusCode + " " + res.statusMessage);
             exit();
         }
-        //console.log("请求总时长", edTimestamp - stTimestamp);
+        log("请求总时长", edTimestamp - stTimestamp);
 
         if (edTimestamp - stTimestamp <= timeLimit) {
             resTime = res.body.string();
             resTimestamp = Number(resTime.replace("0=", ""));
             sigma = edTimestamp - stTimestamp;
             delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
-            //console.log("时延", sigma);
-            //console.log("误差", delta);
+            log("时延", sigma);
+            log("误差", delta);
             break;
         }
         sleep(200);
@@ -130,15 +129,15 @@ function tbTime() {
             toast("请求失败: " + res.statusCode + " " + res.statusMessage);
             exit();
         }
-        //console.log("请求总时长", edTimestamp - stTimestamp);
+        log("请求总时长", edTimestamp - stTimestamp);
 
         if (edTimestamp - stTimestamp <= 200) {
             resTime = res.body.json();
             resTimestamp = Number(resTime.data.t);
             sigma = edTimestamp - stTimestamp;
             delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
-            //console.log("时延", sigma);
-            //console.log("误差", delta);
+            log("时延", sigma);
+            log("误差", delta);
             break;
         }
         sleep(200);

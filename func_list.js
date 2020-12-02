@@ -1,7 +1,7 @@
 function main() {
-    if (device.brand == 'HUAWEI') {
+    if (device.brand == "HUAWEI") {
         mainHuawei();
-    } else if (device.brand == 'xiaomi') {
+    } else if (device.brand == "xiaomi") {
         mainXiaomi();
     }
 }
@@ -9,9 +9,9 @@ function main() {
 // ----------------------通用功能区-----------------------
 // 切换到autojs
 function toAutojs() {
-    while (currentPackage() != getPackageName('Auto.js')) {
-        launchApp('Auto.js');
-        log('启动autoJS');
+    while (currentPackage() != getPackageName("Auto.js")) {
+        launchApp("Auto.js");
+        log("启动autoJS");
         sleep(1200);
     }
 }
@@ -19,17 +19,17 @@ function toAutojs() {
 function cClick(element) {
     if (element != null) {
         click(element.bounds().centerX(), element.bounds().centerY());
-        log('cClick_center');
+        log("cClick_center");
     }
 }
 
 function sClick(element) {
     if (element != null) {
         if (element.click()) {
-            log('sClick');
+            log("sClick");
         } else {
             click(element.bounds().centerX(), element.bounds().centerY());
-            log('sClick_center');
+            log("sClick_center");
         }
         return true;
     }
@@ -37,10 +37,10 @@ function sClick(element) {
 }
 
 function passAd() {
-    sClick(textContains('跳过').findOnce());
-    sClick(descContains('跳过').findOnce());
-    sClick(idContains('lose').findOnce());
-    //sClick(text('放弃转账').findOnce());*/
+    sClick(textContains("跳过").findOnce());
+    sClick(descContains("跳过").findOnce());
+    sClick(idContains("lose").findOnce());
+    //sClick(text("放弃转账").findOnce());*/
 }
 
 
@@ -54,7 +54,7 @@ function toApp(appName) {
 }
 
 function toJdSku(sellId) {
-    // let appName = '京东';
+    // let appName = "京东";
     // while (currentPackage() != getPackageName(appName)) {
     //     launchApp(appName);
     //     sleep(300);
@@ -74,7 +74,7 @@ function toAppMulti(appName, cnt) {
     launchApp(appName);
     if (cnt != 0) {
         // 等待弹窗
-        while (!(text('使用以下方式打开').findOnce() != null || text('请选择要使用的应用').findOnce() != null)) {
+        while (!(text("使用以下方式打开").findOnce() != null || text("请选择要使用的应用").findOnce() != null)) {
             sleep(500);
         }
         sleep(1000);
@@ -96,13 +96,13 @@ function huaweiUnlock() {
             device.wakeUp();
             sleep(800);
         }
-        toastLog('unlock');
+        toastLog("unlock");
         //while (text("紧急呼叫").findOnce() == null) {
-        while (text('紧急呼叫').findOnce() == null) {
+        while (text("紧急呼叫").findOnce() == null) {
             swipe(300, 60, 300, 850, 400);
             sleep(900);
         }
-        toastLog('输入密码');
+        toastLog("输入密码");
         for (var i = 0; i < pwd.length; i++) {
             desc(pwd[i]).findOne().click();
         }
@@ -135,7 +135,7 @@ function lockScr() {
     home();
     sleep(1200);
     while (1) {
-        if (sClick(desc('一键锁屏').findOnce()) || sClick(desc('锁屏').findOnce())) {
+        if (sClick(desc("一键锁屏").findOnce()) || sClick(desc("锁屏").findOnce())) {
             break;
         } else {
             back();
@@ -145,61 +145,61 @@ function lockScr() {
 
 // 手势解锁密码 xy为中心点坐标，offset为滑动区域 两个点之间的距离
 function gesture_pwd(appName) {
-    let pwd = '147895';
-    let execStr = 'gesture(850';
+    let pwd = "147895";
+    let execStr = "gesture(850";
     let pointX, pointY, point;
     let offSet = device.width * 0.25;
     // 增加判断，避免小米手机判断成0的情况
     if (offSet == 0) {
         switch (device.model) {
-            case 'Redmi Note 7':
+            case "Redmi Note 7":
                 offSet = 1080 * 0.25; break;
             default:
                 offSet = 1080 * 0.25; break;
         }
     }
     switch (appName) {
-        case '买单吧':
-            point = id('com.bankcomm.maidanba:id/login_gestureLockView_rl').findOnce();
-            log('买单吧');
+        case "买单吧":
+            point = id("com.bankcomm.maidanba:id/login_gestureLockView_rl").findOnce();
+            log("买单吧");
             break;
-        case '邮储信用卡':
-            point = idContains('com.yitong.mbank.psbc.creditcard:id/view_lock_pattern').findOnce();
-            log('邮储信用卡');
+        case "邮储信用卡":
+            point = idContains("com.yitong.mbank.psbc.creditcard:id/view_lock_pattern").findOnce();
+            log("邮储信用卡");
             break;
-        case '浦大喜奔':
-            point = id('com.spdbccc.app:id/pattern_lock_body_layout').findOnce();
-            log('浦大喜奔');
+        case "浦大喜奔":
+            point = id("com.spdbccc.app:id/pattern_lock_body_layout").findOnce();
+            log("浦大喜奔");
             break;
-        case '浦发银行':
-            point = id('lpv_pattern_loginunlock').findOnce();
-            log('浦发银行');
+        case "浦发银行":
+            point = id("lpv_pattern_loginunlock").findOnce();
+            log("浦发银行");
             break;
-        case '华彩生活':
-            point = id('com.HuaXiaBank.HuaCard:id/gesture_container').findOnce();
-            log('华彩生活');
+        case "华彩生活":
+            point = id("com.HuaXiaBank.HuaCard:id/gesture_container").findOnce();
+            log("华彩生活");
             break;
-        case '招商银行':
-            point = id('cmb.pb:id/vGestureContentView').findOnce();
-            log('招商银行');
+        case "招商银行":
+            point = id("cmb.pb:id/vGestureContentView").findOnce();
+            log("招商银行");
             break;
-        case '邮储银行':
-            point = id('lockPatternLogin').findOnce();
-            log('邮储银行');
+        case "邮储银行":
+            point = id("lockPatternLogin").findOnce();
+            log("邮储银行");
             break;
-        case '中国农业银行':
-            point = (text('切换登录方式').findOne()).parent().parent().parent().child(0);
-            log('中国农业银行');
+        case "中国农业银行":
+            point = (text("切换登录方式").findOne()).parent().parent().parent().child(0);
+            log("中国农业银行");
             break;
     }
     if (point == null) { return false; }
     x = point.bounds().centerX();
     y = point.bounds().centerY();
-    log('x =', x);
-    log('y =', y);
-    log('offSet =', offSet);
+    log("x =", x);
+    log("y =", y);
+    log("offSet =", offSet);
 
-    let arr = pwd.split('');
+    let arr = pwd.split("");
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] == 1) {
             pointX = x - offSet;
@@ -229,12 +229,12 @@ function gesture_pwd(appName) {
             pointX = x + offSet;
             pointY = y + offSet;
         }
-        execStr = execStr + ',[' + pointX + ',' + pointY + ']';
+        execStr = execStr + ",[" + pointX + "," + pointY + "]";
     }
     //gesture(1000, [0, 0], [500, 500], [500, 1000])
-    execStr = execStr + ')';
+    execStr = execStr + ")";
     //log(execStr);
-    engines.execScript('hello', execStr);
+    engines.execScript("hello", execStr);
 }
 
 //生成从minNum到maxNum的随机数
@@ -249,150 +249,169 @@ function randomNum(minNum, maxNum) {
     }
 }
 // -----------通用功能区------------------
-// 判断时间
-function isInTime(targetTime) {
-    let tDate = getToday() + ',' + targetTime;
-    stDate = tDate.split(',');
-    let targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
-    let timeDiff = func.getTimeDiff('a');
-    curTimestamp = new Date().getTime() + timeDiff;
-    // 等待时间
-    while (curTimestamp < targetTimestamp) {
-        curTimestamp = new Date().getTime() + timeDiff;
-    }
-}
 
+var serverDelay = 30;
 // 时间校准 获取时间差函数
 function getTimeDiff(area, targetTime) {
-    //console.show();
-    let i = 10;
-    let cnt = i;
-    let c = 0;
-    //10次取均值
-    while (i--) {
-        switch (area) {
-            case "京东时间":
-                c = c + jdTime();
-                break;
-            case "北京时间":
-                c = c + beiJingTime();
-                break;
-            case "淘宝时间":
-                c = c + tbTime();
-                break;
-        }
+    // 生成今天的时间戳
+    let tDate, stDate, targetTimestamp;
+    tDate = getToday() + "," + targetTime;
+    stDate = tDate.split(",");
+    targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
+    // 获取当前时间戳
+    curTimestamp = new Date().getTime();
+
+    if (targetTimestamp < curTimestamp) {
+        toastLog("目标时间小于当前时间，退出不执行");
+        exit();
     }
-    //console.log('总值：' + c);
-    c = Math.trunc(c / cnt);
-    //console.log('均值：' + c);
-    // while (1) {
-    //     console.log(new Date(new Date().getTime() + c));
-    //     sleep(1000);
-    // }
-    let tDate = getToday() + ',' + targetTime;
-    stDate = tDate.split(',');
-    let targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
-    let timeDiff = func.getTimeDiff('a');
+
+    console.setSize(200, 100);
+    console.show();
+
+    //当剩余时间超过20秒的时候 等待
+    while (targetTimestamp - curTimestamp > 25000) {
+        curTimestamp = new Date().getTime();
+        console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
+        // toastLog("剩余时间:", targetTimestamp - curTimestamp);
+        sleep(1000);
+    }
+
+    let timeDiff;
+    // 获取时间误差
+    switch (area) {
+        case "京东时间":
+            timeDiff = jdTime();
+            break;
+        case "北京时间":
+            timeDiff = beiJingTime();
+            break;
+        case "淘宝时间":
+            timeDiff = tbTime();
+            break;
+        default:
+            timeDiff = beiJingTime();
+            break;
+    }
+
+    let cnt = 0;
     curTimestamp = new Date().getTime() + timeDiff;
     while (curTimestamp < targetTimestamp) {
         curTimestamp = new Date().getTime() + timeDiff;
         sleep(100);
+        cnt = cnt + 1;
+        if (cnt >= 10) {
+            console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
+            cnt = 0;
+        }
     }
-    return 0;
+    console.hide();
+}
+
+function getToday() {
+    var date = new Date();
+    var seperator1 = ",";
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    var strDate = date.getDate();
+    return year + seperator1 + month + seperator1 + strDate;
 }
 
 function jdTime() {
+    log("请求京东时间");
     let res, resTime, resTimestamp, sigma, delta;
     let timeLimit = 400;
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
-        res = http.get('https://a.jd.com//ajax/queryServerData.html');
+        res = http.get("https://a.jd.com//ajax/queryServerData.html");
         edTimestamp = new Date();
 
         if (res.statusCode != 200) {
             toast("请求失败: " + res.statusCode + " " + res.statusMessage);
             exit();
         }
-        //console.log("请求总时长", edTimestamp - stTimestamp);
+        log("请求总时长", edTimestamp - stTimestamp);
 
         if (edTimestamp - stTimestamp <= timeLimit) {
             resTime = res.body.json();
             resTimestamp = Number(resTime.serverTime);
             sigma = edTimestamp - stTimestamp;
             delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
-            //console.log("时延", sigma);
-            //console.log("误差", delta);
+            log("时延", sigma);
+            log("误差", delta);
             break;
         }
-        sleep(200);
+        sleep(800);
     }
 
     //返回时间差
-    return delta + timeLimit / 2;
+    return delta + serverDelay;
 }
 
 // 北京时间
 function beiJingTime() {
+    log("请求北京时间");
     let res, resTime, resTimestamp, sigma, delta;
     let timeLimit = 200;
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
-        res = http.get('http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1');
+        res = http.get("http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1");
         edTimestamp = new Date();
 
         if (res.statusCode != 200) {
             toast("请求失败: " + res.statusCode + " " + res.statusMessage);
             exit();
         }
-        //console.log("请求总时长", edTimestamp - stTimestamp);
+        log("请求总时长", edTimestamp - stTimestamp);
 
         if (edTimestamp - stTimestamp <= timeLimit) {
             resTime = res.body.string();
             resTimestamp = Number(resTime.replace("0=", ""));
             sigma = edTimestamp - stTimestamp;
             delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
-            //console.log("时延", sigma);
-            //console.log("误差", delta);
+            log("时延", sigma);
+            log("误差", delta);
             break;
         }
-        sleep(200);
+        sleep(800);
     }
 
     //返回时间差
-    return delta + timeLimit / 2;
+    return delta + serverDelay;
 }
 
 // 淘宝时间
 function tbTime() {
+    log("请求淘宝时间");
     let res, resTime, resTimestamp, sigma, delta;
     let timeLimit = 200;
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
-        res = http.get('http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp');
+        res = http.get("http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp");
         edTimestamp = new Date();
 
         if (res.statusCode != timeLimit) {
             toast("请求失败: " + res.statusCode + " " + res.statusMessage);
             exit();
         }
-        //console.log("请求总时长", edTimestamp - stTimestamp);
+        log("请求总时长", edTimestamp - stTimestamp);
 
         if (edTimestamp - stTimestamp <= 200) {
             resTime = res.body.json();
             resTimestamp = Number(resTime.data.t);
             sigma = edTimestamp - stTimestamp;
             delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
-            //console.log("时延", sigma);
-            //console.log("误差", delta);
+            log("时延", sigma);
+            log("误差", delta);
             break;
         }
-        sleep(200);
+        sleep(800);
     }
     //返回时间差
-    return delta + timeLimit / 2;
+    return delta + serverDelay;
 }
 
 module.exports = {

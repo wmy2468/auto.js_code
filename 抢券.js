@@ -66,21 +66,17 @@ function isInTime(targetTime) {
 }
 // ------------------------------------------------------
 
-// 等待页面变价
+// 到点点击
 function 每日10点光大天猫() {
     let appName = "阳光惠生活";
+    let startTime = "10,00,00,100";
     launchApp(appName);
     // 等待进入指定页面
     text("【活动编号】23851").findOne();
     toastLog("已到达指定页面，等待");
     //   定位元素
-    while (1) {
-        if (className("android.view.View").text("提醒我").findOnce()) {
-            continue;
-        }
-        break;
-    }
-    func.sClick(className("android.view.View").text("确认购买").findOne())
+    func.getTimeDiff("北京时间", startTime);
+    func.sClick(className("android.view.View").text("确认购买").findOne());
     toastLog("结束");
     sleep(800);
 }
@@ -99,14 +95,24 @@ function 中信9积分() {
     sleep(800);
 }
 
-// 等待页面变价
+// 到点点击
 function 中信365() {
     let appName = "动卡空间";
-    ["必胜客100元代金券", "百果园50元代金券"]
+    let startTime = "11,00,00,100";
+    // 券名称
+    let couDes = ["必胜客100元代金券", "百果园50元代金券"];
+    let couDesIndex = dialogs.select("选择要抢的券：", couDes);
+    if (couDesIndex == -1) {
+        toastLog("未选择元素");
+        exit();
+    }
     launchApp(appName);
     // 等待进入指定页面
     text("适用门店").findOne();
     toastLog("已到达指定页面，等待");
+    func.getTimeDiff("北京时间", startTime);
+    //点击元素
+    func.sClick(className("android.view.View").text(couDes[couDesIndex]).findOne());
     //点击元素
     func.sClick(className("android.widget.Button").text("立即购买").findOne());
     func.sClick(className("android.view.View").text("确认").findOne());
