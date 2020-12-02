@@ -28,12 +28,16 @@ function getTimeDiff(area) {
     let c = 0;
     //10次取均值
     while (i--) {
-        if (area == '京东') {
-            c = c + jdTime();
-            sleep(100);
-        } else {
-            c = c + tbTime();
-            sleep(100);
+        switch (area) {
+            case "京东时间":
+                c = c + jdTime();
+                break;
+            case "北京时间":
+                c = c + beiJingTime();
+                break;
+            case "淘宝时间":
+                c = c + tbTime();
+                break;
         }
     }
     console.log('总值：' + c);
@@ -54,8 +58,9 @@ function jdTime() {
 
     if (res.statusCode != 200) {
         toast("请求失败: " + res.statusCode + " " + res.statusMessage);
-        return 0;
+        exit();
     }
+    console.log(edTimestamp - stTimestamp);
     resTime = res.body.json();
     resTimestamp = Number(resTime.serverTime);
     //返回时间差
@@ -64,17 +69,25 @@ function jdTime() {
 
 // 北京时间
 function beiJingTime() {
-    let res, resTime, resTimestamp;
+    let res, resTime, resTimestamp, cnt = 10;
     // 获取取一次时间耗时
-    stTimestamp = new Date().getTime();
-    res = http.get('http://api.k780.com:88/?app=life.time&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json');
-    edTimestamp = new Date().getTime()
-    if (res.statusCode != 200) {
-        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
-        return 0;
+    while (cnt--) {
+        stTimestamp = new Date().getTime();
+        res = http.get('http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1');
+        edTimestamp = new Date().getTime()
+
+        if (res.statusCode != 200) {
+            toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+            exit();
+        }
+        console.log("时间差", edTimestamp - stTimestamp);
+        if (edTimestamp - stTimestamp <= 50) {
+            break;
+        }
     }
-    resTime = res.body.json();
-    resTimestamp = Number(resTime.result.timestamp);
+
+    resTime = res.body;
+    resTimestamp = Number(resTime.replace("0=", ""));
     //返回时间差
     return (Math.trunc((edTimestamp - stTimestamp) / 2) + resTimestamp) - edTimestamp
 }
@@ -88,7 +101,7 @@ function tbTime() {
     edTimestamp = new Date().getTime()
     if (res.statusCode != 200) {
         toast("请求失败: " + res.statusCode + " " + res.statusMessage);
-        return 0;
+        exit();
     }
     resTime = res.body.json();
     resTimestamp = Number(resTime.data.t);
