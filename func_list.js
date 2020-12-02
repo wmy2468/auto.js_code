@@ -249,58 +249,151 @@ function randomNum(minNum, maxNum) {
     }
 }
 // -----------通用功能区------------------
+// 判断时间
+function isInTime(targetTime) {
+    let tDate = getToday() + ',' + targetTime;
+    stDate = tDate.split(',');
+    let targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
+    let timeDiff = func.getTimeDiff('a');
+    curTimestamp = new Date().getTime() + timeDiff;
+    // 等待时间
+    while (curTimestamp < targetTimestamp) {
+        curTimestamp = new Date().getTime() + timeDiff;
+    }
+}
 
 // 时间校准 获取时间差函数
-function getTimeDiff(area) {
+function getTimeDiff(area, targetTime) {
+    //console.show();
     let i = 10;
     let cnt = i;
     let c = 0;
+    //10次取均值
     while (i--) {
-        if (area == '京东') {
-            c = c + jdTime();
-            sleep(50);
-        } else {
-            c = c + tbTime();
-            sleep(50);
+        switch (area) {
+            case "京东时间":
+                c = c + jdTime();
+                break;
+            case "北京时间":
+                c = c + beiJingTime();
+                break;
+            case "淘宝时间":
+                c = c + tbTime();
+                break;
         }
     }
+    //console.log('总值：' + c);
     c = Math.trunc(c / cnt);
-    toastLog('时间差为：' + c);
-    return c;
+    //console.log('均值：' + c);
+    // while (1) {
+    //     console.log(new Date(new Date().getTime() + c));
+    //     sleep(1000);
+    // }
+    let tDate = getToday() + ',' + targetTime;
+    stDate = tDate.split(',');
+    let targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
+    let timeDiff = func.getTimeDiff('a');
+    curTimestamp = new Date().getTime() + timeDiff;
+    while (curTimestamp < targetTimestamp) {
+        curTimestamp = new Date().getTime() + timeDiff;
+        sleep(100);
+    }
+    return 0;
 }
 
 function jdTime() {
+    let res, resTime, resTimestamp, sigma, delta;
+    let timeLimit = 400;
     // 获取取一次时间耗时
-    stTimestamp = new Date().getTime();
-    let res = http.get('https://a.jd.com//ajax/queryServerData.html');
-    edTimestamp = new Date().getTime()
-    let resTime, resTimestamp;
-    if (res.statusCode != 200) {
-        toastLog("请求失败: " + res.statusCode + " " + res.statusMessage);
-        return 0;
+    while (1) {
+        stTimestamp = new Date();
+        res = http.get('https://a.jd.com//ajax/queryServerData.html');
+        edTimestamp = new Date();
+
+        if (res.statusCode != 200) {
+            toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+            exit();
+        }
+        //console.log("请求总时长", edTimestamp - stTimestamp);
+
+        if (edTimestamp - stTimestamp <= timeLimit) {
+            resTime = res.body.json();
+            resTimestamp = Number(resTime.serverTime);
+            sigma = edTimestamp - stTimestamp;
+            delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
+            //console.log("时延", sigma);
+            //console.log("误差", delta);
+            break;
+        }
+        sleep(200);
     }
-    resTime = res.body.json();
-    resTimestamp = Number(resTime.serverTime);
+
     //返回时间差
-    return (Math.trunc((edTimestamp - stTimestamp) / 2) + resTimestamp) - edTimestamp
+    return delta + timeLimit / 2;
 }
 
-function tbTime() {
+// 北京时间
+function beiJingTime() {
+    let res, resTime, resTimestamp, sigma, delta;
+    let timeLimit = 200;
     // 获取取一次时间耗时
-    stTimestamp = new Date().getTime();
-    let res = http.get('http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp');
-    edTimestamp = new Date().getTime()
-    let resTime, resTimestamp;
-    if (res.statusCode != 200) {
-        toastLog("请求失败: " + res.statusCode + " " + res.statusMessage);
-        return 0;
+    while (1) {
+        stTimestamp = new Date();
+        res = http.get('http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1');
+        edTimestamp = new Date();
+
+        if (res.statusCode != 200) {
+            toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+            exit();
+        }
+        //console.log("请求总时长", edTimestamp - stTimestamp);
+
+        if (edTimestamp - stTimestamp <= timeLimit) {
+            resTime = res.body.string();
+            resTimestamp = Number(resTime.replace("0=", ""));
+            sigma = edTimestamp - stTimestamp;
+            delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
+            //console.log("时延", sigma);
+            //console.log("误差", delta);
+            break;
+        }
+        sleep(200);
     }
-    resTime = res.body.json();
-    resTimestamp = Number(resTime.data.t);
+
     //返回时间差
-    return (Math.trunc((edTimestamp - stTimestamp) / 2) + resTimestamp) - edTimestamp
+    return delta + timeLimit / 2;
 }
-// 时间校准 获取时间差函数
+
+// 淘宝时间
+function tbTime() {
+    let res, resTime, resTimestamp, sigma, delta;
+    let timeLimit = 200;
+    // 获取取一次时间耗时
+    while (1) {
+        stTimestamp = new Date();
+        res = http.get('http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp');
+        edTimestamp = new Date();
+
+        if (res.statusCode != timeLimit) {
+            toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+            exit();
+        }
+        //console.log("请求总时长", edTimestamp - stTimestamp);
+
+        if (edTimestamp - stTimestamp <= 200) {
+            resTime = res.body.json();
+            resTimestamp = Number(resTime.data.t);
+            sigma = edTimestamp - stTimestamp;
+            delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
+            //console.log("时延", sigma);
+            //console.log("误差", delta);
+            break;
+        }
+        sleep(200);
+    }
+    //返回时间差
+    return delta + timeLimit / 2;
+}
 
 module.exports = {
     toAutojs: toAutojs,

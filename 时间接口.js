@@ -11,18 +11,21 @@
     {"success":"1","result":{"timestamp":"1598419956","datetime_1":"2020-08-26 13:32:36","datetime_2":"2020年08月26日 13时32分36秒","week_1":"3","week_2":"星期三","week_3":"周三","week_4":"Wednesday"}}
 */
 
-let selectedArr = [
-    "京东时间",
-    "北京时间",
-    "淘宝时间"
-];
+main();
 
-let selectIndex = dialogs.select("选择时间", selectedArr);
+function main() {
+    let selectedArr = [
+        "京东时间",
+        "北京时间",
+        "淘宝时间"
+    ];
 
-getTimeDiff(selectedArr[selectIndex]);
+    let selectIndex = dialogs.select("选择时间", selectedArr);
+    getTimeDiff(selectedArr[selectIndex]);
+}
 
 function getTimeDiff(area) {
-    console.show();
+    //console.show();
     let i = 10;
     let cnt = i;
     let c = 0;
@@ -40,80 +43,115 @@ function getTimeDiff(area) {
                 break;
         }
     }
-    console.log('总值：' + c);
+    //console.log('总值：' + c);
     c = Math.trunc(c / cnt);
-    console.log('均值：' + c);
-    while (1) {
-        console.log(new Date(new Date().getTime() + c));
-        sleep(1000);
-    }
+    //console.log('均值：' + c);
+    // while (1) {
+    //     console.log(new Date(new Date().getTime() + c));
+    //     sleep(1000);
+    // }
+    return c;
 }
 
 function jdTime() {
-    let res, resTime, resTimestamp, cnt = 10;
+    let res, resTime, resTimestamp, sigma, delta;
+    let timeLimit = 400;
     // 获取取一次时间耗时
-    while (cnt--) {
+    while (1) {
         stTimestamp = new Date();
         res = http.get('https://a.jd.com//ajax/queryServerData.html');
         edTimestamp = new Date();
 
-        console.log("时间差", edTimestamp - stTimestamp);
         if (res.statusCode != 200) {
             toast("请求失败: " + res.statusCode + " " + res.statusMessage);
             exit();
         }
+        //console.log("请求总时长", edTimestamp - stTimestamp);
+
+        if (edTimestamp - stTimestamp <= timeLimit) {
+            resTime = res.body.json();
+            resTimestamp = Number(resTime.serverTime);
+            sigma = edTimestamp - stTimestamp;
+            delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
+            //console.log("时延", sigma);
+            //console.log("误差", delta);
+            break;
+        }
+        sleep(200);
     }
 
-    resTime = res.body.json();
-    resTimestamp = Number(resTime.serverTime);
     //返回时间差
-    return (Math.trunc((edTimestamp - stTimestamp) / 2) + resTimestamp) - edTimestamp
+    return delta;
 }
 
 // 北京时间
 function beiJingTime() {
-    let res, resTime, resTimestamp, cnt = 10;
+    let res, resTime, resTimestamp, sigma, delta;
+    let timeLimit = 200;
     // 获取取一次时间耗时
-    while (cnt--) {
+    while (1) {
         stTimestamp = new Date();
         res = http.get('http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1');
         edTimestamp = new Date();
 
-        console.log("时间差", edTimestamp - stTimestamp);
-
         if (res.statusCode != 200) {
             toast("请求失败: " + res.statusCode + " " + res.statusMessage);
             exit();
         }
+        //console.log("请求总时长", edTimestamp - stTimestamp);
 
-        if (edTimestamp - stTimestamp <= 50) {
+        if (edTimestamp - stTimestamp <= timeLimit) {
+            resTime = res.body.string();
+            resTimestamp = Number(resTime.replace("0=", ""));
+            sigma = edTimestamp - stTimestamp;
+            delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
+            //console.log("时延", sigma);
+            //console.log("误差", delta);
             break;
         }
+        sleep(200);
     }
 
-    resTime = res.body.string();
-    resTimestamp = Number(resTime.replace("0=", ""));
     //返回时间差
-    return (Math.trunc((edTimestamp - stTimestamp) / 2) + resTimestamp) - edTimestamp
+    return delta;
 }
 
 // 淘宝时间
 function tbTime() {
-    let res, resTime, resTimestamp, cnt = 10;
+    let res, resTime, resTimestamp, sigma, delta;
+    let timeLimit = 200;
     // 获取取一次时间耗时
-    while (cnt--) {
+    while (1) {
         stTimestamp = new Date();
         res = http.get('http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp');
         edTimestamp = new Date();
-        console.log("时间差", edTimestamp - stTimestamp);
 
-        if (res.statusCode != 200) {
+        if (res.statusCode != timeLimit) {
             toast("请求失败: " + res.statusCode + " " + res.statusMessage);
             exit();
         }
+        //console.log("请求总时长", edTimestamp - stTimestamp);
+
+        if (edTimestamp - stTimestamp <= 200) {
+            resTime = res.body.json();
+            resTimestamp = Number(resTime.data.t);
+            sigma = edTimestamp - stTimestamp;
+            delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
+            //console.log("时延", sigma);
+            //console.log("误差", delta);
+            break;
+        }
+        sleep(200);
     }
-    resTime = res.body.json();
-    resTimestamp = Number(resTime.data.t);
     //返回时间差
-    return (Math.trunc((edTimestamp - stTimestamp) / 2) + resTimestamp) - edTimestamp
+    return delta;
+}
+
+
+function calGetTime() {
+    let st, ed;
+    st = new Date()
+    new Date()
+    ed = new Date()
+    return ed - st;
 }
