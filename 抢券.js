@@ -4,7 +4,8 @@ var func = require("func_list.js");
 // 123
 var selectedArr = [
     "每日10点光大天猫",
-    "中信9积分"
+    "中信9积分",
+    "中信365"
 ];
 
 //淘宝测试();
@@ -101,6 +102,7 @@ function 中信9积分() {
 // 等待页面变价
 function 中信365() {
     let appName = "动卡空间";
+    ["必胜客100元代金券", "百果园50元代金券"]
     launchApp(appName);
     // 等待进入指定页面
     text("适用门店").findOne();

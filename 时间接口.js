@@ -11,7 +11,15 @@
     {"success":"1","result":{"timestamp":"1598419956","datetime_1":"2020-08-26 13:32:36","datetime_2":"2020年08月26日 13时32分36秒","week_1":"3","week_2":"星期三","week_3":"周三","week_4":"Wednesday"}}
 */
 
-getTimeDiff();
+let selectedArr = [
+    "京东时间",
+    "北京时间",
+    "淘宝时间"
+];
+
+let selectIndex = dialogs.select("选择时间", selectedArr);
+
+getTimeDiff()
 
 function getTimeDiff(area) {
     console.show();
@@ -22,10 +30,10 @@ function getTimeDiff(area) {
     while (i--) {
         if (area == '京东') {
             c = c + jdTime();
-            sleep(50);
+            sleep(100);
         } else {
             c = c + tbTime();
-            sleep(50);
+            sleep(100);
         }
     }
     console.log('总值：' + c);
@@ -38,11 +46,12 @@ function getTimeDiff(area) {
 }
 
 function jdTime() {
+    let res, resTime, resTimestamp;
     // 获取取一次时间耗时
     stTimestamp = new Date().getTime();
-    let res = http.get('https://a.jd.com//ajax/queryServerData.html');
+    res = http.get('https://a.jd.com//ajax/queryServerData.html');
     edTimestamp = new Date().getTime()
-    let resTime, resTimestamp;
+
     if (res.statusCode != 200) {
         toast("请求失败: " + res.statusCode + " " + res.statusMessage);
         return 0;
@@ -53,12 +62,30 @@ function jdTime() {
     return (Math.trunc((edTimestamp - stTimestamp) / 2) + resTimestamp) - edTimestamp
 }
 
-function tbTime() {
+// 北京时间
+function beiJingTime() {
+    let res, resTime, resTimestamp;
     // 获取取一次时间耗时
     stTimestamp = new Date().getTime();
-    let res = http.get('http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp');
+    res = http.get('http://api.k780.com:88/?app=life.time&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json');
     edTimestamp = new Date().getTime()
-    let resTime, resTimestamp;
+    if (res.statusCode != 200) {
+        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+        return 0;
+    }
+    resTime = res.body.json();
+    resTimestamp = Number(resTime.result.timestamp);
+    //返回时间差
+    return (Math.trunc((edTimestamp - stTimestamp) / 2) + resTimestamp) - edTimestamp
+}
+
+// 淘宝时间
+function tbTime() {
+    let res, resTime, resTimestamp;
+    // 获取取一次时间耗时
+    stTimestamp = new Date().getTime();
+    res = http.get('http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp');
+    edTimestamp = new Date().getTime()
     if (res.statusCode != 200) {
         toast("请求失败: " + res.statusCode + " " + res.statusMessage);
         return 0;
