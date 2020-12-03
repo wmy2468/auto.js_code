@@ -251,7 +251,7 @@ function randomNum(minNum, maxNum) {
 // -----------通用功能区------------------
 
 var timeLimit = { "京东时间": 450, "淘宝时间": 410, "北京时间": 300 };
-var serverDelay = { "京东时间": -150, "淘宝时间": 0, "北京时间": 0 };
+var serverDelay = { "京东时间": 0, "淘宝时间": 0, "北京时间": 0 };
 var reqDelay = 300;
 
 // 仅用于测试

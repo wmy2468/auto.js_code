@@ -12,4 +12,5 @@ let selectIndex = dialogs.select(selectedArr);
 if (selectIndex == -1) {
     exit();
 }
+
 func.showTime(func.calTimeDiff(selectedArr[selectIndex]));

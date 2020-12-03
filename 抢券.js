@@ -7,6 +7,7 @@ var selectedArr = [
     "中信9积分",
     "中信365",
     "掌上星巴克",
+    "京东腾讯月",
     "TEST"
 ];
 
@@ -30,6 +31,7 @@ function main() {
 }
 
 function TEST() {
+    let startTime = "";
     images.requestScreenCapture();
     func.getTimeDiff("北京时间", startTime);
     images.captureScreen("/sdcard/Pictures/Screenshots/a.png");
@@ -118,4 +120,29 @@ function 掌上星巴克() {
     func.sClick(className("android.widget.Button").textContains("提交订单").findOne());
     toastLog("结束");
     sleep(800);
+}
+
+// 到点点击
+function 京东腾讯月() {
+    let appName = "京东金融";
+    let startTime = "21,00,00,000";
+    launchApp(appName);
+    // 等待进入指定页面
+    text("每月可领取一项 拼手速 先到先得").findOne();
+    toastLog("已到达指定页面，等待");
+    func.getTimeDiff("京东时间", startTime);
+    //点击元素
+    func.sClick(className("android.widget.TextView").text("刷新").findOne());
+    let tencentVip = className("android.view.View").text("腾讯视频VIP月卡").findOne();
+    // 找到领取按钮
+    let getBtn = tencentVip.parent().child(4).child(0);
+    if (getBtn.text() != "立即领取") {
+        toastLog("已抢完");
+        sleep(1000);
+    } else {
+        getBtn.click();
+        toastLog("结束");
+        sleep(800);
+    }
+
 }
