@@ -250,8 +250,8 @@ function randomNum(minNum, maxNum) {
 }
 // -----------通用功能区------------------
 
-var serverDelay = 30;
-var timeLimit = 410;
+var timeLimit = { "京东时间": 450, "淘宝时间": 410, "北京时间": 300 };
+var serverDelay = { "京东时间": -150, "淘宝时间": 0, "北京时间": 30 };
 var reqDelay = 300;
 // 时间校准 获取时间差函数
 function getTimeDiff(area, targetTime) {
@@ -268,7 +268,7 @@ function getTimeDiff(area, targetTime) {
         exit();
     }
 
-    console.setSize(200, 100);
+    //console.setSize(200, 100);
     console.show();
 
     //当剩余时间超过20秒的时候 等待
@@ -334,7 +334,7 @@ function jdTime() {
         }
         log("请求总时长", edTimestamp - stTimestamp);
 
-        if (edTimestamp - stTimestamp <= timeLimit) {
+        if (edTimestamp - stTimestamp <= timeLimit["京东时间"]) {
             resTime = res.body.json();
             resTimestamp = Number(resTime.serverTime);
             sigma = edTimestamp - stTimestamp;
@@ -347,7 +347,7 @@ function jdTime() {
     }
 
     //返回时间差
-    return delta + serverDelay;
+    return delta + serverDelay["京东时间"];
 }
 
 // 北京时间
@@ -366,7 +366,7 @@ function beiJingTime() {
         }
         log("请求总时长", edTimestamp - stTimestamp);
 
-        if (edTimestamp - stTimestamp <= timeLimit) {
+        if (edTimestamp - stTimestamp <= timeLimit["北京时间"]) {
             resTime = res.body.string();
             resTimestamp = Number(resTime.replace("0=", ""));
             sigma = edTimestamp - stTimestamp;
@@ -379,7 +379,7 @@ function beiJingTime() {
     }
 
     //返回时间差
-    return delta + serverDelay;
+    return delta + serverDelay["北京时间"];
 }
 
 // 淘宝时间
@@ -392,7 +392,7 @@ function tbTime() {
         res = http.get("http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp");
         edTimestamp = new Date();
 
-        if (res.statusCode != timeLimit) {
+        if (res.statusCode != timeLimit["淘宝时间"]) {
             toast("请求失败: " + res.statusCode + " " + res.statusMessage);
             exit();
         }
@@ -410,7 +410,7 @@ function tbTime() {
         sleep(reqDelay);
     }
     //返回时间差
-    return delta + serverDelay;
+    return delta + serverDelay["淘宝时间"];
 }
 
 module.exports = {

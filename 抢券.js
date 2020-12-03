@@ -14,14 +14,18 @@ main();
 
 //---------------配置区域-----------------
 function main() {
+
     let selectIndex = dialogs.select("先打开抢购页面,再启动", selectedArr);
     if (selectIndex == -1) {
         exit();
     }
     let scriptName = selectedArr[selectIndex];
+    // 设置屏幕常亮6分钟
+    device.keepScreenOn(1000 * 60 * 6);
     //engines.execScript(scriptName, (eval(scriptName + "()")));
     eval(scriptName + "()");
     toastLog("结束");
+    device.cancelKeepingAwake();
 }
 
 function TEST() {
