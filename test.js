@@ -1,16 +1,31 @@
+auto.waitFor();
+// 导入模块
 var func = require("func_list.js");
+let area;
+area = "北京时间";
+// area = "京东时间";
+// area = "淘宝时间";
 
-// func.getTimeDiff("北京时间", "22,01,40,000");
-// toastLog("123");
+showTime(func.calTimeDiff(area));
 
-while (1) {
-    var w = floaty.window(
-        <frame gravity="center" bg="#BBFFFF">
-            <text id="text" textColor="#363636">悬浮文字</text>
-        </frame>
-    );
+function showTime(timeDiffer) {
+    let today, h, m, s;
+    console.show();
+    while (1) {
+        today = new Date() + timeDiffer;
+        h = today.getHours();
+        m = checkTime(today.getMinutes());
+        s = checkTime(today.getSeconds());
+        ms = today.getMilliseconds();
+        console.log(h + ":" + m + ":" + s + ":" + ms);
+        sleep(200);
+        console.clear();
+    }
 }
 
-// setTimeout(() => {
-//     w.close();
-// }, 20000);
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}

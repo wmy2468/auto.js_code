@@ -251,8 +251,30 @@ function randomNum(minNum, maxNum) {
 // -----------通用功能区------------------
 
 var timeLimit = { "京东时间": 450, "淘宝时间": 410, "北京时间": 300 };
-var serverDelay = { "京东时间": -150, "淘宝时间": 0, "北京时间": 30 };
+var serverDelay = { "京东时间": -150, "淘宝时间": 0, "北京时间": 0 };
 var reqDelay = 300;
+
+function showTime(timeDiffer) {
+    let today, h, m, s;
+    console.show();
+    while (1) {
+        today = new Date() + timeDiffer;
+        h = today.getHours();
+        m = checkTime(today.getMinutes());
+        s = checkTime(today.getSeconds());
+        ms = today.getMilliseconds();
+        console.log(h + ":" + m + ":" + s + ":" + ms);
+        sleep(200);
+        console.clear();
+    }
+}
+
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
 // 时间校准 获取时间差函数
 function getTimeDiff(area, targetTime) {
     // 生成今天的时间戳
@@ -279,35 +301,41 @@ function getTimeDiff(area, targetTime) {
         sleep(1000);
     }
 
-    let timeDiff;
-    // 获取时间误差
-    switch (area) {
-        case "京东时间":
-            timeDiff = jdTime();
-            break;
-        case "北京时间":
-            timeDiff = beiJingTime();
-            break;
-        case "淘宝时间":
-            timeDiff = tbTime();
-            break;
-        default:
-            timeDiff = beiJingTime();
-            break;
-    }
+    let timeDiff = calTimeDiff(area);
 
     let cnt = 0;
     curTimestamp = new Date().getTime() + timeDiff;
     while (curTimestamp < targetTimestamp) {
         curTimestamp = new Date().getTime() + timeDiff;
-        sleep(100);
+        sleep(10);
         cnt = cnt + 1;
-        if (cnt >= 10) {
+        if (cnt >= 100) {
             console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
             cnt = 0;
         }
     }
     console.hide();
+}
+
+
+function calTimeDiff(area) {
+    let timeDiff;
+    // 获取时间误差
+    switch (area) {
+        case "京东时间":
+            timeDiff = Math.trunc((jdTime() + jdTime()) / 2);
+            break;
+        case "北京时间":
+            timeDiff = Math.trunc((beiJingTime() + beiJingTime()) / 2);
+            break;
+        case "淘宝时间":
+            timeDiff = Math.trunc((tbTime() + tbTime()) / 2);
+            break;
+        default:
+            timeDiff = Math.trunc((beiJingTime() + beiJingTime()) / 2);
+            break;
+    }
+    return timeDiff;
 }
 
 function getToday() {
@@ -426,5 +454,7 @@ module.exports = {
     randomNum: randomNum,
     lockScr: lockScr,
     toJdSku: toJdSku,
-    getTimeDiff: getTimeDiff
+    getTimeDiff: getTimeDiff,
+    calTimeDiff: calTimeDiff,
+    showTime: showTime
 }

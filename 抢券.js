@@ -31,7 +31,6 @@ function main() {
 
 function TEST() {
     images.requestScreenCapture();
-    let startTime = "09,38,00,100";
     func.getTimeDiff("北京时间", startTime);
     images.captureScreen("/sdcard/Pictures/Screenshots/a.png");
 }
