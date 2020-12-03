@@ -5,7 +5,8 @@ var func = require("func_list.js");
 var selectedArr = [
     "每日10点光大天猫",
     "中信9积分",
-    "中信365"
+    "中信365",
+    "TEST"
 ];
 
 //淘宝测试();
@@ -23,26 +24,14 @@ function main() {
     toastLog("结束");
 }
 
-function 模板() {
-    let appName = "交通银行";
-    let targetTime = "12,00,00,000";
-    let clickEle;
-    isInApp(appName);
-    //   定位元素
-    isInTime(targetTime);
-    func.sClick(clickEle);
-    func.sClick(text("确认兑换").findOne());
+function TEST() {
+    images.requestScreenCapture();
+    let startTime = "09,18,00,100";
+    func.getTimeDiff("北京时间", startTime);
+    images.captureScreen();
 }
 
 // ------------------------------------------------------
-function getToday() {
-    var date = new Date();
-    var seperator1 = ",";
-    var year = date.getFullYear();
-    var month = date.getMonth();
-    var strDate = date.getDate();
-    return year + seperator1 + month + seperator1 + strDate;
-}
 
 // 判断是否切换到APP
 function isInApp(appName) {
@@ -51,18 +40,6 @@ function isInApp(appName) {
         log("等待APP加载");
     }
     toastLog("APP已加载");
-}
-// 判断时间
-function isInTime(targetTime) {
-    let tDate = getToday() + "," + targetTime;
-    stDate = tDate.split(",");
-    let targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
-    let timeDiff = func.getTimeDiff("a");
-    curTimestamp = new Date().getTime() + timeDiff;
-    // 等待时间
-    while (curTimestamp < targetTimestamp) {
-        curTimestamp = new Date().getTime() + timeDiff;
-    }
 }
 // ------------------------------------------------------
 
@@ -108,7 +85,7 @@ function 中信365() {
     }
     launchApp(appName);
     // 等待进入指定页面
-    text("适用门店").findOne();
+    className("android.view.View").text(couDes[couDesIndex]).findOne();
     toastLog("已到达指定页面，等待");
     func.getTimeDiff("北京时间", startTime);
     //点击元素
@@ -116,6 +93,25 @@ function 中信365() {
     //点击元素
     func.sClick(className("android.widget.Button").text("立即购买").findOne());
     func.sClick(className("android.view.View").text("确认").findOne());
+    toastLog("结束");
+    sleep(800);
+}
+
+// 到点点击
+function 掌上星巴克() {
+    let appName = "掌上生活";
+    let startTime = "10,00,00,100";
+    let buyBtn;
+    launchApp(appName);
+    // 等待进入指定页面
+    buyBtn = className("android.view.View").text("星巴克大杯馥芮白双杯券").findOne();
+    toastLog("已到达指定页面，等待");
+    func.getTimeDiff("北京时间", startTime);
+    //点击元素
+    func.sClick(buyBtn.parent().child(2));
+    //点击元素
+    func.sClick(className("android.widget.Button").text("确认订单").findOne());
+    func.sClick(className("android.widget.Button").textContains("提交订单").findOne());
     toastLog("结束");
     sleep(800);
 }
