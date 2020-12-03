@@ -251,6 +251,7 @@ function randomNum(minNum, maxNum) {
 // -----------通用功能区------------------
 
 var serverDelay = 30;
+var timeLimit = 400;
 // 时间校准 获取时间差函数
 function getTimeDiff(area, targetTime) {
     // 生成今天的时间戳
@@ -320,7 +321,6 @@ function getToday() {
 function jdTime() {
     log("请求京东时间");
     let res, resTime, resTimestamp, sigma, delta;
-    let timeLimit = 400;
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
@@ -353,7 +353,6 @@ function jdTime() {
 function beiJingTime() {
     log("请求北京时间");
     let res, resTime, resTimestamp, sigma, delta;
-    let timeLimit = 200;
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
@@ -386,7 +385,6 @@ function beiJingTime() {
 function tbTime() {
     log("请求淘宝时间");
     let res, resTime, resTimestamp, sigma, delta;
-    let timeLimit = 200;
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
