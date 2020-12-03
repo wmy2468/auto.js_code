@@ -254,11 +254,12 @@ var timeLimit = { "京东时间": 450, "淘宝时间": 410, "北京时间": 300 
 var serverDelay = { "京东时间": -150, "淘宝时间": 0, "北京时间": 0 };
 var reqDelay = 300;
 
+// 仅用于测试
 function showTime(timeDiffer) {
     let today, h, m, s;
     console.show();
     while (1) {
-        today = new Date() + timeDiffer;
+        today = new Date(new Date().getTime() + timeDiffer);
         h = today.getHours();
         m = checkTime(today.getMinutes());
         s = checkTime(today.getSeconds());
@@ -291,7 +292,7 @@ function getTimeDiff(area, targetTime) {
     }
 
     //console.setSize(200, 100);
-    console.show();
+    //console.show();
 
     //当剩余时间超过20秒的时候 等待
     while (targetTimestamp - curTimestamp > 25000) {
@@ -314,7 +315,7 @@ function getTimeDiff(area, targetTime) {
             cnt = 0;
         }
     }
-    console.hide();
+    //console.hide();
 }
 
 
@@ -323,16 +324,16 @@ function calTimeDiff(area) {
     // 获取时间误差
     switch (area) {
         case "京东时间":
-            timeDiff = Math.trunc((jdTime() + jdTime()) / 2);
+            timeDiff = Math.trunc((jdTime() + jdTime() + jdTime()) / 3);
             break;
         case "北京时间":
-            timeDiff = Math.trunc((beiJingTime() + beiJingTime()) / 2);
+            timeDiff = Math.trunc((beiJingTime() + beiJingTime() + beiJingTime()) / 3);
             break;
         case "淘宝时间":
-            timeDiff = Math.trunc((tbTime() + tbTime()) / 2);
+            timeDiff = Math.trunc((tbTime() + tbTime() + tbTime()) / 3);
             break;
         default:
-            timeDiff = Math.trunc((beiJingTime() + beiJingTime()) / 2);
+            timeDiff = Math.trunc((beiJingTime() + beiJingTime() + beiJingTime()) / 3);
             break;
     }
     return timeDiff;
