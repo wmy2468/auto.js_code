@@ -265,7 +265,7 @@ function showTime(timeDiffer) {
         s = checkTime(today.getSeconds());
         ms = today.getMilliseconds();
         console.log(h + ":" + m + ":" + s + ":" + ms);
-        sleep(200);
+        sleep(100);
         console.clear();
     }
 }
@@ -302,7 +302,7 @@ function getTimeDiff(area, targetTime) {
         sleep(1000);
     }
 
-    let timeDiff = calTimeDiff(area);
+    let timeDiff = calTimeDiffa(area);
 
     let cnt = 0;
     curTimestamp = new Date().getTime() + timeDiff;
