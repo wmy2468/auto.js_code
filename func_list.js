@@ -251,7 +251,8 @@ function randomNum(minNum, maxNum) {
 // -----------通用功能区------------------
 
 var serverDelay = 30;
-var timeLimit = 400;
+var timeLimit = 410;
+var reqDelay = 300;
 // 时间校准 获取时间差函数
 function getTimeDiff(area, targetTime) {
     // 生成今天的时间戳
@@ -342,7 +343,7 @@ function jdTime() {
             log("误差", delta);
             break;
         }
-        sleep(800);
+        sleep(reqDelay);
     }
 
     //返回时间差
@@ -374,7 +375,7 @@ function beiJingTime() {
             log("误差", delta);
             break;
         }
-        sleep(800);
+        sleep(reqDelay);
     }
 
     //返回时间差
@@ -406,7 +407,7 @@ function tbTime() {
             log("误差", delta);
             break;
         }
-        sleep(800);
+        sleep(reqDelay);
     }
     //返回时间差
     return delta + serverDelay;
