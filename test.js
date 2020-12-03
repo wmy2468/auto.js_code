@@ -12,7 +12,7 @@ function showTime(timeDiffer) {
     let today, h, m, s;
     console.show();
     while (1) {
-        today = new Date() + timeDiffer;
+        today = new Date(new Date() + timeDiffer);
         h = today.getHours();
         m = checkTime(today.getMinutes());
         s = checkTime(today.getSeconds());
