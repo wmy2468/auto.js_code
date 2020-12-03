@@ -26,10 +26,10 @@ function main() {
 
 function TEST() {
     images.requestScreenCapture();
-    images.captureScreen("/sdcard/Pictures/Screenshots/");
+    images.captureScreen("/sdcard/Pictures/Screenshots/a.png");
     let startTime = "09,18,00,100";
     func.getTimeDiff("北京时间", startTime);
-    images.captureScreen("/sdcard/Pictures/Screenshots/");
+    images.captureScreen("/sdcard/Pictures/Screenshots/a.png");
 }
 
 // ------------------------------------------------------
