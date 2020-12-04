@@ -53,12 +53,13 @@ function isInApp(appName) {
 function 每日10点光大天猫() {
     let appName = "阳光惠生活";
     let startTime = "10,00,00,100";
+    let timeArea = "北京时间";
     launchApp(appName);
     // 等待进入指定页面
     text("【活动编号】23851").findOne();
     toastLog("已到达指定页面，等待");
     //   定位元素
-    func.getTimeDiff("北京时间", startTime);
+    func.getTimeDiff(timeArea, startTime);
     func.sClick(className("android.view.View").text("确认购买").findOne());
     toastLog("结束");
     sleep(800);
@@ -82,6 +83,7 @@ function 中信9积分() {
 function 中信365() {
     let appName = "动卡空间";
     let startTime = "11,00,00,100";
+    let timeArea = "北京时间";
     // 券名称
     let couDes = ["必胜客100元代金券", "百果园50元代金券"];
     let couDesIndex = dialogs.select("选择要抢的券：", couDes);
@@ -93,7 +95,7 @@ function 中信365() {
     // 等待进入指定页面
     className("android.view.View").text(couDes[couDesIndex]).findOne();
     toastLog("已到达指定页面，等待");
-    func.getTimeDiff("北京时间", startTime);
+    func.getTimeDiff(timeArea, startTime);
     //点击元素
     func.sClick(className("android.view.View").text(couDes[couDesIndex]).findOne());
     //点击元素
@@ -107,12 +109,13 @@ function 中信365() {
 function 掌上星巴克() {
     let appName = "掌上生活";
     let startTime = "10,00,00,100";
+    let timeArea = "北京时间";
     let buyBtn;
     launchApp(appName);
     // 等待进入指定页面
     buyBtn = className("android.view.View").text("星巴克大杯馥芮白双杯券").findOne();
     toastLog("已到达指定页面，等待");
-    func.getTimeDiff("北京时间", startTime);
+    func.getTimeDiff(timeArea, startTime);
     //点击元素
     func.sClick(buyBtn.parent().child(2));
     //点击元素
@@ -122,27 +125,26 @@ function 掌上星巴克() {
     sleep(800);
 }
 
-// 到点点击
+// 等待页面变价
 function 京东腾讯月() {
     let appName = "京东金融";
-    let startTime = "21,00,00,000";
     launchApp(appName);
-    // 等待进入指定页面
-    text("每月可领取一项 拼手速 先到先得").findOne();
-    toastLog("已到达指定页面，等待");
-    func.getTimeDiff("京东时间", startTime);
-    //点击元素
-    func.sClick(className("android.widget.TextView").text("刷新").findOne());
+    // 等待进入指定页面    
     let tencentVip = className("android.view.View").text("腾讯视频VIP月卡").findOne();
-    // 找到领取按钮
-    let getBtn = tencentVip.parent().child(4).child(0);
-    if (getBtn.text() != "立即领取") {
-        toastLog("已抢完");
-        sleep(1000);
-    } else {
-        getBtn.click();
-        toastLog("结束");
-        sleep(800);
+    let getBtn;
+    toastLog("已到达指定页面，等待");
+    while (1) {
+        try {
+            // 找到领取按钮
+            getBtn = tencentVip.parent().child(4).child(0);
+            if (getBtn != null) {
+                getBtn.click();
+                toastLog("结束");
+                sleep(800);
+                break;
+            }
+        } catch (e) {
+            continue;
+        }
     }
-
 }
