@@ -146,7 +146,6 @@ function lockScr() {
 // 手势解锁密码 xy为中心点坐标，offset为滑动区域 两个点之间的距离
 function gesture_pwd(appName) {
     let pwd = "147895";
-    let execStr = "gesture(1000";
     let pointX, pointY, point;
     let offSet = device.width * 0.25;
     // 增加判断，避免小米手机判断成0的情况
@@ -190,6 +189,15 @@ function gesture_pwd(appName) {
         case "中国农业银行":
             point = (text("切换登录方式").findOne()).parent().parent().parent().child(0);
             log("中国农业银行");
+            break;
+    }
+    let execStr;
+    switch (appName) {
+        case "招商银行":
+            execStr = "gesture(1100";
+            break;
+        default:
+            execStr = "gesture(850";
             break;
     }
     if (point == null) { return false; }
