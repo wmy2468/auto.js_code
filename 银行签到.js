@@ -42,7 +42,7 @@ function 中国农业银行() {
             //toastLog("滑动手势");
             sleep(500);
             func.gesture_pwd(appName);
-            sleep(1000);
+            sleep(2000);
         }
     }
     //toastLog("找签到");

@@ -146,7 +146,7 @@ function lockScr() {
 // 手势解锁密码 xy为中心点坐标，offset为滑动区域 两个点之间的距离
 function gesture_pwd(appName) {
     let pwd = "147895";
-    let execStr = "gesture(1100";
+    let execStr = "gesture(1000";
     let pointX, pointY, point;
     let offSet = device.width * 0.25;
     // 增加判断，避免小米手机判断成0的情况
