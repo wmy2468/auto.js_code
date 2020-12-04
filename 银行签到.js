@@ -166,15 +166,17 @@ function jd_sign() {
     }
     sleep(1200);
 
-    let sighBtn1 = id("com.jd.lib.coupon.feature:id/dg").findOnce();
+    let sighBtn1 = id("di").findOnce();
     let signBtn2 = className("TextView").text("立即签到").findOnce();
+    let signBtn3 = className("TextView").text("立即领红包").findOnce();
 
-    if (sighBtn1 == null && signBtn2 == null) {
+    if (sighBtn1 == null && signBtn2 == null && signBtn3 == null) {
         toastLog("今日已领券");
     }
     else {
         func.sClick(sighBtn1);
         func.sClick(signBtn2);
+        func.sClick(signBtn3);
         className("ImageView").desc("关闭弹窗").findOne();
         func.sClick(className("ImageView").desc("关闭弹窗").findOne());
     }
