@@ -10,7 +10,7 @@ function main() {
 
 function mainHuawei() {
     huaweiUnlock();
-    let appName = '苏宁易购';
+    var appName = '苏宁易购';
     ToAutojs();
     toApp(appName, cnt);
     toPackVie();
@@ -21,8 +21,8 @@ function mainHuawei() {
 //小米
 function mainXiaomi() {
     xiaomiUnlock();
-    let cnt = 1;
-    let appName = '苏宁易购';
+    var cnt = 1;
+    var appName = '苏宁易购';
     while (cnt < 3) {
         ToAutojs();
         toApp(appName, cnt);
@@ -58,9 +58,9 @@ function sClick(element) {
 }
 
 function passAd() {
-    let floatAD = id('iv_adclose').findOnce();
-    let shopAD = id('btn_closed').findOnce();
-    let imgAD = id('img_close').findOnce();
+    var floatAD = id('iv_adclose').findOnce();
+    var shopAD = id('btn_closed').findOnce();
+    var imgAD = id('img_close').findOnce();
     /*if (passAD != null) {
         sClick(passAD);
         return 0;
@@ -85,9 +85,9 @@ function passAd() {
 }
 
 function backWay() {
-    let ivBack;
+    var ivBack;
     ivBack = id('iv_back').findOnce();
-    let liveBack = id('snlive_close_btn').findOnce();
+    var liveBack = id('snlive_close_btn').findOnce();
     if (liveBack != null) {
         sClick(liveBack);
         return 0;
@@ -123,7 +123,7 @@ function toApp(appName, cnt) {
 
 
 function huaweiUnlock() {
-    let pwd = "081573" //解锁密码
+    var pwd = "081573" //解锁密码
     if (!device.isScreenOn()) {
         while (!device.isScreenOn()) {
             device.wakeUp();
@@ -143,8 +143,8 @@ function huaweiUnlock() {
 }
 
 function xiaomiUnlock() {
-    let pwd = "081573" //解锁密码
-    let stDelay = 70;
+    var pwd = "081573" //解锁密码
+    var stDelay = 70;
     if (!device.isScreenOn()) {
         while (!device.isScreenOn()) {
             device.wakeUp();
@@ -180,10 +180,10 @@ function lockScr() {
 // 进入红包界面
 function toPackVie() {
 
-    let floating;
+    var floating;
     while (text('天天发现鲸').findOnce() == null) {
         sleep(3000);
-        let mCancelId = "com.suning.mobile.ebuy:id/marketing_cancel_img";
+        var mCancelId = "com.suning.mobile.ebuy:id/marketing_cancel_img";
         sClick(id(mCancelId).findOnce());
         sleep(1000);
         sClick(id('sign_cancel_img').findOnce());
@@ -201,9 +201,9 @@ function toPackVie() {
 }
 // 点击领币，结束
 function cGold() {
-    let goldBar = textContains('/4500').findOne();
-    let x = goldBar.bounds().centerX();
-    let y = goldBar.bounds().top - 25;
+    var goldBar = textContains('/4500').findOne();
+    var x = goldBar.bounds().centerX();
+    var y = goldBar.bounds().top - 25;
     //toastLog(x);
     //toastLog(y);
     while (text('0/4500').findOnce() == null) {

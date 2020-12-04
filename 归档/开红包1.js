@@ -3,13 +3,13 @@ main();
 function main() {
     checkClock();
     unlock();
-    let i = 1;
+    var i = 1;
     //while (i <= 2) {
     toAutojs();
     toWechat(1);            //< ==== 两个文件的区别在这里
     toFavorite();
     openPacket();
-        //i = i + 1;
+    //i = i + 1;
     //}
     home();
     sleep(800);
@@ -36,12 +36,12 @@ function toAutojs() {
 }
 
 //检查闹钟
-function checkClock(){
+function checkClock() {
     sleep(1000);
-    let clock = text('滑动关闭闹铃').findOnce();
+    var clock = text('滑动关闭闹铃').findOnce();
     if (clock != null) {
-        let x1 = clock.bounds().centerX();
-        let y = clock.bounds().centerY();
+        var x1 = clock.bounds().centerX();
+        var y = clock.bounds().centerY();
         x2 = device.width * 0.9;
         while (text('滑动关闭闹铃').findOnce() != null) {
             swipe(x1, y, x2, y, 400);
@@ -53,7 +53,7 @@ function checkClock(){
 //2020-07月版本
 // 4. 点红包
 function openPacket() {
-    let count = 0;
+    var count = 0;
     while (text('中国银行信用卡微信红包').findOnce() == null) {
         sleep(800);
     }
@@ -109,7 +109,7 @@ function toWechat(cnt) {
 
 // 1， 解锁
 function unlock() {
-    let pwd = "081573" //解锁密码
+    var pwd = "081573" //解锁密码
     while (!device.isScreenOn()) {
         device.wakeUp();
         sleep(800);

@@ -1,11 +1,11 @@
-let name = '18107523694';
-let pwd = 'zzc1231';
-let pointText = '泉州';
+var name = '18107523694';
+var pwd = 'zzc1231';
+var pointText = '泉州';
 
 main();
 
 function passAd() {
-    let passAD = textContains('跳过').findOnce();
+    var passAD = textContains('跳过').findOnce();
     if (passAD != null) {
         sClick(passAD);
     }
@@ -29,10 +29,10 @@ function sClick(element) {
 }
 
 function main() {
-    let appName = '虚拟定位精灵';
+    var appName = '虚拟定位精灵';
     ToApp(appName);
     point = textContains(pointText).findOnce();
-    while(point == null) {
+    while (point == null) {
         passAd();
         sleep(1000);
         point = textContains(pointText).findOnce();
@@ -49,12 +49,12 @@ function main() {
     sClick(id('bt_login').findOne());
     sClick(text('招钱进宝').findOne());
     // 等待钱宝加载
-    let myBtn = id('com.example.mposstandard:id/main_tab_my').text('我的').findOne();
+    var myBtn = id('com.example.mposstandard:id/main_tab_my').text('我的').findOne();
     sleep(4000);
     sClick(myBtn);
     text('我的资产').findOne();
     sleep(800);
-    let clickLogin = text('点击登录').findOnce();
+    var clickLogin = text('点击登录').findOnce();
     if (clickLogin == null) {
         alert('当前已登录');
         return 0;
@@ -62,9 +62,9 @@ function main() {
         sClick(clickLogin);
         sleep(500);
     }
-    let loginBtn = id('com.example.mposstandard:id/title_id').text('登 录').findOne();
-    let qbName = '15980998207';
-    let qbPwd = '003451jj';
+    var loginBtn = id('com.example.mposstandard:id/title_id').text('登 录').findOne();
+    var qbName = '15980998207';
+    var qbPwd = '003451jj';
     setText(0, qbName);
     setText(1, qbPwd);
     sleep(800);

@@ -103,7 +103,7 @@ function eleClick(clickP, count) {
 
 // 根据不同位置获取 要点击的元素。
 function getElementText(sText, elementPos, txOrTxC) {
-    let res;
+    var res;
     if (elementPos == 1) {
         if (txOrTxC == 'TEXT') {
             return text(sText).findOnce();
@@ -126,8 +126,8 @@ function getElementText(sText, elementPos, txOrTxC) {
 
 function singleEleClick(element, timeFlag, targetTimestamp) {
     //element 要点击位置的文本，    点击的次数， 如存在多个相同文本的按钮      设置点击第几个文本，默认1 
-    let eleSearchFlag = 1;
-    let clickP, clickCnt, curTimestamp;
+    var eleSearchFlag = 1;
+    var clickP, clickCnt, curTimestamp;
     while (1) {
         if (eleSearchFlag) {
             clickP = getElementText(element[0], element[2], element[3]);
@@ -168,33 +168,33 @@ function getToday() {
 
 //点击函数
 function main() {
-    let selectVal = dic[selected];
+    var selectVal = dic[selected];
     //如果数据在字典中不存在则退出
     //exit();
     device.keepScreenOn(1000 * 60 * 10);              //设置屏幕6分钟常亮
-    let appName = selectVal[0]          // 抢购软件名称
+    var appName = selectVal[0]          // 抢购软件名称
     // 等待APP启动
     while (currentPackage() != getPackageName(appName)) {
         sleep(500);
     }
     toastLog('已打开抢购APP');
     //设置开始抢购的时间
-    let selectValLen = selectVal.length;    // 单个事件的元素个数。
-    let mClickFlag = 0;                     //多个点击元素标记
+    var selectValLen = selectVal.length;    // 单个事件的元素个数。
+    var mClickFlag = 0;                     //多个点击元素标记
     // 如果元素超过3个。则表示有多个元素要点击，赋值为1
     if (selectValLen > 3) {
         mClickFlag = 1;
     }
-    let tDate = getToday() + ',' + selectVal[1];
+    var tDate = getToday() + ',' + selectVal[1];
     stDate = tDate.split(',');
     // 当前日期+时间 转化成时间戳
-    let targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
+    var targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
     //alert(targetTimestamp);
     // 等待点击第一个元素
     singleEleClick(selectVal[2], 1, targetTimestamp);
     // 判断是否有多个元素
     if (mClickFlag) {
-        let startPos = 4;       // 从第4个元素开始点击
+        var startPos = 4;       // 从第4个元素开始点击
         while (startPos <= selectValLen) {
             singleEleClick(selectVal[startPos - 1], 0, 0);
             startPos = startPos + 1;

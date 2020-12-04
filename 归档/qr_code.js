@@ -1,5 +1,5 @@
 // 获取剪贴板
-let clipText = getClip();
+var clipText = getClip();
 // 判断剪贴板内容，如果为空，则退出
 if (clipText == "") {
     exit();
@@ -11,12 +11,12 @@ if (clipText.indexOf("＆") == 0) {
 }
 log(clipText);
 
-let imgPath = files.cwd() + "//qr.png";
+var imgPath = files.cwd() + "//qr.png";
 //toastLog(filepath);
-let picUrl = "http://api.qrserver.com/v1/create-qr-code/?size=900x900&data=" + clipText; 
-//let picUrl = "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png";
-threads.start(function() {
-    let img = null, maxTime = 10;
+var picUrl = "http://api.qrserver.com/v1/create-qr-code/?size=900x900&data=" + clipText;
+//var picUrl = "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png";
+threads.start(function () {
+    var img = null, maxTime = 10;
     while (img == null) {
         maxTime = maxTime - 1;
         img = images.load(picUrl);
@@ -26,7 +26,7 @@ threads.start(function() {
             alert('接口读取失败。退出');
             exit();
         }
-        
+
         sleep(2000);
     }
     images.save(img, imgPath, "png", 100);

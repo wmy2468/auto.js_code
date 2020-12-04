@@ -54,7 +54,7 @@ function dialogs_js() {
         toastLog("为保证脚本正常运行\n请授予本软件悬浮窗权限");
         sleep(2000);
         var test_rawWindow = floaty.rawWindow(
-            <frame gravity="center" bg="#00000000"/>
+            <frame gravity="center" bg="#00000000" />
         );
         test_rawWindow.setSize(-1, -1);
         test_rawWindow.setTouchable(false);
@@ -78,7 +78,7 @@ function dialogs_js() {
         toastLog("为保证脚本正常运行\n请授予本软件悬浮窗权限");
         sleep(2000);
         var test_rawWindow = floaty.rawWindow(
-            <frame gravity="center" bg="#00000000"/>
+            <frame gravity="center" bg="#00000000" />
         );
         test_rawWindow.setSize(-1, -1);
         test_rawWindow.setTouchable(false);
@@ -131,7 +131,7 @@ function dialogs_js() {
         } else {
             var Z = "";
         }
-        let da = dialogs.select(Z + "请选择一个选项", "使用吐司（Toast）", "使用脚本悬浮日志")
+        var da = dialogs.select(Z + "请选择一个选项", "使用吐司（Toast）", "使用脚本悬浮日志")
         if (da == 0) {
             toastLog("您选择了：使用吐司");
             try {
@@ -301,7 +301,7 @@ auto.waitFor();
 toastLog("无障碍权限已开启" + "\n" + "继续运行脚本……");
 if (files.exists("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or日志.txt") == true) {
     try {
-        let z = files.read("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or日志.txt");
+        var z = files.read("/storage/emulated/0/OrangeJs/种豆得豆自动脚本/吐司or日志.txt");
         if (z == "吐司") {
             var T = 0;
         } else if (z == "日志") {
@@ -636,10 +636,10 @@ function DS() {
 //下面是悬浮窗
 var window = floaty.window(
     <frame>
-        <button id="action" text="点击停止脚本" w="120" h="40" bg="#F0EB4336"/>
+        <button id="action" text="点击停止脚本" w="120" h="40" bg="#F0EB4336" />
     </frame>
 );
-setInterval(() => {}, 1000);
+setInterval(() => { }, 1000);
 var execution = null;
 //记录按键被按下时的触摸坐标
 var x = 0,
@@ -648,7 +648,7 @@ var x = 0,
 var windowX, windowY;
 //记录按键被按下的时间以便判断长按等动作
 var downTime;
-window.action.setOnTouchListener(function(view, event) {
+window.action.setOnTouchListener(function (view, event) {
     switch (event.getAction()) {
         case event.ACTION_DOWN:
             x = event.getRawX();
@@ -747,9 +747,9 @@ if (T == 1) {
     var w = floaty.rawWindow(
         <card bg="#80000000">
             <vertical align="center">
-                <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-logoWhite.png" h="30" margin="0 10 0 5"/>//黑色logo
-                <text text="─ 当前脚本运行日志 ─" textSize="15" color="#FFFFFF" textStyle="bold" gravity="center" margin="0 0 0 5"/>
-                <text id="WZ" text="" textSize="15" color="#FFFFFF" marginLeft="10" gravity="left"/>
+                <img src="https://code.aliyun.com/orange_shirt/OrangeJs/raw/master/OrangeJs-logoWhite.png" h="30" margin="0 10 0 5" />//黑色logo
+                <text text="─ 当前脚本运行日志 ─" textSize="15" color="#FFFFFF" textStyle="bold" gravity="center" margin="0 0 0 5" />
+                <text id="WZ" text="" textSize="15" color="#FFFFFF" marginLeft="10" gravity="left" />
             </vertical>
         </card>
     );
@@ -769,7 +769,7 @@ function openInTask() {
                 toastLog("已尝试盲点“种豆得豆”入口按钮");
                 sleep(3000);
             } else {
-                let a = text("种豆得豆").className("android.widget.TextView").findOnce().parent().bounds();
+                var a = text("种豆得豆").className("android.widget.TextView").findOnce().parent().bounds();
                 click(a.centerX(), a.centerY());
                 toastLog("已尝试点击“种豆得豆”入口按钮");
                 sleep(3000);
@@ -816,7 +816,7 @@ function openInTask() {
 
 function DoTask() {
     if (id("com.jingdong.app.mall:id/fd").text("种豆得豆").findOnce() != null && className("android.view.View").text("收京豆啦!").findOnce() != null) {
-        let a = className("android.view.View").text("收京豆啦!").findOnce().bounds();
+        var a = className("android.view.View").text("收京豆啦!").findOnce().bounds();
         click(a.centerX(), a.centerY());
         toastLog("上期种豆得豆已结束，已找到收京豆按钮");
         sleep(2000);
@@ -824,13 +824,13 @@ function DoTask() {
             toastLog(className("android.view.View").text("炫耀一下").findOne().parent().parent().parent().child(0).text());
         }
         if (className("android.widget.Image").text("8Z8Q+pj1G4IqsY3AAAAABJRU5ErkJggg==").findOnce() != null) {
-            let a = className("android.widget.Image").text("8Z8Q+pj1G4IqsY3AAAAABJRU5ErkJggg==").findOnce().bounds();
+            var a = className("android.widget.Image").text("8Z8Q+pj1G4IqsY3AAAAABJRU5ErkJggg==").findOnce().bounds();
             click(a.centerX(), a.centerY());
             toastLog("已尝试关闭“炫耀一下”蒙版")
             sleep(2000);
         }
         if (className("android.widget.Image").text("4DW5io8tUgDqsAAAAASUVORK5CYII=").findOnce() != null) {
-            let a = className("android.widget.Image").text("4DW5io8tUgDqsAAAAASUVORK5CYII=").findOnce().bounds();
+            var a = className("android.widget.Image").text("4DW5io8tUgDqsAAAAASUVORK5CYII=").findOnce().bounds();
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“下期”按钮");
             sleep(2000);
@@ -839,7 +839,7 @@ function DoTask() {
     if (id("com.jingdong.app.mall:id/fd").text("种豆得豆").findOnce() != null && className("android.view.View").text("培养").findOnce() != null) {
         toastLog("已处于主页进入的种豆得豆界面");
         if (className("android.widget.Image").text("Aa7y3g6fgjVZAAAAAElFTkSuQmCC").findOnce() != null) {
-            let a = className("android.widget.Image").text("Aa7y3g6fgjVZAAAAAElFTkSuQmCC").findOnce().bounds();
+            var a = className("android.widget.Image").text("Aa7y3g6fgjVZAAAAAElFTkSuQmCC").findOnce().bounds();
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“收取”按钮");
             sleep(2000);
@@ -847,7 +847,7 @@ function DoTask() {
 
         function Shou() {
             if (className("android.view.View").textContains("可收X").findOnce() != null && className("android.view.View").textContains("可收X").findOnce().parent().childCount() == 2) {
-                let a = className("android.view.View").textContains("可收X").findOnce().parent().child(0).bounds();
+                var a = className("android.view.View").textContains("可收X").findOnce().parent().child(0).bounds();
                 click(a.centerX(), a.centerY());
                 toastLog("已尝试点击“可收取营养液”");
                 sleep(2000);
@@ -861,7 +861,7 @@ function DoTask() {
                 DoTask();
             }
             while (A.parent().child(2).text() != "x0" && className("android.view.View").text("营养液不足，完成下方任务获取").findOnce() == null) {
-                let a = A.parent().child(2).bounds();
+                var a = A.parent().child(2).bounds();
                 click(a.centerX(), a.centerY());
                 toastLog("当前培养液" + A.parent().child(2).text() + "，已尝试点击培养");
                 sleep(2000);
@@ -887,21 +887,21 @@ function DoTask() {
             DoTask();
         }
         if (B != null && B.child(0).child(0).child(0).childCount() == 2 && B.child(0).child(0).child(0).child(1).text() == "x1" || B != null && B.child(0).child(0).child(0).childCount() == 3 && B.child(0).child(0).child(0).child(2).text() == "x1") { //每日签到任务
-            let a = B.child(0).bounds(); //每日签到按钮
+            var a = B.child(0).bounds(); //每日签到按钮
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“每日签到”按钮");
             sleep(3000);
             if (className("android.widget.TextView").text("签到领京豆").findOnce() != null) {
-                let a = className("android.widget.TextView").text("签到领京豆").findOnce().bounds();
+                var a = className("android.widget.TextView").text("签到领京豆").findOnce().bounds();
                 click(a.centerX(), a.centerY());
                 toastLog("已尝试点击“签到领京豆”按钮");
                 sleep(3000);
                 if (className("android.widget.TextView").text("签到成功，").findOnce() != null) {
-                    let d = className("android.widget.TextView").text("签到成功，").findOnce().parent();
+                    var d = className("android.widget.TextView").text("签到成功，").findOnce().parent();
                     toastLog(d.child(0).text() + d.child(1).text() + d.child(2).text()); //成功完成每日签到任务
-                    for (let f = 2; f > 0; f--) {
+                    for (var f = 2; f > 0; f--) {
                         if (className("android.view.ViewGroup").depth(1).findOnce() != null) {
-                            let ba = className("android.view.ViewGroup").depth(1).findOnce().bounds();
+                            var ba = className("android.view.ViewGroup").depth(1).findOnce().bounds();
                             click(ba.centerX(), ba.centerY());
                             toastLog("已尝试点击“返回按钮”");
                             sleep(2000);
@@ -912,9 +912,9 @@ function DoTask() {
                     }
                 } else if (className("android.widget.TextView").text("恭喜您获得连签奖励").findOnce() != null || className("android.widget.TextView").text("种豆瓜分京豆").findOnce() != null && className("android.widget.TextView").text("种豆瓜分京豆").findOnce().parent().className() == "android.view.ViewGroup") {
                     toastLog("今日签到任务已完成，正在返回种豆得豆界面");
-                    for (let f = 2; f > 0; f--) {
+                    for (var f = 2; f > 0; f--) {
                         if (className("android.view.ViewGroup").depth(1).findOnce() != null) {
-                            let ba = className("android.view.ViewGroup").depth(1).findOnce().bounds();
+                            var ba = className("android.view.ViewGroup").depth(1).findOnce().bounds();
                             click(ba.centerX(), ba.centerY());
                             toastLog("已尝试点击“返回按钮”");
                             sleep(2000);
@@ -929,7 +929,7 @@ function DoTask() {
                     sleep(2000);
                 }
             } else if (className("android.widget.TextView").text("已连续签到").findOnce() != null) {
-                let b = className("android.widget.TextView").text("已连续签到").findOne().parent();
+                var b = className("android.widget.TextView").text("已连续签到").findOne().parent();
                 console.warn("若看到此日志，请截图提醒开发者！此处代码不应该运行的哦。");
                 if (b.childCount() != 3) {
                     toastLog("今日已签到，本处代码不应该运行的。");
@@ -937,7 +937,7 @@ function DoTask() {
                     toastLog(b.child(0).text() + b.child(1).text() + b.child(2).text());
                 }
                 if (className("android.view.ViewGroup").depth(1).findOnce() != null) {
-                    let ba = className("android.view.ViewGroup").depth(1).findOnce().bounds();
+                    var ba = className("android.view.ViewGroup").depth(1).findOnce().bounds();
                     click(ba.centerX(), ba.centerY());
                     toastLog("已尝试点击“返回按钮”");
                     sleep(2000);
@@ -968,13 +968,13 @@ function DoTask() {
             DoTask();
         }
         if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce() != null) {
-            let a = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().bounds();
+            var a = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().bounds();
             click(a.centerX(), a.centerY());
             toastLog("发现关注任务的悬浮按钮，已尝试再次点击关闭");
             sleep(2000);
         }
         if (B != null && B.child(1).child(0).child(0).childCount() == 2) { //关注任务
-            let a = B.child(1).bounds(); //关注任务按钮
+            var a = B.child(1).bounds(); //关注任务按钮
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“关注任务”按钮");
             sleep(3000);
@@ -986,9 +986,9 @@ function DoTask() {
                 }
                 if (C.child(0).child(0).child(0).childCount() == 2 && C.child(0).child(0).child(0).child(1).text() == "x1" || C.child(0).child(0).child(0).childCount() == 3 && C.child(0).child(0).child(0).child(2).text() == "x1") { //浏览店铺
                     toastLog("当前浏览店铺：" + C.child(0).child(0).child(0).child(1).text()); //上限
-                    let sx = C.child(0).child(0).child(0).child(1).text();
+                    var sx = C.child(0).child(0).child(0).child(1).text();
                     var limit = sx.replace("每日上限", "");
-                    let m = C.child(0).child(0).child(0).child(0).bounds();
+                    var m = C.child(0).child(0).child(0).child(0).bounds();
                     click(m.centerX(), m.centerY());
                     toastLog("已尝试点击“浏览店铺”按钮");
                     sleep(3000);
@@ -1026,7 +1026,7 @@ function DoTask() {
                                 sleep(3000);
                                 break;
                             } else {
-                                let a = className("android.view.View").text("进店并关注").findOnce(i);
+                                var a = className("android.view.View").text("进店并关注").findOnce(i);
                                 if (a == null) {
                                     toastLog("找不到“进店并关注”按钮，正在重新尝试中……");
                                     openInTask();
@@ -1049,7 +1049,7 @@ function DoTask() {
                                                     za.click();
                                                     toastLog("营养液走丢了～已盲点“继续找营养液”");
                                                 } else {
-                                                    let zb = za.bounds();
+                                                    var zb = za.bounds();
                                                     click(zb.centerX(), zb.centerY());
                                                     toastLog("营养液走丢了～已点击“继续找营养液（" + zb.centerX(), zb.centerY() + "）”");
                                                 }
@@ -1073,7 +1073,7 @@ function DoTask() {
                                                     za.click();
                                                     toastLog("已找到" + zat.text() + "～已盲点“继续找营养液”");
                                                 } else {
-                                                    let zb = za.bounds();
+                                                    var zb = za.bounds();
                                                     click(zb.centerX(), zb.centerY());
                                                     toastLog("已找到" + zat.text() + "～已点击“继续找营养液（" + zb.centerX(), zb.centerY() + "）”");
                                                 }
@@ -1123,13 +1123,13 @@ function DoTask() {
             DoTask();
         }
         if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce() != null) {
-            let a = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().bounds();
+            var a = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().bounds();
             click(a.centerX(), a.centerY());
             toastLog("发现关注任务的悬浮按钮，已尝试再次点击关闭");
             sleep(2000);
         }
         if (B != null && B.child(1).child(0).child(0).childCount() == 2) { //关注任务
-            let a = B.child(1).bounds(); //关注任务按钮
+            var a = B.child(1).bounds(); //关注任务按钮
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“关注任务”按钮");
             sleep(3000);
@@ -1141,9 +1141,9 @@ function DoTask() {
                 }
                 if (C.child(1).child(0).child(0).childCount() == 2 && C.child(1).child(0).child(0).child(1).text() == "x1" || C.child(1).child(0).child(0).childCount() == 3 && C.child(1).child(0).child(0).child(2).text() == "x1") { //挑选商品
                     toastLog("当前挑选商品：" + C.child(1).child(0).child(0).child(1).text()); //上限
-                    let sx = C.child(1).child(0).child(0).child(1).text();
+                    var sx = C.child(1).child(0).child(0).child(1).text();
                     var limit = sx.replace("每日上限", "");
-                    let m = C.child(1).child(0).child(0).child(0).bounds();
+                    var m = C.child(1).child(0).child(0).child(0).bounds();
                     click(m.centerX(), m.centerY());
                     toastLog("已尝试点击“挑选商品”按钮");
                     sleep(3000);
@@ -1160,7 +1160,7 @@ function DoTask() {
                             break;
                         }
                         var str = C.child(1).text(); // N/总数
-                        let x = str.search("/");
+                        var x = str.search("/");
                         var ALL = null;
                         for (var a = str.length; a > 0; a--) {
                             if (a == x) {
@@ -1199,7 +1199,7 @@ function DoTask() {
                                 toastLog("已尝试按顺序滑动至第" + i + "个卡片");
                                 sleep(2000);
                             } else {
-                                let d = C.child(0).child(0).child(2).child(0).child(0).child(0).child(4).child(0).child(0).bounds();
+                                var d = C.child(0).child(0).child(2).child(0).child(0).child(0).child(4).child(0).child(0).bounds();
                                 click(d.centerX(), d.centerY());
                                 toastLog("已尝试点击“选ta并关注”按钮");
                                 if (className("android.view.View").text("关注成功，获得1瓶营养液").findOne(3000) != null) {
@@ -1251,13 +1251,13 @@ function DoTask() {
             DoTask();
         }
         if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce() != null) {
-            let a = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().bounds();
+            var a = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().bounds();
             click(a.centerX(), a.centerY());
             toastLog("发现关注任务的悬浮按钮，已尝试再次点击关闭");
             sleep(2000);
         }
         if (B != null && B.child(1).child(0).child(0).childCount() == 2) { //关注任务
-            let a = B.child(1).bounds(); //关注任务按钮
+            var a = B.child(1).bounds(); //关注任务按钮
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击“关注任务”按钮");
             sleep(3000);
@@ -1269,9 +1269,9 @@ function DoTask() {
                 }
                 if (C.child(2).child(0).child(0).childCount() == 2 && C.child(2).child(0).child(0).child(1).text() == "x1" || C.child(2).child(0).child(0).childCount() == 3 && C.child(2).child(0).child(0).child(2).text() == "x1") { //关注频道
                     toastLog("当前关注频道：" + C.child(2).child(0).child(0).child(1).text()); //上限
-                    let sx = C.child(2).child(0).child(0).child(1).text();
+                    var sx = C.child(2).child(0).child(0).child(1).text();
                     var limit = sx.replace("每日上限", "");
-                    let m = C.child(2).child(0).child(0).child(0).bounds();
+                    var m = C.child(2).child(0).child(0).child(0).bounds();
                     click(m.centerX(), m.centerY());
                     toastLog("已尝试点击“关注频道”按钮");
                     sleep(3000);
@@ -1309,7 +1309,7 @@ function DoTask() {
                                 sleep(3000);
                                 break;
                             } else {
-                                let a = className("android.view.View").text("进入并关注").findOnce(i);
+                                var a = className("android.view.View").text("进入并关注").findOnce(i);
                                 if (a == null) {
                                     toastLog("找不到“进入并关注”按钮，正在重新尝试中……");
                                     openInTask();
@@ -1322,7 +1322,7 @@ function DoTask() {
                                         toastLog("恭喜获得1瓶营养液");
                                         over++;
                                     }
-                                    for (let a = 5; a > 0; a--) {
+                                    for (var a = 5; a > 0; a--) {
                                         toastLog("正在等待活动加载，剩余" + a + "秒……");
                                         sleep(2000);
                                     }
@@ -1346,7 +1346,7 @@ function DoTask() {
                                         toastLog("恭喜获得1瓶营养液");
                                         over++;
                                     }
-                                    for (let a = 5; a > 0; a--) {
+                                    for (var a = 5; a > 0; a--) {
                                         toastLog("正在等待活动加载，剩余" + a + "秒……");
                                         sleep(2500);
                                     }
@@ -1389,7 +1389,7 @@ function DoTask() {
         DoTask();
     }
     if (className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce() != null) {
-        let a = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().bounds();
+        var a = className("android.widget.Image").text("EQTnuMAAAAASUVORK5CYII=").findOnce().bounds();
         click(a.centerX(), a.centerY());
         toastLog("发现关注任务的悬浮按钮，已尝试再次点击关闭");
         sleep(2000);
@@ -1404,11 +1404,11 @@ function DoTask() {
         DoTask();
     }
     if (B != null && B.child(3).child(0).child(0).childCount() == 2 && B.child(3).child(0).child(0).child(1).text() == "x1" || B != null && B.child(3).child(0).child(0).childCount() == 3 && B.child(3).child(0).child(0).child(2).text() == "x1") { //逛逛会场任务
-        let a = B.child(3).bounds(); //逛逛会场按钮
+        var a = B.child(3).bounds(); //逛逛会场按钮
         click(a.centerX(), a.centerY());
         toastLog("已尝试点击“逛逛会场”按钮");
         if (className("android.widget.Image").text("53lRFGmtboD5P17e27NNUN5iAAAAAElFTkSuQmCC").findOne(3000) != null) {
-            let a = className("android.widget.Image").text("53lRFGmtboD5P17e27NNUN5iAAAAAElFTkSuQmCC").findOnce().bounds();
+            var a = className("android.widget.Image").text("53lRFGmtboD5P17e27NNUN5iAAAAAElFTkSuQmCC").findOnce().bounds();
             click(a.centerX(), a.centerY());
             toastLog("已尝试点击蒙版“逛逛会场”按钮");
             sleep(2000);
@@ -1445,7 +1445,7 @@ function DoTask() {
         DoTask();
     }
     if (B.child(4) != null) {
-        let a = B.child(4).bounds(); //更多任务按钮
+        var a = B.child(4).bounds(); //更多任务按钮
         click(a.centerX(), a.centerY());
         toastLog("已尝试点击“更多任务”按钮");
         sleep(2000);
@@ -1462,11 +1462,11 @@ function DoTask() {
             DoTask();
         }
         if (b != null && b.child(0).child(0).child(0).childCount() == 2 && b.child(0).child(0).child(0).child(1).text() == "x1" || b != null && b.child(0).child(0).child(0).childCount() == 3 && b.child(0).child(0).child(0).child(2).text() == "x1") {
-            let c = b.child(0).bounds(); //金融双签
+            var c = b.child(0).bounds(); //金融双签
             click(c.centerX(), c.centerY());
             toastLog("已尝试点击“金融双签”按钮");
             sleep(2000);
-            for (let w = 10; w > 0; w--) {
+            for (var w = 10; w > 0; w--) {
                 toastLog("正在等待“金融双签”加载，剩余" + w + "秒……");
                 sleep(1000);
             }
@@ -1495,7 +1495,7 @@ function DoTask() {
         DoTask();
     }
     if (className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce() != null) {
-        let v = className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().bounds();
+        var v = className("android.widget.Image").text("YSQ7wR+wHq088KUgADXA0kgqiXVZzkpOXp3mMuy4waYlSIFHAiEDjlZIoim5vUKBkZ9q8iF7zkDEapiHhX5BrWYKWuqiWOzWluZm2T9Hw5B8zQFuQb2AAAAAElFTkSuQmCC").findOnce().bounds();
         click(v.centerX(), v.centerY());
         toastLog("已发现悬浮的“更多任务”按钮，并已点击关闭");
         sleep(2000);

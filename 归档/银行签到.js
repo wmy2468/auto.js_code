@@ -31,12 +31,12 @@ function ToApp(appName) {
 
 // 买单吧
 function 买单吧() {
-    let appName = '买单吧';
+    var appName = '买单吧';
     ToAutojs();
     //closeApp(appName);
     ToApp(appName);
     while (className('TextView').id('tv_title').text('我的').findOnce() == null) {
-        let passAD = className('TextView').text('跳过').findOnce();
+        var passAD = className('TextView').text('跳过').findOnce();
         if (passAD != null) {
             center_click(passAD);
         }
@@ -64,12 +64,12 @@ function 买单吧() {
 
 // 浦发
 function 浦发信用卡() {
-    let appName = '浦大喜奔';
+    var appName = '浦大喜奔';
     //closeApp(appName);
     ToAutojs();
     ToApp(appName);
     while (text('我的').findOnce() == null) {
-        let passAD = className('TextView').text('跳过').findOnce();
+        var passAD = className('TextView').text('跳过').findOnce();
         if (passAD != null) {
             center_click(passAD);
         }
@@ -95,7 +95,7 @@ function 浦发信用卡() {
     sleep(1000);
     if (text('今天').findOnce().parent().child(1).text() == '待签到') {
         // 立即签到按钮
-        let signNow;
+        var signNow;
         if (text('周一').find().length == 1) {
             signNow = text('周二').find()[1];
         } else {
@@ -109,16 +109,16 @@ function 浦发信用卡() {
 
 // 邮储信用卡
 function 邮储信用卡() {
-    let appName = '邮储信用卡';
+    var appName = '邮储信用卡';
     ToAutojs();
     //closeApp(appName);
     ToApp(appName);
     while (className('TextView').id('tv_title').text('我的').findOnce() == null) {
-        let passAD = className('TextView').textContains('跳过').findOnce();
+        var passAD = className('TextView').textContains('跳过').findOnce();
         if (passAD != null) {
             center_click(passAD);
         }
-        let Continue = className('TextView').text('继续使用').findOnce();
+        var Continue = className('TextView').text('继续使用').findOnce();
         if (Continue != null) {
             center_click(Continue);
         }
@@ -149,12 +149,12 @@ function 邮储信用卡() {
 
 // 云闪付
 function 云闪付() {
-    let appName = '云闪付';
+    var appName = '云闪付';
     //closeApp(appName);
     ToAutojs();
     ToApp(appName);
     while (className('TextView').text('我 的').findOnce() == null) {
-        let passAD = className('TextView').textContains('跳过').findOnce();
+        var passAD = className('TextView').textContains('跳过').findOnce();
         if (passAD != null) {
             center_click(passAD);
         }
@@ -179,12 +179,12 @@ function 云闪付() {
 }
 
 function 手机淘宝() {
-    let appName = '手机淘宝';
+    var appName = '手机淘宝';
     //closeApp(appName);
     ToAutojs();
     ToApp(appName);
     while (className('TextView').text('领淘金币').findOnce() == null) {
-        let passAD = className('TextView').textContains('跳过').findOnce();
+        var passAD = className('TextView').textContains('跳过').findOnce();
         if (passAD != null) {
             center_click(passAD);
         }
@@ -206,19 +206,19 @@ function 手机淘宝() {
 }
 
 function 苏宁易购() {
-    let appName = '苏宁易购';
+    var appName = '苏宁易购';
     //closeApp(appName);
     ToAutojs();
     ToApp(appName);
     while (className('TextView').text('首页').findOnce() == null) {
-        let passAD = textContains('跳过').findOnce();
+        var passAD = textContains('跳过').findOnce();
         if (passAD != null) {
             center_click(passAD);
         }
         sleep(1000);
     }
     sleep(2000);
-    let cancelBtn = id('com.suning.mobile.ebuy:id/marketing_cancel_img').findOnce();
+    var cancelBtn = id('com.suning.mobile.ebuy:id/marketing_cancel_img').findOnce();
     if (cancelBtn != null) {
         cancelBtn.click();
     }
@@ -251,9 +251,9 @@ function center_click(element) {
 
 // xy为中心点坐标，offset为滑动区域 两个点之间的距离
 function gesture_pwd(appName) {
-    let execStr = 'gesture(850';
-    let pointX, pointY, point;
-    let offSet = device.width * 0.25;
+    var execStr = 'gesture(850';
+    var pointX, pointY, point;
+    var offSet = device.width * 0.25;
     switch (appName) {
         case '买单吧':
             point = id('com.bankcomm.maidanba:id/login_gestureLockView_rl').findOnce();
@@ -271,9 +271,9 @@ function gesture_pwd(appName) {
     if (point == null) { return false; }
     x = point.bounds().centerX();
     y = point.bounds().centerY();
-    let pwd = '147895';
-    let arr = pwd.split('');
-    for (let i = 0; i < arr.length; i++) {
+    var pwd = '147895';
+    var arr = pwd.split('');
+    for (var i = 0; i < arr.length; i++) {
         if (arr[i] == 1) {
             pointX = x - offSet;
             pointY = y - offSet;
@@ -312,10 +312,10 @@ function gesture_pwd(appName) {
 
 
 function closeApp(appName) {
-    let packageName = app.getPackageName(appName);
+    var packageName = app.getPackageName(appName);
     app.openAppSetting(packageName);
     text(app.getAppName(packageName)).waitFor();
-    let is_sure = textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).findOne();
+    var is_sure = textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).findOne();
     if (is_sure.enabled()) {
         sleep(1000);
         textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).findOne().click();

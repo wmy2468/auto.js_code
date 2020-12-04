@@ -17,11 +17,11 @@ main();
 //---------------配置区域-----------------
 function main() {
 
-    let selectIndex = dialogs.select("先打开抢购页面,再启动", selectedArr);
+    var selectIndex = dialogs.select("先打开抢购页面,再启动", selectedArr);
     if (selectIndex == -1) {
         exit();
     }
-    let scriptName = selectedArr[selectIndex];
+    var scriptName = selectedArr[selectIndex];
     // 设置屏幕常亮6分钟
     device.keepScreenOn(1000 * 60 * 6);
     //engines.execScript(scriptName, (eval(scriptName + "()")));
@@ -31,7 +31,7 @@ function main() {
 }
 
 function TEST() {
-    let startTime = "";
+    var startTime = "";
     images.requestScreenCapture();
     func.getTimeDiff("北京时间", startTime);
     images.captureScreen("/sdcard/Pictures/Screenshots/a.png");
@@ -51,9 +51,9 @@ function isInApp(appName) {
 
 // 到点点击
 function 每日10点光大天猫() {
-    let appName = "阳光惠生活";
-    let startTime = "10,00,00,100";
-    let timeArea = "北京时间";
+    var appName = "阳光惠生活";
+    var startTime = "10,00,00,100";
+    var timeArea = "北京时间";
     launchApp(appName);
     // 等待进入指定页面
     text("【活动编号】23851").findOne();
@@ -67,7 +67,7 @@ function 每日10点光大天猫() {
 
 // 等待页面变价
 function 中信9积分() {
-    let appName = "动卡空间";
+    var appName = "动卡空间";
     launchApp(appName);
     // 等待进入指定页面
     text("价格: 1个权益+9个积分").findOne();
@@ -81,12 +81,12 @@ function 中信9积分() {
 
 // 到点点击
 function 中信365() {
-    let appName = "动卡空间";
-    let startTime = "11,00,00,100";
-    let timeArea = "北京时间";
+    var appName = "动卡空间";
+    var startTime = "11,00,00,100";
+    var timeArea = "北京时间";
     // 券名称
-    let couDes = ["必胜客100元代金券", "百果园50元代金券"];
-    let couDesIndex = dialogs.select("选择要抢的券：", couDes);
+    var couDes = ["必胜客100元代金券", "百果园50元代金券"];
+    var couDesIndex = dialogs.select("选择要抢的券：", couDes);
     if (couDesIndex == -1) {
         toastLog("未选择元素");
         exit();
@@ -107,10 +107,10 @@ function 中信365() {
 
 // 到点点击
 function 掌上星巴克() {
-    let appName = "掌上生活";
-    let startTime = "10,00,00,100";
-    let timeArea = "北京时间";
-    let buyBtn;
+    var appName = "掌上生活";
+    var startTime = "10,00,00,100";
+    var timeArea = "北京时间";
+    var buyBtn;
     launchApp(appName);
     // 等待进入指定页面
     buyBtn = className("android.view.View").text("星巴克大杯馥芮白双杯券").findOne();
@@ -127,11 +127,11 @@ function 掌上星巴克() {
 
 // 等待页面变价
 function 京东腾讯月() {
-    let appName = "京东金融";
+    var appName = "京东金融";
     launchApp(appName);
     // 等待进入指定页面    
-    let tencentVip = className("android.view.View").text("腾讯视频VIP月卡").findOne();
-    let getBtn;
+    var tencentVip = className("android.view.View").text("腾讯视频VIP月卡").findOne();
+    var getBtn;
     toastLog("已到达指定页面，等待");
     while (1) {
         try {

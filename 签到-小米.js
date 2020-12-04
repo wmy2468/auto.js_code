@@ -7,7 +7,7 @@ main();
 function main() {
     func.xiaomiUnlock();
     招商银行();
-    let i = 1;
+    var i = 1;
     while (i < 3) {
         func.toAppMulti("京东", i);
         jd_sign();
@@ -27,7 +27,7 @@ function jd_sign() {
         func.sClick(textContains('取消').findOnce());
         func.sClick(descContains('取消').findOnce());
     }
-    let getBeans = className('TextView').text('领京豆').findOne();
+    var getBeans = className('TextView').text('领京豆').findOne();
     func.sClick(getBeans.parent());
     //等待进店领豆加载
     className('TextView').text('进店领豆').findOne();
@@ -46,11 +46,11 @@ function jd_sign() {
         back();
         sleep(3000);
     }
-    let getCon = text('领券').findOne();
+    var getCon = text('领券').findOne();
     func.sClick(getCon.parent());
 
     while (className('ImageView').desc('领券中心').findOnce() == null) {
-        let closeBtn = id('com.jd.lib.coupon.feature:id/db').findOnce();
+        var closeBtn = id('com.jd.lib.coupon.feature:id/db').findOnce();
         if (closeBtn != null) {
             func.sClick(closeBtn.parent().child(1));
         }
@@ -58,9 +58,9 @@ function jd_sign() {
     }
     sleep(1200);
 
-    let sighBtn1 = id("di").findOnce();
-    let signBtn2 = className("TextView").text("立即签到").findOnce();
-    let signBtn3 = className("TextView").text("立即领红包").findOnce();
+    var sighBtn1 = id("di").findOnce();
+    var signBtn2 = className("TextView").text("立即签到").findOnce();
+    var signBtn3 = className("TextView").text("立即领红包").findOnce();
 
     if (sighBtn1 == null && signBtn2 == null && signBtn3 == null) {
         toastLog("今日已领券");
@@ -82,7 +82,7 @@ function jd_sign() {
 }
 
 function 招商银行() {
-    let appName = '招商银行';
+    var appName = '招商银行';
     setClip('＆https://t.cmbchina.com/RZV7f2＆');
     sleep(600);
     func.toApp(appName);
@@ -97,7 +97,7 @@ function 招商银行() {
         }
     }
     sleep(2000);
-    let monday = text('周一').findOne();
+    var monday = text('周一').findOne();
     func.sClick(monday.parent().parent().parent().child(3));
     text('医保电子凭证').findOne();
     sleep(1200);

@@ -15,20 +15,20 @@ main();
 
 //---------------配置区域-----------------
 function main() {
-    let selectIndex = dialogs.select('先打开抢购页面,再启动', selectedArr);
+    var selectIndex = dialogs.select('先打开抢购页面,再启动', selectedArr);
     if (selectIndex == -1) {
         exit();
     }
-    let scriptName = selectedArr[selectIndex];
+    var scriptName = selectedArr[selectIndex];
     //engines.execScript(scriptName, (eval(scriptName + '()')));
     eval(scriptName + '()');
     toastLog('结束');
 }
 
 function 模板() {
-    let appName = '交通银行';
-    let targetTime = '12,00,00,000';
-    let clickEle;
+    var appName = '交通银行';
+    var targetTime = '12,00,00,000';
+    var clickEle;
     isInApp(appName);
     //   定位元素
     isInTime(targetTime);
@@ -58,10 +58,10 @@ function isInApp(appName) {
 }
 // 判断时间
 function isInTime(targetTime) {
-    let tDate = getToday() + ',' + targetTime;
+    var tDate = getToday() + ',' + targetTime;
     stDate = tDate.split(',');
-    let targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
-    let timeDiff = func.getTimeDiff('a');
+    var targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
+    var timeDiff = func.getTimeDiff('a');
     curTimestamp = new Date().getTime() + timeDiff;
     // 等待时间
     while (curTimestamp < targetTimestamp) {
@@ -72,9 +72,9 @@ function isInTime(targetTime) {
 
 
 function 淘宝测试() {
-    let appName = '手机淘宝';
-    let targetTime = '21,46,23,100';
-    let elements;
+    var appName = '手机淘宝';
+    var targetTime = '21,46,23,100';
+    var elements;
     isInApp(appName);
     //   定位元素
     while (1) {
@@ -91,9 +91,9 @@ function 淘宝测试() {
 
 // 等待页面变价
 function 交行贴金() {
-    let appName = '交通银行';
-    let targetTime = '12,00,00,100';
-    let elements, clickEle;
+    var appName = '交通银行';
+    var targetTime = '12,00,00,100';
+    var elements, clickEle;
     isInApp(appName);
     //   定位元素
     while (1) {
@@ -101,7 +101,7 @@ function 交行贴金() {
         if (elements.empty()) {
             continue;
         }
-        let cnt = 0;
+        var cnt = 0;
         while (1) {
             if (elements[cnt].parent().parent().child(1).text == '满10元可用') {
                 clickEle = elements[cnt];
@@ -122,9 +122,9 @@ function 交行贴金() {
 
 // 跳转页面提交订单
 function 天猫茅台() {
-    let appName = '手机淘宝';
-    let targetTime = '20,00,00,100';
-    let elements;
+    var appName = '手机淘宝';
+    var targetTime = '20,00,00,100';
+    var elements;
     isInApp(appName);
     //   定位元素
     while (1) {
@@ -143,9 +143,9 @@ function 天猫茅台() {
 
 // 准点进页面
 function 中行赞卡微信() {
-    let appName = '微信';
-    let targetTime = '10,00,00,100';
-    let elements;
+    var appName = '微信';
+    var targetTime = '10,00,00,100';
+    var elements;
     isInApp(appName);
     //   定位元素
     while (1) {
@@ -166,9 +166,9 @@ function 中行赞卡微信() {
 
 // 准点进页面
 function 中行赞卡缤纷() {
-    let appName = '缤纷生活';
-    let targetTime = '10,00,00,100';
-    let elements;
+    var appName = '缤纷生活';
+    var targetTime = '10,00,00,100';
+    var elements;
     isInApp(appName);
     //   定位元素
     while (1) {

@@ -22,7 +22,7 @@ function main() {
 // ======================签到代码==================================
 // 农行小豆
 function 中国农业银行() {
-    let appName = "中国农业银行";
+    var appName = "中国农业银行";
     //closeApp(appName);
     func.toApp(appName);
     lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
@@ -58,7 +58,7 @@ function 中国农业银行() {
 
 // 邮储银行
 function 邮储银行() {
-    let appName = "邮储银行";
+    var appName = "邮储银行";
     //closeApp(appName);
     func.toApp(appName);
     while (className("RadioButton").text("我的").findOnce() == null) {
@@ -89,7 +89,7 @@ function 邮储银行() {
 
 // 浦发金豆签到
 function 浦发银行() {
-    let appName = "浦发银行";
+    var appName = "浦发银行";
     //closeApp(appName);
     func.toApp(appName);
     while (text("首页").findOnce() == null) {
@@ -135,7 +135,7 @@ function jd_sign() {
         func.sClick(descContains("取消").findOnce());
         sleep(1500);
     }
-    let getBeans = className("TextView").text("领京豆").findOne();
+    var getBeans = className("TextView").text("领京豆").findOne();
     func.sClick(getBeans.parent());
     //等待进店领豆加载
     className("TextView").text("进店领豆").findOne();
@@ -154,11 +154,11 @@ function jd_sign() {
         back();
         sleep(2000);
     }
-    let getCon = text("领券").findOne();
+    var getCon = text("领券").findOne();
     func.sClick(getCon.parent());
 
     while (className("ImageView").desc("领券中心").findOnce() == null) {
-        let closeBtn = id("com.jd.lib.coupon.feature:id/db").findOnce();
+        var closeBtn = id("com.jd.lib.coupon.feature:id/db").findOnce();
         if (closeBtn != null) {
             func.sClick(closeBtn.parent().child(1));
         }
@@ -166,9 +166,9 @@ function jd_sign() {
     }
     sleep(1200);
 
-    let sighBtn1 = id("di").findOnce();
-    let signBtn2 = className("TextView").text("立即签到").findOnce();
-    let signBtn3 = className("TextView").text("立即领红包").findOnce();
+    var sighBtn1 = id("di").findOnce();
+    var signBtn2 = className("TextView").text("立即签到").findOnce();
+    var signBtn3 = className("TextView").text("立即领红包").findOnce();
 
     if (sighBtn1 == null && signBtn2 == null && signBtn3 == null) {
         toastLog("今日已领券");
@@ -191,7 +191,7 @@ function jd_sign() {
 
 // 买单吧
 function 买单吧() {
-    let appName = "买单吧";
+    var appName = "买单吧";
     //closeApp(appName);
     func.toApp(appName);
     while (className("TextView").id("tv_title").text("我的").findOnce() == null) {
@@ -225,7 +225,7 @@ function 买单吧() {
 
 // 浦发
 function 浦发信用卡() {
-    let appName = "浦大喜奔";
+    var appName = "浦大喜奔";
     //closeApp(appName);
     func.toApp(appName);
     while (text("我的").findOnce() == null) {
@@ -248,7 +248,7 @@ function 浦发信用卡() {
     // 等待签到页面加载
     text("每日签到").findOne();
     sleep(1000);
-    let waitSign = text("待签到").findOne();
+    var waitSign = text("待签到").findOne();
     sleep(1000);
     func.sClick(waitSign.parent().parent().parent().parent().child(4));
     toastLog(appName + "已签到");
@@ -257,11 +257,11 @@ function 浦发信用卡() {
 
 // 邮储信用卡
 function 邮储信用卡() {
-    let appName = "邮储信用卡";
+    var appName = "邮储信用卡";
     func.toApp(appName);
     while (text("我的").findOnce() == null) {
         func.passAd();
-        let Continue = className("TextView").text("继续使用").findOnce();
+        var Continue = className("TextView").text("继续使用").findOnce();
         if (Continue != null) {
             func.sClick(Continue);
         }
@@ -269,7 +269,7 @@ function 邮储信用卡() {
     sleep(800);
     func.sClick(className("TextView").text("精选").findOne());
     // 等待我的页面加载
-    let myBill = text("热门活动").findOne();
+    var myBill = text("热门活动").findOne();
     sleep(800);
     func.sClick(myBill.parent().parent().child(7));
     while (text("今日已签到").findOnce() == null) {
@@ -287,7 +287,7 @@ function 邮储信用卡() {
 
 // 华彩生活
 function 华彩生活() {
-    let appName = "华彩生活";
+    var appName = "华彩生活";
     //closeApp(appName);
     func.toApp(appName);
     while (text("我的").findOnce() == null) {
@@ -321,7 +321,7 @@ function 华彩生活() {
 
 // 云闪付
 function 云闪付() {
-    let appName = "云闪付";
+    var appName = "云闪付";
     //closeApp(appName);
     func.toApp(appName);
     while (className("TextView").text("我 的").findOnce() == null) {
@@ -339,7 +339,7 @@ function 云闪付() {
         /*
         if (text("去抽奖").findOnce() != null) {
             func.sClick(text("去抽奖").findOnce());
-            let area, areaP;
+            var area, areaP;
             while (1) {
                 try {
                     area = id("com.unionpay:id/tv_title").text("签到抽奖专区").findOnce();
@@ -360,7 +360,7 @@ function 云闪付() {
 }
 
 function 工银e生活() {
-    let appName = "工银e生活";
+    var appName = "工银e生活";
     //closeApp(appName);
     func.toApp(appName);
     while (id("radio_button1").text("生活").findOnce() == null) {
@@ -388,7 +388,7 @@ function 工银e生活() {
 }
 
 function 招商银行() {
-    let appName = "招商银行";
+    var appName = "招商银行";
     setClip("＆https://t.cmbchina.com/RZV7f2＆");
     sleep(600);
     func.toApp(appName);
@@ -403,7 +403,7 @@ function 招商银行() {
         }
     }
     sleep(2000);
-    let monday = text("周一").findOne();
+    var monday = text("周一").findOne();
     func.sClick(monday.parent().parent().parent().child(3));
     text("医保电子凭证").findOne();
     sleep(1200);
@@ -415,9 +415,9 @@ function 招商银行() {
 }
 
 function 什么值得买() {
-    let appName = "什么值得买";
+    var appName = "什么值得买";
     func.toApp(appName);
-    let signBtn = null;
+    var signBtn = null;
     while (signBtn == null) {
         signBtn = id("tv_login_sign").findOnce();
         func.sClick(id("tab_usercenter").text("我的").findOnce());

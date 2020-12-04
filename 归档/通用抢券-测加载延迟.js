@@ -32,7 +32,7 @@ function eleClick(clickP) {
 
 // 根据不同位置获取 要点击的元素。
 function getElementText(sText, elementPos, txOrTxC) {
-    let res;
+    var res;
     if (elementPos == 1) {
         if (txOrTxC == 'TEXT') {
             return text(sText).findOnce();
@@ -57,24 +57,24 @@ function getElementText(sText, elementPos, txOrTxC) {
 
 //点击函数
 function main() {
-    let selectVal = dic;
+    var selectVal = dic;
     //如果数据在字典中不存在则退出
     //exit();
-    let appName = selectVal[0]          // 抢购软件名称
+    var appName = selectVal[0]          // 抢购软件名称
     launchApp(appName);
     // 等待APP启动
     while (currentPackage() != getPackageName(appName)) {
         sleep(500);
     }
     toastLog('已打开抢购APP');
-    let _1stTime = 0, _2ndTime = 0, loadTime = 0;
-    let ele1, ele1find, ele2, cnt = 2;
+    var _1stTime = 0, _2ndTime = 0, loadTime = 0;
+    var ele1, ele1find, ele2, cnt = 2;
     if (selectVal.length > 3) {
         ele1 = selectVal[cnt];
         while (1) {
-            let ele1st = new Date().getTime();
+            var ele1st = new Date().getTime();
             if (getElementText(ele1[0], ele1[2], ele1[3]) != null) {
-                let ele1ed = new Date().getTime();
+                var ele1ed = new Date().getTime();
                 _1stTime = ele1ed - ele1st;
                 ele1find = getElementText(ele1[0], ele1[2], ele1[3]);
                 break;
@@ -84,17 +84,17 @@ function main() {
         ele2 = selectVal[cnt + 1];
         loadst = new Date().getTime();
         while (1) {
-            let ele2st = new Date().getTime();
+            var ele2st = new Date().getTime();
             if (getElementText(ele2[0], ele2[2], ele2[3]) != null) {
-                let ele2ed = new Date().getTime();
+                var ele2ed = new Date().getTime();
                 _2ndTime = ele2ed - ele2st;
                 break;
             }
         }
-        let loaded = new Date().getTime();
+        var loaded = new Date().getTime();
         loadTime = loaded - loadst - _2ndTime;
     }
-    
+
     alert("元素1 查找时间:" + _1stTime + "ms\n" + "元素2 查找时间:" + _2ndTime + "ms\n" + "页面加载时间:" + loadTime + "ms\n");
     //device.cancelKeepingAwake();
 }

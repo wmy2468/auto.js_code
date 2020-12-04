@@ -15,7 +15,7 @@ var devBrand = device.brand;
 main();
 
 function main() {
-	let kouLing = '28.0复制整段话 Https:/JYDWNoVro4qHi1【全民在线营业啦，帮我助力，11.11一起来分京东10亿】￥N2Jae9a23b%→打开（京つ東】';
+	var kouLing = '28.0复制整段话 Https:/JYDWNoVro4qHi1【全民在线营业啦，帮我助力，11.11一起来分京东10亿】￥N2Jae9a23b%→打开（京つ東】';
 	setClip(kouLing);
 	sleep(1000);
 	log("正在打开");
@@ -50,7 +50,7 @@ function process() {
 	func.sClick(className("TextView").text("立即查看").findOne());
 
 	// 助力关闭按钮
-	let closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne();
+	var closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne();
 	sleep(3000);
 	if (textContains('为TA助力').findOnce() != null || textContains('您今天的助力次数已用完').findOnce() != null) {
 		log('为TA助力不为空')
@@ -61,7 +61,7 @@ function process() {
 	}
 
 	//等待完全加载后，如果出现取消按钮会找不到
-	let lottery, iKnow;
+	var lottery, iKnow;
 	while (!(text('领金币').findOnce() != null && (text('我知道了').findOnce() == null) && text('立即抽奖').findOnce() == null)) {
 		iKnow = text('我知道了').findOnce();
 		if (iKnow != null) {
@@ -102,8 +102,8 @@ function 营业版图() {
 	log('营业版图已加载');
 	sleep(800);
 	// 检查营业版图是否完成一个是查结尾，一个查中间
-	let view2 = (text('热爱城').findOne()).parent().parent();
-	let view2Cnt = view2.childCount() - 1;
+	var view2 = (text('热爱城').findOne()).parent().parent();
+	var view2Cnt = view2.childCount() - 1;
 	func.sClick(view2.child(view2Cnt));
 	text('签到得最高500金币').findOne();
 	sleep(1500);
@@ -113,9 +113,9 @@ function 营业版图() {
 		return 0;
 	} else {
 		back_way();
-		let view2 = (text('热爱城').findOne()).parent().parent();
+		var view2 = (text('热爱城').findOne()).parent().parent();
 		// 取中间的检查
-		let view2Cnt = Math.floor(view2.childCount() / 2);
+		var view2Cnt = Math.floor(view2.childCount() / 2);
 		func.sClick(view2.child(view2Cnt));
 		text('签到得最高500金币').findOne();
 		sleep(1500);
@@ -135,8 +135,8 @@ function 营业版图() {
 
 function 营业1(i) {
 	log('开始第一组');
-	let view1 = (text('北京').findOne()).parent().parent();
-	let view1Cnt = view1.childCount();
+	var view1 = (text('北京').findOne()).parent().parent();
+	var view1Cnt = view1.childCount();
 	while (i <= (view1Cnt - 1)) {
 		toastLog('当前正在完成第 ' + i + '个，共' + (view1Cnt - 1) + '个，城市：' + view1.child(i).child(2).text());
 		func.sClick(view1.child(i));
@@ -166,12 +166,12 @@ function 营业2(i) {
 }
 
 function 营业版图_去完成() {
-	let index = 0, cnt = 0;
+	var index = 0, cnt = 0;
 	while (textContains('去完成').exists()) {
 		unComplete = text('去完成').find();
 		toastLog('去完成剩余 = ' + unComplete.length);
 		if (unComplete.nonEmpty()) {
-			let goUnComplete = unComplete[index];
+			var goUnComplete = unComplete[index];
 			/*if (unComplete[index].parent().child([goUnComplete.indexInParent() - 2]).text() == '去逛真五折秘籍清单(0/1)') {
 				break;
 			}*/
@@ -209,7 +209,7 @@ function 开宝箱() {
 	text('寻宝箱 领金币').findOne();
 	sleep(3000);
 	i = 0;
-	let boxlist, boxLen;
+	var boxlist, boxLen;
 	var myList = new Array();
 	boxlist = getBoxList();
 	while (true) {
@@ -239,10 +239,10 @@ function 每日任务() {
 
 	func.sClick(text('签到').findOnce());
 	log('签到');
-	let indexText, detailText;
-	let index = 3;
+	var indexText, detailText;
+	var index = 3;
 	while (textContains('去完成').exists()) {
-		let nextStep, nextStepDetail;
+		var nextStep, nextStepDetail;
 		nextStepDetail = '';
 		unComplete = text('去完成').find();
 		//toastLog(unComplete.length);
@@ -287,7 +287,7 @@ function waitLog(cnt, textDetail) {
 }
 
 function after_click(textStr, details) {
-	let gold001Parent, cnt, gold000, gold001 = 1;
+	var gold001Parent, cnt, gold000, gold001 = 1;
 	switch (textStr) {
 		case '等待8秒':
 			cnt = 1;
@@ -381,7 +381,7 @@ function after_click(textStr, details) {
 // 浏览5个商品
 function view_list() {
 	i = 0;
-	let findDoller;
+	var findDoller;
 	while (text('已完成').findOnce() == null) {
 		textContains('¥').findOne();
 		//点击商品加购物车按钮
@@ -418,7 +418,7 @@ function member_card() {
 //加购5个商品
 function add_cart() {
 	i = 0;
-	let findDoller;
+	var findDoller;
 	textContains('当前页任意加购5个商品').findOne();
 	while (text('已完成').findOnce() == null) {
 		if (i >= 4) {
@@ -446,7 +446,7 @@ function add_cart() {
 
 function back_way() {
 	sleep(800);
-	let backBtn = desc('返回').findOnce();
+	var backBtn = desc('返回').findOnce();
 	if (backBtn == null) {
 		back();
 	} else {

@@ -91,9 +91,9 @@ function isInApp(appName) {
 }
 // 判断时间
 function isInTime(targetTime) {
-    let tDate = getToday() + ',' + targetTime;
+    var tDate = getToday() + ',' + targetTime;
     stDate = tDate.split(',');
-    let targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
+    var targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
     curTimestamp = new Date().getTime();
     // 等待时间
     while (curTimestamp < targetTimestamp) {
@@ -102,9 +102,9 @@ function isInTime(targetTime) {
 }
 
 function 交行贴金() {
-    let appName = '交通银行';
-    let targetTime = '12,00,00,000';
-    let elements, clickEle;
+    var appName = '交通银行';
+    var targetTime = '12,00,00,000';
+    var elements, clickEle;
     isInApp(appName);
     //   定位元素
     while (1) {
@@ -112,7 +112,7 @@ function 交行贴金() {
         if (elements.empty()) {
             continue;
         }
-        let cnt = 0;
+        var cnt = 0;
         while (1) {
             if (elements[cnt].parent().parent().child(1).text == '满5元可用') {
                 clickEle = elements[cnt];

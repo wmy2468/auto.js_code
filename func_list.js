@@ -54,7 +54,7 @@ function toApp(appName) {
 }
 
 function toJdSku(sellId) {
-    // let appName = "京东";
+    // var appName = "京东";
     // while (currentPackage() != getPackageName(appName)) {
     //     launchApp(appName);
     //     sleep(300);
@@ -90,7 +90,7 @@ function toAppMulti(appName, cnt) {
 
 
 function huaweiUnlock() {
-    let pwd = "081573" //解锁密码
+    var pwd = "081573" //解锁密码
     if (!device.isScreenOn()) {
         while (!device.isScreenOn()) {
             device.wakeUp();
@@ -110,8 +110,8 @@ function huaweiUnlock() {
 }
 
 function xiaomiUnlock() {
-    let pwd = "081573" //解锁密码
-    let stDelay = 90;
+    var pwd = "081573" //解锁密码
+    var stDelay = 90;
     if (!device.isScreenOn()) {
         while (!device.isScreenOn()) {
             device.wakeUp();
@@ -145,9 +145,9 @@ function lockScr() {
 
 // 手势解锁密码 xy为中心点坐标，offset为滑动区域 两个点之间的距离
 function gesture_pwd(appName) {
-    let pwd = "147895";
-    let pointX, pointY, point;
-    let offSet = device.width * 0.25;
+    var pwd = "147895";
+    var pointX, pointY, point;
+    var offSet = device.width * 0.25;
     // 增加判断，避免小米手机判断成0的情况
     if (offSet == 0) {
         switch (device.model) {
@@ -191,7 +191,7 @@ function gesture_pwd(appName) {
             log("中国农业银行");
             break;
     }
-    let execStr;
+    var execStr;
     switch (appName) {
         case "招商银行":
             execStr = "gesture(1100";
@@ -207,8 +207,8 @@ function gesture_pwd(appName) {
     log("y =", y);
     log("offSet =", offSet);
 
-    let arr = pwd.split("");
-    for (let i = 0; i < arr.length; i++) {
+    var arr = pwd.split("");
+    for (var i = 0; i < arr.length; i++) {
         if (arr[i] == 1) {
             pointX = x - offSet;
             pointY = y - offSet;
@@ -258,13 +258,14 @@ function randomNum(minNum, maxNum) {
 }
 // -----------通用功能区------------------
 
-var timeLimit = { "京东时间": 450, "淘宝时间": 410, "北京时间": 300 };
-var serverDelay = { "京东时间": 0, "淘宝时间": 0, "北京时间": 0 };
+var timeLimit = { "京东时间": 800, "淘宝时间": 800, "北京时间": 500, "苏宁时间": 800 };
+var serverDelay = { "京东时间": 0, "淘宝时间": 0, "北京时间": 0, "苏宁时间": 0 };
+// 每次请求之间的延迟
 var reqDelay = 300;
 
 // 仅用于测试
 function showTime(timeDiffer) {
-    let today, h, m, s;
+    var today, h, m, s;
     console.show();
     while (1) {
         today = new Date(new Date().getTime() + timeDiffer);
@@ -287,7 +288,7 @@ function checkTime(i) {
 // 时间校准 获取时间差函数
 function getTimeDiff(area, targetTime) {
     // 生成今天的时间戳
-    let tDate, stDate, targetTimestamp;
+    var tDate, stDate, targetTimestamp;
     tDate = getToday() + "," + targetTime;
     stDate = tDate.split(",");
     targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
@@ -310,9 +311,9 @@ function getTimeDiff(area, targetTime) {
         sleep(1000);
     }
 
-    let timeDiff = calTimeDiffa(area);
+    var timeDiff = calTimeDiffa(area);
 
-    let cnt = 0;
+    var cnt = 0;
     curTimestamp = new Date().getTime() + timeDiff;
     while (curTimestamp < targetTimestamp) {
         curTimestamp = new Date().getTime() + timeDiff;
@@ -328,7 +329,7 @@ function getTimeDiff(area, targetTime) {
 
 
 function calTimeDiff(area) {
-    let timeDiff;
+    var timeDiff;
     // 获取时间误差
     switch (area) {
         case "京东时间":
@@ -339,6 +340,9 @@ function calTimeDiff(area) {
             break;
         case "淘宝时间":
             timeDiff = Math.trunc((tbTime() + tbTime() + tbTime()) / 3);
+            break;
+        case "苏宁时间":
+            timeDiff = Math.trunc((snTime() + snTime() + snTime()) / 3);
             break;
         default:
             timeDiff = Math.trunc((beiJingTime() + beiJingTime() + beiJingTime()) / 3);
@@ -357,8 +361,9 @@ function getToday() {
 }
 
 function jdTime() {
-    log("请求京东时间");
-    let res, resTime, resTimestamp, sigma, delta;
+    var res, resTime, resTimestamp, sigma, delta;
+    var timeArea = "京东时间";
+    log("请求", timeArea);
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
@@ -371,7 +376,7 @@ function jdTime() {
         }
         log("请求总时长", edTimestamp - stTimestamp);
 
-        if (edTimestamp - stTimestamp <= timeLimit["京东时间"]) {
+        if (edTimestamp - stTimestamp <= timeLimit[timeArea]) {
             resTime = res.body.json();
             resTimestamp = Number(resTime.serverTime);
             sigma = edTimestamp - stTimestamp;
@@ -384,13 +389,14 @@ function jdTime() {
     }
 
     //返回时间差
-    return delta + serverDelay["京东时间"];
+    return delta + serverDelay[timeArea];
 }
 
 // 北京时间
 function beiJingTime() {
-    log("请求北京时间");
-    let res, resTime, resTimestamp, sigma, delta;
+    var res, resTime, resTimestamp, sigma, delta;
+    var timeArea = "北京时间";
+    log("请求", timeArea);
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
@@ -403,7 +409,7 @@ function beiJingTime() {
         }
         log("请求总时长", edTimestamp - stTimestamp);
 
-        if (edTimestamp - stTimestamp <= timeLimit["北京时间"]) {
+        if (edTimestamp - stTimestamp <= timeLimit[timeArea]) {
             resTime = res.body.string();
             resTimestamp = Number(resTime.replace("0=", ""));
             sigma = edTimestamp - stTimestamp;
@@ -416,26 +422,27 @@ function beiJingTime() {
     }
 
     //返回时间差
-    return delta + serverDelay["北京时间"];
+    return delta + serverDelay[timeArea];
 }
 
 // 淘宝时间
 function tbTime() {
     log("请求淘宝时间");
-    let res, resTime, resTimestamp, sigma, delta;
+    var res, resTime, resTimestamp, sigma, delta;
+    var timeArea = "淘宝时间";
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
         res = http.get("http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp");
         edTimestamp = new Date();
 
-        if (res.statusCode != timeLimit["淘宝时间"]) {
+        if (res.statusCode != 200) {
             toast("请求失败: " + res.statusCode + " " + res.statusMessage);
             exit();
         }
         log("请求总时长", edTimestamp - stTimestamp);
 
-        if (edTimestamp - stTimestamp <= 200) {
+        if (edTimestamp - stTimestamp <= timeLimit[timeArea]) {
             resTime = res.body.json();
             resTimestamp = Number(resTime.data.t);
             sigma = edTimestamp - stTimestamp;
@@ -447,7 +454,39 @@ function tbTime() {
         sleep(reqDelay);
     }
     //返回时间差
-    return delta + serverDelay["淘宝时间"];
+    return delta + serverDelay[timeArea];
+}
+
+// 苏宁时间
+function snTime() {
+    var res, resTime, resTimestamp, sigma, delta;
+    var timeArea = "苏宁时间";
+    log("请求", timeArea);
+    // 获取取一次时间耗时
+    while (1) {
+        stTimestamp = new Date();
+        res = http.get("https://f.m.suning.com/api/ct.do");
+        edTimestamp = new Date();
+
+        if (res.statusCode != 200) {
+            toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+            exit();
+        }
+        log("请求总时长", edTimestamp - stTimestamp);
+
+        if (edTimestamp - stTimestamp <= timeLimit[timeArea]) {
+            resTime = res.body.json();
+            resTimestamp = Number(resTime.currentTime);
+            sigma = edTimestamp - stTimestamp;
+            delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
+            log("时延", sigma);
+            log("误差", delta);
+            break;
+        }
+        sleep(reqDelay);
+    }
+    //返回时间差
+    return delta + serverDelay[timeArea];
 }
 
 module.exports = {

@@ -4,36 +4,36 @@ function find_child_item(type, val, clsName) {
     if (clsName == undefined || clsName == '') {
         clsName = 'android.widget.TextView';
     }
-    let target = null;
-    switch (type){
+    var target = null;
+    switch (type) {
         case 'text':
             if (text(val).findOnce() != null) {
-            text(val).findOnce().children().forEach(
-                child => {target = child.findOne(className(clsName));});
+                text(val).findOnce().children().forEach(
+                    child => { target = child.findOne(className(clsName)); });
             }
             break;
         case 'id':
             if (id(val).findOnce() != null) {
                 id(val).findOnce().children().forEach(
-                child => {target = child.findOne(className(clsName));});
+                    child => { target = child.findOne(className(clsName)); });
             }
             break;
     }
-    if (target != null) {return target;}
-    else {return false;}
+    if (target != null) { return target; }
+    else { return false; }
 }
 
-function wait_load_click (type, val, clsName) {
-    let po = wait_item_load(type, val, clsName);
+function wait_load_click(type, val, clsName) {
+    var po = wait_item_load(type, val, clsName);
     item_click(po);
 }
 // 判断元素是否加载
-function item_is_load (type, val, clsName) {
+function item_is_load(type, val, clsName) {
     // 设置classname 默认值
     if (clsName == undefined || clsName == '') {
         clsName = 'android.widget.TextView';
     }
-    let target;
+    var target;
     switch (type) {
         case 'text':
             target = text(val).className(clsName).findOnce();
@@ -45,28 +45,28 @@ function item_is_load (type, val, clsName) {
             target = desc(val).className(clsName).findOnce();
             break;
         case 'text+id':
-            let text_id = val.split('+');
-            let text_val = text_id[0];
-            let id_val = text_id[1];
+            var text_id = val.split('+');
+            var text_val = text_id[0];
+            var id_val = text_id[1];
             target = text(text_val).id(id_val).className(clsName).findOnce();
             break;
     }
     if (target != null) {
         log(type + '--' + val + '--已加载');
         return target;
-    } 
+    }
     else {
         log(type + '--' + val + '--未加载');
         return false;
     }
 }
 // 等待元素加载
-function wait_item_load (type, val, clsName) {
+function wait_item_load(type, val, clsName) {
     // 设置classname 默认值
     if (clsName == undefined || clsName == '') {
         clsName = 'android.widget.TextView';
     }
-    let target;
+    var target;
     switch (type) {
         case 'text':
             target = text(val).className(clsName).findOne();
@@ -78,9 +78,9 @@ function wait_item_load (type, val, clsName) {
             target = desc(val).className(clsName).findOne();
             break;
         case 'text+id':
-            let text_id = val.split('+');
-            let text_val = text_id[0];
-            let id_val = text_id[1];
+            var text_id = val.split('+');
+            var text_val = text_id[0];
+            var id_val = text_id[1];
             target = text(text_val).id(id_val).className(clsName).findOne();
             break;
     }
@@ -88,7 +88,7 @@ function wait_item_load (type, val, clsName) {
     return target;
 }
 // 点击元素
-function item_click (po) {
+function item_click(po) {
     if (po == null) {
         log('输入点为null 无法点击');
         return;
@@ -105,12 +105,12 @@ function item_click (po) {
     }
 }
 // 判断是否启动app
-function run_app (pkg) {
+function run_app(pkg) {
     while (true) {
         if (currentPackage() != pkg) {
             log(pkg + '--未打开，执行打开...');
             app.launch(pkg)
-            //let apps = getAppName(pkg);
+            //var apps = getAppName(pkg);
             //app.launchApp(apps);
             sleep(4000);
         } else {
@@ -120,11 +120,11 @@ function run_app (pkg) {
 }
 
 function act_is_load(act) {
-    if (currentActivity() === act) {return true;}
-    else {return false;}
+    if (currentActivity() === act) { return true; }
+    else { return false; }
 }
 
-function go_back (){
+function go_back() {
     back();
     sleep(1000);
 }
@@ -137,15 +137,15 @@ function go_home() {
 }
 
 module.exports = {
-    go_home:go_home,
-    wait_load_click:wait_load_click,
-    item_is_load:item_is_load,
-    wait_item_load:wait_item_load,
-    item_click:item_click,
-    run_app:run_app,
-    go_back:go_back,
-    act_is_load:act_is_load,
-    find_child_item:find_child_item
+    go_home: go_home,
+    wait_load_click: wait_load_click,
+    item_is_load: item_is_load,
+    wait_item_load: wait_item_load,
+    item_click: item_click,
+    run_app: run_app,
+    go_back: go_back,
+    act_is_load: act_is_load,
+    find_child_item: find_child_item
 }
 
 //例子

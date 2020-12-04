@@ -12,16 +12,16 @@ function main() {
 
 
 function managers() {
-    let i;
+    var i;
     id('com.jingdong.app.mall:id/bci').text('立即查看').findOne().click();
     //等待加载
     text('为他加人气 >').findOne()
     sleep(2500);
     //1. 找各个店长
-    let managerPNG = className('Image').textContains('.png').findOnce();
-    let managerJPG = className('Image').textContains('.jpg').findOnce();
+    var managerPNG = className('Image').textContains('.png').findOnce();
+    var managerJPG = className('Image').textContains('.jpg').findOnce();
     //有找到元素才执行
-    let mngs, count;
+    var mngs, count;
     if (managerPNG != null) {
         count = managerPNG.parent().parent().parent().childCount();
         for (i = 0; i < count; i++) {
@@ -45,7 +45,7 @@ function managers() {
 
 function manager(starts) {
     //切换到店长
-    let i;
+    var i;
     starts.click();
     sleep(500);
     //点击为他加人气
@@ -65,13 +65,13 @@ function manager(starts) {
         }
     }
 
-    let idx = 0;
+    var idx = 0;
     while (true) {
-        let taskGo = text('前往').find();
+        var taskGo = text('前往').find();
         if (taskGo.nonEmpty()) {
             if (taskGo.length <= 1) { break; }
-            let taskGoBtn = taskGo[idx];
-            let taskName = taskGoBtn.parent().child(0).child(0).text();
+            var taskGoBtn = taskGo[idx];
+            var taskName = taskGoBtn.parent().child(0).child(0).text();
             if (taskName == '开通品牌会员') {
                 taskGoBtn.click();
                 text('会员卡详情').findOne();
@@ -104,7 +104,7 @@ function manager(starts) {
 
 // -------------通用部分--------------------
 function run_app(act_name) {
-    let act_pkg = app.getPackageName(act_name);
+    var act_pkg = app.getPackageName(act_name);
     if (currentPackage() == act_pkg) {
         home();
         sleep(1000);

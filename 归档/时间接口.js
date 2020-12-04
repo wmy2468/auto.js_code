@@ -14,20 +14,20 @@
 main();
 
 function main() {
-    let selectedArr = [
+    var selectedArr = [
         "京东时间",
         "北京时间",
         "淘宝时间"
     ];
 
-    let selectIndex = dialogs.select("选择时间", selectedArr);
+    var selectIndex = dialogs.select("选择时间", selectedArr);
     getTimeDiff(selectedArr[selectIndex]);
 }
 
 function getTimeDiff(area) {
-    let i = 10;
-    let cnt = i;
-    let c = 0;
+    var i = 10;
+    var cnt = i;
+    var c = 0;
     //10次取均值
     while (i--) {
         switch (area) {
@@ -53,8 +53,8 @@ function getTimeDiff(area) {
 }
 
 function jdTime() {
-    let res, resTime, resTimestamp, sigma, delta;
-    let timeLimit = 400;
+    var res, resTime, resTimestamp, sigma, delta;
+    var timeLimit = 400;
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
@@ -85,8 +85,8 @@ function jdTime() {
 
 // 北京时间
 function beiJingTime() {
-    let res, resTime, resTimestamp, sigma, delta;
-    let timeLimit = 200;
+    var res, resTime, resTimestamp, sigma, delta;
+    var timeLimit = 200;
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
@@ -117,8 +117,8 @@ function beiJingTime() {
 
 // 淘宝时间
 function tbTime() {
-    let res, resTime, resTimestamp, sigma, delta;
-    let timeLimit = 200;
+    var res, resTime, resTimestamp, sigma, delta;
+    var timeLimit = 200;
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
@@ -148,7 +148,7 @@ function tbTime() {
 
 
 function calGetTime() {
-    let st, ed;
+    var st, ed;
     st = new Date()
     new Date()
     ed = new Date()

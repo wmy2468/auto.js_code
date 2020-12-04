@@ -36,9 +36,9 @@ function cards() {
 
 function card_after_click() {
     sleep(3500);
-    let menberCard = textContains('会员卡').findOnce();
-    let shopCart = text('购物车').findOnce();
-    let shop = textContains('人关注').findOnce();
+    var menberCard = textContains('会员卡').findOnce();
+    var shopCart = text('购物车').findOnce();
+    var shop = textContains('人关注').findOnce();
 
     if (shopCart != null || shop != null) {
         back_way();
@@ -79,7 +79,7 @@ function card_wait_complete() {
 // -------------通用部分--------------------
 function run_app(act_name) {
     //closeApp(act_name);
-    let act_pkg = app.getPackageName(act_name);
+    var act_pkg = app.getPackageName(act_name);
     if (currentPackage() == act_pkg) {
         home();
         sleep(1000);
@@ -107,10 +107,10 @@ function center_click(element) {
 }
 
 function closeApp(appName) {
-    let packageName = app.getPackageName(appName);
+    var packageName = app.getPackageName(appName);
     app.openAppSetting(packageName);
     text(app.getAppName(packageName)).waitFor();
-    let is_sure = textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).findOne();
+    var is_sure = textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).findOne();
     if (is_sure.enabled()) {
         textMatches(/(.*强.*|.*停.*|.*结.*|.*行.*)/).findOne().click();
         sleep(2500);

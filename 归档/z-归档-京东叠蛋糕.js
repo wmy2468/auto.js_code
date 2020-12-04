@@ -56,7 +56,7 @@ function jd_sign() {
 function cakes() {
     // 等待蛋糕界面加载
     while (className('android.view.View').text('当前蛋糕：').findOnce() == null) {
-        let cake_view = className('ImageView').desc('浮层活动').findOnce();
+        var cake_view = className('ImageView').desc('浮层活动').findOnce();
         center_click(cake_view, false);
         sleep(2000);
     }
@@ -67,10 +67,10 @@ function cakes() {
         center_click(sign_immediately);
     }
     // 点击任务
-    let mission = className('android.view.View').text('做任务领金币').findOne();
+    var mission = className('android.view.View').text('做任务领金币').findOne();
     center_click(mission);
-    let idx = 1;
-    let idxText, unComplete, textStr;
+    var idx = 1;
+    var idxText, unComplete, textStr;
     while (true) {
         textStr = '';
         // 等待任务界面出现
@@ -116,9 +116,9 @@ function cakes() {
 
 function after_click(textStr) {
     sleep(4500);
-    let city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
-    //let viewList = text('浏览以下5个商品').depth(17).findOnce(); //恭喜完成
-    //let addCart = textContains('点击加购以下').findOnce();  //idContains(str)
+    var city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
+    //var viewList = text('浏览以下5个商品').depth(17).findOnce(); //恭喜完成
+    //var addCart = textContains('点击加购以下').findOnce();  //idContains(str)
 
     if (textStr == '加购') {
         add_cart();
@@ -128,11 +128,11 @@ function after_click(textStr) {
     }
     else if (city_player != null) {
         sleep(1000);
-        let join_imd = text('确认定位 立即参与').findOnce();
+        var join_imd = text('确认定位 立即参与').findOnce();
         if (join_imd != null) {
             join_imd.click()
             sleep(1000);
-            let happy_get = className('android.view.View').text('开心收下').findOnce();
+            var happy_get = className('android.view.View').text('开心收下').findOnce();
             if (happy_get != null) { happy_get.click() }
         }
         wait_complete();
@@ -154,7 +154,7 @@ function after_click(textStr) {
 }
 
 function add_cart() {
-    let carts
+    var carts
     i = 0;
     while (text('已完成').findOnce() == null) {
         //点击商品加购物车按钮
@@ -194,7 +194,7 @@ function view_list() {
 }
 
 function member_card() {
-    let count = 0;
+    var count = 0;
     //toastLog('会员卡');
     sleep(3000);
     while (text('去完成').findOnce() == null) {
@@ -219,7 +219,7 @@ function wait_complete() {
 
 // -------------通用部分--------------------
 function run_app(act_name) {
-    let act_pkg = app.getPackageName(act_name);
+    var act_pkg = app.getPackageName(act_name);
     if (currentPackage() == act_pkg) {
         home();
         sleep(1000);
@@ -229,11 +229,11 @@ function run_app(act_name) {
 
 function back_way() {
     sleep(800);
-    let backBtn = desc('返回').findOnce();
+    var backBtn = desc('返回').findOnce();
     if (backBtn == null) {
         back();
     } else {
-        let closeBtn = className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce();
+        var closeBtn = className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce();
         if (closeBtn != null) {
             closeBtn.click();
             sleep(1000);

@@ -7,7 +7,7 @@ mainXiaomi();
 
 function mainHuawei() {
     huaweiUnlock();
-    let appName = '京东';
+    var appName = '京东';
     ToAutojs();
     setClip('馥zんí#VDvzj6EQzb@');
     sleep(1500);
@@ -20,8 +20,8 @@ function mainHuawei() {
 //小米
 function mainXiaomi() {
     xiaomiUnlock();
-    let cnt = 1;
-    let appName = '京东';
+    var cnt = 1;
+    var appName = '京东';
     while (cnt < 3) {
         ToAutojs();
         setClip('馥zんí#VDvzj6EQzb@');
@@ -43,8 +43,8 @@ function ToAutojs() {
 }
 
 function passAd() {
-    let passAD = textContains('跳过').findOnce();
-    let descpassAD = descContains('跳过').findOnce();
+    var passAD = textContains('跳过').findOnce();
+    var descpassAD = descContains('跳过').findOnce();
     if (passAD != null) {
         sClick(passAD);
         sleep(800);
@@ -73,7 +73,7 @@ function sClick(element) {
 }
 
 function huaweiUnlock() {
-    let pwd = "081573" //解锁密码
+    var pwd = "081573" //解锁密码
     if (!device.isScreenOn()) {
         while (!device.isScreenOn()) {
             device.wakeUp();
@@ -93,8 +93,8 @@ function huaweiUnlock() {
 }
 
 function xiaomiUnlock() {
-    let pwd = "081573" //解锁密码
-    let stDelay = 70;
+    var pwd = "081573" //解锁密码
+    var stDelay = 70;
     if (!device.isScreenOn()) {
         while (!device.isScreenOn()) {
             device.wakeUp();
@@ -164,7 +164,7 @@ function toActViaCode() {
 
 function isNewPage() {
     sleep(2000);
-    let ppo = textContains('我的热力值:').findOnce()
+    var ppo = textContains('我的热力值:').findOnce()
     if (ppo) {
         sClick(ppo.parent().parent().child(3));
         return 1;
@@ -176,8 +176,8 @@ function isNewPage() {
 //获取真实的按钮位置
 function getRealBtn(elements) {
     if (elements.empty()) { return null; }
-    let eleLen = elements.length - 1;
-    let ele, eleTxt;
+    var eleLen = elements.length - 1;
+    var ele, eleTxt;
     while (eleLen >= 0) {
         ele = elements[eleLen].parent().parent().child(0);
         if (ele != null) {
@@ -195,7 +195,7 @@ function getRealBtn(elements) {
 function getNow() {
     textContains('分享好友助力').findOne();
     while (1) {
-        let getIt = text('立即领取').findOnce();
+        var getIt = text('立即领取').findOnce();
         if (text('继续浏览,领取京豆').findOnce() != null) {
             sClick(text('继续浏览').findOnce().parent().parent().child(2));
             sleep(1000);
@@ -212,10 +212,10 @@ function getNow() {
 }
 
 function allAct() {
-    let backFlg = 1;
+    var backFlg = 1;
     while (1) {
         sleep(1000);
-        let view = 0, cView = 0, focus = 0, joinMem = 0, getinNow = 0;
+        var view = 0, cView = 0, focus = 0, joinMem = 0, getinNow = 0;
         if (sClick(getRealBtn(text('去浏览').find()))) {
             toastLog('找到去浏览'); sleep(500);
             view = 1;

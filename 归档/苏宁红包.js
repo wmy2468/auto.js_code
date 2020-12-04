@@ -5,7 +5,7 @@ mainXiaomi();
 
 function mainHuawei() {
     huaweiUnlock();
-    let appName = '苏宁易购';
+    var appName = '苏宁易购';
     ToAutojs();
     toApp(appName, 0);
     toPackVie();
@@ -17,8 +17,8 @@ function mainHuawei() {
 //小米
 function mainXiaomi() {
     xiaomiUnlock();
-    let cnt = 1;
-    let appName = '苏宁易购';
+    var cnt = 1;
+    var appName = '苏宁易购';
     while (cnt < 3) {
         ToAutojs();
         toApp(appName, cnt);
@@ -58,11 +58,11 @@ function sClick(element) {
 }
 
 function passAd() {
-    let passAD = textContains('跳过').findOnce();
-    let descpassAD = descContains('跳过').findOnce();
-    let floatAD = id('iv_adclose').findOnce();
-    let shopAD = id('btn_closed').findOnce();
-    let imgAD = id('img_close').findOnce();
+    var passAD = textContains('跳过').findOnce();
+    var descpassAD = descContains('跳过').findOnce();
+    var floatAD = id('iv_adclose').findOnce();
+    var shopAD = id('btn_closed').findOnce();
+    var imgAD = id('img_close').findOnce();
     /*if (passAD != null) {
         sClick(passAD);
         return 0;
@@ -85,7 +85,7 @@ function passAd() {
 }
 
 function huaweiUnlock() {
-    let pwd = "081573" //解锁密码
+    var pwd = "081573" //解锁密码
     if (!device.isScreenOn()) {
         while (!device.isScreenOn()) {
             device.wakeUp();
@@ -105,8 +105,8 @@ function huaweiUnlock() {
 }
 
 function xiaomiUnlock() {
-    let pwd = "081573" //解锁密码
-    let stDelay = 70;
+    var pwd = "081573" //解锁密码
+    var stDelay = 70;
     if (!device.isScreenOn()) {
         while (!device.isScreenOn()) {
             device.wakeUp();
@@ -159,9 +159,9 @@ function toApp(appName, cnt) {
 }
 
 function backWay() {
-    let ivBack;
+    var ivBack;
     ivBack = id('iv_back').findOnce();
-    let liveBack = id('snlive_close_btn').findOnce();
+    var liveBack = id('snlive_close_btn').findOnce();
     if (liveBack != null) {
         sClick(liveBack);
         return 0;
@@ -174,7 +174,7 @@ function backWay() {
 }
 
 function getActTitle(element, titleName) {
-    let actName;
+    var actName;
     if (element == null) { return -1; }
     else {
         actName = element.parent().child(element.indexInParent() - 2).text();
@@ -190,16 +190,16 @@ function getActTitle(element, titleName) {
 // 进入红包界面
 function toPackVie() {
     toastLog('toPackVie开始');
-    let floating;
+    var floating;
     while (text('天天发现鲸').findOnce() == null) {
         sleep(3000);
-		let mCancelId = "com.suning.mobile.ebuy:id/marketing_cancel_img";
+        var mCancelId = "com.suning.mobile.ebuy:id/marketing_cancel_img";
         sClick(id(mCancelId).findOnce());
         sleep(1000);
         sClick(id('sign_cancel_img').findOnce());
         sleep(1000);
         passAd();
-		
+
         sleep(2000);
         floating = desc('悬浮广告').findOnce();
         // 点击赚金币
@@ -225,7 +225,7 @@ function signIn() {
 
 //浏览+100 金币
 function plusOneH() {
-    let plus100;
+    var plus100;
     sleep(2500)
     //sClick(text('去逛逛').findOnce());
     while (1) {
