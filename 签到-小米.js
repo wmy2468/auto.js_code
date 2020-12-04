@@ -71,6 +71,8 @@ function jd_sign() {
         func.sClick(signBtn3);
         className('ImageView').desc('关闭弹窗').findOne();
         func.sClick(className('ImageView').desc('关闭弹窗').findOne());
+        toastLog("今日已领券");
+        sleep(1000);
     }
 
     while (className('TextView').text('首页').findOnce() == null) {
