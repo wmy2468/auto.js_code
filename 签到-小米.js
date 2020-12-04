@@ -48,7 +48,7 @@ function jd_sign() {
     }
     let getCon = text('领券').findOne();
     func.sClick(getCon.parent());
-    
+
     while (className('ImageView').desc('领券中心').findOnce() == null) {
         let closeBtn = id('com.jd.lib.coupon.feature:id/db').findOnce();
         if (closeBtn != null) {
@@ -58,15 +58,17 @@ function jd_sign() {
     }
     sleep(1200);
 
-    let sighBtn1 = id('com.jd.lib.coupon.feature:id/dg').findOnce();
-    let signBtn2 = className('TextView').text('立即签到').findOnce();
+    let sighBtn1 = id("di").findOnce();
+    let signBtn2 = className("TextView").text("立即签到").findOnce();
+    let signBtn3 = className("TextView").text("立即领红包").findOnce();
 
-    if (sighBtn1 == null && signBtn2 == null) {
-        toastLog('今日已领券');
+    if (sighBtn1 == null && signBtn2 == null && signBtn3 == null) {
+        toastLog("今日已领券");
     }
     else {
         func.sClick(sighBtn1);
         func.sClick(signBtn2);
+        func.sClick(signBtn3);
         className('ImageView').desc('关闭弹窗').findOne();
         func.sClick(className('ImageView').desc('关闭弹窗').findOne());
     }
