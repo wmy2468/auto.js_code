@@ -304,7 +304,7 @@ function getTimeDiff(area, targetTime) {
     var floatWin = floatyInit();
 
     //当剩余时间超过25秒的时候 等待
-    while (targetTimestamp - curTimestamp > 25000) {
+    while (targetTimestamp - curTimestamp > 15000) {
         curTimestamp = new Date().getTime();
         setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000));
         //console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
