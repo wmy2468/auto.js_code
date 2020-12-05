@@ -21,7 +21,7 @@ var timeDiff = func.calTimeDiff(selectedArr[selectIndex])
 
 var window = floaty.window(
     <frame gravity="center" bg="#1F1F1F" h="25dp" >
-        <text id="text" textSize="20sp" textStyle="bold" typeface="monospace" textColor="#00FFFF" />
+        <text id="text" textSize="16sp" textStyle="bold" typeface="monospace" textColor="#00FFFF" />
     </frame >
 );
 
@@ -30,6 +30,8 @@ window.exitOnClose();
 window.text.click(() => {
     window.setAdjustEnabled(!window.isAdjustEnabled());
 });
+
+window.setPosition(150, 100);
 
 setInterval(() => {
     //对控件的操作需要在UI线程中执行
@@ -58,11 +60,11 @@ function dynamicText() {
 function showTime(timeDiffer) {
     var today, h, m, s;
     today = new Date(new Date().getTime() + timeDiffer);
-    h = today.getHours();
+    h = checkTime(today.getHours());
     m = checkTime(today.getMinutes());
     s = checkTime(today.getSeconds());
     ms = today.getMilliseconds();
-    return util.format(selectedArr[selectIndex] + ": %d:%s:%s:%s\n", h, m, s, ms);
+    return util.format(selectedArr[selectIndex] + ":%d:%s:%s:%s\n", h, m, s, ms);
 }
 
 function checkTime(i) {

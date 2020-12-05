@@ -263,28 +263,34 @@ var serverDelay = { "京东时间": 0, "淘宝时间": 0, "北京时间": 0, "�
 // 每次请求之间的延迟
 var reqDelay = 300;
 
-// 仅用于测试
-function showTime(timeDiffer) {
-    var today, h, m, s;
-    console.show();
-    while (1) {
-        today = new Date(new Date().getTime() + timeDiffer);
-        h = today.getHours();
-        m = checkTime(today.getMinutes());
-        s = checkTime(today.getSeconds());
-        ms = today.getMilliseconds();
-        console.log(h + ":" + m + ":" + s + ":" + ms);
-        sleep(100);
-        console.clear();
-    }
+function floatyInit() {
+    var window = floaty.window(
+        <frame gravity="center" bg="#1F1F1F" h="25dp" >
+            <text id="text" textSize="16sp" textStyle="bold" typeface="monospace" textColor="#00FFFF" />
+        </frame >
+    );
+    // 设置浮窗关闭则退出脚本
+    window.exitOnClose();
+    // 设置单击可移动事件
+    window.text.click(() => {
+        window.setAdjustEnabled(!window.isAdjustEnabled());
+    });
+    //设置浮窗位置
+    window.setPosition(500, 10);
+    // 设置浮窗大小为自动调节
+    window.setSize(-2, -2);
+    setInterval(() => { }, 1000);
+
+    return window;
 }
 
-function checkTime(i) {
-    if (i < 10) {
-        i = "0" + i;
-    }
-    return i;
+function setFloatyVal(window, textVal) {
+    //对控件的操作需要在UI线程中执行
+    ui.run(function () {
+        window.text.setText(textVal);
+    });
 }
+
 // 时间校准 获取时间差函数
 function getTimeDiff(area, targetTime) {
     // 生成今天的时间戳
@@ -300,13 +306,16 @@ function getTimeDiff(area, targetTime) {
         exit();
     }
 
-    //console.setSize(200, 100);
-    console.show();
+    //console.show();
+    //console.setSize(500, 200);
+    //console.setPosition(200, 0);
+    var floatWin = floatyInit();
 
-    //当剩余时间超过20秒的时候 等待
+    //当剩余时间超过25秒的时候 等待
     while (targetTimestamp - curTimestamp > 25000) {
         curTimestamp = new Date().getTime();
-        console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
+        setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000));
+        //console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
         // toastLog("剩余时间:", targetTimestamp - curTimestamp);
         sleep(1000);
     }
@@ -316,17 +325,16 @@ function getTimeDiff(area, targetTime) {
     var cnt = 0;
     curTimestamp = new Date().getTime() + timeDiff;
     while (curTimestamp < targetTimestamp) {
-        curTimestamp = new Date().getTime() + timeDiff;
-        sleep(10);
+        sleep(50);
         cnt = cnt + 1;
-        if (cnt >= 100) {
-            console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
+        if (cnt >= 20) {
+            setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000))
+            //console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
             cnt = 0;
         }
+        curTimestamp = new Date().getTime() + timeDiff;
     }
-    console.hide();
 }
-
 
 function calTimeDiff(area) {
     var timeDiff;
@@ -360,6 +368,7 @@ function getToday() {
     return year + seperator1 + month + seperator1 + strDate;
 }
 
+//京东时间
 function jdTime() {
     var res, resTime, resTimestamp, sigma, delta;
     var timeArea = "京东时间";
@@ -503,6 +512,5 @@ module.exports = {
     lockScr: lockScr,
     toJdSku: toJdSku,
     getTimeDiff: getTimeDiff,
-    calTimeDiff: calTimeDiff,
-    showTime: showTime
+    calTimeDiff: calTimeDiff
 }
