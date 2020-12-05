@@ -258,11 +258,6 @@ function randomNum(minNum, maxNum) {
 }
 // -----------通用功能区------------------
 
-var timeLimit = { "京东时间": 800, "淘宝时间": 800, "北京时间": 500, "苏宁时间": 800 };
-var serverDelay = { "京东时间": 0, "淘宝时间": 0, "北京时间": 0, "苏宁时间": 0 };
-// 每次请求之间的延迟
-var reqDelay = 300;
-
 function floatyInit() {
     var window = floaty.window(
         <frame gravity="center" bg="#1F1F1F" h="25dp" >
@@ -306,9 +301,6 @@ function getTimeDiff(area, targetTime) {
         exit();
     }
 
-    //console.show();
-    //console.setSize(500, 200);
-    //console.setPosition(200, 0);
     var floatWin = floatyInit();
 
     //当剩余时间超过25秒的时候 等待
@@ -335,6 +327,11 @@ function getTimeDiff(area, targetTime) {
         curTimestamp = new Date().getTime() + timeDiff;
     }
 }
+
+var timeLimit = { "京东时间": 800, "淘宝时间": 800, "北京时间": 500, "苏宁时间": 800 };
+var serverDelay = { "京东时间": 0, "淘宝时间": 0, "北京时间": 0, "苏宁时间": 0 };
+// 每次请求之间的延迟
+var reqDelay = 300;
 
 function calTimeDiff(area) {
     var timeDiff;
