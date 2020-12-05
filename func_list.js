@@ -301,7 +301,7 @@ function getTimeDiff(area, targetTime) {
     }
 
     //console.setSize(200, 100);
-    //console.show();
+    console.show();
 
     //当剩余时间超过20秒的时候 等待
     while (targetTimestamp - curTimestamp > 25000) {
@@ -311,7 +311,7 @@ function getTimeDiff(area, targetTime) {
         sleep(1000);
     }
 
-    var timeDiff = calTimeDiffa(area);
+    var timeDiff = calTimeDiff(area);
 
     var cnt = 0;
     curTimestamp = new Date().getTime() + timeDiff;
@@ -324,7 +324,7 @@ function getTimeDiff(area, targetTime) {
             cnt = 0;
         }
     }
-    //console.hide();
+    console.hide();
 }
 
 

@@ -82,7 +82,7 @@ function 中信9积分() {
 // 到点点击
 function 中信365() {
     var appName = "动卡空间";
-    var startTime = "11,00,00,100";
+    var startTime = "11,00,00,000";
     var timeArea = "北京时间";
     // 券名称
     var couDes = ["必胜客100元代金券", "百果园50元代金券"];
@@ -98,6 +98,7 @@ function 中信365() {
     func.getTimeDiff(timeArea, startTime);
     //点击元素
     func.sClick(className("android.view.View").text(couDes[couDesIndex]).findOne());
+    toastLog("点击商品");
     //点击元素
     func.sClick(className("android.widget.Button").text("立即购买").findOne());
     func.sClick(className("android.view.View").text("确认").findOne());
