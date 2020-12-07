@@ -40,7 +40,6 @@ setInterval(() => {
     //对控件的操作需要在UI线程中执行
     ui.run(function () {
         window.text.setText(dynamicText());
-        toastLog(window.getWidth());
     });
 }, 10);
 
