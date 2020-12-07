@@ -274,8 +274,13 @@ function floatyInit() {
         window.setAdjustEnabled(!window.isAdjustEnabled());
     });
 
-    //设置浮窗位置
-    window.setPosition(520, 15);
+    if (device.brand == "HUAWEI") {
+        //设置浮窗位置
+        window.setPosition(420, 15);
+    } else if (device.brand == "xiaomi") {
+        //设置浮窗位置
+        window.setPosition(520, 15);
+    }
 
     setInterval(() => { }, 1000);
     return window;
