@@ -270,12 +270,17 @@ function floatyInit() {
     window.text.click(() => {
         window.setAdjustEnabled(!window.isAdjustEnabled());
     });
+    // 获取浮窗宽度
+    var fltyWidth = window.getWidht();
+    var dWidth = device.width;
+    if (dWidth == 0) {
+        dWidth = 1080;
+    }
     //设置浮窗位置
-    window.setPosition(500, 10);
+    window.setPosition(1080 - fltyWidth, 10);
     // 设置浮窗大小为自动调节
     window.setSize(-2, -2);
     setInterval(() => { }, 1000);
-
     return window;
 }
 

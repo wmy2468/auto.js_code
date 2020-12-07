@@ -13,9 +13,12 @@ if (selectIndex == -1) {
     exit();
 }
 
-var timeDiff = func.calTimeDiff(selectedArr[selectIndex])
+// var timeDiff = func.calTimeDiff(selectedArr[selectIndex])
 // func.showTime(func.calTimeDiff(selectedArr[selectIndex]));
+func.floatyInit();
+func.setFloatyVal(func.calTimeDiff(selectedArr[selectIndex]));
 
+/*
 var window = floaty.window(
     <frame gravity="center" bg="#1F1F1F" h="25dp" >
         <text id="text" textSize="16sp" textStyle="bold" typeface="monospace" textColor="#00FFFF" />
@@ -70,3 +73,5 @@ function checkTime(i) {
     }
     return i;
 }
+
+*/
