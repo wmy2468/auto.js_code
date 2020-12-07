@@ -13,12 +13,11 @@ if (selectIndex == -1) {
     exit();
 }
 
-// var timeDiff = func.calTimeDiff(selectedArr[selectIndex])
-// func.showTime(func.calTimeDiff(selectedArr[selectIndex]));
-var win = func.floatyInit();
-func.setFloatyVal(win, func.calTimeDiff(selectedArr[selectIndex]));
+var timeDiff = func.calTimeDiff(selectedArr[selectIndex])
+    / func.showTime(func.calTimeDiff(selectedArr[selectIndex]));
 
-/*
+
+
 var window = floaty.window(
     <frame gravity="center" bg="#1F1F1F" h="25dp" >
         <text id="text" textSize="16sp" textStyle="bold" typeface="monospace" textColor="#00FFFF" />
@@ -30,8 +29,17 @@ window.exitOnClose();
 window.text.click(() => {
     window.setAdjustEnabled(!window.isAdjustEnabled());
 });
+// 设置浮窗大小为自动调节
+window.setSize(-2, -2);
 
-window.setPosition(470, 100);
+var fltyWidth = window.getWidth();
+var dWidth = divice.width;
+if (dWidth == 0) {
+    dWidth = 1080;
+}
+//设置浮窗位置
+window.setPosition(dWidth - fltyWidth, 10);
+
 
 setInterval(() => {
     //对控件的操作需要在UI线程中执行
@@ -73,5 +81,3 @@ function checkTime(i) {
     }
     return i;
 }
-
-*/
