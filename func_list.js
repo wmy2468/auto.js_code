@@ -513,6 +513,8 @@ module.exports = {
     randomNum: randomNum,
     lockScr: lockScr,
     toJdSku: toJdSku,
+    floatyInit: floatyInit,
+    setFloatyVal: setFloatyVal,
     getTimeDiff: getTimeDiff,
     calTimeDiff: calTimeDiff
 }
