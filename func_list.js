@@ -271,7 +271,7 @@ function floatyInit() {
         window.setAdjustEnabled(!window.isAdjustEnabled());
     });
     // 获取浮窗宽度
-    var fltyWidth = window.getWidht();
+    var fltyWidth = window.getWidth();
     var dWidth = device.width;
     if (dWidth == 0) {
         dWidth = 1080;
