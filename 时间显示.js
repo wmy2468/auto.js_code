@@ -29,7 +29,7 @@ window.text.click(() => {
 // 设置浮窗大小为自动调节
 window.setSize(-2, -2);
 
-var dWidth = divice.width;
+var dWidth = device.width;
 if (dWidth == 0) {
     dWidth = 1080;
 }
