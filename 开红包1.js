@@ -4,13 +4,15 @@ function main() {
     checkClock();
     unlock();
     var i = 1;
-    //while (i <= 2) {
-    toAutojs();
-    toWechat(1);            //< ==== 两个文件的区别在这里
-    toFavorite();
-    openPacket();
-    //i = i + 1;
-    //}
+    while (i <= 2) {
+        toAutojs();
+        toWechat(i);            //< ==== 两个文件的区别在这里
+        toFavorite();
+        openPacket();
+        i = i + 1;
+        // 等待10秒
+        sleep(10000);
+    }
     home();
     sleep(800);
     click(459, 2088);
