@@ -275,9 +275,8 @@ function floatyInit() {
     });
 
     //设置浮窗位置
-    window.setPosition(440, 15);
-    // 设置浮窗大小为自动调节
-    window.setSize(-2, -2);
+    window.setPosition(520, 15);
+
     setInterval(() => { }, 1000);
     return window;
 }

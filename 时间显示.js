@@ -26,15 +26,9 @@ window.exitOnClose();
 window.text.click(() => {
     window.setAdjustEnabled(!window.isAdjustEnabled());
 });
-// 设置浮窗大小为自动调节
-window.setSize(-2, -2);
 
-var dWidth = device.width;
-if (dWidth == 0) {
-    dWidth = 1080;
-}
 //设置浮窗位置
-window.setPosition(dWidth - 641, 10);
+window.setPosition(520, 15);
 
 setInterval(() => {
     //对控件的操作需要在UI线程中执行
