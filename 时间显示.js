@@ -15,8 +15,8 @@ if (selectIndex == -1) {
 
 // var timeDiff = func.calTimeDiff(selectedArr[selectIndex])
 // func.showTime(func.calTimeDiff(selectedArr[selectIndex]));
-
-func.setFloatyVal(func.floatyInit(), func.calTimeDiff(selectedArr[selectIndex]));
+var win = func.floatyInit();
+func.setFloatyVal(win, func.calTimeDiff(selectedArr[selectIndex]));
 
 /*
 var window = floaty.window(
