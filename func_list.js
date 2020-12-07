@@ -1,3 +1,6 @@
+// 设置屏幕分辨率
+setScreenMetrics(2340, 1080);
+
 function main() {
     if (device.brand == "HUAWEI") {
         mainHuawei();
@@ -271,12 +274,8 @@ function floatyInit() {
         window.setAdjustEnabled(!window.isAdjustEnabled());
     });
 
-    var dWidth = device.width;
-    if (dWidth == 0) {
-        dWidth = 1080;
-    }
     //设置浮窗位置
-    window.setPosition(dWidth - 641, 10);
+    window.setPosition(440, 15);
     // 设置浮窗大小为自动调节
     window.setSize(-2, -2);
     setInterval(() => { }, 1000);
@@ -512,8 +511,6 @@ module.exports = {
     randomNum: randomNum,
     lockScr: lockScr,
     toJdSku: toJdSku,
-    floatyInit: floatyInit,
-    setFloatyVal: setFloatyVal,
     getTimeDiff: getTimeDiff,
     calTimeDiff: calTimeDiff
 }

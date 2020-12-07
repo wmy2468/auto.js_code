@@ -112,18 +112,20 @@ function toWechat(cnt) {
 // 1， 解锁
 function unlock() {
     var pwd = "081573" //解锁密码
-    while (!device.isScreenOn()) {
-        device.wakeUp();
-        sleep(800);
-    }
-    toastLog('unlock');
-    //while (text("紧急呼叫").findOnce() == null) {
-    while (text('紧急呼叫').findOnce() == null) {
-        swipe(300, 60, 300, 850, 400);
-        sleep(900);
-    }
-    toastLog('输入密码');
-    for (var i = 0; i < pwd.length; i++) {
-        desc(pwd[i]).findOne().click();
+    if (!device.isScreenOn()) {
+        while (!device.isScreenOn()) {
+            device.wakeUp();
+            sleep(800);
+        }
+        toastLog('unlock');
+        //while (text("紧急呼叫").findOnce() == null) {
+        while (text('紧急呼叫').findOnce() == null) {
+            swipe(300, 60, 300, 850, 400);
+            sleep(900);
+        }
+        toastLog('输入密码');
+        for (var i = 0; i < pwd.length; i++) {
+            desc(pwd[i]).findOne().click();
+        }
     }
 }
