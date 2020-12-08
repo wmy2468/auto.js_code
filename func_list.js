@@ -1,6 +1,3 @@
-// 设置屏幕分辨率
-setScreenMetrics(2340, 1080);
-
 function main() {
     if (device.brand == "HUAWEI") {
         mainHuawei();
