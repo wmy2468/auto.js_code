@@ -35,9 +35,9 @@ function jd_sign() {
         toastLog('今日已签到');
     }
     else {
-        func.sClick(className('TextView').text('签到领京豆').findOnce());
         while (className('TextView').text('签到提醒').findOnce() == null
             && text('全民抢京豆').findOnce() == null) {
+            func.sClick(className("TextView").text("签到领京豆").findOnce());
             sleep(1000);
         }
         toastLog('签到成功');
@@ -58,19 +58,15 @@ function jd_sign() {
     }
     sleep(1200);
 
-    var sighBtn1 = id("di").findOnce();
-    var signBtn2 = className("TextView").text("立即签到").findOnce();
-    var signBtn3 = className("TextView").text("立即领红包").findOnce();
+    var signBtn = className("TextView").text("立即领红包").findOnce();
 
-    if (sighBtn1 == null && signBtn2 == null && signBtn3 == null) {
+    if (signBtn == null) {
         toastLog("今日已领券");
     }
     else {
-        func.sClick(sighBtn1);
-        func.sClick(signBtn2);
-        func.sClick(signBtn3);
-        className('ImageView').desc('关闭弹窗').findOne();
-        func.sClick(className('ImageView').desc('关闭弹窗').findOne());
+        func.sClick(signBtn);
+        className("ImageView").desc("关闭弹窗").findOne();
+        func.sClick(className("ImageView").desc("关闭弹窗").findOne());
         toastLog("今日已领券");
         sleep(1000);
     }

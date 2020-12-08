@@ -35,7 +35,7 @@ function 中国农业银行() {
     func.sClick(lineBtn.child(4));
     sleep(1200);
     // 签到按钮
-    func.sClick(id("tv_my_haidou_unlogin").text("小豆").findOne());
+    func.cClick(id("tv_my_haidou_unlogin").text("小豆").findOne());
     //toastLog("我的已点击");
     while (textContains("小豆秒杀").findOnce() == null) {
         if (text("切换登录方式").findOnce() != null) {
@@ -143,9 +143,10 @@ function jd_sign() {
         toastLog("今日已签到");
     }
     else {
-        func.sClick(className("TextView").text("签到领京豆").findOnce());
+
         while (className("TextView").text("签到提醒").findOnce() == null
             && text("全民抢京豆").findOnce() == null) {
+            func.sClick(className("TextView").text("签到领京豆").findOnce());
             sleep(1000);
         }
         toastLog("签到成功");
@@ -166,17 +167,13 @@ function jd_sign() {
     }
     sleep(1200);
 
-    var sighBtn1 = id("di").findOnce();
-    var signBtn2 = className("TextView").text("立即签到").findOnce();
-    var signBtn3 = className("TextView").text("立即领红包").findOnce();
+    var signBtn = className("TextView").text("立即领红包").findOnce();
 
-    if (sighBtn1 == null && signBtn2 == null && signBtn3 == null) {
+    if (signBtn == null) {
         toastLog("今日已领券");
     }
     else {
-        func.sClick(sighBtn1);
-        func.sClick(signBtn2);
-        func.sClick(signBtn3);
+        func.sClick(signBtn);
         className("ImageView").desc("关闭弹窗").findOne();
         func.sClick(className("ImageView").desc("关闭弹窗").findOne());
         toastLog("今日已领券");
