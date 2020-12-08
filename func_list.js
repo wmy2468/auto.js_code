@@ -353,6 +353,9 @@ function calTimeDiff(area) {
         case "苏宁时间":
             timeDiff = Math.trunc((snTime() + snTime() + snTime()) / 3);
             break;
+        case "北京时间NOW":
+            timeDiff = Math.trunc((beiJingTime_NOW() + beiJingTime_NOW() + beiJingTime_NOW()) / 3);
+            break;
         default:
             timeDiff = Math.trunc((beiJingTime() + beiJingTime() + beiJingTime()) / 3);
             break;
@@ -422,6 +425,39 @@ function beiJingTime() {
         if (edTimestamp - stTimestamp <= timeLimit[timeArea]) {
             resTime = res.body.string();
             resTimestamp = Number(resTime.replace("0=", ""));
+            sigma = edTimestamp - stTimestamp;
+            delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
+            log("时延", sigma);
+            log("误差", delta);
+            break;
+        }
+        sleep(reqDelay);
+    }
+
+    //返回时间差
+    return delta + serverDelay[timeArea];
+}
+
+// 北京时间
+function beiJingTime_NOW() {
+    var res, resTime, resTimestamp, sigma, delta;
+    var timeArea = "北京时间";
+    log("请求", timeArea);
+    // 获取取一次时间耗时
+    while (1) {
+        stTimestamp = new Date();
+        res = http.get("http://api.k780.com/?app=life.time&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json");
+        edTimestamp = new Date();
+
+        if (res.statusCode != 200) {
+            toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+            exit();
+        }
+        log("请求总时长", edTimestamp - stTimestamp);
+
+        if (edTimestamp - stTimestamp <= timeLimit[timeArea]) {
+            resTime = res.body.json();
+            resTimestamp = Number(resTime.result.timestamp + "000");
             sigma = edTimestamp - stTimestamp;
             delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
             log("时延", sigma);
