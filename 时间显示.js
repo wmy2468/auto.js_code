@@ -15,7 +15,6 @@ if (selectIndex == -1) {
 
 var halfHourFlag = 0;
 var timeDiff = 0;
-// var timeDiff = func.calTimeDiff(selectedArr[selectIndex])
 
 var window = floaty.window(
     <frame gravity="center" bg="#1F1F1F" h="25dp" >
@@ -51,13 +50,12 @@ setInterval(() => {
 // 更新悬浮文字
 function dynamicText(timeDiffer) {
     var today, h, m, s;
-    log("timeDiffer", timeDiffer);
     today = new Date(new Date().getTime() + timeDiffer);
     h = checkTime(today.getHours());
     m = checkTime(today.getMinutes());
     s = checkTime(today.getSeconds());
     ms = today.getMilliseconds();
-    if (m == "29" && s >= "40" && (halfHourFlag <= 0)) {
+    if ((m == "29" || m == "59") && s >= "40" && (halfHourFlag <= 0)) {
         halfHourFlag = halfHourFlag + 1;
     }
     return util.format(selectedArr[selectIndex] + ":%d:%s:%s:%s\n", h, m, s, ms);
