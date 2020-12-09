@@ -13,7 +13,9 @@ if (selectIndex == -1) {
     exit();
 }
 
-var timeDiff = func.calTimeDiff(selectedArr[selectIndex])
+var halfHourFlag = false;
+var timeDiff = 0;
+// var timeDiff = func.calTimeDiff(selectedArr[selectIndex])
 
 var window = floaty.window(
     <frame gravity="center" bg="#1F1F1F" h="25dp" >
@@ -34,9 +36,6 @@ if (device.brand == "HUAWEI") {
     //设置浮窗位置
     window.setPosition(520, 15);
 }
-
-var halfHourFlag = false;
-var timeDiff = 0;
 
 setInterval(() => {
     //对控件的操作需要在UI线程中执行
