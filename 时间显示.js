@@ -13,7 +13,7 @@ if (selectIndex == -1) {
     exit();
 }
 
-var halfHourFlag = false;
+var halfHourFlag = 0;
 var timeDiff = 0;
 // var timeDiff = func.calTimeDiff(selectedArr[selectIndex])
 
@@ -31,15 +31,16 @@ window.text.click(() => {
 
 if (device.brand == "HUAWEI") {
     //设置浮窗位置
-    window.setPosition(420, 40);
+    window.setPosition(420, 45);
 } else if (device.brand == "xiaomi") {
     //设置浮窗位置
-    window.setPosition(520, 40);
+    window.setPosition(520, 45);
 }
 
 setInterval(() => {
-    if (halfHourFlag) {
+    if (halfHourFlag == 1) {
         timeDiff = func.calTimeDiff(selectedArr[selectIndex]);
+        halfHourFlag = halfHourFlag + 1;
     }
     //对控件的操作需要在UI线程中执行
     ui.run(function () {
@@ -50,13 +51,14 @@ setInterval(() => {
 // 更新悬浮文字
 function dynamicText(timeDiffer) {
     var today, h, m, s;
+    log("timeDiffer", timeDiffer);
     today = new Date(new Date().getTime() + timeDiffer);
     h = checkTime(today.getHours());
     m = checkTime(today.getMinutes());
     s = checkTime(today.getSeconds());
     ms = today.getMilliseconds();
-    if (m == "29" && s >= "40") {
-        halfHourFlag = true;
+    if (m == "29" && s >= "40" && (halfHourFlag <= 0)) {
+        halfHourFlag = halfHourFlag + 1;
     }
     return util.format(selectedArr[selectIndex] + ":%d:%s:%s:%s\n", h, m, s, ms);
     //var str = showTime();
