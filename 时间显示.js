@@ -63,9 +63,9 @@ function dynamicText() {
 
 function showTime() {
     if (halfHourFlag) {
-        timeDiff = threads.start(function () {
+        var thread = threads.start(function () {
             //在新线程执行的代码
-            return func.calTimeDiff(selectedArr[selectIndex]);
+            timeDiff = func.calTimeDiff(selectedArr[selectIndex]);
         });
         thread.interrupt();
     }
