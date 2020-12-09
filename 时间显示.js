@@ -35,6 +35,9 @@ if (device.brand == "HUAWEI") {
     window.setPosition(520, 15);
 }
 
+var halfHourFlag = false;
+var timeDiff;
+
 setInterval(() => {
     //对控件的操作需要在UI线程中执行
     ui.run(function () {
@@ -44,7 +47,7 @@ setInterval(() => {
 
 // 更新悬浮文字
 function dynamicText() {
-    var str = showTime(timeDiff)
+    var str = showTime()
     //var str = util.format("时间: %d:%d:%d\n", date.getHours(), date.getMinutes(), date.getSeconds());
     //str += util.format("内存使用量: %d%%\n", getMemoryUsage());
     //str += "当前活动: " + currentActivity() + "\n";
@@ -59,13 +62,19 @@ function dynamicText() {
 //     return Math.round(usage * 10) / 10;
 // }
 
-function showTime(timeDiffer) {
+function showTime() {
+    if (halfHourFlag) {
+        timeDiff = func.calTimeDiff(selectedArr[selectIndex]);
+    }
     var today, h, m, s;
     today = new Date(new Date().getTime() + timeDiffer);
     h = checkTime(today.getHours());
     m = checkTime(today.getMinutes());
     s = checkTime(today.getSeconds());
     ms = today.getMilliseconds();
+    if (m == "29" && s >= "40") {
+        halfHourFlag = true;
+    }
     return util.format(selectedArr[selectIndex] + ":%d:%s:%s:%s\n", h, m, s, ms);
 }
 
