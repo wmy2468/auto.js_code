@@ -36,7 +36,7 @@ if (device.brand == "HUAWEI") {
 }
 
 var halfHourFlag = false;
-var timeDiff;
+var timeDiff = 0;
 
 setInterval(() => {
     //对控件的操作需要在UI线程中执行
