@@ -31,10 +31,10 @@ window.text.click(() => {
 
 if (device.brand == "HUAWEI") {
     //设置浮窗位置
-    window.setPosition(420, 15);
+    window.setPosition(420, 30);
 } else if (device.brand == "xiaomi") {
     //设置浮窗位置
-    window.setPosition(520, 15);
+    window.setPosition(520, 30);
 }
 
 setInterval(() => {
@@ -63,10 +63,14 @@ function dynamicText() {
 
 function showTime() {
     if (halfHourFlag) {
-        timeDiff = func.calTimeDiff(selectedArr[selectIndex]);
+        timeDiff = threads.start(function () {
+            //在新线程执行的代码
+            return func.calTimeDiff(selectedArr[selectIndex]);
+        });
+        thread.interrupt();
     }
     var today, h, m, s;
-    today = new Date(new Date().getTime() + timeDiffer);
+    today = new Date(new Date().getTime() + timeDiff);
     h = checkTime(today.getHours());
     m = checkTime(today.getMinutes());
     s = checkTime(today.getSeconds());
