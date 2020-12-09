@@ -273,10 +273,10 @@ function floatyInit() {
 
     if (device.brand == "HUAWEI") {
         //设置浮窗位置
-        window.setPosition(420, 15);
+        window.setPosition(420, 50);
     } else if (device.brand == "xiaomi") {
         //设置浮窗位置
-        window.setPosition(520, 15);
+        window.setPosition(520, 50);
     }
 
     setInterval(() => { }, 1000);
