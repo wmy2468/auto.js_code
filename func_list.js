@@ -332,8 +332,10 @@ function getTimeDiff(area, targetTime) {
     }
 }
 
+// 请求时间限制
 var timeLimit = { "京东时间": 800, "淘宝时间": 800, "北京时间": 500, "苏宁时间": 800 };
-var serverDelay = { "京东时间": 0, "淘宝时间": 0, "北京时间": 0, "苏宁时间": 0 };
+// 设置服务器延迟
+var serverDelay = { "京东时间": 0, "淘宝时间": 0, "北京时间": 104, "苏宁时间": 0 };
 // 每次请求之间的延迟
 var reqDelay = 300;
 
