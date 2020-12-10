@@ -3,12 +3,11 @@ auto.waitFor();
 var func = require("func_list.js");
 // 123
 var selectedArr = [
-    "每日10点光大天猫",
+    "光大活动",
     "中信9积分",
     "中信365",
     "掌上星巴克",
-    "京东腾讯月",
-    "TEST"
+    "京东腾讯月"
 ];
 
 //淘宝测试();
@@ -30,13 +29,6 @@ function main() {
     device.cancelKeepingAwake();
 }
 
-function TEST() {
-    var startTime = "";
-    images.requestScreenCapture();
-    func.getTimeDiff("北京时间", startTime);
-    images.captureScreen("/sdcard/Pictures/Screenshots/a.png");
-}
-
 // ------------------------------------------------------
 
 // 判断是否切换到APP
@@ -50,13 +42,38 @@ function isInApp(appName) {
 // ------------------------------------------------------
 
 // 到点点击
-function 每日10点光大天猫() {
+function 光大活动() {
+    var startTime, targetViewText;
+    var actNames = ["10元肯德基", "10元30天猫", "50元海底捞", "50元必胜客"];
+    var selActIdx = dialogs.select("选择启动", actNames);
+    if (selActIdx == -1) {
+        exit();
+    }
+    var actName = actNames[selActIdx];
+    switch (actName) {
+        case "10元肯德基":
+            startTime = "11,00,00,000";
+            targetViewText = "【活动编号】30456";
+            break;
+        case "10元30天猫":
+            startTime = "10,00,00,000";
+            targetViewText = "【活动编号】23851";
+            break;
+        case "50元必胜客":
+            startTime = "11,00,00,000";
+            targetViewText = "【活动编号】26829";
+            break;
+        case "50元海底捞":
+            startTime = "11,00,00,000";
+            targetViewText = "【活动编号】26951";
+            break;
+    }
+
     var appName = "阳光惠生活";
-    var startTime = "10,00,00,100";
     var timeArea = "北京时间";
     launchApp(appName);
     // 等待进入指定页面
-    text("【活动编号】23851").findOne();
+    text(targetViewText).findOne();
     toastLog("已到达指定页面，等待");
     //   定位元素
     func.getTimeDiff(timeArea, startTime);
