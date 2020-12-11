@@ -7,6 +7,7 @@ var selectedArr = [
     "中信9积分",
     "中信365",
     "掌上星巴克",
+    "交行5积分",
     "京东腾讯月"
 ];
 
@@ -81,6 +82,27 @@ function 光大活动() {
     toastLog("结束");
     sleep(800);
 }
+
+// 等待页面加载
+function 交行5积分() {
+    var appName = "买单吧";
+    launchApp(appName);
+    // 等待进入指定页面
+    while (1) {
+        var gasPacket;
+        gasPacket = textContains("加油卡充值30元红包").findOnce();
+        if (gasPacket != null) {
+            toastLog("找到元素");
+            //点击元素
+            func.sClick(gasPacket.parent().child(1).child(0));
+            sleep(300);
+            break;
+        }
+    }
+    toastLog("结束");
+    sleep(800);
+}
+
 
 // 等待页面变价
 function 中信9积分() {
