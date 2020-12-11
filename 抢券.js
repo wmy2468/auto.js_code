@@ -32,16 +32,6 @@ function main() {
 
 // ------------------------------------------------------
 
-// 判断是否切换到APP
-function isInApp(appName) {
-    // 等待APP启动
-    while (currentPackage() != getPackageName(appName)) {
-        log("等待APP加载");
-    }
-    toastLog("APP已加载");
-}
-// ------------------------------------------------------
-
 // 到点点击
 function 光大活动() {
     var startTime, targetViewText;
@@ -95,7 +85,7 @@ function 交行5积分() {
             toastLog("找到元素");
             //点击元素
             func.sClick(gasPacket.parent().child(1).child(0));
-            sleep(300);
+            func.sClick(text("确认").findOne());
             break;
         }
     }
