@@ -38,8 +38,9 @@ function jd_sign() {
         while (text('今日签到成功奖励').findOnce() == null
             && text('全民抢京豆').findOnce() == null) {
             func.sClick(className("TextView").text("签到领京豆").findOnce());
-            sleep(1000);
+            sleep(2000);
         }
+        sleep(2000);
         toastLog('签到成功');
     }
     while (className('TextView').text('首页').findOnce() == null) {
