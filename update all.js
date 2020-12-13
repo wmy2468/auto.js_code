@@ -19,6 +19,7 @@ for (i = 0; i <= jsFiles.length; i++) {
         toastLog('网络读取错误，可能文件不存在，继续下一个' + req.statusMessage)
         //exit();
     } else {
+        toastLog('更新完成 写入文件' + req.statusMessage)
         // 写入文件
         files.write(filePath, req.body.string());
     }
