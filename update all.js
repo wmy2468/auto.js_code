@@ -44,7 +44,7 @@ if (selectIndex == -1) {
             toastLog('网络读取错误，可能文件不存在')
             sleep(800);
         } else {
-            toastLog('更新完成 写入文件')
+            toastLog(fileName + ',更新完成 写入文件')
             // 写入文件
             files.write(filePath, req.body.string());
         }
