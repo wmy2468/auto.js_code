@@ -1,13 +1,11 @@
 auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
-// 123
+// 入口统一为 收藏夹
 var selectedArr = [
-    "光大活动",
-    "中信活动",
-    "掌上星巴克",
-    "交行5积分",
-    "京东腾讯月"
+    "京东茅台",
+    "苏宁茅台",
+    "天猫茅台"
 ];
 
 //淘宝测试();
@@ -32,9 +30,9 @@ function main() {
 // ------------------------------------------------------
 
 // 到点点击
-function 光大活动() {
+function 苏宁茅台() {
     var startTime, targetViewText;
-    var actNames = ["每日11点10元KFC", "每日10点10元30天猫", "周末11点50元海底捞", "周末11点50元必胜客"];
+
     var selActIdx = dialogs.select("选择启动", actNames);
     if (selActIdx == -1) {
         exit();
@@ -107,15 +105,6 @@ function 中信活动() {
 
     switch (actName) {
         case "每日10点9积分兑换":
-            // 券名称
-            var couDes = ["必胜客100元代金券", "百果园50元代金券"];
-            var couDesIndex = dialogs.select("选择要抢的券：", couDes);
-            if (couDesIndex == -1) {
-                toastLog("未选择元素");
-                exit();
-            }
-            // 设置查找的文本
-            targetViewText = couDes[couDesIndex];
             // 等待页面变化
             targetViewText = "价格: 1个权益+9个积分";
             launchApp(appName);
