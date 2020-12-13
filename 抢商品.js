@@ -32,7 +32,6 @@ function main() {
 // 到点点击
 function 苏宁茅台() {
     var startTime, targetViewText;
-
     var selActIdx = dialogs.select("选择启动", actNames);
     if (selActIdx == -1) {
         exit();
