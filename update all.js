@@ -25,7 +25,7 @@ if (selectIndex == -1) {
     fileUrl = originUrl + fileName;     // 网络文件路径
     var req = http.get(fileUrl);
     if (req.statusCode != '200') {
-        toastLog('网络读取错误，可能文件不存在' + req.statusMessage)
+        toastLog('网络读取错误，可能文件不存在')
         sleep(800);
         alert('更新失败 退出');
     } else {
@@ -41,10 +41,10 @@ if (selectIndex == -1) {
         fileUrl = originUrl + fileName;     // 网络文件路径
         var req = http.get(fileUrl);
         if (req.statusCode != '200') {
-            toastLog('网络读取错误，可能文件不存在' + req.statusMessage)
+            toastLog('网络读取错误，可能文件不存在')
             sleep(800);
         } else {
-            toastLog('更新完成 写入文件' + req.statusMessage)
+            toastLog('更新完成 写入文件')
             // 写入文件
             files.write(filePath, req.body.string());
         }
