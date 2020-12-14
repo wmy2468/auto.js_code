@@ -81,13 +81,13 @@ function 天猫茅台() {
     // 等待用户选择到指定页面
     text(targetViewText).findOne();
     // 等待时间到达
-    func.getTimeDiff(timeArea, startTime);
+    // func.getTimeDiff(timeArea, startTime);
     // 循环点击元素
     var sureOrder, submitOrder;     // 确认订单，提交订单
     while (1) {
         // 点击结算
         func.sClick(className("android.widget.TextView").id("button_cart_charge").text("结算(1)").findOne());
-        sureOrder = className("android.widget.TextView").text("确认订单").findOne();
+        sureOrder = className("android.widget.TextView").id("btn_back").text("确认订单").findOne();
         if (text("失效宝贝").findOnce() == null) {
             func.sClick(sureOrder);     // 点击返回
         }
