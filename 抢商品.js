@@ -48,11 +48,24 @@ function 京东茅台() {
     // 等待时间到达
     func.getTimeDiff(timeArea, startTime);
     // 循环点击元素
-    // 点击商品
-    func.sClick(text(targetViewText).findOne());
-    // 点击立即抢购
-    func.sClick(text("立即抢购").findOne());
+    while (!func.sClick(text("立即抢购").findOnce())) {
+        // 点击商品
+        func.sClick(textContains(targetViewText).findOnce());
+        // 如果找到已预约 则返回
+        if (text("已预约").findOnce()) {
+            back();
+            continue;
+        }
+    }
     // 点击提交订单
+    while (!func.sClick(text("提交订单").findOnce())) {
+        // 点击立即抢购
+        func.sClick(text("立即抢购").findOnce());
+        if (textContains("很遗憾").findOnce()) {
+            back();
+            continue;
+        }
+    }
     while (1) {
         func.sClick(text("提交订单").findOnce());
         sleep(300);
