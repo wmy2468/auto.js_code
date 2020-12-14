@@ -290,6 +290,13 @@ function setFloatyVal(window, textVal) {
     });
 }
 
+// 请求时间限制
+var timeLimit = { "京东时间": 800, "淘宝时间": 800, "北京时间": 500, "苏宁时间": 800 };
+// 设置服务器延迟
+var serverDelay = { "京东时间": 50, "淘宝时间": 50, "北京时间": 104, "苏宁时间": 50 };
+// 每次请求之间的延迟
+var reqDelay = 300;
+
 // 时间校准 获取时间差函数
 function getTimeDiff(area, targetTime) {
     // 生成今天的时间戳
@@ -307,7 +314,7 @@ function getTimeDiff(area, targetTime) {
 
     var floatWin = floatyInit();
 
-    //当剩余时间超过25秒的时候 等待
+    //当剩余时间超过15秒的时候 等待
     while (targetTimestamp - curTimestamp > 15000) {
         curTimestamp = new Date().getTime();
         setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000));
@@ -331,13 +338,6 @@ function getTimeDiff(area, targetTime) {
         curTimestamp = new Date().getTime() + timeDiff;
     }
 }
-
-// 请求时间限制
-var timeLimit = { "京东时间": 800, "淘宝时间": 800, "北京时间": 500, "苏宁时间": 800 };
-// 设置服务器延迟
-var serverDelay = { "京东时间": 50, "淘宝时间": 50, "北京时间": 104, "苏宁时间": 50 };
-// 每次请求之间的延迟
-var reqDelay = 300;
 
 function calTimeDiff(area) {
     var timeDiff;

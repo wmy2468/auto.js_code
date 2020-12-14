@@ -4,8 +4,7 @@ var func = require("func_list.js");
 // 入口统一为 收藏夹
 var selectedArr = [
     "京东茅台",
-    "天猫茅台",
-    "苏宁茅台"
+    "天猫茅台"
 ];
 
 //淘宝测试();
@@ -54,6 +53,7 @@ function 京东茅台() {
         // 如果找到已预约 则返回
         if (text("已预约").findOnce()) {
             back();
+            sleep(200);
             continue;
         }
     }
@@ -63,12 +63,13 @@ function 京东茅台() {
         func.sClick(text("立即抢购").findOnce());
         if (textContains("很遗憾").findOnce()) {
             back();
+            sleep(200);
             continue;
         }
     }
     while (1) {
         func.sClick(text("提交订单").findOnce());
-        sleep(300);
+        sleep(333);
     }
     // 提示结束
     toastLog("结束");
@@ -87,15 +88,15 @@ function 天猫茅台() {
     // 等待用户选择到指定页面
     text(targetViewText).findOne();
     toastLog("已到达等待页面");
+    var submitOrder;     // 提交订单
     // 等待时间到达
     func.getTimeDiff(timeArea, startTime);
     // 循环点击元素
-    var sureOrder, submitOrder;     // 确认订单，提交订单
     func.sClick(className("android.widget.TextView").id("button_cart_charge").text("结算(1)").findOne());
     var submitOrder = className("android.widget.TextView").text("提交订单").findOne();
     while (text("支付宝账号").findOnce() == null) {
         func.sClick(submitOrder.parent());
-        sleep(300);
+        sleep(333);
     }
     // 提示结束
     toastLog("结束");
