@@ -69,123 +69,44 @@ function 苏宁茅台() {
     sleep(800);
 }
 
-// 等待页面加载
-function 交行5积分() {
-    var appName = "买单吧";
+function 天猫茅台() {
+    // 只有购物车抢购模式
+    var appName = "手机淘宝"
+    var startTimes = ["19,00,00,000", "20,00,00,000"];
+    var startTime = dialogsWin(startTimes);
+    var targetViewText = "结算(1)";;
+    // 启动APP
     launchApp(appName);
-    // 等待进入指定页面
+    // 等待用户选择到指定页面
+    text(targetViewText).findOne();
+    // 等待时间到达
+    func.getTimeDiff(timeArea, startTime);
+    // 循环点击元素
+    var sureOrder, submitOrder;     // 确认订单，提交订单
     while (1) {
-        var gasPacket;
-        gasPacket = textContains("加油卡充值30元红包").findOnce();
-        if (gasPacket != null) {
-            toastLog("找到元素");
-            //点击元素
-            func.sClick(gasPacket.parent().child(1).child(0));
-            func.sClick(text("确认").findOne());
-            break;
+        // 点击结算
+        func.sClick(className("android.widget.TextView").id("button_cart_charge").text("结算(1)").findOne());
+        sureOrder = className("android.widget.TextView").text("确认订单").findOne();
+        if (text("失效宝贝").findOnce() == null) {
+            func.sClick(sureOrder);     // 点击返回
+        }
+        else {
+            // 点击提交订单
+            var submitOrder = className("android.widget.TextView").text("提交订单").findOnce();
+            if (!submitOrder) {
+                func.sClick(submitOrder.parent());
+            }
         }
     }
+    // 提示结束
     toastLog("结束");
     sleep(800);
 }
 
-
-// 等待页面变价
-function 中信活动() {
-    var appName = "动卡空间";
-    var timeArea = "北京时间";
-    var startTime, targetViewText;
-    var actNames = ["每日10点9积分兑换", "周三六11点5折券"];
-    var selActIdx = dialogs.select("选择启动", actNames);
-    if (selActIdx == -1) {
+function dialogsWin(inArr) {
+    var selIdx = dialogs.select("选择启动", inArr);
+    if (selIdx == -1) {
         exit();
     }
-    var actName = actNames[selActIdx];
-
-    switch (actName) {
-        case "每日10点9积分兑换":
-            // 等待页面变化
-            targetViewText = "价格: 1个权益+9个积分";
-            launchApp(appName);
-            // 等待进入指定页面
-            text(targetViewText).findOne();
-            toastLog("已到达指定页面，等待");
-            //点击元素
-            func.sClick(className("android.view.View").text("去兑换").findOne());
-            func.sClick(className("android.view.View").text("去支付").findOne());
-            toastLog("结束");
-            sleep(800);
-            break;
-        case "周三六11点5折券":
-            // 到点点击
-            startTime = "11,00,00,000";
-            // 券名称
-            var couDes = ["必胜客100元代金券", "百果园50元代金券"];
-            var couDesIndex = dialogs.select("选择要抢的券：", couDes);
-            if (couDesIndex == -1) {
-                toastLog("未选择元素");
-                exit();
-            }
-            // 设置查找的文本
-            targetViewText = couDes[couDesIndex];
-            launchApp(appName);
-            // 等待进入指定页面
-            className("android.view.View").text(targetViewText).findOne();
-            toastLog("已到达指定页面，等待");
-            // 等待时间
-            func.getTimeDiff(timeArea, startTime);
-            // 点击元素
-            func.sClick(className("android.view.View").text(targetViewText).findOne());
-            toastLog("点击商品");
-            // 点击元素
-            func.sClick(className("android.widget.Button").text("立即购买").findOne());
-            func.sClick(className("android.view.View").text("确认").findOne());
-            toastLog("结束");
-            sleep(800);
-            break;
-    }
-}
-
-// 到点点击
-function 掌上星巴克() {
-    var appName = "掌上生活";
-    var startTime = "10,00,00,100";
-    var timeArea = "北京时间";
-    var buyBtn;
-    launchApp(appName);
-    // 等待进入指定页面
-    buyBtn = className("android.view.View").text("星巴克大杯馥芮白双杯券").findOne();
-    toastLog("已到达指定页面，等待");
-    func.getTimeDiff(timeArea, startTime);
-    //点击元素
-    func.sClick(buyBtn.parent().child(2));
-    //点击元素
-    func.sClick(className("android.widget.Button").text("确认订单").findOne());
-    func.sClick(className("android.widget.Button").textContains("提交订单").findOne());
-    toastLog("结束");
-    sleep(800);
-}
-
-// 等待页面变价
-function 京东腾讯月() {
-    var appName = "京东金融";
-    launchApp(appName);
-    // 等待进入指定页面    
-    var tencentVip = className("android.view.View").text("腾讯视频VIP月卡").findOne();
-    var getBtn;
-    toastLog("已到达指定页面，等待");
-    while (1) {
-        try {
-            // 找到领取按钮
-            getBtn = tencentVip.parent().child(4).child(0);
-            if (getBtn != null) {
-                getBtn.click();
-                toastLog("结束");
-                sleep(800);
-                break;
-            }
-        } catch (e) {
-            continue;
-        }
-    }
+    return inArr[selIdx];
 }

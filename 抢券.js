@@ -107,15 +107,7 @@ function 中信活动() {
 
     switch (actName) {
         case "每日10点9积分兑换":
-            // 券名称
-            var couDes = ["必胜客100元代金券", "百果园50元代金券"];
-            var couDesIndex = dialogs.select("选择要抢的券：", couDes);
-            if (couDesIndex == -1) {
-                toastLog("未选择元素");
-                exit();
-            }
-            // 设置查找的文本
-            targetViewText = couDes[couDesIndex];
+            toastLog("等待页面变价");
             // 等待页面变化
             targetViewText = "价格: 1个权益+9个积分";
             launchApp(appName);
