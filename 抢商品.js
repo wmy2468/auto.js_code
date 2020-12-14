@@ -72,6 +72,7 @@ function 苏宁茅台() {
 function 天猫茅台() {
     // 只有购物车抢购模式
     var appName = "手机淘宝"
+    var timeArea = "淘宝时间";
     var startTimes = ["19,00,00,000", "20,00,00,000"];
     var startTime = dialogsWin(startTimes);
     var targetViewText = "结算(1)";;
