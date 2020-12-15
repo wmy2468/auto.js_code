@@ -35,7 +35,7 @@ function 京东茅台() {
 
     var appName = "京东"
     var timeArea = "京东时间";
-    var startTime = "09,59,59,666";
+    var startTime = "09,59,50,000";
     var targetViewText = "贵州茅台酒";;
     // 启动APP
     launchApp(appName);
@@ -46,17 +46,10 @@ function 京东茅台() {
     toastLog("已到达等待页面");
     // 等待时间到达
     func.getTimeDiff(timeArea, startTime);
-    // 循环点击元素
-    while (!func.sClick(text("立即抢购").findOnce())) {
-        // 点击商品
-        func.sClick(textContains(targetViewText).findOnce());
-        // 如果找到已预约 则返回
-        if (text("已预约").findOnce()) {
-            back();
-            sleep(200);
-            continue;
-        }
-    }
+    // 点击商品进入
+    func.sClick(textContains(targetViewText).findOne());
+    // 循环点击元素 等待页面变价
+    func.sClick(text("立即抢购").findOne());
     // 点击提交订单
     while (!func.sClick(text("提交订单").findOnce())) {
         // 点击立即抢购
@@ -66,6 +59,7 @@ function 京东茅台() {
             sleep(200);
             continue;
         }
+        sleep(400);
     }
     while (1) {
         func.sClick(text("提交订单").findOnce());
@@ -80,8 +74,7 @@ function 天猫茅台() {
     // 只有购物车抢购模式
     var appName = "手机淘宝"
     var timeArea = "淘宝时间";
-    var startTimes = ["18,59,59,666", "19,59,59,666"];
-    var startTime = dialogsWin(startTimes);
+    var startTime = "19,59,59,666";
     var targetViewText = "结算(1)";;
     // 启动APP
     launchApp(appName);
@@ -96,7 +89,7 @@ function 天猫茅台() {
     var submitOrder = className("android.widget.TextView").text("提交订单").findOne();
     while (text("支付宝账号").findOnce() == null) {
         func.sClick(submitOrder.parent());
-        sleep(333);
+        sleep(666);
     }
     // 提示结束
     toastLog("结束");
