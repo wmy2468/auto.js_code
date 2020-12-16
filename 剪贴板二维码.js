@@ -17,7 +17,6 @@ log(clipText);
 var imgPath = files.cwd() + "//qr.png";
 //toastLog(filepath);
 var picUrl = "http://apis.juhe.cn/qrcode/api?key=684e3d257f6034ebdfd80a2bbeddeb18&type=2&fgcolor=00b7ee&w=450&m=50&text=" + clipText;
-//var picUrl = "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png";
 threads.start(function () {
     var img = null, maxTime = 10;
     while (img == null) {
