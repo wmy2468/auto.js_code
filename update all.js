@@ -35,7 +35,7 @@ if (selectIndex == -1) {
     }
 } else {
     // 变例读取文件
-    for (i = 0; i <= jsFiles.length; i++) {
+    for (i = 0; i <= jsFiles.length - 1; i++) {
         fileName = jsFiles[i];              // 文件名
         filePath = dir + '/' + fileName;    // 文件路径
         fileUrl = originUrl + fileName;     // 网络文件路径
