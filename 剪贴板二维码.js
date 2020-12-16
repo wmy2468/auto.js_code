@@ -9,6 +9,7 @@ if (clipText == "") {
 if (clipText.indexOf("＆") == 0) {
     clipText = clipText.substr(1, clipText.length - 2);
 }
+// 如果是URL，需要对其URL编码
 if (clipText.indexOf("http") == 0) {
     clipText = encodeURIComponent(clipText);
 }
