@@ -337,6 +337,8 @@ function getTimeDiff(area, targetTime) {
         }
         curTimestamp = new Date().getTime() + timeDiff;
     }
+    // 关闭浮窗
+    floaty.closeAll();
 }
 
 function calTimeDiff(area) {
@@ -501,6 +503,14 @@ function snTime() {
     return delta - serverDelay[timeArea];
 }
 
+function dialogsWin(inArr) {
+    var selIdx = dialogs.select("选择启动", inArr);
+    if (selIdx == -1) {
+        exit();
+    }
+    return inArr[selIdx];
+}
+
 module.exports = {
     toAutojs: toAutojs,
     cClick: cClick,
@@ -515,5 +525,6 @@ module.exports = {
     lockScr: lockScr,
     toJdSku: toJdSku,
     getTimeDiff: getTimeDiff,
-    calTimeDiff: calTimeDiff
+    calTimeDiff: calTimeDiff,
+    dialogsWin: dialogsWin
 }

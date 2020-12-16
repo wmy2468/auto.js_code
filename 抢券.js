@@ -104,10 +104,19 @@ function 中信活动() {
         exit();
     }
     var actName = actNames[selActIdx];
-
+    var couDes;    // 券描述
     switch (actName) {
         case "每日10点9积分兑换":
-            toastLog("等待页面变价");
+            startTime = "09,59,45,000"
+            couDes = ["星巴克中杯", "必胜客30元", "奈雪", "喜茶25元", "苏宁易购20元", "百果园20元", "京东支付券20元", "天猫20元", "美团外卖20元"];
+            targetViewText = func.dialogsWin(couDes);
+            // 找券
+            var couClick = textContains(couDes).findOne();
+            toastLog("已到找到对应券位置，提前15秒自动进入");
+            // 等待到15秒的时候再进入
+            func.getTimeDiff(timeArea, startTime);
+            // 点击标签
+            func.sClick(couClick);
             // 等待页面变化
             targetViewText = "价格: 1个权益+9个积分";
             launchApp(appName);
@@ -124,14 +133,9 @@ function 中信活动() {
             // 到点点击
             startTime = "11,00,00,000";
             // 券名称
-            var couDes = ["必胜客100元代金券", "百果园50元代金券"];
-            var couDesIndex = dialogs.select("选择要抢的券：", couDes);
-            if (couDesIndex == -1) {
-                toastLog("未选择元素");
-                exit();
-            }
+            couDes = ["必胜客100元代金券", "百果园50元代金券"];
             // 设置查找的文本
-            targetViewText = couDes[couDesIndex];
+            targetViewText = func.dialogsWin(couDes);
             launchApp(appName);
             // 等待进入指定页面
             className("android.view.View").text(targetViewText).findOne();

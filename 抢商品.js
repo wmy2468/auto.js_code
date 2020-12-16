@@ -36,7 +36,7 @@ function 京东茅台() {
     var appName = "京东"
     var timeArea = "京东时间";
     var startTime = "09,59,50,000";
-    var targetViewText = "贵州茅台酒";;
+    var targetViewText = "贵州茅台酒";
     // 启动APP
     launchApp(appName);
     // 等待用户选择到指定页面
@@ -56,7 +56,6 @@ function 京东茅台() {
         func.sClick(text("立即抢购").findOnce());
         if (textContains("很遗憾").findOnce()) {
             back();
-            sleep(200);
             continue;
         }
         sleep(400);
@@ -94,12 +93,4 @@ function 天猫茅台() {
     // 提示结束
     toastLog("结束");
     sleep(800);
-}
-
-function dialogsWin(inArr) {
-    var selIdx = dialogs.select("选择启动", inArr);
-    if (selIdx == -1) {
-        exit();
-    }
-    return inArr[selIdx];
 }
