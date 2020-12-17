@@ -2,11 +2,13 @@ auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
 // 根据设备区分延迟
-var deviceDelay;
+var deviceDelayJD, deviceDelayTB;
 if (device.brand == "HUAWEI") {
-    deviceDelay = 330;
+    deviceDelayJD = 330;
+    deviceDelayTB = 100;
 } else if (device.brand == "xiaomi") {
-    deviceDelay = 630;
+    deviceDelayJD = 630;
+    deviceDelayTB = 55;
 }
 
 // 入口统一为 收藏夹
@@ -42,7 +44,7 @@ function 京东茅台() {
 
     var appName = "京东"
     var timeArea = "京东时间";
-    var startTime = "09,59,59," + (999 - deviceDelay).toString();
+    var startTime = "09,59,59," + (999 - deviceDelayJD).toString();
     var targetViewText = "贵州茅台酒";
     launchApp(appName);             // 启动APP
     // 等待用户选择到指定页面
@@ -76,18 +78,16 @@ function 天猫茅台() {
     // 只有购物车抢购模式
     var appName = "手机淘宝"
     var timeArea = "淘宝时间";
-    var startTime = "19,59,59,444";
+    var startTime = "19,59,59," + (555 - deviceDelayTB).toString();
     var targetViewText = "结算(1)";;
     launchApp(appName);             // 启动APP
     text(targetViewText).findOne();             // 等待用户选择到指定页面
     toastLog("已到达等待页面");
-    var submitOrder;     // 提交订单
     func.getTimeDiff(timeArea, startTime);              // 等待时间到达
     // 循环点击元素
     func.sClick(className("android.widget.TextView").id("button_cart_charge").text("结算(1)").findOne());
-    var submitOrder = className("android.widget.TextView").text("提交订单").findOne();
     while (text("支付宝账号").findOnce() == null) {
-        func.sClick(submitOrder.parent());
+        func.sClick(className("android.widget.TextView").text("提交订单").findOne());
         sleep(335);
         if (func.sClick(text("我知道了").findOnce())) {
             sleep(200);

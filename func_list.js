@@ -20,6 +20,8 @@ function cClick(element) {
     if (element != null) {
         click(element.bounds().centerX(), element.bounds().centerY());
         log("cClick_center");
+    } else {
+        log("cClick_null");
     }
 }
 
@@ -33,6 +35,7 @@ function sClick(element) {
         }
         return true;
     }
+    log("sClick_null");
     return false;
 }
 
