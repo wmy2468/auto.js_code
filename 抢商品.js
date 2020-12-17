@@ -1,6 +1,14 @@
 auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
+// 根据设备区分延迟
+var deviceDelay;
+if (device.brand == "HUAWEI") {
+    deviceDelay = 330;
+} else if (device.brand == "xiaomi") {
+    deviceDelay = 630;
+}
+
 // 入口统一为 收藏夹
 var selectedArr = [
     "京东茅台",
@@ -34,7 +42,7 @@ function 京东茅台() {
 
     var appName = "京东"
     var timeArea = "京东时间";
-    var startTime = "09,59,50,000";
+    var startTime = "09,59,59," + (999 - deviceDelay).toString();
     var targetViewText = "贵州茅台酒";
     launchApp(appName);             // 启动APP
     // 等待用户选择到指定页面
@@ -68,7 +76,7 @@ function 天猫茅台() {
     // 只有购物车抢购模式
     var appName = "手机淘宝"
     var timeArea = "淘宝时间";
-    var startTime = "19,59,59,555";
+    var startTime = "19,59,59,444";
     var targetViewText = "结算(1)";;
     launchApp(appName);             // 启动APP
     text(targetViewText).findOne();             // 等待用户选择到指定页面
@@ -80,7 +88,10 @@ function 天猫茅台() {
     var submitOrder = className("android.widget.TextView").text("提交订单").findOne();
     while (text("支付宝账号").findOnce() == null) {
         func.sClick(submitOrder.parent());
-        sleep(666);
+        sleep(335);
+        if (func.sClick(text("我知道了").findOnce())) {
+            sleep(200);
+        }
     }
     // 提示结束
     toastLog("结束");
