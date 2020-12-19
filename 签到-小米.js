@@ -35,8 +35,7 @@ function jd_sign() {
         toastLog('今日已签到');
     }
     else {
-        while (text('今日签到成功奖励').findOnce() == null
-            && text('全民抢京豆').findOnce() == null) {
+        while (textContains("恭喜您获得").findOnce() == null) {
             func.sClick(className("TextView").text("签到领京豆").findOnce());
             sleep(2000);
         }
