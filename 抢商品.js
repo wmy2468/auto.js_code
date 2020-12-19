@@ -85,13 +85,14 @@ function 天猫茅台() {
     toastLog("已到达等待页面");
     func.getTimeDiff(timeArea, startTime);              // 等待时间到达
     // 循环点击元素
-    func.sClick(className("android.widget.TextView").id("button_cart_charge").text("结算(1)").findOne());
+    while (!(text("配送时间").findOnce())) {
+        func.sClick(id("button_cart_charge").text("结算(1)").findOne());
+        func.sClick(text("我知道了").findOnce());
+    }
+
     while (text("支付宝账号").findOnce() == null) {
         func.sClick(className("android.widget.TextView").text("提交订单").findOne());
         sleep(335);
-        if (func.sClick(text("我知道了").findOnce())) {
-            sleep(200);
-        }
     }
     // 提示结束
     toastLog("结束");
