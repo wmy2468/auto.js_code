@@ -13,7 +13,7 @@ function main() {
         clipText = clipText.substr(1, clipText.length - 2);
     }
     // 如果是URL，需要对其URL编码
-    if (clipText.indexOf("http") == 0) {
+    if (clipText.indexOf("http") == 0 && clipText.indexOf("%") == -1) {
         clipText = encodeURIComponent(clipText);
     }
     log(clipText);

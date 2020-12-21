@@ -2,12 +2,10 @@ auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
 // 根据设备区分延迟
-var deviceDelayJD, deviceDelayTB;
+var deviceDelayTB;
 if (device.brand == "HUAWEI") {
-    deviceDelayJD = 330;
     deviceDelayTB = 100;
 } else if (device.brand == "xiaomi") {
-    deviceDelayJD = 630;
     deviceDelayTB = 55;
 }
 
@@ -44,17 +42,17 @@ function 京东茅台() {
 
     var appName = "京东"
     var timeArea = "京东时间";
-    var startTime = "09,59,59," + (999 - deviceDelayJD).toString();
+    var startTime = "09,59,50,000";
     var targetViewText = "贵州茅台酒";
     launchApp(appName);             // 启动APP
-    // 等待用户选择到指定页面
-    while (text("我的预约").findOnce() || id("com.jd.lib.favourites.feature:id/favo_goods_tab").text("商品").findOnce()) {
+    // 等待用户选择到指定页面 条件=商品或预约 + 茅台
+    while ((text("我的预约").findOnce() || id("favo_goods_tab").text("商品").findOnce()) && textContains(targetViewText).findOnce()) {
         sleep(800);
     }
     toastLog("已到达等待页面");
     func.getTimeDiff(timeArea, startTime);              // 等待时间到达
     func.sClick(textContains(targetViewText).findOne());                // 点击商品进入
-    func.sClick(text("立即抢购").findOne());                // 循环点击元素 等待页面变价
+    func.sClick(text("立即抢购").findOne());                // 等待页面变价 点击元素 
     // 点击提交订单
     while (!func.sClick(text("提交订单").findOnce())) {
         // 点击立即抢购
@@ -81,6 +79,7 @@ function 天猫茅台() {
     var startTime = "19,59,59," + (555 - deviceDelayTB).toString();
     var targetViewText = "结算(1)";;
     launchApp(appName);             // 启动APP
+    toastLog("勾选商品，购物车显示为结算(1)");
     text(targetViewText).findOne();             // 等待用户选择到指定页面
     toastLog("已到达等待页面");
     func.getTimeDiff(timeArea, startTime);              // 等待时间到达

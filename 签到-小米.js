@@ -57,7 +57,8 @@ function jd_sign() {
         sleep(800);
     }
     sleep(1200);
-
+    // 点击领话费券按钮
+    func.sClick(text("话费券").findOnce());
     var signBtn = className("TextView").text("立即领红包").findOnce();
 
     if (signBtn == null) {

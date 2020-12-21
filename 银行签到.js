@@ -14,7 +14,7 @@ function main() {
     //邮储银行();
     浦发信用卡();
     邮储信用卡();
-    华彩生活();
+    //华彩生活();
     买单吧();
     alert("已完成.");
 }
@@ -165,7 +165,8 @@ function jd_sign() {
         sleep(800);
     }
     sleep(1200);
-
+    // 点击领话费券按钮
+    func.sClick(text("话费券").findOnce());
     var signBtn = className("TextView").text("立即领红包").findOnce();
 
     if (signBtn == null) {

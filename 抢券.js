@@ -51,11 +51,11 @@ function 光大活动() {
             targetViewText = "【活动编号】23851";
             break;
         case "周末11点50元必胜客":
-            startTime = "11,00,00,000";
+            startTime = "10,59,59,666";
             targetViewText = "【活动编号】26829";
             break;
         case "周末11点50元海底捞":
-            startTime = "11,00,00,000";
+            startTime = "10,59,59,666";
             targetViewText = "【活动编号】26951";
             break;
     }
