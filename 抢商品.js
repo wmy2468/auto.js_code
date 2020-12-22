@@ -79,8 +79,11 @@ function 天猫茅台() {
     var startTime = "19,59,59," + (650 - deviceDelayTB).toString();
     var targetViewText = "结算(1)";;
     launchApp(appName);             // 启动APP
-    toastLog("勾选商品，购物车显示为结算(1)");
-    text(targetViewText).findOne();             // 等待用户选择到指定页面
+    // 等待用户选择到指定页面
+    while (!text(targetViewText).findOnce()) {
+        toastLog("请勾选商品，购物车显示为结算(1)");
+        sleep(1000);
+    }
     toastLog("已到达等待页面");
     func.getTimeDiff(timeArea, startTime);              // 等待时间到达
     // 循环点击元素
