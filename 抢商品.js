@@ -76,7 +76,7 @@ function 天猫茅台() {
     // 只有购物车抢购模式
     var appName = "手机淘宝"
     var timeArea = "淘宝时间";
-    var startTime = "19,59,59," + (666 - deviceDelayTB).toString();
+    var startTime = "19,59,59," + (650 - deviceDelayTB).toString();
     var targetViewText = "结算(1)";;
     launchApp(appName);             // 启动APP
     toastLog("勾选商品，购物车显示为结算(1)");
