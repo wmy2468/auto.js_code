@@ -47,6 +47,7 @@ function 京东茅台() {
     launchApp(appName);             // 启动APP
     // 等待用户选择到指定页面 条件=商品或预约 + 茅台
     while ((text("我的预约").findOnce() || id("favo_goods_tab").text("商品").findOnce()) && textContains(targetViewText).findOnce()) {
+        toastLog("请跳转到收藏界面或者 预约界面，直到提示  已到达等待页面");
         sleep(800);
     }
     toastLog("已到达等待页面");
@@ -81,7 +82,7 @@ function 天猫茅台() {
     launchApp(appName);             // 启动APP
     // 等待用户选择到指定页面
     while (!text(targetViewText).findOnce()) {
-        toastLog("请勾选商品，购物车显示为结算(1)");
+        toastLog("请勾选商品，购物车显示为结算(1)，直到提示  已到达等待页面");
         sleep(1000);
     }
     toastLog("已到达等待页面");
