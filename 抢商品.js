@@ -4,7 +4,7 @@ var func = require("func_list.js");
 // 根据设备区分延迟
 var deviceDelayTB;
 if (device.brand == "HUAWEI") {
-    deviceDelayTB = 100;
+    deviceDelayTB = 50;
 } else if (device.brand == "xiaomi") {
     deviceDelayTB = 50;
 }
@@ -77,7 +77,7 @@ function 天猫茅台() {
     // 只有购物车抢购模式
     var appName = "手机淘宝"
     var timeArea = "淘宝时间";
-    var startTime = "19,59,59," + (650 - deviceDelayTB).toString();
+    var startTime = "19,59,59," + (700 - deviceDelayTB).toString();
     var targetViewText = "结算(1)";;
     launchApp(appName);             // 启动APP
     // 等待用户选择到指定页面
@@ -88,12 +88,12 @@ function 天猫茅台() {
     toastLog("已到达等待页面");
     func.getTimeDiff(timeArea, startTime);              // 等待时间到达
     // 循环点击元素
-    while (text("支付宝账号").findOnce() == null) {
-        if (func.sClick(id("button_cart_charge").text("结算(1)").findOne())) {
+    while (!text("支付宝账号").findOnce()) {
+        if (func.sClick(id("button_cart_charge").text("结算(1)").findOnce())) {
             sleep(300);
         }
         func.sClick(text("我知道了").findOnce());
-        if (func.sClick(className("android.widget.TextView").text("提交订单").findOne())) {
+        if (func.sClick(className("android.widget.TextView").text("提交订单").findOnce())) {
             sleep(335);
         }
 
