@@ -6,7 +6,7 @@ var deviceDelayTB;
 if (device.brand == "HUAWEI") {
     deviceDelayTB = 100;
 } else if (device.brand == "xiaomi") {
-    deviceDelayTB = 55;
+    deviceDelayTB = 50;
 }
 
 // 入口统一为 收藏夹
@@ -76,7 +76,7 @@ function 天猫茅台() {
     // 只有购物车抢购模式
     var appName = "手机淘宝"
     var timeArea = "淘宝时间";
-    var startTime = "19,59,59," + (555 - deviceDelayTB).toString();
+    var startTime = "19,59,59," + (666 - deviceDelayTB).toString();
     var targetViewText = "结算(1)";;
     launchApp(appName);             // 启动APP
     toastLog("勾选商品，购物车显示为结算(1)");
@@ -85,7 +85,9 @@ function 天猫茅台() {
     func.getTimeDiff(timeArea, startTime);              // 等待时间到达
     // 循环点击元素
     while (!(text("配送时间").findOnce())) {
-        func.sClick(id("button_cart_charge").text("结算(1)").findOne());
+        if (func.sClick(id("button_cart_charge").text("结算(1)").findOne())) {
+            sleep(300);
+        }
         func.sClick(text("我知道了").findOnce());
     }
 
