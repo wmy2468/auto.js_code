@@ -42,42 +42,45 @@ function 京东茅台() {
 
     var appName = "京东"
     var timeArea = "京东时间";
-    var startTime = "09,59,50,000";
+    var startTime = "09,59,52,000";
     var targetViewText = "贵州茅台酒";
     launchApp(appName);             // 启动APP
     // 等待用户选择到指定页面 条件=商品或预约 + 茅台
-    while ((text("我的预约").findOnce() || id("favo_goods_tab").text("商品").findOnce()) && textContains(targetViewText).findOnce()) {
+    while (!((text("我的预约").findOnce() || id("favo_goods_tab").text("商品").findOnce()) || textContains(targetViewText).findOnce())) {
         toastLog("请跳转到收藏界面或者 预约界面，直到提示  已到达等待页面");
-        sleep(800);
+        sleep(1000);
     }
     toastLog("已到达等待页面");
     func.getTimeDiff(timeArea, startTime);              // 等待时间到达
     func.sClick(textContains(targetViewText).findOne());                // 点击商品进入
-    func.sClick(text("立即抢购").findOne());                // 等待页面变价 点击元素 
+    func.sClick(text("立即抢购").findOne());                // 等待页面变价 点击元素
+    log("整点变价 立即抢购 Click");
     // 点击提交订单
     while (!func.sClick(text("提交订单").findOnce())) {
         // 点击立即抢购
-        func.sClick(text("立即抢购").findOnce());
+        if (func.sClick(text("立即抢购").findOnce())) {
+            log("已变价 立即抢购 Click");
+            sleep(389);
+        }
         if (textContains("很遗憾").findOnce()) {
+            log("很遗憾 Click");
             back();
             continue;
         }
-        sleep(400);
+
     }
     while (1) {
         func.sClick(text("提交订单").findOnce());
+        log("提交订单 Click");
         sleep(333);
     }
-    // 提示结束
-    toastLog("结束");
-    sleep(800);
 }
 
 function 天猫茅台() {
     // 只有购物车抢购模式
     var appName = "手机淘宝"
     var timeArea = "淘宝时间";
-    var startTime = "19,59,59," + (700 - deviceDelayTB).toString();
+    var startTime = "19,59,59," + (800 - deviceDelayTB).toString();
     var targetViewText = "结算(1)";;
     launchApp(appName);             // 启动APP
     // 等待用户选择到指定页面
@@ -90,15 +93,14 @@ function 天猫茅台() {
     // 循环点击元素
     while (!text("支付宝账号").findOnce()) {
         if (func.sClick(id("button_cart_charge").text("结算(1)").findOnce())) {
+            log("结算 Click");
             sleep(300);
         }
         func.sClick(text("我知道了").findOnce());
         if (func.sClick(className("android.widget.TextView").text("提交订单").findOnce())) {
+            log("提交订单 Click");
             sleep(335);
         }
 
     }
-    // 提示结束
-    toastLog("结束");
-    sleep(800);
 }

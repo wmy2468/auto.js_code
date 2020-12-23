@@ -5,6 +5,7 @@ var func = require("func_list.js");
 var selectedArr = [
     "光大活动",
     "中信活动",
+    "工行活动",
     "掌上星巴克",
     "交行5积分",
     "京东腾讯月"
@@ -64,7 +65,10 @@ function 光大活动() {
     var timeArea = "北京时间";
     launchApp(appName);
     // 等待进入指定页面
-    text(targetViewText).findOne();
+    while (!text(targetViewText).findOnce()) {
+        toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
+        sleep(1000);
+    }
     toastLog("已到达指定页面，等待");
     //   定位元素
     func.getTimeDiff(timeArea, startTime);
@@ -172,7 +176,11 @@ function 京东腾讯月() {
     toastLog("等待页面变化");
     var appName = "京东金融";
     launchApp(appName);
-    // 等待进入指定页面    
+    // 等待进入指定页面
+    while (!className("android.view.View").text("腾讯视频VIP月卡").findOnce()) {
+        toastLog("请跳转到腾讯月卡领取页面，直到提示  已到达等待页面");
+        sleep(1000);
+    }
     var tencentVip = className("android.view.View").text("腾讯视频VIP月卡").findOne();
     var getBtn;
     toastLog("已到达指定页面，等待");
@@ -189,5 +197,39 @@ function 京东腾讯月() {
         } catch (e) {
             continue;
         }
+    }
+}
+
+function 工行活动() {
+    var appName = "工银E生活";
+    var timeArea = "北京时间";
+    var actNames = ["周二25元卡券", "每日42元卡券"];
+    var selActIdx = dialogs.select("选择启动", actNames);
+    if (selActIdx == -1) {
+        exit();
+    }
+    var actName = actNames[selActIdx];
+    switch (actName) {
+        case "周二25元卡券":
+            while (!(!text("更多地区").findOnce() && (textContains("沃尔玛50元").findOnce() || textContains("星巴克50元").findOnce()
+                || textContains("喜茶50元").findOnce() || textContains("肯德基50元").findOnce()))) {
+                toastLog("请进入活动页面，直到提示  已到达等待页面");
+            }
+            toastLog("已到达指定页面，等待");
+            while (!func.sClick(text("立即购买").findOnce()) || !text("安全验证").findOnce()) {
+                func.sClick(text("知道了").findOnce());
+            }
+            break;
+        case "每日42元卡券":
+            launchApp(appName);             // 启动APP
+            while (!(text("使用流程").findOnce() && (textContains("沃尔玛50元").findOnce() || textContains("星巴克50元").findOnce()
+                || textContains("喜茶50元").findOnce() || textContains("肯德基50元").findOnce()))) {
+                toastLog("请进入活动页面，直到提示  已到达等待页面");
+            }
+            toastLog("已到达指定页面，等待");
+            while (!text("安全验证").findOnce()) {
+                func.sClick(text("知道了").findOnce());
+            }
+            break;
     }
 }
