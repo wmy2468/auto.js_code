@@ -98,13 +98,16 @@ function 天猫茅台() {
     while (!text("支付宝账号").findOnce()) {
         if (func.sClick(id("button_cart_charge").text("结算(1)").findOnce())) {
             log("结算 Click");
-            sleep(300);
-        }
-        func.sClick(text("我知道了").findOnce());
-        if (func.sClick(className("android.widget.TextView").text("提交订单").findOnce())) {
-            log("提交订单 Click");
-            sleep(335);
+            sleep(155);
         }
 
+        if (func.sClick(text("我知道了").findOnce())) {
+            log("我知道了 Click");
+            sleep(155);
+        }
+        if (func.sClick(text("提交订单").findOnce())) {
+            log("提交订单 Click");
+            sleep(155);
+        }
     }
 }

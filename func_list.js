@@ -321,7 +321,7 @@ function getTimeDiff(area, targetTime) {
         setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000));
         //console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
         // toastLog("剩余时间:", targetTimestamp - curTimestamp);
-        sleep(1000);
+        sleep(998);
     }
 
     var timeDiff = calTimeDiff(area);
@@ -329,9 +329,9 @@ function getTimeDiff(area, targetTime) {
     var cnt = 0;
     curTimestamp = new Date().getTime() + timeDiff;
     while (curTimestamp < targetTimestamp) {
-        sleep(50);
+        sleep(10);
         cnt = cnt + 1;
-        if (cnt >= 20) {
+        if (cnt >= 100) {
             setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000))
             //console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
             cnt = 0;
