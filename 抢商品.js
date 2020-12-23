@@ -9,17 +9,16 @@ if (device.brand == "HUAWEI") {
     deviceDelayTB = 50;
 }
 
-// 入口统一为 收藏夹
-var selectedArr = [
-    "京东茅台",
-    "天猫茅台"
-];
-
-//淘宝测试();
 main();
 
-//---------------配置区域-----------------
 function main() {
+    // 入口统一为 收藏夹
+    var selectedArr = [
+        "京东茅台",
+        "天猫茅台"
+    ];
+
+    //淘宝测试();
     var selectIndex = dialogs.select("先打开抢购页面,再启动", selectedArr);
     if (selectIndex == -1) {
         exit();
@@ -27,12 +26,17 @@ function main() {
     var scriptName = selectedArr[selectIndex];
     // 设置屏幕常亮6分钟
     device.keepScreenOn(1000 * 60 * 6);
-    //engines.execScript(scriptName, (eval(scriptName + "()")));
-    eval(scriptName + "()");
+    switch (scriptName) {
+        case "京东茅台":
+            京东茅台();
+            break;
+        case "天猫茅台":
+            天猫茅台()
+            break;
+    }
     toastLog("结束");
     device.cancelKeepingAwake();
 }
-
 // ------------------------------------------------------
 
 // 到点点击

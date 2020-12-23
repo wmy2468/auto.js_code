@@ -21,10 +21,10 @@ function main() {
     ];
 
     var selectIndex = dialogs.select("选择时间", selectedArr);
-    getTimeDiff(selectedArr[selectIndex]);
+    getTimeDif(selectedArr[selectIndex]);
 }
 
-function getTimeDiff(area) {
+function getTimeDif(area) {
     var i = 10;
     var cnt = i;
     var c = 0;

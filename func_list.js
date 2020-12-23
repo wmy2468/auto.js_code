@@ -267,8 +267,6 @@ function floatyInit() {
             <text id="text" textSize="16sp" textStyle="bold" typeface="monospace" textColor="#00FFFF" />
         </frame >
     );
-    // 设置浮窗关闭则退出脚本
-    window.exitOnClose();
     // 设置单击可移动事件
     window.text.click(() => {
         window.setAdjustEnabled(!window.isAdjustEnabled());
@@ -281,8 +279,8 @@ function floatyInit() {
         //设置浮窗位置
         window.setPosition(520, 50);
     }
-
-    setInterval(() => { }, 1000);
+    // 如果需要浮窗一直显示，则可以设置这个
+    // setInterval(() => { }, 1000);
     return window;
 }
 
@@ -340,8 +338,8 @@ function getTimeDiff(area, targetTime) {
         }
         curTimestamp = new Date().getTime() + timeDiff;
     }
-    // 关闭浮窗
-    floaty.closeAll();
+    // 如果有设置浮窗显示，则需要手动关闭
+    // floatWin.close();
 }
 
 function calTimeDiff(area) {
