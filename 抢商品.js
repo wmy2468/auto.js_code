@@ -57,6 +57,9 @@ function 京东茅台() {
     toastLog("已到达等待页面");
     func.getTimeDiff(timeArea, startTime);              // 等待时间到达
     func.sClick(textContains(targetViewText).findOne());                // 点击商品进入
+    while (!text("购物车").findOnce()) {
+        func.sClick(text("重试").findOnce());
+    }
     func.sClick(text("立即抢购").findOne());                // 等待页面变价 点击元素
     log("整点变价 立即抢购 Click");
     // 点击提交订单
@@ -100,7 +103,6 @@ function 天猫茅台() {
             log("结算 Click");
             sleep(155);
         }
-
         if (func.sClick(text("我知道了").findOnce())) {
             log("我知道了 Click");
             sleep(155);
