@@ -339,7 +339,7 @@ function getTimeDiff(area, targetTime) {
         curTimestamp = new Date().getTime() + timeDiff;
     }
     // 如果有设置浮窗显示，则需要手动关闭
-    // floatWin.close();
+    floatWin.close();
 }
 
 function calTimeDiff(area) {

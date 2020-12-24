@@ -74,7 +74,6 @@ function 京东茅台() {
             back();
             continue;
         }
-
     }
     while (1) {
         func.sClick(text("提交订单").findOnce());
@@ -87,7 +86,7 @@ function 天猫茅台() {
     // 只有购物车抢购模式
     var appName = "手机淘宝"
     var timeArea = "淘宝时间";
-    var startTime = "19,59,59," + (800 - deviceDelayTB).toString();
+    var startTime = "19,59,59," + (750 - deviceDelayTB).toString();
     var targetViewText = "结算(1)";;
     launchApp(appName);             // 启动APP
     // 等待用户选择到指定页面
