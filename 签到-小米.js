@@ -61,7 +61,7 @@ function jd_sign() {
     var huafei = text("话费券").findOnce();
     if (huafei) {
         if (huafei.parent().childCount() == 3) {
-            func.sClick(huafei);
+            func.sClick(huafei.parent().child(2));
         }
     }
     var signBtn = className("TextView").text("立即领红包").findOnce();

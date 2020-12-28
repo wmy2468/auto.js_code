@@ -166,7 +166,12 @@ function jd_sign() {
     }
     sleep(1200);
     // 点击领话费券按钮
-    func.sClick(text("话费券").findOnce());
+    var huafei = text("话费券").findOnce();
+    if (huafei) {
+        if (huafei.parent().childCount() == 3) {
+            func.sClick(huafei.parent().child(2));
+        }
+    }
     var signBtn = className("TextView").text("立即领红包").findOnce();
 
     if (signBtn == null) {
