@@ -19,20 +19,20 @@ function main() {
 // ======================签到代码==================================
 function jd_sign() {
     //等待首页加载
-    while (className('TextView').text('首页').findOnce() == null) {
-        func.sClick(id('xk').findOnce());
-        toastLog('等待首页...');
+    while (className("TextView").text("首页").findOnce() == null) {
+        func.sClick(id("xk").findOnce());
+        toastLog("等待首页...");
         func.passAd();
-        sleep(2000);
-        func.sClick(textContains('取消').findOnce());
-        func.sClick(descContains('取消').findOnce());
+        func.sClick(textContains("取消").findOnce());
+        func.sClick(descContains("取消").findOnce());
+        sleep(1500);
     }
-    var getBeans = className('TextView').text('领京豆').findOne();
+    var getBeans = className("TextView").text("领京豆").findOne();
     func.sClick(getBeans.parent());
     //等待进店领豆加载
-    className('TextView').text('进店领豆').findOne();
-    if (className('TextView').text('已连续签到').findOnce()) {
-        toastLog('今日已签到');
+    className("TextView").text("进店领豆").findOne();
+    if (className("TextView").text("已连续签到").findOnce()) {
+        toastLog("今日已签到");
     }
     else {
         while (textContains("恭喜您获得").findOnce() == null) {
@@ -40,17 +40,17 @@ function jd_sign() {
             sleep(2000);
         }
         sleep(2000);
-        toastLog('签到成功');
+        toastLog("签到成功");
     }
-    while (className('TextView').text('首页').findOnce() == null) {
+    while (className("TextView").text("首页").findOnce() == null) {
         back();
-        sleep(3000);
+        sleep(2000);
     }
-    var getCon = text('领券').findOne();
+    var getCon = text("领券").findOne();
     func.sClick(getCon.parent());
 
-    while (className('ImageView').desc('领券中心').findOnce() == null) {
-        var closeBtn = id('com.jd.lib.coupon.feature:id/db').findOnce();
+    while (className("ImageView").desc("领券中心").findOnce() == null) {
+        var closeBtn = id("com.jd.lib.coupon.feature:id/db").findOnce();
         if (closeBtn != null) {
             func.sClick(closeBtn.parent().child(1));
         }
@@ -72,7 +72,7 @@ function jd_sign() {
         sleep(1000);
     }
 
-    while (className('TextView').text('首页').findOnce() == null) {
+    while (className("TextView").text("首页").findOnce() == null) {
         back();
         sleep(2000);
     }
