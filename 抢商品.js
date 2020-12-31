@@ -59,6 +59,7 @@ function 京东茅台() {
     func.sClick(textContains(targetViewText).findOne());                // 点击商品进入
     while (!text("购物车").findOnce()) {
         func.sClick(text("重试").findOnce());
+        func.sClick(desc("重试").findOnce());
     }
     func.sClick(text("立即抢购").findOne());                // 等待页面变价 点击元素
     log("整点变价 立即抢购 Click");
