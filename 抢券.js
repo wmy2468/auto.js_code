@@ -95,7 +95,7 @@ function 交行5积分() {
         if (gasPacket != null) {
             toastLog("找到元素");
             //点击元素
-            func.sClick(gasPacket.parent().child(1).child(0));
+            func.sClick(gasPacket.parent().child(4));
             func.sClick(text("确认").findOne());
             break;
         }
@@ -176,10 +176,12 @@ function 京东腾讯月() {
             // 找到领取按钮
             getBtn = tencentVip.parent().child(4).child(0);
             if (getBtn != null) {
-                getBtn.click();
-                toastLog("结束");
-                sleep(800);
-                break;
+                if (getBtn.text() == "立即领取") {
+                    getBtn.click();
+                    toastLog("结束");
+                    sleep(800);
+                    break;
+                }
             }
         } catch (e) {
             continue;

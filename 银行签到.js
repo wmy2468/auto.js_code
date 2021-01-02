@@ -13,7 +13,7 @@ function main() {
     工银e生活();
     //邮储银行();
     浦发信用卡();
-    邮储信用卡();
+    //邮储信用卡();
     //华彩生活();
     买单吧();
     alert("已完成.");
@@ -169,6 +169,8 @@ function jd_sign() {
     var huafei = text("话费券").findOnce();
     if (huafei) {
         if (huafei.parent().childCount() == 3) {
+            toastLog("话费券已点击");
+            func.sClick(huafei.parent().child(2));
             func.sClick(huafei.parent().child(2));
         }
     }
