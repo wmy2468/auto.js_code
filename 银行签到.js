@@ -109,7 +109,7 @@ function 浦发银行() {
     func.sClick(text("金豆").findOnce());
     while (text("我的成长").findOnce() == null) {
         sleep(800);
-        if (text("切换登录方式").findOnce() != null) {
+        if (text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce()) {
             sleep(500);
             func.gesture_pwd(appName);
             sleep(1000);
