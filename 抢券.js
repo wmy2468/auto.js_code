@@ -163,14 +163,23 @@ function 京东腾讯月() {
     toastLog("等待页面变化");
     var appName = "京东金融";
     launchApp(appName);
+    var tVip = className("android.view.View").text("腾讯视频VIP月卡").findOnce();
+    var tVip2 = className("android.view.View").desc("腾讯视频VIP月卡").findOnce();
     // 等待进入指定页面
-    while (!className("android.view.View").text("腾讯视频VIP月卡").findOnce()) {
+    while (!(tVip || tVip2)) {
+        tVip = className("android.view.View").text("腾讯视频VIP月卡").findOnce();
+        tVip2 = className("android.view.View").desc("腾讯视频VIP月卡").findOnce();
         toastLog("请跳转到腾讯月卡领取页面，直到提示  已到达等待页面");
         sleep(1000);
     }
     toastLog("已到达指定页面，等待");
-    var tencentVip = className("android.view.View").text("腾讯视频VIP月卡").findOne();
-    var getBtn;
+
+    var getBtn, tencentVip;
+    if (tVip == null) {
+        tencentVip = tVip;
+    } else {
+        tencentVip = tVip2;
+    }
     while (1) {
         try {
             // 找到领取按钮
