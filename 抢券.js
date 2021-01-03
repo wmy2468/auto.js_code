@@ -55,15 +55,15 @@ function 光大活动() {
             break;
         case "每日10点10元30天猫":
             startTime = "10,00,00,000";
-            targetViewText = "【活动编号】23851";
+            targetViewText = "【活动编号】33735";
             break;
         case "周末11点50元必胜客":
             startTime = "10,59,59,666";
-            targetViewText = "【活动编号】26829";
+            targetViewText = "【活动编号】33741";
             break;
         case "周末11点50元海底捞":
             startTime = "10,59,59,666";
-            targetViewText = "【活动编号】26951";
+            targetViewText = "【活动编号】33739";
             break;
     }
 
@@ -185,7 +185,7 @@ function 京东腾讯月() {
             // 找到领取按钮
             getBtn = tencentVip.parent().child(4).child(0);
             if (getBtn != null) {
-                if (getBtn.text() == "立即领取") {
+                if (getBtn.text() == "立即领取" || getBtn.desc() == "立即领取") {
                     getBtn.click();
                     toastLog("结束");
                     sleep(800);
