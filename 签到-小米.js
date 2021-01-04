@@ -57,13 +57,31 @@ function jd_sign() {
         sleep(800);
     }
     sleep(1200);
+
     // 点击领话费券按钮
-    var huafei = text("话费券").findOnce();
-    if (huafei) {
-        if (huafei.parent().childCount() == 3) {
-            func.sClick(huafei.parent().child(2));
+    var hotPos, huafei, huafeis;
+    // 获取热抢位置
+    hotPos = text("热抢中").findOne().indexInParent();
+    huafeis = text("话费券").find();
+    // 如果话费券非空
+    if (huafeis.nonEmpty()) {
+        if (huafeis.length >= 2) {
+            // 00：00情况
+            if (hotPos == 1) {
+                huafei = huafeis[1];
+            } else {
+                huafei = huafeis[0];
+            }
+        } else {
+            huafei = huafeis[0];
+        }
+        if (huafei) {
+            if (huafei.parent().childCount() == 3) {
+                func.sClick(huafei.parent().child(2));
+            }
         }
     }
+
     var signBtn = className("TextView").text("立即领红包").findOnce();
 
     if (signBtn == null) {
