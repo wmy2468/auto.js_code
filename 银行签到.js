@@ -171,7 +171,7 @@ function jd_sign() {
     // 点击领话费券按钮
     var hotPos, huafei, huafeis;
     // 获取热抢位置
-    hotPos = text("热抢中").findOne().indexInParent();
+    hotPos = (text("热抢中").findOne().parent()).indexInParent();
     huafeis = text("话费券").find();
     // 如果话费券非空
     if (huafeis.nonEmpty()) {
