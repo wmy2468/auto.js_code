@@ -91,12 +91,16 @@ function 交行5积分() {
     // 等待进入指定页面
     while (1) {
         var gasPacket;
-        gasPacket = textContains("加油卡充值30元红包").findOnce();
+        gasPacket = text("加油卡充值30元红包").findOnce();
         if (gasPacket != null) {
             toastLog("找到元素");
             //点击元素
-            func.sClick(gasPacket.parent().child(4));
-            func.sClick(text("确认").findOne());
+            try {
+                func.sClick(gasPacket.parent().parent().child(1));
+                func.sClick(text("确认").findOne());
+            } catch (e) {
+                continue;
+            }
             break;
         }
     }
