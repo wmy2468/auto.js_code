@@ -175,6 +175,7 @@ function jd_sign() {
     huafeis = text("话费券").find();
     // 如果话费券非空
     if (huafeis.nonEmpty()) {
+        toastLog("找到" + huafeis.length + "个 话费券");
         if (huafeis.length >= 2) {
             huafei = huafeis[1];
         } else {
