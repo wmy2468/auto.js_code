@@ -1,10 +1,3 @@
-function main() {
-    if (device.brand == "HUAWEI") {
-        mainHuawei();
-    } else if (device.brand == "xiaomi") {
-        mainXiaomi();
-    }
-}
 
 // ----------------------通用功能区-----------------------
 // 切换到autojs
@@ -43,7 +36,7 @@ function passAd() {
     sClick(textContains("跳过").findOnce());
     sClick(descContains("跳过").findOnce());
     sClick(idContains("lose").findOnce());
-    sClick(text("取消").findOnce());
+    //sClick(text("取消").findOnce());
     //sClick(text("放弃转账").findOnce());*/
 }
 
