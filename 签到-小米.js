@@ -59,25 +59,27 @@ function jd_sign() {
     sleep(1200);
 
     // 点击领话费券按钮
-    var hotPos, huafei, huafeis;
+    var hotTime, huafei, huafeis;
     // 获取热抢位置
-    hotPos = (text("热抢中").findOne().parent()).indexInParent();
+    hotTime = text("热抢中").findOne().parent().child(0);
     huafeis = text("话费券").find();
     // 如果话费券非空
     if (huafeis.nonEmpty()) {
+        toastLog("找到" + huafeis.length + "个 话费券");
         if (huafeis.length >= 2) {
-            // 00：00情况
-            if (hotPos == 1) {
-                huafei = huafeis[1];
-            } else {
-                huafei = huafeis[0];
-            }
+            huafei = huafeis[1];
         } else {
+            // 如果只找到1个话费券，直接点击
             huafei = huafeis[0];
         }
         if (huafei) {
             if (huafei.parent().childCount() == 3) {
                 func.sClick(huafei.parent().child(2));
+                toastLog("话费券已领取...检查");
+                sleep(1500);
+            } else {
+                toastLog("话费券领取过了...");
+                sleep(1500);
             }
         }
     }
