@@ -98,11 +98,11 @@ function 交行5积分() {
             gasPacket = className("android.view.View").text("21元用卡保障刷卡金").findOnce().parent().parent().child(1);
             //gasPacket = className("android.view.View").text("加油卡充值30元红包").findOnce().parent().parent().child(1);
             if (gasPacket.text() == "抢兑") {
-                func.cClick(gasPacket);
+                func.sClick(gasPacket);
             } else {
                 continue;
             }
-            //func.sClick(className("android.view.View").text("确认").findOne());
+            // func.sClick(className("android.view.View").text("确认").findOne());
         } catch (e) {
             continue;
         }
