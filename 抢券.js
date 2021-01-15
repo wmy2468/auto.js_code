@@ -93,8 +93,10 @@ function 交行5积分() {
     while (1) {
         //点击元素
         try {
-            //func.cClick(className("android.view.View").text("21元用卡保障刷卡金").findOnce().parent().parent().child(1));
-            func.cClick(className("android.view.View").text("加油卡充值30元红包").findOnce().parent().parent().child(1));
+            // gasPacket = className("android.view.View").text("21元用卡保障刷卡金").findOnce().parent().parent().child(1);
+            gasPacket = className("android.view.View").text("加油卡充值30元红包").findOnce().parent().parent().child(1);
+            toastLog(gasPacket.text());
+            func.cClick(gasPacket);
             func.sClick(className("android.view.View").text("确认").findOne());
         } catch (e) {
             continue;
