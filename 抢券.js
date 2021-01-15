@@ -93,6 +93,7 @@ function 交行5积分() {
     while (1) {
         //点击元素
         try {
+            textContains("本月可用兑换资格").findOne();
             toastLog(className("android.view.View").text("21元用卡保障刷卡金").find().length);
             gasPacket = className("android.view.View").text("21元用卡保障刷卡金").findOnce().parent().parent().child(1);
             //gasPacket = className("android.view.View").text("加油卡充值30元红包").findOnce().parent().parent().child(1);
