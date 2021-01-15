@@ -91,18 +91,15 @@ function 交行5积分() {
     // 等待进入指定页面
     var gasPacket;
     while (1) {
-        gasPacket = text("加油卡充值30元红包").findOnce();
-        if (gasPacket != null) {
-            toastLog("找到元素");
-            //点击元素
-            try {
-                func.sClick(gasPacket.parent().parent().child(1));
-                func.sClick(text("确认").findOnce());
-            } catch (e) {
-                continue;
-            }
-            break;
+        //点击元素
+        try {
+            //func.cClick(className("android.view.View").text("21元用卡保障刷卡金").findOnce().parent().parent().child(1));
+            func.cClick(className("android.view.View").text("加油卡充值30元红包").findOnce().parent().parent().child(1));
+            func.sClick(className("android.view.View").text("确认").findOne());
+        } catch (e) {
+            continue;
         }
+        break;
     }
 }
 
