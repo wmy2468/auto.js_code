@@ -4,7 +4,7 @@ var func = require("func_list.js");
 main();
 //买单吧();
 function main() {
-    招商银行();
+    //招商银行();
     中国农业银行();
     什么值得买();
     jd_sign();
@@ -265,7 +265,7 @@ function 浦发信用卡() {
     }
     func.sClick(className("ImageView").id("iv_user_leader_title_3").findOne());
     // 输入手势密码
-    text("请输入手势密码").findOne();
+    textContains("手势密码").findOne();
     sleep(500);
     func.gesture_pwd(appName);
     sleep(1000);

@@ -89,15 +89,15 @@ function 交行5积分() {
     var appName = "买单吧";
     launchApp(appName);
     // 等待进入指定页面
+    var gasPacket;
     while (1) {
-        var gasPacket;
         gasPacket = text("加油卡充值30元红包").findOnce();
         if (gasPacket != null) {
             toastLog("找到元素");
             //点击元素
             try {
                 func.sClick(gasPacket.parent().parent().child(1));
-                func.sClick(text("确认").findOne());
+                func.sClick(text("确认").findOnce());
             } catch (e) {
                 continue;
             }
