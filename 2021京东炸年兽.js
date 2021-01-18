@@ -18,7 +18,9 @@ function kouling() {
     toastLog("等待任务页面加载");
     while (text("每邀1个好友可得10000爆竹").findOnce() == null) {
         func.sClick(text('集爆竹').findOnce());
-        func.sClick(className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce());
+        // 关闭弹窗
+        func.sClick(className('android.view.View').text("我知道了").findOnce().parent().parent().parent().child(3));
+        //func.sClick(className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce());
     }
     sleep(3500);
 }
