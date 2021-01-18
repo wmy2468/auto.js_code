@@ -5,7 +5,7 @@ var func = require("func_list.js");
 main();
 
 function main() {
-    run_app('京东');
+    app.launch('京东');
     kouling();
     monster();
     alert('已完成！');
@@ -20,7 +20,13 @@ function kouling() {
         func.sClick(text('集爆竹').findOnce());
         sleep(2500);
         // 关闭弹窗
-        closePopUp();
+        try {
+            func.sClick(className('android.view.View').text("我知道了").findOnce().parent().parent().parent().child(3));
+            func.sClick(className('android.view.View').text("立即抽奖").findOnce().parent().parent().parent().child(3));
+        }
+        catch (e) {
+            continue;
+        }
     }
     sleep(1000);
 }
@@ -82,7 +88,7 @@ function after_click(textStr) {
     else {
         wait_complete();
     }
-
+    check_current_pkg("京东");
 }
 
 function add_cart() {
@@ -130,6 +136,8 @@ function wait_complete() {
         sleep(1000);
         if (count > 10) {
             toastLog("等待超时，返回...");
+            back();
+            return false;
         }
     }
     toastLog("等待完成");
@@ -138,17 +146,23 @@ function wait_complete() {
     sleep(2800);
     toastLog("等待完成");
     sleep(2800);
+
+    // 针对双开手机
+    if (func.sClick(text("取消").findOnce()) || func.sClick(desc("取消").findOnce())) {
+        sleep(1500);
+    }
     func.cClick(backNow)
 }
 
 // -------------通用部分--------------------
-function run_app(act_name) {
+function check_current_pkg(act_name) {
     var act_pkg = app.getPackageName(act_name);
     if (currentPackage() == act_pkg) {
-        home();
-        sleep(1000);
+        return true;
+    } else {
+        app.launch(act_pkg);
+        sleep(2000);
     }
-    app.launch(act_pkg);
 }
 
 function member_card() {
@@ -157,7 +171,7 @@ function member_card() {
     sleep(3000);
     while (text('去完成').findOnce() == null) {
         if (count >= 4) {
-            closePopUp();
+            func.sClick(className('android.view.View').text("295042cd75137e90").findOnce());
             back();
             sleep(2000);
         }
@@ -169,29 +183,6 @@ function member_card() {
         toastLog("未找到会员...等待返回")
         sleep(1500);
     }
-}
-
-
-function closePopUp() {
-    if (className('android.view.View').text("我知道了").findOnce()) {
-        func.sClick(className('android.view.View').text("我知道了").findOnce().parent().parent().parent().child(3));
-        toastLog("关闭弹窗 返回");
-        sleep(1000);
-        return true;
-    }
-    if (className('android.view.View').text("立即抽奖").findOnce()) {
-        func.sClick(className('android.view.View').text("立即抽奖").findOnce().parent().parent().parent().child(3));
-        toastLog("关闭弹窗 返回");
-        sleep(1000);
-        return true;
-    }
-    if (func.sClick(className('android.view.View').text("295042cd75137e90").findOnce())) {
-        toastLog("关闭弹窗 返回");
-        sleep(1000);
-        return true;
-    }
-    toastLog("未找到弹窗 返回");
-    sleep(1000);
 }
 // function view_list() {
 //     i = 0;
