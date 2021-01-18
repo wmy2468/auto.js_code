@@ -51,6 +51,7 @@ function monster() {
             if (idxText.indexOf('浏览可得') != -1) { textStr = '直接返回' }
             else if (idxText.indexOf('秒可得') != -1) { textStr = '等待返回' }
             else if (idxText.indexOf('浏览并加购5个商品可得') != -1) { textStr = '加购' }
+            else if (idxText.indexOf('成功入会可得') != -1) { textStr = '会员' }
             toastLog(textStr);
             after_click(textStr);
         } else {
@@ -157,6 +158,23 @@ function run_app(act_name) {
     app.launch(act_pkg);
 }
 
+function member_card() {
+    var count = 0;
+    //toastLog('会员卡');
+    sleep(3000);
+    while (text('去完成').findOnce() == null) {
+        if (count >= 4) {
+            back();
+            sleep(4000);
+        }
+        if (center_click(textContains('确认授权并加入').findOnce())) {
+            sleep(3000);
+            func.cClick(text('我知道了').findOnce())
+        }
+        count = count + 1;
+        sleep(3000);
+    }
+}
 
 // function view_list() {
 //     i = 0;
@@ -178,20 +196,3 @@ function run_app(act_name) {
 //     }
 // }
 
-// function member_card() {
-//     var count = 0;
-//     //toastLog('会员卡');
-//     sleep(3000);
-//     while (text('去完成').findOnce() == null) {
-//         if (count >= 4) {
-//             back_way();
-//             sleep(4000);
-//         }
-//         if (center_click(textContains('确认授权并加入').findOnce())) {
-//             sleep(3000);
-//             center_click(text('我知道了').findOnce())
-//         }
-//         count = count + 1;
-//         sleep(3000);
-//     }
-// }
