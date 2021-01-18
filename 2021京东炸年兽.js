@@ -164,11 +164,11 @@ function add_cart() {
 
 function wait_complete() {
     //等待恭喜完成
-    var backNow = textContains('vk image').findOne();
-    toastLog("已找到倒计时框，等待完成");
+    //var backNow = textContains('vk image').findOne();
+    toastLog("等待完成");
     textContains("任务已完成").findOne();
     sleep(800);
-    center_click(backNow);
+    back_way();
 }
 
 // -------------通用部分--------------------
