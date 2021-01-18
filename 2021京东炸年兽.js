@@ -28,7 +28,7 @@ function kouling() {
         }
         //func.sClick(className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce());
     }
-    sleep(3500);
+    sleep(1000);
 }
 
 // ======================年兽代码==================================
@@ -144,7 +144,7 @@ function wait_complete() {
 
     toastLog("等待完成");
     sleep(8500);
-    center_click(backNow)
+    func.cClick(backNow)
 }
 
 // -------------通用部分--------------------
