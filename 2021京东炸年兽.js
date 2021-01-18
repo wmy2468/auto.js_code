@@ -112,9 +112,10 @@ function add_cart() {
             carts = idContains('jmdd-react-smash').find()[i].click();
             //if (carts.child(0).text() != '已加购') {
             //}
-            id("detail_desc_description").findOne();
+            id("lib_pb_recycle_view").findOne();
+            toastLog("已找到商品描述");
             sleep(1500);
-            back();
+            back_way();
             sleep(2000);
         }                   //加购等待已完成 
         i = i + 1;
@@ -123,44 +124,6 @@ function add_cart() {
     sleep(2000);
 }
 
-
-// function view_list() {
-//     i = 0;
-//     while (text('已完成').findOnce() == null) {
-//         idContains('view_').findOne();
-//         //点击商品加购物车按钮
-//         if (idContains('view_').findOnce() != null) {
-//             idContains('view_').find()[i].click();
-//             textContains('购物车').findOne();
-//             sleep(1500);
-//             back_way();
-//             sleep(2500);
-//         }
-//         i = i + 1;
-//     }
-//     while (className('android.view.View').textContains('签到').findOnce() == null) {
-//         back_way();
-//         sleep(2000);
-//     }
-// }
-
-// function member_card() {
-//     var count = 0;
-//     //toastLog('会员卡');
-//     sleep(3000);
-//     while (text('去完成').findOnce() == null) {
-//         if (count >= 4) {
-//             back_way();
-//             sleep(4000);
-//         }
-//         if (center_click(textContains('确认授权并加入').findOnce())) {
-//             sleep(3000);
-//             center_click(text('我知道了').findOnce())
-//         }
-//         count = count + 1;
-//         sleep(3000);
-//     }
-// }
 
 function wait_complete() {
     //等待恭喜完成
@@ -218,3 +181,43 @@ function center_click(element, centerClick) {
         }
     } else { return false; }
 }
+
+
+
+// function view_list() {
+//     i = 0;
+//     while (text('已完成').findOnce() == null) {
+//         idContains('view_').findOne();
+//         //点击商品加购物车按钮
+//         if (idContains('view_').findOnce() != null) {
+//             idContains('view_').find()[i].click();
+//             textContains('购物车').findOne();
+//             sleep(1500);
+//             back_way();
+//             sleep(2500);
+//         }
+//         i = i + 1;
+//     }
+//     while (className('android.view.View').textContains('签到').findOnce() == null) {
+//         back_way();
+//         sleep(2000);
+//     }
+// }
+
+// function member_card() {
+//     var count = 0;
+//     //toastLog('会员卡');
+//     sleep(3000);
+//     while (text('去完成').findOnce() == null) {
+//         if (count >= 4) {
+//             back_way();
+//             sleep(4000);
+//         }
+//         if (center_click(textContains('确认授权并加入').findOnce())) {
+//             sleep(3000);
+//             center_click(text('我知道了').findOnce())
+//         }
+//         count = count + 1;
+//         sleep(3000);
+//     }
+// }
