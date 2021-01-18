@@ -165,14 +165,15 @@ function member_card() {
     while (text('去完成').findOnce() == null) {
         if (count >= 4) {
             back();
-            sleep(4000);
+            sleep(2000);
         }
         if (center_click(textContains('确认授权并加入').findOnce())) {
             sleep(3000);
             func.cClick(text('我知道了').findOnce())
         }
         count = count + 1;
-        sleep(3000);
+        toastLog("未找到会员...等待返回")
+        sleep(1500);
     }
 }
 
