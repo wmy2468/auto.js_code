@@ -185,11 +185,11 @@ function back_way() {
     if (backBtn == null) {
         back();
     } else {
-        try {
+        if (className('android.view.View').text("我知道了").findOnce()) {
             func.sClick(className('android.view.View').text("我知道了").findOnce().parent().parent().parent().child(3));
+        }
+        if (className('android.view.View').text("立即抽奖").findOnce()) {
             func.sClick(className('android.view.View').text("立即抽奖").findOnce().parent().parent().parent().child(3));
-        } catch (e) {
-            continue;
         }
     }
     sleep(800);
