@@ -46,6 +46,7 @@ function monster() {
             else if (idxText.indexOf('秒可得') != -1) { textStr = '等待返回' }
             else if (idxText.indexOf('浏览并加购5个商品可得') != -1) { textStr = '加购' }
             else if (idxText.indexOf('成功入会可得') != -1) { textStr = '会员' }
+            else if (idxText.indexOf('浏览并关注频道可得') != -1) { textStr = '直接返回' }
             toastLog(textStr);
             after_click(textStr);
         } else {
