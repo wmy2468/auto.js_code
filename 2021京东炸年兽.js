@@ -169,7 +169,7 @@ function closePopUp() {
         func.sClick(className('android.view.View').text("立即抽奖").findOnce().parent().parent().parent().child(3));
         func.sClick(className('android.view.View').text("295042cd75137e90").findOnce());
         sleep(1000);
-    } finally {
+    } catch (e) {
         toastLog("未找到弹窗 继续...");
     }
 }
