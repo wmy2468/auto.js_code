@@ -112,9 +112,11 @@ function add_cart() {
             carts = idContains('jmdd-react-smash').find()[i].click();
             //if (carts.child(0).text() != '已加购') {
             //}
-            id("lib_pb_recycle_view").findOne();
+            while (!(textContains("购物车").findOnce() || textContains("店铺").findOnce())) {
+                sleep(1000);
+            }
             toastLog("已找到商品描述");
-            sleep(1500);
+            sleep(1000);
             back_way();
             sleep(2000);
         }                   //加购等待已完成 
