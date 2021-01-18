@@ -37,7 +37,7 @@ function monster() {
     var idxText, unComplete, textStr;
     while (true) {
         textStr = '';
-        text('去完成').findOne();
+        text("每邀1个好友可得10000爆竹").findOne();
         unComplete = text('去完成').find();
         if (unComplete.nonEmpty()) {
             log("去完成长度：" + unComplete.length);
