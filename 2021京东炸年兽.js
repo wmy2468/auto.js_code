@@ -136,6 +136,10 @@ function wait_complete() {
         sleep(1000);
         if (count > 10) {
             toastLog("等待超时，返回...");
+            // 针对双开手机
+            if (func.sClick(text("取消").findOnce()) || func.sClick(desc("取消").findOnce())) {
+                sleep(1500);
+            }
             back();
             return false;
         }
