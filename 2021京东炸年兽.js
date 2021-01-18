@@ -164,14 +164,25 @@ function member_card() {
 
 
 function closePopUp() {
-    try {
+    if (className('android.view.View').text("我知道了").findOnce()) {
         func.sClick(className('android.view.View').text("我知道了").findOnce().parent().parent().parent().child(3));
-        func.sClick(className('android.view.View').text("立即抽奖").findOnce().parent().parent().parent().child(3));
-        func.sClick(className('android.view.View').text("295042cd75137e90").findOnce());
+        toastLog("关闭弹窗 返回");
         sleep(1000);
-    } catch (e) {
-        toastLog("未找到弹窗 继续...");
+        return true;
     }
+    if (className('android.view.View').text("立即抽奖").findOnce()) {
+        func.sClick(className('android.view.View').text("立即抽奖").findOnce().parent().parent().parent().child(3));
+        toastLog("关闭弹窗 返回");
+        sleep(1000);
+        return true;
+    }
+    if (func.sClick(className('android.view.View').text("295042cd75137e90").findOnce())) {
+        toastLog("关闭弹窗 返回");
+        sleep(1000);
+        return true;
+    }
+    toastLog("未找到弹窗 返回");
+    sleep(1000);
 }
 // function view_list() {
 //     i = 0;
