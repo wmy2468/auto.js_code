@@ -19,7 +19,12 @@ function kouling() {
     while (text("每邀1个好友可得10000爆竹").findOnce() == null) {
         func.sClick(text('集爆竹').findOnce());
         // 关闭弹窗
-        func.sClick(className('android.view.View').text("我知道了").findOnce().parent().parent().parent().child(3));
+        try {
+            func.sClick(className('android.view.View').text("我知道了").findOnce().parent().parent().parent().child(3));
+            func.sClick(className('android.view.View').text("立即抽奖").findOnce().parent().parent().parent().child(3));
+        } catch (e) {
+            continue;
+        }
         //func.sClick(className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce());
     }
     sleep(3500);
@@ -92,14 +97,21 @@ function after_click(textStr) {
 }
 
 function add_cart() {
-    var carts
+    var carts, cartComplete;
     i = 0;
-    while (text('已完成').findOnce() == null) {
+    while (1) {
+        cartComplete = text("在当前页加购5个商品").findOne();
+        if (cartComplete.parent().childCount() == 5) {
+            break;
+        }
         //点击商品加购物车按钮
-        if (idContains('cart_').findOnce() != null) {
-            carts = idContains('cart_').find()[i].click();
+        if (idContains('jmdd-react-smash').findOnce() != null) {
+            carts = idContains('jmdd-react-smash').find()[i].click();
             //if (carts.child(0).text() != '已加购') {
             //}
+            id("detail_desc_description").findOne();
+            sleep(1500);
+            back();
             sleep(2000);
         }                   //加购等待已完成 
         i = i + 1;
@@ -149,8 +161,8 @@ function add_cart() {
 
 function wait_complete() {
     //等待恭喜完成
-    var backNow = textContains('立刻返回').findOne();
-    sleep(1000);
+    var backNow = textContains('vk image').findOne();
+    sleep(8000);
     func.sClick(backNow);
 }
 
