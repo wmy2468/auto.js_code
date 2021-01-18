@@ -20,13 +20,7 @@ function kouling() {
         func.sClick(text('集爆竹').findOnce());
         sleep(2500);
         // 关闭弹窗
-        try {
-            func.sClick(className('android.view.View').text("我知道了").findOnce().parent().parent().parent().child(3));
-            func.sClick(className('android.view.View').text("立即抽奖").findOnce().parent().parent().parent().child(3));
-        } catch (e) {
-            continue;
-        }
-        //func.sClick(className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce());
+        closePopUp();
     }
     sleep(1000);
 }
@@ -62,8 +56,9 @@ function monster() {
 
 
 function after_click(textStr) {
-    sleep(4500);
-    var city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
+    sleep(3000);
+    toastLog("已点击去完成，等待下一步...");
+    //var city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
     //var viewList = text('浏览以下5个商品').depth(17).findOnce(); //恭喜完成
     //var addCart = textContains('点击加购以下').findOnce();  //idContains(str)
 
@@ -72,17 +67,6 @@ function after_click(textStr) {
     }
     else if (textStr == '浏览') {
         view_list();
-    }
-    else if (city_player != null) {
-        sleep(1000);
-        var join_imd = text('确认定位 立即参与').findOnce();
-        if (join_imd != null) {
-            join_imd.click()
-            sleep(1000);
-            var happy_get = className('android.view.View').text('开心收下').findOnce();
-            if (happy_get != null) { happy_get.click() }
-        }
-        wait_complete();
     }
     else if (textStr == '直接返回') {
         sleep(2500);
@@ -164,6 +148,7 @@ function member_card() {
     sleep(3000);
     while (text('去完成').findOnce() == null) {
         if (count >= 4) {
+            closePopUp();
             back();
             sleep(2000);
         }
@@ -177,6 +162,17 @@ function member_card() {
     }
 }
 
+
+function closePopUp() {
+    try {
+        func.sClick(className('android.view.View').text("我知道了").findOnce().parent().parent().parent().child(3));
+        func.sClick(className('android.view.View').text("立即抽奖").findOnce().parent().parent().parent().child(3));
+        func.sClick(className('android.view.View').text("295042cd75137e90").findOnce());
+        sleep(1000);
+    } finally {
+        toastLog("未找到弹窗 继续...");
+    }
+}
 // function view_list() {
 //     i = 0;
 //     while (text('已完成').findOnce() == null) {
