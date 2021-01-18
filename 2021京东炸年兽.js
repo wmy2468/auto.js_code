@@ -45,7 +45,7 @@ function monster() {
             idxText = unComplete[idx].parent().child(2).text();
             sleep(1500);
             while (text('去完成').findOnce() != null) {
-                unComplete[idx].click();
+                func.sClick(unComplete[idx]);
                 sleep(1000);
             }
             if (idxText.indexOf('浏览可得') != -1) { textStr = '直接返回' }
