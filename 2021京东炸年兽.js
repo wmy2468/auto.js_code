@@ -167,7 +167,7 @@ function member_card() {
             back();
             sleep(2000);
         }
-        if (func.cClick((textContains('确认授权并加入').findOnce())) {
+        if (func.cClick(textContains('确认授权并加入').findOnce())) {
             sleep(3000);
             func.cClick(text('我知道了').findOnce())
         }
