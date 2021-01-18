@@ -18,6 +18,7 @@ function kouling() {
     toastLog("等待任务页面加载");
     while (text("每邀1个好友可得10000爆竹").findOnce() == null) {
         func.sClick(text('集爆竹').findOnce());
+        sleep(2500);
         // 关闭弹窗
         try {
             func.sClick(className('android.view.View').text("我知道了").findOnce().parent().parent().parent().child(3));
@@ -36,8 +37,10 @@ function monster() {
     var idxText, unComplete, textStr;
     while (true) {
         textStr = '';
+        text('去完成').findOne();
         unComplete = text('去完成').find();
         if (unComplete.nonEmpty()) {
+            log("去完成长度：" + unComplete.length);
             if (unComplete.length <= 1 || idx >= unComplete.length) { break; }
             idxText = unComplete[idx].parent().child(2).text();
             sleep(1500);
@@ -81,7 +84,7 @@ function after_click(textStr) {
         wait_complete();
     }
     else if (textStr == '直接返回') {
-        sleep(1000);
+        sleep(2500);
         back();
     }
     else if (textStr == '等待返回') {
@@ -182,15 +185,11 @@ function back_way() {
     if (backBtn == null) {
         back();
     } else {
-        var closeBtn = className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce();
-        if (closeBtn != null) {
-            closeBtn.click();
-            sleep(1000);
-        }
-        if (backBtn.clickable()) {
-            backBtn.click();
-        } else {
-            center_click(backBtn);
+        try {
+            func.sClick(className('android.view.View').text("我知道了").findOnce().parent().parent().parent().child(3));
+            func.sClick(className('android.view.View').text("立即抽奖").findOnce().parent().parent().parent().child(3));
+        } catch (e) {
+            continue;
         }
     }
     sleep(800);
