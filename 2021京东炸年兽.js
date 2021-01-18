@@ -5,7 +5,7 @@ var func = require("func_list.js");
 main();
 
 function main() {
-    app.launch('京东');
+    launchApp('京东');
     kouling();
     monster();
     alert('已完成！');
@@ -149,6 +149,10 @@ function wait_complete() {
 
     // 针对双开手机
     if (func.sClick(text("取消").findOnce()) || func.sClick(desc("取消").findOnce())) {
+        sleep(1500);
+    }
+    // 针对奇怪的弹窗
+    if (className("android.widget.ImageView").clickable(true).depth(2).findOnce()) {
         sleep(1500);
     }
     func.cClick(backNow)
