@@ -117,19 +117,31 @@ function add_cart() {
             }
             toastLog("已找到商品描述");
             sleep(1000);
-            back_way();
+            back();
             sleep(2000);
         }                   //加购等待已完成 
         i = i + 1;
     }
-    back_way();
+    back();
     sleep(2000);
 }
 
 
 function wait_complete() {
     //等待恭喜完成
-    var backNow = className("android.widget.ImageView").depth(9).findOne();
+    var backNow
+    while (1) {
+        backNow = className("android.widget.ImageView").depth(9).findOnce();
+        if (backNow) {
+            break;
+        }
+        backNow = className("android.widget.Image").text("vk image").findOnce();
+        if (backNow) {
+            break;
+        }
+        sleep(1000);
+    }
+
     toastLog("等待完成");
     sleep(8500);
     center_click(backNow)
@@ -144,46 +156,6 @@ function run_app(act_name) {
     }
     app.launch(act_pkg);
 }
-
-function back_way() {
-    sleep(800);
-    var backBtn = desc('返回').findOnce();
-    if (backBtn == null) {
-        back();
-    } else {
-        if (className('android.view.View').text("我知道了").findOnce()) {
-            func.sClick(className('android.view.View').text("我知道了").findOnce().parent().parent().parent().child(3));
-        }
-        if (className('android.view.View').text("立即抽奖").findOnce()) {
-            func.sClick(className('android.view.View').text("立即抽奖").findOnce().parent().parent().parent().child(3));
-        }
-    }
-    sleep(800);
-    center_click(textContains('离开').findOnce());
-    center_click(textContains('知道了').findOnce());
-}
-
-
-
-function center_click(element, centerClick) {
-    if (element != null) {
-        if (centerClick == null) {
-            if (element.clickable()) {
-                element.click();
-                return true;
-            } else {
-                click(element.bounds().centerX(), element.bounds().centerY());
-                sleep(800);
-                return true;
-            }
-        } else {
-            click(element.bounds().centerX(), element.bounds().centerY());
-            sleep(800);
-            return true;
-        }
-    } else { return false; }
-}
-
 
 
 // function view_list() {
