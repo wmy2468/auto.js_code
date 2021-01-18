@@ -115,8 +115,10 @@ function add_cart() {
 
 function wait_complete() {
     //等待恭喜完成
-    var backNow
+    var backNow, count;
+    count = 0;
     while (1) {
+        count = count + 1;
         backNow = className("android.widget.ImageView").depth(9).findOnce();
         if (backNow) {
             break;
@@ -126,10 +128,16 @@ function wait_complete() {
             break;
         }
         sleep(1000);
+        if (count > 10) {
+            toastLog("等待超时，返回...");
+        }
     }
-
     toastLog("等待完成");
-    sleep(8500);
+    sleep(2800);
+    toastLog("等待完成");
+    sleep(2800);
+    toastLog("等待完成");
+    sleep(2800);
     func.cClick(backNow)
 }
 
