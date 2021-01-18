@@ -165,8 +165,10 @@ function add_cart() {
 function wait_complete() {
     //等待恭喜完成
     var backNow = textContains('vk image').findOne();
-    sleep(8000);
-    func.sClick(backNow);
+    toastLog("已找到倒计时框，等待完成");
+    textContains("任务已完成").findOne();
+    sleep(800);
+    center_click(backNow);
 }
 
 // -------------通用部分--------------------
