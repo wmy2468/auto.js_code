@@ -164,11 +164,10 @@ function add_cart() {
 
 function wait_complete() {
     //等待恭喜完成
-    //var backNow = textContains('vk image').findOne();
+    var backNow = className("android.widget.ImageView").depth(9).findOne();
     toastLog("等待完成");
-    textContains("任务已完成").findOne();
-    sleep(800);
-    back_way();
+    sleep(8500);
+    center_click(backNow)
 }
 
 // -------------通用部分--------------------
