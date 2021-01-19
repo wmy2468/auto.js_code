@@ -14,18 +14,31 @@ function main() {
 function kouling() {
     setClip('18.0复制整段话 http:/J8KywSROEN3jkp幫皒助屴，1起炸哖獸分10億吧！>>ㄣ￥mDmQ3EB2Rb%da開(倞A崬pp）');
     func.sClick(id('com.jingdong.app.mall:id/bci').text('立即查看').findOne());
-
+    var popUp, popUpLen;
     toastLog("等待任务页面加载");
     while (text("每邀1个好友可得10000爆竹").findOnce() == null) {
         func.sClick(text('集爆竹').findOnce());
         sleep(2500);
         // 关闭弹窗
-        try {
-            func.sClick(className('android.view.View').text("我知道了").findOnce().parent().parent().parent().child(3));
-            func.sClick(className('android.view.View').text("立即抽奖").findOnce().parent().parent().parent().child(3));
+        popUp = className('android.view.View').text("我知道了").findOnce();
+        if (popUp) {
+            try {
+                popUpLen = popUp.parent().parent().parent();
+                func.sClick(popUp.child(popUpLen - 1));
+            }
+            catch (e) {
+                continue;
+            }
         }
-        catch (e) {
-            continue;
+        popUp = className('android.view.View').text("立即抽奖").findOnce();
+        if (popUp) {
+            try {
+                popUpLen = popUp.parent().parent().parent();
+                func.sClick(popUp.child(popUpLen - 1));
+            }
+            catch (e) {
+                continue;
+            }
         }
     }
     sleep(1000);
