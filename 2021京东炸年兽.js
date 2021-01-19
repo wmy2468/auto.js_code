@@ -173,7 +173,10 @@ function wait_complete() {
         toastLog("点击了签到的弹窗");
         sleep(1500);
     }
-    back();
+    while (text("去完成").findOnce() == null) {
+        back();
+        sleep(4000);
+    }
 }
 
 // -------------通用部分--------------------
