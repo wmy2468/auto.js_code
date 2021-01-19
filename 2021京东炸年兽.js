@@ -20,7 +20,7 @@ function main() {
                 break;
         }
     }
-    func.toAppMulti(appNames, appNumbers);
+    func.toAppMulti("京东", appNumbers);
 
     kouling();
     monster();
