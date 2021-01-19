@@ -151,7 +151,10 @@ function wait_complete() {
             if (func.sClick(text("取消").findOnce()) || func.sClick(desc("取消").findOnce())) {
                 sleep(1500);
             }
-            back();
+            while (text("去完成").findOnce() == null) {
+                back();
+                sleep(3000);
+            }
             return false;
         }
     }
