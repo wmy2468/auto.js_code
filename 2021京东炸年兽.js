@@ -126,12 +126,15 @@ function wait_complete() {
     while (1) {
         count = count + 1;
         backNow = className("android.widget.ImageView").depth(9).findOnce();
-        if (backNow) {
+        if (backNow != null) {
             break;
-        }
-        backNow = className("android.widget.Image").text("vk image").findOnce();
-        if (backNow) {
-            break;
+        } else {
+            backNow = className("android.widget.Image").text("vk image").findOnce();
+            if (backNow != null) {
+                break;
+            } else {
+                backNow = backNow.parent();
+            }
         }
         sleep(1000);
         if (count > 10) {
@@ -159,7 +162,7 @@ function wait_complete() {
     if (className("android.widget.ImageView").clickable(true).depth(2).findOnce()) {
         sleep(1500);
     }
-    func.cClick(backNow)
+    func.sClick(backNow)
 }
 
 // -------------通用部分--------------------
