@@ -20,13 +20,13 @@ function kouling() {
         func.sClick(text('集爆竹').findOnce());
         sleep(2500);
         // 关闭弹窗
-        popUp = text("我知道了").findOnce();
+        func.sClick(text("我知道了").findOnce());
+
+        popUp = text("立即抽奖").findOnce();
         if (popUp == null) {
-            popUp = text("立即抽奖").findOnce();
-            if (popUp == null) {
-                popUp = text("继续炸年兽分红包").findOnce();
-            }
+            popUp = text("继续炸年兽分红包").findOnce();
         }
+
         if (popUp != null) {
             try {
                 popUpLen = popUp.parent().parent().parent().childCount();
