@@ -3,7 +3,9 @@ var func = require("func_list.js");
 
 //var backNow = textContains('立刻返回').findOne();
 
-func.sClick(className('android.view.View').text("立即抽奖").findOnce().parent().parent().parent().child(3));
+var popUp = text("我知道了").findOnce();
+var popUpLen = popUp.parent().parent().parent().childCount();
+func.sClick(popUp.child(popUpLen - 1));
 
 // var backNow = descContains('立刻返回').findOne();
 // sleep(1000);
