@@ -2,11 +2,13 @@ auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
 var doubleApp = true;
-var appNumbers = 1;
+var appNumbers = 0;
 
 main();
 
 function main() {
+    setClip("意%n3Eun52jaa!去");
+
     var selectedArr = ["第一个APP", "第二个APP"]
     var selNum;
     if (device.brand == "xiaomi") {
@@ -28,7 +30,7 @@ function main() {
 }
 
 function kouling() {
-    setClip("18.0复制整段话 http:/J8KywSROEN3jkp幫皒助屴，1起炸哖獸分10億吧！>>ㄣ￥mDmQ3EB2Rb%da開(倞A崬pp）");
+
     func.sClick(id("com.jingdong.app.mall:id/bci").text("立即查看").findOne());
     var popUp, popUpLen;
     toastLog("等待任务页面加载");
