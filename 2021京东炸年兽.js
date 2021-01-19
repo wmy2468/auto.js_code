@@ -1,11 +1,27 @@
 auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
+var doubleApp = true;
+var appNumbers = 1;
 
 main();
 
 function main() {
-    launchApp('京东');
+    var selectedArr = ['第一个APP', '第二个APP']
+    var selNum;
+    if (device.brand == "xiaomi") {
+        selNum = func.dialogsWin(selectedArr);
+        switch (selNum) {
+            case 第一个APP:
+                appNumbers = 1;
+                break;
+            case 第二个APP:
+                appNumbers = 2;
+                break;
+        }
+    }
+    func.toAppMulti(appNames, appNumbers);
+
     kouling();
     monster();
     alert('已完成！');
@@ -52,17 +68,18 @@ function monster() {
             log("去完成长度：" + unComplete.length);
             if (unComplete.length <= 1 || idx >= unComplete.length) { break; }
             idxText = unComplete[idx].parent().child(2).text();
-            sleep(1500);
-            while (text('去完成').findOnce() != null) {
-                func.sClick(unComplete[idx]);
-                sleep(1000);
-            }
+            // 判断文本的描述是属于哪种
             if (idxText.indexOf('浏览可得') != -1) { textStr = '直接返回' }
             else if (idxText.indexOf('秒可得') != -1) { textStr = '等待返回' }
             else if (idxText.indexOf('浏览并加购5个商品可得') != -1) { textStr = '加购' }
             else if (idxText.indexOf('成功入会可得') != -1) { textStr = '会员' }
             else if (idxText.indexOf('浏览并关注频道可得') != -1) { textStr = '直接返回' }
             toastLog(textStr);
+            sleep(1500);
+            while (text('去完成').findOnce() != null) {
+                func.cClick(unComplete[idx]);
+                sleep(1000);
+            }
             after_click(textStr);
         } else {
             break;
@@ -101,7 +118,7 @@ function after_click(textStr) {
 }
 
 function add_cart() {
-    var carts, cartComplete;
+    var cartComplete;
     i = 0;
     while (1) {
         cartComplete = text("在当前页加购5个商品").findOne();
@@ -175,17 +192,30 @@ function wait_complete() {
     }
     while (text("去完成").findOnce() == null) {
         back();
-        sleep(4000);
+        sleep(3000);
     }
 }
 
 // -------------通用部分--------------------
-function check_current_pkg(act_name) {
-    var act_pkg = app.getPackageName(act_name);
+function runApps(appNames) {
+    if (device.brand == "xiaomi") {
+        // 如果是小米双开则选择当前的数字
+        if (doubleApp) {
+            func.toAppMulti(appNames, appNumbers);
+        } else {
+            launchApp(appNames);
+        }
+    } else {
+        launchApp(appNames);
+    }
+}
+
+function check_current_pkg(app_name) {
+    var act_pkg = app.getPackageName(app_name);
     if (currentPackage() == act_pkg) {
         return true;
     } else {
-        app.launch(act_pkg);
+        runApps(app_name);
         sleep(2000);
     }
 }
