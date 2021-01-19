@@ -20,16 +20,16 @@ function kouling() {
         func.sClick(text('集爆竹').findOnce());
         sleep(2500);
         // 关闭弹窗
-        popUp = className('android.view.View').text("我知道了").findOnce();
+        popUp = text("我知道了").findOnce();
         if (popUp == null) {
-            popUp = className('android.view.View').text("立即抽奖").findOnce();
+            popUp = text("立即抽奖").findOnce();
             if (popUp == null) {
-                popUp = className('android.view.View').text("继续炸年兽分红包").findOnce();
+                popUp = text("继续炸年兽分红包").findOnce();
             }
         }
         if (popUp != null) {
             try {
-                popUpLen = popUp.parent().parent().parent();
+                popUpLen = popUp.parent().parent().parent().childCount();
                 func.sClick(popUp.child(popUpLen - 1));
             }
             catch (e) {
@@ -72,8 +72,8 @@ function monster() {
 
 
 function after_click(textStr) {
-    sleep(3000);
     toastLog("已点击去完成，等待下一步...");
+    sleep(3000);
     //var city_player = className('android.webkit.WebView').text('京喜城市玩家').findOnce();
     //var viewList = text('浏览以下5个商品').depth(17).findOnce(); //恭喜完成
     //var addCart = textContains('点击加购以下').findOnce();  //idContains(str)
