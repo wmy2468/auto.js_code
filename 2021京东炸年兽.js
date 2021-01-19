@@ -140,9 +140,8 @@ function wait_complete() {
         } else {
             backNow = className("android.widget.Image").text("vk image").findOnce();
             if (backNow != null) {
-                break;
-            } else {
                 backNow = backNow.parent();
+                break;
             }
         }
         sleep(1000);
