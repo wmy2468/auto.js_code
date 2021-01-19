@@ -47,8 +47,8 @@ function kouling() {
 
         if (popUp != null) {
             try {
-                popUpLen = popUp.parent().parent().parent().childCount();
-                func.sClick(popUp.child(popUpLen - 1));
+                popUpLen = popUp.parent().parent().parent().parent().childCount();
+                func.sClick(popUp.parent().parent().parent().parent().child(popUpLen - 1));
             }
             catch (e) {
                 continue;
