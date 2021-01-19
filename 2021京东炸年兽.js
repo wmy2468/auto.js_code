@@ -140,7 +140,6 @@ function wait_complete() {
         } else {
             backNow = className("android.widget.Image").text("vk image").findOnce();
             if (backNow != null) {
-                backNow = backNow.parent();
                 break;
             }
         }
@@ -174,7 +173,7 @@ function wait_complete() {
         toastLog("点击了签到的弹窗");
         sleep(1500);
     }
-    func.sClick(backNow)
+    back();
 }
 
 // -------------通用部分--------------------
