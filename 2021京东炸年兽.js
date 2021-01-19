@@ -21,17 +21,13 @@ function kouling() {
         sleep(2500);
         // 关闭弹窗
         popUp = className('android.view.View').text("我知道了").findOnce();
-        if (popUp) {
-            try {
-                popUpLen = popUp.parent().parent().parent();
-                func.sClick(popUp.child(popUpLen - 1));
-            }
-            catch (e) {
-                continue;
+        if (popUp == null) {
+            popUp = className('android.view.View').text("立即抽奖").findOnce();
+            if (popUp == null) {
+                popUp = className('android.view.View').text("继续炸年兽分红包").findOnce();
             }
         }
-        popUp = className('android.view.View').text("立即抽奖").findOnce();
-        if (popUp) {
+        if (popUp != null) {
             try {
                 popUpLen = popUp.parent().parent().parent();
                 func.sClick(popUp.child(popUpLen - 1));
