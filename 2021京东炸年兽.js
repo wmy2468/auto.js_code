@@ -83,8 +83,9 @@ function monster() {
                 count = count + 1;
                 if (count > 5) {
                     func.cClick(unComplete[idx]);
+                    count = 0;
                 }
-                sleep(1000);
+                sleep(1500);
             }
             after_click(textStr);
         } else {
