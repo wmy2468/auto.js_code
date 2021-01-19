@@ -58,9 +58,10 @@ function kouling() {
 
 // ======================年兽代码==================================
 function monster() {
-    var idx = 1;
+    var count, idx = 1;
     var idxText, unComplete, textStr;
     while (true) {
+        count = 0;
         textStr = "";
         text("每邀1个好友可得10000爆竹").findOne();
         unComplete = text("去完成").find();
@@ -74,10 +75,15 @@ function monster() {
             else if (idxText.indexOf("浏览并加购5个商品可得") != -1) { textStr = "加购" }
             else if (idxText.indexOf("成功入会可得") != -1) { textStr = "会员" }
             else if (idxText.indexOf("浏览并关注频道可得") != -1) { textStr = "直接返回" }
+            else { "直接返回" }
             toastLog(textStr);
             sleep(1500);
             while (text("去完成").findOnce() != null) {
-                func.cClick(unComplete[idx]);
+                func.sClick(unComplete[idx]);
+                count = count + 1;
+                if (count > 5) {
+                    func.cClick(unComplete[idx]);
+                }
                 sleep(1000);
             }
             after_click(textStr);
