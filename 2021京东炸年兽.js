@@ -166,8 +166,9 @@ function wait_complete() {
     if (func.sClick(text("取消").findOnce()) || func.sClick(desc("取消").findOnce())) {
         sleep(1500);
     }
-    // 针对奇怪的弹窗
-    if (className("android.widget.ImageView").clickable(true).depth(2).findOnce()) {
+    // 签到的弹窗
+    if (func.sClick(className("android.widget.ImageView").clickable(true).depth(2).findOnce())) {
+        toastLog("点击了签到的弹窗");
         sleep(1500);
     }
     func.sClick(backNow)
