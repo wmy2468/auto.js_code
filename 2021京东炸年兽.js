@@ -177,10 +177,7 @@ function wait_complete() {
             if (func.sClick(text("取消").findOnce()) || func.sClick(desc("取消").findOnce())) {
                 sleep(1500);
             }
-            while (text("去完成").findOnce() == null) {
-                back();
-                sleep(3000);
-            }
+            backLoop();
             return false;
         }
     }
@@ -200,11 +197,7 @@ function wait_complete() {
         toastLog("点击了签到的弹窗");
         sleep(1500);
     }
-    while (text("去完成").findOnce() == null) {
-        check_current_pkg("京东");
-        back();
-        sleep(3000);
-    }
+    backLoop();
 }
 
 // -------------通用部分--------------------
@@ -248,6 +241,14 @@ function member_card() {
         count = count + 1;
         toastLog("未找到会员...等待返回")
         sleep(1500);
+    }
+}
+
+function backLoop() {
+    while (!(text("去完成").findOnce() != null && text("每邀1个好友可得10000爆竹").findOnce() != null)) {
+        check_current_pkg("京东");
+        back();
+        sleep(3000);
     }
 }
 // function view_list() {
