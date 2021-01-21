@@ -60,10 +60,11 @@ function kouling() {
 
 // ======================年兽代码==================================
 function monster() {
-    var count, idx = 1;
+    var count, cnt, idx = 1;
     var idxText, unComplete, textStr;
     while (true) {
         count = 0;
+        cnt = 0;
         textStr = "";
         text("每邀1个好友可得10000爆竹").findOne();
         unComplete = text("去完成").find();
@@ -85,10 +86,18 @@ function monster() {
                 func.sClick(unComplete[idx]);
                 count = count + 1;
                 if (count > 5) {
+                    // 超时计数器
+                    cnt = cnt + 1;
                     func.cClick(unComplete[idx]);
                     count = 0;
+                    if (cnt > 6) {
+                        break;
+                    }
                 }
                 sleep(1500);
+            }
+            if (cnt > 6) {
+                continue;
             }
             after_click(textStr);
         } else {
@@ -131,15 +140,16 @@ function add_cart() {
     var cartComplete;
     i = 0;
     while (1) {
-        cartComplete = text("在当前页加购5个商品").findOne();
+        cartComplete = textContains("加购5个商品").findOne();
         if (cartComplete.parent().childCount() == 5) {
+            sleep(800);
             break;
         }
         //点击商品加购物车按钮
         if (idContains("jmdd-react-smash").findOnce() != null) {
             carts = idContains("jmdd-react-smash").find()[i].click();
-            //if (carts.child(0).text() != "已加购") {
-            //}
+            toastLog("已点击购物车");
+            sleep(800);
             while (!(textContains("购物车").findOnce() || textContains("店铺").findOnce())) {
                 sleep(1000);
             }
