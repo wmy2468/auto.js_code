@@ -67,6 +67,7 @@ function monster() {
         cnt = 0;
         textStr = "";
         text("每邀1个好友可得10000爆竹").findOne();
+        sleep(1000);
         unComplete = text("去完成").find();
         if (unComplete.nonEmpty()) {
             log("去完成长度：" + unComplete.length);
@@ -90,13 +91,14 @@ function monster() {
                     cnt = cnt + 1;
                     func.cClick(unComplete[idx]);
                     count = 0;
-                    if (cnt > 6) {
+                    if (cnt > 3) {
+                        toastLog("去完成点击超时，退出重新查找");
                         break;
                     }
                 }
-                sleep(1500);
+                sleep(1100);
             }
-            if (cnt > 6) {
+            if (cnt > 3) {
                 continue;
             }
             after_click(textStr);
