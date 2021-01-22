@@ -61,7 +61,7 @@ function kouling() {
 // ======================年兽代码==================================
 function monster() {
     var unCompletes, unText;
-    var idx = 0, idx2 = 0;
+    var idx, idx2 = 0;
     var pngs;
     while (1) {
         textContains("当前关卡").findOne();
@@ -73,7 +73,7 @@ function monster() {
                 func.sClick(pngs[idx2]);
                 sleep(2000);
             }
-
+            idx = 0;
             while (1) {
                 textContains('剩余').findOne();
                 unCompletes = text("去完成").find();
