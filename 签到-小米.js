@@ -67,6 +67,8 @@ function jd_sign() {
         for (let huafei in huafeis) {
             try {
                 huafeiParent = huafei.parent();
+                log(huafeiParent.childCount());
+                log(huafeiParent.child(2).child(1).text());
                 if (huafeiParent.childCount() == 3 && huafeiParent.child(2).child(1).text() == "领取") {
                     func.sClick(huafeiParent.child(2));
                     toastLog("准备领取话费券");
