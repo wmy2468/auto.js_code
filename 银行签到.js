@@ -169,24 +169,27 @@ function jd_sign() {
     sleep(1200);
 
     // 点击领话费券按钮
-    var huafeis, huafeiParent;
+    var huafeis, huafeiParent, huafeiLen;
     huafeis = text("话费券").find();
     // 如果话费券非空
     if (huafeis.nonEmpty()) {
-        toastLog("找到" + huafeis.length + "个 话费券");
-        for (let huafei in huafeis) {
+        huafeiLen = huafeis.length;
+        toastLog("找到" + huafeiLen + "个 话费券");
+        for (let j = 0; j < huafeiLen; j++) {
+            huafei = huafeis[j];
             try {
                 huafeiParent = huafei.parent();
-                log(huafeiParent.childCount());
-                log(huafeiParent.child(2).child(1).text());
-                if (huafeiParent.childCount() == 3 && huafeiParent.child(2).child(1).text() == "领取") {
-                    func.sClick(huafeiParent.child(2));
+                log("childCount" + huafeiParent.childCount());
+                log("button Text" + huafeiParent.child(huafeiLen - 1).text());
+                if (huafeiParent.childCount() == 3 && huafeiParent.child(huafeiLen - 1).text() == "领取") {
+                    func.sClick(huafeiParent.child(huafeiLen - 1));
                     toastLog("准备领取话费券");
                     sleep(1500);
                 } else {
                     continue;
                 }
             } catch (e) {
+                toastLog("找话费券报错了");
                 continue;
             }
         }
