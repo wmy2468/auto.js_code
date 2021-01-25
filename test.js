@@ -1,5 +1,6 @@
 // 导入模块
 var func = require("func_list.js");
+luanchApp("京东");
 jd_sign();
 
 function jd_sign() {
@@ -31,7 +32,8 @@ function jd_sign() {
     // 如果话费券非空
     if (huafeis.nonEmpty()) {
         toastLog("找到" + huafeis.length + "个 话费券");
-        for (let huafei in huafeis) {
+        for (let j = 0; j < huafeis.length; j++) {
+            huafei = huafeis[j];
             log(huafei.text());
             try {
                 huafeiParent = huafei.parent();
