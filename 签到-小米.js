@@ -65,6 +65,7 @@ function jd_sign() {
     if (huafeis.nonEmpty()) {
         toastLog("找到" + huafeis.length + "个 话费券");
         for (let huafei in huafeis) {
+            log(huafei.text());
             try {
                 huafeiParent = huafei.parent();
                 log(huafeiParent.childCount());
