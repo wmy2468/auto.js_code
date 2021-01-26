@@ -58,11 +58,11 @@ function 光大活动() {
             targetViewText = "【活动编号】33735";
             break;
         case "周末11点50元必胜客":
-            startTime = "10,59,59,600";
+            startTime = "10,59,59,650";
             targetViewText = "【活动编号】33741";
             break;
         case "周末11点50元海底捞":
-            startTime = "10,59,59,600";
+            startTime = "10,59,59,650";
             targetViewText = "【活动编号】33739";
             break;
     }
@@ -193,15 +193,17 @@ function 中信活动() {
 
 // 等待页面变价
 function 京东腾讯月() {
+    var actNames = ["腾讯视频VIP月卡", "肯德基10元代金券"];
+    var actName = func.dialogsWin(actNames);      // 设置查找的文本
     toastLog("等待页面变化");
     var appName = "京东金融";
     launchApp(appName);
-    var tVip = className("android.view.View").text("腾讯视频VIP月卡").findOnce();
-    var tVip2 = className("android.view.View").desc("腾讯视频VIP月卡").findOnce();
+    var tVip = className("android.view.View").text(actName).findOnce();
+    var tVip2 = className("android.view.View").desc(actName).findOnce();
     // 等待进入指定页面
     while (!(tVip || tVip2)) {
-        tVip = className("android.view.View").text("腾讯视频VIP月卡").findOnce();
-        tVip2 = className("android.view.View").desc("腾讯视频VIP月卡").findOnce();
+        tVip = className("android.view.View").text(actName).findOnce();
+        tVip2 = className("android.view.View").desc(actName).findOnce();
         toastLog("请跳转到腾讯月卡领取页面，直到提示  已到达等待页面");
         sleep(1000);
     }
