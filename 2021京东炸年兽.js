@@ -80,9 +80,11 @@ function monster() {
             else if (idxText.indexOf("浏览并加购5个商品可得") != -1) { textStr = "加购" }
             else if (idxText.indexOf("成功入会可得") != -1) { textStr = "会员" }
             else if (idxText.indexOf("浏览并关注频道可得") != -1) { textStr = "直接返回" }
-            else { textStr = "直接返回" }
             toastLog(textStr);
             sleep(1500);
+            if (textStr = "") {
+                continue;
+            }
             while (text("去完成").findOnce() != null) {
                 func.sClick(unComplete[idx]);
                 count = count + 1;
