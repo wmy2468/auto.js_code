@@ -83,6 +83,7 @@ function monster() {
             toastLog(textStr);
             sleep(1500);
             if (textStr = "") {
+                idx = idx + 1;
                 continue;
             }
             while (text("去完成").findOnce() != null) {
