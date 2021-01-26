@@ -82,7 +82,7 @@ function monster() {
             else if (idxText.indexOf("浏览并关注频道可得") != -1) { textStr = "直接返回" }
             toastLog(textStr);
             sleep(1500);
-            if (textStr = "") {
+            if (textStr == "") {
                 idx = idx + 1;
                 continue;
             }
