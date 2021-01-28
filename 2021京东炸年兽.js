@@ -67,7 +67,7 @@ function monster() {
         count = 0;
         cnt = 0;
         textStr = "";
-        text("每邀1个好友可得10000爆竹").findOne();
+        textContains("每邀1个好友可得").findOne();
         sleep(1000);
         unComplete = text("去完成").find();
         if (unComplete.nonEmpty()) {
