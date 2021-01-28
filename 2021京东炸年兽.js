@@ -3,7 +3,7 @@ auto.waitFor();
 var func = require("func_list.js");
 var doubleApp = true;
 var appNumbers = 0;
-
+var pageText = "每邀1个好友可得";
 main();
 
 function main() {
@@ -34,7 +34,7 @@ function kouling() {
     func.sClick(id("com.jingdong.app.mall:id/bci").text("立即查看").findOne());
     var popUp, popUpLen;
     toastLog("等待任务页面加载");
-    while (text("每邀1个好友可得10000爆竹").findOnce() == null) {
+    while (textContains(pageText).findOnce() == null) {
         func.sClick(text("集爆竹").findOnce());
         sleep(2500);
         // 关闭弹窗
@@ -67,7 +67,7 @@ function monster() {
         count = 0;
         cnt = 0;
         textStr = "";
-        textContains("每邀1个好友可得").findOne();
+        textContains(pageText).findOne();
         sleep(1000);
         unComplete = text("去完成").find();
         if (unComplete.nonEmpty()) {
