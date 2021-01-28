@@ -261,7 +261,7 @@ function member_card() {
 }
 
 function backLoop() {
-    while (!(text("去完成").findOnce() != null && text("每邀1个好友可得10000爆竹").findOnce() != null)) {
+    while (!(text("去完成").findOnce() != null && textContains(pageText).findOnce() != null)) {
         check_current_pkg("京东");
         back();
         sleep(3000);
