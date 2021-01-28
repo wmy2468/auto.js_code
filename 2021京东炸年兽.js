@@ -62,8 +62,8 @@ function kouling() {
 function monster() {
     var count, cnt, idx;
     var idxText, unComplete, textStr;
+    idx = 1;
     while (true) {
-        idx = 1;
         count = 0;
         cnt = 0;
         textStr = "";
