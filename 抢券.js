@@ -9,7 +9,7 @@ function main() {
         "光大活动",
         "中信活动",
         "工行活动",
-        "交行5积分",
+        "交行9点5积分",
         "京东腾讯月"
     ];
 
@@ -30,8 +30,8 @@ function main() {
         case "掌上星巴克":
             掌上星巴克();
             break;
-        case "交行5积分":
-            交行5积分();
+        case "交行9点5积分":
+            交行9点5积分();
             break;
         case "京东腾讯月":
             京东腾讯月();
@@ -50,19 +50,20 @@ function 光大活动() {
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
     switch (actName) {
         case "每日11点10元KFC":
-            startTime = "11,00,00,000";
+            startTime = "09,59,59,700";
             targetViewText = "【活动编号】30456";
             break;
         case "每日10点10元30天猫":
-            startTime = "10,00,00,000";
+            startTime = "09,59,59,700";
             targetViewText = "【活动编号】33735";
             break;
         case "周末11点50元必胜客":
-            startTime = "10,59,59,650";
+            // 650 太早 750太慢
+            startTime = "10,59,59,700";
             targetViewText = "【活动编号】33741";
             break;
         case "周末11点50元海底捞":
-            startTime = "10,59,59,650";
+            startTime = "10,59,59,700";
             targetViewText = "【活动编号】33739";
             break;
     }
@@ -78,13 +79,22 @@ function 光大活动() {
     toastLog("已到达指定页面，等待");
     //   定位元素
     func.getTimeDiff(timeArea, startTime);
-    func.sClick(className("android.view.View").text("确认购买").findOne());
+    var cnt = 0;
+    while (1) {
+        func.sClick(className("android.view.View").text("确认购买").findOne());
+        sleep(300);
+        func.sClick(className("android.widget.Button").text("确认").findOnce());
+        cnt = cnt + 1;
+        if (cnt > 5) {
+            break;
+        }
+    }
     toastLog("已点击，请确认结果");
     sleep(3000);
 }
 
 // 等待页面加载
-function 交行5积分() {
+function 交行9点5积分() {
     toastLog("等待页面变化");
     var appName = "买单吧";
     launchApp(appName);
@@ -146,7 +156,7 @@ function 中信活动() {
             break;
         case "周三六11点-5折必胜客百果园":
             toastLog("到点点击");
-            startTime = "11,00,00,000";             // 设置时间点
+            startTime = "10,59,59,700";             // 设置时间点
             couDes = ["必胜客100元代金券", "百果园50元代金券"];             // 券名称
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             launchApp(appName);             // 启动APP
