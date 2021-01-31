@@ -58,8 +58,8 @@ function 光大活动() {
             targetViewText = "【活动编号】33735";
             break;
         case "周末11点50元必胜客":
-            // 650 太早 750太慢
-            startTime = "10,59,59,700";
+            // 650 太早 750太慢 700太慢
+            startTime = "10,59,59,675";
             targetViewText = "【活动编号】33741";
             break;
         case "周末11点50元海底捞":

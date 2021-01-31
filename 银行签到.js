@@ -356,7 +356,7 @@ function 云闪付() {
     //点击签到按钮
     func.sClick(id("com.unionpay:id/frog_float_notgif").findOne());
     // 等待签到页面加载
-    textContains("已连续签到").findOne();
+    textContains("连续签到").findOne();
 
     if (text("今日已签到").findOnce() == null) {
         func.sClick(text("立即签到").findOnce());
