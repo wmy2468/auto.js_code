@@ -128,7 +128,7 @@ function after_click(textStr) {
     }
     else if (textStr == "直接返回") {
         sleep(2500);
-        back();
+        backLoop();
     }
     else if (textStr == "等待返回") {
         wait_complete();
