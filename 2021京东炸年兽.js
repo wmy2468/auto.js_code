@@ -128,7 +128,7 @@ function after_click(textStr) {
     }
     else if (textStr == "直接返回") {
         sleep(2500);
-        if (!check_current_pkg()) {
+        if (!check_current_pkg("京东")) {
             sleep(1500);
         }
         back();
