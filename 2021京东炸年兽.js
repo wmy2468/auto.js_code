@@ -128,7 +128,9 @@ function after_click(textStr) {
     }
     else if (textStr == "直接返回") {
         sleep(2500);
-        back();
+        if (check_current_pkg()) {
+            back();
+        }
     }
     else if (textStr == "等待返回") {
         wait_complete();
@@ -237,6 +239,7 @@ function check_current_pkg(app_name) {
     } else {
         runApps(app_name);
         sleep(2000);
+        return false;
     }
 }
 
