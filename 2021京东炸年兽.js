@@ -100,7 +100,7 @@ function monster() {
                         break;
                     }
                 }
-                toastLog("去完成");
+                toastLog("点击去完成");
                 sleep(1000);
             }
             if (cnt > 3) {
