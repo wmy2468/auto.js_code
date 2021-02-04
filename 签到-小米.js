@@ -50,10 +50,10 @@ function jd_sign() {
     func.sClick(getCon.parent());
 
     while (className("ImageView").desc("领券中心").findOnce() == null) {
-        var closeBtn = id("com.jd.lib.coupon.feature:id/db").findOnce();
-        if (closeBtn != null) {
-            func.sClick(closeBtn.parent().child(1));
-        }
+        // var closeBtn = id("com.jd.lib.coupon.feature:id/db").findOnce();
+        // if (closeBtn != null) {
+        //     func.sClick(closeBtn.parent().child(1));
+        // }
         sleep(800);
     }
     sleep(1200);
