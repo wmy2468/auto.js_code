@@ -133,6 +133,7 @@ function after_click(textStr) {
             sleep(1500);
         }
         back();
+        func.sClick(text("下次再来哦～").findOnce());
     }
     else if (textStr == "等待返回") {
         wait_complete();
