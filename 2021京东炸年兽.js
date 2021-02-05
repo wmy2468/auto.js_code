@@ -95,7 +95,7 @@ function monster() {
                     cnt = cnt + 1;
                     func.cClick(unComplete[idx]);
                     count = 0;
-                    if (cnt > 3) {
+                    if (cnt >= 2) {
                         toastLog("去完成点击超时，退出重新查找");
                         break;
                     }
