@@ -102,7 +102,7 @@ function 交行9点5积分() {
     var gasPacket;
     text("本月可用兑换资格2次").findOne();
     var countDown, countDownParent, idxCountDown, minuteIdx, secIdx, minuteText, secText;
-    var tempSec = "";
+    var tempSec = "", cnt = 0;
     while (1) {
         countDown = text("抢兑倒计时：").findOne();
         countDownParent = countDown.parent();
@@ -114,8 +114,12 @@ function 交行9点5积分() {
         // 分钟和时钟的值
         minuteText = countDownParent.child(minuteIdx).text();
         secText = countDownParent.child(secIdx).text();
+        cnt = cnt + 1;
         if (!(tempSec == secText)) {
-            toastLog("倒计时 分钟:" + minuteText + " 秒:" + secText);
+            if (cnt >= 5) {
+                cnt = 0;
+                toastLog("倒计时 分钟:" + minuteText + " 秒:" + secText);
+            }
         }
         tempSec = secText;
         if (minuteText == "00" && secText == "01") {
@@ -130,6 +134,7 @@ function 交行9点5积分() {
             gasPacket = className("android.view.View").text("加油卡充值30元红包").findOnce().parent().parent().child(1);
             if (gasPacket.text() == "抢兑") {
                 func.sClick(gasPacket);
+                sleep(300);
             } else {
                 continue;
             }
