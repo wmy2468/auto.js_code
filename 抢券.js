@@ -101,6 +101,28 @@ function 交行9点5积分() {
     // 等待进入指定页面
     var gasPacket;
     text("本月可用兑换资格2次").findOne();
+    var countDown, countDownParent, idxCountDown, minuteIdx, secIdx, minuteText, secText;
+    var cnt = 0;
+    while (1) {
+        countDown = text("抢兑倒计时：").findOne();
+        countDownParent = countDown.parent();
+        // 获取倒计时在母空间的位置
+        idxCountDown = countDown.indexInParent();
+        // 分钟和时钟的位置
+        minuteIdx = idxCountDown + 1;
+        secIdx = idxCountDown + 3;
+        // 分钟和时钟的值
+        minuteText = countDownParent[minuteIdx].text();
+        secText = countDownParent[secIdx].text();
+        cnt = cnt + 1;
+        if (cnt >= 20) {
+            toastLog("倒计时分钟:" + minuteText + "倒计时m秒:" + secText);
+            cnt = 0;
+        }
+        if (minuteText == "00" && secText == "01") {
+            break;
+        }
+    }
     while (1) {
         //点击元素
         try {
@@ -112,11 +134,12 @@ function 交行9点5积分() {
             } else {
                 continue;
             }
-            func.sClick(className("android.view.View").text("确认").findOne());
+            if (func.sClick(className("android.view.View").text("确认").findOnce())) {
+                break;
+            }
         } catch (e) {
             continue;
         }
-        break;
     }
 }
 
