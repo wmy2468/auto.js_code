@@ -115,8 +115,8 @@ function 交行9点5积分() {
         minuteText = countDownParent.child(minuteIdx).text();
         secText = countDownParent.child(secIdx).text();
         cnt = cnt + 1;
-        if (cnt >= 20) {
-            toastLog("倒计时分钟:" + minuteText + "倒计时m秒:" + secText);
+        if (cnt >= 200) {
+            toastLog("倒计时 分钟:" + minuteText + " 秒:" + secText);
             cnt = 0;
         }
         if (minuteText == "00" && secText == "01") {
