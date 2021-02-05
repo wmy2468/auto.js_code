@@ -102,7 +102,7 @@ function 交行9点5积分() {
     var gasPacket;
     text("本月可用兑换资格2次").findOne();
     var countDown, countDownParent, idxCountDown, minuteIdx, secIdx, minuteText, secText;
-    var cnt = 0;
+    var tempSec = "";
     while (1) {
         countDown = text("抢兑倒计时：").findOne();
         countDownParent = countDown.parent();
@@ -114,11 +114,10 @@ function 交行9点5积分() {
         // 分钟和时钟的值
         minuteText = countDownParent.child(minuteIdx).text();
         secText = countDownParent.child(secIdx).text();
-        cnt = cnt + 1;
-        if (cnt >= 200) {
+        if (!(tempSec == secText)) {
             toastLog("倒计时 分钟:" + minuteText + " 秒:" + secText);
-            cnt = 0;
         }
+        tempSec = secText;
         if (minuteText == "00" && secText == "01") {
             break;
         }
