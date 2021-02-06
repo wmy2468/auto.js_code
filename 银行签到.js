@@ -137,21 +137,17 @@ function jd_sign() {
         func.sClick(descContains("取消").findOnce());
         sleep(1500);
     }
-    var getBeans = className("TextView").text("领京豆").findOne();
-    func.sClick(getBeans.parent());
-    //等待进店领豆加载
-    className("TextView").text("进店领豆").findOne();
-    if (className("TextView").text("已连续签到").findOnce()) {
-        toastLog("今日已签到");
+    // 等待页面加载
+    text("购物返豆").findOne();
+    sleep(800);
+
+    while (textContains("已连签").findOnce() == null) {
+        func.sClick(className("TextView").text("签到领京豆").findOnce());
+        sleep(800);
     }
-    else {
-        while (textContains("恭喜您获得").findOnce() == null) {
-            func.sClick(className("TextView").text("签到领京豆").findOnce());
-            sleep(2000);
-        }
-        sleep(2000);
-        toastLog("签到成功");
-    }
+    toastLog("已签到");
+    sleep(1000);
+
     while (className("TextView").text("首页").findOnce() == null) {
         back();
         sleep(2000);
@@ -179,8 +175,8 @@ function jd_sign() {
             huafei = huafeis[j];
             try {
                 huafeiParent = huafei.parent();
-                log("childCount" + huafeiParent.childCount());
-                log("button Text" + huafeiParent.child(huafeiLen - 1).text());
+                log("childCount:" + huafeiParent.childCount());
+                log("button Text:" + huafeiParent.child(huafeiLen - 1).text());
                 if (huafeiParent.childCount() == 3 && huafeiParent.child(huafeiLen - 1).text() == "领取") {
                     func.sClick(huafeiParent.child(huafeiLen - 1));
                     toastLog("准备领取话费券");
