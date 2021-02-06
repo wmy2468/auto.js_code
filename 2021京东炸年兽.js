@@ -131,8 +131,10 @@ function after_click(textStr) {
         sleep(2500);
         if (!check_current_pkg("京东")) {
             sleep(1500);
+        } else {
+            back();
+            sleep(1500);
         }
-        back();
         func.sClick(text("下次再来哦～").findOnce());
     }
     else if (textStr == "等待返回") {
