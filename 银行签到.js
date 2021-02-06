@@ -137,6 +137,8 @@ function jd_sign() {
         func.sClick(descContains("取消").findOnce());
         sleep(1500);
     }
+    var getBeans = className("TextView").text("领京豆").findOne();
+    func.sClick(getBeans.parent());
     // 等待页面加载
     text("购物返豆").findOne();
     sleep(800);
