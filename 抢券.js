@@ -59,7 +59,7 @@ function 光大活动() {
             break;
         case "周末11点50元必胜客":
             // 650 太早 750太慢 700太慢
-            startTime = "10,59,59,675";
+            startTime = "10,59,59,700";
             targetViewText = "【活动编号】33741";
             break;
         case "周末11点50元海底捞":
@@ -97,6 +97,8 @@ function 光大活动() {
 function 交行9点5积分() {
     toastLog("等待页面变化");
     var appName = "买单吧";
+    var actNames = ["加油卡充值30元红包", "缴费类15元红包", "话费20元红包", "话费10元红包"];
+    var actName = func.dialogsWin(actNames);      // 设置查找的文本
     launchApp(appName);
     // 等待进入指定页面
     var gasPacket;
@@ -123,23 +125,29 @@ function 交行9点5积分() {
         }
         tempSec = secText;
         if (minuteText == "00" && secText == "01") {
+            sleep(500);
             break;
         }
     }
+    var sureBtn;
     while (1) {
         //点击元素
         try {
-            //toastLog(className("android.view.View").text("21元用卡保障刷卡金").find().length);
-            //gasPacket = className("android.view.View").text("21元用卡保障刷卡金").findOnce().parent().parent().child(1);
-            gasPacket = className("android.view.View").text("加油卡充值30元红包").findOnce().parent().parent().child(1);
-            if (gasPacket.text() == "抢兑") {
-                func.sClick(gasPacket);
-                sleep(300);
+            sureBtn = className("android.view.View").text("确认").findOnce();
+            //如果找到确认按钮则不继续点击抢兑
+            if (sureBtn == null) {
+                gasPacket = className("android.view.View").text(actName).findOnce().parent().parent().child(1);
+                if (gasPacket.text() == "抢兑") {
+                    func.sClick(gasPacket);
+                    sleep(300);
+                } else {
+                    continue;
+                }
             } else {
-                continue;
-            }
-            if (func.sClick(className("android.view.View").text("确认").findOnce())) {
-                break;
+                if (func.sClick(sureBtn)) {
+                    toastLog("已点击");
+                    break;
+                }
             }
         } catch (e) {
             continue;
