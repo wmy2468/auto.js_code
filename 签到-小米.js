@@ -59,7 +59,7 @@ function jd_sign() {
     sleep(1200);
 
     // 点击领话费券按钮
-    var huafeis, huafeiParent, huafeiLen;
+    var huafeis, huafeiParent, huafeiLen, huafeiParentChildCount;
     huafeis = text("话费券").find();
     // 如果话费券非空
     if (huafeis.nonEmpty()) {
@@ -69,10 +69,11 @@ function jd_sign() {
             huafei = huafeis[j];
             try {
                 huafeiParent = huafei.parent();
-                log("childCount" + huafeiParent.childCount());
-                log("button Text" + huafeiParent.child(huafeiLen - 1).text());
-                if (huafeiParent.childCount() == 3 && huafeiParent.child(huafeiLen - 1).text() == "领取") {
-                    func.sClick(huafeiParent.child(huafeiLen - 1));
+                huafeiParentChildCount = huafeiParent.childCount();
+                log("childCount: " + huafeiParentChildCount);
+                log("button Text: " + huafeiParent.child(huafeiParentChildCount - 1).text());
+                if (huafeiParentChildCount == 3 && huafeiParent.child(huafeiParentChildCount - 1).text() == "领取") {
+                    func.sClick(huafeiParent.child(huafeiParentChildCount - 1));
                     toastLog("准备领取话费券");
                     sleep(1500);
                 } else {

@@ -177,10 +177,11 @@ function jd_sign() {
             huafei = huafeis[j];
             try {
                 huafeiParent = huafei.parent();
-                log("childCount:" + huafeiParent.childCount());
-                log("button Text:" + huafeiParent.child(huafeiLen - 1).text());
-                if (huafeiParent.childCount() == 3 && huafeiParent.child(huafeiLen - 1).text() == "领取") {
-                    func.sClick(huafeiParent.child(huafeiLen - 1));
+                huafeiParentChildCount = huafeiParent.childCount();
+                log("childCount: " + huafeiParentChildCount);
+                log("button Text: " + huafeiParent.child(huafeiParentChildCount - 1).text());
+                if (huafeiParentChildCount == 3 && huafeiParent.child(huafeiParentChildCount - 1).text() == "领取") {
+                    func.sClick(huafeiParent.child(huafeiParentChildCount - 1));
                     toastLog("准备领取话费券");
                     sleep(1500);
                 } else {
