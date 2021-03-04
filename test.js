@@ -13,7 +13,7 @@ function 邮储信用卡() {
         }
     }
     sleep(800);
-    func.sClick(className("TextView").text("精选").findOne());
+    func.cClick(className("TextView").text("精选").findOne());
     // 等待我的页面加载
     var myBill = text("热门活动").findOne();
     sleep(800);
