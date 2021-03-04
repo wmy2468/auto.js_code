@@ -18,7 +18,6 @@ function main() {
 
 // ======================签到代码==================================
 function jd_sign() {
-    func.toApp("京东");
     //等待首页加载
     while (className("TextView").text("首页").findOnce() == null) {
         func.sClick(id("xk").findOnce());
