@@ -184,16 +184,13 @@ function gesture_pwd(appName) {
             log("邮储银行");
             break;
         case "中国农业银行":
-            point = (text("切换登录方式").findOne()).parent().parent().parent().child(0);
+            point = (text("切换登录方式").findOne()).parent().child(1);
             log("中国农业银行");
             break;
     }
     var execStr;
     switch (appName) {
         case "招商银行":
-            execStr = "gesture(1100";
-            break;
-        case "中国农业银行":
             execStr = "gesture(1100";
             break;
         default:
