@@ -1,32 +1,35 @@
 // 导入模块
 var func = require("func_list.js");
-邮储信用卡();
+招商银行();
 
-function 邮储信用卡() {
-    var appName = "邮储信用卡";
+function 招商银行() {
+    var appName = "招商银行";
+    // setClip("＆https://t.cmbchina.com/RZV7f2＆");
+    sleep(600);
     func.toApp(appName);
-    while (text("我的").findOnce() == null) {
-        func.passAd();
-        var Continue = className("TextView").text("继续使用").findOnce();
-        if (Continue != null) {
-            func.sClick(Continue);
-        }
-    }
+    func.passAd();
+    // func.sClick(text("立即查看").findOne());
+    func.sClick(id("cmb.pb:id/textMarquee").findOne());
+    text("历史搜索").findOne();
     sleep(800);
-    func.cClick(className("TextView").text("精选").findOne());
-    // 等待我的页面加载
-    var myBill = text("热门活动").findOne();
-    sleep(800);
-    func.sClick(myBill.parent().parent().child(6));
-    while (!(text("明天再来哦").findOnce() != null || textContains("恭喜获得").findOnce() != null)) {
-        func.sClick(text("立即签到").findOnce());
-        sleep(800);
-        if (text("忘记手势密码").findOnce() != null) {
+    setText(0, "刮刮乐");
+    func.sClick(text("招牌便民刮刮乐").findOne());
+    sleep(1000);
+    while (text("周日").findOnce() == null) {
+        if (id("ivBigHeadImage").findOnce() != null) {
             sleep(500);
             func.gesture_pwd(appName);
             sleep(1000);
         }
     }
+    sleep(2000);
+    var monday = text("周一").findOne();
+    func.sClick(monday.parent().parent().parent().child(3));
+    text("医保电子凭证").findOne();
+    sleep(1200);
+    back();
+    sleep(800);
+    setClip("");
     toastLog(appName + "已签到");
-    sleep(1000);
+    sleep(1200);
 }

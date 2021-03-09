@@ -413,11 +413,16 @@ function 工银e生活() {
 
 function 招商银行() {
     var appName = "招商银行";
-    setClip("＆https://t.cmbchina.com/RZV7f2＆");
+    // setClip("＆https://t.cmbchina.com/RZV7f2＆");
     sleep(600);
     func.toApp(appName);
     func.passAd();
-    func.sClick(text("立即查看").findOne());
+    // func.sClick(text("立即查看").findOne());
+    func.sClick(id("cmb.pb:id/textMarquee").findOne());
+    text("历史搜索").findOne();
+    sleep(800);
+    setText(0, "刮刮乐");
+    func.sClick(text("招牌便民刮刮乐").findOne());
     sleep(1000);
     while (text("周日").findOnce() == null) {
         if (id("ivBigHeadImage").findOnce() != null) {
