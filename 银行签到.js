@@ -351,6 +351,7 @@ function 云闪付() {
     while (className("TextView").text("我 的").findOnce() == null) {
         func.passAd();
     }
+    sleep(800);
     func.sClick(className("TextView").text("首 页").findOnce());
     //点击签到按钮
     func.sClick(id("com.unionpay:id/frog_float_notgif").findOne());
