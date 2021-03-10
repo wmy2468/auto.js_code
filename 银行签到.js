@@ -295,7 +295,7 @@ function 邮储信用卡() {
     sleep(800);
     // 等待我的页面加载
     var myBill = text("热门活动").findOne();
-    sleep(1300);
+    sleep(800);
     func.sClick(myBill.parent().parent().child(6));
     while (!(text("明天再来哦").findOnce() != null || textContains("恭喜获得").findOnce() != null)) {
         func.sClick(text("立即签到").findOnce());
