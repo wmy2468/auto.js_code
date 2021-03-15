@@ -435,8 +435,7 @@ function 招商银行() {
     }
     sleep(2000);
     var monday = text("周一").findOne();
-    var idx = monday.parent().parent().indexInParent();
-    func.sClick(monday.parent().parent().parent().child(idx + 2));
+    func.sClick(monday.parent().parent().parent().child(4));
     text("医保电子凭证").findOne();
     sleep(1200);
     back();
