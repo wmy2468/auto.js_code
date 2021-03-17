@@ -243,31 +243,22 @@ function 京东腾讯月() {
     toastLog("等待页面变化");
     var appName = "京东金融";
     launchApp(appName);
-    var tVip = className("android.view.View").text(actName).findOnce();
-    var tVip2 = className("android.view.View").desc(actName).findOnce();
+    var tVip, getBtn;
     // 等待进入指定页面
-    while (!(tVip || tVip2)) {
-        tVip = className("android.view.View").text(actName).findOnce();
-        tVip2 = className("android.view.View").desc(actName).findOnce();
-        toastLog("请跳转到腾讯月卡领取页面，直到提示  已到达等待页面");
-        sleep(1000);
-    }
+    toastLog("请跳转到腾讯月卡领取页面，直到提示  已到达等待页面");
+    sleep(800);
+    className("android.view.View").text(actName).findOne();
     toastLog("已到达指定页面，等待");
 
-    var getBtn, tencentVip;
-    if (tVip == null) {
-        tencentVip = tVip;
-    } else {
-        tencentVip = tVip2;
-    }
     while (1) {
         try {
+            tVip = className("android.view.View").text(actName).findOnce();
             // 找到领取按钮
-            getBtn = tencentVip.parent().child(4).child(0);
+            getBtn = tVip.parent().child(4).child(0);
             if (getBtn != null) {
                 if (getBtn.text() == "立即领取" || getBtn.desc() == "立即领取") {
                     getBtn.click();
-                    toastLog("结束");
+                    toastLog("结束,已点击！");
                     sleep(800);
                     break;
                 }
