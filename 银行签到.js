@@ -4,7 +4,7 @@ var func = require("func_list.js");
 main();
 //买单吧();
 function main() {
-    招商银行();
+    //招商银行();
     中国农业银行();
     什么值得买();
     jd_sign();

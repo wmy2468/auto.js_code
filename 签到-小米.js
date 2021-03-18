@@ -6,7 +6,7 @@ main();
 //买单吧();
 function main() {
     func.xiaomiUnlock();
-    招商银行();
+    //招商银行();
     var i = 1;
     while (i < 3) {
         func.toAppMulti("京东", i);
