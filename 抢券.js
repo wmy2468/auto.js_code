@@ -272,53 +272,19 @@ function 京东腾讯月() {
 function 工行活动() {
     var appName = "工银E生活";
     var timeArea = "北京时间";
-    var startTime = "10,29,59,000";
-    var actNames = ["周二25元卡券", "每日42元卡券"];
-    var actName = func.dialogsWin(actNames);      // 设置查找的文本
-    var couName, couNames;
-    couNames = ["沃尔玛50元代金券", "星巴克50元代金券", "肯德基50元代金券"];
-    couName = func.dialogsWin(couNames);      // 设置查找的文本
+    var startTime = "10,30,00,000";
+    couName = "确定"
     launchApp(appName);             // 启动APP
-    switch (actName) {
-        case "每日42元卡券":
-            // 找到使用流程，且找到对应券名称沃尔玛的情况下就是 券的详情页
-            while (!(text("使用流程").findOnce() && text(couName).findOnce())) {
-                toastLog("请进入活动页面，直到提示  已到达等待页面");
-                sleep(333);
-            }
-            toastLog("已到达指定页面，等待");
-            func.getTimeDiff(timeArea, startTime);              // 等待时间
-            // 等待点击立即购买
-            while (!text("安全验证").findOnce()) {
-                if (func.sClick(text("知道了").findOnce())) {
-                    sleep(150);
-                }
-                if (func.sClick(text("立即购买").findOnce())) {
-                    sleep(150);
-                }
-            }
-            toastLog("已点击，请确认结果");
-            sleep(3000);
-            break;
-        case "周二25元卡券":
-            // 找不到更多地区，且找到沃尔玛的情况下就是25元的页面
-            while (!(!text("更多地区").findOnce() && text(couName).findOnce())) {
-                toastLog("请进入活动页面，直到提示  已到达等待页面");
-                sleep(333);
-            }
-            toastLog("已到达指定页面，等待");
-            func.getTimeDiff(timeArea, startTime);              // 等待时间
-            // 未找到立即购买 就持续点击
-            while (!func.sClick(text("立即购买").findOnce())) {
-                if (func.sClick(text("知道了").findOnce())) {
-                    sleep(150);
-                }
-                if (func.sClick(className("android.widget.Image").text(couName).findOnce())) {
-                    sleep(150);
-                }
-            }
-            toastLog("已点击，请输入验证码");
-            sleep(3000);
-            break;
+    // 找到使用流程，且找到对应券名称沃尔玛的情况下就是 券的详情页
+    while (!(text("安全验证").findOnce())) {
+        toastLog("请进入活动页面，直到提示  已到达等待页面");
+        sleep(333);
     }
+    var sureBtn = className("android.widget.Button").text(couName).findOne();
+    toastLog("已到达指定页面，等待");
+    func.getTimeDiff(timeArea, startTime);              // 等待时间
+    // 等待点击立即购买
+    func.sClick(sureBtn);
+    toastLog("已点击，请确认结果");
+    sleep(3000);
 }
