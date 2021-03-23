@@ -376,7 +376,7 @@ function jdTime() {
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
-        res = http.get("https://a.jd.com//ajax/queryServerData.html");
+        res = http.get("https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5");
         edTimestamp = new Date();
 
         if (res.statusCode != 200) {
@@ -387,7 +387,7 @@ function jdTime() {
 
         if (edTimestamp - stTimestamp <= timeLimit[timeArea]) {
             resTime = res.body.json();
-            resTimestamp = Number(resTime.serverTime);
+            resTimestamp = Number(resTime.currentTime2);
             sigma = edTimestamp - stTimestamp;
             delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
             log("时延", sigma);
