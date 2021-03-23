@@ -1,35 +1,23 @@
 // 导入模块
 var func = require("func_list.js");
-招商银行();
+beiJingTime();
 
-function 招商银行() {
-    var appName = "招商银行";
-    // setClip("＆https://t.cmbchina.com/RZV7f2＆");
-    sleep(600);
-    func.toApp(appName);
-    func.passAd();
-    // func.sClick(text("立即查看").findOne());
-    func.sClick(id("cmb.pb:id/textMarquee").findOne());
-    text("历史搜索").findOne();
-    sleep(800);
-    setText(0, "刮刮乐");
-    func.sClick(text("招牌便民刮刮乐").findOne());
-    sleep(1000);
-    while (text("周日").findOnce() == null) {
-        if (id("ivBigHeadImage").findOnce() != null) {
-            sleep(500);
-            func.gesture_pwd(appName);
-            sleep(1000);
-        }
+function beiJingTime() {
+    var res, resTime, resTimestamp, sigma, delta;
+    var timeArea = "北京时间";
+    log("请求", timeArea);
+    // 获取取一次时间耗时
+    stTimestamp = new Date();
+    res = http.get("http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1");
+    edTimestamp = new Date();
+
+    if (res.statusCode != 200) {
+        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+        exit();
     }
-    sleep(2000);
-    var monday = text("周一").findOne();
-    func.sClick(monday.parent().parent().parent().child(3));
-    text("医保电子凭证").findOne();
-    sleep(1200);
-    back();
-    sleep(800);
-    setClip("");
-    toastLog(appName + "已签到");
-    sleep(1200);
+    toastLog("请求返回的BODY" + res.body);
+    log("请求总时长", edTimestamp - stTimestamp);
+
+    //返回时间差
+    return delta - serverDelay[timeArea];
 }
