@@ -16,8 +16,10 @@ function beiJingTime() {
         exit();
     }
     for (var headerName in res.headers) {
-        toastLog("%s : %s", headerName, res.headers[headerName]);
+        log(headerName, res.headers[headerName]);
     }
+    toastLog(res.body.string());
+    toastLog(new Date(res.headers["Data"]));
     //toastLog("请求返回的BODY.BYTES" + res.body.bytes());
     //toastLog("请求返回的BODY.STRING" + res.body.string());
     //toastLog("请求返回的BODY.contentType" + res.body.contentType());
