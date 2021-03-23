@@ -15,9 +15,10 @@ function beiJingTime() {
         toast("请求失败: " + res.statusCode + " " + res.statusMessage);
         exit();
     }
-    toastLog("请求返回的BODY" + res.body);
-    log("请求总时长", edTimestamp - stTimestamp);
+    toastLog("请求返回的BODY.BYTES" + res.body.bytes());
+    toastLog("请求返回的BODY.JSON" + res.body.json());
+    toastLog("请求返回的BODY.STRING" + res.body.string());
+    toastLog("请求返回的BODY.contentType" + res.body.contentType());
 
-    //返回时间差
-    return delta - serverDelay[timeArea];
+    log("请求总时长", edTimestamp - stTimestamp);
 }
