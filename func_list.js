@@ -42,6 +42,8 @@ function passAd() {
 
 
 function toApp(appName) {
+    toAutojs();
+    sleep(800);
     while (currentPackage() != getPackageName(appName)) {
         launchApp(appName);
         sleep(2000);
