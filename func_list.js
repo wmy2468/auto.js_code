@@ -35,7 +35,7 @@ function sClick(element) {
 function passAd() {
     sClick(textContains("跳过").findOnce());
     sClick(descContains("跳过").findOnce());
-    sClick(idContains("lose").findOnce());
+    sClick(idContains("close").findOnce());
     //sClick(text("取消").findOnce());
     //sClick(text("放弃转账").findOnce());*/
 }

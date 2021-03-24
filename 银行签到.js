@@ -118,9 +118,17 @@ function 浦发银行() {
         }
     }
     sleep(1000);
-    while (textContains("连续签到").find().length > 2) {
-        func.sClick(textContains("连续签到").findOnce());
-
+    var signs = textContains("连续签到").find();
+    try {
+        if (signs.length >= 2) {
+            for (var i = 0; i < signs.length; i++) {
+                func.sClick(signs[i]);
+            }
+        }
+    }
+    catch (e) {
+        toastLog("未找到多余的连续签到");
+        sleep(2000);
     }
     toastLog(appName + "已签到");
     sleep(1000);
