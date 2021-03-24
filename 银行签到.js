@@ -118,7 +118,7 @@ function 浦发银行() {
         }
     }
     sleep(1000);
-    if (textContains("连续签到").find().length > 2) {
+    while (textContains("连续签到").find().length > 2) {
         func.sClick(textContains("连续签到").findOnce());
 
     }
