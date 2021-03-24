@@ -1,28 +1,39 @@
 // 导入模块
 var func = require("func_list.js");
-beiJingTime();
+浦发银行();
 
-function beiJingTime() {
-    var res, resTime, resTimestamp, sigma, delta;
-    var timeArea = "北京时间";
-    log("请求", timeArea);
-    // 获取取一次时间耗时
-    stTimestamp = new Date();
-    res = http.get("http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1");
-    edTimestamp = new Date();
-
-    if (res.statusCode != 200) {
-        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
-        exit();
+function 浦发银行() {
+    var appName = "浦发银行";
+    //closeApp(appName);
+    func.toApp(appName);
+    while (text("首页").findOnce() == null) {
+        func.passAd();
     }
-    for (var headerName in res.headers) {
-        log(headerName, res.headers[headerName]);
+    sleep(1800);
+    func.sClick(id("radio_button5").text("我的").findOnce());
+    // 等待我的页面加载
+    text("日历提醒").findOne();
+    // 签到按钮
+    while (text("金豆").findOnce() == null) {
+        func.toAutojs();
+        func.toApp(appName);
+        sleep(3000);
     }
-    toastLog(res.body.string());
-    toastLog(new Date(res.headers["Data"]));
-    //toastLog("请求返回的BODY.BYTES" + res.body.bytes());
-    //toastLog("请求返回的BODY.STRING" + res.body.string());
-    //toastLog("请求返回的BODY.contentType" + res.body.contentType());
+    sleep(800);
+    while (text("开启签到提醒").findOnce() == null) {
+        func.sClick(text("金豆").findOnce());
+        sleep(800);
+        if (text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce()) {
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(1000);
+        }
+    }
+    sleep(1000);
+    if (textContains("连续签到").find().length > 2) {
+        func.sClick(textContains("连续签到").findOnce());
 
-    log("请求总时长", edTimestamp - stTimestamp);
+    }
+    toastLog(appName + "已签到");
+    sleep(1000);
 }
