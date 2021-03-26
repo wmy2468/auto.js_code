@@ -297,6 +297,7 @@ function getTimeDiff(area, targetTime) {
     // 生成今天的时间戳
     var tDate, stDate, targetTimestamp;
     tDate = getToday() + "," + targetTime;
+    toastLog(tDate);
     stDate = tDate.split(",");
     targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
     // 获取当前时间戳
