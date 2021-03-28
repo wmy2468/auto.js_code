@@ -6,6 +6,7 @@ var selectArr = ["微信", "云闪付PAY"];
 // func.sClick(text("全部").findOnce());
 
 var result = dialogsWin(selectArr);
+var cardEndNumber = "2079";
 
 if (result == "微信") {
     func.toApp("京东");
@@ -35,7 +36,7 @@ function huaweiPay() {
                 while (func.sClick(text("Huawei Pay").findOnce()) == false) {
                     scrollDown();
                 }
-                func.cClick(textContains("2079").findOne());
+                func.cClick(textContains(cardEndNumber).findOne());
                 text("付款详情");
                 func.sClick(text("确认付款").findOnce());
             }
