@@ -12,10 +12,10 @@ function toAutojs() {
 function cClick(element) {
     if (element != null) {
         click(element.bounds().centerX(), element.bounds().centerY());
-        log("cClick_center");
+        log("cClick_center" + element.text());
         return true;
     } else {
-        log("cClick_null");
+        log("cClick_null" + element.text());
         return false;
     }
 }
@@ -23,14 +23,14 @@ function cClick(element) {
 function sClick(element) {
     if (element != null) {
         if (element.click()) {
-            log("sClick");
+            log("sClick" + element.text());
         } else {
             click(element.bounds().centerX(), element.bounds().centerY());
-            log("sClick_center");
+            log("sClick_center" + element.text());
         }
         return true;
     }
-    log("sClick_null");
+    log("sClick_null" + element.text());
     return false;
 }
 
