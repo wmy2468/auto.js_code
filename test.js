@@ -16,4 +16,5 @@ while (true) {
     if (func.sClick(text("立即抽奖").findOnce())) {
         text("恭喜你").findOne();
     }
+    text("待付款").findOne();
 }
