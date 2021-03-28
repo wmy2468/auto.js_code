@@ -13,8 +13,10 @@ function cClick(element) {
     if (element != null) {
         click(element.bounds().centerX(), element.bounds().centerY());
         log("cClick_center");
+        return true;
     } else {
         log("cClick_null");
+        return false;
     }
 }
 

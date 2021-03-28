@@ -7,7 +7,7 @@ while (true) {
     func.sClick(text("待付款").findOnce());
     func.sClick(text("去支付").findOnce());
     if (func.sClick(id("com.jd.lib.cashier.feature:id/cf").findOnce())) {
-        while (!func.sClick(text("返回商家").findOnce())) {
+        while (!func.cClick(text("返回商家").findOnce())) {
             func.sClick(text("立即支付").findOnce());
             func.sClick(text("确认支付").findOnce());
         }
