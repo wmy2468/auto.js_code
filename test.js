@@ -23,7 +23,7 @@ while (true) {
         text("完成").findOne();
     }
     if (func.sClick(text("立即抽奖").findOnce())) {
-        text("待付款").findOne();
+        id("com.jd.lib.ordercenter.feature:id/uk").findOne();
     }
     // text("待付款").findOne();
 }
