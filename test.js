@@ -3,13 +3,16 @@ var func = require("func_list.js");
 
 func.toApp("京东");
 
+// toastLog(text("再次购买").findOnce());
+// func.sClick(text("全部").findOnce());
+
 while (true) {
     try {
-        func.sClick(text("待付款").findOnce().parent().child(2))
+        func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(0));
+        func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(1));
     } catch (e) {
 
     }
-    func.sClick(text("待付款").findOnce());
     func.sClick(text("去支付").findOnce());
     if (func.sClick(id("com.jd.lib.cashier.feature:id/cf").findOnce())) {
         while (func.cClick(text("返回商家").findOnce()) == false) {
