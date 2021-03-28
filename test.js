@@ -9,15 +9,16 @@ func.toApp("京东");
 while (true) {
     try {
         func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(0));
+        sleep(300);
         func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(1));
     } catch (e) {
 
     }
     func.sClick(text("去支付").findOnce());
-    if (func.sClick(id("com.jd.lib.cashier.feature:id/cf").findOnce())) {
+    if (func.sClick(id("com.jd.lib.cashier.feature:id/cd").findOnce())) {
         while (func.cClick(text("返回商家").findOnce()) == false) {
-            func.sClick(text("立即支付").findOnce());
-            func.sClick(text("确认支付").findOnce());
+            func.cClick(text("立即支付").findOnce());
+            func.cClick(text("确认支付").findOnce());
         }
         text("完成").findOne();
     }
