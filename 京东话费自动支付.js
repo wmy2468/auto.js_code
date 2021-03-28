@@ -21,30 +21,34 @@ function huaweiPay() {
         // 在全部订单和待付款切换
         try {
             func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(0));
-            sleep(300);
+            sleep(500);
             func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(1));
+            sleep(500);
         } catch (e) {
 
         }
         func.sClick(text("去支付").findOnce());
         if (func.sClick(id("com.jd.lib.cashier.feature:id/cd").findOnce()) == true) {
-            while (text("支付成功").findOnce() == null) {
-                toastLog("切换到云闪付");
-                while (text("选择付款方式").findOnce() == null) {
-                    func.cClick(text("付款方式").findOnce());
-                    sleep(800);
-                }
-                while (func.sClick(text("Huawei Pay").findOnce()) == false) {
-                    scrollDown();
-                    sleep(500);
-                }
-                sleep(400);
-                func.cClick(textContains(cardEndNumber).findOne());
-                text("付款详情").findOne();
-                func.sClick(text("确认付款").findOnce());
+
+            toastLog("切换到云闪付");
+            while (text("选择付款方式").findOnce() == null) {
+                func.cClick(text("付款方式").findOnce());
+                sleep(800);
             }
+            while (func.sClick(text("Huawei Pay").findOnce()) == false) {
+                scrollDown();
+                sleep(500);
+            }
+            text("选择付款方式").findOne();
+            sleep(300);
+            func.cClick(text("[" + cardEndNumber + "]").findOne());
+            text("付款详情").findOne();
+            func.sClick(text("确认付款").findOnce());
+            text("支付成功").findOne();
             func.sClick(text("完成").findOne());
+            text("查看订单").findOne();
         }
+
         if (func.sClick(text("立即抽奖").findOnce())) {
             id("com.jd.lib.ordercenter.feature:id/uk").findOne();
         }
@@ -56,8 +60,9 @@ function wechat() {
     while (true) {
         try {
             func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(0));
-            sleep(300);
+            sleep(500);
             func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(1));
+            sleep(500);
         } catch (e) {
 
         }
