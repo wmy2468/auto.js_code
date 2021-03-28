@@ -5,7 +5,7 @@ var selectArr = ["微信", "云闪付PAY"];
 // toastLog(text("再次购买").findOnce());
 // func.sClick(text("全部").findOnce());
 
-var result = dialogsWin(selectArr);
+var result = func.dialogsWin(selectArr);
 var cardEndNumber = "2079";
 
 if (result == "微信") {
@@ -28,16 +28,18 @@ function huaweiPay() {
         }
         func.sClick(text("去支付").findOnce());
         if (func.sClick(id("com.jd.lib.cashier.feature:id/cd").findOnce()) == true) {
-            while (text("支付成功").findOnce() == false) {
-                while (id("tv_title").text("选择付款方式").findOnce() == null) {
+            while (text("支付成功").findOnce() == null) {
+                toastLog("切换到云闪付");
+                while (text("选择付款方式").findOnce() == null) {
                     func.cClick(text("付款方式").findOnce());
                     sleep(800);
                 }
                 while (func.sClick(text("Huawei Pay").findOnce()) == false) {
                     scrollDown();
+                    sleep(500);
                 }
                 func.cClick(textContains(cardEndNumber).findOne());
-                text("付款详情");
+                text("付款详情").findOne();
                 func.sClick(text("确认付款").findOnce());
             }
             func.sClick(text("完成").findOne());
