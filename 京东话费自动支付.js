@@ -21,9 +21,9 @@ function huaweiPay() {
         // 在全部订单和待付款切换
         try {
             func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(0));
-            sleep(500);
+            sleep(1000);
             func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(1));
-            sleep(500);
+            sleep(1000);
         } catch (e) {
 
         }
@@ -60,9 +60,9 @@ function wechat() {
     while (true) {
         try {
             func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(0));
-            sleep(500);
+            sleep(1000);
             func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(1));
-            sleep(500);
+            sleep(1000);
         } catch (e) {
 
         }
