@@ -40,9 +40,12 @@ function huaweiPay() {
                 sleep(500);
             }
             text("选择付款方式").findOne();
-            sleep(300);
-            func.cClick(text("[" + cardEndNumber + "]").findOne());
-            text("付款详情").findOne();
+
+            while (text("付款详情").findOnce() == null) {
+                func.cClick(text("[" + cardEndNumber + "]").findOnce());
+                sleep(500);
+            }
+            sleep(500);
             func.sClick(text("确认付款").findOnce());
             text("支付成功").findOne();
             func.sClick(text("完成").findOne());
