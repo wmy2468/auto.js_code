@@ -161,7 +161,7 @@ function 中信活动() {
     var appName = "动卡空间";
     var timeArea = "北京时间";
     var startTime, targetViewText;
-    var actNames = ["10点-9积分兑换", "周三六11点-5折必胜客百果园", "15点-星巴克中杯"];
+    var actNames = ["10点-9积分兑换", "周三六11点-5折必胜客百果园", "15点-星巴克中杯", "2021积分兑换"];
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
     var couDes;    // 券描述列表
     switch (actName) {
@@ -232,6 +232,27 @@ function 中信活动() {
             func.sClick(className("android.view.View").text("去支付").findOne());
             toastLog("已点击，等待验证码");
             sleep(3000);
+            break;
+        case "2021积分兑换":
+            startTime = "14,00,00,000"
+            targetViewText = "已报名，快去抢兑吧";               // 设置查找的文本
+            launchApp(appName);             // 启动APP
+            var btnClick = text(targetViewText).findOnce();          // 找按钮
+            while (btnClick == null) {
+                btnClick = text(targetViewText).findOnce();          // 找按钮
+                toastLog("请跳转到对应页面，直到提示  已到达等待页面");
+                sleep(800);
+            }
+            func.getTimeDiff(timeArea, startTime);              // 等待时间
+            var goodsText = "SKG 颈部按摩仪"
+            buyBtn = text(goodsText).findOnce();
+            while (buyBtn == null) {
+                buyBtn = text(goodsText).findOnce();
+                scrollDown();
+            }
+            var idx = buyBtn.indexInParent();
+            var goodsParent = buyBtn.parent();
+            func.sClick(goodsParent.child([idx + 3]));
             break;
     }
 }
