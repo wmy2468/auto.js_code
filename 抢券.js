@@ -244,6 +244,7 @@ function 中信活动() {
                 sleep(800);
             }
             func.getTimeDiff(timeArea, startTime);              // 等待时间
+            func.sClick(btnClick);
             var goodsText = "SKG 颈部按摩仪"
             buyBtn = text(goodsText).findOnce();
             while (buyBtn == null) {
