@@ -45,7 +45,6 @@ function huaweiPay() {
                 func.cClick(text("[" + cardEndNumber + "]").findOnce());
                 sleep(500);
             }
-            sleep(500);
             func.sClick(text("确认付款").findOnce());
             text("支付成功").findOne();
             func.sClick(text("完成").findOne());

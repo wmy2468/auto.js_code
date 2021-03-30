@@ -4,7 +4,7 @@ var func = require("func_list.js");
 main();
 //买单吧();
 function main() {
-    //招商银行();
+    招商银行();
     中国农业银行();
     什么值得买();
     jd_sign();
@@ -443,7 +443,7 @@ function 招商银行() {
     }
     sleep(2000);
     var monday = text("周一").findOne();
-    func.sClick(monday.parent().parent().parent().child(4));
+    func.sClick(monday.parent().parent().parent().child(3));
     text("医保电子凭证").findOne();
     sleep(1200);
     back();

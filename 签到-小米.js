@@ -6,7 +6,7 @@ main();
 //买单吧();
 function main() {
     func.xiaomiUnlock();
-    //招商银行();
+    招商银行();
     var i = 1;
     while (i < 3) {
         func.toAppMulti("京东", i);
@@ -125,7 +125,7 @@ function 招商银行() {
     }
     sleep(2000);
     var monday = text("周一").findOne();
-    func.sClick(monday.parent().parent().parent().child(4));
+    func.sClick(monday.parent().parent().parent().child(3));
     text("医保电子凭证").findOne();
     sleep(1200);
     back();
