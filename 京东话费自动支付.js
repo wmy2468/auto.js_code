@@ -5,7 +5,16 @@ var selectArr = ["微信", "云闪付PAY"];
 // toastLog(text("再次购买").findOnce());
 // func.sClick(text("全部").findOnce());
 
-var result = func.dialogsWin(selectArr);
+var result;
+
+if (device.brand == "HUAWEI") {
+    result = "云闪付PAY";
+} else if (device.brand == "xiaomi") {
+    result == "微信";
+} else {
+    result = func.dialogsWin(selectArr);
+}
+
 var cardEndNumber = "2079";
 
 if (result == "微信") {
@@ -18,6 +27,7 @@ if (result == "微信") {
 
 function huaweiPay() {
     while (true) {
+        sleep(1000);
         // 在全部订单和待付款切换
         try {
             func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(0));
@@ -26,6 +36,10 @@ function huaweiPay() {
             sleep(1250);
         } catch (e) {
 
+        }
+        if (text("重新加载").findOnce()) {
+            back();
+            sleep(500);
         }
         func.sClick(text("去支付").findOnce());
         if (func.sClick(id("com.jd.lib.cashier.feature:id/cd").findOnce()) == true) {
@@ -49,10 +63,15 @@ function huaweiPay() {
             text("支付成功").findOne();
             func.sClick(text("完成").findOne());
             text("查看订单").findOne();
-        }
+            sleep(500);
+            if (func.sClick(text("立即抽奖").findOnce())) {
+                sleep(8000);
+                back();
+                // 待付款滑动栏
+                id("com.jd.lib.ordercenter.feature:id/uk").findOne();
+            }
 
-        if (func.sClick(text("立即抽奖").findOnce())) {
-            id("com.jd.lib.ordercenter.feature:id/uk").findOne();
+
         }
         // text("待付款").findOne();
     }
@@ -60,6 +79,7 @@ function huaweiPay() {
 
 function wechat() {
     while (true) {
+        sleep(1000);
         try {
             func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(0));
             sleep(1250);
@@ -67,6 +87,10 @@ function wechat() {
             sleep(1250);
         } catch (e) {
 
+        }
+        if (text("重新加载").findOnce()) {
+            back();
+            sleep(500);
         }
         func.sClick(text("去支付").findOnce());
         if (func.sClick(id("com.jd.lib.cashier.feature:id/cd").findOnce())) {
@@ -77,6 +101,9 @@ function wechat() {
             text("完成").findOne();
         }
         if (func.sClick(text("立即抽奖").findOnce())) {
+            sleep(8000);
+            back();
+            // 待付款滑动栏
             id("com.jd.lib.ordercenter.feature:id/uk").findOne();
         }
         // text("待付款").findOne();
