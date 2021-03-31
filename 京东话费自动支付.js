@@ -10,7 +10,7 @@ var result;
 if (device.brand == "HUAWEI") {
     result = "云闪付PAY";
 } else if (device.brand == "xiaomi") {
-    result == "微信";
+    result = "微信";
 } else {
     result = func.dialogsWin(selectArr);
 }
