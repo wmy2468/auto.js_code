@@ -82,10 +82,13 @@ function 光大活动() {
     var cnt = 0;
     while (1) {
         func.sClick(className("android.view.View").text("确认购买").findOne());
+        text("优惠券可售数量不足").findOne();
         sleep(300);
         func.sClick(className("android.widget.Button").text("确认").findOnce());
+        toastLog("正在点击第" + (cnt + 1).toString() + "次，共240次");
+        sleep(1200);
         cnt = cnt + 1;
-        if (cnt > 5) {
+        if (cnt > 240) {
             break;
         }
     }
