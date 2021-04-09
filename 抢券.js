@@ -216,7 +216,7 @@ function 中信活动() {
         case "15点-星巴克中杯":
             toastLog("等待页面变化");
             startTime = "14,59,45,000"
-            targetViewText = "星巴克中杯";               // 设置查找的文本
+            targetViewText = "星巴克中杯饮品电子券（15点抢兑）";               // 设置查找的文本
             launchApp(appName);             // 启动APP
             var couClick = textContains(targetViewText).findOnce();          // 找券
             while (couClick == null) {
