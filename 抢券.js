@@ -46,25 +46,42 @@ function main() {
 function 光大活动() {
     toastLog("到点点击");
     var startTime, targetViewText;
-    var actNames = ["每日11点10元KFC", "每日10点10元30天猫", "周末11点50元海底捞", "周末11点50元必胜客"];
+    var actNames = ["天猫10买30元",
+        "必胜客50买100元", "海底捞50买100元",
+        "必胜客80买100元", "青桔单车2.5买月卡",
+        "饿了么1分买6元", "饿了么1分买10元"
+    ];
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
     switch (actName) {
-        case "每日11点10元KFC":
-            startTime = "09,59,59,700";
-            targetViewText = "【活动编号】30456";
-            break;
-        case "每日10点10元30天猫":
+        // 10点
+        case "天猫10买30元":            //10点
             startTime = "09,59,59,700";
             targetViewText = "【活动编号】33735";
             break;
-        case "周末11点50元必胜客":
-            // 650 太早 750太慢 700太慢
+        case "必胜客50买100元":            //11点
+            // 11点 650 太早 750太慢 700太慢
             startTime = "10,59,59,700";
             targetViewText = "【活动编号】33741";
             break;
-        case "周末11点50元海底捞":
+        case "海底捞50买100元":            //11点
             startTime = "10,59,59,700";
             targetViewText = "【活动编号】33739";
+            break;
+        case "必胜客80买100元":            //0点
+            startTime = "23,59,59,700";
+            targetViewText = "【活动编号】33748";
+            break;
+        case "青桔单车2.5买月卡":            //10点
+            startTime = "09,59,59,700";
+            targetViewText = "【活动编号】33739";
+            break;
+        case "饿了么1分买6元":            //10点
+            startTime = "09,59,59,700";
+            targetViewText = "【活动编号】34332";
+            break;
+        case "饿了么1分买10元":            //10点
+            startTime = "09,59,59,700";
+            targetViewText = "【活动编号】34331";
             break;
     }
 
