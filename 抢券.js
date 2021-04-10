@@ -79,16 +79,22 @@ function 光大活动() {
     toastLog("已到达指定页面，等待");
     //   定位元素
     func.getTimeDiff(timeArea, startTime);
-    var cnt = 0;
+    var cnt = 0, loopBreak;
     while (1) {
+        loopBreak = 75;
         func.sClick(className("android.view.View").text("确认购买").findOne());
-        text("优惠券可售数量不足").findOne();
-        sleep(300);
-        func.sClick(className("android.widget.Button").text("确认").findOnce());
-        toastLog("正在点击第" + (cnt + 1).toString() + "次，共240次");
-        sleep(1200);
-        cnt = cnt + 1;
-        if (cnt > 240) {
+        // 如果15秒内没找到就自动退出 200毫秒一次1秒5次，30秒 150次
+        while (loopBreak >= 0) {
+            // 如果点击了按钮说明没抢到，需要继续
+            if (func.sClick(className("android.widget.Button").text("确定").findOnce())) {
+                break;
+            }
+            loopBreak = loopBreak - 1;
+            sleep(200)
+        }
+        if (loopBreak < 0) {
+            continue;
+        } else {
             break;
         }
     }
