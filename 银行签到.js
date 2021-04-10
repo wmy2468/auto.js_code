@@ -302,11 +302,9 @@ function 邮储信用卡() {
     func.sClick(className("TextView").text("精选").findOne());
     sleep(800);
     // 等待我的页面加载
-    var hotAct = text("热门活动").findOne().parent();
-    var idxHotAct = hotAct.indexInParent();
-    toastLog(idxHotAct);
+    var hotAct = text("热门活动").findOne().parent().parent();
     sleep(800);
-    func.sClick(hotAct.parent().child(idxHotAct + 1));
+    func.sClick(hotAct.child(6));
     while (!(text("明天再来哦").findOnce() != null || textContains("恭喜获得").findOnce() != null)) {
         func.sClick(text("立即签到").findOnce());
         sleep(800);
