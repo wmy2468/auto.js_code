@@ -118,7 +118,7 @@ function 浦发银行() {
         }
     }
     sleep(1000);
-    var signs = textContains("连续签到").find();
+    var signs = textStartsWith("+").find();
     try {
         if (signs.length >= 2) {
             for (var i = 0; i < signs.length; i++) {
@@ -131,7 +131,7 @@ function 浦发银行() {
         sleep(2000);
     }
     toastLog(appName + "已签到");
-    sleep(1000);
+    sleep(3000);
 }
 
 function jd_sign() {
@@ -302,9 +302,10 @@ function 邮储信用卡() {
     func.sClick(className("TextView").text("精选").findOne());
     sleep(800);
     // 等待我的页面加载
-    var myBill = text("热门活动").findOne();
+    var hotAct = text("热门活动").findOne().parent();
+    var idxHotAct = hotAct.indexInParent();
     sleep(800);
-    func.sClick(myBill.parent().parent().child(6));
+    func.sClick(hotAct.parent().child(idxHotAct + 1));
     while (!(text("明天再来哦").findOnce() != null || textContains("恭喜获得").findOnce() != null)) {
         func.sClick(text("立即签到").findOnce());
         sleep(800);
