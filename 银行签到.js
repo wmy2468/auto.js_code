@@ -304,6 +304,7 @@ function 邮储信用卡() {
     // 等待我的页面加载
     var hotAct = text("热门活动").findOne().parent();
     var idxHotAct = hotAct.indexInParent();
+    toastLog(idxHotAct);
     sleep(800);
     func.sClick(hotAct.parent().child(idxHotAct + 1));
     while (!(text("明天再来哦").findOnce() != null || textContains("恭喜获得").findOnce() != null)) {
