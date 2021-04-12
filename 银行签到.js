@@ -432,6 +432,7 @@ function 招商银行() {
     text("历史搜索").findOne();
     sleep(800);
     setText(0, "刮刮乐");
+    keyCode("KEYCODE_ENTER");
     func.sClick(text("招牌便民刮刮乐").findOne());
     sleep(1000);
     while (text("周日").findOnce() == null) {
