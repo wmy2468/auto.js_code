@@ -28,7 +28,7 @@ function 中国农业银行() {
     lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
     while (lineBtn == null) {
         lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
-        func.passAd();
+        sleep(1000);
     }
     sleep(1000);
     //点击我的按钮
