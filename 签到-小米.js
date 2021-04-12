@@ -116,10 +116,14 @@ function 招商银行() {
     setText(0, "刮刮乐");
     sleep(500);
     KeyCode("KEYCODE_ENTER");
-    func.sClick(text("招牌便民刮刮乐").findOne());
     sleep(500);
     while (text("周日").findOnce() == null) {
-
+        if (func.sClick(text("招牌便民刮刮乐").findOnce())) {
+            sleep(1000);
+        }
+        if (func.sClick(text("保持不变").findOnce())) {
+            sleep(1000);
+        }
         if (id("ivBigHeadImage").findOnce() != null) {
             sleep(500);
             func.gesture_pwd(appName);
