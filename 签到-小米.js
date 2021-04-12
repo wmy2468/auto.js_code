@@ -117,10 +117,8 @@ function 招商银行() {
     sleep(500);
     KeyCode("KEYCODE_ENTER");
     sleep(500);
+    func.sClick(text("招牌便民刮刮乐").findOnce());
     while (text("周日").findOnce() == null) {
-        if (func.sClick(text("招牌便民刮刮乐").findOnce())) {
-            sleep(1000);
-        }
         if (func.sClick(text("保持不变").findOnce())) {
             sleep(1000);
         }
