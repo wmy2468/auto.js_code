@@ -431,10 +431,9 @@ function 招商银行() {
     func.sClick(id("cmb.pb:id/textMarquee").findOne());
     text("历史搜索").findOne();
     sleep(800);
-    setText(0, "刮刮乐");
-    sleep(500);
-    KeyCode("KEYCODE_ENTER");
-    func.sClick(text("招牌便民刮刮乐").findOne());
+    setText(0, "招牌便民刮刮乐");
+    sleep(3500);
+    func.sClick(text("做任务,刮大奖,兑好礼,最高赢8888元现金红包!").findOne());
     sleep(500);
     while (text("周日").findOnce() == null) {
 
