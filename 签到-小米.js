@@ -7,11 +7,11 @@ main();
 function main() {
     func.xiaomiUnlock();
     var i = 1;
-    while (i < 3) {
-        func.toAppMulti("京东", i);
-        jd_sign();
-        i = i + 1;
-    }
+    // while (i < 3) {
+    //     func.toAppMulti("京东", i);
+    //     jd_sign();
+    //     i = i + 1;
+    // }
     招商银行();
     func.lockScr();
 }
@@ -117,11 +117,8 @@ function 招商银行() {
     sleep(500);
     KeyCode("KEYCODE_ENTER");
     sleep(500);
-    func.sClick(text("招牌便民刮刮乐").findOnce());
     while (text("周日").findOnce() == null) {
-        if (func.sClick(text("保持不变").findOnce())) {
-            sleep(1000);
-        }
+        func.sClick(text("招牌便民刮刮乐").findOne());
         if (id("ivBigHeadImage").findOnce() != null) {
             sleep(500);
             func.gesture_pwd(appName);
