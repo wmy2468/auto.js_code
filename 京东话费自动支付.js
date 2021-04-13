@@ -7,6 +7,9 @@ var selectArr = ["微信", "云闪付PAY"];
 
 var result;
 
+var scrollBarID = "com.jd.lib.ordercenter.feature:id/un";
+var payBtnID = "com.jd.lib.cashier.feature:id/cl"
+
 if (device.brand == "HUAWEI") {
     result = "云闪付PAY";
 } else if (device.brand == "xiaomi") {
@@ -30,9 +33,9 @@ function huaweiPay() {
         sleep(1000);
         // 在全部订单和待付款切换
         try {
-            func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(0));
+            func.sClick(id(scrollBarID).findOnce().child(0).child(0));
             sleep(1250);
-            func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(1));
+            func.sClick(id(scrollBarID).findOnce().child(0).child(1));
             sleep(1250);
         } catch (e) {
 
@@ -42,7 +45,7 @@ function huaweiPay() {
             sleep(500);
         }
         func.sClick(text("去支付").findOnce());
-        if (func.sClick(id("com.jd.lib.cashier.feature:id/cd").findOnce()) == true) {
+        if (func.sClick(id(payBtnID).findOnce()) == true) {
 
             toastLog("切换到云闪付");
             while (text("选择付款方式").findOnce() == null) {
@@ -68,7 +71,7 @@ function huaweiPay() {
                 sleep(8000);
                 back();
                 // 待付款滑动栏
-                id("com.jd.lib.ordercenter.feature:id/uk").findOne();
+                id(scrollBarID).findOne();
             }
 
 
@@ -78,12 +81,13 @@ function huaweiPay() {
 }
 
 function wechat() {
+
     while (true) {
         sleep(1000);
         try {
-            func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(0));
+            func.sClick(id(scrollBarID).findOnce().child(0).child(0));
             sleep(1250);
-            func.sClick(id("com.jd.lib.ordercenter.feature:id/uk").findOnce().child(0).child(1));
+            func.sClick(id(scrollBarID).findOnce().child(0).child(1));
             sleep(1250);
         } catch (e) {
 
@@ -93,7 +97,7 @@ function wechat() {
             sleep(500);
         }
         func.sClick(text("去支付").findOnce());
-        if (func.sClick(id("com.jd.lib.cashier.feature:id/cd").findOnce())) {
+        if (func.sClick(id(payBtnID).findOnce())) {
             while (func.cClick(text("返回商家").findOnce()) == false) {
                 func.cClick(text("立即支付").findOnce());
                 func.cClick(text("确认支付").findOnce());
@@ -104,7 +108,7 @@ function wechat() {
             sleep(8000);
             back();
             // 待付款滑动栏
-            id("com.jd.lib.ordercenter.feature:id/uk").findOne();
+            id(scrollBarID).findOne();
         }
         // text("待付款").findOne();
     }
