@@ -266,12 +266,12 @@ function 浦发信用卡() {
     func.sClick(text("我的").findOne());
     // 等待我的页面加载
     text("我的订单").findOne();
-    while (className("ImageView").id("iv_user_leader_title_3").findOnce() == null) {
+    while (text("签到").findOnce() == null) {
         func.toAutojs();
         func.toApp(appName);
         sleep(3000);
     }
-    func.sClick(className("ImageView").id("iv_user_leader_title_3").findOne());
+    func.sClick(text("签到").findOne());
     // 输入手势密码
     textContains("手势密码").findOne();
     sleep(500);
