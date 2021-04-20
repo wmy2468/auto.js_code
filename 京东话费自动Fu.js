@@ -1,6 +1,6 @@
 // 导入模块
 var func = require("func_list.js");
-var selectArr = ["微信", "云闪付PAY"];
+var selectArr = ["weiXinn", "YunShaofu"];
 
 // toastLog(text("再次购买").findOnce());
 // func.sClick(text("全部").findOnce());
@@ -11,24 +11,24 @@ var scrollBarID = "com.jd.lib.ordercenter.feature:id/un";
 var payBtnID = "com.jd.lib.cashier.feature:id/cl"
 
 if (device.brand == "HUAWEI") {
-    result = "云闪付PAY";
+    result = "YunShaofu";
 } else if (device.brand == "xiaomi") {
-    result = "微信";
+    result = "weiXinn";
 } else {
     result = func.dialogsWin(selectArr);
 }
 
 var cardEndNumber = "2079";
 
-if (result == "微信") {
+if (result == "weiXinn") {
     func.toApp("京东");
-    wechat();
-} else if (result == "云闪付PAY") {
+    weiXinn();
+} else if (result == "YunShaofu") {
     func.toApp("京东");
-    huaweiPay();
+    hwzhifu();
 }
 
-function huaweiPay() {
+function hwzhifu() {
     while (true) {
         sleep(1000);
         // 在全部订单和待付款切换
@@ -80,7 +80,7 @@ function huaweiPay() {
     }
 }
 
-function wechat() {
+function weiXinn() {
 
     while (true) {
         sleep(1000);

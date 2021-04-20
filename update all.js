@@ -37,16 +37,18 @@ if (selectIndex == -1) {
     // 变例读取文件
     for (i = 0; i <= jsFiles.length - 1; i++) {
         fileName = jsFiles[i];              // 文件名
-        filePath = dir + '/' + fileName;    // 文件路径
-        fileUrl = originUrl + fileName;     // 网络文件路径
-        var req = http.get(fileUrl);
-        if (req.statusCode != '200') {
-            log(fileName + '网络读取错误，可能文件不存在')
-            sleep(800);
-        } else {
-            log(fileName + ',更新完成 写入文件')
-            // 写入文件
-            files.write(filePath, req.body.string());
+        if (!(fileName == "京东话费自动支付.js")) {
+            filePath = dir + '/' + fileName;    // 文件路径
+            fileUrl = originUrl + fileName;     // 网络文件路径
+            var req = http.get(fileUrl);
+            if (req.statusCode != '200') {
+                log(fileName + '网络读取错误，可能文件不存在')
+                sleep(800);
+            } else {
+                log(fileName + ',更新完成 写入文件')
+                // 写入文件
+                files.write(filePath, req.body.string());
+            }
         }
     }
     alert('更新完成');
