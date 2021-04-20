@@ -360,7 +360,7 @@ function 云闪付() {
     while (className("TextView").text("我 的").findOnce() == null) {
         sleep(1000);
     }
-    sleep(500);
+    sleep(1500);
     func.sClick(className("TextView").text("首 页").findOnce());
     //点击签到按钮
     func.sClick(id("com.unionpay:id/frog_float_notgif").findOne());
