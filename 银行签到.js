@@ -4,6 +4,7 @@ var func = require("func_list.js");
 main();
 //买单吧();
 function main() {
+    中行缤纷生活();
     招商银行();
     中国农业银行();
     什么值得买();
@@ -20,6 +21,46 @@ function main() {
 }
 
 // ======================签到代码==================================
+
+// 中行缤纷生活
+function 中行缤纷生活() {
+    var appName = "缤纷生活";
+    //closeApp(appName);
+    func.toApp(appName);
+    while (text("我的").findOnce() == null) {
+        func.passAd();
+    }
+    sleep(1000);
+    func.sClick(text("我的").findOnce());
+    // 等待我的页面加载
+    text("登录手机号更改").findOne();
+    // 签到按钮
+    var signBtnId = "imgRight";
+    while (id(signBtnId).findOnce() == null) {
+        func.toAutojs();
+        func.toApp(appName);
+        sleep(3000);
+    }
+    sleep(800);
+    func.sClick(id(signBtnId).findOnce());
+
+    while (text("查看活力奖励>").findOnce() == null) {
+        sleep(800);
+        if (textContains("手势登录密码").findOnce() != null) {
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(1000);
+        }
+    }
+    try {
+        func.sClick(className("android.view.View").text("周一").findOnce().parent().parent().parent().parent().child(3))
+    }
+    catch (e) { }
+
+    toastLog(appName + "已签到");
+    sleep(3000);
+}
+
 // 农行小豆
 function 中国农业银行() {
     var appName = "中国农业银行";
@@ -317,6 +358,7 @@ function 邮储信用卡() {
     toastLog(appName + "已签到");
     sleep(1000);
 }
+
 
 // 华彩生活
 function 华彩生活() {

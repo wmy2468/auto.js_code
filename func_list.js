@@ -157,6 +157,10 @@ function gesture_pwd(appName) {
         }
     }
     switch (appName) {
+        case "缤纷生活":
+            point = id("lock_pattern").findOnce();
+            log("缤纷生活");
+            break;
         case "买单吧":
             point = id("com.bankcomm.maidanba:id/login_gestureLockView_rl").findOnce();
             log("买单吧");
