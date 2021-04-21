@@ -1,7 +1,9 @@
 //toastLog(id("com.jd.lib.cashier.feature:id/cd").findOnce().click());
 var func = require("func_list.js");
 
-云闪付();
+//云闪付();
+
+toastLog(text(" 待付款 ").findOnce());
 
 function 云闪付() {
     var appName = "云闪付";

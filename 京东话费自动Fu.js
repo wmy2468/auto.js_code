@@ -7,6 +7,8 @@ var selectArr = ["weiXinn", "YunShaofu"];
 
 var result;
 
+var textPay = " 待付款 ";
+var textAll = " 全部 ";
 var scrollBarID = "com.jd.lib.ordercenter.feature:id/un";
 var payBtnID = "com.jd.lib.cashier.feature:id/cl"
 
@@ -18,7 +20,7 @@ if (device.brand == "HUAWEI") {
     result = func.dialogsWin(selectArr);
 }
 
-var cardEndNumber = "2079";
+var cardEndNumber = func.dialogsWin(["2079", "5177", "8589"]);
 
 if (result == "weiXinn") {
     func.toApp("京东");
@@ -33,9 +35,9 @@ function hwzhifu() {
         sleep(1000);
         // 在全部订单和待付款切换
         try {
-            func.sClick(id(scrollBarID).findOnce().child(0).child(0));
+            func.sClick(text(textPay).findOnce());
             sleep(1250);
-            func.sClick(id(scrollBarID).findOnce().child(0).child(1));
+            func.sClick(text(textAll).findOnce());
             sleep(1250);
         } catch (e) {
 
@@ -71,10 +73,8 @@ function hwzhifu() {
                 sleep(8000);
                 back();
                 // 待付款滑动栏
-                id(scrollBarID).findOne();
+                text(textPay).findOne();
             }
-
-
         }
         // text("待付款").findOne();
     }
@@ -85,9 +85,9 @@ function weiXinn() {
     while (true) {
         sleep(1000);
         try {
-            func.sClick(id(scrollBarID).findOnce().child(0).child(0));
+            func.sClick(text(textPay).findOnce());
             sleep(1250);
-            func.sClick(id(scrollBarID).findOnce().child(0).child(1));
+            func.sClick(text(textAll).findOnce());
             sleep(1250);
         } catch (e) {
 
@@ -108,7 +108,7 @@ function weiXinn() {
             sleep(8000);
             back();
             // 待付款滑动栏
-            id(scrollBarID).findOne();
+            text(textPay).findOne();
         }
         // text("待付款").findOne();
     }
