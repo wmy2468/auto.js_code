@@ -52,10 +52,24 @@ function 中行缤纷生活() {
             sleep(1000);
         }
     }
-    try {
-        func.sClick(className("android.view.View").text("周一").findOnce().parent().parent().parent().parent().child(3))
+    text("查看活力奖励>").findOne();
+    sleep(1000);
+    while (true) {
+        try {
+            var signFlag = textContains("再连续签到").findOnce();
+            var signText = signFlag.text();
+            var idx = signFlag.indexInParent();
+            var currentWeekday = Number(signText.subString(6, 1));
+            var weekdayText = signFlag.parent().child(idx + 1).child(0).child(currentWeekday).text();
+            if (weekdayText == "") {
+                break;
+            } else {
+                func.cClick(signFlag.parent().child(idx + 2));
+                sleep(3000);
+            }
+        }
+        catch (e) { }
     }
-    catch (e) { }
 
     toastLog(appName + "已签到");
     sleep(3000);
