@@ -1,46 +1,64 @@
 //toastLog(id("com.jd.lib.cashier.feature:id/cd").findOnce().click());
 var func = require("func_list.js");
 
-//云闪付();
+中行缤纷生活();
+// toastLog(textContains("每周连续签到7天可获得翻倍轮盘机会").findOnce());
 
-toastLog(text(" 待付款 ").findOnce());
-
-function 云闪付() {
-    var appName = "云闪付";
+function 中行缤纷生活() {
+    var appName = "缤纷生活";
     //closeApp(appName);
     func.toApp(appName);
-    while (className("TextView").text("我 的").findOnce() == null) {
-        sleep(1000);
+    while (text("我的").findOnce() == null) {
+        func.passAd();
     }
-    sleep(1500);
-    func.sClick(className("TextView").text("首 页").findOnce());
-    //点击签到按钮
-    func.sClick(id("com.unionpay:id/frog_float_notgif").findOne());
-    // 等待签到页面加载
-    textContains("连续签到").findOne();
+    sleep(1000);
+    func.sClick(text("我的").findOnce());
+    // 等待我的页面加载
+    text("登录手机号更改").findOne();
+    // 签到按钮
+    var signBtnId = "imgRight";
+    while (id(signBtnId).findOnce() == null) {
+        func.toAutojs();
+        func.toApp(appName);
+        sleep(3000);
+    }
+    sleep(800);
+    func.sClick(id(signBtnId).findOnce());
 
-    if (text("今日已签到").findOnce() == null) {
-        func.sClick(text("立即签到").findOnce());
-        sleep(1500);
-        /*
-        if (text("去抽奖").findOnce() != null) {
-            func.sClick(text("去抽奖").findOnce());
-            var area, areaP;
-            while (1) {
-                try {
-                    area = id("com.unionpay:id/tv_title").text("签到抽奖专区").findOnce();
-                    areaP = area.parent();
-                    sleep(2000);
-                    func.cClick(areaP.parent().child(2).child(0).child(0).child(0).child(0).child(0).child(3));
-                    idContains("resultBtn").findOnce();
-                    break;
-                } catch (err) {
-                    sleep(2500);
-                }
+    while (text("查看活力奖励>").findOnce() == null) {
+        sleep(800);
+        if (textContains("手势登录密码").findOnce() != null) {
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(1000);
+        }
+    }
+    text("查看活力奖励>").findOne();
+    sleep(1000);
+    while (true) {
+        try {
+            var signFlag = textContains("再连续签到").findOnce();
+            var signText = signFlag.text();
+            //toastLog("signText:" + signText);
+            var idx = signFlag.indexInParent();
+            var currentWeekday = Number(signText.substr(5, 1)) - 1;
+            //toastLog("currentWeekday:" + String(currentWeekday));
+            var weekdayText = signFlag.parent().child(idx + 1).child(0).child(currentWeekday).child(0).text();
+            //toastLog("weekdayText:" + weekdayText);
+            if (weekdayText == "") {
+                break;
+            } else {
+                func.cClick(signFlag.parent().child(idx + 2));
+                sleep(3000);
+                textContains("每周连续签到7天可获得翻倍轮盘机会").findOne();
+                break;
             }
         }
-        */
+        catch (e) {
+            sleep(1000);
+        }
     }
+
     toastLog(appName + "已签到");
-    sleep(1000);
+    sleep(3000);
 }

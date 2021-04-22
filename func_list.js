@@ -15,7 +15,7 @@ function cClick(element) {
         log("cClick_center" + element.text());
         return true;
     } else {
-        log("cClick_null");
+        // log("cClick_null");
         return false;
     }
 }
@@ -30,7 +30,7 @@ function sClick(element) {
         }
         return true;
     }
-    log("sClick_null");
+    // log("sClick_null");
     return false;
 }
 
