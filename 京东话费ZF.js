@@ -49,7 +49,7 @@ function hwzhifu() {
         func.sClick(text("去支付").findOnce());
         if (func.sClick(id(payBtnID).findOnce()) == true) {
 
-            toastLog("切换到云闪付");
+            toastLog("切换到YunShaofu");
             while (text("选择付款方式").findOnce() == null) {
                 func.cClick(text("付款方式").findOnce());
                 sleep(800);
