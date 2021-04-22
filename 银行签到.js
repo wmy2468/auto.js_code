@@ -58,9 +58,12 @@ function 中行缤纷生活() {
         try {
             var signFlag = textContains("再连续签到").findOnce();
             var signText = signFlag.text();
+            toastLog("signText:", signText);
             var idx = signFlag.indexInParent();
             var currentWeekday = Number(signText.subString(6, 1));
+            toastLog("currentWeekday:", currentWeekday);
             var weekdayText = signFlag.parent().child(idx + 1).child(0).child(currentWeekday).text();
+            toastLog("weekdayText:", weekdayText);
             if (weekdayText == "") {
                 break;
             } else {
