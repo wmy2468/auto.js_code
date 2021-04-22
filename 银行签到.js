@@ -9,7 +9,7 @@ function main() {
     中国农业银行();
     什么值得买();
     jd_sign();
-    云闪付();
+    YunShaofu();
     浦发银行();
     //工银e生活();
     //邮储银行();
@@ -415,8 +415,8 @@ function 华彩生活() {
     sleep(1000);
 }
 
-// 云闪付
-function 云闪付() {
+// YunShaofu
+function YunShaofu() {
     var appName = "云闪付";
     //closeApp(appName);
     func.toApp(appName);
