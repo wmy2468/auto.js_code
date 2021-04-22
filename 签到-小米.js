@@ -12,7 +12,7 @@ function main() {
         jd_sign();
         i = i + 1;
     }
-    // 中行缤纷生活();
+    中行缤纷生活();
     招商银行();
     func.lockScr();
 }
