@@ -1,8 +1,8 @@
 //toastLog(id("com.jd.lib.cashier.feature:id/cd").findOnce().click());
 var func = require("func_list.js");
 
-中行缤纷生活();
-// toastLog(textContains("每周连续签到7天可获得翻倍轮盘机会").findOnce());
+
+toastLog(new Date().getDay());
 
 function 中行缤纷生活() {
     var appName = "缤纷生活";
@@ -35,15 +35,19 @@ function 中行缤纷生活() {
     }
     text("查看活力奖励>").findOne();
     sleep(1000);
+    var currentWeekday = new Date().getDay();
+    // 0 返回的周日 周一返回1，周二2
+    if (currentWeekday == 0) {
+        currentWeekday = 6
+    } else {
+        currentWeekday = currentWeekday - 1
+    }
+    var signFlag, idx, weekdayText;
     while (true) {
         try {
-            var signFlag = textContains("再连续签到").findOnce();
-            var signText = signFlag.text();
-            //toastLog("signText:" + signText);
-            var idx = signFlag.indexInParent();
-            var currentWeekday = Number(signText.substr(5, 1)) - 1;
-            //toastLog("currentWeekday:" + String(currentWeekday));
-            var weekdayText = signFlag.parent().child(idx + 1).child(0).child(currentWeekday).child(0).text();
+            signFlag = textContains("再连续签到").findOnce();
+            idx = signFlag.indexInParent();
+            weekdayText = signFlag.parent().child(idx + 1).child(0).child(currentWeekday).child(0).text();
             //toastLog("weekdayText:" + weekdayText);
             if (weekdayText == "") {
                 break;
