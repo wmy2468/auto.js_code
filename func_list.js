@@ -52,6 +52,17 @@ function toApp(appName) {
     }
 }
 
+
+function toPackage(packageName) {
+    toAutojs();
+    sleep(800);
+    while (currentPackage() != packageName) {
+        launch(packageName);
+        sleep(2000);
+    }
+}
+
+
 function toJdSku(sellId) {
     // var appName = "京东";
     // while (currentPackage() != getPackageName(appName)) {
@@ -521,6 +532,7 @@ module.exports = {
     sClick: sClick,
     passAd: passAd,
     toApp: toApp,
+    toPackage: toPackage,
     toAppMulti: toAppMulti,
     huaweiUnlock: huaweiUnlock,
     xiaomiUnlock: xiaomiUnlock,

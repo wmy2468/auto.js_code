@@ -417,9 +417,9 @@ function 华彩生活() {
 
 // YunShaofu
 function YunShaofu() {
-    var appName = "云闪付";
+    var appName = "com.unionpay";
     //closeApp(appName);
-    func.toApp(appName);
+    func.toPackage(appName);
     while (className("TextView").text("我 的").findOnce() == null) {
         sleep(1000);
     }
