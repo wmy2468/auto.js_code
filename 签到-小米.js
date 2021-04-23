@@ -176,7 +176,7 @@ function 中行缤纷生活() {
             var signText = signFlag.text();
             //toastLog("signText:" + signText);
             var idx = signFlag.indexInParent();
-            var currentWeekday = Number(signText.substr(5, 1)) - 1;
+            var currentWeekday = 7 - Number(signText.substr(5, 1));
             //toastLog("currentWeekday:" + String(currentWeekday));
             var weekdayText = signFlag.parent().child(idx + 1).child(0).child(currentWeekday).child(0).text();
             //toastLog("weekdayText:" + weekdayText);
