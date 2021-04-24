@@ -160,16 +160,16 @@ function 中行缤纷生活() {
     sleep(800);
     func.sClick(id(signBtnId).findOnce());
 
-    while (text("查看活力奖励>").findOnce() == null) {
-        sleep(800);
+    while (textContains("翻倍轮盘").findOnce() == null) {
+        sleep(1000);
         if (textContains("手势登录密码").findOnce() != null) {
             sleep(500);
             func.gesture_pwd(appName);
             sleep(1000);
         }
     }
-    text("查看活力奖励>").findOne();
-    sleep(1000);
+    sleep(2000);
+
     var currentWeekday = new Date().getDay();
     // 0 返回的周日 周一返回1，周二2
     if (currentWeekday == 0) {
