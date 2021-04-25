@@ -80,10 +80,10 @@ function 中行缤纷生活() {
         catch (e) {
             sleep(1000);
         }
-
-        toastLog(appName + "已签到");
-        sleep(3000);
     }
+
+    toastLog(appName + "已签到");
+    sleep(3000);
 }
 
 // 农行小豆
