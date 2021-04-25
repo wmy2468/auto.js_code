@@ -507,9 +507,9 @@ function 招商银行() {
     // func.sClick(text("立即查看").findOne());
     func.sClick(id("cmb.pb:id/textMarquee").findOne());
     text("历史搜索").findOne();
-    sleep(800);
+    sleep(2500);
     setText(0, "招牌便民刮刮乐");
-    sleep(2000);
+    sleep(800);
     func.sClick(text("功能").findOne());
     func.sClick(text("做任务,刮大奖,兑好礼,最高赢8888元现金红包!").findOne());
     sleep(500);
