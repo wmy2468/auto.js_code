@@ -160,7 +160,7 @@ function 中行缤纷生活() {
     sleep(800);
     func.sClick(id(signBtnId).findOnce());
 
-    while (textContains("翻倍轮盘").findOnce() == null) {
+    while (text("查看活力奖励>").findOnce() == null) {
         sleep(1000);
         if (textContains("手势登录密码").findOnce() != null) {
             sleep(500);
@@ -168,7 +168,8 @@ function 中行缤纷生活() {
             sleep(1000);
         }
     }
-    sleep(2000);
+    sleep(2500);
+    text("查看活力奖励>").findOne();
 
     var currentWeekday = new Date().getDay();
     // 0 返回的周日 周一返回1，周二2
@@ -177,10 +178,19 @@ function 中行缤纷生活() {
     } else {
         currentWeekday = currentWeekday - 1
     }
-    var signFlag, idx, weekdayText;
+    var signFlag, idx, weekdayText, signCnt;
+    signCnt = 0;
+
     while (true) {
         try {
             signFlag = textContains("再连续签到").findOnce();
+            if (signFlag == null) {
+                signCnt = signCnt + 1;
+            }
+            // 如果查找连续签到超过5次没找到则退出，避免周日找不到的情况
+            if (signCnt > 5) {
+                break;
+            }
             idx = signFlag.indexInParent();
             weekdayText = signFlag.parent().child(idx + 1).child(0).child(currentWeekday).child(0).text();
             //toastLog("weekdayText:" + weekdayText);
