@@ -183,7 +183,7 @@ function 中行缤纷生活() {
 
     while (true) {
         try {
-            signFlag = textContains("再连续签到").findOnce();
+            signFlag = textContains("连续签到").findOnce();
             if (signFlag == null) {
                 signCnt = signCnt + 1;
             }
