@@ -305,7 +305,11 @@ function 京东腾讯月() {
             getBtn = tVip.parent().child(4).child(0);
             if (getBtn != null) {
                 if (getBtn.text() == "立即领取" || getBtn.desc() == "立即领取") {
-                    getBtn.click();
+                    func.sClick(getBtn);
+                    sleep(300);
+                    func.sClick(getBtn);
+                    sleep(300);
+                    func.sClick(getBtn);
                     toastLog("结束,已点击！");
                     sleep(800);
                     break;
