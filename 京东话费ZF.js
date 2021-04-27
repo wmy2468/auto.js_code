@@ -64,7 +64,7 @@ function hwzhifu() {
                 sleep(500);
                 if (!func.cClick(text("[" + cardEndNumber + "]").findOnce())) {
                     scrollDown();
-                    sleep(3000);
+                    sleep(1000);
                 } else {
                     sleep(3000);
                 }
