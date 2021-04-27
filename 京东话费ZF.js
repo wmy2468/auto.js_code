@@ -61,8 +61,10 @@ function hwzhifu() {
             text("选择付款方式").findOne();
 
             while (text("付款详情").findOnce() == null) {
-                func.cClick(text("[" + cardEndNumber + "]").findOnce());
                 sleep(500);
+                if (func.cClick(text("[" + cardEndNumber + "]").findOnce())) {
+                    scrollDown();
+                }
             }
             func.sClick(text("确认付款").findOnce());
             text("支付成功").findOne();
