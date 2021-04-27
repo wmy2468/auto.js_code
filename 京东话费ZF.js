@@ -62,7 +62,7 @@ function hwzhifu() {
 
             while (text("付款详情").findOnce() == null) {
                 sleep(500);
-                if (func.cClick(text("[" + cardEndNumber + "]").findOnce())) {
+                if (!func.cClick(text("[" + cardEndNumber + "]").findOnce())) {
                     scrollDown();
                 }
             }
