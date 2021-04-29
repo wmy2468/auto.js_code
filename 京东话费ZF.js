@@ -97,6 +97,11 @@ function weiXinn() {
         }
         func.sClick(text("去支付").findOnce());
         if (func.sClick(id(payBtnID).findOnce())) {
+            if (device.brand == "HUAWEI") {
+                text("使用以下方式打开").findOne();
+                sleep(1000);
+                click(250, 1900);
+            }
             while (func.cClick(text("返回商家").findOnce()) == false) {
                 func.cClick(text("立即支付").findOnce());
                 func.cClick(text("确认支付").findOnce());
