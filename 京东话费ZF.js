@@ -12,15 +12,8 @@ var textAll = " 全部 ";
 var scrollBarID = "com.jd.lib.ordercenter.feature:id/un";
 var payBtnID = "com.jd.lib.cashier.feature:id/cl"
 
-if (device.brand == "HUAWEI") {
-    result = "YunShaofu";
-} else if (device.brand == "xiaomi") {
-    result = "weiXinn";
-} else {
-    result = func.dialogsWin(selectArr);
-}
+result = func.dialogsWin(selectArr);
 
-var cardEndNumber = func.dialogsWin(["2079", "5177", "8589"]);
 
 if (result == "weiXinn") {
     func.toApp("京东");
@@ -31,6 +24,7 @@ if (result == "weiXinn") {
 }
 
 function hwzhifu() {
+    var cardEndNumber = func.dialogsWin(["2079", "5177", "8589"]);
     while (true) {
         sleep(1000);
         // 在全部订单和待付款切换
