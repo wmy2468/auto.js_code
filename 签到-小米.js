@@ -147,9 +147,10 @@ function 中行缤纷生活() {
         func.passAd();
     }
     sleep(1000);
-    func.sClick(text("我的").findOnce());
-    // 等待我的页面加载
-    text("登录手机号更改").findOne();
+    while (text("登录手机号更改").findOnce() == null) {
+        func.sClick(text("我的").findOnce());
+        sleep(1000);
+    }
     // 签到按钮
     var signBtnId = "imgRight";
     while (id(signBtnId).findOnce() == null) {
