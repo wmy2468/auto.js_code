@@ -103,8 +103,9 @@ function weiXinn() {
                 click(250, 1900);
             }
             while (func.cClick(text("返回商家").findOnce()) == false) {
-                func.cClick(text("立即支付").findOnce());
-                func.cClick(text("确认支付").findOnce());
+                func.sClick(text("立即支付").findOnce());
+                func.sClick(text("继续支付").findOnce());
+                func.sClick(text("确认支付").findOnce());
             }
             text("完成").findOne();
         }
