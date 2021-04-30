@@ -106,6 +106,7 @@ function weiXinn() {
                 func.sClick(text("立即支付").findOnce());
                 func.sClick(text("继续支付").findOnce());
                 func.sClick(text("确认支付").findOnce());
+                sleep(800);
             }
             text("完成").findOne();
         }
