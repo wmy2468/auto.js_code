@@ -19,7 +19,7 @@ if (result == "weiXinn") {
     func.toApp("京东");
     weiXinn();
 } else if (result == "YunShaofu") {
-    cardEndNumber = func.dialogsWin(["2079", "5177", "8589"]);
+    cardEndNumber = func.dialogsWin(["2079", "5177", "8589", "8636", "4471"]);
     func.toApp("京东");
     hwzhifu();
 }
