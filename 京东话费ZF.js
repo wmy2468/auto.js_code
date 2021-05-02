@@ -13,18 +13,19 @@ var scrollBarID = "com.jd.lib.ordercenter.feature:id/un";
 var payBtnID = "com.jd.lib.cashier.feature:id/cl"
 
 result = func.dialogsWin(selectArr);
-
+var cardEndNumber;
 
 if (result == "weiXinn") {
     func.toApp("京东");
     weiXinn();
 } else if (result == "YunShaofu") {
+    cardEndNumber = func.dialogsWin(["2079", "5177", "8589"]);
     func.toApp("京东");
     hwzhifu();
 }
 
 function hwzhifu() {
-    var cardEndNumber = func.dialogsWin(["2079", "5177", "8589"]);
+
     while (true) {
         sleep(1000);
         // 在全部订单和待付款切换
