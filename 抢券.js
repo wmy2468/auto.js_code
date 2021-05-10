@@ -324,7 +324,7 @@ function 京东腾讯月() {
 function 工行活动() {
     var appName = "工银e生活";
     var timeArea = "北京时间";
-    var startTime = "10,30,00,000";
+    var startTime = "10,29,29,700";
     couName = "确定"
     launchApp(appName);             // 启动APP
     // 找到使用流程，且找到对应券名称沃尔玛的情况下就是 券的详情页
