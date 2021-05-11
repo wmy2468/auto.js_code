@@ -67,7 +67,7 @@ function hwzhifu() {
             func.sClick(text("确认付款").findOnce());
             text("支付成功").findOne();
             sleep(1000);
-            func.sClick(text("完成").findOne());
+            back();
             text("查看订单").findOne();
             sleep(500);
             if (func.sClick(text("立即抽奖").findOnce())) {
