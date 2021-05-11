@@ -187,19 +187,25 @@ function 中信活动() {
     var appName = "动卡空间";
     var timeArea = "北京时间";
     var startTime, targetViewText;
-    var actNames = ["10点-9积分兑换", "周三六11点-5折必胜客百果园", "15点-星巴克中杯", "2021积分兑换"];
+    // var actNames = ["10点-9积分兑换", "周三六11点-5折必胜客百果园", "15点-星巴克中杯", "2021积分兑换"];
+    var actNames = ["10点-9积分兑换", "15点-星巴克中杯"];
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
     var couDes;    // 券描述列表
     switch (actName) {
         case "10点-9积分兑换":
             toastLog("等待页面变化");
             startTime = "09,59,45,000"
-            couDes = ["星巴克中杯", "必胜客30元", "奈雪", "喜茶25元", "苏宁易购20元", "百果园20元", "京东支付券20元", "天猫20元", "美团外卖20元"];
+            couDes = ["星巴克中杯饮品电子券", "奈雪", "喜茶25元", "苏宁支付券20元", "京东支付券20元", "天猫20元", "滴滴出行20元", "美团外卖20元"];
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             launchApp(appName);             // 启动APP
             var couClick = textContains(targetViewText).findOnce();          // 找券
             while (couClick == null) {
-                couClick = textContains(targetViewText).findOnce();          // 找券
+                if (couDes == "星巴克中杯饮品电子券") {
+                    couClick = text(targetViewText).findOnce();          // 找券
+                } else {
+                    couClick = textContains(targetViewText).findOnce();          // 找券
+                }
+
                 toastLog("请跳转到券 列表 页面，直到提示  已到达等待页面");
                 sleep(1000);
             }
