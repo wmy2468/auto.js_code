@@ -292,8 +292,8 @@ function 中信活动() {
 
 // 等待页面变价
 function 京东腾讯月() {
-    var actNames = ["腾讯视频VIP月卡", "肯德基10元代金券"];
-    var actName = func.dialogsWin(actNames);      // 设置查找的文本
+    var actNames = ["腾讯视频VIP月卡"]; //, "肯德基10元代金券"];
+    //var actName = func.dialogsWin(actNames);      // 设置查找的文本
     toastLog("等待页面变化");
     var appName = "京东金融";
     launchApp(appName);
@@ -330,7 +330,7 @@ function 京东腾讯月() {
 function 工行活动() {
     var appName = "工银e生活";
     var timeArea = "北京时间";
-    var startTime = "10,29,29,700";
+    var startTime = "10,29,29,750";
     couName = "确定"
     launchApp(appName);             // 启动APP
     // 找到使用流程，且找到对应券名称沃尔玛的情况下就是 券的详情页
