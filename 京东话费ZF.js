@@ -60,9 +60,10 @@ function hwzhifu() {
                 if (!func.cClick(text("[" + cardEndNumber + "]").findOnce())) {
                     scrollDown();
                     sleep(1000);
+                } else {
+                    sleep(2500);
                 }
             }
-            sleep(1000);
             func.sClick(text("确认付款").findOnce());
             text("支付成功").findOne();
             func.sClick(text("完成").findOne());
