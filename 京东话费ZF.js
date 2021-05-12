@@ -19,7 +19,7 @@ if (result == "weiXinn") {
     func.toApp("京东");
     weiXinn();
 } else if (result == "YunShaofu") {
-    cardEndNumber = func.dialogsWin(["2079", "5177", "8589", "8636", "4471"]);
+    cardEndNumber = func.dialogsWin(["2079", "5177", "8589", "8636", "4471", "1729", "5976"]);
     func.toApp("京东");
     hwzhifu();
 }
@@ -66,7 +66,8 @@ function hwzhifu() {
             }
             func.sClick(text("确认付款").findOnce());
             text("支付成功").findOne();
-            func.sClick(text("完成").findOne());
+            sleep(1000);
+            back();
             text("查看订单").findOne();
             sleep(500);
             if (func.sClick(text("立即抽奖").findOnce())) {
