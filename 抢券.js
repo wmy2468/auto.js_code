@@ -187,8 +187,7 @@ function 中信活动() {
     var appName = "动卡空间";
     var timeArea = "北京时间";
     var startTime, targetViewText;
-    // var actNames = ["10点-9积分兑换", "周三六11点-5折必胜客百果园", "15点-星巴克中杯", "2021积分兑换"];
-    var actNames = ["10点-9积分兑换", "15点-星巴克中杯"];
+    var actNames = ["10点-9积分兑换", "周三六11点-5折必胜客百果园", "15点-星巴克中杯"];
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
     var couDes;    // 券描述列表
     switch (actName) {
