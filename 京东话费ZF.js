@@ -69,13 +69,10 @@ function hwzhifu() {
             sleep(1000);
             back();
             text("查看订单").findOne();
-            sleep(500);
-            if (func.sClick(text("立即抽奖").findOnce())) {
-                sleep(8000);
-                back();
-                // 待付款滑动栏
-                text(textPay).findOne();
-            }
+            sleep(2000);
+            back();
+            // 待付款滑动栏
+            text(textPay).findOne();
         }
         // text("待付款").findOne();
     }
@@ -112,12 +109,10 @@ function weiXinn() {
             }
             text("完成").findOne();
         }
-        if (func.sClick(text("立即抽奖").findOnce())) {
-            sleep(8000);
-            back();
-            // 待付款滑动栏
-            text(textPay).findOne();
-        }
+        sleep(2000);
+        back();
+        // 待付款滑动栏
+        text(textPay).findOne();
         // text("待付款").findOne();
     }
 }
