@@ -4,7 +4,6 @@ var func = require("func_list.js");
 main();
 
 function main() {
-    YunShaofu();
     pufa_CXK();
     pufa_XYK();
     //gonghang_XYK();
@@ -16,42 +15,47 @@ function main() {
     alert("已完成.");
 }
 
-function YunShaofu() {
-    var appName = "com.unionpay";
+// 金豆签到
+function pufa_CXK() {
+    var appName = "cn.com.spdb.mobilebank.per";
     //closeApp(appName);
     func.toPackage(appName);
-    while (className("TextView").text("我 的").findOnce() == null) {
-        sleep(1000);
+    while (text("首页").findOnce() == null) {
+        func.passAd();
     }
-    sleep(1500);
-    func.sClick(className("TextView").text("首 页").findOnce());
-    //点击签到按钮
-    func.sClick(id("com.unionpay:id/frog_float_notgif").findOne());
-    // 等待签到页面加载
-    textContains("连续签到").findOne();
-
-    if (text("今日已签到").findOnce() == null) {
-        func.sClick(text("立即签到").findOnce());
-        sleep(1500);
-        /*
-        if (text("去抽奖").findOnce() != null) {
-            func.sClick(text("去抽奖").findOnce());
-            var area, areaP;
-            while (1) {
-                try {
-                    area = id("com.unionpay:id/tv_title").text("签到抽奖专区").findOnce();
-                    areaP = area.parent();
-                    sleep(2000);
-                    func.cClick(areaP.parent().child(2).child(0).child(0).child(0).child(0).child(0).child(3));
-                    idContains("resultBtn").findOnce();
-                    break;
-                } catch (err) {
-                    sleep(2500);
-                }
+    sleep(1800);
+    func.sClick(id("radio_button5").text("我的").findOnce());
+    // 等待我的页面加载
+    text("日历提醒").findOne();
+    // 签到按钮
+    while (text("金豆").findOnce() == null) {
+        func.toAutojs();
+        func.toApp(appName);
+        sleep(3000);
+    }
+    sleep(800);
+    while (text("开启签到提醒").findOnce() == null) {
+        func.sClick(text("金豆").findOnce());
+        sleep(800);
+        if (text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce()) {
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(1000);
+        }
+    }
+    sleep(1000);
+    var signs = textStartsWith("+").find();
+    try {
+        if (signs.length >= 2) {
+            for (var i = 0; i < signs.length; i++) {
+                func.sClick(signs[i]);
             }
         }
-        */
+    }
+    catch (e) {
+        toastLog("未找到多余的连续签到");
+        sleep(2000);
     }
     toastLog(appName + "已签到");
-    sleep(1000);
+    sleep(3000);
 }
