@@ -16,7 +16,6 @@ function main() {
     //youchu_CXK();
 
     youchu_XYK();
-    //huaxia_XYK();
     jiaohang_XYK();
     alert("已完成.");
 }
@@ -399,40 +398,6 @@ function youchu_XYK() {
     sleep(1000);
 }
 
-
-function huaxia_XYK() {
-    var appName = "com.HuaXiabank.HuaCard";
-    //closeApp(appName);
-    func.toPackage(appName);
-    while (text("我的").findOnce() == null) {
-        func.passAd();
-    }
-    sleep(1000);
-    func.sClick(text("我的").findOnce());
-    // 等待我的页面加载
-    text("自动还款").findOne();
-    // 签到按钮
-    while (id("iv_sign").findOnce() == null) {
-        func.toAutojs();
-        func.toApp(appName);
-        sleep(3000);
-    }
-    sleep(800);
-    func.sClick(id("iv_sign").findOnce());
-
-    while (textContains("恭喜您获得").findOnce() == null && text("今日已签").findOnce() == null) {
-        func.sClick(text("连续签到抽大奖").findOnce());
-        sleep(800);
-        if (text("请输入手势密码").findOnce() != null) {
-            sleep(500);
-            func.gesture_pwd(appName);
-            sleep(1000);
-        }
-    }
-    toastLog(appName + "已签到");
-    sleep(1000);
-}
-
 // YunShaofu
 function YunShaofu() {
     var appName = "com.unionpay";
@@ -474,33 +439,7 @@ function YunShaofu() {
     sleep(1000);
 }
 
-function gonghang_XYK() {
-    var appName = "com.icbc.elife";
-    //closeApp(appName);
-    func.toPackage(appName);
-    while (id("radio_button1").text("生活").findOnce() == null) {
-        func.passAd();
-    }
-    func.sClick(id("radio_button1").text("生活").findOne());
-    // 点击输入框
-    func.sClick(text("扫一扫").findOne().parent().child(1));
-    // 商城
-    id("tv_title").text("历史搜索").findOne();
-    sleep(1000);
-    func.sClick(className("TextView").id("tv_name").text("购物日").findOne());
-    sleep(1000);
-    id("tv_title").text("特色活动").findOne();
-    sleep(1000);
-    // 第二个商城
-    func.sClick(id("tv_name").text("购物日").findOne());
-    sleep(800);
-    text("点击签到").findOne();
-    sleep(2000);
-    func.sClick(text("点击签到").findOnce());
 
-    toastLog(appName + "已签到");
-    sleep(1000);
-}
 
 
 
