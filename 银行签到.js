@@ -5,7 +5,7 @@ main();
 //买单吧();
 function main() {
     // 中行缤纷生活();
-    招商银行();
+    zhaoshang();
     中国农业银行();
     什么值得买();
     jd_sign();
@@ -503,9 +503,9 @@ function 工银e生活() {
     sleep(1000);
 }
 
-function 招商银行() {
-    var appName = "招商银行";
-    // setClip("＆https://t.cmbchina.com/RZV7f2＆");
+function zhaoshang() {
+    var appName = "cmb.pb";
+    func.toPackage(appName);
     sleep(600);
     func.toApp(appName);
     func.passAd();
