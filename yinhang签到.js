@@ -400,7 +400,6 @@ function youchu_XYK() {
 }
 
 
-// 华彩生活
 function huaxia_XYK() {
     var appName = "com.HuaXiaBank.HuaCard";
     //closeApp(appName);
