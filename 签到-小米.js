@@ -12,7 +12,7 @@ function main() {
         jd_sign();
         i = i + 1;
     }
-    招商银行();
+    zhaoshang();
     // 中行缤纷生活();
     func.lockScr();
 }
@@ -107,11 +107,11 @@ function jd_sign() {
     }
 }
 
-function 招商银行() {
-    var appName = "招商银行";
+function zhaoshang() {
+    var appName = "cmb.pb";
+    func.toPackage(appName);
     // setClip("＆https://t.cmbchina.com/RZV7f2＆");
     sleep(600);
-    func.toApp(appName);
     func.passAd();
     // func.sClick(text("立即查看").findOne());
     func.sClick(id("cmb.pb:id/textMarquee").findOne());
