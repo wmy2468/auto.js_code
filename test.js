@@ -6,7 +6,6 @@ main();
 function main() {
     // zhonghang_XYK();
     nongye_CXK();
-    什么值得买();
     jd_sign();
     YunShaofu();
     pufa_CXK();
@@ -20,22 +19,40 @@ function main() {
     alert("已完成.");
 }
 
-function 什么值得买() {
-    var appName = "什么值得买";
-    func.toApp(appName);
-    var signBtn = null;
-    while (signBtn == null) {
-        signBtn = id("tv_login_sign").findOnce();
-        func.sClick(id("tab_usercenter").text("我的").findOnce());
-        sleep(800);
-        func.sClick(id("dialog_home_ads_close").findOnce());
-        sleep(800);
-        func.passAd();
+// 小豆
+function nongye_CXK() {
+    var appName = "com.android.bankabc";
+    //closeApp(appName);
+    func.toPackage(appName);
+    lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
+    while (lineBtn == null) {
+        lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
+        sleep(1000);
     }
-    sleep(800);
-    func.sClick(signBtn);
     sleep(1000);
-    //textContains("已连续签到").findOne();
-    toastLog(appName + "已签到");
+    //点击我的按钮
+    func.sClick(lineBtn.child(4));
     sleep(1200);
+    // 签到按钮
+    func.cClick(id("tv_my_haidou_unlogin").text("小豆").findOne());
+    //toastLog("我的已点击");
+    while (textContains("小豆秒杀").findOnce() == null) {
+        if (text("切换登录方式").findOnce() != null) {
+            //toastLog("滑动手势");
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(2000);
+        }
+    }
+    //toastLog("找签到");
+    while (text("已经签到").findOnce() == null) {
+        func.sClick(text("收起").findOnce());
+        sleep(1200);
+        func.sClick(text("签到有礼").findOnce());
+        sleep(1200);
+        func.sClick(text("签到得豆").findOnce());
+        sleep(1200);
+    }
+    toastLog(appName + "已签到");
+    sleep(1000);
 }
