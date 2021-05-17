@@ -101,7 +101,7 @@ function zhonghang_XYK() {
 
 // 小豆
 function nongye_CXK() {
-    var appName = "com.android.bankabc";
+    var appName = "com.android.bnakabc";
     //closeApp(appName);
     func.toPackage(appName);
     lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
@@ -139,7 +139,7 @@ function nongye_CXK() {
 
 
 function youchu_CXK() {
-    var appName = "com.yitong.mbank.psbc";
+    var appName = "com.yitong.mbnak.psbc";
     //closeApp(appName);
     func.toPackage(appName);
     while (className("RadioButton").text("我的").findOnce() == null) {
@@ -170,7 +170,7 @@ function youchu_CXK() {
 
 // 金豆签到
 function pufa_CXK() {
-    var appName = "cn.com.spdb.mobilebank.per";
+    var appName = "cn.com.spdb.mobilebnak.per";
     //closeApp(appName);
     func.toPackage(appName);
     while (text("首页").findOnce() == null) {
@@ -315,7 +315,7 @@ function 买单吧() {
     func.sClick(text("我的").findOne());
     sleep(2000);
     while (id("rl_title_white").findOnce() == null) {
-        func.sClick(id("com.bankcomm.maidanba:id/tv_sign").text("每日签到").findOnce());
+        func.sClick(id("com.bnakcomm.maidanba:id/tv_sign").text("每日签到").findOnce());
         sleep(1000);
         func.sClick(idContains("lose").findOnce());
         log(appName + "等待登录");
@@ -329,9 +329,9 @@ function 买单吧() {
     sleep(1000);
     while (!(text("客官明天再来呦").findOnce() != null || text("完成").findOnce() != null)) {
         func.sClick(id("bt_signin").text("签到").findOnce());
-        func.sClick(id("com.bankcomm.maidanba:id/bt_signin").text("抽奖").findOnce());
+        func.sClick(id("com.bnakcomm.maidanba:id/bt_signin").text("抽奖").findOnce());
         sleep(1000);
-        func.sClick(id("com.bankcomm.maidanba:id/bt_welfare_lottery").text("去抽奖").findOnce());
+        func.sClick(id("com.bnakcomm.maidanba:id/bt_welfare_lottery").text("去抽奖").findOnce());
     }
     toastLog(appName + "已签到");
     sleep(1000);
@@ -370,7 +370,7 @@ function pufa_XYK() {
 
 
 function youchu_XYK() {
-    var appName = "com.yitong.mbank.psbc.creditcard";
+    var appName = "com.yitong.mbnak.psbc.creditcard";
     func.toPackage(appName);
     while (text("我的").findOnce() == null) {
         func.passAd();
@@ -401,7 +401,7 @@ function youchu_XYK() {
 
 
 function huaxia_XYK() {
-    var appName = "com.HuaXiaBank.HuaCard";
+    var appName = "com.HuaXiabnak.HuaCard";
     //closeApp(appName);
     func.toPackage(appName);
     while (text("我的").findOnce() == null) {
