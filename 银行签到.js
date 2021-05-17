@@ -10,7 +10,7 @@ function main() {
     什么值得买();
     jd_sign();
     YunShaofu();
-    浦发银行();
+    pufa();
     //工银e生活();
     //邮储银行();
     浦发信用卡();
@@ -337,10 +337,10 @@ function 买单吧() {
 }
 
 // 浦发
-function 浦发信用卡() {
-    var appName = "浦大喜奔";
+function pufa() {
+    var appName = "com.spdbcc.app";
     //closeApp(appName);
-    func.toApp(appName);
+    func.toPackage(appName);
     while (text("我的").findOnce() == null) {
         func.passAd();
     }

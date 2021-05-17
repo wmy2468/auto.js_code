@@ -47,9 +47,13 @@ if (selectIndex == -1) {
                 log(fileName + '网络读取错误，可能文件不存在')
                 sleep(800);
             } else {
-                log(fileName + ',更新完成 写入文件')
-                // 写入文件
-                files.write(filePath, req.body.string());
+                if (req.body.string() == "根据相关法律政策,该内容无法显示") {
+                    toastLog(fileName + "被禁止读取");
+                } else {
+                    log(fileName + ',更新完成 写入文件')
+                    // 写入文件
+                    files.write(filePath, req.body.string());
+                }
             }
         }
         catch (e) {
