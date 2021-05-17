@@ -16,7 +16,7 @@ function main() {
     //youchu_CXK();
 
     youchu_XYK();
-    //华彩生活();
+    //huaxia_XYK();
     买单吧();
     alert("已完成.");
 }
@@ -337,7 +337,6 @@ function 买单吧() {
     sleep(1000);
 }
 
-// 浦发
 function pufa_XYK() {
     var appName = "com.spdbcc.app";
     //closeApp(appName);
@@ -402,10 +401,10 @@ function youchu_XYK() {
 
 
 // 华彩生活
-function 华彩生活() {
-    var appName = "华彩生活";
+function huaxia_XYK() {
+    var appName = "com.HuaXiaBank.HuaCard";
     //closeApp(appName);
-    func.toApp(appName);
+    func.toPackage(appName);
     while (text("我的").findOnce() == null) {
         func.passAd();
     }
@@ -476,10 +475,10 @@ function YunShaofu() {
     sleep(1000);
 }
 
-function 工银e生活() {
-    var appName = "工银e生活";
+function gonghang_XYK() {
+    var appName = "com.icbc.elife";
     //closeApp(appName);
-    func.toApp(appName);
+    func.toPackage(appName);
     while (id("radio_button1").text("生活").findOnce() == null) {
         func.passAd();
     }
