@@ -57,7 +57,7 @@ if (selectIndex == -1) {
             }
         }
         catch (e) {
-            //toastLog(filePath);
+            log(fileName + ',更新中途出错')
             continue;
         }
     }
