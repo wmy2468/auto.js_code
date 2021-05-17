@@ -2,19 +2,20 @@ auto.waitFor();
 var func = require("func_list.js");
 
 main();
-//买单吧();
+
 function main() {
-    // 中行缤纷生活();
-    zhaoshang();
-    中国农业银行();
+    // zhonghang_XYK();
+    zhaoshang_CXK();
+    nongye_CXK();
     什么值得买();
     jd_sign();
     YunShaofu();
-    pufa();
-    //工银e生活();
-    //邮储银行();
-    浦发信用卡();
-    邮储信用卡();
+    pufa_CXK();
+    pufa_XYK();
+    //gonghang_XYK();
+    //youchu_CXK();
+
+    youchu_XYK();
     //华彩生活();
     买单吧();
     alert("已完成.");
@@ -22,12 +23,12 @@ function main() {
 
 // ======================签到代码==================================
 
-// 中行缤纷生活
-function 中行缤纷生活() {
+
+function zhonghang_XYK() {
     // test3
-    var appName = "缤纷生活";
+    var appName = "com.forms";
     //closeApp(appName);
-    func.toApp(appName);
+    func.toPackage(appName);
     while (text("我的").findOnce() == null) {
         func.passAd();
     }
@@ -98,11 +99,11 @@ function 中行缤纷生活() {
     sleep(3000);
 }
 
-// 农行小豆
-function 中国农业银行() {
-    var appName = "中国农业银行";
+// 小豆
+function nongye_CXK() {
+    var appName = "com.android.bankabc";
     //closeApp(appName);
-    func.toApp(appName);
+    func.toPackage(appName);
     lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
     while (lineBtn == null) {
         lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
@@ -136,11 +137,11 @@ function 中国农业银行() {
     sleep(1000);
 }
 
-// 邮储银行
-function 邮储银行() {
-    var appName = "邮储银行";
+
+function youchu_CXK() {
+    var appName = "com.yitong.mbank.psbc";
     //closeApp(appName);
-    func.toApp(appName);
+    func.toPackage(appName);
     while (className("RadioButton").text("我的").findOnce() == null) {
         func.passAd();
     }
@@ -167,11 +168,11 @@ function 邮储银行() {
     sleep(1000);
 }
 
-// 浦发金豆签到
-function 浦发银行() {
-    var appName = "浦发银行";
+// 金豆签到
+function pufa_CXK() {
+    var appName = "cn.com.spdb.mobilebank.per";
     //closeApp(appName);
-    func.toApp(appName);
+    func.toPackage(appName);
     while (text("首页").findOnce() == null) {
         func.passAd();
     }
@@ -337,7 +338,7 @@ function 买单吧() {
 }
 
 // 浦发
-function pufa() {
+function pufa_XYK() {
     var appName = "com.spdbcc.app";
     //closeApp(appName);
     func.toPackage(appName);
@@ -368,10 +369,10 @@ function pufa() {
     sleep(1000);
 }
 
-// 邮储信用卡
-function 邮储信用卡() {
-    var appName = "邮储信用卡";
-    func.toApp(appName);
+
+function youchu_XYK() {
+    var appName = "com.yitong.mbank.psbc.creditcard";
+    func.toPackage(appName);
     while (text("我的").findOnce() == null) {
         func.passAd();
         var Continue = className("TextView").text("继续使用").findOnce();
@@ -503,7 +504,7 @@ function 工银e生活() {
     sleep(1000);
 }
 
-function zhaoshang() {
+function zhaoshang_CXK() {
     var appName = "cmb.pb";
     func.toPackage(appName);
     sleep(600);
