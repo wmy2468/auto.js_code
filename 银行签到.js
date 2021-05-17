@@ -24,6 +24,7 @@ function main() {
 
 // 中行缤纷生活
 function 中行缤纷生活() {
+    // test3
     var appName = "缤纷生活";
     //closeApp(appName);
     func.toApp(appName);

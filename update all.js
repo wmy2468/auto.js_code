@@ -1,5 +1,6 @@
 //https://gitee.com/JJ1573/auto.js_code/raw/master/通用抢券,复杂元素.js
-var originUrl = 'https://gitee.com/JJ1573/auto.js_code/raw/master/';
+// var originUrl = 'https://gitee.com/JJ1573/auto.js_code/raw/master/';
+var originUrl = 'https://raw.githubusercontent.com/mw03251214/auto.js_code/master/'
 
 // 获取脚本路径
 var dir = files.cwd();
@@ -12,6 +13,7 @@ var jsFiles = files.listDir(dir, function (name) {
 var fileName, filePath, fileUrl;
 var selectedArr = ["更新所有文件"];
 var selectIndex = dialogs.select('选择功能', selectedArr);
+var req;
 if (selectIndex == -1) {
     fileName = rawInput("请输入要下载的文件名,例:XXX，不需要输入.JS");
     if (fileName == null || fileName == '') {
@@ -23,7 +25,7 @@ if (selectIndex == -1) {
     }
     filePath = dir + '/' + fileName;    // 文件路径
     fileUrl = originUrl + fileName;     // 网络文件路径
-    var req = http.get(fileUrl);
+    req = http.get(fileUrl);
     if (req.statusCode != '200') {
         toastLog('网络读取错误，可能文件不存在')
         sleep(800);
@@ -37,10 +39,10 @@ if (selectIndex == -1) {
     // 变例读取文件
     for (i = 0; i <= jsFiles.length - 1; i++) {
         fileName = jsFiles[i];              // 文件名
-        if (!(fileName == "京东话费自动支付.js")) {
-            filePath = dir + '/' + fileName;    // 文件路径
-            fileUrl = originUrl + fileName;     // 网络文件路径
-            var req = http.get(fileUrl);
+        filePath = dir + '/' + fileName;    // 文件路径
+        fileUrl = originUrl + fileName;     // 网络文件路径
+        try {
+            req = http.get(fileUrl);
             if (req.statusCode != '200') {
                 log(fileName + '网络读取错误，可能文件不存在')
                 sleep(800);
@@ -49,6 +51,10 @@ if (selectIndex == -1) {
                 // 写入文件
                 files.write(filePath, req.body.string());
             }
+        }
+        catch (e) {
+            //toastLog(filePath);
+            continue;
         }
     }
     alert('更新完成');

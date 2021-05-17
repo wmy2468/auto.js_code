@@ -109,9 +109,6 @@ function jd_sign() {
 
 function 招商银行() {
     var appName = "招商银行";
-    var appName = "com.unionpay";
-    //closeApp(appName);
-    func.toPackage(appName);
     // setClip("＆https://t.cmbchina.com/RZV7f2＆");
     sleep(600);
     func.toApp(appName);

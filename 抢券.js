@@ -73,7 +73,7 @@ function 光大活动() {
             break;
         case "青桔单车2.5买月卡":            //10点
             startTime = "09,59,59,700";
-            targetViewText = "【活动编号】33739";
+            targetViewText = "【活动编号】33819";
             break;
         case "饿了么1分买6元":            //10点
             startTime = "09,59,59,700";
