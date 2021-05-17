@@ -1,12 +1,29 @@
-//toastLog(id("com.jd.lib.cashier.feature:id/cd").findOnce().click());
+auto.waitFor();
 var func = require("func_list.js");
-//test on laptop
 
-招商银行();
+main();
 
-function 招商银行() {
-    var appName = "招商银行";
-    // setClip("＆https://t.cmbchina.com/RZV7f2＆");
+function main() {
+    // zhonghang_XYK();
+    zhaoshang_CXK();
+    nongye_CXK();
+    什么值得买();
+    jd_sign();
+    YunShaofu();
+    pufa_CXK();
+    pufa_XYK();
+    //gonghang_XYK();
+    //youchu_CXK();
+
+    youchu_XYK();
+    //huaxia_XYK();
+    jiaohang_XYK();
+    alert("已完成.");
+}
+
+function zhaoshang_CXK() {
+    var appName = "cmb.pb";
+    func.toPackage(appName);
     sleep(600);
     func.toApp(appName);
     func.passAd();
