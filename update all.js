@@ -38,7 +38,7 @@ if (selectIndex == -1) {
         alert('更新失败 退出');
     } else {
         // 写入文件
-        files.writeBytes(filePath, req.body.bytes());
+        files.write(filePath, req.body.string());
         alert('更新完成');
     }
 } else {
@@ -58,7 +58,7 @@ if (selectIndex == -1) {
                 log(fileName + ',更新完成 写入文件')
                 successCnt = successCnt + 1;
                 // 写入文件
-                files.writeBytes(filePath, req.body.bytes());
+                files.write(filePath, req.body.string());
             }
         }
         catch (err) {
