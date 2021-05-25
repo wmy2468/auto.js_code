@@ -1,6 +1,6 @@
 //https://gitee.com/JJ1573/auto.js_code/raw/master/通用抢券,复杂元素.js
-// var originUrl = 'https://gitee.com/JJ1573/auto.js_code/raw/master/';
-var originUrl = 'https://raw.githubusercontent.com/mw03251214/auto.js_code/master/';
+var originUrl = 'https://gitee.com/JJ1573/auto.js_code/raw/master/';
+// var originUrl = 'https://raw.githubusercontent.com/mw03251214/auto.js_code/master/';
 // var originUrl = "https://gitlab.com/mw03251214/auto-js_code/-/raw/master/";
 
 // 获取脚本路径
