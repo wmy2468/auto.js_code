@@ -85,7 +85,7 @@ function 中行缤纷生活() {
             } else {
                 func.cClick(signFlag.parent().child(idx + 2));
                 sleep(3000);
-                textContains("每周连续签到7天可获得翻倍轮盘机会").findOne();
+                textContains("每周连续签到7天可获得翻倍").findOne();
                 break;
             }
         }
