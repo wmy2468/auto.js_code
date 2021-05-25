@@ -12,7 +12,7 @@ function toAutojs() {
 function cClick(element) {
     if (element != null) {
         click(element.bounds().centerX(), element.bounds().centerY());
-        log("cClick_center" + element.text());
+        log("cClick_center: " + element.text());
         return true;
     } else {
         // log("cClick_null");
@@ -26,7 +26,7 @@ function sClick(element) {
             log("sClick" + element.text());
         } else {
             click(element.bounds().centerX(), element.bounds().centerY());
-            log("sClick_center" + element.text());
+            log("sClick_center: " + element.text());
         }
         return true;
     }
