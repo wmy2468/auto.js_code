@@ -227,17 +227,17 @@ function 中信活动() {
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             launchApp(appName);             // 启动APP
             // 等待进入指定页面
-            var couClick = className("android.view.View").text(targetViewText).findOnce();
+            var couClick = text(targetViewText).findOnce();
             while (!couClick) {
-                couClick = className("android.view.View").text(targetViewText).findOnce();
+                couClick = text(targetViewText).findOnce();
                 toastLog("请跳转到券 列表 页面，直到提示  已到达等待页面");
             }
             toastLog("已到达指定页面，等待");
             func.getTimeDiff(timeArea, startTime);              // 等待时间
             func.sClick(couClick);             // 点击元素
             // 点击元素
-            func.sClick(className("android.widget.Button").text("立即购买").findOne());
-            func.sClick(className("android.view.View").text("确认").findOne());
+            func.sClick(text("立即购买").findOne());
+            func.sClick(text("确认").findOne());
             toastLog("已点击，请确认结果");
             sleep(3000);
             break;
