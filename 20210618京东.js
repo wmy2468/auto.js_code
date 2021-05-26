@@ -5,9 +5,17 @@ var 小米双开 = true;
 
 var i = 0;
 var k;
-var appName = '京东';
-var selectedArr = ['每日任务', '图鉴'];
+var appName, koulingText;
+var selectedArr = ['每日任务', '图鉴', "金融领金币"];
 var selectIndex = dialogs.select('选择启动的功能', selectedArr);
+if (selectIndex != 2) {
+	appName = '京东';
+	koulingText = "24.0复制整段话 Https:/JUWzIzbq3E8tGV幇幇莪！解鎻憅粅聅萠%R9JUj8Qf2b@去→倞東 go！";
+}
+else {
+	appName = '京东金融';
+	koulingText = "26.0复制整段话 http:/J2hWLtQf6CBwZx憅粅聅萠①起唻嗨怶，趚唻t#zBN3N7BIUb%しǎι【京東】ＡΡΡの";
+}
 if (selectIndex == -1) { exit() };
 // 数字从0开始。
 var selected = selectedArr[selectIndex];
@@ -15,8 +23,7 @@ var devBrand = device.brand;
 main();
 
 function main() {
-	var kouLing = '24.0复制整段话 Https:/JUWzIzbq3E8tGV幇幇莪！解鎻憅粅聅萠%R9JUj8Qf2b@去→倞東 go！';
-	setClip(kouLing);
+	setClip(koulingText);
 	sleep(1000);
 	log("正在打开");
 	if (devBrand == 'HUAWEI') {
@@ -28,7 +35,7 @@ function main() {
 			func.toAppMulti(appName, k);
 			process();
 			toastLog('第一个已完成');
-			setClip(kouLing);
+			setClip(koulingText);
 			sleep(1000);
 			k = k + 1;
 			func.toAppMulti(appName, k);
@@ -47,10 +54,11 @@ function main() {
 function process() {
 	log("正在等待进入活动页面");
 	//等待点击 立即查看按钮
-	func.sClick(className("TextView").text("立即查看").findOne());
+	func.sClick(className("TextView").textContains("立即").findOne());
 
 	// 助力关闭按钮
 	var closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne();
+
 	sleep(3000);
 	if (textContains('为TA助力').findOnce() != null || textContains('您今天的助力次数已用完').findOnce() != null) {
 		log('为TA助力不为空')
@@ -78,12 +86,21 @@ function process() {
 		case '图鉴':
 			图鉴();
 			break;
-		case '开宝箱':
-			开宝箱();
+		case '金融领金币':
+			金融领金币();
 			break;
 	}
 }
 
+
+function 金融领金币() {
+	log('等待加载');
+	func.sClick(textContains('领金币').findOne());
+	sleep(2000);
+	textContains('邀请好友助力').waitFor();
+	sleep(800);
+	clickComplete();
+}
 
 function checkPopUp() {
 	var lottery, iKnow, curCnt;
@@ -186,7 +203,7 @@ function 每日任务() {
 function clickComplete() {
 	var indexText, detailText, unCompleteIdx;
 	var index;
-	if (selected == "每日任务") {
+	if (selected == "每日任务" || selected == "金融领金币") {
 		index = 1;
 	} else {
 		index = 0;
@@ -194,6 +211,9 @@ function clickComplete() {
 	while (textContains('去完成').exists()) {
 		var nextStep, nextStepDetail;
 		nextStepDetail = '';
+		if (text("去完成").findOnce()) {
+			sleep(2000);
+		}
 		unComplete = text('去完成').find();
 		//toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
@@ -230,17 +250,21 @@ function clickComplete() {
 
 				// 正常任务
 				if (indexText.indexOf('秒') != -1) { nextStep = '等待8秒' }
-				if (indexText.indexOf('浏览可得') != -1) { nextStep = '浏览返回' }
-				if (indexText.indexOf('浏览并关注') != -1) { nextStep = '浏览返回' }
-				if (indexText.indexOf('逛店可得') != -1) { nextStep = '浏览返回' }
-				if (indexText.indexOf('参与可得') != -1) { nextStep = '参与返回' }
-				if (indexText.indexOf('浏览5个') != -1) { nextStep = '浏览商品' }
-				if (indexText.indexOf('加购5个') != -1) { nextStep = '加购物车' }
-				if (indexText.indexOf('成功入会') != -1) { nextStep = '加入会员' }
+				else if (indexText.indexOf('浏览可得') != -1) { nextStep = '浏览返回' }
+				else if (indexText.indexOf('浏览并关注') != -1) { nextStep = '浏览返回' }
+				else if (indexText.indexOf('逛店可得') != -1) { nextStep = '浏览返回' }
+				else if (indexText.indexOf('参与可得') != -1) { nextStep = '参与返回' }
+				else if (indexText.indexOf('浏览5个') != -1) { nextStep = '浏览商品' }
+				else if (indexText.indexOf('加购5个') != -1) { nextStep = '加购物车' }
+				else if (indexText.indexOf('成功入会') != -1) { nextStep = '加入会员' }
 				// 详细描述校验
-				if (detailText.indexOf('去小程序领更多') != -1) { nextStepDetail = '小程序' }
-				if (detailText.indexOf('去逛美妆护肤爆款会场') != -1) { nextStepDetail = '小程序' }
-				if (detailText.indexOf('去逛京友圈') != -1) { nextStepDetail = '京友圈' }
+				else if (detailText.indexOf('去小程序领更多') != -1) { nextStepDetail = '小程序' }
+				else if (detailText.indexOf('去逛美妆护肤爆款会场') != -1) { nextStepDetail = '小程序' }
+				else if (detailText.indexOf('去逛京友圈') != -1) { nextStepDetail = '京友圈' }
+				else {
+					index = index + 1;
+					continue;
+				}
 				func.sClick(unComplete[index]);
 				toastLog(nextStep);
 				log(nextStepDetail);
@@ -248,43 +272,6 @@ function clickComplete() {
 				after_click(nextStep, nextStepDetail);
 			}
 		}
-	}
-}
-
-
-function getBoxList() {
-	if (devBrand == 'HUAWEI') {
-		boxlist = (text('寻宝箱 领金币').findOne()).parent().child(2);
-	} else if (devBrand == 'xiaomi') {
-		boxlist = (text('寻宝箱 领金币').findOne()).parent().parent().child(2);
-	} else {
-		boxlist = (text('寻宝箱 领金币').findOne()).parent().child(2);
-	}
-	return boxlist;
-}
-
-function 开宝箱() {
-	text('寻宝箱 领金币').findOne();
-	sleep(3000);
-	i = 0;
-	var boxlist, boxLen;
-	var myList = new Array();
-	boxlist = getBoxList();
-	while (true) {
-		boxLen = boxlist.childCount(); i
-		i = random(0, boxLen - 1);
-		while (myList.indexOf(i) != -1) {
-			i = random(0, boxLen - 1);
-		}
-		log('随机数字为=' + i);
-		func.sClick(boxlist.child(i));
-		text('签到得500金币').findOne();
-		if (textContains('今日签到已达上限').findOnce()) {
-			break;
-		}
-		myList.push(i);
-		back_way();
-		boxlist = getBoxList();
 	}
 }
 
@@ -359,12 +346,13 @@ function after_click(textStr, details) {
 			break;
 	}
 	log('等待返回');
-	if (selected == "每日任务") {
+	if (selected == "每日任务" || selected == "金融领金币") {
 		textContains('邀请好友助力').waitFor();
 	} else {
 		textContains('每日签到').waitFor();
 	}
-	sleep(2500);
+	log('已返回');
+	sleep(3000);
 }
 
 
@@ -482,5 +470,6 @@ function back_way() {
 		back();
 	} catch (err) { }
 	func.sClick(textContains('离开').findOnce());
+	func.sClick(textContains('放弃').findOnce());
 	func.sClick(textContains('知道了').findOnce());
 }
