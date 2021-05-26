@@ -223,7 +223,7 @@ function 中信活动() {
         case "周三六11点-5折必胜客百果园":
             toastLog("到点点击");
             startTime = "10,59,59,700";             // 设置时间点
-            couDes = ["必胜客50元代金券", "百果园50元代金券"];             // 券名称
+            couDes = ["必胜客50元代金券", "达美乐50元代金券", "肯德基50元代金券"];             // 券名称
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             launchApp(appName);             // 启动APP
             // 等待进入指定页面
@@ -236,8 +236,9 @@ function 中信活动() {
             func.getTimeDiff(timeArea, startTime);              // 等待时间
             func.sClick(couClick);             // 点击元素
             // 点击元素
-            func.sClick(text("立即购买").findOne());
-            func.sClick(text("确认").findOne());
+            while (!func.sClick(text("确认").findOnce())) {
+                func.sClick(text("立即购买").findOnce());
+            }
             toastLog("已点击，请确认结果");
             sleep(3000);
             break;
