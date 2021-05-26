@@ -15,7 +15,7 @@ function 买单吧() {
     func.sClick(text("我的").findOne().parent().parent().parent().parent().child(2));
     text("羊毛资讯").findOne();
     sleep(1000);
-    while (!(text("客官明天再来呦").findOnce() != null || text("完成").findOnce() != null)) {
+    while (textContains("客官明天再来呦").findOnce() == null) {
         func.sClick(idContains("sign").findOnce());
         sleep(1000);
         func.sClick(id("com.bankcomm.maidanba:id/bt_welfare_lottery").text("去抽奖").findOnce());
