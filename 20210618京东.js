@@ -100,7 +100,7 @@ function checkPopUp() {
 		func.sClick(lottery.parent().child(childcurCnt + 1));
 		sleep(800);
 	}
-	signNow = text('去签到 拿红包>').findOnce();
+	signNow = textContains('去签到').findOnce();
 	if (signNow != null) {
 		curCnt = signNow.indexInParent();
 		log('去签到取消');
