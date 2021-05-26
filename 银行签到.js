@@ -335,7 +335,7 @@ function 浦发信用卡() {
     func.toApp(appName);
     while (text("我的").findOnce() == null) {
         func.passAd();
-        func.sClick(textContains("close").findOnce());
+        func.sClick(idContains("close").findOnce());
     }
     func.sClick(text("我的").findOne());
     // 等待我的页面加载
