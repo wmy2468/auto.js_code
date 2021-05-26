@@ -108,13 +108,14 @@ function checkPopUp() {
 	if (iKnow != null) {
 		curCnt = iKnow.indexInParent();
 		log('我知道了取消');
-		func.sClick(iKnow.parent().child(childcurCnt + 1));
+		func.sClick(iKnow.parent().child(curCnt + 1));
 		sleep(800);
 	}
 	lottery = text('立即抽奖').findOnce();
 	if (lottery != null) {
+		curCnt = lottery.indexInParent();
 		log('立即抽奖取消');
-		func.sClick(lottery.parent().child(childcurCnt + 1));
+		func.sClick(lottery.parent().child(curCnt + 1));
 		sleep(800);
 	}
 	signNow = textContains('去签到').findOnce();
