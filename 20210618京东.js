@@ -70,7 +70,7 @@ function process() {
 	}
 	//延迟3秒
 	sleep(3000);
-
+	checkPopUp();
 	switch (selected) {
 		case '每日任务':
 			每日任务();
