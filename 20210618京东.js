@@ -211,7 +211,7 @@ function clickComplete() {
 	while (textContains('去完成').exists()) {
 		var nextStep, nextStepDetail;
 		nextStepDetail = '';
-		if (text("去完成").findOnce()) {
+		if (text("已完成").findOnce() != null) {
 			sleep(2000);
 		}
 		unComplete = text('去完成').find();
