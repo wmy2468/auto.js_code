@@ -2,63 +2,32 @@
 var func = require("func_list.js");
 //test on laptop
 
-log(textContains(".jpg").find().length);
+买单吧();
 
-// var cnt = 5;
-// while (cnt > 0) {
-//     scrollDown();
-//     sleep(1000);
-//     cnt = cnt - 1;
-// }
-
-// func.sClick((textContains('¥').find()[5]).parent().child(5));
-// (function () {
-//     let request = http.request;
-//     // 覆盖http关键函数request，其他http返回最终会调用这个函数
-//     http.request = function () {
-//         try {
-//             // 捕捉所有异常
-//             return request.apply(http, arguments);
-//         } catch (e) {
-//             // 出现异常返回null
-//             console.error(e);
-//             return null;
-//         }
-//     }
-// })();
-
-// var originUrl = 'https://raw.githubusercontent.com/mw03251214/auto.js_code/master/func_list.js'
-// http.__okhttp__.setTimeout(10000);
-// try {
-//     http.get(originUrl);
-// }
-// catch (err) {
-//     log(err);
-// }
-
-// github下载的脚本 = 获取下载的脚本()
-// log("github下载的脚本=", github下载的脚本)
-// engines.execScript('auto.js&github', github下载的脚本)
-// function 获取下载的脚本() {
-//     try {
-//         var r = http.get(githubUrl)
-//         log('code=', r.statusCode)
-//         var zipFile = r.body.bytes()
-//         if (zipFile) {
-//             var 代码路径 = 保存zip文件(zipFile)
-//             return files.read(代码路径)
-//         } else {
-//             console.error('下载github代码失败')
-//             exit()
-//         }
-//     } catch (err) {
-//         console.error(err)
-//         exit()
-//     }
-// }
-
-
-
+function 买单吧() {
+    var appName = "买单吧";
+    //closeApp(appName);
+    func.toApp(appName);
+    while (className("TextView").id("tv_title").text("我的").findOnce() == null) {
+        func.passAd();
+        func.sClick(id("ivADClose").findOnce());
+    }
+    func.sClick(text("我的").findOne().parent().parent().parent().parent().child(2));
+    text("羊毛资讯").findOne();
+    sleep(1000);
+    while (!(text("客官明天再来呦").findOnce() != null || text("完成").findOnce() != null)) {
+        func.sClick(idContains("sign").findOnce());
+        sleep(1000);
+        func.sClick(id("com.bankcomm.maidanba:id/bt_welfare_lottery").text("去抽奖").findOnce());
+        if (text("手势登录").findOnce() != null) {
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(1000);
+        }
+    }
+    toastLog(appName + "已签到");
+    sleep(1000);
+}
 
 
 // YunShaofu
