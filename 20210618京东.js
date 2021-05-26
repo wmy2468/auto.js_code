@@ -386,7 +386,6 @@ function view_list() {
 		textContains('购物车').findOne();
 		sleep(800);
 		back_way();
-		sleep(2000);
 		i = i + 1;
 	}
 }
@@ -446,6 +445,7 @@ function add_cart() {
 }
 
 function back_way() {
+
 	log('返回');
 	sleep(800);
 	var backBtn = desc('返回').findOnce();
@@ -473,4 +473,9 @@ function back_way() {
 	func.sClick(textContains('离开').findOnce());
 	func.sClick(textContains('放弃').findOnce());
 	func.sClick(textContains('知道了').findOnce());
+	sleep(3000);
+	while (text("去完成").findOnce() == null) {
+		back_way();
+		sleep(3000);
+	}
 }
