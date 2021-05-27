@@ -358,7 +358,7 @@ function after_click(textStr, details) {
 
 
 function waitCompleteDisappear() {
-	while (text("邀请好友助力").findOnce() != null) {
+	while (textContains("邀请好友助力").findOnce() != null) {
 		sleep(800);
 		log("等待去完成消失");
 	}
@@ -474,7 +474,7 @@ function back_way() {
 	func.sClick(textContains('放弃').findOnce());
 	func.sClick(textContains('知道了').findOnce());
 	sleep(3000);
-	while (text("邀请好友助力").findOnce() == null) {
+	while (textContains("邀请好友助力").findOnce() == null) {
 		back_way();
 		sleep(3000);
 	}
