@@ -1,7 +1,7 @@
 //toastLog(id("com.jd.lib.cashier.feature:id/cd").findOnce().click());
 var func = require("func_list.js");
 //test on laptop
-
+log(id("com.bankcomm.maidanba:id/bt_signin").findOnce().click());
 
 function 买单吧() {
     var appName = "买单吧";

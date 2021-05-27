@@ -315,7 +315,7 @@ function 买单吧() {
     text("羊毛资讯").findOne();
     sleep(1000);
     while (textContains("客官明天再来哟").findOnce() == null) {
-        func.sClick(idContains("sign").findOnce());
+        id("com.bankcomm.maidanba:id/bt_signin").findOnce().click();
         sleep(1000);
         func.sClick(id("com.bankcomm.maidanba:id/bt_welfare_lottery").text("去抽奖").findOnce());
         if (text("手势登录").findOnce() != null) {
