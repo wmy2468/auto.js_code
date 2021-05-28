@@ -291,7 +291,7 @@ function after_click(textStr, details) {
 			log('参与返回');
 			waitCompleteDisappear();
 			sleep(2000);
-			back();
+			back_way();
 			break;
 		case '等待8秒':
 			cnt = 1;
