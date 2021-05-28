@@ -473,4 +473,8 @@ function back_way() {
 	func.sClick(textContains('放弃').findOnce());
 	func.sClick(textContains('知道了').findOnce());
 	sleep(3000);
+	while (textContains("邀请好友助力").findOnce() == null) {
+		back_way();
+		sleep(3000);
+	}
 }
