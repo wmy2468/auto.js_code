@@ -70,15 +70,15 @@ function process() {
 	}
 
 	//等待完全加载后，如果出现取消按钮会找不到
-	while (textContains('领金币').findOnce() == null) {
+	while (textContains('邀请好友助力').findOnce() == null) {
 		checkPopUp();
+		func.sClick(textContains('领金币').findOnce());
 		func.sClick(text('取消').findOnce());
-		sleep(300);
 		func.sClick(text('立即收下').findOnce());
+		sleep(800);
 	}
 	//延迟3秒
 	sleep(3000);
-	checkPopUp();
 	switch (selected) {
 		case '每日任务':
 			每日任务();
