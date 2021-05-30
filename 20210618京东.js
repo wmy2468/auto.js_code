@@ -444,7 +444,6 @@ function add_cart() {
 }
 
 function back_way() {
-	log('返回');
 	sleep(800);
 	var backBtn = desc('返回').findOnce();
 	if (backBtn == null) {
@@ -463,17 +462,7 @@ function back_way() {
 		}
 	}
 	sleep(800);
-	try {
-		func.sClick(idContains('m_common_tip').findOnce().parent().child(1).child(1).child(1).child(0).child(1));
-		sleep(800);
-		back();
-	} catch (err) { }
 	func.sClick(textContains('离开').findOnce());
-	func.sClick(textContains('放弃').findOnce());
 	func.sClick(textContains('知道了').findOnce());
-	sleep(3000);
-	while (textContains("邀请好友助力").findOnce() == null) {
-		back_way();
-		sleep(3000);
-	}
+	log('返回');
 }
