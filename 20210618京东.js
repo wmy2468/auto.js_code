@@ -71,11 +71,11 @@ function process() {
 
 	//等待完全加载后，如果出现取消按钮会找不到
 	while (textContains('邀请好友助力').findOnce() == null) {
-		checkPopUp();
 		func.sClick(textContains('领金币').findOnce());
+		checkPopUp();
 		func.sClick(text('取消').findOnce());
 		func.sClick(text('立即收下').findOnce());
-		sleep(800);
+		sleep(1000);
 	}
 	//延迟3秒
 	sleep(3000);
