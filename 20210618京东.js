@@ -449,17 +449,18 @@ function back_way() {
 	if (backBtn == null) {
 		back();
 	} else {
-		func.sClick(className('ImageView').id('com.jd.lib.jshop:id/asj').findOnce());
-		func.sClick(className('ImageView').id('com.jd.lib.jshop.feature:id/gd').findOnce());
-		func.sClick(className('ImageView').id('com.jd.lib.jshop.feature:id/mj').findOnce());
-		func.sClick(className('ImageView').desc('关闭页面').findOnce());
-
-		sleep(1000);
 		if (backBtn.clickable()) {
 			backBtn.click();
 		} else {
 			func.sClick(backBtn);
 		}
+		func.sClick(id('com.jd.lib.jshop:id/asj').findOnce());
+		func.sClick(id('com.jd.lib.jshop:id/fe').findOnce());
+		func.sClick(id('com.jd.lib.jshop.feature:id/gd').findOnce());
+		func.sClick(id('com.jd.lib.jshop.feature:id/mj').findOnce());
+		func.sClick(desc('关闭页面').findOnce());
+		func.sClick(idContains('close').findOnce());
+		sleep(1000);
 	}
 	sleep(800);
 	func.sClick(textContains('离开').findOnce());
