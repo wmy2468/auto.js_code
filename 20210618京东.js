@@ -106,9 +106,8 @@ function checkPopUp() {
 	var lottery, iKnow, curCnt;
 	iKnow = text('我知道了').findOnce();
 	if (iKnow != null) {
-		curCnt = iKnow.indexInParent();
+		iKnow.click();
 		log('我知道了取消');
-		func.sClick(iKnow.parent().child(curCnt + 1));
 		sleep(800);
 	}
 	lottery = text('立即抽奖').findOnce();
