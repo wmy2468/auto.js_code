@@ -36,7 +36,7 @@ function main() {
     while (point == null) {
         passAd();
         sleep(1000);
-        point = textContains(targetText).findOnce();
+        point = id("tv_Locationname").textContains(targetText).findOnce();
     }
     sleep(800);
     sClick(point);
@@ -75,7 +75,7 @@ function main() {
     text("发送账单").id("com.example.mposstandard:id/bill_submit_button").findOne();
     */
     sleep(500);
-    alert("当前已登录");
+    toastLog("当前已登录");
 }
 
 

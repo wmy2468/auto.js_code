@@ -3,7 +3,7 @@ var func = require("func_list.js");
 //test on laptop
 toastLog(id("com.example.mposstandard:id/amount").find().length);
 
-let targetCnt = 190;
+let targetCnt = id("com.example.mposstandard:id/trade_num").findOne().text();
 let curCnt = 0;
 let dict = {};
 
@@ -31,3 +31,4 @@ while (targetCnt != curCnt) {
     sleep(3000);
 }
 
+alert("总手续费:" + total_fees);
