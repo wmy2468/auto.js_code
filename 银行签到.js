@@ -315,7 +315,7 @@ function 买单吧() {
     text("羊毛资讯").findOne();
     sleep(1000);
     while (textContains("客官明天再来哟").findOnce() == null) {
-        id("com.bankcomm.maidanba:id/bt_signin").findOnce().click();
+        func.sClick(id("com.bankcomm.maidanba:id/bt_signin").findOnce());
         sleep(1000);
         func.sClick(id("com.bankcomm.maidanba:id/bt_welfare_lottery").text("去抽奖").findOnce());
         if (text("手势登录").findOnce() != null) {
@@ -367,6 +367,7 @@ function 邮储信用卡() {
     func.toApp(appName);
     while (text("我的").findOnce() == null) {
         func.passAd();
+        func.sClick(text("确认").findOnce());
         var Continue = className("TextView").text("继续使用").findOnce();
         if (Continue != null) {
             func.sClick(Continue);
