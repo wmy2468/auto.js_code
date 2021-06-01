@@ -46,10 +46,9 @@ function hwzhifu() {
             sleep(500);
             func.sClick(className("android.widget.TextView").textContains("银联支付").findOne());
             toastLog("切换到YunShaofu");
-            while (text("付款方式").findOnce() == null) {
-                func.cClick(text("付款方式").findOnce());
-                sleep(800);
-            }
+            text("付款详情").findOne();
+            func.cClick(text("付款方式").findOne());
+
             while (func.sClick(text("Huawei Pay").findOnce()) == false) {
                 scrollDown();
                 sleep(500);
