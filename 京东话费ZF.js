@@ -29,9 +29,9 @@ function hwzhifu() {
         sleep(1000);
         // 在全部订单和待付款切换
         try {
-            func.sClick(textContains(textPay).findOnce());
+            func.sClick(text(textPay).findOnce());
             sleep(1250);
-            func.sClick(textContains(textAll).findOnce());
+            func.sClick(text(textAll).findOnce());
         } catch (e) {
 
         }
@@ -41,7 +41,7 @@ function hwzhifu() {
         }
 
         func.sClick(textContains("去支付").findOnce());
-        if (text(textBar).findOnce()) {
+        if (text(textBar).findOnce() != null) {
             func.sClick(textContains("云闪付").findOne());
             sleep(500);
             func.sClick(className("android.widget.TextView").textContains("银联支付").findOne());
@@ -86,10 +86,9 @@ function weiXinn() {
     while (true) {
         sleep(1000);
         try {
-            func.sClick(textContains(textPay).findOnce());
+            func.sClick(text(textPay).findOnce());
             sleep(1250);
-            func.sClick(textContains(textAll).findOnce());
-            sleep(1250);
+            func.sClick(text(textAll).findOnce());
         } catch (e) {
 
         }
