@@ -42,11 +42,11 @@ function hwzhifu() {
 
         func.sClick(textContains("去支付").findOnce());
         if (text(textBar).findOnce()) {
-            func.sClick(textContains("云闪付").findOnce());
+            func.sClick(textContains("云闪付").findOne());
             sleep(500);
-            func.sClick(className("android.widget.TextView").textContains("银联支付").findOnce());
+            func.sClick(className("android.widget.TextView").textContains("银联支付").findOne());
             toastLog("切换到YunShaofu");
-            while (text("选择付款方式").findOnce() == null) {
+            while (text("付款方式").findOnce() == null) {
                 func.cClick(text("付款方式").findOnce());
                 sleep(800);
             }
