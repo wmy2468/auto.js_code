@@ -9,6 +9,7 @@ var result;
 
 var textPay = " 待付款 ";
 var textAll = " 全部 ";
+var textBar = "京东收银台"
 var scrollBarID = "com.jd.lib.ordercenter.feature:id/un";
 var payBtnID = "com.jd.lib.cashier.feature:id/cl"
 
@@ -41,10 +42,12 @@ function hwzhifu() {
             back();
             sleep(500);
         }
-        func.sClick(textContains("云闪付").findOne());
-        func.sClick(textContains("银联支付").findOnce());
-        if (func.sClick(id(payBtnID).findOnce()) == true) {
 
+        func.sClick(textContains("去支付").findOnce());
+        if (text(textBar).findOnce()) {
+            func.sClick(textContains("云闪付").findOnce());
+            sleep(500);
+            func.sClick(className("android.widget.TextView").textContains("银联支付").findOnce());
             toastLog("切换到YunShaofu");
             while (text("选择付款方式").findOnce() == null) {
                 func.cClick(text("付款方式").findOnce());
@@ -97,9 +100,11 @@ function weiXinn() {
             back();
             sleep(500);
         }
-        func.sClick(textContains("微信支付").findOne());
-        func.sClick(textContains("微信支付").findOnce());
-        if (func.sClick(id(payBtnID).findOnce())) {
+        func.sClick(textContains("去支付").findOne());
+        if (text(textBar).findOnce()) {
+            func.sClick(textContains("微信支付").findOnce());
+            sleep(500);
+            func.sClick(className("android.widget.TextView").textContains("微信支付").findOnce());
             if (device.brand == "HUAWEI") {
                 text("使用以下方式打开").findOne();
                 sleep(1000);
