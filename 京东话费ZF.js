@@ -47,7 +47,8 @@ function hwzhifu() {
             func.sClick(className("android.widget.TextView").textContains("银联支付").findOne());
             toastLog("切换到YunShaofu");
             text("付款详情").findOne();
-            func.cClick(text("付款方式").findOne());
+            sleep(1000);
+            func.sClick(text("付款方式").findOne());
 
             while (func.sClick(text("Huawei Pay").findOnce()) == false) {
                 scrollDown();
@@ -107,9 +108,11 @@ function weiXinn() {
             }
             while (func.cClick(text("返回商家").findOnce()) == false) {
                 func.sClick(text("立即支付").findOnce());
+                sleep(150);
                 func.sClick(text("继续支付").findOnce());
+                sleep(150);
                 func.sClick(text("确认支付").findOnce());
-                sleep(400);
+                sleep(150);
             }
             text("完成").findOne();
         }

@@ -4,4 +4,4 @@ var func = require("func_list.js");
 var textPay = "待付款";
 var textAll = "全部";
 
-func.cClick(text("付款方式").findOnce());
+func.sClick(text("付款方式").findOne());
