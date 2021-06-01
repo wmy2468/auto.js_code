@@ -31,9 +31,9 @@ function hwzhifu() {
         sleep(1000);
         // 在全部订单和待付款切换
         try {
-            func.sClick(text(textPay).findOnce());
+            func.sClick(textContains(textPay).findOnce());
             sleep(1250);
-            func.sClick(text(textAll).findOnce());
+            func.sClick(textContains(textAll).findOnce());
             sleep(1250);
         } catch (e) {
 
@@ -77,7 +77,7 @@ function hwzhifu() {
                 sleep(2000);
                 back();
                 // 待付款滑动栏
-                text(textPay).findOne();
+                textContains(textPay).findOne();
             }
         }
         // text("待付款").findOne();
@@ -89,9 +89,9 @@ function weiXinn() {
     while (true) {
         sleep(1000);
         try {
-            func.sClick(text(textPay).findOnce());
+            func.sClick(textContains(textPay).findOnce());
             sleep(1250);
-            func.sClick(text(textAll).findOnce());
+            func.sClick(textContains(textAll).findOnce());
             sleep(1250);
         } catch (e) {
 
@@ -122,7 +122,7 @@ function weiXinn() {
             sleep(2000);
             back();
             // 待付款滑动栏
-            text(textPay).findOne();
+            textContains(textPay).findOne();
         }
         // text("待付款").findOne();
     }
