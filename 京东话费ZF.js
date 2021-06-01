@@ -34,7 +34,6 @@ function hwzhifu() {
             func.sClick(textContains(textPay).findOnce());
             sleep(1250);
             func.sClick(textContains(textAll).findOnce());
-            sleep(1250);
         } catch (e) {
 
         }
@@ -69,11 +68,11 @@ function hwzhifu() {
                 }
             }
             func.sClick(text("确认付款").findOnce());
-            text("支付成功").findOne();
+            textContains("支付成功").findOne();
             sleep(1000);
             back();
-            text("查看订单").findOne();
-            if (text("立即抽奖").findOnce()) {
+            textContains("查看订单").findOne();
+            if (textContains("立即抽奖").findOnce()) {
                 sleep(2000);
                 back();
                 // 待付款滑动栏
