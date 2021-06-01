@@ -34,7 +34,7 @@ function jd_sign() {
     text("购物返豆").findOne();
     sleep(800);
 
-    while (textContains("已连签").findOnce() == null) {
+    while (textContains("已连").findOnce() == null) {
         func.sClick(className("TextView").text("签到领京豆").findOnce());
         sleep(800);
     }
