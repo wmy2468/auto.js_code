@@ -7,11 +7,9 @@ var selectArr = ["weiXinn", "YunShaofu"];
 
 var result;
 
-var textPay = " 待付款 ";
-var textAll = " 全部 ";
+var textPay = "待付款";
+var textAll = "全部";
 var textBar = "京东收银台"
-var scrollBarID = "com.jd.lib.ordercenter.feature:id/un";
-var payBtnID = "com.jd.lib.cashier.feature:id/cl"
 
 result = func.dialogsWin(selectArr);
 var cardEndNumber;
@@ -68,11 +66,11 @@ function hwzhifu() {
                 }
             }
             func.sClick(text("确认付款").findOnce());
-            textContains("支付成功").findOne();
+            text("支付成功").findOne();
             sleep(1000);
             back();
-            textContains("查看订单").findOne();
-            if (textContains("立即抽奖").findOnce()) {
+            log(text("查看订单").findOne());
+            if (text("立即抽奖").findOnce()) {
                 sleep(2000);
                 back();
                 // 待付款滑动栏
