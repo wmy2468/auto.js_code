@@ -96,11 +96,12 @@ function weiXinn() {
             back();
             sleep(500);
         }
-        func.sClick(textContains("去支付").findOne());
-        if (text(textBar).findOnce()) {
-            func.sClick(textContains("微信支付").findOnce());
+        func.sClick(textContains("去支付").findOnce());
+        if (text(textBar).findOnce() != null) {
+            log("find the bar");
+            func.sClick(textContains("微信支付").findOne());
             sleep(500);
-            func.sClick(className("android.widget.TextView").depth(12).text("微信支付").findOnce());
+            func.sClick(className("android.widget.TextView").depth(12).text("微信支付").findOne());
             if (device.brand == "HUAWEI") {
                 text("使用以下方式打开").findOne();
                 sleep(1000);
