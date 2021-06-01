@@ -41,7 +41,8 @@ function hwzhifu() {
             back();
             sleep(500);
         }
-        func.sClick(text("去支付").findOnce());
+        func.sClick(textContains("云闪付").findOne());
+        func.sClick(textContains("银联支付").findOnce());
         if (func.sClick(id(payBtnID).findOnce()) == true) {
 
             toastLog("切换到YunShaofu");
@@ -96,7 +97,8 @@ function weiXinn() {
             back();
             sleep(500);
         }
-        func.sClick(text("去支付").findOnce());
+        func.sClick(textContains("微信支付").findOne());
+        func.sClick(textContains("微信支付").findOnce());
         if (func.sClick(id(payBtnID).findOnce())) {
             if (device.brand == "HUAWEI") {
                 text("使用以下方式打开").findOne();
