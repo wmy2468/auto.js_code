@@ -100,7 +100,7 @@ function weiXinn() {
         if (text(textBar).findOnce()) {
             func.sClick(textContains("微信支付").findOnce());
             sleep(500);
-            func.sClick(className("android.widget.TextView").textContains("微信支付").findOnce());
+            func.sClick(className("android.widget.TextView").depth(12).text("微信支付").findOnce());
             if (device.brand == "HUAWEI") {
                 text("使用以下方式打开").findOne();
                 sleep(1000);

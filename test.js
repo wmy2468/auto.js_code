@@ -4,4 +4,4 @@ var func = require("func_list.js");
 var textPay = "待付款";
 var textAll = "全部";
 
-func.sClick(text("付款方式").findOne());
+func.sClick(className("android.widget.TextView").depth(12).text("微信支付").findOnce());
