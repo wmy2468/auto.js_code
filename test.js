@@ -6,4 +6,7 @@ var textAll = "全部";
 var moneyText;
 moneyText = id("com.bill.quickmoney:id/mon_").findOnce().text();
 
-log(moneyText.substring(2, moneyText.length - 1));
+scrollDown();
+sleep(1000);
+swipe(300, 850, 300, 60, 400);
+sleep(2000);

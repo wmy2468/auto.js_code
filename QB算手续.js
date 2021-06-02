@@ -43,7 +43,9 @@ function 快钱手续费() {
         toastLog("当前计算手续费:" + total_fees);
         // 翻页
         scrollDown();
-        sleep(3000);
+        sleep(1000);
+        swipe(300, 850, 300, 60, 400);
+        sleep(2000);
     }
     alert("总手续费:" + total_fees);
 }
