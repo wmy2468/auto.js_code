@@ -152,7 +152,6 @@ function 图鉴() {
 		} else {
 			zooAnimals = textContains(".png").find();
 		}
-
 		while (idx < zooAnimals.length) {
 			while (textContains('每日签到').findOnce() == null) {
 				zooAnimals[idx].click();
@@ -165,6 +164,7 @@ function 图鉴() {
 				back();
 				sleep(1500);
 			} else {
+				log("图鉴click");
 				图鉴Click();
 				back();
 				sleep(1500);
