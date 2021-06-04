@@ -319,6 +319,7 @@ function after_click(textStr, details) {
 			break;
 		case '浏览返回':
 			log('浏览返回');
+			back_way();
 			break;
 		case '浏览商品':
 			log('浏览商品');
