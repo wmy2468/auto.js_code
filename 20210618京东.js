@@ -456,16 +456,16 @@ function back_way() {
 		} else {
 			func.sClick(backBtn);
 		}
+		sleep(1300);
 		func.sClick(id('com.jd.lib.jshop:id/asj').findOnce());
 		func.sClick(id('com.jd.lib.jshop:id/fe').findOnce());
 		func.sClick(id('com.jd.lib.jshop.feature:id/gd').findOnce());
 		func.sClick(id('com.jd.lib.jshop.feature:id/mj').findOnce());
 		func.sClick(desc('关闭页面').findOnce());
 		func.sClick(idContains('close').findOnce());
-		sleep(1000);
+
+		sleep(500);
+		func.sClick(textContains('离开').findOnce());
+		func.sClick(textContains('知道了').findOnce());
+		log('返回');
 	}
-	sleep(800);
-	func.sClick(textContains('离开').findOnce());
-	func.sClick(textContains('知道了').findOnce());
-	log('返回');
-}
