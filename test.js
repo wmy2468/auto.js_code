@@ -5,4 +5,4 @@ var textPay = "待付款";
 var textAll = "全部";
 var moneyText;
 
-func.sClick(className("android.widget.ImageView").depth(11).findOne());
+func.cClick(textContains('离开').findOnce());
