@@ -344,20 +344,22 @@ function after_click(textStr, details) {
 		log('微信返回');
 		i = 10;
 		toastLog('跳转到小程序，等待20秒');
-		if (devBrand == 'HUAWEI') {
-			waitLog(8, '等待一会儿..跳转回JD');
-			func.toApp(appName);
-		} else if (devBrand == 'xiaomi') {
-			if (小米双开) {
-				waitLog(15, '等待一会儿..跳转回JD');
-				func.toAppMulti(appName, k);
+		if (currentPackage() != "com.jingdong.app.mall") {
+			if (devBrand == 'HUAWEI') {
+				waitLog(8, '等待一会儿..跳转回JD');
+				func.toApp(appName);
+			} else if (devBrand == 'xiaomi') {
+				if (小米双开) {
+					waitLog(15, '等待一会儿..跳转回JD');
+					func.toAppMulti(appName, k);
+				} else {
+					waitLog(15, '等待一会儿..跳转回JD');
+					func.toApp(appName);
+				}
 			} else {
 				waitLog(15, '等待一会儿..跳转回JD');
 				func.toApp(appName);
 			}
-		} else {
-			waitLog(15, '等待一会儿..跳转回JD');
-			func.toApp(appName);
 		}
 		sleep(2500);
 	}
