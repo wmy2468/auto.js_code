@@ -4,9 +4,5 @@ var func = require("func_list.js");
 var textPay = "待付款";
 var textAll = "全部";
 var moneyText;
-moneyText = id("com.bill.quickmoney:id/mon_").findOnce().text();
 
-scrollDown();
-sleep(1000);
-swipe(300, 850, 300, 60, 400);
-sleep(2000);
+func.sClick(className("android.widget.ImageView").depth(11).findOne());
