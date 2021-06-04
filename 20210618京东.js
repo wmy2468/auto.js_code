@@ -484,6 +484,7 @@ function back_way() {
 	func.sClick(desc('关闭页面').findOnce());
 	func.sClick(idContains('close').findOnce());
 	func.sClick(textContains('离开').findOnce());
+	func.sClick(textContains('放弃').findOnce());
 	func.sClick(textContains('知道了').findOnce());
 	log('返回');
 }
