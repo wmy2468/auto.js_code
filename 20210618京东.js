@@ -251,10 +251,6 @@ function clickComplete() {
 				// 正常任务
 				if (indexText.indexOf('秒') != -1) { nextStep = '等待8秒' }
 				// 详细描述校验，先校验小程序
-				else if (detailText.indexOf('小程序') != -1) { nextStepDetail = '小程序' }
-				else if (detailText.indexOf('去逛美妆护肤爆款会场') != -1) { nextStepDetail = '小程序' }
-				else if (detailText.indexOf('去逛京友圈') != -1) { nextStepDetail = '京友圈' }
-
 				else if (indexText.indexOf('浏览可得') != -1) { nextStep = '浏览返回' }
 				else if (indexText.indexOf('浏览并关注') != -1) { nextStep = '浏览返回' }
 				else if (indexText.indexOf('逛店可得') != -1) { nextStep = '浏览返回' }
@@ -262,6 +258,10 @@ function clickComplete() {
 				else if (indexText.indexOf('浏览5个') != -1) { nextStep = '浏览商品' }
 				else if (indexText.indexOf('加购5个') != -1) { nextStep = '加购物车' }
 				else if (indexText.indexOf('成功入会') != -1) { nextStep = '加入会员' }
+
+				if (detailText.indexOf('小程序') != -1) { nextStepDetail = '小程序' }
+				else if (detailText.indexOf('去逛美妆护肤爆款会场') != -1) { nextStepDetail = '小程序' }
+				else if (detailText.indexOf('去逛京友圈') != -1) { nextStepDetail = '京友圈' }
 
 				else {
 					index = index + 1;
@@ -304,30 +304,6 @@ function after_click(textStr, details) {
 			break;
 		case '浏览返回':
 			log('浏览返回');
-			// 判断是否被微信小程序跳转到了微信
-			if (details == '小程序') {
-				log('微信返回');
-				i = 10;
-				toastLog('跳转到小程序，等待20秒');
-				if (devBrand == 'HUAWEI') {
-					waitLog(8, '等待一会儿..跳转回JD');
-					func.toApp(appName);
-				} else if (devBrand == 'xiaomi') {
-					if (小米双开) {
-						waitLog(15, '等待一会儿..跳转回JD');
-						func.toAppMulti(appName, k);
-					} else {
-						waitLog(15, '等待一会儿..跳转回JD');
-						func.toApp(appName);
-					}
-				} else {
-					waitLog(15, '等待一会儿..跳转回JD');
-					func.toApp(appName);
-				}
-				sleep(2500);
-			} else {
-				back_way();
-			}
 			break;
 		case '浏览商品':
 			log('浏览商品');
@@ -346,6 +322,28 @@ function after_click(textStr, details) {
 			break;
 		default:
 			break;
+	}
+	// 判断是否被微信小程序跳转到了微信
+	if (details == '小程序') {
+		log('微信返回');
+		i = 10;
+		toastLog('跳转到小程序，等待20秒');
+		if (devBrand == 'HUAWEI') {
+			waitLog(8, '等待一会儿..跳转回JD');
+			func.toApp(appName);
+		} else if (devBrand == 'xiaomi') {
+			if (小米双开) {
+				waitLog(15, '等待一会儿..跳转回JD');
+				func.toAppMulti(appName, k);
+			} else {
+				waitLog(15, '等待一会儿..跳转回JD');
+				func.toApp(appName);
+			}
+		} else {
+			waitLog(15, '等待一会儿..跳转回JD');
+			func.toApp(appName);
+		}
+		sleep(2500);
 	}
 	log('等待返回');
 	if (selected == "每日任务" || selected == "金融领金币") {
