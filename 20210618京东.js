@@ -375,9 +375,14 @@ function after_click(textStr, details) {
 
 
 function waitCompleteDisappear() {
+	var cnt = 0;
 	while (textContains("邀请好友助力").findOnce() != null) {
 		sleep(800);
 		log("等待去完成消失");
+		cnt = cnt + 1;
+		if (cnt > 20) {
+			break;
+		}
 	}
 	toastLog("去完成已消失");
 	sleep(1000);
@@ -483,6 +488,7 @@ function back_way() {
 	func.sClick(id('com.jd.lib.jshop.feature:id/mj').findOnce());
 	func.sClick(desc('关闭页面').findOnce());
 	func.sClick(idContains('close').findOnce());
+	func.sClick(textContains('离开').findOnce());
 	func.sClick(textContains('我要离开').findOnce());
 	func.sClick(textContains('放弃').findOnce());
 	func.sClick(textContains('知道了').findOnce());
