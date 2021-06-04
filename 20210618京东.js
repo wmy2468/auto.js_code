@@ -429,9 +429,9 @@ function add_cart() {
 		sleep(1000);
 		while (textContains('点购物车加购5个商品').findOnce() == null) {
 			back();
-			sleep(800);
+			sleep(1500);
 		}
-		sleep(2000);
+		sleep(1000);
 		try {
 			childCnt = textContains('点购物车加购5个商品').findOnce().parent().childCount();
 			log("当前已加购数量：" + childCnt);
