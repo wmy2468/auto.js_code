@@ -251,32 +251,34 @@ function clickComplete() {
 
 				// 正常任务
 				if (indexText.indexOf('秒') != -1) {
-					nextStep = '等待8秒'
+					nextStep = '等待8秒';
 				} else if (indexText.indexOf('浏览可得') != -1) {
-					nextStep = '浏览返回'
+					nextStep = '浏览返回';
 				} else if (indexText.indexOf('浏览并关注') != -1) {
-					nextStep = '浏览返回'
+					nextStep = '浏览返回';
 				} else if (indexText.indexOf('逛店可得') != -1) {
-					nextStep = '浏览返回'
+					nextStep = '浏览返回';
 				} else if (indexText.indexOf('参与可得') != -1) {
-					nextStep = '参与返回'
+					nextStep = '参与返回';
 				} else if (indexText.indexOf('浏览5个') != -1) {
-					nextStep = '浏览商品'
+					nextStep = '浏览商品';
 				} else if (indexText.indexOf('加购5个') != -1) {
-					nextStep = '加购物车'
+					nextStep = '加购物车';
 				} else if (indexText.indexOf('成功入会') != -1) {
-					nextStep = '加入会员'
+					nextStep = '加入会员';
 				} else {
 					index = index + 1;
 					continue;
 				}
 				// 详细描述校验，校验小程序
 				if (detailText.indexOf('小程序') != -1) {
-					nextStepDetail = '小程序'
+					nextStepDetail = '小程序';
 				} else if (detailText.indexOf('去逛美妆护肤爆款会场') != -1) {
+					nextStepDetail = '小程序';
+				} else if (detailText.indexOf('限时抢9.9元爆品') != -1) {
 					nextStepDetail = '小程序'
 				} else if (detailText.indexOf('去逛京友圈') != -1) {
-					nextStepDetail = '京友圈'
+					nextStepDetail = '京友圈';
 				}
 
 
