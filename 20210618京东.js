@@ -473,7 +473,7 @@ function back_way() {
 			func.sClick(backBtn);
 		}
 	}
-	sleep(1500);
+	sleep(2000);
 	if (textContains('邀请好友助力').findOnce() == null) {
 		func.sClick(className("android.widget.ImageView").depth(11).findOnce());
 	}
