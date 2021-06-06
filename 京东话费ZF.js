@@ -70,8 +70,8 @@ function hwzhifu() {
             sleep(1000);
             back();
             log(text("查看订单").findOne());
-            if (text("立即抽奖").findOnce()) {
-                sleep(2000);
+            if (func.sClick(text("立即抽奖").findOnce())) {
+                sleep(8000);
                 back();
                 // 待付款滑动栏
                 textContains(textPay).findOne();
@@ -117,8 +117,8 @@ function weiXinn() {
             }
             text("完成").findOne();
         }
-        if (text("立即抽奖").findOnce()) {
-            sleep(2000);
+        if (func.sClick(text("立即抽奖").findOnce())) {
+            sleep(8000);
             back();
             // 待付款滑动栏
             textContains(textPay).findOne();
