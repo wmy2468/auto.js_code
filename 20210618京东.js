@@ -364,9 +364,10 @@ function after_click(textStr, details) {
 				func.toApp(appName);
 			}
 		}
-		sleep(2500);
+
 	}
 	// 返回
+	sleep(3500);
 	back_way();
 	log('等待返回');
 	if (selected == "每日任务" || selected == "金融领金币") {
