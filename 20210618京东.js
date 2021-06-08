@@ -313,8 +313,8 @@ function after_click(textStr, details) {
 			cnt = 1;
 			log('等待8秒');
 			waitCompleteDisappear();
-			// 等待10秒 应该完成了
-			sleep(10000);
+			// 等待11秒 应该完成了
+			sleep(11000);
 			back_way();
 			break;
 		case '浏览返回':
@@ -492,5 +492,6 @@ function back_way() {
 	func.sClick(textContains('我要离开').findOnce());
 	func.sClick(textContains('放弃').findOnce());
 	func.sClick(textContains('知道了').findOnce());
+	func.sClick(textContains('待会再来').findOnce());
 	log('返回');
 }
