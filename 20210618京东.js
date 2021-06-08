@@ -277,7 +277,7 @@ function clickComplete() {
 					nextStepDetail = '小程序';
 				} else if (detailText.indexOf('限时抢9.9元爆品') != -1) {
 					nextStepDetail = '小程序'
-				} else if (detailText.indexOf('金融') != -1) {
+				} else if (detailText.indexOf('金融神券') != -1) {
 					nextStepDetail = '金融'
 				} else if (detailText.indexOf('去逛京友圈') != -1) {
 					nextStepDetail = '京友圈';
