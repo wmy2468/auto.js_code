@@ -343,6 +343,7 @@ function after_click(textStr, details) {
 		if (currentPackage() != "com.jingdong.app.mall") {
 			func.toApp(appName);
 		}
+		sleep(3000);
 	} else if (details == '小程序') {
 		log('微信返回');
 		i = 10;
@@ -364,11 +365,11 @@ function after_click(textStr, details) {
 				func.toApp(appName);
 			}
 		}
-
+		sleep(3000);
+	} else {
+		// 返回
+		back_way();
 	}
-	// 返回
-	sleep(3500);
-	back_way();
 	log('等待返回');
 	if (selected == "每日任务" || selected == "金融领金币") {
 		textContains('邀请好友助力').waitFor();
