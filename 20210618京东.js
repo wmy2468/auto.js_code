@@ -277,6 +277,8 @@ function clickComplete() {
 					nextStepDetail = '小程序';
 				} else if (detailText.indexOf('限时抢9.9元爆品') != -1) {
 					nextStepDetail = '小程序'
+				} else if (detailText.indexOf('金融') != -1) {
+					nextStepDetail = '金融'
 				} else if (detailText.indexOf('去逛京友圈') != -1) {
 					nextStepDetail = '京友圈';
 				}
@@ -338,6 +340,14 @@ function after_click(textStr, details) {
 			break;
 		default:
 			break;
+	}
+	if (details == '金融') {
+		log("金融返回");
+		back();
+		sleep(2000);
+		if (currentPackage() != "com.jingdong.app.mall") {
+			func.toApp(appName);
+		}
 	}
 	// 判断是否被微信小程序跳转到了微信
 	if (details == '小程序') {
