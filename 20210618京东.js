@@ -309,7 +309,6 @@ function after_click(textStr, details) {
 			log('参与返回');
 			waitCompleteDisappear();
 			sleep(2000);
-			back_way();
 			break;
 		case '等待8秒':
 			cnt = 1;
@@ -317,30 +316,26 @@ function after_click(textStr, details) {
 			waitCompleteDisappear();
 			// 等待11秒 应该完成了
 			sleep(11000);
-			back_way();
 			break;
 		case '浏览返回':
 			log('浏览返回');
-			back_way();
 			break;
 		case '浏览商品':
 			log('浏览商品');
 			view_list();
-			back_way();
 			break;
 		case '加购物车':
 			log('加购物车');
 			add_cart();
-			back_way();
 			break;
 		case '加入会员':
 			log('加入会员');
 			member_card();
-			back_way();
 			break;
 		default:
 			break;
 	}
+	// 确保已经切换回京东APP
 	if (details == '金融') {
 		log("金融返回");
 		back();
@@ -348,9 +343,7 @@ function after_click(textStr, details) {
 		if (currentPackage() != "com.jingdong.app.mall") {
 			func.toApp(appName);
 		}
-	}
-	// 判断是否被微信小程序跳转到了微信
-	if (details == '小程序') {
+	} else if (details == '小程序') {
 		log('微信返回');
 		i = 10;
 		toastLog('跳转到小程序，等待20秒');
@@ -373,6 +366,8 @@ function after_click(textStr, details) {
 		}
 		sleep(2500);
 	}
+	// 返回
+	back_way();
 	log('等待返回');
 	if (selected == "每日任务" || selected == "金融领金币") {
 		textContains('邀请好友助力').waitFor();
