@@ -226,8 +226,7 @@ function clickComplete() {
 				log("去完成索引为：" + unCompleteIdx);
 				indexText = unComplete[index].parent().child(unCompleteIdx - 1).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
 				detailText = unComplete[index].parent().child(unCompleteIdx - 2).text();
-				toastLog(indexText);
-				log(detailText);
+				log(indexText);
 				if (indexText.indexOf('扩大商圈可得') != -1) {
 					index = index + 1;
 					continue;
@@ -283,6 +282,8 @@ function clickComplete() {
 					nextStepDetail = '京友圈';
 				} else if (detailText.indexOf('京享值PK赢') != -1) {
 					nextStepDetail = '金融2次返回';
+				} else if (detailText.indexOf('领百亿购物金') != -1) {
+					nextStepDetail = '20秒等待';
 				}
 
 
@@ -338,7 +339,13 @@ function after_click(textStr, details) {
 			break;
 	}
 	// 确保已经切换回京东APP
-	if (details == '金融2次返回') {
+
+	if (details == '20秒等待') {
+		toastLog("加载巨慢额外等待10秒");
+		sleep(10000);
+		back_way();
+	}
+	else if (details == '金融2次返回') {
 		log("金融返回");
 		back_way();
 		sleep(2000);
