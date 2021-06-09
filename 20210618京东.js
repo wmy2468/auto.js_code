@@ -129,7 +129,7 @@ function checkPopUp() {
 
 
 function 图鉴() {
-	func.sClick(text('下拉有惊喜').findOne().parent().child(5));
+	func.sClick(text('下拉有惊喜').findOne().parent().child(4));
 	sleep(2000);
 	text('已经解锁：').waitFor();
 	log('宠物图鉴已加载');
@@ -226,7 +226,7 @@ function clickComplete() {
 				log("去完成索引为：" + unCompleteIdx);
 				indexText = unComplete[index].parent().child(unCompleteIdx - 1).text();	//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
 				detailText = unComplete[index].parent().child(unCompleteIdx - 2).text();
-				log(indexText);
+				log("indexText：" + indexText);
 				if (indexText.indexOf('扩大商圈可得') != -1) {
 					index = index + 1;
 					continue;
@@ -289,6 +289,7 @@ function clickComplete() {
 
 				func.sClick(unComplete[index]);
 				log("nextStep：" + nextStep);
+				log("nextStepDetail：" + nextStepDetail);
 				toastLog("detailText：" + detailText);
 				sleep(1500);
 				after_click(nextStep, nextStepDetail);
@@ -499,11 +500,11 @@ function back_way() {
 			}
 		}
 		sleep(2000);
-		if (textContains('邀请好友助力').findOnce() == null) {
-			func.sClick(className("android.widget.ImageView").depth(11).findOnce());
-		}
-		func.sClick(id('com.jd.lib.jshop:id/asj').findOnce());
+		// if (textContains('邀请好友助力').findOnce() == null) {
+		// 	func.sClick(className("android.widget.ImageView").depth(11).findOnce());
+		// }
 		// func.sClick(id('com.jd.lib.jshop:id/fe').findOnce());
+		func.sClick(id('com.jd.lib.jshop:id/asj').findOnce());
 		func.sClick(id('com.jd.lib.jshop.feature:id/gd').findOnce());
 		func.sClick(id('com.jd.lib.jshop.feature:id/mj').findOnce());
 		func.sClick(desc('关闭页面').findOnce());

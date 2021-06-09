@@ -23,10 +23,26 @@ function cClick(element) {
 function sClick(element) {
     if (element != null) {
         if (element.click()) {
-            log("sClick" + element.text());
+            if (element.text() != null && element.text() != "") {
+                log("sClick_center_text: " + element.text());
+            } else if (element.desc() != null && element.desc() != "") {
+                log("sClick_center_desc: " + element.desc());
+            } else if (element.id() != null && element.id() != "") {
+                log("sClick_center_id: " + element.id());
+            } else {
+                log("sClick_center: text/desc/id all empty");
+            }
         } else {
             click(element.bounds().centerX(), element.bounds().centerY());
-            log("sClick_center: " + element.text());
+        }
+        if (element.text() != null && element.text() != "") {
+            log("sClick_text: " + element.text());
+        } else if (element.desc() != null && element.desc() != "") {
+            log("sClick_desc: " + element.desc());
+        } else if (element.id() != null && element.id() != "") {
+            log("sClick_id: " + element.id());
+        } else {
+            log("sClick: text/desc/id all empty");
         }
         return true;
     }
