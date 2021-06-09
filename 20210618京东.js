@@ -288,7 +288,7 @@ function clickComplete() {
 
 				func.sClick(unComplete[index]);
 				log("nextStep：" + nextStep);
-				toastLog("detailText" + detailText);
+				toastLog("detailText：" + detailText);
 				sleep(1500);
 				after_click(nextStep, nextStepDetail);
 			}
