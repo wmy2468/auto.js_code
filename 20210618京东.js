@@ -494,7 +494,7 @@ function back_way() {
 			func.sClick(className("android.widget.ImageView").depth(11).findOnce());
 		}
 		func.sClick(id('com.jd.lib.jshop:id/asj').findOnce());
-		func.sClick(id('com.jd.lib.jshop:id/fe').findOnce());
+		// func.sClick(id('com.jd.lib.jshop:id/fe').findOnce());
 		func.sClick(id('com.jd.lib.jshop.feature:id/gd').findOnce());
 		func.sClick(id('com.jd.lib.jshop.feature:id/mj').findOnce());
 		func.sClick(desc('关闭页面').findOnce());
