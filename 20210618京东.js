@@ -278,15 +278,17 @@ function clickComplete() {
 				} else if (detailText.indexOf('限时抢9.9元爆品') != -1) {
 					nextStepDetail = '小程序'
 				} else if (detailText.indexOf('金融神券') != -1) {
-					nextStepDetail = '金融'
+					nextStepDetail = '金融2次返回'
 				} else if (detailText.indexOf('去逛京友圈') != -1) {
 					nextStepDetail = '京友圈';
+				} else if (detailText.indexOf('京享值PK赢') != -1) {
+					nextStepDetail = '金融2次返回';
 				}
 
 
 				func.sClick(unComplete[index]);
-				toastLog(nextStep);
-				log(nextStepDetail);
+				log("nextStep：" + nextStep);
+				toastLog("nextStepDetail：" + nextStepDetail);
 				sleep(1500);
 				after_click(nextStep, nextStepDetail);
 			}
@@ -336,7 +338,7 @@ function after_click(textStr, details) {
 			break;
 	}
 	// 确保已经切换回京东APP
-	if (details == '金融') {
+	if (details == '金融2次返回') {
 		log("金融返回");
 		back_way();
 		sleep(2000);
