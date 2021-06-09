@@ -2,4 +2,4 @@
 var func = require("func_list.js");
 //test on laptop
 
-log(textContains('待会再来').findOnce().click());
+log(className("android.view.View").text("立即购买").findOne().click());

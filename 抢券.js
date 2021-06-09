@@ -10,7 +10,8 @@ function main() {
         "中信活动",
         "工行活动",
         // "交行9点5积分",
-        "京东腾讯月"
+        "京东腾讯月",
+        "京东支付券"
     ];
 
     //---------------配置区域-----------------
@@ -35,6 +36,10 @@ function main() {
             break;
         case "京东腾讯月":
             京东腾讯月();
+            break;
+        case "京东支付券":
+            toastLog("已启动，请切换到京东APP");
+            className("android.view.View").text("立即购买").findOne().click();
             break;
     }
     toastLog("结束");

@@ -338,16 +338,18 @@ function after_click(textStr, details) {
 	// 确保已经切换回京东APP
 	if (details == '金融') {
 		log("金融返回");
-		back();
+		back_way();
 		sleep(2000);
 		if (currentPackage() != "com.jingdong.app.mall") {
 			func.toApp(appName);
 		}
 		sleep(3000);
+		back_way();
 	} else if (details == '小程序') {
 		log('微信返回');
 		i = 10;
 		toastLog('跳转到小程序，等待20秒');
+		sleep(3000);
 		if (currentPackage() != "com.jingdong.app.mall") {
 			if (devBrand == 'HUAWEI') {
 				waitLog(8, '等待一会儿..跳转回JD');
@@ -365,7 +367,7 @@ function after_click(textStr, details) {
 				func.toApp(appName);
 			}
 		}
-		sleep(3000);
+
 	} else {
 		// 返回
 		back_way();
@@ -475,30 +477,35 @@ function add_cart() {
 
 function back_way() {
 	sleep(800);
-	var backBtn = desc('返回').findOnce();
-	if (backBtn == null) {
-		back();
-	} else {
-		if (backBtn.clickable()) {
-			backBtn.click();
+	if (textContains('去完成').findOnce() == null && (textContains('邀请好友助力').findOnce() == null
+		|| textContains('每日签到').findOnce() == null)) {
+		var backBtn = desc('返回').findOnce();
+		if (backBtn == null) {
+			back();
 		} else {
-			func.sClick(backBtn);
+			if (backBtn.clickable()) {
+				backBtn.click();
+			} else {
+				func.sClick(backBtn);
+			}
 		}
+		sleep(2000);
+		if (textContains('邀请好友助力').findOnce() == null) {
+			func.sClick(className("android.widget.ImageView").depth(11).findOnce());
+		}
+		func.sClick(id('com.jd.lib.jshop:id/asj').findOnce());
+		func.sClick(id('com.jd.lib.jshop:id/fe').findOnce());
+		func.sClick(id('com.jd.lib.jshop.feature:id/gd').findOnce());
+		func.sClick(id('com.jd.lib.jshop.feature:id/mj').findOnce());
+		func.sClick(desc('关闭页面').findOnce());
+		func.sClick(idContains('close').findOnce());
+		func.sClick(textContains('离开').findOnce());
+		func.sClick(textContains('我要离开').findOnce());
+		func.sClick(textContains('放弃').findOnce());
+		func.sClick(textContains('知道了').findOnce());
+		func.sClick(textContains('待会再来').findOnce());
+		log('返回');
+	} else {
+		log("已在去完成界面");
 	}
-	sleep(2000);
-	if (textContains('邀请好友助力').findOnce() == null) {
-		func.sClick(className("android.widget.ImageView").depth(11).findOnce());
-	}
-	func.sClick(id('com.jd.lib.jshop:id/asj').findOnce());
-	func.sClick(id('com.jd.lib.jshop:id/fe').findOnce());
-	func.sClick(id('com.jd.lib.jshop.feature:id/gd').findOnce());
-	func.sClick(id('com.jd.lib.jshop.feature:id/mj').findOnce());
-	func.sClick(desc('关闭页面').findOnce());
-	func.sClick(idContains('close').findOnce());
-	func.sClick(textContains('离开').findOnce());
-	func.sClick(textContains('我要离开').findOnce());
-	func.sClick(textContains('放弃').findOnce());
-	func.sClick(textContains('知道了').findOnce());
-	func.sClick(textContains('待会再来').findOnce());
-	log('返回');
 }
