@@ -2,4 +2,4 @@
 var func = require("func_list.js");
 //test on laptop
 
-toastLog(textContains("可抵").findOnce());
+log(descContains("上限").findOnce());

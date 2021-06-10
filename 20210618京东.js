@@ -157,14 +157,15 @@ function 图鉴() {
 				zooAnimals[idx].click();
 				sleep(2000);
 			}
+
 			toastLog("正在完成第：" + (idx + 1) + "/" + zooAnimals.length + " 个");
 			sleep(1500);
 			if (text('去完成').findOnce() == null) {
 				toastLog('检测到当前任务已经完成，下一个');
 				back();
 				sleep(1500);
+				break;
 			} else {
-				log("图鉴click");
 				图鉴Click();
 				back();
 				sleep(1500);
@@ -177,9 +178,9 @@ function 图鉴() {
 				zooAnimals = textContains(".png").find();
 			}
 		}
+		cnt = cnt - 1;
+		idx = 0;
 	}
-	cnt = cnt - 1;
-	idx = 0;
 }
 
 
@@ -187,6 +188,7 @@ function 图鉴Click(i) {
 	log('图鉴Click');
 	text('去完成').findOne();
 	clickComplete();
+	log('图鉴Click_complete');
 }
 
 
@@ -315,7 +317,7 @@ function after_click(textStr, details) {
 			sleep(2000);
 			break;
 		case '等待8秒':
-			cnt = 1;
+			cnt = 11;
 			log('等待8秒');
 			waitCompleteDisappear();
 			// 等待11秒 应该完成了
@@ -399,7 +401,7 @@ function waitCompleteDisappear() {
 		sleep(800);
 		log("等待去完成消失");
 		cnt = cnt + 1;
-		if (cnt > 20) {
+		if (cnt > 10) {
 			break;
 		}
 	}
