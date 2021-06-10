@@ -70,12 +70,15 @@ function hwzhifu() {
             sleep(1000);
             back();
             log(text("查看订单").findOne());
-            if (func.sClick(text("立即抽奖").findOnce())) {
-                sleep(8000);
-                back();
-                // 待付款滑动栏
-                textContains(textPay).findOne();
-            }
+
+            sleep(8000);
+            back();
+            // if (func.sClick(text("立即抽奖").findOnce())) {
+            //     sleep(8000);
+            //     back();
+            //     // 待付款滑动栏
+            //     textContains(textPay).findOne();
+            // }
         }
         // text("待付款").findOne();
     }
@@ -117,12 +120,15 @@ function weiXinn() {
             }
             text("完成").findOne();
         }
-        if (func.sClick(text("立即抽奖").findOnce())) {
-            sleep(8000);
-            back();
-            // 待付款滑动栏
-            textContains(textPay).findOne();
-        }
+        sleep(8000);
+        back();
+
+        // if (func.sClick(text("立即抽奖").findOnce())) {
+        //     sleep(8000);
+        //     back();
+        //     // 待付款滑动栏
+        //     textContains(textPay).findOne();
+        // }
         // text("待付款").findOne();
     }
 }
