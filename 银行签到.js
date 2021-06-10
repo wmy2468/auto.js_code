@@ -226,7 +226,7 @@ function jd_sign() {
     var getBeans = className("TextView").text("领京豆").findOne();
     func.sClick(getBeans.parent());
     // 等待页面加载
-    text("购物返豆").findOne();
+    textContains("可抵").findOne();
     sleep(800);
 
     while (textContains("已连").findOnce() == null) {
