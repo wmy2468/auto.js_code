@@ -202,7 +202,7 @@ function 中信活动() {
             couDes = ["星巴克中杯饮品电子券", "奈雪", "喜茶25元", "苏宁支付券20元", "京东支付券20元", "天猫20元", "滴滴出行20元", "美团外卖20元"];
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             launchApp(appName);             // 启动APP
-            var couClick = textContains(targetViewText).findOnce();          // 找券
+            var couClick = null;          // 找券
             while (couClick == null) {
                 if (couDes == "星巴克中杯饮品电子券") {
                     couClick = text(targetViewText).findOnce();          // 找券
