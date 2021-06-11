@@ -119,7 +119,7 @@ function weiXinn() {
         }
         //if (func.sClick(text("立即抽奖").findOnce())) {
         if (text("立即抽奖").findOnce()) {
-            sleep(5000);
+            sleep(8000);
             back();
             // 待付款滑动栏
             textContains(textPay).findOne();
