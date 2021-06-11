@@ -38,8 +38,10 @@ function main() {
             京东腾讯月();
             break;
         case "京东支付券":
-            toastLog("已启动，请切换到京东APP");
-            className("android.view.View").text("立即购买").findOne().click();
+            toastLog("已启动，请切换到京东金融APP");
+            while (func.sClick(text("立即购买").findOnce()) == false) {
+                sleep(100);
+            }
             break;
     }
     toastLog("结束");
@@ -220,8 +222,12 @@ function 中信活动() {
             text(targetViewText).findOne();             // 等待进入指定页面
             toastLog("已到达指定页面，等待");
             //点击元素
-            func.sClick(className("android.view.View").text("去兑换").findOne());
-            func.sClick(className("android.view.View").text("去支付").findOne());
+            while (func.sClick(text("去兑换").findOnce()) == false) {
+                sleep(100);
+            }
+            while (func.sClick(text("去支付").findOnce()) == false) {
+                sleep(100);
+            }
             toastLog("已点击，等待验证码");
             sleep(3000);
             break;
