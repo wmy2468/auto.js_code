@@ -5,13 +5,17 @@ var func = require("func_list.js");
 main();
 
 function main() {
-    var title = text("话费充值").findOne();
+    func.toApp("京东");
+    while (text("话费充值").findOnce() == null) {
+        toastLog("请打开 全部订单 界面");
+        sleep(2000);
+    }
     toastLog("已跳转到页面");
-    var delBtn;
+    var delBtn, title;
     while (1) {
         try {
             title = text("话费充值").findOnce();
-            delParent = title.parent().parent().parent();
+            delParent = title.parent().parent().parent().parent();
             if (delParent.childCount() == 2) {
                 delBtn = delParent.child(1).child(2);
             } else {
