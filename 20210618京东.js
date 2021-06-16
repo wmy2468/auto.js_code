@@ -286,6 +286,8 @@ function clickComplete() {
 					nextStepDetail = '金融2次返回';
 				} else if (detailText.indexOf('领百亿购物金') != -1) {
 					nextStepDetail = '20秒等待';
+				} else {
+					nextStepDetail = '无';
 				}
 
 
@@ -347,8 +349,7 @@ function after_click(textStr, details) {
 		toastLog("加载巨慢额外等待10秒");
 		sleep(10000);
 		back_way();
-	}
-	else if (details == '金融2次返回') {
+	} else if (details == '金融2次返回') {
 		log("金融返回");
 		back_way();
 		sleep(2000);
@@ -379,19 +380,27 @@ function after_click(textStr, details) {
 				func.toApp(appName);
 			}
 		}
-
 	} else {
 		// 返回
 		back_way();
+		sleep(4000);
 	}
+
 	log('等待返回');
 	if (selected == "每日任务" || selected == "金融领金币") {
+		if (textContains('邀请好友助力').findOnce() == null) {
+			back();
+			sleep(3000);
+		}
 		textContains('邀请好友助力').waitFor();
 	} else {
-		textContains('每日签到').waitFor();
+		if (textContains('每日签到').findOnce() == null) {
+			back();
+			sleep(3000);
+			textContains('每日签到').waitFor();
+		}
 	}
 	log('已返回');
-	sleep(3000);
 }
 
 
