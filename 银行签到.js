@@ -323,6 +323,8 @@ function 买单吧() {
             func.gesture_pwd(appName);
             sleep(1000);
         }
+        // 点击完成按钮
+        func.sClick(id("com.bankcomm.maidanba:id/bt_ws_lottery_close").findOnce());
     }
     toastLog(appName + "已签到");
     sleep(1000);
