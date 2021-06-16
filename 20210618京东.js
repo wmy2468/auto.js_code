@@ -383,23 +383,18 @@ function after_click(textStr, details) {
 	} else {
 		// 返回
 		back_way();
-		sleep(4000);
+		sleep(3000);
 	}
 
 	log('等待返回');
 	if (selected == "每日任务" || selected == "金融领金币") {
-		if (textContains('邀请好友助力').findOnce() == null) {
-			back();
-			sleep(3000);
-		}
-		textContains('邀请好友助力').waitFor();
+		if (textContains('邀请好友助力').findOnce() == null) { back_way(); }
+		textContains('邀请好友助力').findOne();
 	} else {
-		if (textContains('每日签到').findOnce() == null) {
-			back();
-			sleep(3000);
-			textContains('每日签到').waitFor();
-		}
+		if (textContains('每日签到').findOnce() == null) { back_way(); }
+		textContains('每日签到').findOne();
 	}
+	sleep(1000);
 	log('已返回');
 }
 
