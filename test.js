@@ -2,4 +2,4 @@
 var func = require("func_list.js");
 //test on laptop
 
-log(descContains("上限").findOnce());
+func.sClick(text('下拉有惊喜').findOne().parent().child(5));

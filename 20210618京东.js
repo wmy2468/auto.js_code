@@ -129,7 +129,7 @@ function checkPopUp() {
 
 
 function 图鉴() {
-	func.sClick(text('下拉有惊喜').findOne().parent().child(4));
+	func.sClick(text('下拉有惊喜').findOne().parent().child(5));
 	sleep(2000);
 	text('已经解锁：').waitFor();
 	log('宠物图鉴已加载');
