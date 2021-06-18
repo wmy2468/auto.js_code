@@ -18,7 +18,36 @@ if (result == "weiXinn") {
     func.toApp("京东");
     weiXinn();
 } else if (result == "YunShaofu") {
-    cardEndNumber = func.dialogsWin(["2079", "5177", "8589", "8636", "4471", "1729", "5976"]);
+    var cardName = func.dialogsWin(["JJ-中信", "LP-中信", "华夏", "JJ-京东红卡", "浦发", "交通", "LM-中行", "邮储", "JJ-建行"]);
+    switch (cardName) {
+        case "JJ-中信":
+            cardEndNumber = "2079"
+            break;
+        case "LP-中信":
+            cardEndNumber = "5177"
+            break;
+        case "华夏":
+            cardEndNumber = "8589"
+            break;
+        case "浦发":
+            cardEndNumber = "8636"
+            break;
+        case "交通":
+            cardEndNumber = "4471"
+            break;
+        case "JJ-京东红卡":
+            cardEndNumber = "2743"
+            break;
+        case "邮储":
+            cardEndNumber = "3780"
+            break;
+        case "JJ-建行":
+            cardEndNumber = "5135"
+            break;
+        case "LM-中行":
+            cardEndNumber = "5976"
+            break;
+    }
     func.toApp("京东");
     hwzhifu();
 }
