@@ -10,9 +10,10 @@ function main() {
         "中信活动",
         "工行活动",
         // "交行9点5积分",
-        "京东腾讯月",
+        // "京东腾讯月",
         "京东支付券",
-        "掌上生活"
+        "掌上生活",
+        "农行缴费20-10"
     ];
 
     //---------------配置区域-----------------
@@ -38,6 +39,9 @@ function main() {
         case "京东腾讯月":
             京东腾讯月();
             break;
+        case "农行缴费20-10":
+            农行缴费();
+            break;
         case "京东支付券":
             toastLog("已启动，请切换到京东金融APP");
             while (func.sClick(text("立即购买").findOnce()) == false) {
@@ -49,6 +53,35 @@ function main() {
     device.cancelKeepingAwake();
 }
 // ------------------------------------------------------
+
+function 农行缴费() {
+    var startTime, targetViewText;
+    var appName = "云闪付";
+    var timeArea = "北京时间";
+    toastLog("到点点击");
+    startTime = "09,59,59,700";
+    targetViewText = "[6179]";
+    launchApp(appName);
+    // 等待进入指定页面
+    var card = textContains(targetViewText).findOnce();
+    while (card == null) {
+        card = textContains(targetViewText).findOnce();
+        toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
+        sleep(800);
+    }
+    toastLog("已到达指定页面，等待");
+    //  等待倒计时
+    func.getTimeDiff(timeArea, startTime);
+    // 点击进入 等待
+    func.sClick(card);
+    while (1) {
+        if (text('¥10.00').findOnce()) {
+            func.sClick(text("确认付款").findOnce());
+        } else {
+            sleep(50);
+        }
+    }
+}
 
 
 function 掌上生活活动() {
