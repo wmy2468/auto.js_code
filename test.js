@@ -2,4 +2,4 @@
 var func = require("func_list.js");
 //test on laptop
 
-func.sClick(text('下拉有惊喜').findOne().parent().child(5));
+toastLog(text('（周三5折）肯德基20元全场通兑代金券').findOnce());

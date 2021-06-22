@@ -11,7 +11,8 @@ function main() {
         "工行活动",
         // "交行9点5积分",
         "京东腾讯月",
-        "京东支付券"
+        "京东支付券",
+        "掌上生活"
     ];
 
     //---------------配置区域-----------------
@@ -28,8 +29,8 @@ function main() {
         case "工行活动":
             工行活动();
             break;
-        case "掌上星巴克":
-            掌上星巴克();
+        case "掌上生活":
+            掌上生活活动();
             break;
         case "交行9点5积分":
             交行9点5积分();
@@ -48,6 +49,73 @@ function main() {
     device.cancelKeepingAwake();
 }
 // ------------------------------------------------------
+
+
+function 掌上生活活动() {
+    var startTime, targetViewText;
+    var actNames = ["周三五折", "10点拼团星巴克"];
+    var actName = func.dialogsWin(actNames);      // 设置查找的文本
+    var appName = "掌上生活";
+    var timeArea = "北京时间";
+    switch (actName) {
+        // 10点
+        case "周三五折":            //10点
+            toastLog("提前10秒进入");
+            startTime = "09,59,50,000";
+            targetViewText = func.dialogsWin(["（周三5折）喜茶20元代金券",
+                "（周三5折）必胜客50元代金券",
+                "（周三5折）肯德基20元全场通兑代金券"]);
+            launchApp(appName);
+            // 等待进入指定页面
+            while (!text(targetViewText).findOnce()) {
+                toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
+                sleep(800);
+            }
+            toastLog("已到达指定页面，等待");
+            //  提前10秒 开始查找
+            func.getTimeDiff(timeArea, startTime);
+            // 点击进入 等待
+            func.sClick(text(targetViewText).findOne());
+            while (1) {
+                if (!func.sClick(textContains("立即抢购").findOnce())) {
+                    sleep(200);
+                } else {
+                    break;
+                }
+            }
+            break;
+        case "10点拼团星巴克":            //10点
+            toastLog("提前10秒开始查找");
+            startTime = "09,59,50,000";
+            targetViewText = "星巴克中杯手工调制饮品";
+            launchApp(appName);
+            // 等待进入指定页面
+            while (!text(targetViewText).findOnce()) {
+                toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
+                sleep(800);
+            }
+            toastLog("已到达指定页面，等待");
+            //  提前10秒 开始查找
+            func.getTimeDiff(timeArea, startTime);
+            var clickBtn;
+            while (1) {
+                try {
+                    clickBtn = text(targetViewText).findOnce().parent().child(8).child(0);
+                    if (clickBtn.text() == "立即抢") {
+                        // 点击立即抢
+                        clickBtn.click();
+                        break;
+                    } else {
+                        sleep(200);
+                    }
+                }
+                catch (e) { continue; }
+            }
+            break;
+    }
+    toastLog("已点击，请确认结果");
+    sleep(3000);
+}
 
 // 到点点击
 function 光大活动() {
@@ -341,7 +409,7 @@ function 京东腾讯月() {
 function 工行活动() {
     var appName = "工银e生活";
     var timeArea = "北京时间";
-    var startTime = "10,29,59,700";
+    var startTime = "10,29,59,680";
     couName = "确定"
     launchApp(appName);             // 启动APP
     // 找到使用流程，且找到对应券名称沃尔玛的情况下就是 券的详情页
