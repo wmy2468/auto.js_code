@@ -90,11 +90,12 @@ function 掌上生活活动() {
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
     var appName = "掌上生活";
     var timeArea = "北京时间";
+    var cnt = 3;
     switch (actName) {
         // 10点
         case "周三五折":            //10点
-            toastLog("提前10秒进入");
-            startTime = "09,59,50,000";
+            toastLog("提前5秒进入");
+            startTime = "09,59,55,000";
             targetViewText = func.dialogsWin(["（周三5折）喜茶20元代金券",
                 "（周三5折）必胜客50元代金券",
                 "（周三5折）肯德基20元全场通兑代金券"]);
@@ -119,7 +120,7 @@ function 掌上生活活动() {
             break;
         case "10点拼团星巴克":            //10点
             toastLog("提前10秒开始查找");
-            startTime = "09,59,50,000";
+            startTime = "09,59,59,700";
             targetViewText = "星巴克中杯手工调制饮品";
             launchApp(appName);
             // 等待进入指定页面
@@ -134,13 +135,13 @@ function 掌上生活活动() {
             while (1) {
                 try {
                     clickBtn = text(targetViewText).findOnce().parent().child(8).child(0);
-                    if (clickBtn.text() == "立即抢") {
-                        // 点击立即抢
+                    // 点击立即抢
+                    while (cnt > 0) {
                         clickBtn.click();
-                        break;
-                    } else {
                         sleep(200);
+                        cnt = cnt - 1;
                     }
+                    break;
                 }
                 catch (e) { continue; }
             }
