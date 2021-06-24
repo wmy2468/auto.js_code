@@ -169,6 +169,7 @@ function weiXinn() {
             toastLog("...等待显示完成...");
             sleep(3000);
             text("完成").findOne();
+            toastLog("...已完成...");
             sleep(2000);
         }
         //if (func.sClick(text("立即抽奖").findOnce())) {
@@ -177,6 +178,8 @@ function weiXinn() {
             back();
             // 待付款滑动栏
             textContains(textPay).findOne();
+            toastLog("...等待下一单...");
+            sleep(5000);
             toastLog("...等待下一单...");
             sleep(5000);
             toastLog("...等待下一单...");
