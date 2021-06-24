@@ -180,6 +180,10 @@ function weiXinn() {
         };
         toastLog("...等待下一单...");
         sleep(5000);
+        toastLog("...等待下一单...");
+        sleep(5000);
+        toastLog("...等待下一单...");
+        sleep(5000);
     }
 }
 
