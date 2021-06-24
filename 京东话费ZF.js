@@ -98,7 +98,7 @@ function hwzhifu() {
             toastLog("...等待输入MM...");
             sleep(3000);
             for (var i = 0; i < pwds.length; i++) {
-                func.sClick(text(pwds[i]).findOnce());
+                func.cClick(text(pwds[i]).findOnce());
                 sleep(1200);
             }
             text("支付成功").findOne();
