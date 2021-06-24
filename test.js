@@ -2,15 +2,7 @@
 var func = require("func_list.js");
 //test on laptop
 
-inputPwd(6);
-sleep(500);
-inputPwd(7);
-sleep(500);
-inputPwd(8);
-sleep(500);
-inputPwd(9);
-sleep(500);
-inputPwd(0);
+func.sClick(text("稍后再说").findOnce());
 
 function inputPwd(number) {
     var centerX = 540, centerY = 1952;

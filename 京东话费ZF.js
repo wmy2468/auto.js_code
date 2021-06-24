@@ -129,6 +129,7 @@ function weiXinn() {
         if (text(textBar).findOnce() != null) {
             log("find the bar");
             func.sClick(textContains("微信支付").findOne());
+            toastLog("...等待跳转微信...");
             sleep(500);
             func.sClick(className("android.widget.TextView").depth(12).text("微信支付").findOne());
             if (device.brand == "HUAWEI") {
@@ -153,13 +154,19 @@ function weiXinn() {
                 func.sClick(text("确认支付").findOnce());
                 sleep(800);
             }
+            toastLog("...等待输入...");
             sleep(3000);
             for (var i = 0; i < pwds.length; i++) {
                 inputPwd(pwds[i]);
                 sleep(1200);
             }
+            toastLog("...等待返回...");
             sleep(3000);
-            func.cClick(text("返回商家").findOne());
+            while (func.cClick(text("返回商家").findOnce()) == null) {
+                func.sClick(text("稍后再说").findOnce());
+                sleep(1000);
+            }
+            toastLog("...等待显示完成...");
             sleep(3000);
             text("完成").findOne();
             sleep(2000);
@@ -171,6 +178,7 @@ function weiXinn() {
             // 待付款滑动栏
             textContains(textPay).findOne();
         };
+        toastLog("...等待下一单...");
         sleep(5000);
     }
 }
