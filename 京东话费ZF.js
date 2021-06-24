@@ -112,12 +112,15 @@ function hwzhifu() {
 
 function weiXinn() {
     var pwds = [0, 8, 1, 5, 7, 3];
+    var cnt;
     while (true) {
+        cnt = 6;
         sleep(2000);
         try {
             func.sClick(text(textPay).findOnce());
             sleep(2000);
             func.sClick(text(textAll).findOnce());
+            sleep(2000);
         } catch (e) {
 
         }
@@ -162,7 +165,7 @@ function weiXinn() {
             }
             toastLog("...等待返回...");
             sleep(3000);
-            while (func.cClick(text("返回商家").findOnce()) == null) {
+            while (func.cClick(text("返回商家").findOnce()) == false) {
                 func.sClick(text("稍后再说").findOnce());
                 sleep(1000);
             }
@@ -174,18 +177,16 @@ function weiXinn() {
         }
         //if (func.sClick(text("立即抽奖").findOnce())) {
         if (text("立即抽奖").findOnce()) {
+            toastLog("找到抽奖，等待返回");
             sleep(8000);
             back();
             // 待付款滑动栏
             textContains(textPay).findOne();
-            toastLog("...等待下一单...");
-            sleep(5000);
-            toastLog("...等待下一单...");
-            sleep(5000);
-            toastLog("...等待下一单...");
-            sleep(5000);
-            toastLog("...等待下一单...");
-            sleep(5000);
+            while (cnt > 0) {
+                cnt = cnt - 1;
+                toastLog("...等待下一单...");
+                sleep(5000);
+            }
         };
         sleep(2000);
     }
