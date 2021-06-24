@@ -177,13 +177,14 @@ function weiXinn() {
             back();
             // 待付款滑动栏
             textContains(textPay).findOne();
+            toastLog("...等待下一单...");
+            sleep(5000);
+            toastLog("...等待下一单...");
+            sleep(5000);
+            toastLog("...等待下一单...");
+            sleep(5000);
         };
-        toastLog("...等待下一单...");
-        sleep(5000);
-        toastLog("...等待下一单...");
-        sleep(5000);
-        toastLog("...等待下一单...");
-        sleep(5000);
+        sleep(2000);
     }
 }
 
