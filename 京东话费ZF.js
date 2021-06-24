@@ -113,10 +113,10 @@ function hwzhifu() {
 function weiXinn() {
 
     while (true) {
-        sleep(1500);
+        sleep(2000);
         try {
             func.sClick(text(textPay).findOnce());
-            sleep(1500);
+            sleep(2000);
             func.sClick(text(textAll).findOnce());
         } catch (e) {
 
@@ -138,11 +138,11 @@ function weiXinn() {
             }
             while (func.cClick(text("返回商家").findOnce()) == false) {
                 func.sClick(text("立即支付").findOnce());
-                sleep(500);
+                sleep(800);
                 func.sClick(text("继续支付").findOnce());
-                sleep(500);
+                sleep(800);
                 func.sClick(text("确认支付").findOnce());
-                sleep(500);
+                sleep(800);
             }
             text("完成").findOne();
         }
@@ -153,5 +153,6 @@ function weiXinn() {
             // 待付款滑动栏
             textContains(textPay).findOne();
         };
+        sleep(5000);
     }
 }
