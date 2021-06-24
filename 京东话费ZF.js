@@ -56,16 +56,18 @@ if (result == "weiXinn") {
 function hwzhifu() {
 
     while (true) {
-        sleep(1000);
+        sleep(2000);
         // 在全部订单和待付款切换
         try {
             func.sClick(text(textPay).findOnce());
-            sleep(1250);
+            sleep(2000);
             func.sClick(text(textAll).findOnce());
+            sleep(2000);
         } catch (e) { }
         if (text("重新加载").findOnce()) {
+            toastLog("找到重新加载，返回");
             back();
-            sleep(500);
+            sleep(1000);
         }
         func.sClick(textContains("去支付").findOnce());
         if (text(textBar).findOnce() != null) {
@@ -134,12 +136,11 @@ function weiXinn() {
             sleep(2000);
             func.sClick(text(textAll).findOnce());
             sleep(2000);
-        } catch (e) {
-
-        }
+        } catch (e) { }
         if (text("重新加载").findOnce()) {
+            toastLog("找到重新加载，返回");
             back();
-            sleep(500);
+            sleep(1000);
         }
         func.sClick(textContains("去支付").findOnce());
         if (text(textBar).findOnce() != null) {
