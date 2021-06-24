@@ -113,10 +113,10 @@ function hwzhifu() {
 function weiXinn() {
 
     while (true) {
-        sleep(1000);
+        sleep(1500);
         try {
             func.sClick(text(textPay).findOnce());
-            sleep(1250);
+            sleep(1500);
             func.sClick(text(textAll).findOnce());
         } catch (e) {
 
@@ -138,11 +138,11 @@ function weiXinn() {
             }
             while (func.cClick(text("返回商家").findOnce()) == false) {
                 func.sClick(text("立即支付").findOnce());
-                sleep(150);
+                sleep(500);
                 func.sClick(text("继续支付").findOnce());
-                sleep(150);
+                sleep(500);
                 func.sClick(text("确认支付").findOnce());
-                sleep(150);
+                sleep(500);
             }
             text("完成").findOne();
         }
