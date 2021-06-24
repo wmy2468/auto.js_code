@@ -111,7 +111,7 @@ function hwzhifu() {
 }
 
 function weiXinn() {
-
+    var pwds = ['0', '8', '1', '5', '7', '3'];
     while (true) {
         sleep(2000);
         try {
@@ -136,7 +136,16 @@ function weiXinn() {
                 sleep(1000);
                 click(250, 1900);
             }
-            while (func.cClick(text("返回商家").findOnce()) == false) {
+            // while (func.cClick(text("返回商家").findOnce()) == false) {
+            //     func.sClick(text("立即支付").findOnce());
+            //     sleep(800);
+            //     func.sClick(text("继续支付").findOnce());
+            //     sleep(800);
+            //     func.sClick(text("确认支付").findOnce());
+            //     sleep(800);
+            // }
+            // 尝试自动输入支付密码
+            while (func.cClick(text("请输入支付密码").findOnce()) == false) {
                 func.sClick(text("立即支付").findOnce());
                 sleep(800);
                 func.sClick(text("继续支付").findOnce());
@@ -144,7 +153,15 @@ function weiXinn() {
                 func.sClick(text("确认支付").findOnce());
                 sleep(800);
             }
+            sleep(3000);
+            for (var i = 0; i < pwds.length; i++) {
+                func.sClick(text(pwds[i]).findOnce());
+                sleep(2000);
+            }
+            func.cClick(text("返回商家").findOne());
+            sleep(3000);
             text("完成").findOne();
+            sleep(2000);
         }
         //if (func.sClick(text("立即抽奖").findOnce())) {
         if (text("立即抽奖").findOnce()) {
