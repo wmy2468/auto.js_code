@@ -76,7 +76,7 @@ function 农行缴费() {
     func.sClick(card);
     while (1) {
         if (text('¥10.00').findOnce()) {
-            func.sClick(text("确认付款").findOnce());
+            if (func.sClick(text("确认付款").findOnce())) { break; }
         } else {
             sleep(50);
         }
