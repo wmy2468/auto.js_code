@@ -119,8 +119,8 @@ function 掌上生活活动() {
             }
             break;
         case "10点拼团星巴克":            //10点
-            toastLog("提前10秒 进入");
-            startTime = "09,59,50,700";
+            toastLog("提前15秒 进入");
+            startTime = "09,59,45,000";
             targetViewText = "星巴克中杯手工调制饮品";
             launchApp(appName);
             // 等待进入指定页面
