@@ -133,6 +133,7 @@ function 掌上生活活动() {
             func.getTimeDiff(timeArea, startTime);
             func.sClick(text("成团领奖").findOnce());
             var clickBtn;
+            func.getTimeDiff(timeArea, "09,59,59,700");
             while (1) {
                 try {
                     clickBtn = text(targetViewText).findOnce().parent().child(8).child(0);
