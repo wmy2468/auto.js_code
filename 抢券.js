@@ -119,18 +119,19 @@ function 掌上生活活动() {
             }
             break;
         case "10点拼团星巴克":            //10点
-            toastLog("提前10秒开始查找");
-            startTime = "09,59,59,700";
+            toastLog("提前10秒 进入");
+            startTime = "09,59,50,700";
             targetViewText = "星巴克中杯手工调制饮品";
             launchApp(appName);
             // 等待进入指定页面
-            while (!text(targetViewText).findOnce()) {
+            while (!text("成团领奖").findOnce()) {
                 toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
                 sleep(800);
             }
             toastLog("已到达指定页面，等待");
-            //  提前10秒 开始查找
+            //  提前10秒 开始进入
             func.getTimeDiff(timeArea, startTime);
+            func.sClick(text("成团领奖").findOnce());
             var clickBtn;
             while (1) {
                 try {
