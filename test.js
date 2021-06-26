@@ -2,24 +2,23 @@
 var func = require("func_list.js");
 //test on laptop
 
-func.sClick(text("稍后再说").findOnce());
+持续响铃(5);
 
-function inputPwd(number) {
-    var centerX = 540, centerY = 1952;
-    var offsetX = 360, offsetY = 154;
-    var nums = {
-        0: [centerX, centerY + offsetY + offsetY],      //x,y++
-
-        1: [centerX - offsetX, centerY - offsetY],      //x-,y-
-        2: [centerX, centerY - offsetY],                //x,y-
-        3: [centerX + offsetX, centerY - offsetY],      //x+,y-
-        4: [centerX - offsetX, centerY],                //x-,y
-        5: [centerX, centerY],                          //x,y
-        6: [centerX + offsetX, centerY],                //x+,y
-        7: [centerX - offsetX, centerY + offsetY],      //x-,y+
-        8: [centerX, centerY + offsetY],                //x,y+
-        9: [centerX + offsetX, centerY + offsetY]       //x+,y+
+function 持续响铃(时间秒) {
+    while (时间秒 > 0) {
+        时间秒 = 时间秒 - 1;
+        铃声通知();
+        sleep(1000);
     }
-    var point = nums[number];
-    click(point[0], point[1]);
+}
+
+function 铃声通知(播放时长, 音量) {
+    var 音量 = 音量 || 13;
+    var 播放时长 = 播放时长 || 1000;
+    var 铃声 = android.media.RingtoneManager.TYPE_NOTIFICATION;
+    var mp = new android.media.MediaPlayer();
+    device.setMusicVolume(音量)
+    mp.setDataSource(context, android.media.RingtoneManager.getDefaultUri(铃声));
+    mp.prepare();
+    mp.start();
 }

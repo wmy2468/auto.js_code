@@ -129,10 +129,17 @@ function hwzhifu() {
 
 function weiXinn() {
     var cnt;
+    var clickCnt = 0;
     while (true) {
         sleep(2000);
+        if (clickCnt > 10) {
+            持续响铃(15);
+            break;
+        }
         try {
-            func.sClick(text(textPay).findOnce());
+            if (func.sClick(text(textPay).findOnce())) {
+                clickCnt = clickCnt + 1;
+            }
             sleep(2000);
             func.sClick(text(textAll).findOnce());
             sleep(2000);
@@ -144,6 +151,7 @@ function weiXinn() {
         }
         func.sClick(textContains("去支付").findOnce());
         if (text(textBar).findOnce() != null) {
+            clickCnt = 0;
             log("find the bar");
             func.sClick(textContains("微信支付").findOne());
             toastLog("...等待跳转微信...");
@@ -218,4 +226,29 @@ function inputPwd(number) {
     }
     var point = nums[number];
     click(point[0], point[1]);
+}
+
+
+function 持续响铃(时间秒) {
+    while (时间秒 > 0) {
+        时间秒 = 时间秒 - 1;
+        铃声通知();
+        sleep(1000);
+    }
+}
+
+function 铃声通知(播放时长, 音量) {
+    var 音量 = 音量 || 13;
+    var 播放时长 = 播放时长 || 1000;
+    var 铃声 = android.media.RingtoneManager.TYPE_NOTIFICATION;
+    var mp = new android.media.MediaPlayer();
+    device.setMusicVolume(音量)
+    mp.setDataSource(context, android.media.RingtoneManager.getDefaultUri(铃声));
+    mp.prepare();
+    mp.start();
+}
+
+function 震动(vibrate_time) {
+    var vibrate_time = vibrate_time || 1000;
+    device.vibrate(vibrate_time);
 }
