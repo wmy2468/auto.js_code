@@ -133,7 +133,7 @@ function weiXinn() {
     while (true) {
         sleep(2000);
         if (clickCnt > 10) {
-            持续响铃(15);
+            持续响铃(60);
             break;
         }
         try {
