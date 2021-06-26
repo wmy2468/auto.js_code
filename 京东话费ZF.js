@@ -54,12 +54,18 @@ if (result == "weiXinn") {
 }
 
 function hwzhifu() {
-
+    var clickCnt = 0;
     while (true) {
         sleep(2000);
+        if (clickCnt > 10) {
+            持续响铃(20);
+            break;
+        }
         // 在全部订单和待付款切换
         try {
-            func.sClick(text(textPay).findOnce());
+            if (func.sClick(text(textPay).findOnce())) {
+                clickCnt = clickCnt + 1;
+            }
             sleep(2000);
             func.sClick(text(textAll).findOnce());
             sleep(2000);
@@ -71,6 +77,7 @@ function hwzhifu() {
         }
         func.sClick(textContains("去支付").findOnce());
         if (text(textBar).findOnce() != null) {
+            clickCnt = 0;
             func.sClick(textContains("云闪付").findOne());
             sleep(500);
             func.sClick(className("android.widget.TextView").textContains("银联支付").findOne());
@@ -133,7 +140,7 @@ function weiXinn() {
     while (true) {
         sleep(2000);
         if (clickCnt > 10) {
-            持续响铃(60);
+            持续响铃(20);
             break;
         }
         try {
