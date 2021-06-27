@@ -57,7 +57,7 @@ function hwzhifu() {
     var clickCnt = 0;
     while (true) {
         sleep(2000);
-        if (clickCnt > 10) {
+        if (clickCnt > 5) {
             持续响铃(20);
             break;
         }
