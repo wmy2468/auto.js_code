@@ -2,11 +2,23 @@ auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
 
-main();
+if (device.brand == "HUAWEI") {
+    func.toApp("京东");
+    main();
+} else if (device.brand == "xiaomi") {
+    var i = 1;
+    while (i < 3) {
+        func.toAppMulti("京东", i);
+        main();
+        i = i + 1;
+    }
+}
+
 
 function main() {
-    func.toApp("京东");
     while (text("话费充值").findOnce() == null) {
+        func.sClick(text("我的").findOnce());
+        func.sClick(text("我的订单").findOnce());
         toastLog("请打开 全部订单 界面");
         sleep(2000);
     }
