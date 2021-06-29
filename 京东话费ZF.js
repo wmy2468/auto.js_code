@@ -1,3 +1,4 @@
+auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
 var selectArr = ["微信", "华为支付", "云闪付"];
@@ -159,6 +160,8 @@ function hwzhifu() {
         }
         func.sClick(textContains("去支付").findOnce());
         if (text(textBar).findOnce() != null) {
+            scrollDown();
+            sleep(1000);
             clickCnt = 0;
             func.sClick(textContains("云闪付").findOne());
             sleep(500);
@@ -167,11 +170,12 @@ function hwzhifu() {
             text("付款详情").findOne();
             sleep(1000);
             func.sClick(text("付款方式").findOne());
-
+            sleep(1000);
             while (func.sClick(text("Huawei Pay").findOnce()) == false) {
                 scrollDown();
                 sleep(500);
             }
+            sleep(1000);
             text("选择付款方式").findOne();
             while (text("付款详情").findOnce() == null) {
                 sleep(500);

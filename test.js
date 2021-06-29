@@ -2,7 +2,7 @@
 var func = require("func_list.js");
 //test on laptop
 
-持续响铃(5);
+toastLog(func.sClick(text("Huawei Pay").findOnce()));
 
 function 持续响铃(时间秒) {
     while (时间秒 > 0) {
