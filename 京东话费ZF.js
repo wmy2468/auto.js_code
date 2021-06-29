@@ -1,12 +1,12 @@
 // 导入模块
 var func = require("func_list.js");
-var selectArr = ["weiXinn", "YunShaofu"];
+var selectArr = ["微信", "华为支付", "云闪付"];
 
 // toastLog(text("再次购买").findOnce());
 // func.sClick(text("全部").findOnce());
 
 var result;
-
+var ringCount = 4;
 var textPay = "待付款";
 var textAll = "全部";
 var textBar = "京东收银台"
@@ -14,11 +14,12 @@ var textBar = "京东收银台"
 result = func.dialogsWin(selectArr);
 var cardEndNumber;
 var pwds = ['0', '8', '1', '5', '7', '3'];
+var pwdYsf = ['1', '0', '0', '0', '0', '0'];
 
-if (result == "weiXinn") {
+if (result == "微信") {
     func.toApp("京东");
     weiXinn();
-} else if (result == "YunShaofu") {
+} else if (result == "华为支付" || result == "云闪付") {
     var cardName = func.dialogsWin(["JJ-中信", "LP-中信", "华夏", "JJ-京东红卡", "浦发", "交通", "LM-中行", "邮储", "JJ-建行"]);
     switch (cardName) {
         case "JJ-中信":
@@ -50,14 +51,95 @@ if (result == "weiXinn") {
             break;
     }
     func.toApp("京东");
-    hwzhifu();
+    if (result == "华为支付") {
+        hwzhifu();
+    } else {
+        yunshanfu();
+    }
 }
+
+
+function yunshanfu() {
+    var clickCnt = 0;
+    while (true) {
+        sleep(2000);
+        if (clickCnt > ringCount) {
+            持续响铃(20);
+            break;
+        }
+        // 在全部订单和待付款切换
+        try {
+            if (func.sClick(text(textPay).findOnce())) {
+                clickCnt = clickCnt + 1;
+            }
+            sleep(2000);
+            func.sClick(text(textAll).findOnce());
+            sleep(2000);
+        } catch (e) { }
+        if (text("重新加载").findOnce()) {
+            toastLog("找到重新加载，返回");
+            back();
+            sleep(1000);
+        }
+        func.sClick(textContains("去支付").findOnce());
+        if (text(textBar).findOnce() != null) {
+            clickCnt = 0;
+            func.sClick(textContains("云闪付").findOne());
+            sleep(500);
+            func.sClick(className("android.widget.TextView").textContains("银联支付").findOne());
+            toastLog("切换到云闪付");
+            text("付款详情").findOne();
+            sleep(1000);
+            func.sClick(text("付款方式").findOne());
+            text("选择付款方式").findOne();
+            while (text("付款详情").findOnce() == null) {
+                sleep(500);
+                if (!func.cClick(text("[" + cardEndNumber + "]").findOnce())) {
+                    scrollDown();
+                    sleep(1000);
+                } else {
+                    sleep(2500);
+                }
+            }
+            sleep(1200);
+            func.sClick(text("确认付款").findOnce());
+
+            while (text("验证支付密码").findOnce() == null) { sleep(1000); }
+            toastLog("...等待输入MM...");
+            sleep(3000);
+            for (var i = 0; i < pwdYsf.length; i++) {
+                inputPwd(pwdYsf[i]);
+                sleep(1200);
+            }
+            text("支付成功").findOne();
+            toastLog("...支付完成...");
+            sleep(1200);
+            back();
+            log(text("查看订单").findOne());
+            //if (func.sClick(text("立即抽奖").findOnce())) {
+            if (text("立即抽奖").findOnce()) {
+                toastLog("找到抽奖，等待返回");
+                sleep(8000);
+                back();
+                // 待付款滑动栏
+                textContains(textPay).findOne();
+                cnt = 6;
+                while (cnt > 0) {
+                    cnt = cnt - 1;
+                    toastLog("...等待下一单...");
+                    sleep(4000);
+                }
+            }
+        }
+    }
+}
+
 
 function hwzhifu() {
     var clickCnt = 0;
     while (true) {
         sleep(2000);
-        if (clickCnt > 5) {
+        if (clickCnt > ringCount) {
             持续响铃(20);
             break;
         }
@@ -139,7 +221,7 @@ function weiXinn() {
     var clickCnt = 0;
     while (true) {
         sleep(2000);
-        if (clickCnt > 10) {
+        if (clickCnt > ringCount) {
             持续响铃(20);
             break;
         }
