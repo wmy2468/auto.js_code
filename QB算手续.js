@@ -16,6 +16,11 @@ else {
 }
 
 function 快钱手续费() {
+    var selectedArr = ["提现", "消费"];
+    var selectIndex = dialogs.select("选择提现、消费", selectedArr);
+    if (selectIndex == -1) {
+        exit();
+    }
     text("资产明细").findOne();
     var times, inBills, moneyTypes;
     var lastTime, recordTime, moneyText, total_fees = 0.0;;
@@ -32,7 +37,7 @@ function 快钱手续费() {
             recordTime = lastTime;
         }
         for (i = 0; i < times.length; i++) {
-            if ((moneyTypes[i].text().indexOf("提现") != -1) && !(times[i].text() in dict)) {
+            if ((moneyTypes[i].text().indexOf(selectedArr[selectIndex]) != -1) && !(times[i].text() in dict)) {
                 dict[times[i].text()] = 1;
                 moneyText = inBills[i].text();
                 moneyText = moneyText.substring(2, moneyText.length - 1);
