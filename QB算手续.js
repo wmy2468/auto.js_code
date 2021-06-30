@@ -49,7 +49,7 @@ function 快钱手续费() {
         // 翻页
         scrollDown();
         sleep(1000);
-        swipe(300, 850, 300, 60, 400);
+        swipe(300, 850, 300, 600, 400);
         sleep(2000);
     }
     alert("总手续费:" + total_fees);
