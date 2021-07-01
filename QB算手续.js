@@ -16,15 +16,14 @@ else {
 }
 
 function 快钱手续费() {
-    var selectedArr = ["提现", "消费"];
-    var selectIndex = dialogs.select("选择提现、消费", selectedArr);
-    if (selectIndex == -1) {
-        exit();
+    while (text("资产明细").findOnce() == null) {
+        toastLog("请打开资产明细页面");
+        sleep(2000);
     }
-    text("资产明细").findOne();
     var times, inBills, moneyTypes;
-    var lastTime, recordTime, moneyText, total_fees = 0.0;;
-    let dict = {};
+    var lastTime, recordTime, moneyText, total_fees = 0.0;
+    var lastTimePay, recordTimePay, moneyTextPay, total_feesPay = 0.0;
+    let dict = {}, dictPay = {};
     recordTime = "";
     while (true) {
         times = id("com.bill.quickmoney:id/time_").find();
@@ -37,25 +36,38 @@ function 快钱手续费() {
             recordTime = lastTime;
         }
         for (i = 0; i < times.length; i++) {
-            if ((moneyTypes[i].text().indexOf(selectedArr[selectIndex]) != -1) && !(times[i].text() in dict)) {
+            if ((moneyTypes[i].text().indexOf("提现") != -1) && !(times[i].text() in dict)) {
                 dict[times[i].text()] = 1;
                 moneyText = inBills[i].text();
                 moneyText = moneyText.substring(2, moneyText.length - 1);
                 log(moneyText);
                 total_fees = total_fees + moneyText * 1;
             }
+
+            if ((moneyTypes[i].text().indexOf("消费") != -1) && !(times[i].text() in dictPay)) {
+                dictPay[times[i].text()] = 1;
+                moneyTextPay = inBills[i].text();
+                moneyTextPay = moneyTextPay.substring(2, moneyTextPay.length - 1);
+                log(moneyTextPay);
+                total_feesPay = total_feesPay + moneyTextPay * 1;
+            }
         }
-        toastLog("当前计算手续费:" + total_fees);
+        toastLog("当前提现共：" + total_fees + "\n当前消费共：" + total_feesPay);
         // 翻页
-        scrollDown();
-        sleep(1000);
+
         swipe(300, 850, 300, 600, 400);
         sleep(2000);
+        scrollDown();
+        sleep(2000);
     }
-    alert("总手续费:" + total_fees);
+    alert("提现共：" + total_fees + "\n消费共：" + total_feesPay);
 }
 
 function 钱宝手续费() {
+    while (text("账户明细").findOnce() == null) {
+        toastLog("请打开账户明细页面");
+        sleep(2000);
+    }
     toastLog(id("com.example.mposstandard:id/amount").find().length);
 
     let targetCnt = id("com.example.mposstandard:id/trade_num").findOne().text();
@@ -86,5 +98,5 @@ function 钱宝手续费() {
         sleep(3000);
     }
 
-    alert("总手续费:" + total_fees);
+    alert("总手续费:" + total_fees + "\n总条目：" + curCnt);
 }

@@ -2,7 +2,7 @@
 var func = require("func_list.js");
 //test on laptop
 
-toastLog(func.sClick(text("Huawei Pay").findOnce()));
+alert("总手续费:" + "\n总条目：");
 
 function 持续响铃(时间秒) {
     while (时间秒 > 0) {
