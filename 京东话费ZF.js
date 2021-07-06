@@ -149,9 +149,9 @@ function hwzhifu() {
             if (func.sClick(text(textPay).findOnce())) {
                 clickCnt = clickCnt + 1;
             }
-            sleep(2000);
+            sleep(1000);
             func.sClick(text(textAll).findOnce());
-            sleep(2000);
+            sleep(1000);
         } catch (e) { }
         if (text("重新加载").findOnce()) {
             toastLog("找到重新加载，返回");
@@ -161,29 +161,29 @@ function hwzhifu() {
         func.sClick(textContains("去支付").findOnce());
         if (text(textBar).findOnce() != null) {
             scrollDown();
-            sleep(1000);
+            sleep(500);
             clickCnt = 0;
             func.sClick(textContains("云闪付").findOne());
             sleep(500);
             func.sClick(className("android.widget.TextView").textContains("银联支付").findOne());
             toastLog("切换到YunShaofu");
             text("付款详情").findOne();
-            sleep(1000);
+            sleep(500);
             func.sClick(text("付款方式").findOne());
-            sleep(1000);
+            sleep(500);
             while (func.sClick(text("Huawei Pay").findOnce()) == false) {
                 scrollDown();
                 sleep(500);
             }
-            sleep(1000);
+            sleep(800);
             text("选择付款方式").findOne();
             while (text("付款详情").findOnce() == null) {
                 sleep(500);
                 if (!func.cClick(text("[" + cardEndNumber + "]").findOnce())) {
                     scrollDown();
-                    sleep(1000);
+                    sleep(500);
                 } else {
-                    sleep(2500);
+                    sleep(1000);
                 }
             }
             sleep(1200);
@@ -191,10 +191,10 @@ function hwzhifu() {
 
             while (text("验证支付密码").findOnce() == null) { sleep(1000); }
             toastLog("...等待输入MM...");
-            sleep(3000);
+            sleep(1000);
             for (var i = 0; i < pwds.length; i++) {
                 func.cClick(text(pwds[i]).findOnce());
-                sleep(1200);
+                sleep(500);
             }
             text("支付成功").findOne();
             toastLog("...支付完成...");
@@ -204,7 +204,7 @@ function hwzhifu() {
             //if (func.sClick(text("立即抽奖").findOnce())) {
             if (text("立即抽奖").findOnce()) {
                 toastLog("找到抽奖，等待返回");
-                sleep(8000);
+                sleep(2000);
                 back();
                 // 待付款滑动栏
                 textContains(textPay).findOne();
@@ -212,7 +212,7 @@ function hwzhifu() {
                 while (cnt > 0) {
                     cnt = cnt - 1;
                     toastLog("...等待下一单...");
-                    sleep(4000);
+                    sleep(1300);
                 }
             }
         }
