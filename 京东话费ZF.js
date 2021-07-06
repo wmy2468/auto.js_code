@@ -171,10 +171,12 @@ function hwzhifu() {
             sleep(500);
             func.sClick(text("付款方式").findOne());
             sleep(500);
-            while (func.cClick(text("Huawei Pay").findOnce()) == false) {
-                scrollDown();
-                sleep(500);
-            }
+            try {
+                while (func.sClick(text("Huawei Pay").findOnce().parent()) == false) {
+                    scrollDown();
+                    sleep(500);
+                }
+            } catch (e) { log("未找到Huawei pay") }
             sleep(800);
             text("选择付款方式").findOne();
             while (text("付款详情").findOnce() == null) {
