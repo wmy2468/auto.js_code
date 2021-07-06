@@ -2,7 +2,7 @@
 var func = require("func_list.js");
 //test on laptop
 
-alert("总手续费:" + "\n总条目：");
+toastLog(textContains("京东闪付").findOne());
 
 function 持续响铃(时间秒) {
     while (时间秒 > 0) {
