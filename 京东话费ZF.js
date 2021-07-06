@@ -175,7 +175,7 @@ function hwzhifu() {
                 scrollDown();
                 sleep(500);
             }
-            sleep(800);
+            sleep(2000);
             text("选择付款方式").findOne();
             while (text("付款详情").findOnce() == null) {
                 sleep(500);
