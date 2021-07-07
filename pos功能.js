@@ -24,7 +24,7 @@ function 万商3比() {
     inputVal = rawInput("请输入金额");
     appName = "万商云";
     func.toApp(appName);
-    while (func.sClick(id("home_qrcodepay").findOne() == false) {
+    while (func.sClick(id("home_qrcodepay").findOnce()) == false) {
         if (text("请绘制手势密码登录").findOnce()) {
             gesture_pwd(appName);
         }
