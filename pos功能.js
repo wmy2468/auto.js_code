@@ -32,6 +32,8 @@ function 万商3比() {
         while (text("支付成功！").findOnce() == null) {
             sleep(2000);
         }
+        sleep(1000);
+        back();
         count = count - 1;
     }
 }
