@@ -184,6 +184,10 @@ function gesture_pwd(appName) {
         }
     }
     switch (appName) {
+        case "万商云":
+            point = id("com.bill.quickmoney:id/lock_9_view").findOnce();
+            log("万商云");
+            break;
         case "缤纷生活":
             point = id("lock_pattern").findOnce();
             log("缤纷生活");
