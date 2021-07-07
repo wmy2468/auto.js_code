@@ -4,7 +4,7 @@ var func = require("func_list.js");
 
 var appName, count, inputVal;
 var selectFunc;
-var selectFunc = func.dialogsWin(["万商付3比", "钱宝付3比", "计算手续费"]);
+selectFunc = func.dialogsWin(["万商付3比", "钱宝付3比", "计算手续费"]);
 
 switch (selectFunc) {
     case "万商付3比":
@@ -21,8 +21,8 @@ switch (selectFunc) {
 
 function 万商3比() {
     count = 3;
-    appName = "万商云";
     inputVal = rawInput("请输入金额");
+    appName = "万商云";
     func.toApp(appName);
     func.sClick(id("home_qrcodepay").findOne());
     while (count > 0) {
@@ -49,13 +49,8 @@ function 钱宝3比() { }
 
 
 function 手续费() {
-    selectedArr = ["钱宝手续费", "快钱手续费"];
-    var selectIndex = dialogs.select("选择时间", selectedArr);
-    if (selectIndex == -1) {
-        exit();
-    }
-
-    if (selectedArr[selectIndex] == "钱宝手续费") {
+    selectFunc = func.dialogsWin(["钱宝手续费", "快钱手续费"]);
+    if (selectFunc == "钱宝手续费") {
         钱宝手续费();
     }
     else {
@@ -64,6 +59,8 @@ function 手续费() {
 }
 
 function 快钱手续费() {
+    appName = "万商云";
+    func.toApp(appName);
     while (text("资产明细").findOnce() == null) {
         toastLog("请打开资产明细页面");
         sleep(2000);
@@ -112,6 +109,8 @@ function 快钱手续费() {
 }
 
 function 钱宝手续费() {
+    appName = "招钱进宝";
+    func.toApp(appName);
     while (text("账户明细").findOnce() == null) {
         toastLog("请打开账户明细页面");
         sleep(2000);
