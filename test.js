@@ -2,14 +2,7 @@
 var func = require("func_list.js");
 //test on laptop
 
-var inputVal = rawInput("请输入金额");
-func.sClick(id("home_qrcodepay").findOne());
-
-func.sClick(text("扫一扫").findOne());
-text("请输入收款金额").findOne();
-setText(inputVal);
-sleep(500);
-func.sClick(text("确定").findOnce());
+toastLog(text("将二维码/条码放入框内，即可自动扫描").findOnce());
 
 
 

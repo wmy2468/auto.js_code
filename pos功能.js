@@ -26,11 +26,16 @@ function 万商3比() {
     func.toApp(appName);
     func.sClick(id("home_qrcodepay").findOne());
     while (count > 0) {
-        func.sClick(text("扫一扫").findOne());
-        text("请输入收款金额").findOne();
+        while (text("请输入收款金额").findOnce() == null) {
+            func.sClick(text("扫一扫").findOnce());
+            sleep(500);
+        }
         setText(inputVal);
         sleep(500);
-        func.sClick(text("确定").findOnce());
+        while (text("将二维码/条码放入框内，即可自动扫描").findOnce() == null) {
+            func.sClick(text("确定").findOnce());
+            sleep(500);
+        }
         while (text("支付成功！").findOnce() == null) {
             sleep(2000);
         }
