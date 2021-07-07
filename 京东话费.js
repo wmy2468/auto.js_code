@@ -25,7 +25,6 @@ function 话费支付() {
     var result;
     result = func.dialogsWin(selectArr);
     var cardEndNumber;
-
     if (result == "微信") {
         func.toApp("京东");
         weiXinn();
@@ -62,14 +61,14 @@ function 话费支付() {
         }
         func.toApp("京东");
         if (result == "华为支付") {
-            hwzhifu();
+            hwzhifu(cardEndNumber);
         } else {
-            yunshanfu();
+            yunshanfu(cardEndNumber);
         }
     }
 }
 
-function yunshanfu() {
+function yunshanfu(cardEndNumber) {
     var clickCnt = 0;
     while (true) {
         sleep(2000);
@@ -145,7 +144,7 @@ function yunshanfu() {
 }
 
 
-function hwzhifu() {
+function hwzhifu(cardEndNumber) {
     var clickCnt = 0;
     while (true) {
         sleep(2000);
