@@ -5,7 +5,7 @@ var func = require('func_list.js');
 main();
 
 function main() {
-    func.toApp("京东", i);
+    func.toApp("京东");
     jd_sign();
     func.lockScr();
 }
