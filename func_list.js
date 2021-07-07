@@ -233,6 +233,9 @@ function gesture_pwd(appName) {
         case "缤纷生活":
             execStr = "gesture(1100";
             break;
+        case "万商云":
+            execStr = "gesture(1100";
+            break;
         default:
             execStr = "gesture(850";
             break;

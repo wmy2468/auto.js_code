@@ -2,7 +2,7 @@
 var func = require("func_list.js");
 //test on laptop
 
-toastLog(text("将二维码/条码放入框内，即可自动扫描").findOnce());
+func.gesture_pwd("万商云");
 
 
 
