@@ -3,17 +3,10 @@ auto.waitFor();
 var func = require('func_list.js');
 
 main();
-//买单吧();
+
 function main() {
-    func.xiaomiUnlock();
-    var i = 1;
-    while (i < 3) {
-        func.toAppMulti("京东", i);
-        jd_sign();
-        i = i + 1;
-    }
-    // 招商银行();
-    // 中行缤纷生活();
+    func.toApp("京东", i);
+    jd_sign();
     func.lockScr();
 }
 

@@ -2,17 +2,39 @@
 var func = require("func_list.js");
 //test on laptop
 
-selectedArr = ["钱宝手续费", "快钱手续费"];
-var selectIndex = dialogs.select("选择时间", selectedArr);
-if (selectIndex == -1) {
-    exit();
+
+var selectFunc = dialogs.select(["万商付3比", "钱宝付3比", "计算手续费"]);
+switch (selectFunc) {
+    case "万商付3比":
+        万商3比();
+        break;
+    case "钱宝付3比":
+        钱宝3比();
+        break;
+    case "计算手续费":
+        手续费();
+        break;
 }
 
-if (selectedArr[selectIndex] == "钱宝手续费") {
-    钱宝手续费();
-}
-else {
-    快钱手续费();
+
+function 万商3比() { }
+
+function 钱宝3比() { }
+
+
+function 手续费() {
+    selectedArr = ["钱宝手续费", "快钱手续费"];
+    var selectIndex = dialogs.select("选择时间", selectedArr);
+    if (selectIndex == -1) {
+        exit();
+    }
+
+    if (selectedArr[selectIndex] == "钱宝手续费") {
+        钱宝手续费();
+    }
+    else {
+        快钱手续费();
+    }
 }
 
 function 快钱手续费() {

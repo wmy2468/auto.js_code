@@ -1,64 +1,73 @@
 auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
-var selectArr = ["微信", "华为支付", "云闪付"];
 
-// toastLog(text("再次购买").findOnce());
-// func.sClick(text("全部").findOnce());
-
-var result;
 var ringCount = 4;
 var textPay = "待付款";
 var textAll = "全部";
 var textBar = "京东收银台"
-
-result = func.dialogsWin(selectArr);
-var cardEndNumber;
+var selectArr = ["微信", "华为支付", "云闪付"];
 var pwds = ['0', '8', '1', '5', '7', '3'];
 var pwdYsf = ['1', '0', '0', '0', '0', '0'];
 
-if (result == "微信") {
-    func.toApp("京东");
-    weiXinn();
-} else if (result == "华为支付" || result == "云闪付") {
-    var cardName = func.dialogsWin(["JJ-中信", "LP-中信", "华夏", "JJ-京东红卡", "浦发", "交通", "LM-中行", "邮储", "JJ-建行"]);
-    switch (cardName) {
-        case "JJ-中信":
-            cardEndNumber = "2079"
-            break;
-        case "LP-中信":
-            cardEndNumber = "5177"
-            break;
-        case "华夏":
-            cardEndNumber = "8589"
-            break;
-        case "浦发":
-            cardEndNumber = "8636"
-            break;
-        case "交通":
-            cardEndNumber = "4471"
-            break;
-        case "JJ-京东红卡":
-            cardEndNumber = "2743"
-            break;
-        case "邮储":
-            cardEndNumber = "3780"
-            break;
-        case "JJ-建行":
-            cardEndNumber = "5135"
-            break;
-        case "LM-中行":
-            cardEndNumber = "5976"
-            break;
-    }
-    func.toApp("京东");
-    if (result == "华为支付") {
-        hwzhifu();
-    } else {
-        yunshanfu();
-    }
+
+var selectFunc = func.dialogsWin(["话费支付", "删除话费订单"]);
+switch (selectFunc) {
+    case "话费支付":
+        话费支付();
+        break;
+    case "删除话费订单":
+        删除话费订单();
+        break;
 }
 
+function 话费支付() {
+    var result;
+    result = func.dialogsWin(selectArr);
+    var cardEndNumber;
+
+    if (result == "微信") {
+        func.toApp("京东");
+        weiXinn();
+    } else if (result == "华为支付" || result == "云闪付") {
+        var cardName = func.dialogsWin(["JJ-中信", "LP-中信", "华夏", "JJ-京东红卡", "浦发", "交通", "LM-中行", "邮储", "JJ-建行"]);
+        switch (cardName) {
+            case "JJ-中信":
+                cardEndNumber = "2079"
+                break;
+            case "LP-中信":
+                cardEndNumber = "5177"
+                break;
+            case "华夏":
+                cardEndNumber = "8589"
+                break;
+            case "浦发":
+                cardEndNumber = "8636"
+                break;
+            case "交通":
+                cardEndNumber = "4471"
+                break;
+            case "JJ-京东红卡":
+                cardEndNumber = "2743"
+                break;
+            case "邮储":
+                cardEndNumber = "3780"
+                break;
+            case "JJ-建行":
+                cardEndNumber = "5135"
+                break;
+            case "LM-中行":
+                cardEndNumber = "5976"
+                break;
+        }
+        func.toApp("京东");
+        if (result == "华为支付") {
+            hwzhifu();
+        } else {
+            yunshanfu();
+        }
+    }
+}
 
 function yunshanfu() {
     var clickCnt = 0;
@@ -344,4 +353,38 @@ function 铃声通知(播放时长, 音量) {
 function 震动(vibrate_time) {
     var vibrate_time = vibrate_time || 1000;
     device.vibrate(vibrate_time);
+}
+
+// ---------------------------------------------------
+// -----------------------分割线-----------------------
+// ---------------------------------------------------
+
+function 删除话费订单() {
+    func.toApp("京东");
+    while (text("话费充值").findOnce() == null) {
+        func.sClick(text("我的").findOnce());
+        func.sClick(text("我的订单").findOnce());
+        toastLog("请打开 全部订单 界面");
+        sleep(2000);
+    }
+    toastLog("已跳转到页面");
+    var delBtn, title;
+    while (1) {
+        try {
+            title = text("话费充值").findOnce();
+            delParent = title.parent().parent().parent().parent();
+            if (delParent.childCount() == 2) {
+                delBtn = delParent.child(1).child(2);
+            } else {
+                delBtn = delParent.child(2).child(0);
+            }
+            if (func.sClick(delBtn)) {
+                func.sClick(text("删除").findOne());
+                sleep(1000);
+            }
+        }
+        catch (e) {
+            swipe(400, 2000, 400, 1000, 200);
+        }
+    }
 }
