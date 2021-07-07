@@ -2,7 +2,7 @@
 var func = require("func_list.js");
 //test on laptop
 
-
+var appName, count, inputVal;
 var selectFunc = dialogs.select(["万商付3比", "钱宝付3比", "计算手续费"]);
 switch (selectFunc) {
     case "万商付3比":
@@ -17,7 +17,24 @@ switch (selectFunc) {
 }
 
 
-function 万商3比() { }
+function 万商3比() {
+    count = 3;
+    appName = "万商云";
+    inputVal = rawInput("请输入金额");
+    func.toApp(appName);
+    func.sClick(id("home_qrcodepay").findOne());
+    while (count > 0) {
+        func.sClick(text("扫一扫").findOne());
+        text("请输入收款金额").findOne();
+        setText(inputVal);
+        sleep(500);
+        func.sClick(text("确定").findOnce());
+        while (text("支付成功！").findOnce() == null) {
+            sleep(2000);
+        }
+        count = count - 1;
+    }
+}
 
 function 钱宝3比() { }
 
