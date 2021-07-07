@@ -3,7 +3,9 @@ var func = require("func_list.js");
 //test on laptop
 
 var appName, count, inputVal;
-var selectFunc = dialogs.select("选择", ["万商付3比", "钱宝付3比", "计算手续费"]);
+var selectFunc;
+var selectFunc = func.dialogsWin(["万商付3比", "钱宝付3比", "计算手续费"]);
+
 switch (selectFunc) {
     case "万商付3比":
         万商3比();
