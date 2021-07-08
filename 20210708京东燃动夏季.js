@@ -238,7 +238,7 @@ function clickComplete() {
 					nextStepDetail = '小程序';
 				} else if (detailText.indexOf('去逛美妆护肤爆款会场') != -1) {
 					nextStepDetail = '小程序';
-				} else if (detailText.indexOf('限时抢9.9元爆品') != -1) {
+				} else if (detailText.indexOf('9.9元') != -1) {
 					nextStepDetail = '小程序'
 				} else if (detailText.indexOf('金融神券') != -1) {
 					nextStepDetail = '金融2次返回'
