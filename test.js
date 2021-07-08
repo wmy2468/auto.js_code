@@ -2,8 +2,8 @@
 var func = require("func_list.js");
 //test on laptop
 
-func.gesture_pwd("万商云");
-
+//toastLog(textContains("更多卡币").findOnce());
+func.sClick(className("Image").text("c143642ad0850f7a").findOnce());
 
 
 function 持续响铃(时间秒) {
