@@ -3,8 +3,25 @@ var func = require('func_list.js');
 
 var i = 0;
 var appName = '京东';
-var koulingText = "哆壹點#UERFi7iyja%咑開京岽app";
+var koulingText;
 var selected = func.dialogsWin(['每日任务', '图鉴'])
+var devModel = device.model;
+// 3个号互点
+switch (devModel) {
+	// 小米手机，LM账号
+	case "Redmi Note 7":
+		koulingText = "JJ-哆壹點#UERFi7iyja%咑開京岽app";
+		break;
+	// 荣耀手机，LP账号
+	case "FRD-AL00":
+		koulingText = "LM 塊幫我點，紅包哆壹點#F5mAY3zZJa%后扌丁开乛倞崬";
+		break;
+	// 华为手机，JJ账号
+	case "TSA-AL00":
+		koulingText = "LP，紅包哆壹點#EDYr74euba@咑開京岽app";
+		break;
+}
+
 main();
 
 function main() {
@@ -27,7 +44,7 @@ function process() {
 	sleep(3000);
 	if (textContains('为TA助力').findOnce() != null || textContains('您今天的助力次数已用完').findOnce() != null) {
 		log('为TA助力不为空')
-		// 如果是小米或荣耀8 则助力
+		// 如果是小米或荣耀8或华为 则助力
 		if (isMyDevice()) {
 			func.sClick(closeBtnHelp.parent().parent().child(1));	// 点击助力
 		} else {
@@ -62,7 +79,7 @@ function process() {
 
 function isMyDevice() {
 	let devModel = device.model;
-	if (devModel == "FRD-AL00" || devModel == "Redmi Note 7") {
+	if (devModel == "FRD-AL00" || devModel == "Redmi Note 7" || devModel == "TSA-AL00") {
 		return true;
 	} else {
 		return false;

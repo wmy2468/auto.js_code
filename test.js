@@ -3,7 +3,8 @@ var func = require("func_list.js");
 //test on laptop
 
 //toastLog(textContains("更多卡币").findOnce());
-func.sClick(className("Image").text("c143642ad0850f7a").findOnce());
+// func.sClick(className("Image").text("c143642ad0850f7a").findOnce());
+toastLog(device.model);
 
 
 function 持续响铃(时间秒) {
