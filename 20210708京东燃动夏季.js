@@ -17,7 +17,7 @@ switch (devModel) {
 		koulingText = "LM 塊幫我點，紅包哆壹點#F5mAY3zZJa%后扌丁开乛倞崬";
 		break;
 	// 华为手机，JJ账号
-	case "TSA-AL00":
+	case "TAS-AL00":
 		koulingText = "LP，紅包哆壹點#EDYr74euba@咑開京岽app";
 		break;
 }

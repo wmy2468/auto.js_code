@@ -157,8 +157,7 @@ function 掌上生活活动() {
 function 光大活动() {
     toastLog("到点点击");
     var startTime, targetViewText;
-    var actNames = ["天猫10买30元",
-        "必胜客50买100元", "海底捞50买100元",
+    var actNames = ["必胜客50买100元",
         "必胜客80买100元", "青桔单车2.5买月卡",
         "饿了么1分买6元", "饿了么1分买10元"
     ];
@@ -171,8 +170,8 @@ function 光大活动() {
             break;
         case "必胜客50买100元":            //11点
             // 11点 650 太早 750太慢 700太慢
-            startTime = "10,59,59,700";
-            targetViewText = "【活动编号】33741";
+            startTime = "09,59,59,700";
+            targetViewText = "【活动编号】39703";
             break;
         case "海底捞50买100元":            //11点
             startTime = "10,59,59,700";
