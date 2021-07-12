@@ -5,22 +5,23 @@ var i = 0;
 var appName = '京东';
 var koulingText;
 var selected = func.dialogsWin(['每日任务', '图鉴'])
-var devModel = device.model;
-// 3个号互点
-switch (devModel) {
-	// 小米手机，LM账号
-	case "Redmi Note 7":
-		koulingText = "JJ-哆壹點#UERFi7iyja%咑開京岽app";
-		break;
-	// 荣耀手机，LP账号
-	case "FRD-AL00":
-		koulingText = "LM 塊幫我點，紅包哆壹點#F5mAY3zZJa%后扌丁开乛倞崬";
-		break;
-	// 华为手机，JJ账号
-	case "TAS-AL00":
-		koulingText = "LP，紅包哆壹點#EDYr74euba@咑開京岽app";
-		break;
-}
+koulingText = "JJ-哆壹點#UERFi7iyja%咑開京岽app";
+// var devModel = device.model;
+// // 3个号互点
+// switch (devModel) {
+// 	// 小米手机，LM账号
+// 	case "Redmi Note 7":
+// 		koulingText = "JJ-哆壹點#UERFi7iyja%咑開京岽app";
+// 		break;
+// 	// 荣耀手机，LP账号
+// 	case "FRD-AL00":
+// 		koulingText = "LM 塊幫我點，紅包哆壹點#F5mAY3zZJa%后扌丁开乛倞崬";
+// 		break;
+// 	// 华为手机，JJ账号
+// 	case "TAS-AL00":
+// 		koulingText = "LP，紅包哆壹點#EDYr74euba@咑開京岽app";
+// 		break;
+// }
 
 main();
 
