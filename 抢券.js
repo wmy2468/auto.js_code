@@ -157,18 +157,13 @@ function 掌上生活活动() {
 function 光大活动() {
     toastLog("到点点击");
     var startTime, targetViewText;
-    var actNames = ["必胜客50买100元",
-        "必胜客80买100元", "青桔单车2.5买月卡",
+    var actNames = ["必胜客50买100元", "青桔单车2.5买月卡",
         "饿了么1分买6元", "饿了么1分买10元"
     ];
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
     switch (actName) {
         // 10点
-        case "天猫10买30元":            //10点
-            startTime = "09,59,59,700";
-            targetViewText = "【活动编号】33735";
-            break;
-        case "必胜客50买100元":            //11点
+        case "必胜客50买100元":            //10点
             // 11点 650 太早 750太慢 700太慢
             startTime = "09,59,59,700";
             targetViewText = "【活动编号】39703";
@@ -190,6 +185,10 @@ function 光大活动() {
             targetViewText = "【活动编号】34332";
             break;
         case "饿了么1分买10元":            //10点
+            startTime = "09,59,59,700";
+            targetViewText = "【活动编号】34331";
+            break;
+        case "肯德基10元吃套餐":            //10点
             startTime = "09,59,59,700";
             targetViewText = "【活动编号】34331";
             break;
@@ -303,7 +302,7 @@ function 中信活动() {
     switch (actName) {
         case "10点-9积分兑换":
             toastLog("等待页面变化");
-            startTime = "09,59,45,000"
+            startTime = "09,59,50,000"
             couDes = ["星巴克中杯饮品电子券", "奈雪", "喜茶25元", "苏宁支付券20元", "京东支付券20元", "天猫20元", "滴滴出行20元", "美团外卖20元"];
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             launchApp(appName);             // 启动APP
@@ -314,11 +313,11 @@ function 中信活动() {
                 } else {
                     couClick = textContains(targetViewText).findOnce();          // 找券
                 }
-
                 toastLog("请跳转到券 列表 页面，直到提示  已到达等待页面");
                 sleep(1000);
             }
-            toastLog("已到达等待页面，提前15秒自动进入");
+            // toastLog("已到达等待页面，提前15秒自动进入");
+            toastLog("元素文本：" + couClick.text());
             func.getTimeDiff(timeArea, startTime);              // 等待到15秒的时候再进入
             func.sClick(couClick);              // 点击标签
             targetViewText = "价格: 1个权益+9个积分";               // 设置查找的文本
@@ -346,19 +345,20 @@ function 中信活动() {
                 couClick = text(targetViewText).findOnce();
                 toastLog("请跳转到券 列表 页面，直到提示  已到达等待页面");
             }
-            toastLog("已到达指定页面，等待");
+            toastLog("元素文本：" + couClick.text());
             func.getTimeDiff(timeArea, startTime);              // 等待时间
             func.sClick(couClick);             // 点击元素
             // 点击元素
-            while (!func.sClick(text("确认").findOnce())) {
+            while (func.sClick(text("确认").findOnce()) == false) {
                 func.sClick(text("立即购买").findOnce());
+                sleep(80);
             }
             toastLog("已点击，请确认结果");
             sleep(3000);
             break;
         case "15点-星巴克中杯":
             toastLog("等待页面变化");
-            startTime = "14,59,45,000"
+            startTime = "14,59,50,000"
             targetViewText = "星巴克中杯饮品电子券（15点抢兑）";               // 设置查找的文本
             launchApp(appName);             // 启动APP
             var couClick = textContains(targetViewText).findOnce();          // 找券
@@ -367,15 +367,19 @@ function 中信活动() {
                 toastLog("请跳转到券 列表 页面，直到提示  已到达等待页面");
                 sleep(1000);
             }
-            toastLog("已到达等待页面，提前15秒自动进入");
+            toastLog("元素文本：" + couClick.text());
             func.getTimeDiff(timeArea, startTime);              // 等待到15秒的时候再进入
             func.sClick(couClick);              // 点击标签
             targetViewText = "价格: 1个权益+9个积分";               // 设置查找的文本
             text(targetViewText).findOne();             // 等待进入指定页面
             toastLog("已到达指定页面，等待");
             //点击元素
-            func.sClick(className("android.view.View").text("去兑换").findOne());
-            func.sClick(className("android.view.View").text("去支付").findOne());
+            while (func.sClick(text("去兑换").findOnce()) == false) {
+                sleep(100);
+            }
+            while (func.sClick(text("去支付").findOnce()) == false) {
+                sleep(100);
+            }
             toastLog("已点击，等待验证码");
             sleep(3000);
             break;
