@@ -4,29 +4,19 @@ var func = require("func_list.js");
 
 //toastLog(textContains("更多卡币").findOnce());
 // func.sClick(className("Image").text("c143642ad0850f7a").findOnce());
-var k = 0, exitFlag;
-for (var i = 0; i < 5; i++) {
-    log(i);
-    if (exitFlag) { break; }
-    k = k + i;
-    if (k > 2) {
-        exitFlag = true
-        i = 0;
-    }
 
-}
-
-
-if (textContains("密码泄露").findOnce() != null) {
-    func.sClick("知道了").findOnce();
-    cnt = 5;
-    while (cnt > 0) {
-        func.sClick(desc("删除").findOnce());
-        cnt = cnt - 1;
-        sleep(800);
-    }
-    i = 0;
-}
+toastLog(textContains("密码泄露").findOnce());
+func.sClick();
+// if (textContains("密码泄露").findOnce() != null) {
+//     func.sClick("知道了").findOnce();
+//     cnt = 5;
+//     while (cnt > 0) {
+//         func.sClick(desc("删除").findOnce());
+//         cnt = cnt - 1;
+//         sleep(800);
+//     }
+//     i = 0;
+// }
 
 
 

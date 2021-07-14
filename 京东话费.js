@@ -69,7 +69,7 @@ function 话费支付() {
 }
 
 function yunshanfu(cardEndNumber) {
-    var clickCnt = 0, cnt = 0;
+    var clickCnt = 0, cnt;
     while (true) {
         sleep(2000);
         if (clickCnt > ringCount) {
@@ -118,16 +118,6 @@ function yunshanfu(cardEndNumber) {
             sleep(3000);
 
             for (var i = 0; i < pwdYsf.length; i++) {
-                if (textContains("密码泄露").findOnce() != null) {
-                    func.sClick("知道了").findOnce();
-                    cnt = 5;
-                    while (cnt > 0) {
-                        func.sClick(desc("删除").findOnce());
-                        cnt = cnt - 1;
-                        sleep(800);
-                    }
-                    i = 0;
-                }
                 inputPwd(pwdYsf[i]);
                 sleep(1200);
             }
@@ -156,7 +146,7 @@ function yunshanfu(cardEndNumber) {
 
 
 function hwzhifu(cardEndNumber) {
-    var clickCnt = 0;
+    var clickCnt = 0, cnt;
     while (true) {
         sleep(2000);
         if (clickCnt > ringCount) {
@@ -212,6 +202,16 @@ function hwzhifu(cardEndNumber) {
             toastLog("...等待输入MM...");
             sleep(1000);
             for (var i = 0; i < pwds.length; i++) {
+                if (textContains("密码泄露").findOnce() != null) {
+                    func.sClick(text("知道了").findOnce());
+                    cnt = 5;
+                    while (cnt > 0) {
+                        func.sClick(desc("删除").findOnce());
+                        cnt = cnt - 1;
+                        sleep(800);
+                    }
+                    i = 0;
+                }
                 func.cClick(text(pwds[i]).findOnce());
                 sleep(500);
             }
@@ -219,7 +219,7 @@ function hwzhifu(cardEndNumber) {
             toastLog("...支付完成...");
             sleep(1200);
             back();
-            log(text("查看订单").findOne());
+            text("查看订单").findOne();
             //if (func.sClick(text("立即抽奖").findOnce())) {
             if (text("立即抽奖").findOnce()) {
                 toastLog("找到抽奖，等待返回");
