@@ -349,10 +349,11 @@ function 中信活动() {
             func.getTimeDiff(timeArea, startTime);              // 等待时间
             func.sClick(couClick);             // 点击元素
             // 点击元素
-            while (func.sClick(text("确认").findOnce()) == false) {
+            while (text("购买后1天内有效").findOnce() == null) {
                 func.sClick(text("立即购买").findOnce());
                 sleep(80);
             }
+            func.sClick(text("确认").findOne());
             toastLog("已点击，请确认结果");
             sleep(3000);
             break;

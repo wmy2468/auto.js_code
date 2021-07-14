@@ -4,7 +4,7 @@ var func = require("func_list.js");
 
 //toastLog(textContains("更多卡币").findOnce());
 // func.sClick(className("Image").text("c143642ad0850f7a").findOnce());
-toastLog(device.model);
+toastLog(text("购买后1天内有效").findOnce());
 
 
 function 持续响铃(时间秒) {
