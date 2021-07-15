@@ -162,18 +162,23 @@ function lockScr() {
 function gesture_pwd(appName) {
     var pwd = "147895";
     var pointX, pointY, point;
-    var offSet = device.width * 0.25;
+    var offSet;
+    offSet = device.width * 0.25;
     // 增加判断，避免小米手机判断成0的情况
     if (offSet == 0) {
         switch (device.model) {
             case "Redmi Note 7":
-                offSet = 1080 * 0.25; break;
+                offSet = 1080 * 0.25;
+                break;
             default:
-                offSet = 1080 * 0.25; break;
+                offSet = 1080 * 0.25;
+                break;
         }
     }
+
     switch (appName) {
         case "万商云":
+            offSet = 341;
             point = id("com.bill.quickmoney:id/lock_9_view").findOnce();
             log("万商云");
             break;
@@ -215,19 +220,11 @@ function gesture_pwd(appName) {
             break;
     }
     var execStr;
-    switch (appName) {
-        case "招商银行":
-            execStr = "gesture(1100";
-            break;
-        case "缤纷生活":
-            execStr = "gesture(1100";
-            break;
-        case "万商云":
-            execStr = "gesture(1100";
-            break;
-        default:
-            execStr = "gesture(850";
-            break;
+    // 根据APP名称区分滑动持续时间
+    if (appName == "招商银行" || appName == "缤纷生活" || appName == "万商云") {
+        execStr = "gesture(1100";
+    } else {
+        execStr = "gesture(850";
     }
     if (point == null) { return false; }
     x = point.bounds().centerX();
@@ -235,7 +232,6 @@ function gesture_pwd(appName) {
     log("x =", x);
     log("y =", y);
     log("offSet =", offSet);
-
     var arr = pwd.split("");
     for (var i = 0; i < arr.length; i++) {
         if (arr[i] == 1) {
@@ -268,9 +264,7 @@ function gesture_pwd(appName) {
         }
         execStr = execStr + ",[" + pointX + "," + pointY + "]";
     }
-    //gesture(1000, [0, 0], [500, 500], [500, 1000])
     execStr = execStr + ")";
-    //log(execStr);
     engines.execScript("hello", execStr);
 }
 

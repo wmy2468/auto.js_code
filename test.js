@@ -4,9 +4,12 @@ var func = require("func_list.js");
 
 //toastLog(textContains("更多卡币").findOnce());
 // func.sClick(className("Image").text("c143642ad0850f7a").findOnce());
+var min, max;
+min = 10;
+max = 25;
+var inputVal = Math.floor((Math.random() * (max - min + 1) + min) * 10) / 10;
+setText(inputVal);
 
-toastLog(textContains("密码泄露").findOnce());
-func.sClick();
 // if (textContains("密码泄露").findOnce() != null) {
 //     func.sClick("知道了").findOnce();
 //     cnt = 5;

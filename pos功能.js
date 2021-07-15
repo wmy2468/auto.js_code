@@ -20,17 +20,23 @@ switch (selectFunc) {
 
 
 function 万商3比() {
-    count = 3;
-    inputVal = rawInput("请输入金额");
+    var count, inputVal, appName;
+    count = dialogs.rawInput("请输入次数", 3);
     appName = "万商云";
     func.toApp(appName);
     while (func.sClick(id("home_qrcodepay").findOnce()) == false) {
-        // if (text("请绘制手势密码登录").findOnce()) {
-        //     func.gesture_pwd(appName);
-        // }
+        if (text("请绘制手势密码登录").findOnce()) {
+            func.gesture_pwd(appName);
+            sleep(4000);
+            id("home_qrcodepay").findOne();
+        }
         sleep(500);
     }
+    var min, max;
+    min = 10;
+    max = 25;
     while (count > 0) {
+        inputVal = Math.floor((Math.random() * (max - min + 1) + min) * 10) / 10;
         while (text("请输入收款金额").findOnce() == null) {
             func.sClick(text("扫一扫").findOnce());
             sleep(500);
@@ -48,6 +54,7 @@ function 万商3比() {
         back();
         count = count - 1;
     }
+    alert("已完成");
 }
 
 function 钱宝3比() { }
