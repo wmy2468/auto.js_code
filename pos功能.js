@@ -34,7 +34,7 @@ function 万商3比() {
     }
     var min, max;
     min = 10;
-    max = 25;
+    max = 23;
     while (count > 0) {
         inputVal = Math.floor((Math.random() * (max - min + 1) + min) * 10) / 10;
         while (text("请输入收款金额").findOnce() == null) {
