@@ -40,6 +40,10 @@ function 万商3比() {
         while (text("请输入收款金额").findOnce() == null) {
             func.sClick(text("扫一扫").findOnce());
             sleep(500);
+            // 如果找到信用卡认证，则点击关闭
+            if (className("ImageButton").id("com.bill.quickmoney:id/affirm").findOnce() != null) {
+                func.sClick(className("ImageButton").id("com.bill.quickmoney:id/cancel").findOnce());
+            }
         }
         setText(inputVal);
         sleep(500);
