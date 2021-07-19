@@ -33,6 +33,7 @@ function 万商3比() {
         while (text("请输入收款金额").findOnce() == null) {
             func.sClick(id("home_qrcodepay").findOnce());
             if (text("请绘制手势密码登录").findOnce()) {
+                sleep(1000);
                 func.gesture_pwd(appName);
                 sleep(4000);
                 id("home_qrcodepay").findOne();
