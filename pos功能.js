@@ -23,21 +23,21 @@ function 万商3比() {
     var count, inputVal, appName;
     count = dialogs.rawInput("请输入次数", 3);
     appName = "万商云";
-    func.toApp(appName);
-    while (func.sClick(id("home_qrcodepay").findOnce()) == false) {
-        if (text("请绘制手势密码登录").findOnce()) {
-            func.gesture_pwd(appName);
-            sleep(4000);
-            id("home_qrcodepay").findOne();
-        }
-        sleep(500);
-    }
     var min, max;
     min = 10;
     max = 23;
+
+    func.toApp(appName);
     while (count > 0) {
         inputVal = Math.floor((Math.random() * (max - min + 1) + min) * 10) / 10;
         while (text("请输入收款金额").findOnce() == null) {
+            func.sClick(id("home_qrcodepay").findOnce());
+            if (text("请绘制手势密码登录").findOnce()) {
+                func.gesture_pwd(appName);
+                sleep(4000);
+                id("home_qrcodepay").findOne();
+                sleep(500);
+            }
             func.sClick(text("扫一扫").findOnce());
             sleep(500);
             // 如果找到信用卡认证，则点击关闭
