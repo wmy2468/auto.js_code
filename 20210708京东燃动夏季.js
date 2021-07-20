@@ -3,10 +3,10 @@ var func = require('func_list.js');
 
 var i = 0;
 var appName = '京东';
-var koulingText;
+var koulingText, devModel;
 var selected = func.dialogsWin(['每日任务', '图鉴'])
 koulingText = "JJ-哆壹點#UERFi7iyja%咑開京岽app";
-// var devModel = device.model;
+devModel = device.model;
 // // 3个号互点
 // switch (devModel) {
 // 	// 小米手机，LM账号
@@ -437,9 +437,11 @@ function add_cart() {
 	childCnt1 = addCartText.parent().childCount();
 	childCnt2 = childCnt1;
 	while (childCnt1 == childCnt2) {
-		if (i >= 3) {
-			scrollDown();
-			sleep(4000);
+		if (devModel == "FRD-AL00") {
+			if (i >= 3) {
+				scrollDown();
+				sleep(4000);
+			}
 		}
 		textContains(dollerText).findOne();
 		//点击商品加购物车按钮
