@@ -328,7 +328,6 @@ function getTimeDiff(area, targetTime) {
     } else {
         tDate = getToday() + "," + targetTime;
     }
-    toastLog(tDate);
     stDate = tDate.split(",");
     targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
     // 获取当前时间戳
@@ -401,7 +400,6 @@ function getToday(needNextDay) {
     var seperator1 = ",";
     var year = date.getFullYear();
     var month = date.getMonth();
-    toastLog(month);
     var strDate = date.getDate();
     return year + seperator1 + month + seperator1 + strDate;
 }
