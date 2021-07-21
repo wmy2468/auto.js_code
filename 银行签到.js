@@ -213,9 +213,8 @@ function 浦发银行() {
 }
 
 function jd_sign() {
-    func.toApp("京东");
     //等待首页加载
-    while (className("TextView").text("首页").findOnce() == null) {
+    while (text("首页").findOnce() == null) {
         func.sClick(id("xk").findOnce());
         toastLog("等待首页...");
         func.passAd();
@@ -223,20 +222,20 @@ function jd_sign() {
         func.sClick(descContains("取消").findOnce());
         sleep(1500);
     }
-    var getBeans = className("TextView").text("领京豆").findOne();
+    var getBeans = text("领京豆").findOne();
     func.sClick(getBeans.parent());
     // 等待页面加载
     textContains("可抵").findOne();
     sleep(800);
 
     while (textContains("已连").findOnce() == null) {
-        func.sClick(className("TextView").text("签到领京豆").findOnce());
+        func.cClick(text("签到领京豆").findOnce());
         sleep(800);
     }
     toastLog("已签到");
     sleep(1000);
 
-    while (className("TextView").text("首页").findOnce() == null) {
+    while (text("首页").findOnce() == null) {
         back();
         sleep(2000);
     }
@@ -253,7 +252,7 @@ function jd_sign() {
     sleep(1200);
 
     // 点击领话费券按钮
-    var huafeis, huafeiParent, huafeiLen;
+    var huafeis, huafeiParent, huafeiLen, huafeiParentChildCount;
     huafeis = text("话费券").find();
     if (!huafeis.nonEmpty()) {
         huafeis = text("话费神券").find();
@@ -283,7 +282,7 @@ function jd_sign() {
         }
     }
 
-    var signBtn = className("TextView").text("立即领红包").findOnce();
+    var signBtn = text("立即领红包").findOnce();
 
     if (signBtn == null) {
         toastLog("今日已领券");
@@ -296,7 +295,7 @@ function jd_sign() {
         sleep(1000);
     }
 
-    while (className("TextView").text("首页").findOnce() == null) {
+    while (text("首页").findOnce() == null) {
         back();
         sleep(2000);
     }
