@@ -5,13 +5,13 @@ var func = require('func_list.js');
 main();
 
 function main() {
-    func.toApp("京东");
     jd_sign();
     func.lockScr();
 }
 
 // ======================签到代码==================================
 function jd_sign() {
+    func.toApp("京东");
     //等待首页加载
     while (text("首页").findOnce() == null) {
         func.sClick(id("xk").findOnce());

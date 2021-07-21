@@ -213,6 +213,7 @@ function 浦发银行() {
 }
 
 function jd_sign() {
+    func.toApp("京东");
     //等待首页加载
     while (text("首页").findOnce() == null) {
         func.sClick(id("xk").findOnce());
