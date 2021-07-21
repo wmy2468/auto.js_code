@@ -55,9 +55,12 @@ function 京东() {
     var startTime, targetViewText;
     var actNames = ["京喜整点沃尔玛"];
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
+    var actWay, actWays;
     switch (actName) {
         // 10点
         case "京喜整点沃尔玛":
+            actWays = ["直接领券", "下单自动领券"];
+            actWay = func.dialogsWin(actWays);      // 设置查找的文本
             appName = "京喜";
             targetViewText = "沃尔玛电子卡"
             startTime = (new Date()).getHours() + ",59,59,700";
@@ -73,10 +76,23 @@ function 京东() {
             toastLog("元素文本：" + couClick.text());
             func.getTimeDiff(timeArea, startTime);              // 等待时间
             func.sClick(couClick);             // 点击元素
-            // 点击元素
-            func.sClick(text("10元补贴券").findOne());
-            func.sClick(text("满10.1元可用").findOne());
-            toastLog("已点击，请确认结果");
+            switch (actWay) {
+                case "直接领券":
+                    // 第一种领券方式
+                    func.sClick(text("10元补贴券").findOne());
+                    if (func.sClick(id("com.jd.pingou.newmodule.feature:id/btn_lingqu").text("领取").findOne())) {
+                        toastLog("已点击领取");
+                    }
+                    break;
+                case "下单自动领券":
+                    // 第二种领券
+                    func.sClick(text("领券参团").findOne());
+                    textContains("购买时会自动领取并使用").findOne();
+                    if (func.sClick(id("com.jd.pingou.newmodule.feature:id/bt_confirm").text("领券参团").findOne())) {
+                        toastLog("购买时自动领取");
+                    }
+                    break;
+            }
             sleep(3000);
             break;
     }

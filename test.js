@@ -10,7 +10,9 @@ var func = require("func_list.js");
 // func.sClick(text("10元补贴券").findOne());
 // func.sClick(text("满10.1元可用").findOne());
 
-func.cClick(text("签到领京豆").findOnce());
+func.sClick(text("领券参团").findOne());
+textContains("购买时会自动领取并使用").findOne();
+func.sClick(id("com.jd.pingou.newmodule.feature:id/bt_confirm").text("领券参团").findOne());
 
 
 function 持续响铃(时间秒) {
