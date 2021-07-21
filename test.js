@@ -4,19 +4,11 @@ var func = require("func_list.js");
 
 //toastLog(textContains("更多卡币").findOnce());
 // func.sClick(className("Image").text("c143642ad0850f7a").findOnce());
-toastLog(className("ImageButton").id("com.bill.quickmoney:id/affirm").findOnce().click());
-
-// if (textContains("密码泄露").findOnce() != null) {
-//     func.sClick("知道了").findOnce();
-//     cnt = 5;
-//     while (cnt > 0) {
-//         func.sClick(desc("删除").findOnce());
-//         cnt = cnt - 1;
-//         sleep(800);
-//     }
-//     i = 0;
-// }
-
+// func.getTimeDiff("beijing", "00,00,00,700");
+var targetViewText = "沃尔玛电子卡";
+log(func.sClick(textContains(targetViewText).findOnce()));
+func.sClick(text("10元补贴券").findOne());
+func.sClick(text("满10.1元可用").findOne());
 
 
 function 持续响铃(时间秒) {

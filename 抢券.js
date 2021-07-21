@@ -11,7 +11,7 @@ function main() {
         "工行活动",
         // "交行9点5积分",
         // "京东腾讯月",
-        "京东支付券",
+        "京东",
         "掌上生活",
         "农行缴费20-10"
     ];
@@ -42,17 +42,45 @@ function main() {
         case "农行缴费20-10":
             农行缴费();
             break;
-        case "京东支付券":
-            toastLog("已启动，请切换到京东金融APP");
-            while (func.sClick(text("立即购买").findOnce()) == false) {
-                sleep(100);
-            }
-            break;
+        case "京东":
+            京东();
     }
     toastLog("结束");
     device.cancelKeepingAwake();
 }
 // ------------------------------------------------------
+function 京东() {
+    var appName;
+    var timeArea = "北京时间";
+    var startTime, targetViewText;
+    var actNames = ["京喜整点沃尔玛"];
+    var actName = func.dialogsWin(actNames);      // 设置查找的文本
+    switch (actName) {
+        // 10点
+        case "京喜整点沃尔玛":
+            appName = "京喜";
+            targetViewText = "沃尔玛电子卡"
+            startTime = (new Date()).getHours() + ",59,59,700";
+            launchApp(appName);             // 启动APP
+            // 等待进入指定页面
+            var couClick = textContains(targetViewText).findOnce();
+            while (couClick == null) {
+                couClick = textContains(targetViewText).findOnce();
+                toastLog("请跳转到 京喜 购物车 页面，直到提示 已到达等待页面");
+                sleep(1000);
+            }
+            toastLog("元素文本：" + couClick.text());
+            func.getTimeDiff(timeArea, startTime);              // 等待时间
+            func.sClick(couClick);             // 点击元素
+            // 点击元素
+            func.sClick(text("10元补贴券").findOne());
+            func.sClick(text("满10.1元可用").findOne());
+            toastLog("已点击，请确认结果");
+            sleep(3000);
+            break;
+    }
+}
+
 
 function 农行缴费() {
     var startTime, targetViewText;

@@ -322,7 +322,13 @@ var reqDelay = 300;
 function getTimeDiff(area, targetTime) {
     // 生成今天的时间戳
     var tDate, stDate, targetTimestamp;
-    tDate = getToday() + "," + targetTime;
+    // 如果输入的时间是0点，则目标天数要+1
+    if (targetTime.substr(0, 2) == "00") {
+        tDate = getToday(needNextDay = true) + "," + targetTime;
+    } else {
+        tDate = getToday() + "," + targetTime;
+    }
+    toastLog(tDate);
     stDate = tDate.split(",");
     targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
     // 获取当前时间戳
@@ -385,11 +391,17 @@ function calTimeDiff(area) {
     return timeDiff;
 }
 
-function getToday() {
-    var date = new Date();
+function getToday(needNextDay) {
+    var date;
+    date = new Date();
+    // 如果下一天有值，则加1
+    if (needNextDay != undefined) {
+        date.setDate(date.getDate() + 1);
+    }
     var seperator1 = ",";
     var year = date.getFullYear();
     var month = date.getMonth();
+    toastLog(month);
     var strDate = date.getDate();
     return year + seperator1 + month + seperator1 + strDate;
 }
