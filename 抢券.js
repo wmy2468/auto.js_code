@@ -64,7 +64,7 @@ function 京东() {
             appName = "京喜";
             targetViewText = "沃尔玛电子卡"
             startTime = (new Date()).getHours() + ",59,59,700";
-            launchApp(appName);             // 启动APP
+            func.toApp(appName);             // 启动APP
             // 等待进入指定页面
             var couClick = textContains(targetViewText).findOnce();
             while (couClick == null) {
@@ -106,7 +106,7 @@ function 农行缴费() {
     toastLog("到点点击");
     startTime = "09,59,59,700";
     targetViewText = "[6179]";
-    launchApp(appName);
+    func.toApp(appName);
     // 等待进入指定页面
     var card = textContains(targetViewText).findOnce();
     while (card == null) {
@@ -144,7 +144,7 @@ function 掌上生活活动() {
             targetViewText = func.dialogsWin(["（周三5折）喜茶20元代金券",
                 "（周三5折）必胜客50元代金券",
                 "（周三5折）肯德基20元全场通兑代金券"]);
-            launchApp(appName);
+            func.toApp(appName);
             // 等待进入指定页面
             while (!text(targetViewText).findOnce()) {
                 toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
@@ -167,7 +167,7 @@ function 掌上生活活动() {
             toastLog("提前15秒 进入");
             startTime = "09,59,45,000";
             targetViewText = "星巴克中杯手工调制饮品";
-            launchApp(appName);
+            func.toApp(appName);
             // 等待进入指定页面
             while (!text("成团领奖").findOnce()) {
                 toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
@@ -241,7 +241,7 @@ function 光大活动() {
 
     var appName = "阳光惠生活";
     var timeArea = "北京时间";
-    launchApp(appName);
+    func.toApp(appName);
     // 等待进入指定页面
     while (!textContains(targetViewText).findOnce()) {
         toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
@@ -279,7 +279,7 @@ function 交行9点5积分() {
     var appName = "买单吧";
     var actNames = ["加油卡充值30元红包", "缴费类15元红包", "话费20元红包", "话费10元红包"];
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
-    launchApp(appName);
+    func.toApp(appName);
     // 等待进入指定页面
     var gasPacket;
     text("本月可用兑换资格2次").findOne();
@@ -350,7 +350,7 @@ function 中信活动() {
             startTime = "09,59,50,000"
             couDes = ["星巴克中杯饮品电子券", "奈雪", "喜茶25元", "苏宁支付券20元", "京东支付券20元", "天猫20元", "滴滴出行20元", "美团外卖20元"];
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
-            launchApp(appName);             // 启动APP
+            func.toApp(appName);             // 启动APP
             var couClick = null;          // 找券
             while (couClick == null) {
                 if (couDes == "星巴克中杯饮品电子券") {
@@ -383,7 +383,7 @@ function 中信活动() {
             startTime = "10,59,59,700";             // 设置时间点
             couDes = ["必胜客50元代金券", "达美乐50元代金券", "肯德基50元代金券"];             // 券名称
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
-            launchApp(appName);             // 启动APP
+            func.toApp(appName);             // 启动APP
             // 等待进入指定页面
             var couClick = text(targetViewText).findOnce();
             while (!couClick) {
@@ -406,7 +406,7 @@ function 中信活动() {
             toastLog("等待页面变化");
             startTime = "14,59,50,000"
             targetViewText = "星巴克中杯饮品电子券（15点抢兑）";               // 设置查找的文本
-            launchApp(appName);             // 启动APP
+            func.toApp(appName);             // 启动APP
             var couClick = textContains(targetViewText).findOnce();          // 找券
             while (couClick == null) {
                 couClick = textContains(targetViewText).findOnce();          // 找券
@@ -432,7 +432,7 @@ function 中信活动() {
         case "2021积分兑换":
             startTime = "14,00,00,000"
             targetViewText = "已报名，快去抢兑吧";               // 设置查找的文本
-            launchApp(appName);             // 启动APP
+            func.toApp(appName);             // 启动APP
             var btnClick = text(targetViewText).findOnce();          // 找按钮
             while (btnClick == null) {
                 btnClick = text(targetViewText).findOnce();          // 找按钮
@@ -460,7 +460,7 @@ function 京东腾讯月() {
     //var actName = func.dialogsWin(actNames);      // 设置查找的文本
     toastLog("等待页面变化");
     var appName = "京东金融";
-    launchApp(appName);
+    func.toApp(appName);
     var tVip, getBtn;
     // 等待进入指定页面
     toastLog("请跳转到腾讯月卡领取页面，直到提示  已到达等待页面");
@@ -496,7 +496,7 @@ function 工行活动() {
     var timeArea = "北京时间";
     var startTime = "10,29,59,680";
     couName = "确定"
-    launchApp(appName);             // 启动APP
+    func.toApp(appName);             // 启动APP
     // 找到使用流程，且找到对应券名称沃尔玛的情况下就是 券的详情页
     while (!(text("安全验证").findOnce())) {
         toastLog("请进入活动页面，直到提示  已到达等待页面");
