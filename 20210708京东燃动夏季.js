@@ -430,9 +430,10 @@ function member_card() {
 //加购5个商品
 function add_cart() {
 	i = 0;
-	var dollerText = "￥";
+	var addText, dollerText = "￥";
 	var findDoller;
-	var addCartText = textContains('点购物车加购5个商品').findOne();
+	addText = '点购物车加购5个商品';
+	var addCartText = textContains(addText).findOne();
 	var childCnt2, childCnt1;
 	childCnt1 = addCartText.parent().childCount();
 	childCnt2 = childCnt1;
@@ -456,14 +457,14 @@ function add_cart() {
 			}
 		}
 		func.sClick(findDoller);
-		sleep(1500);
-		addCartText = textContains('点购物车加购5个商品').findOnce();
+		sleep(2000);
+		addCartText = textContains(addText).findOnce();
 		while (addCartText == null) {
-			back();
-			sleep(2100);
-			addCartText = textContains('点购物车加购5个商品').findOnce();
-			sleep(800);
+			back_way();
+			sleep(2500);
+			addCartText = textContains(addText).findOnce();
 		}
+		sleep(1000);
 		childCnt2 = addCartText.parent().childCount();
 		toastLog("childCount1: " + childCnt1 + " / childCount2: " + childCnt2);
 		sleep(1000);
