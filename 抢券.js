@@ -66,6 +66,7 @@ function 京东() {
             var couClick = textContains(targetViewText).findOnce();
             while (couClick == null) {
                 couClick = textContains(targetViewText).findOnce();
+                func.sClick(text("购物车").findOnce());
                 toastLog("请跳转到 京喜 购物车 页面，直到提示 已到达等待页面");
                 sleep(1000);
             }
