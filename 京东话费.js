@@ -60,6 +60,10 @@ function 话费支付() {
                 break;
         }
         func.toApp("京东");
+        while (text(textPay).findOnce() == null) {
+            func.sClick(text("我的").findOnce());
+            sleep(1000);
+        }
         if (result == "华为支付") {
             hwzhifu(cardEndNumber);
         } else {
