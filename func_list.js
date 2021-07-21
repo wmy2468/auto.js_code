@@ -311,10 +311,7 @@ function setFloatyVal(window, textVal) {
     });
 }
 
-// 请求时间限制
-var timeLimit = { "京东时间": 800, "淘宝时间": 500, "北京时间": 500, "苏宁时间": 800 };
-// 设置服务器延迟
-var serverDelay = { "京东时间": 10, "淘宝时间": 10, "北京时间": 10, "苏宁时间": 10 };
+
 // 每次请求之间的延迟
 var reqDelay = 300;
 
@@ -340,8 +337,8 @@ function getTimeDiff(area, targetTime) {
 
     var floatWin = floatyInit();
 
-    //当剩余时间超过15秒的时候 等待
-    while (targetTimestamp - curTimestamp > 15000) {
+    //当剩余时间超过20秒的时候 等待
+    while (targetTimestamp - curTimestamp > 20000) {
         curTimestamp = new Date().getTime();
         setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000));
         //console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
@@ -406,13 +403,20 @@ function getToday(needNextDay) {
 
 //京东时间
 function jdTime() {
-    var res, resTime, resTimestamp, sigma, delta;
-    var timeArea = "京东时间";
-    log("请求", timeArea);
+    var res, resTime, resTimestamp, sigma, delta, timeLimit;
+    timeLimit = 800;
+    delta = 0;
+    log("请求京东时间");
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
-        res = http.get("https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5");
+        try {
+            res = http.get("https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5");
+        } catch (error) {
+            log(error);
+            toastLog("报错了 返回0");
+            return 0;
+        }
         edTimestamp = new Date();
 
         if (res.statusCode != 200) {
@@ -421,7 +425,7 @@ function jdTime() {
         }
         log("请求总时长", edTimestamp - stTimestamp);
 
-        if (edTimestamp - stTimestamp <= timeLimit[timeArea]) {
+        if (edTimestamp - stTimestamp <= timeLimit) {
             resTime = res.body.json();
             resTimestamp = Number(resTime.currentTime2);
             sigma = edTimestamp - stTimestamp;
@@ -434,18 +438,25 @@ function jdTime() {
     }
 
     //返回时间差
-    return delta - serverDelay[timeArea];
+    return delta;
 }
 
 // 北京时间
 function beiJingTime() {
-    var res, resTime, resTimestamp, sigma, delta;
-    var timeArea = "北京时间";
-    log("请求", timeArea);
+    var res, resTime, resTimestamp, sigma, delta, timeLimit;
+    timeLimit = 600;
+    delta = 0;
+    log("请求北京时间");
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
-        res = http.get("http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1");
+        try {
+            res = http.get("http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1");
+        } catch (error) {
+            log(error);
+            toastLog("报错了 返回0");
+            return 0;
+        }
         edTimestamp = new Date();
 
         if (res.statusCode != 200) {
@@ -454,7 +465,7 @@ function beiJingTime() {
         }
         log("请求总时长", edTimestamp - stTimestamp);
 
-        if (edTimestamp - stTimestamp <= timeLimit[timeArea]) {
+        if (edTimestamp - stTimestamp <= timeLimit) {
             resTime = res.body.string();
             resTimestamp = Number(resTime.replace("0=", ""));
             sigma = edTimestamp - stTimestamp;
@@ -467,18 +478,25 @@ function beiJingTime() {
     }
 
     //返回时间差
-    return delta - serverDelay[timeArea];
+    return delta;
 }
 
 // 淘宝时间
 function tbTime() {
     log("请求淘宝时间");
-    var res, resTime, resTimestamp, sigma, delta;
-    var timeArea = "淘宝时间";
+    var res, resTime, resTimestamp, sigma, delta, timeLimit;
+    timeLimit = 600;
+    delta = 0;
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
-        res = http.get("http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp");
+        try {
+            res = http.get("http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp");
+        } catch (error) {
+            log(error);
+            toastLog("报错了 返回0");
+            return 0;
+        }
         edTimestamp = new Date();
 
         if (res.statusCode != 200) {
@@ -487,7 +505,7 @@ function tbTime() {
         }
         log("请求总时长", edTimestamp - stTimestamp);
 
-        if (edTimestamp - stTimestamp <= timeLimit[timeArea]) {
+        if (edTimestamp - stTimestamp <= timeLimit) {
             resTime = res.body.json();
             resTimestamp = Number(resTime.data.t);
             sigma = edTimestamp - stTimestamp;
@@ -499,18 +517,25 @@ function tbTime() {
         sleep(reqDelay);
     }
     //返回时间差
-    return delta - serverDelay[timeArea];
+    return delta;
 }
 
 // 苏宁时间
 function snTime() {
-    var res, resTime, resTimestamp, sigma, delta;
-    var timeArea = "苏宁时间";
-    log("请求", timeArea);
+    var res, resTime, resTimestamp, sigma, delta, timeLimit;
+    timeLimit = 800;
+    delta = 0;
+    log("请求苏宁时间");
     // 获取取一次时间耗时
     while (1) {
         stTimestamp = new Date();
-        res = http.get("https://f.m.suning.com/api/ct.do");
+        try {
+            res = http.get("https://f.m.suning.com/api/ct.do");
+        } catch (error) {
+            log(error);
+            toastLog("报错了 返回0");
+            return 0;
+        }
         edTimestamp = new Date();
 
         if (res.statusCode != 200) {
@@ -519,7 +544,7 @@ function snTime() {
         }
         log("请求总时长", edTimestamp - stTimestamp);
 
-        if (edTimestamp - stTimestamp <= timeLimit[timeArea]) {
+        if (edTimestamp - stTimestamp <= timeLimit) {
             resTime = res.body.json();
             resTimestamp = Number(resTime.currentTime);
             sigma = edTimestamp - stTimestamp;
@@ -531,7 +556,7 @@ function snTime() {
         sleep(reqDelay);
     }
     //返回时间差
-    return delta - serverDelay[timeArea];
+    return delta;
 }
 
 function dialogsWin(inArr) {
