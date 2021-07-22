@@ -244,7 +244,13 @@ function clickComplete() {
 				} else if (indexText.indexOf('浏览5个') != -1) {
 					nextStep = '浏览商品';
 				} else if (indexText.indexOf('加购5个') != -1) {
-					nextStep = '加购物车';
+					// 小米Note 7 加购卡死
+					if (devModel == "Redmi Note 7") {
+						index = index + 1;
+						continue;
+					} else {
+						nextStep = '加购物车';
+					}
 				} else if (indexText.indexOf('成功入会') != -1) {
 					nextStep = '加入会员';
 				} else {
@@ -253,7 +259,13 @@ function clickComplete() {
 				}
 				// 详细描述校验，校验小程序
 				if (detailText.indexOf('小程序') != -1) {
-					nextStepDetail = '小程序';
+					// 除了Mate 30外，另外2个台古董在小程序卡死
+					if (devModel == "TAS-AL00") {
+						nextStepDetail = '小程序';
+					} else {
+						index = index + 1;
+						continue;
+					}
 				} else if (detailText.indexOf('去逛美妆护肤爆款会场') != -1) {
 					nextStepDetail = '小程序';
 				} else if (detailText.indexOf('9.9元') != -1) {
