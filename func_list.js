@@ -269,14 +269,23 @@ function gesture_pwd(appName) {
 }
 
 //生成从minNum到maxNum的随机数
-function randomNum(minNum, maxNum) {
-    switch (arguments.length) {
-        case 1:
-            return parseInt(Math.random() * minNum + 1, 10);
-        case 2:
-            return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+function randomNum(min, max, digit) {
+    /*
+    ::param min, 最小数
+    ::param max, 最大数
+    ::digit, 保留的小数位
+     */
+    var powNum;
+    // 如果没有digit参数，默认2个小数点
+    if (digit == undefined) {
+        digit = 0;
+    }
+    switch (digit) {
+        case 0:
+            return Math.floor((Math.random() * (max - min) + min));
         default:
-            return 0;
+            powNum = Math.pow(10, digit);
+            return Math.floor((Math.random() * (max - min) + min) * powNum) / powNum;
     }
 }
 // -----------通用功能区------------------

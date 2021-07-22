@@ -41,7 +41,7 @@ function 万商3比() {
     }
     func.toApp(appName);
     while (count > 0) {
-        inputVal = Math.floor((Math.random() * (max - min + 1) + min) * 10) / 10;
+        inputVal = func.randomNum(min, max, digit = 1);
         while (text("请输入收款金额").findOnce() == null) {
             func.sClick(id("home_qrcodepay").findOnce());
             if (text("请绘制手势密码登录").findOnce()) {

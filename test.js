@@ -13,9 +13,14 @@ var func = require("func_list.js");
 // func.sClick(text("领券参团").findOne());
 // textContains("购买时会自动领取并使用").findOne();
 // func.sClick(id("com.jd.pingou.newmodule.feature:id/bt_confirm").text("领券参团").findOne());
-var timeArea = "淘宝时间";
-startTime = (new Date()).getHours() + ",56,10,700";
-func.getTimeDiff(timeArea, startTime);              // 等待时间
+// var timeArea = "淘宝时间";
+var cnt = 30;
+while (cnt > 0) {
+    cnt--;
+    log(func.randomNum(1, 10, 2));
+}
+// startTime = (new Date()).getHours() + ",56,10,700";
+// func.getTimeDiff(timeArea, startTime);              // 等待时间
 
 function 持续响铃(时间秒) {
     while (时间秒 > 0) {
