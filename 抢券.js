@@ -63,7 +63,7 @@ function 京东() {
             actWay = func.dialogsWin(actWays);      // 设置查找的文本
             appName = "京喜";
             targetViewText = "沃尔玛电子卡"
-            startTime = (new Date()).getHours() + ",59,59,700";
+            startTime = (new Date()).getHours() + ",59,59,800";
             func.toApp(appName);             // 启动APP
             // 等待进入指定页面
             var couClick = textContains(targetViewText).findOnce();
