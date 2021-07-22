@@ -67,9 +67,9 @@ function 京东() {
             // || devModel == "Redmi Note 7" || devModel == "FRD-AL00")
             // 如果是Mate 30 则时间放短
             if (devModel == "TSA-AL00") {
-                subTime = ",59,59,850";
+                subTime = ",59,59,950";
             } else {
-                subTime = ",59,59,750";
+                subTime = ",59,59,850";
             }
             startTime = (new Date()).getHours() + subTime;
             func.toApp(appName);             // 启动APP
