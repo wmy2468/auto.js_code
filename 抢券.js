@@ -55,7 +55,8 @@ function 京东() {
     var startTime, targetViewText;
     var actNames = ["京喜整点沃尔玛"];
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
-    var actWay, actWays;
+    var actWay, actWays, subTime, devModel;
+    devModel = device.model;
     switch (actName) {
         // 10点
         case "京喜整点沃尔玛":
@@ -63,7 +64,14 @@ function 京东() {
             actWay = func.dialogsWin(actWays);      // 设置查找的文本
             appName = "京喜";
             targetViewText = "沃尔玛电子卡"
-            startTime = (new Date()).getHours() + ",59,59,800";
+            // || devModel == "Redmi Note 7" || devModel == "FRD-AL00")
+            // 如果是Mate 30 则时间放短
+            if (devModel == "TSA-AL00") {
+                subTime = ",59,59,850";
+            } else {
+                subTime = ",59,59,750";
+            }
+            startTime = (new Date()).getHours() + subTime;
             func.toApp(appName);             // 启动APP
             // 等待进入指定页面
             var couClick = textContains(targetViewText).findOnce();
