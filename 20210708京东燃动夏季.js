@@ -266,6 +266,9 @@ function clickComplete() {
 					nextStepDetail = '金融2次返回';
 				} else if (detailText.indexOf('领百亿购物金') != -1) {
 					nextStepDetail = '20秒等待';
+				} else if (detailText.indexOf('去养狗兑京豆') != -1) {
+					index = index + 1;
+					continue;
 				} else {
 					nextStepDetail = '无';
 				}
