@@ -95,7 +95,7 @@ function 京东() {
             couClick = textContains(targetViewText).findOnce();
             while (true) {
                 couClick = textContains(targetViewText).findOnce();
-                toastLog("请跳转到 京喜 购物车 页面，直到提示 已到达等待页面");
+                toastLog("等待返回购物车页面");
                 if (couClick != null && text("单独购买").findOnce() == null) {
                     break;
                 }
