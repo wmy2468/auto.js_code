@@ -346,13 +346,13 @@ function getTimeDiff(area, targetTime) {
 
     var floatWin = floatyInit();
 
-    //当剩余时间超过20秒的时候 等待
-    while (targetTimestamp - curTimestamp > 20000) {
+    //当剩余时间超过15秒的时候 等待
+    while (targetTimestamp - curTimestamp > 15000) {
         curTimestamp = new Date().getTime();
         setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000));
         //console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
         // toastLog("剩余时间:", targetTimestamp - curTimestamp);
-        sleep(998);
+        sleep(999);
     }
 
     var timeDiff = calTimeDiff(area);
