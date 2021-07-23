@@ -244,13 +244,7 @@ function clickComplete() {
 				} else if (indexText.indexOf('浏览5个') != -1) {
 					nextStep = '浏览商品';
 				} else if (indexText.indexOf('加购5个') != -1) {
-					// 小米Note 7 加购卡死
-					if (devModel == "Redmi Note 7") {
-						index = index + 1;
-						continue;
-					} else {
-						nextStep = '加购物车';
-					}
+					nextStep = '加购物车';
 				} else if (indexText.indexOf('成功入会') != -1) {
 					nextStep = '加入会员';
 				} else {

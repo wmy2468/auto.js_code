@@ -270,11 +270,11 @@ function gesture_pwd(appName) {
 
 //生成从minNum到maxNum的随机数
 function randomNum(min, max, digit) {
-    /*
-    ::param min, 最小数
-    ::param max, 最大数
-    ::digit, 保留的小数位
-     */
+    /**
+    @param  min 最小数
+    @param  max, 最大数
+    @param  digit, 保留的小数位
+    */
     var powNum;
     // 如果没有digit参数，默认2个小数点
     if (digit == undefined) {
