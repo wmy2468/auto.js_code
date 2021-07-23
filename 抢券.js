@@ -81,6 +81,24 @@ function 京东() {
                 toastLog("请跳转到 京喜 购物车 页面，直到提示 已到达等待页面");
                 sleep(1000);
             }
+            // 进入页面后，进入一次商品详情
+            func.sClick(couClick);             // 点击元素
+            // 延迟3秒后 返回
+            while (text("单独购买").findOnce() == null) {
+                toastLog("未进入商品页面");
+                sleep(500);
+            }
+            sleep(700);
+            back();
+            // 重新查找
+            couClick = textContains(targetViewText).findOnce();
+            while (couClick == null) {
+                couClick = textContains(targetViewText).findOnce();
+                func.sClick(text("购物车").findOnce());
+                toastLog("请跳转到 京喜 购物车 页面，直到提示 已到达等待页面");
+                sleep(1000);
+            }
+
             toastLog("元素文本：" + couClick.text());
             func.getTimeDiff(timeArea, startTime);              // 等待时间
             func.sClick(couClick);             // 点击元素
