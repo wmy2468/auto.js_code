@@ -320,10 +320,6 @@ function setFloatyVal(window, textVal) {
     });
 }
 
-
-// 每次请求之间的延迟
-var reqDelay = 300;
-
 // 时间校准 获取时间差函数
 function getTimeDiff(area, targetTime) {
     // 生成今天的时间戳
@@ -443,9 +439,7 @@ function jdTime() {
             log("误差", delta);
             break;
         }
-        sleep(reqDelay);
     }
-
     //返回时间差
     return delta;
 }
@@ -478,14 +472,12 @@ function beiJingTime() {
             resTime = res.body.string();
             resTimestamp = Number(resTime.replace("0=", ""));
             sigma = edTimestamp - stTimestamp;
-            delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
+            delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2); // 返回的时间-开始时间
             log("时延", sigma);
             log("误差", delta);
             break;
         }
-        sleep(reqDelay);
     }
-
     //返回时间差
     return delta;
 }
@@ -523,7 +515,6 @@ function tbTime() {
             log("误差", delta);
             break;
         }
-        sleep(reqDelay);
     }
     //返回时间差
     return delta;

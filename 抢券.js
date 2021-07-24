@@ -101,7 +101,7 @@ function 京东() {
                 }
                 sleep(1000);
             }
-            couClick = textContains(targetViewText).findOnsse();
+            couClick = textContains(targetViewText).findOne();
             toastLog("元素文本：" + couClick.text());
             func.getTimeDiff(timeArea, startTime);              // 等待时间
             func.sClick(couClick);             // 点击元素
