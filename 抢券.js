@@ -66,12 +66,7 @@ function 京东() {
             appName = "京喜";
             targetViewText = "沃尔玛电子卡"
             // || devModel == "Redmi Note 7" || devModel == "FRD-AL00")
-            // 如果是Mate 30 则时间放短
-            if (devModel == "TSA-AL00") {
-                subTime = ",59,59,950";
-            } else {
-                subTime = ",59,59,850";
-            }
+            subTime = ",59,59,990";
             startTime = (new Date()).getHours() + subTime;
             func.toApp(appName);             // 启动APP
             // 等待进入指定页面
