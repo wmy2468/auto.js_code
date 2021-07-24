@@ -60,8 +60,9 @@ function 京东() {
     switch (actName) {
         // 10点
         case "京喜整点沃尔玛":
-            actWays = ["直接领券", "下单自动领券"];
-            actWay = func.dialogsWin(actWays);      // 设置查找的文本
+            // actWays = ["直接领券", "下单自动领券"];
+            // actWay = func.dialogsWin(actWays);      // 设置查找的文本
+            actWay = "直接领券";
             appName = "京喜";
             targetViewText = "沃尔玛电子卡"
             // || devModel == "Redmi Note 7" || devModel == "FRD-AL00")
@@ -92,15 +93,15 @@ function 京东() {
             sleep(700);
             back();
             // 重新查找 //需要判定找不到单独购买的情况下获取的元素才准
-            couClick = textContains(targetViewText).findOnce();
+            // couClick = textContains(targetViewText).findOnce();
             while (true) {
-                couClick = textContains(targetViewText).findOnce();
                 toastLog("等待返回购物车页面");
-                if (couClick != null && text("单独购买").findOnce() == null) {
+                if (text("单独购买").findOnce() == null && textContains("去结算").findOnce() != null) {
                     break;
                 }
                 sleep(1000);
             }
+            couClick = textContains(targetViewText).findOnsse();
             toastLog("元素文本：" + couClick.text());
             func.getTimeDiff(timeArea, startTime);              // 等待时间
             func.sClick(couClick);             // 点击元素
