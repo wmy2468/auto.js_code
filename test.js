@@ -14,11 +14,8 @@ var func = require("func_list.js");
 // textContains("购买时会自动领取并使用").findOne();
 // func.sClick(id("com.jd.pingou.newmodule.feature:id/bt_confirm").text("领券参团").findOne());
 // var timeArea = "淘宝时间";
-var cnt = 30;
-while (cnt > 0) {
-    cnt--;
-    log(func.randomNum(1, 10, 2));
-}
+scrollDown(0);
+sleep(800);
 // startTime = (new Date()).getHours() + ",56,10,700";
 // func.getTimeDiff(timeArea, startTime);              // 等待时间
 

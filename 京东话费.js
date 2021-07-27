@@ -375,7 +375,7 @@ function 震动(vibrate_time) {
 
 function 删除话费订单() {
     func.toApp("京东");
-    while (text("话费充值").findOnce() == null) {
+    while (text("筛选").findOnce() == null) {
         func.sClick(text("我的").findOnce());
         func.sClick(text("我的订单").findOnce());
         toastLog("请打开 全部订单 界面");
@@ -398,7 +398,8 @@ function 删除话费订单() {
             }
         }
         catch (e) {
-            swipe(400, 2000, 400, 1000, 200);
+            scrollDown(0);
+            sleep(800);
         }
     }
 }
