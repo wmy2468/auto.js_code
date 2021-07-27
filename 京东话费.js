@@ -398,7 +398,7 @@ function 删除话费订单() {
             }
         }
         catch (e) {
-            scrollDown(0);
+            classNameContains("RecyclerView").scrollable().findOne().scrollForward();
             sleep(800);
         }
     }
