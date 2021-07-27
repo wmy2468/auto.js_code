@@ -14,10 +14,17 @@ var func = require("func_list.js");
 // textContains("购买时会自动领取并使用").findOne();
 // func.sClick(id("com.jd.pingou.newmodule.feature:id/bt_confirm").text("领券参团").findOne());
 // var timeArea = "淘宝时间";
-toastLog(classNameContains("RecyclerView").scrollable().findOne().scrollForward());
-sleep(800);
+// toastLog(classNameContains("RecyclerView").scrollable().findOne().scrollForward());
+// sleep(800);
 // startTime = (new Date()).getHours() + ",56,10,700";
 // func.getTimeDiff(timeArea, startTime);              // 等待时间
+
+var st, ed;
+st = new Date();
+func.sClick(text("补贴券可抵10元").findOne().parent().parent().child(1));
+//func.sClick(text("领券").id("com.jd.pingou.newmodule.feature:id/tv_youhui_title").findOne());
+ed = new Date();
+toastLog(ed - st);
 
 function 持续响铃(时间秒) {
     while (时间秒 > 0) {
