@@ -277,14 +277,15 @@ function clickComplete() {
 					nextStepDetail = '金融2次返回';
 				} else if (detailText.indexOf('领百亿购物金') != -1) {
 					nextStepDetail = '20秒等待';
+					// } else if (detailText.indexOf('来东东超市') != -1) {
+					// 	// 点击完成按钮返回
+					// 	nextStepDetail = 'imgClick';
 				} else if (detailText.indexOf('去养狗兑京豆') != -1) {
 					index = index + 1;
 					continue;
 				} else {
 					nextStepDetail = '无';
 				}
-
-
 				func.sClick(unComplete[index]);
 				log("nextStep：" + nextStep);
 				log("nextStepDetail：" + nextStepDetail);
@@ -361,6 +362,8 @@ function after_click(textStr, details) {
 			waitLog(5, '等待一会儿..跳转回JD');
 			func.toApp(appName);
 		}
+	} else if (details == 'imgClick') {
+		func.sClick(text('vk image').findOne().parent());
 	} else {
 		// 返回
 		back_way();
@@ -508,7 +511,7 @@ function back_way() {
 		func.sClick(id('com.jd.lib.jshop:id/asj').findOnce());
 		func.sClick(id('com.jd.lib.jshop.feature:id/gd').findOnce());
 		func.sClick(id('com.jd.lib.jshop.feature:id/mj').findOnce());
-		// func.sClick(desc('关闭页面').findOnce());
+		func.sClick(desc('关闭页面').findOnce());
 		func.sClick(idContains('close').findOnce());
 		func.sClick(textContains('离开').findOnce());
 		func.sClick(textContains('我要离开').findOnce());
