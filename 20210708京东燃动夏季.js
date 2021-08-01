@@ -67,14 +67,15 @@ function process() {
 	}
 	//延迟3秒
 	sleep(3000);
-	switch (selected) {
-		case '每日任务':
-			每日任务();
-			break;
-		case '图鉴':
-			图鉴();
-			break;
-	}
+	每日任务();
+	// switch (selected) {
+	// 	case '每日任务':
+	// 		每日任务();
+	// 		break;
+	// 	case '图鉴':
+	// 		图鉴();
+	// 		break;
+	// }
 }
 
 
