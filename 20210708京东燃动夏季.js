@@ -4,7 +4,7 @@ var func = require('func_list.js');
 var i = 0;
 var appName = '京东';
 var koulingText, devModel;
-// var selected = func.dialogsWin(['每日任务', '图鉴'])
+var selected = func.dialogsWin(['每日任务', '图鉴'])
 koulingText = "27.0red包#M1VFq6V33b%大家买买买都→猄栋";
 devModel = device.model;
 // // 3个号互点
@@ -67,15 +67,14 @@ function process() {
 	}
 	//延迟3秒
 	sleep(3000);
-	每日任务();
-	// switch (selected) {
-	// 	case '每日任务':
-	// 		每日任务();
-	// 		break;
-	// 	case '图鉴':
-	// 		图鉴();
-	// 		break;
-	// }
+	switch (selected) {
+		case '每日任务':
+			每日任务();
+			break;
+		case '图鉴':
+			图鉴();
+			break;
+	}
 }
 
 
