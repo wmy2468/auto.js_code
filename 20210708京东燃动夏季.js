@@ -4,8 +4,8 @@ var func = require('func_list.js');
 var i = 0;
 var appName = '京东';
 var koulingText, devModel;
-var selected = func.dialogsWin(['每日任务', '图鉴'])
-koulingText = "JJ-哆壹點#UERFi7iyja%咑開京岽app";
+// var selected = func.dialogsWin(['每日任务', '图鉴'])
+koulingText = "27.0复制整段话 Http:/JD0LUtiT7ShiLi 大球球了！幫我點下得運動red包#M1VFq6V33b%大家买买买都→猄栋";
 devModel = device.model;
 // // 3个号互点
 // switch (devModel) {
