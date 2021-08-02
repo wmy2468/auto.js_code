@@ -73,6 +73,7 @@ function 京东() {
 
     // || devModel == "Redmi Note 7" || devModel == "FRD-AL00")
     subTime = ",59,59,990";
+    // subTime = ",50,20,990";
     startTime = (new Date()).getHours() + subTime;
     func.toApp(appName);             // 启动APP
     // 等待进入指定页面
@@ -109,7 +110,8 @@ function 京东() {
     switch (actWay) {
         case "直接领券":
             // 第一种领券方式
-            func.sClick(text("10元补贴券").findOne());
+            func.sClick(text("领券").id("com.jd.pingou.newmodule.feature:id/tv_youhui_title").findOne())
+            // func.sClick(text("补贴券可抵10元").findOne().parent().parent().child(1));
             if (func.sClick(id("com.jd.pingou.newmodule.feature:id/btn_lingqu").text("领取").findOne())) {
                 toastLog("已点击领取");
             }
@@ -118,7 +120,7 @@ function 京东() {
             // 第二种领券
             func.sClick(text("领券参团").findOne());
             textContains("购买时会自动领取并使用").findOne();
-            if (func.sClick(id("com.jd.pingou.newmodule.feature:id/bt_confirm").text("领券参团").findOne())) {
+            if (func.sClick(text("领券参团").findOne())) {
                 toastLog("购买时自动领取");
             }
             break;

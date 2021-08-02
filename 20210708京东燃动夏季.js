@@ -5,7 +5,7 @@ var i = 0;
 var appName = '京东';
 var koulingText, devModel;
 var selected = func.dialogsWin(['每日任务', '图鉴'])
-koulingText = "JJ-哆壹點#UERFi7iyja%咑開京岽app";
+koulingText = "27.0red包#M1VFq6V33b%大家买买买都→猄栋";
 devModel = device.model;
 // // 3个号互点
 // switch (devModel) {
@@ -277,14 +277,15 @@ function clickComplete() {
 					nextStepDetail = '金融2次返回';
 				} else if (detailText.indexOf('领百亿购物金') != -1) {
 					nextStepDetail = '20秒等待';
+				} else if (detailText.indexOf('来东东超市') != -1) {
+					// 点击完成按钮返回
+					nextStepDetail = 'imgClick';
 				} else if (detailText.indexOf('去养狗兑京豆') != -1) {
 					index = index + 1;
 					continue;
 				} else {
 					nextStepDetail = '无';
 				}
-
-
 				func.sClick(unComplete[index]);
 				log("nextStep：" + nextStep);
 				log("nextStepDetail：" + nextStepDetail);
@@ -361,6 +362,9 @@ function after_click(textStr, details) {
 			waitLog(5, '等待一会儿..跳转回JD');
 			func.toApp(appName);
 		}
+	} else if (details == 'imgClick') {
+		func.sClick(desc('关闭页面').findOnce());
+		sleep(3000);
 	} else {
 		// 返回
 		back_way();

@@ -374,6 +374,8 @@ function 震动(vibrate_time) {
 // ---------------------------------------------------
 
 function 删除话费订单() {
+    var cnt;
+    cnt = 0;
     func.toApp("京东");
     while (text("筛选").findOnce() == null) {
         func.sClick(text("我的").findOnce());
@@ -386,20 +388,27 @@ function 删除话费订单() {
     while (1) {
         try {
             title = text("话费充值").findOnce();
-            delParent = title.parent().parent().parent().parent();
+            delParent = title.parent().parent().parent().parent().parent();
+
             if (delParent.childCount() == 2) {
-                delBtn = delParent.child(1).child(2);
+                delBtn = delParent.child(2).child(1).child(0).child(0).child(0)
             } else {
-                delBtn = delParent.child(2).child(0);
+                delBtn = delParent.child(2).child(1).child(0).child(0).child(0)
             }
             if (func.sClick(delBtn)) {
                 func.sClick(text("删除").findOne());
                 sleep(1000);
             }
+            cnt = 0;
         }
         catch (e) {
             classNameContains("RecyclerView").scrollable().findOne().scrollForward();
             sleep(800);
+            cnt = cnt + 1;
+            if (cnt > 10) {
+                break;
+            }
         }
     }
+    alert("删除完成");
 }
