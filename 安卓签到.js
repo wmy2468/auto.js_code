@@ -6,7 +6,7 @@ main();
 
 function main() {
     jd_sign();
-    func.lockScr();
+    // func.lockScr();
 }
 
 // ======================签到代码==================================
