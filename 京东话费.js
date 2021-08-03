@@ -388,13 +388,22 @@ function 删除话费订单() {
     while (1) {
         try {
             title = text("话费充值").findOnce();
-            delParent = title.parent().parent().parent().parent().parent();
 
+
+            // 右上角 删除框形式
+            delParent = title.parent().parent().parent().parent();
             if (delParent.childCount() == 2) {
-                delBtn = delParent.child(2).child(1).child(0).child(0).child(0)
+                delBtn = delParent.child(1).child(2);
             } else {
-                delBtn = delParent.child(2).child(1).child(0).child(0).child(0)
+                delBtn = delParent.child(2).child(0);
             }
+            // 删除订单 按钮形式
+            // delParent = title.parent().parent().parent().parent().parent();
+            // if (delParent.childCount() == 2) {
+            //     delBtn = delParent.child(2).child(1).child(0).child(0).child(0)
+            // } else {
+            //     delBtn = delParent.child(2).child(1).child(0).child(0).child(0)
+            // }
             if (func.sClick(delBtn)) {
                 func.sClick(text("删除").findOne());
                 sleep(1000);
