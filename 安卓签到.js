@@ -6,6 +6,7 @@ main();
 
 function main() {
     jd_sign();
+    alert("已完成");
     // func.lockScr();
 }
 
