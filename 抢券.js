@@ -425,9 +425,9 @@ function 中信活动() {
             func.getTimeDiff(timeArea, startTime);              // 等待时间
             func.sClick(couClick);             // 点击元素
             // 点击元素
-            while (text("购买后1天内有效").findOnce() == null) {
-                func.sClick(text("立即购买").findOnce());
-                sleep(80);
+            while (className("android.view.View").text("购买后1天内有效").findOnce() == null) {
+                func.sClick(className("Button").text("立即购买").findOnce());
+                func.sClick(className("Button").text("已售罄").findOnce());
             }
             func.sClick(text("确认").findOne());
             toastLog("已点击，请确认结果");
