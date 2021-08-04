@@ -447,7 +447,7 @@ function jdTime() {
 // 北京时间
 function beiJingTime() {
     var res, resTime, resTimestamp, sigma, delta, timeLimit;
-    timeLimit = 600;
+    timeLimit = 800;
     delta = 0;
     log("请求北京时间");
     // 获取取一次时间耗时
