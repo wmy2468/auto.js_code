@@ -59,6 +59,11 @@ function 话费支付() {
                 cardEndNumber = "5976"
                 break;
         }
+        // 如果是荣耀8，先启动云闪付和钱包
+        if (device.model == "FRD-AL00") {  
+            func.toApp("华为钱包");
+            func.toApp("云闪付");
+        }
         func.toApp("京东");
         while (text(textPay).findOnce() == null) {
             func.sClick(text("我的").findOnce());
