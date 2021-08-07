@@ -61,8 +61,13 @@ function 话费支付() {
         }
         // 如果是荣耀8，先启动云闪付和钱包
         if (device.model == "FRD-AL00") {  
-            func.toApp("华为钱包");
+            func.toApp("钱包");
+            sleep(2000);
+            home();
             func.toApp("云闪付");
+            sleep(2000);
+            home();
+            sleep(2000);
         }
         func.toApp("京东");
         while (text(textPay).findOnce() == null) {
