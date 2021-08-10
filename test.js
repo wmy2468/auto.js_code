@@ -28,12 +28,15 @@ var func = require("func_list.js");
 
 // func.sClick(className("Button").depth(12).text("立即购买").findOnce());
 
-func.sClick(text("小爷酸汤鱼100元代金券").findOnce().parent().parent());             // 点击元素
-// 点击元素
-while (className("android.view.View").text("购买后1天内有效").findOnce() == null) {
-    func.sClick(className("Button").text("立即购买").findOnce());
-    func.sClick(className("Button").text("已售罄").findOnce());
-}
+// func.sClick(text("小爷酸汤鱼100元代金券").findOnce().parent().parent());             // 点击元素
+// // 点击元素
+// while (className("android.view.View").text("购买后1天内有效").findOnce() == null) {
+//     func.sClick(className("Button").text("立即购买").findOnce());
+//     func.sClick(className("Button").text("已售罄").findOnce());
+// }
+
+func.toApp("华为钱包");
+
 
 function 持续响铃(时间秒) {
     while (时间秒 > 0) {
