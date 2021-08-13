@@ -15,7 +15,7 @@ var 控制台, 悬控移动和点击, 接码窗口;
       <TableRow>
         <vertical gravity="center">
           <horizontal>
-            <button id='隐藏或显示' layout_weight="1">隐藏或显示接码窗口</button>
+            <button id='隐藏或显示' layout_weight="1"> 十 </button>
           </horizontal>
         </vertical>
       </TableRow>
@@ -46,6 +46,7 @@ var 控制台, 悬控移动和点击, 接码窗口;
     floaty.closeAll()
   }
 )
+
 控制台.隐藏或显示.click(
   function () {
     log('点击了控制台的隐藏或显示按钮')
