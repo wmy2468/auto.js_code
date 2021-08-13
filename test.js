@@ -37,84 +37,18 @@ var func = require("func_list.js");
 
 //运行环境为auto.js pro版本
 
-console.show();
-
-var win = floaty.rawWindow(
-
-    <vertical>
-
-        <canvas id="canvas" layout_weight="1" />
-
-    </vertical>
-
-);
-
-win.setSize(-1, -1);
-
-win.setTouchable(true);
-
-setInterval(() => { }, 100);
-
-new canvasDraw(win.canvas);
-
-function canvasDraw(canvasView) {
-    var paint = new Paint;
-
-    paint.setStrokeWidth(10);
-
-    paint.setStyle(Paint.Style.FILL);
-
-    paint.setStrokeCap(Paint.Cap.SQUARE);
-
-    paint.setARGB(50, 100, 120, 160);
-
-    viewDraw = (canvas) => {
-        win.canvas.setOnTouchListener(function (view, event) {
-            switch (event.getAction()) {
-                case event.ACTION_DOWN:
-
-                    downX = parseInt(event.getX());
-
-                    downY = parseInt(event.getY());
-
-                    toastLog("down:\n(" + downX + "," + downY + ")");
-
-                    return true;
-
-                case event.ACTION_MOVE:
-
-                    return true;
-
-                case event.ACTION_UP:
-
-                    upX = parseInt(event.getX());
-
-                    upY = parseInt(event.getY());
-
-                    toastLog("up:\n(" + upX + "," + upY + ")");
-
-                    return true;
-
-            };
-
-            return true;
-
-        })
-
-    };
-
-    canvasView.on("draw", viewDraw);
-
-}
+// var window = floaty.window(
+//     <vertical gravity="center" >
+//         <button id='移动' layout_weight="1" alpha="0"></button>
+//         <text id='text' layout_weight="1" gravity="center" textColor="red"> 一十一 </text>
+//         <button id='关闭' layout_weight="1">关闭</button>
+//     </vertical >
+// );
 
 
-function 持续响铃(时间秒) {
-    while (时间秒 > 0) {
-        时间秒 = 时间秒 - 1;
-        铃声通知();
-        sleep(1000);
-    }
-}
+
+
+// toastLog(x + "," + y);
 
 function 铃声通知(播放时长, 音量) {
     var 音量 = 音量 || 13;

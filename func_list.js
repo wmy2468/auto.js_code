@@ -289,17 +289,54 @@ function randomNum(min, max, digit) {
     }
 }
 // -----------通用功能区------------------
-
-function floatyInit() {
-    var window = floaty.window(
-        <frame gravity="center" bg="#1F1F1F" h="25dp" >
-            <text id="text" textSize="16sp" textStyle="bold" typeface="monospace" textColor="#00FFFF" />
-        </frame >
-    );
-    // 设置单击可移动事件
-    window.text.click(() => {
-        window.setAdjustEnabled(!window.isAdjustEnabled());
+function floatyMove(window, view, clickAction) {
+    var show = function () { }
+    //记录按键被按下时的触摸坐标
+    var x = 0, y = 0;
+    //记录按键被按下时的悬浮窗位置
+    var windowX, windowY;
+    //记录按键被按下的时间以便判断长按等动作
+    var downTime;
+    var onClick = show
+    if (clickAction) {
+        onClick = () => { clickAction() }
+    }
+    view.setOnTouchListener(function (view, event) {
+        switch (event.getAction()) {
+            case event.ACTION_DOWN:
+                x = event.getRawX();
+                y = event.getRawY();
+                windowX = window.getX();
+                windowY = window.getY();
+                downTime = new Date().getTime();
+                return true;
+            case event.ACTION_MOVE:
+                //移动手指时调整悬浮窗位置
+                window.setPosition(windowX + (event.getRawX() - x),
+                    windowY + (event.getRawY() - y));
+                //如果按下的时间超过5秒判断为长按，退出脚本
+                if (new Date().getTime() - downTime > 5500) {
+                    exit();
+                }
+                return true;
+            case event.ACTION_UP:
+                //手指弹起时如果偏移很小则判断为点击
+                if (Math.abs(event.getRawY() - y) < 5 && Math.abs(event.getRawX() - x) < 5) {
+                    onClick(clickAction);
+                }
+                return true;
+        }
+        return true;
     });
+}
+
+// 传入悬浮窗和悬浮窗的某个控件ID
+function floatyInit(window, winView) {
+    // 设置单击可移动事件
+    // window.text.click(() => {
+    //     floatyWin.setAdjustEnabled(!floatyWin.isAdjustEnabled());
+    // });
+    floatyMove(window, winView);
 
     if (device.brand == "HUAWEI") {
         //设置浮窗位置
@@ -313,11 +350,23 @@ function floatyInit() {
     return window;
 }
 
+
 function setFloatyVal(window, textVal) {
     //对控件的操作需要在UI线程中执行
     ui.run(function () {
         window.text.setText(textVal);
     });
+}
+
+function countDownInit() {
+    var floatyWin = floaty.window(
+        <frame gravity="center" bg="#1F1F1F" h="25dp" >
+            <text id="text" textSize="16sp" textStyle="bold" typeface="monospace" textColor="#00FFFF"></text>
+        </frame >
+    );
+    // 对生成的悬浮窗初始化
+    floatyInit(floatyWin, floatyWin.text);
+    return floatyWin;
 }
 
 // 时间校准 获取时间差函数
@@ -340,7 +389,7 @@ function getTimeDiff(area, targetTime) {
         exit();
     }
 
-    var floatWin = floatyInit();
+    var floatWin = countDownInit();
 
     //当剩余时间超过15秒的时候 等待
     while (targetTimestamp - curTimestamp > 15000) {
@@ -348,7 +397,7 @@ function getTimeDiff(area, targetTime) {
         setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000));
         //console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
         // toastLog("剩余时间:", targetTimestamp - curTimestamp);
-        sleep(999);
+        sleep(1000);
     }
 
     var timeDiff = calTimeDiff(area);
@@ -568,6 +617,7 @@ function dialogsWin(inArr) {
 }
 
 module.exports = {
+    floatyMove: floatyMove,
     toAutojs: toAutojs,
     cClick: cClick,
     sClick: sClick,

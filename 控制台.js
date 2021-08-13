@@ -9,12 +9,13 @@ var 控制台, 悬控移动和点击, 接码窗口;
 
 
 控制台 = floaty.window(
-  <vertical gravity="center" >
-    <button id='移动' layout_weight="1" layout_gravity="left|top">移动</button>
+  <vertical bg="#00ff00">
+    <button id='移动' layout_weight="1"> 移动</button>
     <text id='隐藏或显示' layout_weight="1" gravity="center" textColor="red"> 一十一 </text>
     <button id='关闭' layout_weight="1">关闭</button>
   </vertical >
 )
+控制台.setPosition(540, 100)
 
 
 // function kill(pid){
@@ -26,9 +27,9 @@ var 控制台, 悬控移动和点击, 接码窗口;
     // var myPid=android.os.Process.myPid()
     // kill(myPid)
     // 控制台.close()
-    toastLog(控制台.getX());
-    toastLog(控制台.top);
-    floaty.closeAll()
+
+    toastLog(控制台.getX() + "," + 控制台.getY() + "," + 控制台.getWidth() + "," + 控制台.getHeight());
+    floaty.closeAll();
   }
 )
 
