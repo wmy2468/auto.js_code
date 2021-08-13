@@ -10,7 +10,7 @@ var 控制台, 悬控移动和点击, 接码窗口;
 
 控制台 = floaty.window(
   <vertical gravity="center">
-    <text id='隐藏或显示' layout_weight="1" > 十 </text>
+    <text id='隐藏或显示' layout_weight="1" gravity="center" textColor="red"> 十 </text>
     <button id='移动' layout_weight="1">移动</button>
     <button id='关闭' layout_weight="1">关闭</button>
   </vertical >
