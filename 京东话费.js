@@ -29,7 +29,7 @@ function 话费支付() {
         func.toApp("京东");
         weiXinn();
     } else if (result == "华为支付" || result == "云闪付") {
-        var cardName = func.dialogsWin(["JJ-中信", "LP-中信", "华夏", "JJ-京东红卡", "浦发", "交通", "LM-中行", "邮储", "JJ-建行"]);
+        var cardName = func.dialogsWin(["JJ-中信", "JJ-华为中信", "LP-中信", "华夏", "JJ-京东红卡", "浦发", "交通", "LM-中行", "邮储", "JJ-建行"]);
         switch (cardName) {
             case "JJ-中信":
                 cardEndNumber = "2079"
