@@ -34,6 +34,9 @@ function 话费支付() {
             case "JJ-中信":
                 cardEndNumber = "2079"
                 break;
+            case "JJ-华为中信":
+                cardEndNumber = "6710"
+                break;
             case "LP-中信":
                 cardEndNumber = "5177"
                 break;
