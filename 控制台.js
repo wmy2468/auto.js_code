@@ -9,27 +9,10 @@ var 控制台, 悬控移动和点击, 接码窗口;
 
 
 控制台 = floaty.window(
-  <vertical bg='#FFB6C1' gravity="center">
-    <TableLayout layout_width="match_parent" layout_height="match_parent" stretchColumns="1" gravity="center" alpha="0.2">
-      <TableRow>
-        <vertical gravity="center">
-          <horizontal>
-            <text id='隐藏或显示' layout_weight="1" alpha="0.1"> 十 </text>
-          </horizontal>
-        </vertical>
-      </TableRow>
-    </TableLayout>
-    <TableRow>
-      <horizontal>
-        <button id='移动' layout_weight="1">移动</button>
-      </horizontal>
-    </TableRow>
-    <TableRow>
-      <horizontal>
-        <button id='关闭' layout_weight="1">关闭</button>
-      </horizontal>
-    </TableRow>
-
+  <vertical gravity="center">
+    <text id='隐藏或显示' layout_weight="1" > 十 </text>
+    <button id='移动' layout_weight="1">移动</button>
+    <button id='关闭' layout_weight="1">关闭</button>
   </vertical >
 )
 
