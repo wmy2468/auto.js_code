@@ -26,7 +26,7 @@ var 控制台, 悬控移动和点击, 接码窗口;
     // var myPid=android.os.Process.myPid()
     // kill(myPid)
     // 控制台.close()
-    toastLog(控制台.关闭.getX());
+    toastLog(控制台.关闭.bounds().centerX());
     floaty.closeAll()
   }
 )
