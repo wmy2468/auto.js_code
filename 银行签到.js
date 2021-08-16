@@ -316,7 +316,7 @@ function 买单吧() {
     sleep(1000);
     // 任意一个找到就退出循环
     while (!(textContains("客官明天再来哟").findOnce() != null || textContains("今日已签到").findOnce() != null)) {
-        func.sClick(idContains("_signin").findOnce());
+        func.sClick(idContains("signin").findOnce());
         func.sClick(text("立即签到").findOnce());
         sleep(1000);
         func.sClick(id("com.bankcomm.maidanba:id/bt_welfare_lottery").text("去抽奖").findOnce());
