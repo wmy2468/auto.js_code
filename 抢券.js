@@ -13,7 +13,8 @@ function main() {
         // "京东腾讯月",
         "京东",
         "掌上生活",
-        "农行缴费20-10"
+        "云闪付锦鲤活动"
+        // "农行缴费20-10"
     ];
 
     //---------------配置区域-----------------
@@ -41,6 +42,9 @@ function main() {
             break;
         case "农行缴费20-10":
             农行缴费();
+            break;
+        case "云闪付锦鲤活动":
+            云闪付锦鲤活动();
             break;
         case "京东":
             京东();
@@ -128,6 +132,72 @@ function 京东() {
     sleep(3000);
 
 }
+
+function 云闪付锦鲤活动() {
+    var startTime, targetViewText;
+    var appName = "云闪付";
+    var timeArea = "北京时间";
+    toastLog("到点点击");
+    var idFind, idEveryDay, id567_10, id567_15, idFriday10, idFriday15, idSaturday10, idSaturday15, idSunday10, idSunday15;
+    targetViewText = "应用跳转";
+
+    idEveryDay = "4182765241";
+    idFriday10 = "2943312694";
+    idFriday15 = "9303295163";
+    idSaturday10 = "7251082198";
+    idSaturday15 = "4700237954";
+    idSunday10 = "7944754729";
+    idSunday15 = "3964351356";
+
+    var currentWeekday = new Date().getDay();
+    // 返回的周日0 周一返回1，周二2
+    switch (currentWeekday) {
+        case 5:
+            id567_10 = idFriday10;
+            id567_15 = idFriday15;
+            break;
+        case 6:
+            id567_10 = idSaturday10;
+            id567_15 = idSaturday15;
+            break;
+        case 0:
+            id567_10 = idSunday10;
+            id567_15 = idSunday15;
+            break;
+    }
+    targetViewText = func.dialogsWin(["每日券", "周五六日10点", "周五六日15点"]);
+    switch (targetViewText) {
+        case "每日券":
+            startTime = "08,59,59,700";
+            idFind = idEveryDay;
+            break;
+        case "周五六日10点":
+            startTime = "09,59,59,700";
+            idFind = id567_10;
+            break;
+        case "周五六日15点":
+            startTime = "14,59,59,700";
+            idFind = id567_15;
+            break;
+    }
+
+    func.toApp(appName);
+    // 等待进入指定页面
+    var card = id(idFind).text(targetViewText).findOnce();
+    while (card == null) {
+        d(idFind).text(targetViewText).findOnce();
+        toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
+        sleep(800);
+    }
+    toastLog("已到达指定页面，等待");
+    //  等待倒计时
+    func.getTimeDiff(timeArea, startTime);
+    // 点击进入 等待
+    func.sClick(card);
+    func.sClick(text("立即领取").findOne());
+    toastLog("已完成，等待验证码");
+}
+
 
 
 function 农行缴费() {
