@@ -44,8 +44,36 @@ var func = require("func_list.js");
 //         <button id='关闭' layout_weight="1">关闭</button>
 //     </vertical >
 // );
+买单吧();
 
-
+function 买单吧() {
+    var appName = "买单吧";
+    //closeApp(appName);
+    func.toApp(appName);
+    while (className("TextView").id("tv_title").text("我的").findOnce() == null) {
+        func.passAd();
+        func.sClick(id("ivADClose").findOnce());
+    }
+    func.sClick(text("我的").findOne().parent().parent().parent().parent().child(2));
+    text("羊毛资讯").findOne();
+    sleep(1000);
+    // 任意一个找到就退出循环
+    while (!(textContains("客官明天再来哟").findOnce() != null || textContains("今日已签到").findOnce() != null)) {
+        func.sClick(idC("com.bankcomm.maidanba:id/iv_signin").findOnce());
+        func.sClick(text("立即签到").findOnce());
+        sleep(1000);
+        func.sClick(id("com.bankcomm.maidanba:id/bt_welfare_lottery").text("去抽奖").findOnce());
+        if (text("手势登录").findOnce() != null) {
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(1000);
+        }
+        // 点击完成按钮
+        func.sClick(id("com.bankcomm.maidanba:id/bt_ws_lottery_close").findOnce());
+    }
+    toastLog(appName + "已签到");
+    sleep(1000);
+}
 
 
 // toastLog(x + "," + y);
