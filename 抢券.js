@@ -183,9 +183,9 @@ function 云闪付锦鲤活动() {
 
     func.toApp(appName);
     // 等待进入指定页面
-    var card = id(idFind).text(targetViewText).findOnce();
+    var card = idContains(idFind).text(targetViewText).findOnce();
     while (card == null) {
-        card = id(idFind).text(targetViewText).findOnce();
+        card = idContains(idFind).text(targetViewText).findOnce();
         toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
         sleep(800);
     }

@@ -44,7 +44,7 @@ var func = require("func_list.js");
 //         <button id='关闭' layout_weight="1">关闭</button>
 //     </vertical >
 // );
-toastLog(new Date().getDay());
+toastLog(idContains("4182765241").text("应用跳转").findOnce());
 
 
 // toastLog(x + "," + y);
