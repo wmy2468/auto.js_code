@@ -44,7 +44,8 @@ var func = require("func_list.js");
 //         <button id='关闭' layout_weight="1">关闭</button>
 //     </vertical >
 // );
-toastLog(idContains("4182765241").text("应用跳转").findOnce());
+getCoupons = text("领取2").find();
+toastLog(getCoupons.length);
 
 
 // toastLog(x + "," + y);

@@ -139,7 +139,6 @@ function 云闪付锦鲤活动() {
     var timeArea = "北京时间";
     toastLog("到点点击");
     var idFind, idEveryDay, id567_10, id567_15, idFriday10, idFriday15, idSaturday10, idSaturday15, idSunday10, idSunday15;
-    targetViewText = "应用跳转";
 
     idEveryDay = "4182765241";
     idFriday10 = "2943312694";
@@ -183,9 +182,11 @@ function 云闪付锦鲤活动() {
     log(idFind);
     func.toApp(appName);
     // 等待进入指定页面
-    var card = idContains(idFind).text(targetViewText).findOnce();
+
+    var card;
+    card = idContains(idFind).findOnce();
     while (card == null) {
-        card = idContains(idFind).text(targetViewText).findOnce();
+        card = idContains(idFind).findOnce();
         toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
         sleep(800);
     }
@@ -194,8 +195,23 @@ function 云闪付锦鲤活动() {
     func.getTimeDiff(timeArea, startTime);
     // 点击进入 等待
     func.sClick(card);
-    func.sClick(text("立即领取").findOne());
-    toastLog("已完成，等待验证码");
+
+    // 定义领取按钮
+    var getCoupons, couponsCount;
+    toastLog("等待领取页面加载...");
+    while (textContains("领取").findOnce() == null) {
+        log("等待领取页面加载...");
+        sleep(300);
+    }
+    getCoupons = textContains("领取").find();
+    couponsCount = getCoupons.length;
+    if (couponsCount == 3) {
+        func.sClick(getCoupons[2]); //点击线下券
+    } else if (couponsCount != 0) {
+        func.sClick(getCoupons[0]); //点击线上券 如果只有1张就点击1张
+    }
+
+    toastLog("已完成");
 }
 
 
