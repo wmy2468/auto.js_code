@@ -180,7 +180,7 @@ function 云闪付锦鲤活动() {
             idFind = id567_15;
             break;
     }
-
+    log(idFind);
     func.toApp(appName);
     // 等待进入指定页面
     var card = idContains(idFind).text(targetViewText).findOnce();
