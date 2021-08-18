@@ -63,18 +63,18 @@ function 话费支付() {
                 break;
         }
         // 如果是荣耀8，先启动云闪付和钱包
-        if (device.model == "FRD-AL00") {  
-            func.toApp("京东");
-            home();
-            sleep(1000);
-            func.toApp("华为钱包");
-            sleep(2000);
-            home();
-            func.toApp("云闪付");
-            sleep(2000);
-            home();
-            sleep(2000);
-        }
+        // if (device.model == "FRD-AL00") {
+        //     func.toApp("京东");
+        //     home();
+        //     sleep(1000);
+        //     func.toApp("华为钱包");
+        //     sleep(2000);
+        //     home();
+        //     func.toApp("云闪付");
+        //     sleep(2000);
+        //     home();
+        //     sleep(2000);
+        // }
         func.toApp("京东");
         while (text(textPay).findOnce() == null) {
             func.sClick(text("我的").findOnce());
@@ -345,7 +345,6 @@ function inputPwd(number) {
     var offsetX = 360, offsetY = 154;
     var nums = {
         '0': [centerX, centerY + offsetY + offsetY],      //x,y++
-
         '1': [centerX - offsetX, centerY - offsetY],      //x-,y-
         '2': [centerX, centerY - offsetY],                //x,y-
         '3': [centerX + offsetX, centerY - offsetY],      //x+,y-
