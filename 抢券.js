@@ -205,6 +205,7 @@ function 云闪付锦鲤活动() {
     }
     getCoupons = textContains("领取").find();
     couponsCount = getCoupons.length;
+    toastLog("找到领取:" + couponsCount + "个数");
     if (couponsCount == 3) {
         func.sClick(getCoupons[2]); //点击线下券
     } else if (couponsCount != 0) {
