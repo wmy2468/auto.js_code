@@ -134,7 +134,7 @@ function 京东() {
 }
 
 function 云闪付锦鲤活动() {
-    var startTime, targetViewText;
+    var startTime, targetViewText, clickText;
     var appName = "云闪付";
     var timeArea = "北京时间";
     toastLog("到点点击");
@@ -167,16 +167,19 @@ function 云闪付锦鲤活动() {
     targetViewText = func.dialogsWin(["每日券", "周五六日10点", "周五六日15点"]);
     switch (targetViewText) {
         case "每日券":
-            startTime = "08,59,59,700";
+            startTime = "08,59,59,600";
             idFind = idEveryDay;
+            clickText = "领取";
             break;
         case "周五六日10点":
-            startTime = "09,59,59,700";
+            startTime = "09,59,59,600";
             idFind = id567_10;
+            clickText = "立即领取";
             break;
         case "周五六日15点":
-            startTime = "14,59,59,700";
+            startTime = "14,59,59,600";
             idFind = id567_15;
+            clickText = "立即领取";
             break;
     }
     log(idFind);
@@ -197,19 +200,25 @@ function 云闪付锦鲤活动() {
     func.sClick(card);
 
     // 定义领取按钮
-    var getCoupons, couponsCount;
+    var clickItem, itemsCount;
     toastLog("等待领取页面加载...");
-    while (textContains("领取").findOnce() == null) {
+    clickItem = text(clickText).findOnce();
+    // 如果是非空的 退出
+    while (!clickItem.nonEmpty()) {
+        clickItem = text(clickText).find();
         log("等待领取页面加载...");
         sleep(300);
     }
-    getCoupons = textContains("领取").find();
-    couponsCount = getCoupons.length;
-    toastLog("找到领取:" + couponsCount + "个数");
-    if (couponsCount == 3) {
-        func.sClick(getCoupons[2]); //点击线下券
-    } else if (couponsCount != 0) {
-        func.sClick(getCoupons[0]); //点击线上券 如果只有1张就点击1张
+    if (targetViewText == "每日券") {
+        itemsCount = clickItem.length;
+        toastLog("找到领取:" + itemsCount + "个数");
+        if (itemsCount == 3) {
+            func.sClick(clickItem[2]); //点击线下券
+        } else if (itemsCount != 0) {
+            func.sClick(clickItem[0]); //点击线上券 如果只有1张就点击1张
+        }
+    } else {
+        func.sClick(clickItem[0]);
     }
 
     toastLog("已完成");
