@@ -202,10 +202,10 @@ function 云闪付锦鲤活动() {
 
     toastLog("已到达指定页面，等待");
     //  等待倒计时
-    // func.getTimeDiff(timeArea, startTime);
+    func.getTimeDiff(timeArea, startTime);
     // 点击进入 等待
     func.sClick(clickItem);
-    func.sClick(text(clickText).findOne());
+    func.sClick(text("立即领取").findOne());
     toastLog("已完成");
 }
 
