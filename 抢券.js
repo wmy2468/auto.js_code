@@ -138,89 +138,74 @@ function 云闪付锦鲤活动() {
     var appName = "云闪付";
     var timeArea = "北京时间";
     toastLog("到点点击");
-    var idFind, idEveryDay, id567_10, id567_15, idFriday10, idFriday15, idSaturday10, idSaturday15, idSunday10, idSunday15;
-
-    idEveryDay = "4182765241";
-    idFriday10 = "2943312694";
-    idFriday15 = "9303295163";
-    idSaturday10 = "7251082198";
-    idSaturday15 = "4700237954";
-    idSunday10 = "7944754729";
-    idSunday15 = "3964351356";
 
     var currentWeekday = new Date().getDay();
+    var counponText;
     // 返回的周日0 周一返回1，周二2
     switch (currentWeekday) {
         case 5:
-            id567_10 = idFriday10;
-            id567_15 = idFriday15;
+            counponText = "满20可用";
             break;
         case 6:
-            id567_10 = idSaturday10;
-            id567_15 = idSaturday15;
+            counponText = "满35可用";
             break;
         case 0:
-            id567_10 = idSunday10;
-            id567_15 = idSunday15;
+            counponText = "满50可用";
             break;
     }
+
     targetViewText = func.dialogsWin(["每日券", "周五六日10点", "周五六日15点"]);
     switch (targetViewText) {
         case "每日券":
             startTime = "08,59,59,600";
-            idFind = idEveryDay;
-            clickText = "领取";
+            counponText = "满10可用"
             break;
         case "周五六日10点":
             startTime = "09,59,59,600";
-            idFind = id567_10;
-            clickText = "立即领取";
             break;
         case "周五六日15点":
             startTime = "14,59,59,600";
-            idFind = id567_15;
-            clickText = "立即领取";
             break;
     }
-    log(idFind);
     func.toApp(appName);
+    var exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
+    exWhile = false;
     // 等待进入指定页面
-
-    var card;
-    card = idContains(idFind).findOnce();
-    while (card == null) {
-        card = idContains(idFind).findOnce();
-        toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
+    while (text("奖励中心").findOnce() == null) {
+        toastLog("请跳转到 \" 奖励中心 \"，直到提示  已到达等待页面");
         sleep(800);
     }
+    while (1) {
+        try {
+            clickItems = text(counponText).find();
+            if (clickItems.nonEmpty()) {
+                for (var i = 0; i < clickItems.length; i++) {
+                    clickItem = clickItems[i];
+                    itemIndex = clickItem.indexInParent();
+                    itemParent = clickItem.parent();
+                    upItemText = (itemParent.child(itemIndex + 1)).text();
+                    log(upItemText);
+                    if (upItemText == "线下指定商户") {
+                        exWhile = true;
+                        break;
+                    }
+                }
+            }
+            if (exWhile) {
+                break;
+            }
+        }
+        catch (e) {
+            log("123");
+        }
+    }
+
     toastLog("已到达指定页面，等待");
     //  等待倒计时
-    func.getTimeDiff(timeArea, startTime);
+    // func.getTimeDiff(timeArea, startTime);
     // 点击进入 等待
-    func.sClick(card);
-
-    // 定义领取按钮
-    var clickItem, itemsCount;
-    toastLog("等待领取页面加载...");
-    clickItem = text(clickText).findOnce();
-    // 如果是非空的 退出
-    while (!clickItem.nonEmpty()) {
-        clickItem = text(clickText).find();
-        log("等待领取页面加载...");
-        sleep(300);
-    }
-    if (targetViewText == "每日券") {
-        itemsCount = clickItem.length;
-        toastLog("找到领取:" + itemsCount + "个数");
-        if (itemsCount == 3) {
-            func.sClick(clickItem[2]); //点击线下券
-        } else if (itemsCount != 0) {
-            func.sClick(clickItem[0]); //点击线上券 如果只有1张就点击1张
-        }
-    } else {
-        func.sClick(clickItem[0]);
-    }
-
+    func.sClick(clickItem);
+    func.sClick(text(clickText).findOne());
     toastLog("已完成");
 }
 

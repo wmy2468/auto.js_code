@@ -44,8 +44,10 @@ var func = require("func_list.js");
 //         <button id='关闭' layout_weight="1">关闭</button>
 //     </vertical >
 // );
-getCoupons = text("领取2").find();
-toastLog(getCoupons.length);
+items = text("满10可用").findOnce();
+iParent = items.parent();
+idx = items.indexInParent();
+toastLog(iParent.child(idx + 1).text());
 
 
 // toastLog(x + "," + y);
