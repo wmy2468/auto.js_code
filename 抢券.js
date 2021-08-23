@@ -155,9 +155,11 @@ function 云闪付锦鲤活动() {
     }
 
     targetViewText = func.dialogsWin(["每日券", "周五六日10点", "周五六日15点"]);
-    var targetText = "线下指定商户";
+    var targetText, everyText;
+    targetText = "线下指定商户";
     switch (targetViewText) {
         case "每日券":
+            targetText = func.dialogsWin(["线下指定商户", "线上指定商户"]);
             startTime = "08,59,59,600";
             counponText = "满10可用"
             break;
@@ -169,6 +171,17 @@ function 云闪付锦鲤活动() {
             break;
     }
     func.toApp(appName);
+    var appServiece;
+    while (text().findOnce() == null) {
+        // 如果能点击按钮，就等待设置文本
+        if (func.sClick(id("rl_search_coupon").findOnce()) == true) {
+            text("历史记录").findOne() && text("热门搜索").findOne();
+            func.sClick(text("奖励中心").depth(15).findOne());
+            appServiece = text("应用服务").findOne();
+        }
+    }
+
+
     var exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
     exWhile = false;
     // 等待进入指定页面

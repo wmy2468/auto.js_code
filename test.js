@@ -44,10 +44,12 @@ var func = require("func_list.js");
 //         <button id='关闭' layout_weight="1">关闭</button>
 //     </vertical >
 // );
-items = text("满10可用").findOnce();
-iParent = items.parent();
-idx = items.indexInParent();
-toastLog(iParent.child(idx + 1).text());
+appServiece = text("应用服务").findOne().parent();
+center = (appServiece.findByText("奖励中心"));
+center.forEach(
+    (cen) => {
+        func.sClick(cen);
+    });
 
 
 // toastLog(x + "," + y);
