@@ -71,7 +71,7 @@ function 进90减2界面() {
     log("startTime: " + startTime);
     // 查找话费按钮
     var callFeeBtns;
-    callFeeBtns = (className("android.recyclerview.widget.Rec").findOnce()).className("android.view.ViewGroup").depth(10).find();
+    callFeeBtns = className("android.view.ViewGroup").depth(10).indexInParent(1).find();
     while (!callFeeBtns.nonEmpty()) {
         callFeeBtns = className("android.view.ViewGroup").depth(10).find();
         sleep(800);
