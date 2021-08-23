@@ -436,6 +436,10 @@ function YunShaofu() {
     //closeApp(appName);
     func.toPackage(appName);
     while (className("TextView").text("我的").findOnce() == null) {
+        if (textContains("跳过").findOnce() != null) {
+            sleep(800);
+            continue;
+        }
         sleep(1000);
     }
     sleep(1500);

@@ -44,15 +44,103 @@ var func = require("func_list.js");
 //         <button id='关闭' layout_weight="1">关闭</button>
 //     </vertical >
 // );
-appServiece = text("应用服务").findOne().parent();
-center = (appServiece.findByText("奖励中心"));
-center.forEach(
-    (cen) => {
-        func.sClick(cen);
-    });
-
+// func.sClick(text("奖励中心").depth(17).findOnce());
 
 // toastLog(x + "," + y);
+云闪付锦鲤活动();
+
+function 云闪付锦鲤活动() {
+    var startTime, targetViewText, clickText;
+    var appName = "云闪付";
+    var timeArea = "北京时间";
+    toastLog("到点点击");
+
+    var currentWeekday = new Date().getDay();
+    var counponText;
+    // 返回的周日0 周一返回1，周二2
+    switch (currentWeekday) {
+        case 5:
+            counponText = "满20可用";
+            break;
+        case 6:
+            counponText = "满35可用";
+            break;
+        case 0:
+            counponText = "满50可用";
+            break;
+    }
+
+    targetViewText = func.dialogsWin(["每日券", "周五六日10点", "周五六日15点"]);
+    var targetText, everyText;
+    targetText = "线下指定商户";
+    switch (targetViewText) {
+        case "每日券":
+            targetText = func.dialogsWin(["线下指定商户", "线上指定商户"]);
+            startTime = "08,59,59,600";
+            counponText = "满10可用"
+            break;
+        case "周五六日10点":
+            startTime = "09,59,59,600";
+            break;
+        case "周五六日15点":
+            startTime = "14,59,59,600";
+            break;
+    }
+    func.toApp(appName);
+    while (text("激励金提现").findOnce() == null) {
+        // 如果能点击按钮，就等待设置文本
+        if (func.sClick(id("rl_search_coupon").findOnce()) == true) {
+            if (textContains("跳过").findOnce() == null) {
+                text("历史记录").findOne() && text("热门搜索").findOne();
+                func.sClick(text("奖励中心").depth(15).findOne());
+                func.sClick(text("奖励中心").depth(17).findOne());
+            } else {
+                sleep(600);
+                continue;
+            }
+        }
+    }
+
+    var exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
+    exWhile = false;
+    // 等待进入指定页面
+    while (text("奖励中心").findOnce() == null) {
+        toastLog("请跳转到 \" 奖励中心 \"，直到提示  已到达等待页面");
+        sleep(800);
+    }
+    while (1) {
+        try {
+            clickItems = text(counponText).find();
+            if (clickItems.nonEmpty()) {
+                for (var i = 0; i < clickItems.length; i++) {
+                    clickItem = clickItems[i];
+                    itemIndex = clickItem.indexInParent();
+                    itemParent = clickItem.parent();
+                    upItemText = (itemParent.child(itemIndex + 1)).text();
+                    log(upItemText);
+                    if (upItemText == targetText) {
+                        exWhile = true;
+                        break;
+                    }
+                }
+            }
+            if (exWhile) {
+                break;
+            }
+        }
+        catch (e) {
+            log("123");
+        }
+    }
+
+    toastLog("已到达指定页面，等待");
+    //  等待倒计时
+    // func.getTimeDiff(timeArea, startTime);
+    // 点击进入 等待
+    func.sClick(clickItem);
+    func.sClick(text("立即领取").findOne());
+    toastLog("已完成");
+}
 
 function 铃声通知(播放时长, 音量) {
     var 音量 = 音量 || 13;

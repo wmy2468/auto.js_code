@@ -171,13 +171,12 @@ function 云闪付锦鲤活动() {
             break;
     }
     func.toApp(appName);
-    var appServiece;
-    while (text().findOnce() == null) {
+    while (text("激励金提现").findOnce() == null) {
         // 如果能点击按钮，就等待设置文本
         if (func.sClick(id("rl_search_coupon").findOnce()) == true) {
             text("历史记录").findOne() && text("热门搜索").findOne();
             func.sClick(text("奖励中心").depth(15).findOne());
-            appServiece = text("应用服务").findOne();
+            func.sClick(text("奖励中心").depth(17).findOnce());
         }
     }
 
