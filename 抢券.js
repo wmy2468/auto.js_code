@@ -176,8 +176,7 @@ function 云闪付锦鲤活动() {
         if (func.sClick(id("rl_search_coupon").findOnce()) == true) {
             if (textContains("跳过").findOnce() == null) {
                 text("历史记录").findOne();
-                setText(0, "奖励中心");
-                func.sClick(text("奖励中心").depth(16).findOne());
+                func.sClick(text("奖励中心").depth(15).findOne());
                 func.sClick(text("奖励中心").depth(17).findOne());
             } else {
                 sleep(600);
