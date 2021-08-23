@@ -71,16 +71,16 @@ function 进90减2界面() {
     log("startTime: " + startTime);
     // 查找话费按钮
     var callFeeBtns;
-    callFeeBtns = className("android.view.ViewGroup").depth(10).indexInParent(1).find();
-    while (!callFeeBtns.nonEmpty()) {
-        callFeeBtns = className("android.view.ViewGroup").depth(10).find();
+    callFeeBtns = className("android.view.ViewGroup").depth(10).findOnce();
+    while (callFeeBtns != null) {
+        callFeeBtns = className("android.view.ViewGroup").depth(10).findOnce();
         sleep(800);
     }
     // 等待
     func.getTimeDiff(timeArea, startTime);
     // 点击
-    func.sClick(callFeeBtns[1]);
-    func.sClick(callFeeBtns[2]);
+    func.sClick(callFeeBtns.child(1));
+    func.sClick(callFeeBtns.child(2));
     // 提示完成
     alert("点击完成");
 }
