@@ -40,11 +40,18 @@ function 进90减2界面() {
 
     // func.sClick(payBtn.parent());
     // 等待页面加载
-    var payBtn;
+    var payBtn, counponBtn;
     payBtn = text("生活·缴费").findOnce();
+    counponBtn = className("TextView").text("抢90-40话费券").findOnce();
     while (text("充值活动页面").findOnce() == null) {
         func.passAd();
-        func.sClick(className("TextView").text("抢90-40话费券").findOnce());
+
+        if (counponBtn != null) {
+            func.sClick(counponBtn.parent());
+        } else {
+            counponBtn = className("TextView").text("抢90-40话费券").findOnce();
+        }
+
         if (payBtn != null) {
             func.sClick(payBtn.parent());
         } else {
@@ -64,7 +71,7 @@ function 进90减2界面() {
     log("startTime: " + startTime);
     // 查找话费按钮
     var callFeeBtns;
-    callFeeBtns = className("android.view.ViewGroup").depth(10).find();
+    callFeeBtns = (className("android.recyclerview.widget.Rec").findOnce()).className("android.view.ViewGroup").depth(10).find();
     while (!callFeeBtns.nonEmpty()) {
         callFeeBtns = className("android.view.ViewGroup").depth(10).find();
         sleep(800);
