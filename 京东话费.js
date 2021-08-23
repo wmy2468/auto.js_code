@@ -11,7 +11,7 @@ var pwds = ['0', '8', '1', '5', '7', '3'];
 var pwdYsf = ['1', '0', '0', '0', '0', '0'];
 
 
-var selectFunc = func.dialogsWin(["话费支付", "删除话费订单"]);
+var selectFunc = func.dialogsWin(["话费支付", "删除话费订单", "进90减2界面"]);
 switch (selectFunc) {
     case "话费支付":
         话费支付();
@@ -19,6 +19,112 @@ switch (selectFunc) {
     case "删除话费订单":
         删除话费订单();
         break;
+    case "进90减2界面":
+        进90减2界面();
+        break;
+}
+
+function 进90减2界面() {
+    var timeArea;
+    timeArea = "京东时间";
+    func.toApp("京东");
+    //等待首页加载
+    // while (text("首页").findOnce() == null) {
+    //     func.sClick(id("xk").findOnce());
+    //     toastLog("等待首页...");
+    //     func.passAd();
+    //     func.sClick(textContains("取消").findOnce());
+    //     func.sClick(descContains("取消").findOnce());
+    //     sleep(1500);
+    // }
+
+    // func.sClick(payBtn.parent());
+    // 等待页面加载
+    var payBtn;
+    payBtn = text("生活·缴费").findOnce();
+    while (text("充值活动页面").findOnce() == null) {
+        func.passAd();
+        func.sClick(className("TextView").text("抢90-40话费券").findOnce());
+        if (payBtn != null) {
+            func.sClick(payBtn.parent());
+        } else {
+            payBtn = text("生活·缴费").findOnce();
+        }
+        sleep(500);
+    }
+    sleep(1000);
+    // 获取当前时间
+    var curHour, startTime;
+    curHour = new Date().getHours() + 1;
+    if (curHour < 10) {
+        startTime = "0" + curHour + ",00,00,000"  // "10,00,00,000"
+    } else {
+        startTime = curHour + ",00,00,000"  // "10,00,00,000"
+    }
+    log("startTime: " + startTime);
+    // 查找话费按钮
+    var callFeeBtns;
+    callFeeBtns = className("android.view.ViewGroup").depth(10).find();
+    while (!callFeeBtns.nonEmpty()) {
+        callFeeBtns = className("android.view.ViewGroup").depth(10).find();
+        sleep(800);
+    }
+    // 等待
+    func.getTimeDiff(timeArea, startTime);
+    // 点击
+    func.sClick(callFeeBtns[1]);
+    func.sClick(callFeeBtns[2]);
+    // 提示完成
+    alert("点击完成");
+}
+
+function 删除话费订单() {
+    var cnt;
+    cnt = 0;
+    func.toApp("京东");
+    while (text("筛选").findOnce() == null) {
+        func.sClick(text("我的").findOnce());
+        func.sClick(text("我的订单").findOnce());
+        toastLog("请打开 全部订单 界面");
+        sleep(2000);
+    }
+    toastLog("已跳转到页面");
+    var delBtn, title;
+    while (1) {
+        try {
+            title = text("话费充值").findOnce();
+
+
+            // 右上角 删除框形式
+            delParent = title.parent().parent().parent().parent();
+            if (delParent.childCount() == 2) {
+                delBtn = delParent.child(1).child(2);
+            } else {
+                delBtn = delParent.child(2).child(0);
+            }
+            // 删除订单 按钮形式
+            // delParent = title.parent().parent().parent().parent().parent();
+            // if (delParent.childCount() == 2) {
+            //     delBtn = delParent.child(2).child(1).child(0).child(0).child(0)
+            // } else {
+            //     delBtn = delParent.child(2).child(1).child(0).child(0).child(0)
+            // }
+            if (func.sClick(delBtn)) {
+                func.sClick(text("删除").findOne());
+                sleep(1000);
+            }
+            cnt = 0;
+        }
+        catch (e) {
+            classNameContains("RecyclerView").scrollable().findOne().scrollForward();
+            sleep(800);
+            cnt = cnt + 1;
+            if (cnt > 10) {
+                break;
+            }
+        }
+    }
+    alert("删除完成");
 }
 
 function 话费支付() {
@@ -382,57 +488,4 @@ function 铃声通知(播放时长, 音量) {
 function 震动(vibrate_time) {
     var vibrate_time = vibrate_time || 1000;
     device.vibrate(vibrate_time);
-}
-
-// ---------------------------------------------------
-// -----------------------分割线-----------------------
-// ---------------------------------------------------
-
-function 删除话费订单() {
-    var cnt;
-    cnt = 0;
-    func.toApp("京东");
-    while (text("筛选").findOnce() == null) {
-        func.sClick(text("我的").findOnce());
-        func.sClick(text("我的订单").findOnce());
-        toastLog("请打开 全部订单 界面");
-        sleep(2000);
-    }
-    toastLog("已跳转到页面");
-    var delBtn, title;
-    while (1) {
-        try {
-            title = text("话费充值").findOnce();
-
-
-            // 右上角 删除框形式
-            delParent = title.parent().parent().parent().parent();
-            if (delParent.childCount() == 2) {
-                delBtn = delParent.child(1).child(2);
-            } else {
-                delBtn = delParent.child(2).child(0);
-            }
-            // 删除订单 按钮形式
-            // delParent = title.parent().parent().parent().parent().parent();
-            // if (delParent.childCount() == 2) {
-            //     delBtn = delParent.child(2).child(1).child(0).child(0).child(0)
-            // } else {
-            //     delBtn = delParent.child(2).child(1).child(0).child(0).child(0)
-            // }
-            if (func.sClick(delBtn)) {
-                func.sClick(text("删除").findOne());
-                sleep(1000);
-            }
-            cnt = 0;
-        }
-        catch (e) {
-            classNameContains("RecyclerView").scrollable().findOne().scrollForward();
-            sleep(800);
-            cnt = cnt + 1;
-            if (cnt > 10) {
-                break;
-            }
-        }
-    }
-    alert("删除完成");
 }

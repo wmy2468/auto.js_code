@@ -155,6 +155,7 @@ function 云闪付锦鲤活动() {
     }
 
     targetViewText = func.dialogsWin(["每日券", "周五六日10点", "周五六日15点"]);
+    var targetText = "线下指定商户";
     switch (targetViewText) {
         case "每日券":
             startTime = "08,59,59,600";
@@ -185,7 +186,7 @@ function 云闪付锦鲤活动() {
                     itemParent = clickItem.parent();
                     upItemText = (itemParent.child(itemIndex + 1)).text();
                     log(upItemText);
-                    if (upItemText == "线下指定商户") {
+                    if (upItemText == targetText) {
                         exWhile = true;
                         break;
                     }
