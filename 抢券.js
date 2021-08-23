@@ -174,12 +174,17 @@ function 云闪付锦鲤活动() {
     while (text("激励金提现").findOnce() == null) {
         // 如果能点击按钮，就等待设置文本
         if (func.sClick(id("rl_search_coupon").findOnce()) == true) {
-            text("历史记录").findOne() && text("热门搜索").findOne();
-            func.sClick(text("奖励中心").depth(15).findOne());
-            func.sClick(text("奖励中心").depth(17).findOnce());
+            if (textContains("跳过").findOnce() == null) {
+                text("历史记录").findOne();
+                setText(0, "奖励中心");
+                func.sClick(text("奖励中心").depth(16).findOne());
+                func.sClick(text("奖励中心").depth(17).findOne());
+            } else {
+                sleep(600);
+                continue;
+            }
         }
     }
-
 
     var exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
     exWhile = false;
@@ -218,6 +223,7 @@ function 云闪付锦鲤活动() {
     func.getTimeDiff(timeArea, startTime);
     // 点击进入 等待
     func.sClick(clickItem);
+    text("优惠券到账后24小时内有效").findOne();
     func.sClick(text("立即领取").findOne());
     toastLog("已完成");
 }
