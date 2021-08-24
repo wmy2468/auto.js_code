@@ -47,7 +47,9 @@ var func = require("func_list.js");
 // func.sClick(text("奖励中心").depth(17).findOnce());
 
 // toastLog(x + "," + y);
-云闪付锦鲤活动();
+callFeeBtns = className("android.widget.LinearLayout").depth(10).indexInParent(5).drawingOrder(6).findOnce();
+log(callFeeBtns);
+func.sClick(callFeeBtns.child(0));
 
 function 云闪付锦鲤活动() {
     var startTime, targetViewText, clickText;
