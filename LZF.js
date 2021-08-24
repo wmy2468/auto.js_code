@@ -29,7 +29,7 @@ function 日常任务() {
             back();                             // 返回
             // 检查是否已返回
             while (text(checkText).findOnce() == null) {
-                func.sClick(text("拒绝").findOnce();
+                func.sClick(text("拒绝").findOnce());
                 // 如果点击了 获取位置的否，需要等待1秒，再返回
                 if (func.sClick(text("否").findOnce()) == true) {
                     sleep(1000);
