@@ -93,6 +93,7 @@ function jd_sign() {
     }
     else {
         func.sClick(signBtn);
+        sleep(2000);
         className("ImageView").desc("关闭弹窗").findOne();
         func.sClick(className("ImageView").desc("关闭弹窗").findOne());
         toastLog("今日已领券");
