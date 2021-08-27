@@ -52,7 +52,7 @@ function 进90减2界面() {
         }
         sleep(500);
     }
-    sleep(1000);
+    sleep(1500);
     // 获取当前时间
     var curHour, startTime;
     curHour = new Date().getHours() + 1;
@@ -64,14 +64,21 @@ function 进90减2界面() {
     log("startTime: " + startTime);
     // 查找话费按钮
     var callFeeBtns;
-    // callFeeBtns = className("android.widget.RelativeLayout").depth(10).findOnce();
-    callFeeBtns = className("android.widget.LinearLayout").depth(10).indexInParent(5).drawingOrder(6).findOnce();
-    while (callFeeBtns == null) {
+    // callFeeBtns = className("android.widget.RelativeLayout").depth(11).findOnce();
+    while (1) {
+        callFeeBtns = className("android.widget.RelativeLayout").depth(11).findOnce();
+        if (callFeeBtns != null) {
+            break;
+        }
+        sleep(400);
         callFeeBtns = className("android.widget.LinearLayout").depth(10).indexInParent(5).drawingOrder(6).findOnce();
-        sleep(800);
+        if (callFeeBtns != null) {
+            break;
+        }
+        sleep(400);
     }
     // 等待
-    // func.getTimeDiff(timeArea, startTime);
+    func.getTimeDiff(timeArea, startTime);
     // 点击
     func.sClick(callFeeBtns.child(2));
     func.sClick(callFeeBtns.child(0));
