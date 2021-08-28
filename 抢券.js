@@ -64,10 +64,10 @@ function 京东() {
     switch (actName) {
         // 10点
         case "京喜整点沃尔玛":
-            targetViewText = "沃尔玛电子卡";
+            targetViewText = "沃尔玛";
             break;
         case "京喜整点盒马":
-            targetViewText = "盒马鲜生电子礼品卡";
+            targetViewText = "盒马鲜生";
             break;
     }
     // actWays = ["直接领券", "下单自动领券"];
