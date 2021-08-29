@@ -137,19 +137,20 @@ function 进90减2界面() {
     log("startTime: " + startTime);
     // 查找话费按钮
     var callFeeBtns;
+    callFeeBtns = className("android.widget.LinearLayout").depth("10").drawingOrder("6").findOne();
     // callFeeBtns = className("android.widget.RelativeLayout").depth(11).findOnce();
-    while (1) {
-        // callFeeBtns = className("android.widget.RelativeLayout").depth(11).findOnce();
-        // if (callFeeBtns != null) {
-        //     break;
-        // }
-        // sleep(400);
-        callFeeBtns = className("android.widget.LinearLayout").depth("10").drawingOrder("6").findOnce();
-        if (callFeeBtns != null) {
-            break;
-        }
-        sleep(400);
-    }
+    // while (1) {
+    //     // callFeeBtns = className("android.widget.RelativeLayout").depth(11).findOnce();
+    //     // if (callFeeBtns != null) {
+    //     //     break;
+    //     // }
+    //     // sleep(400);
+    //     callFeeBtns = className("android.widget.LinearLayout").depth("10").drawingOrder("6").findOnce();
+    //     if (callFeeBtns != null) {
+    //         break;
+    //     }
+    //     sleep(400);
+    // }
     // 等待
     func.getTimeDiff(timeArea, startTime);
     // 点击
