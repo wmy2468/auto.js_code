@@ -112,6 +112,7 @@ function 进90减2界面() {
             if (device.model == "FRD-AL00") {
                 scrollDown();
                 sleep(1500);
+                pay90_40 = className("TextView").text("抢90减40话费券").findOnce();
             }
             func.sClick(pay90_40);
         }
