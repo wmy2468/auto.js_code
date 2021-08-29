@@ -60,11 +60,11 @@ function 话费支付() {
     if (result == "微信") {
         func.toApp("京东");
         weiXinn();
-    } else if (result == "华为支付" || result == "云闪付" || "JD支付") {
+    } else if (result == "华为支付" || result == "云闪付" || result == "JD支付") {
         // var cardName = func.dialogsWin(["JJ-中信", "JJ-华为中信", "LP-中信", "华夏", "JJ-京东红卡", "浦发", "交通", "LM-中行", "邮储", "JJ-建行"]);
         person = func.dialogsWin(selectPerson);
         // 根据人名 获取卡的尾号
-        personCardList = cardPerson[person];
+        // personCardList = cardPerson[person];
         cardEndNumber = personCardList[func.dialogsWin(Object.keys(personCardList))];
         func.toApp("京东");
         while (text(textPay).findOnce() == null) {
@@ -369,7 +369,64 @@ function hwzhifu(cardEndNumber) {
 
 
 function jd_pay(cardEndNumber) {
+    var clickCnt = 0, cnt;
+    while (true) {
+        sleep(2000);
+        if (clickCnt > ringCount) {
+            持续响铃(20);
+            break;
+        }
+        // 在全部订单和待付款切换
+        try {
+            if (func.sClick(text(textPay).findOnce())) {
+                clickCnt = clickCnt + 1;
+            }
+            sleep(1000);
+            func.sClick(text(textAll).findOnce());
+            sleep(1000);
+        } catch (e) { }
+        if (text("重新加载").findOnce()) {
+            toastLog("找到重新加载，返回");
+            back();
+            sleep(1000);
+        }
+        func.sClick(textContains("去支付").findOnce());
+        // 如果找到京东收银台
+        if (text(textBar).findOnce() != null) {
+            sleep(1500);
+            // 点击全部，展开所有card
+            func.sClick(text("全部付款方式").findOne());
+            // 等待页面加载
+            text("付款方式").findOne();
+            while (!func.cClick(textContains(cardEndNumber).findOnce())) {
+                sleep(850);
+                scrollDown();
+                sleep(850);
+            }
+            sleep(1200);
+            func.sClick(text("银行卡支付").findOne());
 
+            text("支付成功").findOne();
+            toastLog("...支付完成...");
+            sleep(1200);
+            back();
+            text("查看订单").findOne();
+            //if (func.sClick(text("立即抽奖").findOnce())) {
+            if (text("立即抽奖").findOnce()) {
+                toastLog("找到抽奖，等待返回");
+                sleep(2000);
+                back();
+                // 待付款滑动栏
+                textContains(textPay).findOne();
+                cnt = 6;
+                while (cnt > 0) {
+                    cnt = cnt - 1;
+                    toastLog("...等待下一单...");
+                    sleep(1300);
+                }
+            }
+        }
+    }
 }
 
 function weiXinn() {
