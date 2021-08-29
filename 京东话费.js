@@ -101,11 +101,21 @@ function 进90减2界面() {
 
     // func.sClick(payBtn.parent());
     // 等待页面加载
-    var payBtn;
+    var payBtn,pay90_40;
     payBtn = text("生活·缴费").findOnce();
     while (text("充值活动页面").findOnce() == null) {
         func.passAd();
-        func.sClick(className("TextView").text("抢90减40话费券").findOnce());
+        pay90_40 = className("TextView").text("抢90减40话费券").findOnce();
+        if (pay90_40 != null) {
+            sleep(800);
+            // 如果是华为荣耀8，需要向下滑动一下
+            if (device.model == "FRD-AL00") {
+                scrollDown();
+                sleep(1500);
+            }
+            func.sClick(pay90_40);
+        }
+        // func.sClick(className("TextView").text("抢90减40话费券").findOnce());
         if (payBtn != null) {
             func.sClick(payBtn.parent());
         } else {
@@ -113,6 +123,7 @@ function 进90减2界面() {
         }
         sleep(500);
     }
+
     sleep(1500);
     // 获取当前时间
     var curHour, startTime;
