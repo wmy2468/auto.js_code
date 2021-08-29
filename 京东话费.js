@@ -144,7 +144,7 @@ function 进90减2界面() {
         //     break;
         // }
         // sleep(400);
-        callFeeBtns = className("android.widget.LinearLayout").depth("10").indexInParent("5").drawingOrder("6").findOnce();
+        callFeeBtns = className("android.widget.LinearLayout").depth("10").drawingOrder("6").findOnce();
         if (callFeeBtns != null) {
             break;
         }
