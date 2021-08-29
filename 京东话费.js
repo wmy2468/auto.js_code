@@ -127,11 +127,11 @@ function 进90减2界面() {
     var callFeeBtns;
     // callFeeBtns = className("android.widget.RelativeLayout").depth(11).findOnce();
     while (1) {
-        callFeeBtns = className("android.widget.RelativeLayout").depth(11).findOnce();
-        if (callFeeBtns != null) {
-            break;
-        }
-        sleep(400);
+        // callFeeBtns = className("android.widget.RelativeLayout").depth(11).findOnce();
+        // if (callFeeBtns != null) {
+        //     break;
+        // }
+        // sleep(400);
         callFeeBtns = className("android.widget.LinearLayout").depth(10).indexInParent(5).drawingOrder(6).findOnce();
         if (callFeeBtns != null) {
             break;
