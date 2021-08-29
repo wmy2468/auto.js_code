@@ -103,7 +103,7 @@ function 进90减2界面() {
     // 等待页面加载
     var payBtn,pay90_40;
     payBtn = text("生活·缴费").findOnce();
-    while (text("充值活动页面").findOnce() == null) {
+    while (!(text("充值活动页面").findOnce() != null || text("飞利浦家电自营旗舰店").findOnce() != null)) {
         func.passAd();
         pay90_40 = className("TextView").text("抢90减40话费券").findOnce();
         if (pay90_40 != null) {
