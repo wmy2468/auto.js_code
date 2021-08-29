@@ -6,7 +6,7 @@ var ringCount = 4;
 var textPay = "待付款";
 var textAll = "全部";
 var textBar = "京东收银台"
-var selectArr = ["微信", "华为支付", "云闪付"];
+
 var pwds = ['0', '8', '1', '5', '7', '3'];
 var pwdYsf = ['1', '0', '0', '0', '0', '0'];
 
@@ -22,6 +22,67 @@ switch (selectFunc) {
     case "进90减2界面":
         进90减2界面();
         break;
+}
+
+function 话费支付() {
+    var result;
+    var selectArr = ["微信", "华为支付", "云闪付","JD支付"];
+    var selectPerson = ["JJ","LP","LM"];
+    var cardPerson = {
+                    "JJ":{
+                        "JJ中信":"2079",
+                        "JJ交行":"4471",
+                        "JJ浦发":"8636",
+                        "JJ建行":"5135",
+                        "JJ华夏":"8589",
+                        "JJ汇丰":"8633",
+                        "JJ中行":"3842",
+                        "JJ工行":"4897",
+                        "JJ邮储":"3780"
+                    },
+                    "LP": 
+                        {
+                            "LP中信":"5177",
+                            "LP平安":"1672",
+                            "LP光大":"4419",
+                            "LP建行":"6806",
+                            "LP招商":"8940"
+                        },
+                    "LM":{
+                        "LM中行":"6946"
+                    }
+    };
+    // 定义选择卡对应的人
+    var person, personCardList;
+    result = func.dialogsWin(selectArr);
+    
+    var cardEndNumber;
+    if (result == "微信") {
+        func.toApp("京东");
+        weiXinn();
+    } else if (result == "华为支付" || result == "云闪付" || "JD支付") {
+        // var cardName = func.dialogsWin(["JJ-中信", "JJ-华为中信", "LP-中信", "华夏", "JJ-京东红卡", "浦发", "交通", "LM-中行", "邮储", "JJ-建行"]);
+        person = func.dialogsWin(selectPerson);
+        // 根据人名 获取卡的尾号
+        personCardList = cardPerson[person];
+        cardEndNumber = personCardList[func.dialogsWin(Object.keys(personCardList))];
+        func.toApp("京东");
+        while (text(textPay).findOnce() == null) {
+            func.sClick(text("我的").findOnce());
+            sleep(1000);
+        }
+        switch (result) {
+            case "华为支付":
+                hwzhifu(cardEndNumber);
+                break;
+            case "云闪付":
+                yunshanfu(cardEndNumber);
+                break;
+            case "JD支付":
+                jd_pay(cardEndNumber);
+                break;
+        }
+    }
 }
 
 function 进90减2界面() {
@@ -134,73 +195,6 @@ function 删除话费订单() {
         }
     }
     alert("删除完成");
-}
-
-function 话费支付() {
-    var result;
-    result = func.dialogsWin(selectArr);
-    var cardEndNumber;
-    if (result == "微信") {
-        func.toApp("京东");
-        weiXinn();
-    } else if (result == "华为支付" || result == "云闪付") {
-        var cardName = func.dialogsWin(["JJ-中信", "JJ-华为中信", "LP-中信", "华夏", "JJ-京东红卡", "浦发", "交通", "LM-中行", "邮储", "JJ-建行"]);
-        switch (cardName) {
-            case "JJ-中信":
-                cardEndNumber = "2079"
-                break;
-            case "JJ-华为中信":
-                cardEndNumber = "6710"
-                break;
-            case "LP-中信":
-                cardEndNumber = "5177"
-                break;
-            case "华夏":
-                cardEndNumber = "8589"
-                break;
-            case "浦发":
-                cardEndNumber = "8636"
-                break;
-            case "交通":
-                cardEndNumber = "4471"
-                break;
-            case "JJ-京东红卡":
-                cardEndNumber = "2743"
-                break;
-            case "邮储":
-                cardEndNumber = "3780"
-                break;
-            case "JJ-建行":
-                cardEndNumber = "5135"
-                break;
-            case "LM-中行":
-                cardEndNumber = "5976"
-                break;
-        }
-        // 如果是荣耀8，先启动云闪付和钱包
-        // if (device.model == "FRD-AL00") {
-        //     func.toApp("京东");
-        //     home();
-        //     sleep(1000);
-        //     func.toApp("华为钱包");
-        //     sleep(2000);
-        //     home();
-        //     func.toApp("云闪付");
-        //     sleep(2000);
-        //     home();
-        //     sleep(2000);
-        // }
-        func.toApp("京东");
-        while (text(textPay).findOnce() == null) {
-            func.sClick(text("我的").findOnce());
-            sleep(1000);
-        }
-        if (result == "华为支付") {
-            hwzhifu(cardEndNumber);
-        } else {
-            yunshanfu(cardEndNumber);
-        }
-    }
 }
 
 function yunshanfu(cardEndNumber) {
@@ -373,6 +367,10 @@ function hwzhifu(cardEndNumber) {
     }
 }
 
+
+function jd_pay(cardEndNumber) {
+
+}
 
 function weiXinn() {
     var cnt;
