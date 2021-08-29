@@ -47,7 +47,8 @@ var func = require("func_list.js");
 // func.sClick(text("奖励中心").depth(17).findOnce());
 
 // toastLog(x + "," + y);
-className("TextView").text("抢90减40话费券").findOne().click();
+toastLog(className("android.widget.LinearLayout").depth(10).findOne());
+
 
 function 云闪付锦鲤活动() {
     var startTime, targetViewText, clickText;
