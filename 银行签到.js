@@ -363,11 +363,14 @@ function 浦发信用卡() {
     func.gesture_pwd(appName);
     sleep(1000);
     // 等待签到页面加载
-    text("每日签到").findOne();
+    text("天天领福利").findOne();
     sleep(1000);
-    var waitSign = text("待签到").findOne();
-    sleep(1000);
-    func.sClick(waitSign.parent().parent().parent().parent().child(4));
+    if (text("已签到").findOnce() == null) {
+        var waitSign = text("立即签到").findOne();
+        sleep(1000);
+        // func.sClick(waitSign.parent().parent().parent().parent().child(4));
+        func.sClick(waitSign);
+    }
     toastLog(appName + "已签到");
     sleep(1000);
 }
