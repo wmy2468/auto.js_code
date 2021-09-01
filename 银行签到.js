@@ -14,7 +14,7 @@ function main() {
     //工银e生活();
     //邮储银行();
     浦发信用卡();
-    邮储信用卡();
+    //邮储信用卡();
     //华彩生活();
     买单吧();
     alert("已完成.");
@@ -290,7 +290,7 @@ function jd_sign() {
         // 新版本签到
         signBtn = text("签到领奖励").findOnce();
     }
-    
+
     if (signBtn == null) {
         toastLog("今日已领券");
     }
