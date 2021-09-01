@@ -512,13 +512,13 @@ function 中信活动() {
         case "周三六11点-5折必胜客百果园":
             toastLog("到点点击");
             startTime = "10,59,59,700";             // 设置时间点
-            couDes = ["必胜客50元代金券", "达美乐50元代金券", "肯德基50元代金券"];             // 券名称
+            couDes = ["必胜客100元代金券", "达美乐50元代金券", "肯德基50元"];             // 券名称
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             func.toApp(appName);             // 启动APP
             // 等待进入指定页面
-            var couClick = text(targetViewText).findOnce();
+            var couClick = textContains(targetViewText).findOnce();
             while (!couClick) {
-                couClick = text(targetViewText).findOnce();
+                couClick = textContains(targetViewText).findOnce();
                 toastLog("请跳转到券 列表 页面，直到提示  已到达等待页面");
             }
             toastLog("元素文本：" + couClick.text());
