@@ -89,18 +89,7 @@ function 进90减2界面领券() {
     var timeArea;
     timeArea = "京东时间";
     func.toApp("京东");
-    //等待首页加载
-    // while (text("首页").findOnce() == null) {
-    //     func.sClick(id("xk").findOnce());
-    //     toastLog("等待首页...");
-    //     func.passAd();
-    //     func.sClick(textContains("取消").findOnce());
-    //     func.sClick(descContains("取消").findOnce());
-    //     sleep(1500);
-    // }
 
-    // func.sClick(payBtn.parent());
-    // 等待页面加载
     var payBtn, pay90_40;
     payBtn = text("生活·缴费").findOnce();
     while (!(className("ImageView").desc("购物车").depth(15).drawingOrder(1).findOnce != null ||
@@ -142,25 +131,27 @@ function 进90减2界面领券() {
     log("startTime: " + startTime);
     // 查找话费按钮
     var callFeeBtns;
-    callFeeBtns = className("android.widget.LinearLayout").depth("10").drawingOrder("6").findOne();
-    // callFeeBtns = className("android.widget.RelativeLayout").depth(11).findOnce();
-    // while (1) {
-    //     // callFeeBtns = className("android.widget.RelativeLayout").depth(11).findOnce();
-    //     // if (callFeeBtns != null) {
-    //     //     break;
-    //     // }
-    //     // sleep(400);
-    //     callFeeBtns = className("android.widget.LinearLayout").depth("10").drawingOrder("6").findOnce();
-    //     if (callFeeBtns != null) {
-    //         break;
-    //     }
-    //     sleep(400);
-    // }
+    callFeeBtns = null;
+    while (1) {
+        callFeeBtns = className("android.widget.LinearLayout").depth(10).drawingOrder(6).findOnce();
+        if (callFeeBtns != null) {
+            log("LinearLayout find coupon");
+            break;
+        }
+        callFeeBtns = className("android.view.ViewGroup").columnSpan(2).depth(10).drawingOrder(2).findOnce();
+        if (callFeeBtns != null) {
+            log("ViewGroup find coupon");
+            break;
+        }
+        sleep(1000);
+    }
+
     // 等待
     func.getTimeDiff(timeArea, startTime);
     // 点击
-    func.sClick(callFeeBtns.child(2));
-    func.sClick(callFeeBtns.child(0));
+    callFeeBtns.forEach(feeBtn => {
+        func.sClick(feeBtn);
+    })
     // 提示完成
     alert("点击完成");
 }
