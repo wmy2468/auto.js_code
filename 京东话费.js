@@ -135,9 +135,9 @@ function 进90减2界面领券() {
     var curHour, startTime;
     curHour = new Date().getHours() + 1;
     if (curHour < 10) {
-        startTime = "0" + curHour + ",00,00,000"  // "10,00,00,000"
+        startTime = "0" + curHour + ",00,00,200"  // "10,00,00,000"
     } else {
-        startTime = curHour + ",00,00,000"  // "10,00,00,000"
+        startTime = curHour + ",00,00,200"  // "10,00,00,000"
     }
     log("startTime: " + startTime);
     // 查找话费按钮
