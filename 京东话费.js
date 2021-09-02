@@ -92,9 +92,9 @@ function 进90减2界面领券() {
 
     var payBtn, pay90_40;
     payBtn = text("生活·缴费").findOnce();
-    while (!(className("ImageView").desc("购物车").depth(15).drawingOrder(1).findOnce != null ||
-        className("ImageView").text("购物车").depth(15).drawingOrder(1).findOnce != null)) {
+    while (!(className("ImageView").desc("购物车").depth(15).drawingOrder(1).findOnce != null) {
         func.passAd();
+        func.sClick(text("生活·缴费").findOnce());
         pay90_40 = className("TextView").text("抢90减40话费券").findOnce();
         if (pay90_40 != null) {
             sleep(800);
