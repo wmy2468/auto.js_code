@@ -11,7 +11,7 @@ var pwds = ['0', '8', '1', '5', '7', '3'];
 var pwdYsf = ['1', '0', '0', '0', '0', '0'];
 
 
-var selectFunc = func.dialogsWin(["话费支付", "删除话费订单", "进90减2界面"]);
+var selectFunc = func.dialogsWin(["话费支付", "删除话费订单", "进90减2界面领券"]);
 switch (selectFunc) {
     case "话费支付":
         话费支付();
@@ -19,43 +19,43 @@ switch (selectFunc) {
     case "删除话费订单":
         删除话费订单();
         break;
-    case "进90减2界面":
-        进90减2界面();
+    case "进90减2界面领券":
+        进90减2界面领券();
         break;
 }
 
 function 话费支付() {
     var result;
-    var selectArr = ["微信", "华为支付", "云闪付","JD支付"];
-    var selectPerson = ["JJ","LP","LM"];
+    var selectArr = ["微信", "华为支付", "云闪付", "JD支付"];
+    var selectPerson = ["JJ", "LP", "LM"];
     var cardPerson = {
-                    "JJ":{
-                        "JJ中信":"2079",
-                        "JJ交行":"4471",
-                        "JJ浦发":"8636",
-                        "JJ建行":"5135",
-                        "JJ华夏":"8589",
-                        "JJ汇丰":"8633",
-                        "JJ中行":"3842",
-                        "JJ工行":"4897",
-                        "JJ邮储":"3780"
-                    },
-                    "LP": 
-                        {
-                            "LP中信":"5177",
-                            "LP平安":"1672",
-                            "LP光大":"4419",
-                            "LP建行":"6806",
-                            "LP招商":"8940"
-                        },
-                    "LM":{
-                        "LM中行":"6946"
-                    }
+        "JJ": {
+            "JJ中信": "2079",
+            "JJ交行": "4471",
+            "JJ浦发": "8636",
+            "JJ建行": "5135",
+            "JJ华夏": "8589",
+            "JJ汇丰": "8633",
+            "JJ中行": "3842",
+            "JJ工行": "4897",
+            "JJ邮储": "3780"
+        },
+        "LP":
+        {
+            "LP中信": "5177",
+            "LP平安": "1672",
+            "LP光大": "4419",
+            "LP建行": "6806",
+            "LP招商": "8940"
+        },
+        "LM": {
+            "LM中行": "6946"
+        }
     };
     // 定义选择卡对应的人
     var person, personCardList;
     result = func.dialogsWin(selectArr);
-    
+
     var cardEndNumber;
     if (result == "微信") {
         func.toApp("京东");
@@ -85,7 +85,7 @@ function 话费支付() {
     }
 }
 
-function 进90减2界面() {
+function 进90减2界面领券() {
     var timeArea;
     timeArea = "京东时间";
     func.toApp("京东");
@@ -101,9 +101,10 @@ function 进90减2界面() {
 
     // func.sClick(payBtn.parent());
     // 等待页面加载
-    var payBtn,pay90_40;
+    var payBtn, pay90_40;
     payBtn = text("生活·缴费").findOnce();
-    while (!(text("充值活动页面").findOnce() != null || text("飞利浦家电自营旗舰店").findOnce() != null)) {
+    while (!(className("ImageView").desc("购物车").depth(15).drawingOrder(1).findOnce != null ||
+        className("ImageView").text("购物车").depth(15).drawingOrder(1).findOnce != null)) {
         func.passAd();
         pay90_40 = className("TextView").text("抢90减40话费券").findOnce();
         if (pay90_40 != null) {
@@ -113,6 +114,10 @@ function 进90减2界面() {
                 scrollDown();
                 sleep(1500);
                 pay90_40 = className("TextView").text("抢90减40话费券").findOnce();
+            } else {
+                // 如果其它机型，向上滑动一下
+                scrollUp();
+                sleep(1500);
             }
             func.sClick(pay90_40);
         }
