@@ -193,6 +193,8 @@ function 云闪付锦鲤活动() {
         toastLog("请跳转到 \" 奖励中心 \"，直到提示  已到达等待页面");
         sleep(800);
     }
+    // 进入奖励中心后延迟1.5秒
+    sleep(1500);
     while (1) {
         try {
             clickItems = text(counponText).find();

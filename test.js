@@ -47,8 +47,16 @@ var func = require("func_list.js");
 // func.sClick(text("奖励中心").depth(17).findOnce());
 
 // toastLog(x + "," + y);
-toastLog(className("android.widget.LinearLayout").depth(10).findOne());
-
+// toastLog(func.sClick(text("生活·缴费").findOnce()));
+targetView = desc("购物车").depth(14).findOnce();
+callFeeBtns = targetView.parent().parent().parent().parent().parent().parent().parent().parent().parent().child(0).child(0).child(0).child(0).child(1);
+log(callFeeBtns);
+// 等待
+// func.getTimeDiff(timeArea, startTime);
+// 点击
+callFeeBtns.children().forEach(feeBtn => {
+    func.sClick(feeBtn);
+})
 
 function 云闪付锦鲤活动() {
     var startTime, targetViewText, clickText;

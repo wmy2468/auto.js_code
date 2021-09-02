@@ -63,8 +63,8 @@ function 话费支付() {
     } else if (result == "华为支付" || result == "云闪付" || result == "JD支付") {
         // var cardName = func.dialogsWin(["JJ-中信", "JJ-华为中信", "LP-中信", "华夏", "JJ-京东红卡", "浦发", "交通", "LM-中行", "邮储", "JJ-建行"]);
         person = func.dialogsWin(selectPerson);
-        // 根据人名 获取卡的尾号
-        // personCardList = cardPerson[person];
+        // 根据人名 获取卡的尾号 字典
+        personCardList = cardPerson[person];
         cardEndNumber = personCardList[func.dialogsWin(Object.keys(personCardList))];
         func.toApp("京东");
         while (text(textPay).findOnce() == null) {
@@ -90,9 +90,11 @@ function 进90减2界面领券() {
     timeArea = "京东时间";
     func.toApp("京东");
 
-    var payBtn, pay90_40;
+    var pay90_40, targetView;
+    targetView = desc("购物车").depth(14).findOnce();
     payBtn = text("生活·缴费").findOnce();
-    while (!(className("ImageView").id("ov").desc("购物车").depth(15).drawingOrder(1).findOnce != null)) {
+    while (targetView == null) {
+        targetView = desc("购物车").depth(14).findOnce();
         func.passAd();
         func.sClick(text("生活·缴费").findOnce());
         pay90_40 = className("TextView").text("抢90减40话费券").findOnce();
@@ -101,25 +103,17 @@ function 进90减2界面领券() {
             // 如果是华为荣耀8，需要向下滑动一下
             if (device.model == "FRD-AL00") {
                 scrollDown();
-                sleep(1500);
+                sleep(1000);
                 pay90_40 = className("TextView").text("抢90减40话费券").findOnce();
             } else {
                 // 如果其它机型，向上滑动一下
                 scrollUp();
-                sleep(1500);
+                sleep(1000);
             }
             func.sClick(pay90_40);
         }
-        // func.sClick(className("TextView").text("抢90减40话费券").findOnce());
-        if (payBtn != null) {
-            func.sClick(payBtn.parent());
-        } else {
-            payBtn = text("生活·缴费").findOnce();
-        }
-        sleep(500);
+        sleep(800);
     }
-
-    sleep(1500);
     // 获取当前时间
     var curHour, startTime;
     curHour = new Date().getHours() + 1;
@@ -131,25 +125,12 @@ function 进90减2界面领券() {
     log("startTime: " + startTime);
     // 查找话费按钮
     var callFeeBtns;
-    callFeeBtns = null;
-    while (1) {
-        callFeeBtns = className("android.widget.LinearLayout").depth(10).drawingOrder(6).findOnce();
-        if (callFeeBtns != null) {
-            log("LinearLayout find coupon");
-            break;
-        }
-        callFeeBtns = className("android.view.ViewGroup").columnSpan(2).depth(10).drawingOrder(2).findOnce();
-        if (callFeeBtns != null) {
-            log("ViewGroup find coupon");
-            break;
-        }
-        sleep(1000);
-    }
+    callFeeBtns = targetView.parent().parent().parent().parent().parent().parent().parent().parent().parent().child(0).child(0).child(0).child(0).child(1);
 
     // 等待
     func.getTimeDiff(timeArea, startTime);
     // 点击
-    callFeeBtns.forEach(feeBtn => {
+    callFeeBtns.children().forEach(feeBtn => {
         func.sClick(feeBtn);
     })
     // 提示完成
