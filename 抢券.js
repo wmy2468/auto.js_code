@@ -53,87 +53,8 @@ function main() {
     device.cancelKeepingAwake();
 }
 // ------------------------------------------------------
-function 京东() {
-    var appName;
-    var timeArea = "京东时间";
-    var startTime, targetViewText;
-    var actNames = ["京喜整点沃尔玛", "京喜整点盒马"];
-    var actName = func.dialogsWin(actNames);      // 设置查找的文本
-    var actWay, actWays, subTime, devModel;
-    devModel = device.model;
-    switch (actName) {
-        // 10点
-        case "京喜整点沃尔玛":
-            targetViewText = "沃尔玛";
-            break;
-        case "京喜整点盒马":
-            targetViewText = "盒马鲜生";
-            break;
-    }
-    // actWays = ["直接领券", "下单自动领券"];
-    // actWay = func.dialogsWin(actWays);      // 设置查找的文本
-    actWay = "直接领券";
-    appName = "京喜";
 
-    // || devModel == "Redmi Note 7" || devModel == "FRD-AL00")
-    subTime = ",59,59,990";
-    // subTime = ",50,20,990";
-    startTime = (new Date()).getHours() + subTime;
-    func.toApp(appName);             // 启动APP
-    // 等待进入指定页面
-    var couClick = textContains(targetViewText).findOnce();
-    while (couClick == null) {
-        couClick = textContains(targetViewText).findOnce();
-        func.sClick(text("购物车").findOnce());
-        toastLog("请跳转到 京喜 购物车 页面，直到提示 已到达等待页面");
-        sleep(1000);
-    }
-    toastLog("第一次已找到商品，准备进入商品详情");
-    // 进入页面后，进入一次商品详情
-    func.sClick(couClick);             // 点击元素
-    // 延迟3秒后 返回
-    while (text("单独购买").findOnce() == null) {
-        toastLog("未进入商品页面");
-        sleep(500);
-    }
-    sleep(700);
-    back();
-    // 重新查找 //需要判定找不到单独购买的情况下获取的元素才准
-    // couClick = textContains(targetViewText).findOnce();
-    while (true) {
-        toastLog("等待返回购物车页面");
-        if (text("单独购买").findOnce() == null && textContains("去结算").findOnce() != null) {
-            break;
-        }
-        sleep(1000);
-    }
-    couClick = textContains(targetViewText).findOne();
-    toastLog("元素文本：" + couClick.text());
-    func.getTimeDiff(timeArea, startTime);              // 等待时间
-    func.sClick(couClick);             // 点击元素
-    switch (actWay) {
-        case "直接领券":
-            // 第一种领券方式
-            func.sClick(text("领券").id("com.jd.pingou.newmodule.feature:id/tv_youhui_title").findOne())
-            // func.sClick(text("补贴券可抵10元").findOne().parent().parent().child(1));
-            if (func.sClick(id("com.jd.pingou.newmodule.feature:id/btn_lingqu").text("领取").findOne())) {
-                toastLog("已点击领取");
-            }
-            break;
-        case "下单自动领券":
-            // 第二种领券
-            func.sClick(text("领券参团").findOne());
-            textContains("购买时会自动领取并使用").findOne();
-            if (func.sClick(text("领券参团").findOne())) {
-                toastLog("购买时自动领取");
-            }
-            break;
-    }
-    sleep(3000);
-
-}
-
-
+// ------------------------云闪付锦鲤活动--------------------------------------
 function 云闪付捡漏() {
     var targetViewText, targetText;
     targetViewText = func.dialogsWin(["10-2线上", "10-2线下"]);
@@ -307,7 +228,87 @@ function 云闪付锦鲤活动() {
     func.sClick(text("立即领取").findOne());
     toastLog("已完成");
 }
+// ------------------------云闪付锦鲤活动--------------------------------------
 
+function 京东() {
+    var appName;
+    var timeArea = "京东时间";
+    var startTime, targetViewText;
+    var actNames = ["京喜整点沃尔玛", "京喜整点盒马"];
+    var actName = func.dialogsWin(actNames);      // 设置查找的文本
+    var actWay, actWays, subTime, devModel;
+    devModel = device.model;
+    switch (actName) {
+        // 10点
+        case "京喜整点沃尔玛":
+            targetViewText = "沃尔玛";
+            break;
+        case "京喜整点盒马":
+            targetViewText = "盒马鲜生";
+            break;
+    }
+    // actWays = ["直接领券", "下单自动领券"];
+    // actWay = func.dialogsWin(actWays);      // 设置查找的文本
+    actWay = "直接领券";
+    appName = "京喜";
+
+    // || devModel == "Redmi Note 7" || devModel == "FRD-AL00")
+    subTime = ",59,59,990";
+    // subTime = ",50,20,990";
+    startTime = (new Date()).getHours() + subTime;
+    func.toApp(appName);             // 启动APP
+    // 等待进入指定页面
+    var couClick = textContains(targetViewText).findOnce();
+    while (couClick == null) {
+        couClick = textContains(targetViewText).findOnce();
+        func.sClick(text("购物车").findOnce());
+        toastLog("请跳转到 京喜 购物车 页面，直到提示 已到达等待页面");
+        sleep(1000);
+    }
+    toastLog("第一次已找到商品，准备进入商品详情");
+    // 进入页面后，进入一次商品详情
+    func.sClick(couClick);             // 点击元素
+    // 延迟3秒后 返回
+    while (text("单独购买").findOnce() == null) {
+        toastLog("未进入商品页面");
+        sleep(500);
+    }
+    sleep(700);
+    back();
+    // 重新查找 //需要判定找不到单独购买的情况下获取的元素才准
+    // couClick = textContains(targetViewText).findOnce();
+    while (true) {
+        toastLog("等待返回购物车页面");
+        if (text("单独购买").findOnce() == null && textContains("去结算").findOnce() != null) {
+            break;
+        }
+        sleep(1000);
+    }
+    couClick = textContains(targetViewText).findOne();
+    toastLog("元素文本：" + couClick.text());
+    func.getTimeDiff(timeArea, startTime);              // 等待时间
+    func.sClick(couClick);             // 点击元素
+    switch (actWay) {
+        case "直接领券":
+            // 第一种领券方式
+            func.sClick(text("领券").id("com.jd.pingou.newmodule.feature:id/tv_youhui_title").findOne())
+            // func.sClick(text("补贴券可抵10元").findOne().parent().parent().child(1));
+            if (func.sClick(id("com.jd.pingou.newmodule.feature:id/btn_lingqu").text("领取").findOne())) {
+                toastLog("已点击领取");
+            }
+            break;
+        case "下单自动领券":
+            // 第二种领券
+            func.sClick(text("领券参团").findOne());
+            textContains("购买时会自动领取并使用").findOne();
+            if (func.sClick(text("领券参团").findOne())) {
+                toastLog("购买时自动领取");
+            }
+            break;
+    }
+    sleep(3000);
+
+}
 
 
 function 农行缴费() {
