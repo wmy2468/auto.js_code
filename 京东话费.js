@@ -386,8 +386,10 @@ function jd_pay(cardEndNumber) {
             sleep(1000);
             // 如果没点击到卡，则展开所有付款方式
             if (func.cClick(textContains(cardEndNumber).findOnce()) == false) {
+                toastLog("展开卡列表点击");
                 // 点击全部，展开所有card
                 func.sClick(text("全部付款方式").findOne());
+                sleep(1000);
                 // 等待页面加载
                 text("付款方式").findOne();
                 while (!func.cClick(textContains(cardEndNumber).findOnce())) {
@@ -404,7 +406,7 @@ function jd_pay(cardEndNumber) {
             text("支付成功").findOne();
             toastLog("...支付完成...");
             sleep(1200);
-            back();
+            // back();
             text("查看订单").findOne();
             sleep(1200);
             //if (func.sClick(text("立即抽奖").findOnce())) {
