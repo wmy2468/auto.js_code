@@ -171,7 +171,7 @@ function 云闪付锦鲤活动() {
             break;
     }
     func.toApp(appName);
-    while (text("激励金提现").findOnce() == null) {
+    while (text("明日预告").findOnce() == null) {
         // 如果能点击按钮，就等待设置文本
         if (func.sClick(id("rl_search_coupon").findOnce()) == true) {
             // 只要找到一个不为空
