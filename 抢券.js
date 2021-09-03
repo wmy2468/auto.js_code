@@ -182,8 +182,6 @@ function 云闪付捡漏() {
                 log("123");
             }
         }
-        // 点击券，
-        toastLog("已到达指定页面，等待");
         // 点击进入 等待
         func.sClick(clickItem);
         // 等待是否到达立即领取页面
