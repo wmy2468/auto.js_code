@@ -416,14 +416,13 @@ function jd_pay(cardEndNumber) {
                 back();
                 // 待付款滑动栏
                 textContains(textPay).findOne();
-                cnt = 6;
+                cnt = 10;
                 while (cnt > 0) {
                     cnt = cnt - 1;
                     toastLog("...等待下一单...");
                     sleep(1300);
                 }
             }
-            sleep(5000);
         }
     }
 }
