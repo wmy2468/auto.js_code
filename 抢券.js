@@ -190,13 +190,14 @@ function 云闪付捡漏() {
         text("优惠券到账后24小时内有效").findOne();
         // 如有立即领取，点击 退出程序
         if (func.sClick(text("立即领取").findOnce())) {
-
             // 如果已点击，就等待手动返回
             while (text("奖励中心").findOnce() == null) {
                 toastLog("等待手动返回...");
                 sleep(2500);
             }
         } else {
+            toastLog("未捡漏成功....");
+            sleep(2000);
             back();
             text("奖励中心").findOne();
         }
