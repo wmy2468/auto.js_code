@@ -240,7 +240,7 @@ function 云闪付锦鲤活动() {
         case "周五六日15点":
             startTime = "14,59,59,600";
             break;
-        case "周云闪付捡漏":
+        case "云闪付捡漏":
             云闪付捡漏();
             break;
     }
