@@ -395,6 +395,8 @@ function jd_pay(cardEndNumber) {
                     scrollDown();
                     sleep(850);
                 }
+            } else {
+                toastLog("已直接点击");
             }
             sleep(1200);
             func.sClick(text("银行卡支付").findOne());
@@ -404,8 +406,9 @@ function jd_pay(cardEndNumber) {
             sleep(1200);
             back();
             text("查看订单").findOne();
+            sleep(1200);
             //if (func.sClick(text("立即抽奖").findOnce())) {
-            if (text("立即抽奖").findOnce()) {
+            if (text("立即抽奖").findOnce() != null) {
                 toastLog("找到抽奖，等待返回");
                 sleep(2000);
                 back();
@@ -418,6 +421,7 @@ function jd_pay(cardEndNumber) {
                     sleep(1300);
                 }
             }
+            sleep(3000);
         }
     }
 }
