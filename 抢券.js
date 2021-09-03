@@ -133,8 +133,79 @@ function 京东() {
 
 }
 
+
+function 云闪付捡漏() {
+    var targetViewText, targetText;
+    targetViewText = func.dialogsWin(["10-2线上", "10-2线下"]);
+    while (text("奖励中心").findOnce() == null) {
+        toastLog("请跳转到 \" 奖励中心 \"，直到提示  已到达等待页面");
+        sleep(2000);
+    }
+    switch (targetViewText) {
+        case "10-2线上":
+            counponText = "满10可用";
+            targetText = "线上指定商户";
+            break;
+        case "10-2线下":
+            counponText = "满10可用";
+            targetText = "线下指定商户";
+            break;
+    }
+    var exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
+    exWhile = false;
+    while (1) {
+        // 查找券位置
+        while (1) {
+            try {
+                clickItems = text(counponText).find();
+                toastLog("找到 " + counponText + " 数量：" + clickItems.length);
+                if (clickItems.nonEmpty()) {
+                    for (var i = 0; i < clickItems.length; i++) {
+                        clickItem = clickItems[i];
+                        itemIndex = clickItem.indexInParent();
+                        itemParent = clickItem.parent();
+                        upItemText = (itemParent.child(itemIndex + 1)).text();
+                        log(upItemText);
+                        // 如果文本一致，就退出选择
+                        if (upItemText == targetText) {
+                            exWhile = true;
+                            break;
+                        }
+                    }
+                }
+                // 如果退出选项
+                if (exWhile) {
+                    break;
+                }
+            }
+            catch (e) {
+                log("123");
+            }
+        }
+        // 点击券，
+        toastLog("已到达指定页面，等待");
+        // 点击进入 等待
+        func.sClick(clickItem);
+        // 等待是否到达立即领取页面
+        text("优惠券到账后24小时内有效").findOne();
+        // 如有立即领取，点击 退出程序
+        if (func.sClick(text("立即领取").findOnce())) {
+
+            // 如果已点击，就等待手动返回
+            while (text("奖励中心").findOnce() == null) {
+                toastLog("等待手动返回...");
+                sleep(2500);
+            }
+        } else {
+            back();
+            text("奖励中心").findOne();
+        }
+    }
+}
+
+
 function 云闪付锦鲤活动() {
-    var startTime, targetViewText, clickText;
+    var startTime, targetViewText;
     var appName = "云闪付";
     var timeArea = "北京时间";
     toastLog("到点点击");
@@ -154,8 +225,8 @@ function 云闪付锦鲤活动() {
             break;
     }
 
-    targetViewText = func.dialogsWin(["每日券", "周五六日10点", "周五六日15点"]);
-    var targetText, everyText;
+    targetViewText = func.dialogsWin(["每日券", "云闪付捡漏", "周五六日10点", "周五六日15点"]);
+    var targetText;
     targetText = "线下指定商户";
     switch (targetViewText) {
         case "每日券":
@@ -168,6 +239,9 @@ function 云闪付锦鲤活动() {
             break;
         case "周五六日15点":
             startTime = "14,59,59,600";
+            break;
+        case "周云闪付捡漏":
+            云闪付捡漏();
             break;
     }
     func.toApp(appName);
@@ -185,9 +259,6 @@ function 云闪付锦鲤活动() {
             }
         }
     }
-
-    var exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
-    exWhile = false;
     // 等待进入指定页面
     while (text("奖励中心").findOnce() == null) {
         toastLog("请跳转到 \" 奖励中心 \"，直到提示  已到达等待页面");
@@ -196,6 +267,9 @@ function 云闪付锦鲤活动() {
     toastLog("已到达 \" 奖励中心 \"");
     // 进入奖励中心后延迟1.5秒
     sleep(1500);
+
+    var exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
+    exWhile = false;
     while (1) {
         try {
             clickItems = text(counponText).find();
