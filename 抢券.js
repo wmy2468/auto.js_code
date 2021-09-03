@@ -158,7 +158,7 @@ function 云闪付捡漏() {
         while (1) {
             try {
                 clickItems = text(counponText).find();
-                toastLog("找到 " + counponText + " 数量：" + clickItems.length);
+                log("找到 " + counponText + " 数量：" + clickItems.length);
                 if (clickItems.nonEmpty()) {
                     for (var i = 0; i < clickItems.length; i++) {
                         clickItem = clickItems[i];
@@ -200,6 +200,8 @@ function 云闪付捡漏() {
             sleep(2000);
             back();
             text("奖励中心").findOne();
+            toastLog("已返回....");
+            sleep(1500);
         }
     }
 }
