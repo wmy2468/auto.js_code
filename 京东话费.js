@@ -423,7 +423,7 @@ function jd_pay(cardEndNumber) {
                     sleep(1300);
                 }
             }
-            sleep(3000);
+            sleep(5000);
         }
     }
 }
