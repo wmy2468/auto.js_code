@@ -212,6 +212,8 @@ function 云闪付锦鲤活动() {
     // 寻找目标按钮
     var counpons, counponParent, counponIdx, findText;
     var clickBtn, btnParent, btnIdx;
+    var exitWhile;
+    exitWhile = false;
     while (1) {
         try {
             // 查找满10/25/35可用
@@ -228,12 +230,14 @@ function 云闪付锦鲤活动() {
                 if (findText == counponText) {
                     clickBtn = btnParent.child(btnIdx);
                     func.sClick(clickBtn);
-                    break;
+                    exitWhile = true;
                 }
             });
-        }
-        catch (error) {
+        } catch (error) {
             continue;
+        }
+        if (exitWhile) {
+            break;
         }
     }
     toastLog("已完成");
