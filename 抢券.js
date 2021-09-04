@@ -148,17 +148,15 @@ function 云闪付锦鲤活动() {
     }
     var selectFunc;
     selectFunc = func.dialogsWin(["每日券", "云闪付捡漏", "周五六日10点", "周五六日15点"]);
-    var targetText, clockBefore, clockAfter;
+    var clockBefore, clockAfter;
     var clock9, clock10, clock15;
     clock9 = "09:00";
     clock10 = "10:00";
     clock15 = "15:00";
-    targetText = "线下指定商户";
     switch (selectFunc) {
         case "每日券":
-            targetText = func.dialogsWin(["线下指定商户", "线上指定商户"]);
+            counponText = func.dialogsWin(["线下指定商户", "线上指定商户"]);
             startTime = "08,59,59,600";
-            counponText = "满10可用";
             clockAfter = clock9;
             clockBefore = clock10;
             break;
@@ -210,36 +208,24 @@ function 云闪付锦鲤活动() {
     // 点击目标时间
     func.sClick(targetClock);
     // 寻找目标按钮
-    var counpons, counponParent, counponIdx, findText;
-    var clickBtn, btnParent, btnIdx;
-    var exitWhile;
-    exitWhile = false;
-    while (1) {
-        try {
-            // 查找满10/25/35可用
-            counpons = text(counponText).find();
-            // 遍历寻找满足条件的按钮
-            counpons.forEach(counpon => {
-                counponParent = counpon.parent();
-                counponIdx = counpon.indexInParent();
-                findText = counponParent.child(counponIdx + 1).text();
-                // 按钮的文本
-                btnParent = counponParent.parent();
-                btnIdx = counponParent.indexInParent() + 1;
-                // 如果找到的文本等于目标文本
-                if (findText == counponText) {
-                    clickBtn = btnParent.child(btnIdx);
-                    func.sClick(clickBtn);
-                    exitWhile = true;
-                }
-            });
-        } catch (error) {
-            continue;
-        }
-        if (exitWhile) {
+    var childIdx;
+    switch (selectFunc) {
+        case "每日券":
+            if (counponText == "线下指定商户") {
+                childIdx = 2;
+            }
+            else if (counponText == "线上指定商户") {
+                childIdx = 8;
+            }
+        case "周五六日10点":
+            childIdx = 2;
             break;
-        }
+        case "周五六日15点":
+            childIdx = 2;
+            break;
     }
+    // 点击按钮
+    func.sClick(text(counponText).findOne().parent().parent().child(childIdx));
     toastLog("已完成");
 }
 // ------------------------云闪付锦鲤活动--------------------------------------

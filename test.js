@@ -57,8 +57,8 @@ var func = require("func_list.js");
 // callFeeBtns.children().forEach(feeBtn => {
 //     func.sClick(feeBtn);
 // })
+log(text("线下指定商户").findOne().parent().parent().child(2).text());
 
-func.sClick(text("10:00").findOnce())
 
 function 云闪付锦鲤活动() {
     var startTime, targetViewText, clickText;
