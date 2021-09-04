@@ -127,7 +127,7 @@ function 云闪付捡漏() {
 
 
 function 云闪付锦鲤活动() {
-    var startTime, targetViewText;
+    var startTime;
     var appName = "云闪付";
     var timeArea = "北京时间";
     toastLog("到点点击");
@@ -146,21 +146,31 @@ function 云闪付锦鲤活动() {
             counponText = "满50可用";
             break;
     }
-
-    targetViewText = func.dialogsWin(["每日券", "云闪付捡漏", "周五六日10点", "周五六日15点"]);
-    var targetText;
+    var selectFunc;
+    selectFunc = func.dialogsWin(["每日券", "云闪付捡漏", "周五六日10点", "周五六日15点"]);
+    var targetText, clockBefore, clockAfter;
+    var clock9, clock10, clock15;
+    clock9 = "09:00";
+    clock10 = "10:00";
+    clock15 = "15:00";
     targetText = "线下指定商户";
-    switch (targetViewText) {
+    switch (selectFunc) {
         case "每日券":
             targetText = func.dialogsWin(["线下指定商户", "线上指定商户"]);
             startTime = "08,59,59,600";
-            counponText = "满10可用"
+            counponText = "满10可用";
+            clockAfter = clock9;
+            clockBefore = clock10;
             break;
         case "周五六日10点":
             startTime = "09,59,59,600";
+            clockAfter = clock10;
+            clockBefore = clock15;
             break;
         case "周五六日15点":
             startTime = "14,59,59,600";
+            clockAfter = clock15;
+            clockBefore = clock10;
             break;
         case "云闪付捡漏":
             云闪付捡漏();
@@ -187,45 +197,45 @@ function 云闪付锦鲤活动() {
         sleep(800);
     }
     toastLog("已到达 \" 奖励中心 \"");
+    // 点击另一个时间
+    func.sClick(text(clockBefore).findOne());
     // 进入奖励中心后延迟1.5秒
     sleep(1500);
-
-    var exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
-    exWhile = false;
-    while (1) {
-        try {
-            clickItems = text(counponText).find();
-            toastLog("找到 " + counponText + " 数量：" + clickItems.length);
-            if (clickItems.nonEmpty()) {
-                for (var i = 0; i < clickItems.length; i++) {
-                    clickItem = clickItems[i];
-                    itemIndex = clickItem.indexInParent();
-                    itemParent = clickItem.parent();
-                    upItemText = (itemParent.child(itemIndex + 1)).text();
-                    log(upItemText);
-                    if (upItemText == targetText) {
-                        exWhile = true;
-                        break;
-                    }
-                }
-            }
-            // 如果退出选项
-            if (exWhile) {
-                break;
-            }
-        }
-        catch (e) {
-            log("123");
-        }
-    }
-
+    // 定义目标时间，提前获取
+    var targetClock;
+    targetClock = text(clockAfter).findOne();
     toastLog("已到达指定页面，等待");
     //  等待倒计时
     func.getTimeDiff(timeArea, startTime);
-    // 点击进入 等待
-    func.sClick(clickItem);
-    text("优惠券到账后24小时内有效").findOne();
-    func.sClick(text("立即领取").findOne());
+    // 点击目标时间
+    func.sClick(targetClock);
+    // 寻找目标按钮
+    var counpons, counponParent, counponIdx, findText;
+    var clickBtn, btnParent, btnIdx;
+    while (1) {
+        try {
+            // 查找满10/25/35可用
+            counpons = text(counponText).find();
+            // 遍历寻找满足条件的按钮
+            counpons.forEach(counpon => {
+                counponParent = counpon.parent();
+                counponIdx = counpon.indexInParent();
+                findText = counponParent.child(counponIdx + 1).text();
+                // 按钮的文本
+                btnParent = counponParent.parent();
+                btnIdx = counponParent.indexInParent() + 1;
+                // 如果找到的文本等于目标文本
+                if (findText == counponText) {
+                    clickBtn = btnParent.child(btnIdx);
+                    func.sClick(clickBtn);
+                    break;
+                }
+            });
+        }
+        catch (error) {
+            continue;
+        }
+    }
     toastLog("已完成");
 }
 // ------------------------云闪付锦鲤活动--------------------------------------

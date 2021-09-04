@@ -48,15 +48,17 @@ var func = require("func_list.js");
 
 // toastLog(x + "," + y);
 // toastLog(func.sClick(text("生活·缴费").findOnce()));
-targetView = desc("购物车").depth(14).findOnce();
-callFeeBtns = targetView.parent().parent().parent().parent().parent().parent().parent().parent().parent().child(0).child(0).child(0).child(0).child(1);
-log(callFeeBtns);
+// targetView = desc("购物车").depth(14).findOnce();
+// callFeeBtns = targetView.parent().parent().parent().parent().parent().parent().parent().parent().parent().child(0).child(0).child(0).child(0).child(1);
+// log(callFeeBtns);
 // 等待
 // func.getTimeDiff(timeArea, startTime);
 // 点击
-callFeeBtns.children().forEach(feeBtn => {
-    func.sClick(feeBtn);
-})
+// callFeeBtns.children().forEach(feeBtn => {
+//     func.sClick(feeBtn);
+// })
+
+func.sClick(text("10:00").findOnce())
 
 function 云闪付锦鲤活动() {
     var startTime, targetViewText, clickText;
