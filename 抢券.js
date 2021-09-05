@@ -156,17 +156,17 @@ function 云闪付锦鲤活动() {
     switch (selectFunc) {
         case "每日券":
             counponText = func.dialogsWin(["线下指定商户", "线上指定商户"]);
-            startTime = "08,59,59,600";
+            startTime = "08,59,59,800";
             clockAfter = clock9;
             clockBefore = clock10;
             break;
         case "周五六日10点":
-            startTime = "09,59,59,600";
+            startTime = "09,59,59,800";
             clockAfter = clock10;
             clockBefore = clock15;
             break;
         case "周五六日15点":
-            startTime = "14,59,59,600";
+            startTime = "14,59,59,800";
             clockAfter = clock15;
             clockBefore = clock10;
             break;
@@ -197,17 +197,12 @@ function 云闪付锦鲤活动() {
     toastLog("已到达 \" 奖励中心 \"");
     // 点击另一个时间
     func.sClick(text(clockBefore).findOne());
-    // 进入奖励中心后延迟1.5秒
-    sleep(1500);
-    // 定义目标时间，提前获取
-    var targetClock;
-    targetClock = text(clockAfter).findOne();
-    toastLog("已到达指定页面，等待");
-    //  等待倒计时
-    func.getTimeDiff(timeArea, startTime);
-    // 点击目标时间
-    func.sClick(targetClock);
-    // 寻找目标按钮
+    sleep(500);
+    func.sClick(text(clockBefore).findOne());
+    sleep(500);
+    func.sClick(text(clockBefore).findOne());
+    sleep(800);
+    // 定义子按钮的位置
     var childIdx;
     switch (selectFunc) {
         case "每日券":
@@ -224,8 +219,29 @@ function 云闪付锦鲤活动() {
             childIdx = 2;
             break;
     }
+    // 定义目标时间，提前获取
+    var targetClock;
+    targetClock = text(clockAfter).findOne();
+    toastLog("已到达指定页面，等待");
+    //  等待倒计时
+    func.getTimeDiff(timeArea, startTime);
+    // 寻找目标按钮
+    func.sClick(targetClock);
     // 点击按钮
-    func.sClick(text(counponText).findOne().parent().parent().child(childIdx));
+    var clickBtn;
+    while (1) {
+        // 点击目标时间
+        clickBtn = text(counponText).findOnce().parent().parent().child(childIdx);
+        if (clickBtn.text() != "立即领取") {
+            func.sClick(text(clockBefore).findOne());
+            sleep(100);
+            func.sClick(text(clockAfter).findOne());
+            sleep(100);
+        } else {
+            break;
+        }
+    }
+    func.sClick(clickBtn);
     toastLog("已完成");
 }
 // ------------------------云闪付锦鲤活动--------------------------------------
