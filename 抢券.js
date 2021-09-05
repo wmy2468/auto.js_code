@@ -231,7 +231,11 @@ function 云闪付锦鲤活动() {
     var clickBtn;
     while (1) {
         // 点击目标时间
-        clickBtn = text(counponText).findOnce().parent().parent().child(childIdx);
+        try {
+            clickBtn = text(counponText).findOnce().parent().parent().child(childIdx);
+        } catch (error) {
+            continue;
+        }
         if (clickBtn.text() != "立即领取") {
             func.sClick(text(clockBefore).findOne());
             sleep(100);
