@@ -383,6 +383,8 @@ function jd_pay(cardEndNumber) {
         func.sClick(textContains("去支付").findOnce());
         // 如果找到京东收银台
         if (text(textBar).findOnce() != null) {
+            // 重置计数
+            clickCnt = 0;
             sleep(1000);
             // 如果没点击到卡，则展开所有付款方式
             if (func.cClick(textContains(cardEndNumber).findOnce()) == false) {
