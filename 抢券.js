@@ -8,11 +8,11 @@ function main() {
     var selectedArr = [
         "光大活动",
         "中信活动",
-        "工行活动",
+        // "工行活动",
         // "交行9点5积分",
         // "京东腾讯月",
-        "京东",
-        "掌上生活",
+        "京喜领券",
+        // "掌上生活",
         "云闪付锦鲤活动"
         // "农行缴费20-10"
     ];
@@ -46,8 +46,8 @@ function main() {
         case "云闪付锦鲤活动":
             云闪付锦鲤活动();
             break;
-        case "京东":
-            京东();
+        case "京喜领券":
+            京喜领券();
     }
     toastLog("结束");
     device.cancelKeepingAwake();
@@ -254,7 +254,7 @@ function 云闪付锦鲤活动() {
 }
 // ------------------------云闪付锦鲤活动--------------------------------------
 
-function 京东() {
+function 京喜领券() {
     var appName;
     var timeArea = "京东时间";
     var startTime, targetViewText;
