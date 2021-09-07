@@ -99,6 +99,7 @@ function 进90减2界面领券() {
         func.sClick(text("生活·缴费").findOnce());
         pay90_40 = className("TextView").text("抢90减40话费券").findOnce();
         if (pay90_40 != null) {
+            func.sClick(className("ImageView").depth(6).drawingOrder(1).findOnce());
             sleep(800);
             // 如果是华为荣耀8，需要向下滑动一下
             if (device.model == "FRD-AL00") {
