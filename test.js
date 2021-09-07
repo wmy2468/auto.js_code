@@ -57,8 +57,76 @@ var func = require("func_list.js");
 // callFeeBtns.children().forEach(feeBtn => {
 //     func.sClick(feeBtn);
 // })
-log(text("线下指定商户").findOne().parent().parent().child(2).text());
 
+t();
+
+function t() {
+    var defaultCount, count, cardNum, banks;
+    banks = func.dialogsWin(["渣打5比", "交行3比"])
+    switch (banks) {
+        case "渣打5比":
+            cardNum = "(9101)";
+            defaultCount = 5;
+            break;
+        case "交行3比":
+            cardNum = "(5629)";
+            defaultCount = 3;
+            break;
+    }
+    count = dialogs.rawInput("请输入捐款次数", defaultCount);
+    func.toApp("支付宝");
+    var cnt = 1;
+    sleep(1000);
+    while (count > 0) {
+        while (text("项目介绍").findOnce() == null) {
+            toastLog("请跳转到 捐赠项目 界面...");
+            sleep(2500);
+        }
+        while (1) {
+            if (func.sClick(text("单笔捐").findOnce())) {
+                break;
+            }
+            if (func.sClick(text("再捐一笔").findOnce())) {
+                break;
+            }
+        }
+        text("《支付宝爱心捐赠协议》").findOne();
+        sleep(800);
+        func.sClick(className("EditText").findOnce());
+        sleep(800);
+        setText(0, "0.01");
+        sleep(800);
+        func.sClick(text("匿名捐款").findOne());
+        sleep(800);
+        func.sClick(text("同意协议并捐款").findOne());
+        text("立即付款").findOne();
+        sleep(800);
+        while (textContains(cardNum).findOnce() == null) {
+            func.sClick(text("付款方式").findOnce());
+            if (text("选择付款方式").findOnce() != null) {
+                sleep(800);
+                if (func.cClick(text(cardNum).findOnce()) == false) {
+                    scrollDown();
+                    sleep(800);
+                } else {
+                    toastLog("已选择银行卡，等待...");
+                    sleep(3200);
+                }
+            }
+        }
+        func.sClick(text("立即付款").findOne());
+        text("支付成功").findOne();
+        sleep(1200);
+        func.sClick(text("完成").findOne());
+        text("感谢捐助").findOne();
+        sleep(1500);
+        back();
+        toastLog("已完成第 " + cnt + " 次...");
+        sleep(2500);
+        count = count - 1;
+    }
+    alert("已完成");
+}
 
 function 云闪付锦鲤活动() {
     var startTime, targetViewText, clickText;
