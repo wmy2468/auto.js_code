@@ -577,15 +577,26 @@ function 中信活动() {
     var appName = "动卡空间";
     var timeArea = "北京时间";
     var startTime, targetViewText;
-    var actNames = ["10点-9积分兑换", "周三六11点-5折必胜客百果园", "15点-星巴克中杯"];
+    var actNames = ["10点-15点-9积分兑换", "周三六11点-5折必胜客百果园"];
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
     var couDes;    // 券描述列表
     switch (actName) {
-        case "10点-9积分兑换":
+        case "10点-15点-9积分兑换":
             toastLog("等待页面变化");
-            startTime = "09,59,50,000"
-            couDes = ["星巴克中杯饮品电子券", "奈雪", "喜茶25元", "苏宁支付券20元", "京东支付券20元", "天猫20元", "滴滴出行20元", "美团外卖20元"];
-            targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+            // 如果当前小时数 大于10，则是15点场
+            if (new Date().getHours() <= 9) {
+                startTime = "09,59,50,000"
+                couDes = ["星巴克中杯饮品电子券", "奈雪", "喜茶25元", "苏宁支付券20元", "京东支付券20元", "天猫20元", "滴滴出行20元", "美团外卖20元"];
+            } else {
+                startTime = "14,59,50,000"
+                couDes = ["【下午茶】喜茶25元抵用券（15点抢兑）"];
+            }
+            if (couDes.length == 1) {
+                targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+            } else {
+                targetViewText = couDes[0];               // 设置查找的文本
+            }
+
             func.toApp(appName);             // 启动APP
             var couClick = null;          // 找券
             while (couClick == null) {
@@ -639,55 +650,33 @@ function 中信活动() {
             toastLog("已点击，请确认结果");
             sleep(3000);
             break;
-        case "15点-星巴克中杯":
-            toastLog("等待页面变化");
-            startTime = "14,59,50,000"
-            targetViewText = "星巴克中杯饮品电子券（15点抢兑）";               // 设置查找的文本
-            func.toApp(appName);             // 启动APP
-            var couClick = textContains(targetViewText).findOnce();          // 找券
-            while (couClick == null) {
-                couClick = textContains(targetViewText).findOnce();          // 找券
-                toastLog("请跳转到券 列表 页面，直到提示  已到达等待页面");
-                sleep(1000);
-            }
-            toastLog("元素文本：" + couClick.text());
-            func.getTimeDiff(timeArea, startTime);              // 等待到15秒的时候再进入
-            func.sClick(couClick);              // 点击标签
-            targetViewText = "价格: 1个权益+9个积分";               // 设置查找的文本
-            text(targetViewText).findOne();             // 等待进入指定页面
-            toastLog("已到达指定页面，等待");
-            //点击元素
-            while (func.sClick(text("去兑换").findOnce()) == false) {
-                sleep(100);
-            }
-            while (func.sClick(text("去支付").findOnce()) == false) {
-                sleep(100);
-            }
-            toastLog("已点击，等待验证码");
-            sleep(3000);
-            break;
-        case "2021积分兑换":
-            startTime = "14,00,00,000"
-            targetViewText = "已报名，快去抢兑吧";               // 设置查找的文本
-            func.toApp(appName);             // 启动APP
-            var btnClick = text(targetViewText).findOnce();          // 找按钮
-            while (btnClick == null) {
-                btnClick = text(targetViewText).findOnce();          // 找按钮
-                toastLog("请跳转到对应页面，直到提示  已到达等待页面");
-                sleep(800);
-            }
-            func.getTimeDiff(timeArea, startTime);              // 等待时间
-            func.sClick(btnClick);
-            var goodsText = "SKG 颈部按摩仪"
-            buyBtn = text(goodsText).findOnce();
-            while (buyBtn == null) {
-                buyBtn = text(goodsText).findOnce();
-                scrollDown();
-            }
-            var idx = buyBtn.indexInParent();
-            var goodsParent = buyBtn.parent();
-            func.sClick(goodsParent.child([idx + 3]));
-            break;
+        // case "15点-9积分兑换":
+        //     toastLog("等待页面变化");
+        //     startTime = "14,59,50,000"
+        //     targetViewText = "星巴克中杯饮品电子券（15点抢兑）";               // 设置查找的文本
+        //     func.toApp(appName);             // 启动APP
+        //     var couClick = textContains(targetViewText).findOnce();          // 找券
+        //     while (couClick == null) {
+        //         couClick = textContains(targetViewText).findOnce();          // 找券
+        //         toastLog("请跳转到券 列表 页面，直到提示  已到达等待页面");
+        //         sleep(1000);
+        //     }
+        //     toastLog("元素文本：" + couClick.text());
+        //     func.getTimeDiff(timeArea, startTime);              // 等待到15秒的时候再进入
+        //     func.sClick(couClick);              // 点击标签
+        //     targetViewText = "价格: 1个权益+9个积分";               // 设置查找的文本
+        //     text(targetViewText).findOne();             // 等待进入指定页面
+        //     toastLog("已到达指定页面，等待");
+        //     //点击元素
+        //     while (func.sClick(text("去兑换").findOnce()) == false) {
+        //         sleep(100);
+        //     }
+        //     while (func.sClick(text("去支付").findOnce()) == false) {
+        //         sleep(100);
+        //     }
+        //     toastLog("已点击，等待验证码");
+        //     sleep(3000);
+        //     break;
     }
 }
 
