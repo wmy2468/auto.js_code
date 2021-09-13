@@ -81,6 +81,7 @@ function ZFB捐款() {
         sleep(1500);
         back();
         toastLog("已完成第 " + cnt + " 次...");
+        cnt = cnt + 1;
         sleep(2500);
         count = count - 1;
     }
