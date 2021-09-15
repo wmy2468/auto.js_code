@@ -29,7 +29,10 @@ function jd_sign() {
     sleep(800);
 
     while (textContains("已连").findOnce() == null) {
-        func.cClick(text("签到领京豆").findOnce());
+        if (func.cClick(text("签到领京豆").findOnce())) {
+            sleep(2000);
+            back();
+        }
         sleep(800);
     }
     toastLog("已签到");
