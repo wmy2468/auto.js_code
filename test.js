@@ -95,14 +95,16 @@ blockLineBounds = blockLine.bounds();
 // 定义截图坐标
 var imgX, imgY, imgH, imgW, blockR;
 blockR = blockLineBounds.right;
-imgX = blockR;          // 设为滑块的右边
+// imgX = blockR;          // 设为滑块的右边
+// imgH = dragImgBounds.right - blockR;        // 右边-左边
+imgX = dragImgBounds.left;          // 设为滑块的右边
 imgY = dragImgBounds.top;
-imgH = dragImgBounds.right - blockR;        // 右边-左边
+imgH = dragImgBounds.right - dragImgBounds.left;        // 右边-左边
 imgW = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
 
 var imgCut, imgClip, imgScale;
 imgCut = captureScreen();      // 截图
-imgClip = images.cvtColor(images.clip(imgCut, imgX, imgY, imgH, imgW), "BGR2GRAY"); // 裁剪图片
+imgClip = images.grayScale(images.clip(imgCut, imgX, imgY, imgH, imgW)); // 裁剪图片
 imgScale = images.scale(imgClip, 0.5, 0.5);
 var returnXY;
 log("clip");
