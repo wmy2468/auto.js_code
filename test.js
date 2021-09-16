@@ -60,13 +60,57 @@ var func = require("func_list.js");
 
 filePath = "/storage/emulated/0/";
 
-// if (!requestScreenCapture()) {
-//     alert("请求截图权限失败！");
-//     exit();
+if (!requestScreenCapture()) {
+    alert("请求截图权限失败！");
+    exit();
+}
+sleep(800);
+// 查找拼图是否已加载
+var blockLine;
+blockLine = text("向右拖动滑块并拼合图片").findOnce();
+while (blockLine == null) {
+    sleep(800);
+    blockLine = text("向右拖动滑块并拼合图片").findOnce();
+}
+// 获取滑块坐标
+var blockBounds, blockLeft, blockTop;
+blockBounds = blockLine.bounds();
+blockLeft = blockBounds.left;
+blockTop = blockBounds.top;
+
+// 查找图片，得到截图裁剪位置
+var dragImg, dragImgBounds;
+dragImg = id("wpcs_img_show").findOnce();
+if (dragImg == null) {
+    toastLog("未找到滑动的图片 退出");
+    exit();
+}
+dragImgBounds = dragImg.bounds();
+
+// 定义截图坐标
+var imgX, imgY, imgH, imgW;
+imgX = dragImgBounds.left;
+imgY = dragImgBounds.top;
+imgH = dragImgBounds.right - dragImgBounds.left;        // 右边-左边
+imgW = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
+
+
+// 未找到滑块，退出
+var dragBlock;          // 定义滑块
+dragBlock = id("wpcs_drag_block").findOnce();
+if (dragBlock == null) {
+    toastLog("未找到滑块");
+    exit();
+}
+
+var imgCut, imgClip;
+imgCut = captureScreen();      // 截图
+imgClip = images.clip(img, imgX, imgY, imgH, imgW); // 裁剪图片
+// 如果宽度或高度大于600
+// if (imgH > 600 || imgW > 600) {
+//     imgClip()
 // }
-// sleep(2000);
-//ime = captureScreen();
-t();
+superMan(images.toBytes(imgClip));
 
 // images.save(ime, filePath + "脚本/1.png");
 // ime = images.cvtColor(ime, "BGR2GRAY", 3);
@@ -74,7 +118,12 @@ t();
 // images.save(ime, filePath + "脚本/2.png");
 // images.save(ff, filePath + "脚本/3.png");
 
-function t() {
+
+/**
+ * 
+ * @param {输入bytes类型的图片} img
+ */
+function superMan(img) {
     //>>>>>>>>基础设置<<<<<<<<<
     var username = 'mw03251214_2'  //超人云帐号
     var password = '003451jj'  //超人云密码
@@ -84,7 +133,7 @@ function t() {
     var imgid = '' //由识别接口返回，用于报告错误识别结果
 
     //>>>>>>>>查询余额<<<<<<<<<
-    console.show()
+    // console.show()
     var url = baseurl + 'GetUserInfo.ashx'
     var res = http.post(url, {
         "username": username,
@@ -97,14 +146,8 @@ function t() {
     else {
         log('接口请求失败')
     }
-
-
     //>>>>>>>>上传图片等待识别结果<<<<<<<<<
     /*读取图片至16进制字符串*/
-    var img = images.read(filePath + "脚本/1.png");
-    img = images.clip(img, 0, 728, 1080, 888);
-    img = images.scale(img, 0.5, 0.5);
-    img = images.toBytes(img);
     log("requests start")
     var sb = new java.lang.StringBuilder();
     var hex
@@ -132,7 +175,6 @@ function t() {
         log('接口请求失败')
     }
     log("requests end")
-
 
     //>>>>>>>>报告错误(识别结果错误时调用)<<<<<<<<<
     /*** 
