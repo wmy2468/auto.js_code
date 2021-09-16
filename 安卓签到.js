@@ -29,9 +29,10 @@ function jd_sign() {
     sleep(800);
 
     while (textContains("已连").findOnce() == null) {
-        if (func.cClick(text("签到领京豆").findOnce())) {
-            sleep(2000);
+        func.cClick(text("签到领京豆").findOnce());
+        if (text("签到日历").findOnce() != null) {
             back();
+            sleep(2000);
         }
         sleep(800);
     }

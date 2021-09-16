@@ -284,12 +284,12 @@ function jd_sign() {
     }
 
     var signBtn;
-    if (device.model == "TAS-AL00") {
-        signBtn = text("立即领红包").findOnce();
-    } else {
-        // 新版本签到
-        signBtn = text("签到领奖励").findOnce();
-    }
+    // if (device.model == "TAS-AL00") {
+    //     signBtn = text("立即领红包").findOnce();
+    // } else {
+    // 新版本签到
+    signBtn = text("签到领奖励").findOnce();
+    // }
 
     if (signBtn == null) {
         toastLog("今日已领券");
