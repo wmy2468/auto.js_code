@@ -104,7 +104,7 @@ imgW = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
 
 var imgCut, imgClip, imgScale;
 imgCut = captureScreen();      // 截图
-imgClip = images.grayScale(images.clip(imgCut, imgX, imgY, imgH, imgW)); // 裁剪图片
+imgClip = images.grayscale(images.clip(imgCut, imgX, imgY, imgH, imgW)); // 裁剪图片
 imgScale = images.scale(imgClip, 0.5, 0.5);
 var returnXY;
 log("clip");
