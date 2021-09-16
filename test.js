@@ -70,7 +70,7 @@ var blockLine;
 blockLine = text("向右拖动滑块并拼合图片").findOnce();
 while (blockLine == null) {
     sleep(800);
-    blockLine = text("向右拖动滑块并拼合图片").findOnce();
+    blockLine = text("向右拖动滑块拼合图片").findOnce();
 }
 // 获取滑块坐标
 var blockBounds, blockLeft, blockTop;
