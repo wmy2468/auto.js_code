@@ -80,7 +80,7 @@ blockTop = blockBounds.top;
 
 // 查找图片，得到截图裁剪位置
 var dragImg, dragImgBounds;
-dragImg = id("wpcs_img_show").findOnce();
+dragImg = id("com.unionpay:id/wpcs_img_show").findOnce();
 if (dragImg == null) {
     toastLog("未找到滑动的图片 退出");
     exit();
@@ -97,7 +97,7 @@ imgW = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
 
 // 未找到滑块，退出
 var dragBlock;          // 定义滑块
-dragBlock = id("wpcs_drag_block").findOnce();
+dragBlock = id("com.unionpay:id/wpcs_drag_block").findOnce();
 if (dragBlock == null) {
     toastLog("未找到滑块");
     exit();
