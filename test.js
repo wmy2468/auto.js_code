@@ -133,7 +133,7 @@ function superMan(img) {
     var imgid = '' //由识别接口返回，用于报告错误识别结果
 
     //>>>>>>>>查询余额<<<<<<<<<
-    // console.show()
+    onsole.show();
     var url = baseurl + 'GetUserInfo.ashx'
     var res = http.post(url, {
         "username": username,
