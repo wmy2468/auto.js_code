@@ -100,16 +100,20 @@ imgY = dragImgBounds.top;
 imgH = dragImgBounds.right - blockR;        // 右边-左边
 imgW = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
 
-var imgCut, imgClip;
+var imgCut, imgClip, imgScale;
 imgCut = captureScreen();      // 截图
-imgClip = images.scale(images.clip(imgCut, imgX, imgY, imgH, imgW), 0.7, 0.7); // 裁剪图片
+imgClip = images.cvtColor(images.clip(imgCut, imgX, imgY, imgH, imgW), "BGR2GRAY"); // 裁剪图片
+imgScale = images.scale(imgClip, 0.5, 0.5);
 var returnXY;
+log("clip");
 returnXY = superMan(images.toBytes(imgClip));
+log("scale");
+returnXY = superMan(images.toBytes(imgScale));
 
-var targetX, targetY;
-// 先还原比例，再加上截图的X,Y
-targetX = Math.floor(returnXY[0] / 0.7) + imgX;
-targetY = Math.floor(returnXY[1] / 0.7) + imgY;
+// var targetX, targetY;
+// // 先还原比例，再加上截图的X,Y
+// targetX = Math.floor(returnXY[0] / 0.7) + imgX;
+// targetY = Math.floor(returnXY[1] / 0.7) + imgY;
 
 
 /**
