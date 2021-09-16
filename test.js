@@ -58,8 +58,11 @@ var func = require("func_list.js");
 //     func.sClick(feeBtn);
 // })
 
-filePath = "/storage/emulated/0/";
 
+filePath = "/storage/emulated/0/脚本";
+var screenW;
+screenW = device.width;
+log("screenW: " + screenW);
 if (!requestScreenCapture()) {
     alert("请求截图权限失败！");
     exit();
@@ -81,7 +84,7 @@ blockTop = blockBounds.top;
 // 查找图片，得到截图裁剪位置
 var dragImg, dragImgBounds;
 var blockLine, blockLineBounds;
-dragImg = idContains("wpcs_img_show").findOnce();
+dragImg = idContains("wpcs_drag_img").findOnce();
 blockLine = idContains("wpcs_drag_block_line").findOnce();
 
 if (dragImg == null || blockLine == null) {
@@ -93,26 +96,42 @@ dragImgBounds = dragImg.bounds();
 blockLineBounds = blockLine.bounds();
 
 // 定义截图坐标
-var imgX, imgY, imgH, imgW, blockR;
+var img1X, img1Y, img1H, img1W, blockR;
+var img2X, img2Y, img2H, img2W;
 blockR = blockLineBounds.right;
-// imgX = blockR;          // 设为滑块的右边
-// imgH = dragImgBounds.right - blockR;        // 右边-左边
-imgX = dragImgBounds.left;          // 设为滑块的右边
-imgY = dragImgBounds.top;
-imgH = dragImgBounds.right - dragImgBounds.left;        // 右边-左边
-imgW = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
+// 在img2 中查找img1
+//查找的图像35*44
+img1X = dragImgBounds.left;          // 设为滑块的右边
+img1Y = dragImgBounds.top;
+img1W = screenW - dragImgBounds.left * 2;        // 右边-左边
+img1H = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
+log(img1X, img1Y, img1W, img1H);
 
-var img;
+img2X = dragImgBounds.right;          // 设为滑块的右边
+img2Y = dragImgBounds.top;
+img2H = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
+img2W = screenW - dragImgBounds.right;        // 右边-左边
+
+
+var img1;
 log("截图开始");
 img = captureScreen();      // 截图
-img = images.grayscale(images.clip(img, imgX, imgY, imgH, imgW)); // 裁剪图片
-img = images.scale(img, 0.5, 0.5);
-toastLog("截图处理完成");
-var returnXY;
-returnXY = superMan(images.toBytes(img));
+img = images.clip(img, img1X, img1Y, img1W, img1H); // 裁剪图片
+img = images.scale(img, 0.7, 0.7);
+superMan(images.toBytes(img));
+// img2 = images.clip(img, img2X, img2Y, img2W, img2H); // 裁剪图片
+img = images.cvtColor(img, "BGR2GRAY"); // 灰度
+superMan(images.toBytes(img));
+images.save(img, filePath + "/grey.png");
 
-// var targetX, targetY;
-// // 先还原比例，再加上截图的X,Y
+
+toastLog("截图处理完成");
+
+var returnXY;
+// returnXY = superMan(images.toBytes(img));
+
+var targetX, targetY;
+// 先还原比例，再加上截图的X,Y
 // targetX = Math.floor(returnXY[0] / 0.7) + imgX;
 // targetY = Math.floor(returnXY[1] / 0.7) + imgY;
 
