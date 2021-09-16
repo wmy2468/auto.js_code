@@ -58,74 +58,87 @@ var func = require("func_list.js");
 //     func.sClick(feeBtn);
 // })
 
+filePath = "/storage/emulated/0/";
+
+// if (!requestScreenCapture()) {
+//     alert("请求截图权限失败！");
+//     exit();
+// }
+// sleep(2000);
+//ime = captureScreen();
 t();
 
+// images.save(ime, filePath + "脚本/1.png");
+// ime = images.cvtColor(ime, "BGR2GRAY", 3);
+// ff = images.threshold(ime, 110, 255, "BINARY")
+// images.save(ime, filePath + "脚本/2.png");
+// images.save(ff, filePath + "脚本/3.png");
+
 function t() {
-    var defaultCount, count, cardNum, banks;
-    banks = func.dialogsWin(["渣打5比", "交行3比"])
-    switch (banks) {
-        case "渣打5比":
-            cardNum = "(9101)";
-            defaultCount = 5;
-            break;
-        case "交行3比":
-            cardNum = "(5629)";
-            defaultCount = 3;
-            break;
+    //>>>>>>>>基础设置<<<<<<<<<
+    var username = 'mw03251214_2'  //超人云帐号
+    var password = '003451jj'  //超人云密码
+    var softid = '76206' //软件ID，在作者帐号后台设置，为图片长度和作者分成凭证
+    // var baseurl = 'http://api2.sz789.net:88/' //简单图片识别接口，如常见字母，数字
+    var baseurl = 'http://apib.sz789.net:88/'  //复杂图片识别接口，如滑动题，坐标题，计算题
+    var imgid = '' //由识别接口返回，用于报告错误识别结果
+
+    //>>>>>>>>查询余额<<<<<<<<<
+    console.show()
+    var url = baseurl + 'GetUserInfo.ashx'
+    var res = http.post(url, {
+        "username": username,
+        "password": password
+    });
+    if (res.statusCode == 200) {
+        var rjson = res.body.json();
+        log('剩余点数为：' + rjson.left)
     }
-    count = dialogs.rawInput("请输入捐款次数", defaultCount);
-    func.toApp("支付宝");
-    var cnt = 1;
-    sleep(1000);
-    while (count > 0) {
-        while (text("项目介绍").findOnce() == null) {
-            toastLog("请跳转到 捐赠项目 界面...");
-            sleep(2500);
-        }
-        while (1) {
-            if (func.sClick(text("单笔捐").findOnce())) {
-                break;
-            }
-            if (func.sClick(text("再捐一笔").findOnce())) {
-                break;
-            }
-        }
-        text("《支付宝爱心捐赠协议》").findOne();
-        sleep(800);
-        func.sClick(className("EditText").findOnce());
-        sleep(800);
-        setText(0, "0.01");
-        sleep(800);
-        func.sClick(text("匿名捐款").findOne());
-        sleep(800);
-        func.sClick(text("同意协议并捐款").findOne());
-        text("立即付款").findOne();
-        sleep(800);
-        while (textContains(cardNum).findOnce() == null) {
-            func.sClick(text("付款方式").findOnce());
-            if (text("选择付款方式").findOnce() != null) {
-                sleep(800);
-                if (func.cClick(text(cardNum).findOnce()) == false) {
-                    scrollDown();
-                    sleep(800);
-                } else {
-                    toastLog("已选择银行卡，等待...");
-                    sleep(3200);
-                }
-            }
-        }
-        func.sClick(text("立即付款").findOne());
-        text("支付成功").findOne();
-        sleep(1200);
-        func.sClick(text("完成").findOne());
-        text("感谢捐助").findOne();
-        sleep(1500);
-        back();
-        toastLog("已完成第 " + cnt + " 次...");
-        sleep(2500);
-        count = count - 1;
+    else {
+        log('接口请求失败')
     }
-    alert("已完成");
+
+
+    //>>>>>>>>上传图片等待识别结果<<<<<<<<<
+    /*读取图片至16进制字符串*/
+    var img = images.read(filePath + "脚本/1.png");
+    img = images.clip(img, 0, 728, 1080, 888);
+    img = images.scale(img, 0.5, 0.5);
+    img = images.toBytes(img);
+    log("requests start")
+    var sb = new java.lang.StringBuilder();
+    var hex
+    for (var i = 0; i < img.length; i++) {
+        hex = ((img[i] & 0xF0) >> 4).toString(16) + (img[i] & 0x0F).toString(16)
+        sb.append(hex);
+    }
+    var imgdata = sb.toString()
+    var url = baseurl + 'RecvByte.ashx'
+    var res = http.post(url, {
+        "username": username,
+        "password": password,
+        "softId": softid,
+        "imgdata": imgdata
+    })
+
+    if (res.statusCode == 200) {
+        var rjson = res.body.json();
+        log(rjson);
+        log("识别结果:", rjson.result)
+        imgid = rjson.imgId
+        log(imgid);
+    }
+    else {
+        log('接口请求失败')
+    }
+    log("requests end")
+
+
+    //>>>>>>>>报告错误(识别结果错误时调用)<<<<<<<<<
+    /*** 
+    var url = baseurl + 'ReportError.ashx'
+    http.post(url,{"username":username,"password":password,"imgid":imgid})
+    ***/
 }
 
 function 云闪付锦鲤活动() {
