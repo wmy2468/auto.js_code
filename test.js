@@ -80,43 +80,36 @@ blockTop = blockBounds.top;
 
 // 查找图片，得到截图裁剪位置
 var dragImg, dragImgBounds;
-dragImg = id("com.unionpay:id/wpcs_img_show").findOnce();
-if (dragImg == null) {
+var blockLine, blockLineBounds;
+dragImg = idContains("wpcs_img_show").findOnce();
+blockLine = idContains("wpcs_drag_block_line").findOnce();
+
+if (dragImg == null || blockLine == null) {
     toastLog("未找到滑动的图片 退出");
     exit();
 }
+
 dragImgBounds = dragImg.bounds();
+blockLineBounds = blockLine.bounds();
 
 // 定义截图坐标
-var imgX, imgY, imgH, imgW;
-imgX = dragImgBounds.left;
+var imgX, imgY, imgH, imgW, blockR;
+blockR = blockLineBounds.right;
+imgX = blockR;          // 设为滑块的右边
 imgY = dragImgBounds.top;
-imgH = dragImgBounds.right - dragImgBounds.left;        // 右边-左边
+imgH = dragImgBounds.right - blockR;        // 右边-左边
 imgW = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
-
-
-// 未找到滑块，退出
-var dragBlock;          // 定义滑块
-dragBlock = id("com.unionpay:id/wpcs_drag_block").findOnce();
-if (dragBlock == null) {
-    toastLog("未找到滑块");
-    exit();
-}
 
 var imgCut, imgClip;
 imgCut = captureScreen();      // 截图
-imgClip = images.clip(img, imgX, imgY, imgH, imgW); // 裁剪图片
-// 如果宽度或高度大于600
-// if (imgH > 600 || imgW > 600) {
-//     imgClip()
-// }
-superMan(images.toBytes(imgClip));
+imgClip = images.scale(images.clip(imgCut, imgX, imgY, imgH, imgW), 0.7, 0.7); // 裁剪图片
+var returnXY;
+returnXY = superMan(images.toBytes(imgClip));
 
-// images.save(ime, filePath + "脚本/1.png");
-// ime = images.cvtColor(ime, "BGR2GRAY", 3);
-// ff = images.threshold(ime, 110, 255, "BINARY")
-// images.save(ime, filePath + "脚本/2.png");
-// images.save(ff, filePath + "脚本/3.png");
+var targetX, targetY;
+// 先还原比例，再加上截图的X,Y
+targetX = Math.floor(returnXY[0] / 0.7) + imgX;
+targetY = Math.floor(returnXY[1] / 0.7) + imgY;
 
 
 /**
@@ -130,33 +123,33 @@ function superMan(img) {
     var softid = '76206' //软件ID，在作者帐号后台设置，为图片长度和作者分成凭证
     // var baseurl = 'http://api2.sz789.net:88/' //简单图片识别接口，如常见字母，数字
     var baseurl = 'http://apib.sz789.net:88/'  //复杂图片识别接口，如滑动题，坐标题，计算题
-    var imgid = '' //由识别接口返回，用于报告错误识别结果
+    // var imgid = '' //由识别接口返回，用于报告错误识别结果
 
     //>>>>>>>>查询余额<<<<<<<<<
-    onsole.show();
-    var url = baseurl + 'GetUserInfo.ashx'
-    var res = http.post(url, {
-        "username": username,
-        "password": password
-    });
-    if (res.statusCode == 200) {
-        var rjson = res.body.json();
-        log('剩余点数为：' + rjson.left)
-    }
-    else {
-        log('接口请求失败')
-    }
+    // console.show();
+    // var url = baseurl + 'GetUserInfo.ashx'
+    // var res = http.post(url, {
+    //     "username": username,
+    //     "password": password
+    // });
+    // if (res.statusCode == 200) {
+    //     var rjson = res.body.json();
+    //     log('剩余点数为：' + rjson.left);
+    // }
+    // else {
+    //     log('接口请求失败')
+    // }
     //>>>>>>>>上传图片等待识别结果<<<<<<<<<
     /*读取图片至16进制字符串*/
     log("requests start")
     var sb = new java.lang.StringBuilder();
-    var hex
+    var hex;
     for (var i = 0; i < img.length; i++) {
-        hex = ((img[i] & 0xF0) >> 4).toString(16) + (img[i] & 0x0F).toString(16)
+        hex = ((img[i] & 0xF0) >> 4).toString(16) + (img[i] & 0x0F).toString(16);
         sb.append(hex);
     }
-    var imgdata = sb.toString()
-    var url = baseurl + 'RecvByte.ashx'
+    var imgdata = sb.toString();
+    var url = baseurl + 'RecvByte.ashx';
     var res = http.post(url, {
         "username": username,
         "password": password,
@@ -166,15 +159,15 @@ function superMan(img) {
 
     if (res.statusCode == 200) {
         var rjson = res.body.json();
-        log(rjson);
-        log("识别结果:", rjson.result)
-        imgid = rjson.imgId
-        log(imgid);
+        // log(rjson);
+        log("识别结果:", rjson.result);
+        // imgid = rjson.imgId
+        // log(imgid);
     }
     else {
-        log('接口请求失败')
+        log('接口请求失败');
     }
-    log("requests end")
+    toastLog("requests end");
 
     //>>>>>>>>报告错误(识别结果错误时调用)<<<<<<<<<
     /*** 
