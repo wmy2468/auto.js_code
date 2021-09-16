@@ -103,11 +103,12 @@ imgH = dragImgBounds.right - dragImgBounds.left;        // 右边-左边
 imgW = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
 
 var img;
+log("截图开始");
 img = captureScreen();      // 截图
 img = images.grayscale(images.clip(img, imgX, imgY, imgH, imgW)); // 裁剪图片
 img = images.scale(img, 0.5, 0.5);
+toastLog("截图处理完成");
 var returnXY;
-log("scale");
 returnXY = superMan(images.toBytes(img));
 
 // var targetX, targetY;
