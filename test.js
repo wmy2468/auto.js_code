@@ -102,15 +102,13 @@ imgY = dragImgBounds.top;
 imgH = dragImgBounds.right - dragImgBounds.left;        // 右边-左边
 imgW = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
 
-var imgCut, imgClip, imgScale;
-imgCut = captureScreen();      // 截图
-imgClip = images.grayscale(images.clip(imgCut, imgX, imgY, imgH, imgW)); // 裁剪图片
-imgScale = images.scale(imgClip, 0.5, 0.5);
+var img;
+img = captureScreen();      // 截图
+img = images.grayscale(images.clip(img, imgX, imgY, imgH, imgW)); // 裁剪图片
+img = images.scale(img, 0.5, 0.5);
 var returnXY;
-log("clip");
-returnXY = superMan(images.toBytes(imgClip));
 log("scale");
-returnXY = superMan(images.toBytes(imgScale));
+returnXY = superMan(images.toBytes(img));
 
 // var targetX, targetY;
 // // 先还原比例，再加上截图的X,Y
