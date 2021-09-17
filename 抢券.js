@@ -57,24 +57,34 @@ function main() {
 // ------------------------云闪付锦鲤活动--------------------------------------
 function 云闪付捡漏() {
     var targetViewText, targetText;
-    targetViewText = func.dialogsWin(["10-2线上", "10-2线下"]);
+    // targetViewText = func.dialogsWin(["10-2线上", "10-2线下"]);
     while (text("奖励中心").findOnce() == null) {
         toastLog("请跳转到 \" 奖励中心 \"，直到提示  已到达等待页面");
         sleep(2000);
     }
-    switch (targetViewText) {
-        case "10-2线上":
-            counponText = "满10可用";
-            targetText = "线上指定商户";
-            break;
-        case "10-2线下":
+    // switch (targetViewText) {
+    //     case "10-2线上":
+    //         counponText = "满10可用";
+    //         targetText = "线上指定商户";
+    //         break;
+    //     case "10-2线下":
+    //         counponText = "满10可用";
+    //         targetText = "线下指定商户";
+    //         break;
+    // }
+    var clickFlag, exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
+    exWhile = false;
+    clickFlag = 1;
+    while (1) {
+        if (clickFlag == 1) {
             counponText = "满10可用";
             targetText = "线下指定商户";
-            break;
-    }
-    var exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
-    exWhile = false;
-    while (1) {
+            clickFlag = 2;
+        } else {
+            counponText = "满10可用";
+            targetText = "线上指定商户";
+            clickFlag = 1;
+        }
         // 查找券位置
         while (1) {
             try {
