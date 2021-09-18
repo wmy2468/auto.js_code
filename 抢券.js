@@ -171,12 +171,12 @@ function 云闪付锦鲤活动() {
             clockBefore = clock10;
             break;
         case "周五六日10点":
-            startTime = "09,59,59,900";
+            startTime = "09,59,59,800";
             clockAfter = clock10;
             clockBefore = clock15;
             break;
         case "周五六日15点":
-            startTime = "14,59,59,900";
+            startTime = "14,59,59,800";
             clockAfter = clock15;
             clockBefore = clock10;
             break;
