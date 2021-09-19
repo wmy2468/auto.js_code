@@ -187,16 +187,21 @@ function 云闪付锦鲤活动() {
     func.toApp(appName);
     while (text("明日预告").findOnce() == null) {
         // 如果能点击按钮，就等待设置文本
-        if (func.sClick(idContains("marquee").findOnce()) == true) {
-            // 只要找到一个不为空
-            if (textContains("跳过").findOnce() != null || descContains("跳过").findOnce() != null) {
-                sleep(600);
-                continue;
-            } else {
-                text("历史记录").findOne();
-                func.sClick(text("奖励中心").depth(15).findOne());
-                func.sClick(text("奖励中心").depth(17).findOne());
+        try {
+            if (func.sClick(idContains("marquee").findOnce()) == true) {
+                // 只要找到一个不为空
+                if (textContains("跳过").findOnce() != null || descContains("跳过").findOnce() != null) {
+                    sleep(600);
+                    continue;
+                } else {
+                    text("历史记录").findOne();
+                    func.sClick(text("奖励中心").depth(15).findOne());
+                    func.sClick(text("奖励中心").depth(17).findOne());
+                }
             }
+        }
+        catch (e) {
+            continue;
         }
     }
     // 等待进入指定页面
