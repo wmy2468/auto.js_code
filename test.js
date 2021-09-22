@@ -58,79 +58,129 @@ var func = require("func_list.js");
 //     func.sClick(feeBtn);
 // })
 
+// var signs = textStartsWith("+").find();
+// for (var i = 0; i < signs.length; i++) {
+//     func.sClick(signs[i]);
+// }
+scrollDown();
+//浦发银行();
 
-filePath = "/storage/emulated/0/脚本";
-var screenW;
-screenW = device.width;
-log("screenW: " + screenW);
-if (!requestScreenCapture()) {
-    alert("请求截图权限失败！");
-    exit();
-}
-sleep(800);
-// 查找拼图是否已加载
-var blockLine;
-blockLine = text("向右拖动滑块并拼合图片").findOnce();
-while (blockLine == null) {
+function 浦发银行() {
+    var appName = "浦发银行";
+    //closeApp(appName);
+    func.toApp(appName);
+    while (text("我的账户").findOnce() == null) {
+        func.passAd();
+    }
+    sleep(1800);
+    while (text("查看收益/收支明细").findOnce() == null) {
+        func.sClick(idContains("radio_button5").findOnce());
+    }
+    // 签到按钮
+    while (text("金豆").findOnce() == null) {
+        func.toAutojs();
+        func.toApp(appName);
+        sleep(3000);
+    }
     sleep(800);
-    blockLine = text("向右拖动滑块拼合图片").findOnce();
+    while (text("每日收支").findOnce() == null) {
+        func.sClick(text("金豆").findOnce());
+        sleep(800);
+        if (text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce()) {
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(1000);
+        }
+    }
+    sleep(1500);
+    scrollDown();
+    textStartsWith("+").findOne();
+    var signs = textStartsWith("+").find();
+    try {
+        for (var i = 0; i < signs.length; i++) {
+            func.sClick(signs[i]);
+        }
+    }
+    catch (e) {
+        toastLog("未找到多余的连续签到");
+        sleep(2000);
+    }
+    toastLog(appName + "已签到");
+    sleep(3000);
 }
-// 获取滑块坐标
-var blockBounds, blockLeft, blockTop;
-blockBounds = blockLine.bounds();
-blockLeft = blockBounds.left;
-blockTop = blockBounds.top;
 
-// 查找图片，得到截图裁剪位置
-var dragImg, dragImgBounds;
-var blockLine, blockLineBounds;
-dragImg = idContains("wpcs_drag_img").findOnce();
-blockLine = idContains("wpcs_drag_block_line").findOnce();
+// filePath = "/storage/emulated/0/脚本";
+// var screenW;
+// screenW = device.width;
+// log("screenW: " + screenW);
+// if (!requestScreenCapture()) {
+//     alert("请求截图权限失败！");
+//     exit();
+// }
+// sleep(800);
+// // 查找拼图是否已加载
+// var blockLine;
+// blockLine = text("向右拖动滑块并拼合图片").findOnce();
+// while (blockLine == null) {
+//     sleep(800);
+//     blockLine = text("向右拖动滑块拼合图片").findOnce();
+// }
+// // 获取滑块坐标
+// var blockBounds, blockLeft, blockTop;
+// blockBounds = blockLine.bounds();
+// blockLeft = blockBounds.left;
+// blockTop = blockBounds.top;
 
-if (dragImg == null || blockLine == null) {
-    toastLog("未找到滑动的图片 退出");
-    exit();
-}
+// // 查找图片，得到截图裁剪位置
+// var dragImg, dragImgBounds;
+// var blockLine, blockLineBounds;
+// dragImg = idContains("wpcs_drag_img").findOnce();
+// blockLine = idContains("wpcs_drag_block_line").findOnce();
 
-dragImgBounds = dragImg.bounds();
-blockLineBounds = blockLine.bounds();
+// if (dragImg == null || blockLine == null) {
+//     toastLog("未找到滑动的图片 退出");
+//     exit();
+// }
 
-// 定义截图坐标
-var img1X, img1Y, img1H, img1W, blockR;
-var img2X, img2Y, img2H, img2W;
-blockR = blockLineBounds.right;
-// 在img2 中查找img1
-//查找的图像35*44
-img1X = dragImgBounds.left;          // 设为滑块的右边
-img1Y = dragImgBounds.top;
-img1W = screenW - dragImgBounds.left * 2;        // 右边-左边
-img1H = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
-log(img1X, img1Y, img1W, img1H);
+// dragImgBounds = dragImg.bounds();
+// blockLineBounds = blockLine.bounds();
 
-img2X = dragImgBounds.right;          // 设为滑块的右边
-img2Y = dragImgBounds.top;
-img2H = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
-img2W = screenW - dragImgBounds.right;        // 右边-左边
+// // 定义截图坐标
+// var img1X, img1Y, img1H, img1W, blockR;
+// var img2X, img2Y, img2H, img2W;
+// blockR = blockLineBounds.right;
+// // 在img2 中查找img1
+// //查找的图像35*44
+// img1X = dragImgBounds.left;          // 设为滑块的右边
+// img1Y = dragImgBounds.top;
+// img1W = screenW - dragImgBounds.left * 2;        // 右边-左边
+// img1H = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
+// log(img1X, img1Y, img1W, img1H);
 
-
-var img1;
-log("截图开始");
-img = captureScreen();      // 截图
-img = images.clip(img, img1X, img1Y, img1W, img1H); // 裁剪图片
-img = images.scale(img, 0.7, 0.7);
-superMan(images.toBytes(img));
-// img2 = images.clip(img, img2X, img2Y, img2W, img2H); // 裁剪图片
-img = images.cvtColor(img, "BGR2GRAY"); // 灰度
-superMan(images.toBytes(img));
-images.save(img, filePath + "/grey.png");
+// img2X = dragImgBounds.right;          // 设为滑块的右边
+// img2Y = dragImgBounds.top;
+// img2H = dragImgBounds.bottom - dragImgBounds.top;        // 底部-顶部
+// img2W = screenW - dragImgBounds.right;        // 右边-左边
 
 
-toastLog("截图处理完成");
+// var img1;
+// log("截图开始");
+// img = captureScreen();      // 截图
+// img = images.clip(img, img1X, img1Y, img1W, img1H); // 裁剪图片
+// img = images.scale(img, 0.7, 0.7);
+// superMan(images.toBytes(img));
+// // img2 = images.clip(img, img2X, img2Y, img2W, img2H); // 裁剪图片
+// img = images.cvtColor(img, "BGR2GRAY"); // 灰度
+// superMan(images.toBytes(img));
+// images.save(img, filePath + "/grey.png");
 
-var returnXY;
-// returnXY = superMan(images.toBytes(img));
 
-var targetX, targetY;
+// toastLog("截图处理完成");
+
+// var returnXY;
+// // returnXY = superMan(images.toBytes(img));
+
+// var targetX, targetY;
 // 先还原比例，再加上截图的X,Y
 // targetX = Math.floor(returnXY[0] / 0.7) + imgX;
 // targetY = Math.floor(returnXY[1] / 0.7) + imgY;

@@ -172,13 +172,13 @@ function 浦发银行() {
     var appName = "浦发银行";
     //closeApp(appName);
     func.toApp(appName);
-    while (text("首页").findOnce() == null) {
+    while (text("我的账户").findOnce() == null) {
         func.passAd();
     }
     sleep(1800);
-    func.sClick(id("radio_button5").text("我的").findOnce());
-    // 等待我的页面加载
-    text("日历提醒").findOne();
+    while (text("查看收益/收支明细").findOnce() == null) {
+        func.sClick(idContains("radio_button5").findOnce());
+    }
     // 签到按钮
     while (text("金豆").findOnce() == null) {
         func.toAutojs();
@@ -186,7 +186,7 @@ function 浦发银行() {
         sleep(3000);
     }
     sleep(800);
-    while (text("开启签到提醒").findOnce() == null) {
+    while (text("每日收支").findOnce() == null) {
         func.sClick(text("金豆").findOnce());
         sleep(800);
         if (text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce()) {
@@ -195,13 +195,13 @@ function 浦发银行() {
             sleep(1000);
         }
     }
-    sleep(1000);
+    sleep(1500);
+    scrollDown();
+    textStartsWith("+").findOne();
     var signs = textStartsWith("+").find();
     try {
-        if (signs.length >= 2) {
-            for (var i = 0; i < signs.length; i++) {
-                func.sClick(signs[i]);
-            }
+        for (var i = 0; i < signs.length; i++) {
+            func.sClick(signs[i]);
         }
     }
     catch (e) {
