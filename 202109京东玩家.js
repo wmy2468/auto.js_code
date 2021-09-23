@@ -75,27 +75,31 @@ function process() {
 
 function checkPopUp() {
 	var lottery, iKnow, curCnt;
-	iKnow = text('我知道了').findOnce();
-	if (iKnow != null) {
-		iKnow.click();
-		log('我知道了取消');
-		sleep(800);
+	try {
+		iKnow = text('我知道了').findOnce();
+		if (iKnow != null) {
+			iKnow.click();
+			log('我知道了取消');
+			sleep(800);
+		}
+		lottery = text('立即抽奖').findOnce();
+		if (lottery != null) {
+			log('立即抽奖取消');
+			func.sClick(lottery.parent().parent().child(2));
+			sleep(800);
+		}
+		signNow = textContains('去签到').findOnce();
+		if (signNow != null) {
+			curCnt = signNow.indexInParent();
+			log('去签到取消');
+			func.sClick(signNow.parent().child(curCnt + 1));
+			sleep(800);
+		}
+		func.sClick(text('我知道啦').findOnce());
+		func.sClick(text('继续探索赢红包').findOnce());
+	} catch (e) {
+		log("error, continue");
 	}
-	lottery = text('立即抽奖').findOnce();
-	if (lottery != null) {
-		log('立即抽奖取消');
-		func.sClick(lottery.parent().parent().child(9));
-		sleep(800);
-	}
-	signNow = textContains('去签到').findOnce();
-	if (signNow != null) {
-		curCnt = signNow.indexInParent();
-		log('去签到取消');
-		func.sClick(signNow.parent().child(curCnt + 1));
-		sleep(800);
-	}
-	func.sClick(text('我知道啦').findOnce());
-	func.sClick(text('继续探索赢红包').findOnce());
 }
 
 function 每日任务() {
