@@ -62,51 +62,59 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
-scrollDown();
-//浦发银行();
 
-function 浦发银行() {
-    var appName = "浦发银行";
-    //closeApp(appName);
-    func.toApp(appName);
-    while (text("我的账户").findOnce() == null) {
-        func.passAd();
+member_card();
+
+function member_card() {
+    //toastLog('会员卡');
+    sleep(4000);
+    if (textContains('邀请好友助力').findOnce() != null) {
+        return 0;
     }
-    sleep(1800);
-    while (text("查看收益/收支明细").findOnce() == null) {
-        func.sClick(idContains("radio_button5").findOnce());
+    sleep(1000);
+    if (textContains('确认授权并加入').findOnce() == null) {
+        return 0;
     }
-    // 签到按钮
-    while (text("金豆").findOnce() == null) {
-        func.toAutojs();
-        func.toApp(appName);
-        sleep(3000);
-    }
-    sleep(800);
-    while (text("每日收支").findOnce() == null) {
-        func.sClick(text("金豆").findOnce());
-        sleep(800);
-        if (text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce()) {
-            sleep(500);
-            func.gesture_pwd(appName);
-            sleep(1000);
+    var authority, authorited;
+    authorited = false;		// 表示是否勾选授权
+    while (1) {
+        log('加会员');
+        authority = textContains('确认授权即同意').findOnce();
+        if (authority != null) {
+            if (func.cClick(authority.parent().child(0))) {
+                authorited = true;
+            }
+        }
+        sleep(2000);
+        if (authorited) {
+            if (text("姓名").findOnce() != null) {
+                if (setText(1, "老陈")) {
+                    sleep(1500);
+                    back();
+                }
+            }
+            if (text("邮箱").findOnce() != null) {
+                if (setText(2, "273343029@qq.com")) {
+                    sleep(1500);
+                    back();
+                }
+            }
+            if (text("生日").findOnce() != null) {
+                func.sClick(className("android.widget.Spinner").findOne());
+                sleep(1000);
+                func.sClick(text("确定").findOnce());
+                sleep(1000);
+            }
+            sleep(2000);
+            if (func.cClick(textContains('确认授权并加入').findOnce())) {
+                sleep(2000);
+                break;
+            }
         }
     }
     sleep(1500);
-    scrollDown();
-    textStartsWith("+").findOne();
-    var signs = textStartsWith("+").find();
-    try {
-        for (var i = 0; i < signs.length; i++) {
-            func.sClick(signs[i]);
-        }
-    }
-    catch (e) {
-        toastLog("未找到多余的连续签到");
-        sleep(2000);
-    }
-    toastLog(appName + "已签到");
-    sleep(3000);
+    back();
+    sleep(1500);
 }
 
 // filePath = "/storage/emulated/0/脚本";
