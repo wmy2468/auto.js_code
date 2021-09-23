@@ -34,21 +34,8 @@ function process() {
 	log("正在等待进入活动页面");
 	//等待点击 立即查看按钮
 	func.sClick(className("TextView").textContains("立即").findOne());
-	// 助力关闭按钮
-	var closeBtnHelp = className('android.view.View').textContains('的助力邀请').findOne();
-	sleep(3000);
-	if (textContains('为TA').findOnce() != null || textContains('您今天的助力次数已用完').findOnce() != null) {
-		log('为TA助力不为空')
-		// 如果是 自己的设备 则助力
-		if (isMyDevice()) {
-			func.sClick(closeBtnHelp.parent().child(5));	// 点击助力
-		} else {
-			func.sClick(closeBtnHelp.parent().parent().child(2));   // 关闭助力
-		}
-	} else {
-		log('为TA助力为空')
-		func.sClick(closeBtnHelp.parent().parent().child(2));   // 关闭助力
-	}
+	// 点击助力
+	func.sClick(textContains('为TA').findOnce());
 	//等待完全加载后，如果出现取消按钮会找不到
 	var btn;		// 点击出现弹窗的按钮
 	while (textContains('邀请好友助力').findOnce() == null) {
