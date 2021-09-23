@@ -95,6 +95,7 @@ function checkPopUp() {
 		sleep(800);
 	}
 	func.sClick(text('我知道啦').findOnce());
+	func.sClick(text('继续探索赢红包').findOnce());
 }
 
 function 每日任务() {
