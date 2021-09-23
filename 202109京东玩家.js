@@ -35,7 +35,7 @@ function process() {
 	//等待点击 立即查看按钮
 	func.sClick(className("TextView").textContains("立即").findOne());
 	// 点击助力
-	func.sClick(textContains('为TA').findOnce());
+	func.sClick(textContains('为TA').findOne());
 	//等待完全加载后，如果出现取消按钮会找不到
 	var btn;		// 点击出现弹窗的按钮
 	while (textContains('邀请好友助力').findOnce() == null) {
