@@ -52,7 +52,11 @@ function process() {
 	//等待完全加载后，如果出现取消按钮会找不到
 	var btn;		// 点击出现弹窗的按钮
 	while (textContains('邀请好友助力').findOnce() == null) {
-		btn = className("android.view.View").textContains("00/").findOnce();
+		if (devModel == "FRD-AL00") {
+			btn = className("android.view.View").textContains("00/").findOnce();
+		} else {
+			btn = className("android.view.View").text("/").findOnce();
+		}
 		if (btn != null) {
 			func.sClick(btn.parent().parent());
 		}

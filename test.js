@@ -63,7 +63,7 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 
-member_card();
+toastLog(textContains("00/").findOnce());
 
 function member_card() {
     //toastLog('会员卡');
