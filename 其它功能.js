@@ -88,7 +88,7 @@ function ZFB捐款() {
     alert("已完成");
 }
 // -----------------------建行财富季-----------------------
-function 日常任务() {
+function 龙支付_日常任务() {
     var checkText = "每日签到涨财富";
     var see, seeText;
     seeText = "去完成";
@@ -162,10 +162,10 @@ function 龙支付攒财富_浏览(keyWord) {
     toastLog(keyWord + "，已完成！");
 }
 
-function 龙支付攒财富() {
+function 龙支付_攒财富() {
     var checkText = "龙支付分会场";
     var keyList;
-    keyList = ["在路上", "乐活日", "商超日"];
+    keyList = ["在路上", "商超日", "乐活日"];
     while (text(checkText).findOnce() == null) {
         toastLog("请跳转到龙支付 攒财富 界面");
         sleep(2000);
@@ -174,9 +174,29 @@ function 龙支付攒财富() {
     sleep(2000);
     keyList.forEach(keyWord => {
         func.sClick(text(keyWord).findOne());   // 点击关键字
-        sleep(1000);
+        sleep(2000);
         龙支付攒财富_浏览(keyWord);
     })
+    // 切换到主会场
+    var mainBtn, closeBtn, missionBtn;
+    while (text("每日签到涨财富").findOnce() == null) {
+        mainBtn = text("btn_1").findOnce();
+        if (mainBtn != null) {
+            func.sClick(mainBtn.parent());
+            sleep(1000);
+        }
+        closeBtn = className("android.view.View").text("/").depth(22).findOnce();
+        if (closeBtn != null) {
+            func.sClick(closeBtn.parent());
+            sleep(1000);
+        }
+        missionBtn = text("做任务").findOnce();
+        if (missionBtn != null) {
+            func.sClick(missionBtn.parent());
+            sleep(1000);
+        }
+        sleep(1000);
+    }
 }
 
 
@@ -184,8 +204,8 @@ function 龙支付攒财富() {
 function 建行财富季() {
     func.toApp("微信");
     // 龙支付攒财富
-    龙支付攒财富();
-    日常任务();
+    龙支付_攒财富();
+    龙支付_日常任务();
     alert("已完成");
     // 日常任务
     // 消保 答题
