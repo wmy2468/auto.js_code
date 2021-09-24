@@ -178,13 +178,25 @@ function 龙支付_攒财富() {
         龙支付攒财富_浏览(keyWord);
     })
     // 切换到主会场
+    var refresh;
+    refresh = true;
     while (text("每日签到涨财富").findOnce() == null) {
+
         if (func.sClick(text("btn_1").findOnce())) {
             toastLog("已点击 主会场 按钮，等待切换");
             sleep(2200);
+        } else {
+            if (refresh) {
+                toastLog("刷新");
+                func.sClick(id("com.tencent.mm:/kl1").findOne());
+                func.sClick(text("刷新").findOne());
+                sleep(2000);
+            }
         }
         // func.sClick(className("android.view.View").text("/").depth(22).findOnce());
-        func.sClick(text("做任务").findOnce());
+        if (func.sClick(text("做任务").findOnce()) {
+            refresh = false;
+        }
         sleep(2000);
     }
     sleep(1000);
