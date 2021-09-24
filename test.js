@@ -63,16 +63,8 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 
-log(func.sClick(text("立即签到").findOnce()));
-
-切换到主会场
-var mainBtn, closeBtn, missionBtn;
-while (text("每日签到涨财富").findOnce() == null) {
-    func.sClick(text("btn_1").findOnce());
-    func.sClick(className("android.view.View").text("/").depth(22).findOnce());
-    func.sClick(text("做任务").findOnce());
-    sleep(2000);
-}
+// func.sClick(id("com.tencent.mm:id/kl1").findOne());
+func.sClick(text("刷新").findOne());
 
 function member_card() {
     //toastLog('会员卡');

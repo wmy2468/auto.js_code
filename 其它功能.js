@@ -180,15 +180,17 @@ function 龙支付_攒财富() {
     // 切换到主会场
     var refresh;
     refresh = true;
+    sleep(1000);
     while (text("每日签到涨财富").findOnce() == null) {
 
         if (func.sClick(text("btn_1").findOnce())) {
             toastLog("已点击 主会场 按钮，等待切换");
+            refresh = false;
             sleep(2200);
         } else {
             if (refresh) {
                 toastLog("刷新");
-                func.sClick(id("com.tencent.mm:/kl1").findOne());
+                func.sClick(id("com.tencent.mm:id/kl1").findOne());
                 func.sClick(text("刷新").findOne());
                 sleep(2000);
             }
