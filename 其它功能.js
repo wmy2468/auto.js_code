@@ -186,7 +186,7 @@ function 龙支付_攒财富() {
         if (func.sClick(text("btn_1").findOnce())) {
             toastLog("已点击 主会场 按钮，等待切换");
             refresh = false;
-            sleep(2200);
+            sleep(4000);
         } else {
             if (refresh) {
                 toastLog("刷新");
