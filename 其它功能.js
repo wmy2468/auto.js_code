@@ -191,6 +191,7 @@ function 龙支付_攒财富() {
             if (refresh) {
                 toastLog("刷新");
                 func.sClick(id("com.tencent.mm:id/kl1").findOne());
+                sleep(2000);
                 func.sClick(text("刷新").findOne());
                 sleep(2000);
             }
