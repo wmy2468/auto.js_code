@@ -179,8 +179,11 @@ function 龙支付_攒财富() {
     })
     // 切换到主会场
     while (text("每日签到涨财富").findOnce() == null) {
-        func.sClick(text("btn_1").findOnce());
-        func.sClick(className("android.view.View").text("/").depth(22).findOnce());
+        if (func.sClick(text("btn_1").findOnce())) {
+            toastLog("已点击 主会场 按钮，等待切换");
+            sleep(2200);
+        }
+        // func.sClick(className("android.view.View").text("/").depth(22).findOnce());
         func.sClick(text("做任务").findOnce());
         sleep(2000);
     }
