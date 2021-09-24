@@ -178,25 +178,14 @@ function 龙支付_攒财富() {
         龙支付攒财富_浏览(keyWord);
     })
     // 切换到主会场
-    var mainBtn, closeBtn, missionBtn;
     while (text("每日签到涨财富").findOnce() == null) {
-        mainBtn = text("btn_1").findOnce();
-        if (mainBtn != null) {
-            func.sClick(mainBtn.parent());
-            sleep(1000);
-        }
-        closeBtn = className("android.view.View").text("/").depth(22).findOnce();
-        if (closeBtn != null) {
-            func.sClick(closeBtn.parent());
-            sleep(1000);
-        }
-        missionBtn = text("做任务").findOnce();
-        if (missionBtn != null) {
-            func.sClick(missionBtn.parent());
-            sleep(1000);
-        }
-        sleep(1000);
+        func.sClick(text("btn_1").findOnce());
+        func.sClick(className("android.view.View").text("/").depth(22).findOnce());
+        func.sClick(text("做任务").findOnce());
+        sleep(2000);
     }
+    sleep(1000);
+    func.sClick(text("立即签到").findOnce());
 }
 
 
