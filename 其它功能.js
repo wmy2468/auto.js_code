@@ -194,7 +194,7 @@ function 龙支付_攒财富() {
             }
         }
         // func.sClick(className("android.view.View").text("/").depth(22).findOnce());
-        if (func.sClick(text("做任务").findOnce()) {
+        if (func.sClick(text("做任务").findOnce())) {
             refresh = false;
         }
         sleep(2000);
