@@ -131,10 +131,28 @@ function 龙支付_日常任务() {
     toastLog(checkText + "，已完成！");
 }
 
+function WX_刷新() {
+    toastLog("刷新");
+    func.sClick(id("com.tencent.mm:id/kl1").findOne());
+    sleep(2000);
+    func.sClick(text("刷新").findOne());
+    sleep(2000);
+}
+
 function 龙支付攒财富_浏览(keyWord) {
     var checkText = "龙支付分会场";
-    var see, seeText;
+    var see, seeText, refreshCnt;
+    refreshCnt = 0;
     seeText = "去看看";
+    // 如果没找到则刷新一下
+    while (text(seeText).findOnce() == null) {
+        WX_刷新();
+        refreshCnt = refreshCnt + 1;
+        if (refreshCnt > 3) {
+            break;
+        }
+    }
+    // 避免bug，刷新3次
     see = text(seeText).find();
     while (see.nonEmpty()) {
         func.sClick(see[0]);       // 点击最后一个去看看
@@ -142,8 +160,8 @@ function 龙支付攒财富_浏览(keyWord) {
         while (text(checkText).findOnce() != null) {
             sleep(800);
         }
-        log("LZF 会场 已消失");
-        sleep(2000);
+        toastLog("LZF 会场 已消失");
+        sleep(2200);
         back();                             // 返回
         // 检查是否已返回
         while (text(checkText).findOnce() == null) {
@@ -182,18 +200,13 @@ function 龙支付_攒财富() {
     refresh = true;
     sleep(1000);
     while (text("每日签到涨财富").findOnce() == null) {
-
         if (func.sClick(text("btn_1").findOnce())) {
             toastLog("已点击 主会场 按钮，等待切换");
             refresh = false;
             sleep(4000);
         } else {
             if (refresh) {
-                toastLog("刷新");
-                func.sClick(id("com.tencent.mm:id/kl1").findOne());
-                sleep(2000);
-                func.sClick(text("刷新").findOne());
-                sleep(2000);
+                WX_刷新();
             }
         }
         // func.sClick(className("android.view.View").text("/").depth(22).findOnce());
