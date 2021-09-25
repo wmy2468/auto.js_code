@@ -117,6 +117,7 @@ function clickComplete() {
 		unComplete = text('去完成').find();
 		//toastLog(unComplete.length);
 		if (unComplete.nonEmpty()) {
+			log("对比去完成长度和既定值" + unComplete.length <= index)
 			if (unComplete.length <= index) {
 				toastLog('去完成长度剩余:' + unComplete.length);
 				break;
@@ -157,14 +158,7 @@ function clickComplete() {
 				} else if (indexText.indexOf('浏览5个') != -1) {
 					nextStep = '浏览商品';
 				} else if (indexText.indexOf('加购5个') != -1) {
-					if (devModel == "Redmi Note 7") {
-						index = index + 1;
-						continue;
-					} else {
-						nextStep = '加购物车';
-					}
-
-					// nextStep = '加购物车';
+					nextStep = '加购物车';
 				} else if (indexText.indexOf('成功入会') != -1) {
 					nextStep = '加入会员';
 				} else if (indexText.indexOf('开通品牌会员') != -1) {
@@ -285,6 +279,7 @@ function after_click(textStr, details) {
 			func.toApp(appName);
 		}
 	} else if (details == '东东超市') {
+		sleep(4000);
 		while (textContains('邀请好友助力').findOnce() == null) {
 			back();
 			sleep(3000);
@@ -301,7 +296,7 @@ function after_click(textStr, details) {
 	log('等待返回');
 	if (selected == "每日任务" || selected == "金融领金币") {
 		if (textContains(toDoPage).findOnce() == null) {
-			back_way();
+			back_way(toDoPage);
 		}
 		textContains(toDoPage).findOne();
 	} else {
@@ -449,9 +444,12 @@ function add_cart() {
 	}
 }
 
-function back_way() {
+function back_way(toDoPage) {
+	if (toDoPage == undefined) {
+		toDoPage = "邀请好友助力";
+	}
 	sleep(800);
-	if (textContains('去完成').findOnce() == null && (textContains('邀请好友助力').findOnce() == null
+	if (textContains('去完成').findOnce() == null && (textContains(toDoPage).findOnce() == null
 		|| textContains('每日签到').findOnce() == null)) {
 		var backBtn = desc('返回').findOnce();
 		if (backBtn == null) {
