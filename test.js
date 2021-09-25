@@ -64,7 +64,8 @@ var func = require("func_list.js");
 // }
 
 // func.sClick(id("com.tencent.mm:id/kl1").findOne());
-func.sClick(text("刷新").findOne());
+toDoPage = "好玩豆";
+toastLog(textContains(toDoPage).findOnce())
 
 function member_card() {
     //toastLog('会员卡');

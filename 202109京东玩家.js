@@ -21,14 +21,14 @@ function main() {
 	alert('已完成');
 }
 
-function isMyDevice() {
-	let devModel = device.model;
-	if (devModel == "FRD-AL00" || devModel == "Redmi Note 7" || devModel == "TSA-AL00") {
-		return true;
-	} else {
-		return false;
-	}
-}
+// function isMyDevice() {
+// 	let devModel = device.model;
+// 	if (devModel == "FRD-AL00" || devModel == "Redmi Note 7" || devModel == "TSA-AL00") {
+// 		return true;
+// 	} else {
+// 		return false;
+// 	}
+// }
 
 function process() {
 	log("正在等待进入活动页面");
@@ -184,6 +184,8 @@ function clickComplete() {
 					// 	index = index + 1;
 					// 	continue;
 					// }
+				} else if (detailText.indexOf('去企有此礼赢取好礼') != -1) {
+					nextStepDetail = '页面含邀请好友';
 				} else if (detailText.indexOf('去逛美妆护肤爆款会场') != -1) {
 					nextStepDetail = '小程序';
 				} else if (detailText.indexOf('9.9元') != -1) {
@@ -197,8 +199,7 @@ function clickComplete() {
 				} else if (detailText.indexOf('领百亿购物金') != -1) {
 					nextStepDetail = '20秒等待';
 				} else if (detailText.indexOf('东东超市') != -1) {
-					// 点击完成按钮返回
-					nextStepDetail = '东东超市';
+					nextStepDetail = '东东超市';		// 点击完成按钮返回
 				} else if (detailText.indexOf('去养狗兑京豆') != -1) {
 					index = index + 1;
 					continue;
@@ -226,6 +227,8 @@ function waitLog(cnt, textDetail) {
 
 
 function after_click(textStr, details) {
+	var toDoPage;
+	toDoPage = "邀请好友助力";
 	switch (textStr) {
 		case '参与返回':
 			log('参与返回');
@@ -286,6 +289,9 @@ function after_click(textStr, details) {
 			back();
 			sleep(3000);
 		}
+	} else if (details == '页面含邀请好友') {
+		log('页面含邀请好友');
+		toDoPage = "8000好玩豆";
 	} else {
 		// 返回
 		back_way();
@@ -294,8 +300,10 @@ function after_click(textStr, details) {
 
 	log('等待返回');
 	if (selected == "每日任务" || selected == "金融领金币") {
-		if (textContains('邀请好友助力').findOnce() == null) { back_way(); }
-		textContains('邀请好友助力').findOne();
+		if (textContains(toDoPage).findOnce() == null) {
+			back_way();
+		}
+		textContains(toDoPage).findOne();
 	} else {
 		if (textContains('每日签到').findOnce() == null) { back_way(); }
 		textContains('每日签到').findOne();
@@ -392,7 +400,7 @@ function member_card() {
 		}
 	}
 	sleep(1500);
-	back();
+	back_way();
 	sleep(1500);
 }
 
