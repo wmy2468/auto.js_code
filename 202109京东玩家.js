@@ -447,6 +447,10 @@ function add_cart() {
 function back_way(toDoPage) {
 	if (toDoPage == undefined) {
 		toDoPage = "邀请好友助力";
+	} else if (toDoPage == '8000好玩豆') {
+		back();
+		sleep(2000);
+		return 0;
 	}
 	sleep(800);
 	if (textContains('去完成').findOnce() == null && (textContains(toDoPage).findOnce() == null
