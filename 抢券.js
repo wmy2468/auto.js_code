@@ -595,11 +595,12 @@ function 中信活动() {
     var actNames = ["10点-15点-9积分兑换", "周三六11点-5折必胜客百果园"];
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
     var couDes;    // 券描述列表
+    var nowDate = new Date();
     switch (actName) {
         case "10点-15点-9积分兑换":
             toastLog("等待页面变化");
             // 如果当前小时数 大于10，则是15点场
-            if (new Date().getHours() <= 9) {
+            if (nowDate.getHours() <= 9) {
                 startTime = "09,59,50,000"
                 couDes = ["星巴克中杯饮品电子券", "奈雪", "喜茶25元", "苏宁支付券20元", "京东支付券20元", "天猫20元", "滴滴出行20元", "美团外卖20元"];
             } else {
