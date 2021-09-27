@@ -41,7 +41,7 @@ function 互助() {
 	// "JJ 【东东玩家】探索好玩星球分现金红包！#41aPpAsQIPmDMg%扌丁kai鶁崠"
 	// "LP 好玩星球等你探索！￥946lNE0fgjRvAG￥祛→【猄〤崬】"
 	// "LM 五亿现金等你瓜分da#3Cs6aFW3wdrr6x@→打幵椋東ΛΡΡ←"
-	switch (devModel) {
+	switch (device.model) {
 		// 荣耀8
 		case "FRD-AL00":
 			kouling1 = "LM 五亿现金等你瓜分da#3Cs6aFW3wdrr6x@→打幵椋東ΛΡΡ←";
@@ -57,6 +57,8 @@ function 互助() {
 			kouling2 = "LM 五亿现金等你瓜分da#3Cs6aFW3wdrr6x@→打幵椋東ΛΡΡ←";
 			break;
 	}
+	log("kouling1:" + kouling1);
+	log("kouling2:" + kouling2);
 	setClip(kouling1);
 	互助点击();
 	setClip(kouling2);
