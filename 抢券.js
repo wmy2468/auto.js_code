@@ -599,6 +599,7 @@ function 中信活动() {
     switch (actName) {
         case "10点-15点-9积分兑换":
             toastLog("等待页面变化");
+            log(nowDate.getHours() <= 9);
             // 如果当前小时数 大于10，则是15点场
             if (nowDate.getHours() <= 9) {
                 startTime = "09,59,50,000"
