@@ -457,7 +457,7 @@ function member_card() {
 	}
 	sleep(2200);
 	func.sClick(desc('关闭页面').findOnce());
-	func.sClick(id('com.jd.lib.jshop:id/ge').findOnce());
+	func.sClick(id('com.jingdong.app.mall:id/ge').findOnce());
 	sleep(1000);
 	back_way();
 	sleep(1500);
@@ -534,7 +534,7 @@ function back_way(toDoPage) {
 		// 	func.sClick(className("android.widget.ImageView").depth(11).findOnce());
 		// }
 
-		func.sClick(id('com.jd.lib.jshop:id/ge').findOnce());
+		// func.sClick(id('com.jd.lib.jshop:id/ge').findOnce());
 		func.sClick(id('com.jd.lib.jshop:id/asj').findOnce());
 		func.sClick(id('com.jd.lib.jshop.feature:id/gd').findOnce());
 		func.sClick(id('com.jd.lib.jshop.feature:id/mj').findOnce());
