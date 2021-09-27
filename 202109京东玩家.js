@@ -448,7 +448,8 @@ function member_card() {
 			}
 		}
 	}
-	sleep(1500);
+	func.sClick(desc('关闭页面').findOnce());
+	sleep(2200);
 	back_way();
 	sleep(1500);
 }
@@ -523,19 +524,19 @@ function back_way(toDoPage) {
 		// if (textContains('邀请好友助力').findOnce() == null) {
 		// 	func.sClick(className("android.widget.ImageView").depth(11).findOnce());
 		// }
-		if (!func.sClick(desc('关闭页面').findOnce())) {
-			func.sClick(id('com.jd.lib.jshop:id/ge').findOnce());
-			func.sClick(id('com.jd.lib.jshop:id/asj').findOnce());
-			func.sClick(id('com.jd.lib.jshop.feature:id/gd').findOnce());
-			func.sClick(id('com.jd.lib.jshop.feature:id/mj').findOnce());
 
-			func.sClick(idContains('close').findOnce());
-			func.sClick(textContains('离开').findOnce());
-			func.sClick(textContains('我要离开').findOnce());
-			func.sClick(textContains('放弃').findOnce());
-			func.sClick(textContains('知道了').findOnce());
-			func.sClick(textContains('待会再来').findOnce());
-		}
+		func.sClick(id('com.jd.lib.jshop:id/ge').findOnce());
+		func.sClick(id('com.jd.lib.jshop:id/asj').findOnce());
+		func.sClick(id('com.jd.lib.jshop.feature:id/gd').findOnce());
+		func.sClick(id('com.jd.lib.jshop.feature:id/mj').findOnce());
+
+		func.sClick(idContains('close').findOnce());
+		func.sClick(textContains('离开').findOnce());
+		func.sClick(textContains('我要离开').findOnce());
+		func.sClick(textContains('放弃').findOnce());
+		func.sClick(textContains('知道了').findOnce());
+		func.sClick(textContains('待会再来').findOnce());
+
 		log('返回');
 	} else {
 		log("已在去完成界面");
