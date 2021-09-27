@@ -599,7 +599,7 @@ function 中信活动() {
     switch (actName) {
         case "10点-15点-9积分兑换":
             toastLog("等待页面变化");
-            log(nowDate.getHours() <= 9);
+            // log(nowDate.getHours() <= 9);
             // 如果当前小时数 大于10，则是15点场
             if (nowDate.getHours() <= 9) {
                 startTime = "09,59,50,000"
@@ -608,10 +608,11 @@ function 中信活动() {
                 startTime = "14,59,50,000"
                 couDes = ["【下午茶】喜茶25元抵用券（15点抢兑）"];
             }
+
             if (couDes.length == 1) {
-                targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
-            } else {
                 targetViewText = couDes[0];               // 设置查找的文本
+            } else {
+                targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             }
 
             func.toApp(appName);             // 启动APP
