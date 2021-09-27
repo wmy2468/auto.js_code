@@ -455,8 +455,10 @@ function member_card() {
 			}
 		}
 	}
-	func.sClick(desc('关闭页面').findOnce());
 	sleep(2200);
+	func.sClick(desc('关闭页面').findOnce());
+	func.sClick(id('com.jd.lib.jshop:id/ge').findOnce());
+	sleep(1000);
 	back_way();
 	sleep(1500);
 }
