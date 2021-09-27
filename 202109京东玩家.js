@@ -52,7 +52,7 @@ function 互助() {
 			kouling2 = "JJ 探索好玩星球分现金红包！#41aPpAsQIPmDMg%扌丁kai鶁崠";
 			break;
 		// 华为Mate 30
-		case "TSA-AL00":
+		case "TAS-AL00":
 			kouling1 = "LP 好玩星球等你探索！￥946lNE0fgjRvAG￥祛→【猄〤崬】";
 			kouling2 = "LM 五亿现金等你瓜分da#3Cs6aFW3wdrr6x@→打幵椋東ΛΡΡ←";
 			break;
@@ -69,7 +69,12 @@ function 互助点击() {
 	func.toApp(appName);
 	log("正在等待进入活动页面");
 	//等待点击 立即查看按钮
-	func.sClick(className("TextView").textContains("立即").findOne());
+	while (func.sClick(className("TextView").textContains("立即").findOne(10000)) == false) {
+		home();
+		sleep(4000);
+		func.toApp(appName);
+	}
+	sleep(2000);
 	// 点击助力
 	func.sClick(textContains('为TA').findOne());
 	// 延迟等待
