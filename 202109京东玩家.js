@@ -12,15 +12,69 @@ devModel = device.model;
 main();
 
 function main() {
+	var sMission;
+	sMission = func.dialogsWin(['做任务', '互助']);
+	switch (sMission) {
+		case "做任务":
+			做任务();
+			break;
+		case "互助":
+			互助();
+			break;
+	}
+	setClip("");
+	alert('已完成');
+}
+
+function 做任务() {
 	toastLog("启动！！！");
 	setClip(koulingText);
 	sleep(1000);
 	log("正在打开");
 	func.toApp(appName);
 	process();
-	alert('已完成');
 }
 
+function 互助() {
+	toastLog("启动！！！");
+	var kouling1, kouling2;
+	// "JJ 【东东玩家】探索好玩星球分现金红包！#41aPpAsQIPmDMg%扌丁kai鶁崠"
+	// "LP 好玩星球等你探索！￥946lNE0fgjRvAG￥祛→【猄〤崬】"
+	// "LM 五亿现金等你瓜分da#3Cs6aFW3wdrr6x@→打幵椋東ΛΡΡ←"
+	switch (devModel) {
+		// 荣耀8
+		case "FRD-AL00":
+			kouling1 = "LM 五亿现金等你瓜分da#3Cs6aFW3wdrr6x@→打幵椋東ΛΡΡ←";
+			kouling2 = "JJ 探索好玩星球分现金红包！#41aPpAsQIPmDMg%扌丁kai鶁崠";
+			break;
+		case "Redmi Note 7":
+			kouling1 = "LP 好玩星球等你探索！￥946lNE0fgjRvAG￥祛→【猄〤崬】";
+			kouling2 = "JJ 探索好玩星球分现金红包！#41aPpAsQIPmDMg%扌丁kai鶁崠";
+			break;
+		// 华为Mate 30
+		case "TSA-AL00":
+			kouling1 = "LP 好玩星球等你探索！￥946lNE0fgjRvAG￥祛→【猄〤崬】";
+			kouling2 = "LM 五亿现金等你瓜分da#3Cs6aFW3wdrr6x@→打幵椋東ΛΡΡ←";
+			break;
+	}
+	setClip(kouling1);
+	互助点击();
+	setClip(kouling2);
+	互助点击();
+}
+
+function 互助点击() {
+	func.toApp(appName);
+	log("正在等待进入活动页面");
+	//等待点击 立即查看按钮
+	func.sClick(className("TextView").textContains("立即").findOne());
+	// 点击助力
+	func.sClick(textContains('为TA').findOne());
+	// 延迟等待
+	sleep(2000);
+	home();
+	sleep(2000);
+}
 // function isMyDevice() {
 // 	let devModel = device.model;
 // 	if (devModel == "FRD-AL00" || devModel == "Redmi Note 7" || devModel == "TSA-AL00") {
