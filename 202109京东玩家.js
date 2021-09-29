@@ -455,9 +455,9 @@ function member_card() {
 			}
 		}
 	}
-	sleep(2200);
+	sleep(1500);
 	back_way();
-	sleep(1000);
+	sleep(2200);
 	func.sClick(desc('关闭页面').findOnce());
 	func.sClick(id('com.jingdong.app.mall:id/ge').findOnce());
 	sleep(1500);

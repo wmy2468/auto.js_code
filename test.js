@@ -63,7 +63,7 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 
-// func.sClick(id("com.tencent.mm:id/kl1").findOne());
+func.sClick(id('com.jingdong.app.mall:id/ge').findOnce());
 log(device.model);
 
 function member_card() {
