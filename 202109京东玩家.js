@@ -8,6 +8,10 @@ selected = "每日任务";
 // var selected = func.dialogsWin(['每日任务', '图鉴'])
 koulingText = "21.0复制整段话 Https:/JleNO0uhZGi1YB 来【东东玩家】探索好玩星球分现金红包！#41aPpAsQIPmDMg%扌丁kai鶁崠";
 devModel = device.model;
+var devMate30, devHonor8, devRedMi;
+devMate30 = "TAS-AL00";
+devHonor8 = "FRD-AL00";
+devRedMi = "Redmi Note 7";
 
 main();
 
@@ -43,16 +47,16 @@ function 互助() {
 	// "LM 五亿现金等你瓜分da#3Cs6aFW3wdrr6x@→打幵椋東ΛΡΡ←"
 	switch (device.model) {
 		// 荣耀8
-		case "FRD-AL00":
+		case devHonor8:
 			kouling1 = "LM 五亿现金等你瓜分da#3Cs6aFW3wdrr6x@→打幵椋東ΛΡΡ←";
 			kouling2 = "JJ 探索好玩星球分现金红包！#41aPpAsQIPmDMg%扌丁kai鶁崠";
 			break;
-		case "Redmi Note 7":
+		case devRedMi:
 			kouling1 = "LP 好玩星球等你探索！￥946lNE0fgjRvAG￥祛→【猄〤崬】";
 			kouling2 = "JJ 探索好玩星球分现金红包！#41aPpAsQIPmDMg%扌丁kai鶁崠";
 			break;
 		// 华为Mate 30
-		case "TAS-AL00":
+		case devMate30:
 			kouling1 = "LP 好玩星球等你探索！￥946lNE0fgjRvAG￥祛→【猄〤崬】";
 			kouling2 = "LM 五亿现金等你瓜分da#3Cs6aFW3wdrr6x@→打幵椋東ΛΡΡ←";
 			break;
@@ -84,7 +88,7 @@ function 互助点击() {
 }
 // function isMyDevice() {
 // 	let devModel = device.model;
-// 	if (devModel == "FRD-AL00" || devModel == "Redmi Note 7" || devModel == "TSA-AL00") {
+// 	if (devModel == devHonor8 || devModel == devRedMi || devModel == devMate30) {
 // 		return true;
 // 	} else {
 // 		return false;
@@ -100,7 +104,7 @@ function process() {
 	//等待完全加载后，如果出现取消按钮会找不到
 	var btn;		// 点击出现弹窗的按钮
 	while (textContains('邀请好友助力').findOnce() == null) {
-		if (devModel == "FRD-AL00") {
+		if (devModel == devHonor8) {
 			btn = className("android.view.View").textContains("00/").findOnce();
 		} else {
 			btn = className("android.view.View").text("/").findOnce();
@@ -232,16 +236,11 @@ function clickComplete() {
 				// 详细描述校验，校验小程序
 				if (detailText.indexOf('小程序') != -1) {
 					nextStepDetail = '小程序';
-					// 除了Mate 30外，另外2个台古董在小程序卡死
-					// if (devModel == "TAS-AL00") {
-					// 	nextStepDetail = '小程序';
-					// } else {
-					// 	index = index + 1;
-					// 	continue;
-					// }
 				} else if (detailText.indexOf('去企有此礼赢取好礼') != -1) {
 					nextStepDetail = '页面含邀请好友';
 				} else if (detailText.indexOf('去逛美妆护肤爆款会场') != -1) {
+					nextStepDetail = '小程序';
+				} else if (detailText.indexOf('2.9元洗衣液限时') != -1) {
 					nextStepDetail = '小程序';
 				} else if (detailText.indexOf('9.9元') != -1) {
 					nextStepDetail = '小程序'
@@ -261,6 +260,13 @@ function clickComplete() {
 				} else {
 					nextStepDetail = '无';
 				}
+
+				// 除了Mate 30外，另外2个台古董在小程序卡死
+				if (devModel == devHonor8 && nextStepDetail == '小程序') {
+					index = index + 1;
+					continue;
+				}
+
 				func.sClick(unComplete[index]);
 				log("nextStep：" + nextStep);
 				log("nextStepDetail：" + nextStepDetail);
@@ -331,6 +337,7 @@ function after_click(textStr, details) {
 		sleep(3000);
 		back_way();
 	} else if (details == '小程序') {
+
 		log('微信返回');
 		i = 10;
 		toastLog('跳转到小程序，等待20秒');
@@ -474,7 +481,7 @@ function add_cart() {
 	completeText = addCartText.parent().child(2).text();
 
 	while (completeText.indexOf('还差') != -1) {
-		if (devModel == "FRD-AL00") {
+		if (devModel == devHonor8) {
 			if (i >= 3) {
 				scrollDown();
 				sleep(4000);
