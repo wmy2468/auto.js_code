@@ -257,6 +257,8 @@ function clickComplete() {
 				} else if (detailText.indexOf('去养狗兑京豆') != -1) {
 					index = index + 1;
 					continue;
+				} else if (detailText.indexOf('C粉会员卡') != -1) {
+					nextStepDetail = '点击关闭返回';
 				} else {
 					nextStepDetail = '无';
 				}
@@ -337,7 +339,6 @@ function after_click(textStr, details) {
 		sleep(3000);
 		back_way();
 	} else if (details == '小程序') {
-
 		log('微信返回');
 		i = 10;
 		toastLog('跳转到小程序，等待20秒');
@@ -355,6 +356,21 @@ function after_click(textStr, details) {
 	} else if (details == '页面含邀请好友') {
 		log('页面含邀请好友');
 		toDoPage = "8000好玩豆";
+	} else if (details == '点击关闭返回') {
+		while (1) {
+			if (func.sClick(desc('关闭页面').findOnce())) {
+				toastLog("点击 desc 关闭按钮返回成功");
+				sleep(3000);
+				break;
+			}
+			if (func.sClick(id('com.jingdong.app.mall:id/ge').findOnce())) {
+				toastLog("点击 id 关闭按钮返回成功");
+				sleep(3000);
+				break;
+			}
+			toastLog("点击关闭按钮返回");
+			sleep(3000);
+		}
 	} else {
 		// 返回
 		back_way();
