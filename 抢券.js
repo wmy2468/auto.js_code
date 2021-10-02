@@ -169,18 +169,17 @@ function 云闪付锦鲤活动() {
         case "每日券":
             counponText = "满10可用";
             targetText = func.dialogsWin(["线下指定商户", "线上指定商户"]);
-            startTime = "08,59,58,900";
+            startTime = "08,59,58,500";
             clockAfter = clock9;
             clockBefore = clock10;
             break;
         case "周五六日10点":
-            startTime = "09,59,58,800";
+            startTime = "09,59,58,500";
             clockAfter = clock10;
             clockBefore = clock15;
             break;
         case "周五六日15点":
-            // startTime = "14,59,58,800";
-            startTime = "16,32,30,800";
+            startTime = "14,59,58,500";
             clockAfter = clock15;
             clockBefore = clock10;
             break;
@@ -691,7 +690,7 @@ function 中信活动() {
             break;
         case "周三六11点-5折必胜客百果园":
             toastLog("到点点击");
-            startTime = "10,59,59,700";             // 设置时间点
+            startTime = "10,59,59,850";             // 设置时间点
             couDes = ["必胜客100元代金券", "达美乐50元代金券", "肯德基50元"];             // 券名称
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             func.toApp(appName);             // 启动APP
