@@ -257,8 +257,8 @@ function clickComplete() {
 				} else if (detailText.indexOf('去养狗兑京豆') != -1) {
 					index = index + 1;
 					continue;
-				} else if (detailText.indexOf('C粉会员卡') != -1) {
-					nextStepDetail = '点击关闭返回';
+					// } else if (detailText.indexOf('C粉会员卡') != -1) {
+					// 	nextStepDetail = '点击关闭返回';
 				} else {
 					nextStepDetail = '无';
 				}
