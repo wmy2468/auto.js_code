@@ -186,7 +186,7 @@ function 浦发银行() {
         sleep(3000);
     }
     sleep(800);
-    while (text("每日收支").findOnce() == null) {
+    while (text("收支").findOnce() == null) {
         func.sClick(text("金豆").findOnce());
         sleep(800);
         if (text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce()) {
