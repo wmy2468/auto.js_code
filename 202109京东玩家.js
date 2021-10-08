@@ -441,7 +441,7 @@ function member_card() {
 	if (textContains('确认授权并加入').findOnce() == null) {
 		return 0;
 	}
-	var authority, authorited;
+	var authority, authorited, memberName, memberMail;
 	authorited = false;		// 表示是否勾选授权
 	while (1) {
 		log('加会员');
@@ -454,13 +454,27 @@ function member_card() {
 		sleep(2000);
 		if (authorited) {
 			if (text("姓名").findOnce() != null) {
-				if (setText(1, "老陈")) {
+				if (devModel == devRedMi) {
+					memberName = "曾卿"
+				} else if (devModel == devHonor8) {
+					memberName = "郑丽"
+				} else if (devModel == devMate30) {
+					memberName = "陈俊"
+				}
+				if (setText(1, memberName)) {
 					sleep(1500);
 					back();
 				}
 			}
 			if (text("邮箱").findOnce() != null) {
-				if (setText(2, "273343029@qq.com")) {
+				if (devModel == devRedMi) {
+					memberMail = "107910697@qq.com"
+				} else if (devModel == devHonor8) {
+					memberMail = "307458224@qq.com"
+				} else if (devModel == devMate30) {
+					memberMail = "273343029@qq.com"
+				}
+				if (setText(2, memberMail)) {
 					sleep(1500);
 					back();
 				}
