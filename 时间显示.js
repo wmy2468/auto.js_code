@@ -45,6 +45,7 @@ if (selectIndex == "延迟测试") {
             log(area + " :" + error);
         }
     })
+    log(resultStr);
     alert(resultStr);
 } else {
     var halfHourFlag = 0;
