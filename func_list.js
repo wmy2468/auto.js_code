@@ -465,7 +465,7 @@ function jdTime() {
     while (1) {
         stTimestamp = new Date();
         try {
-            http.__okhttp__.setTimeout(2000);       // 设置超时2秒
+            http.__okhttp__.setTimeout(800);       // 设置超时2秒
             res = http.get("https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5");
         } catch (error) {
             log(error);
@@ -504,7 +504,7 @@ function beiJingTime() {
     while (1) {
         stTimestamp = new Date();
         try {
-            http.__okhttp__.setTimeout(2000);       // 设置超时2秒
+            http.__okhttp__.setTimeout(800);       // 设置超时2秒
             res = http.get("http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1");
         } catch (error) {
             log(error);
@@ -543,7 +543,7 @@ function tbTime() {
     while (1) {
         stTimestamp = new Date();
         try {
-            http.__okhttp__.setTimeout(2000);       // 设置超时2秒
+            http.__okhttp__.setTimeout(800);       // 设置超时2秒
             res = http.get("http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp");
         } catch (error) {
             log(error);
@@ -582,7 +582,7 @@ function snTime() {
     while (1) {
         stTimestamp = new Date();
         try {
-            http.__okhttp__.setTimeout(2000);       // 设置超时2秒
+            http.__okhttp__.setTimeout(800);       // 设置超时2秒
             res = http.get("https://f.m.suning.com/api/ct.do");
         } catch (error) {
             log(error);
