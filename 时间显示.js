@@ -35,8 +35,10 @@ if (selectIndex == "延迟测试") {
         http.__okhttp__.setTimeout(2000);       // 设置超时2秒
         res = http.get("https://f.m.suning.com/api/ct.do");
         edTimestamp = new Date();
+        toastLog("请求时差:" + (edTimestamp - stTimestamp));
         alert("请求时差:" + (edTimestamp - stTimestamp));
     } catch (error) {
+
         alert(error);
     }
 }
