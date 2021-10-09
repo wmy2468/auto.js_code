@@ -39,17 +39,14 @@ if (selectIndex == "延迟测试") {
             http.__okhttp__.setTimeout(2000);       // 设置超时2秒
             res = http.get("https://f.m.suning.com/api/ct.do");
             edTimestamp = new Date();
-            resultStr = resultStr + area + "请求时差:" + (edTimestamp - stTimestamp);
+            resultStr = resultStr + area + "请求时差:" + (edTimestamp - stTimestamp) + "\n";
         } catch (error) {
-            resultStr = resultStr + area + "请求失败";
+            resultStr = resultStr + area + "请求失败" + "\n";
             log(area + " :" + error);
         }
-        alert(resultStr);
     })
-
-
-}
-else {
+    alert(resultStr);
+} else {
     var halfHourFlag = 0;
     var timeDiff = 0;
 
