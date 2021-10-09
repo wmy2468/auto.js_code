@@ -505,7 +505,8 @@ function beiJingTime() {
         stTimestamp = new Date();
         try {
             http.__okhttp__.setTimeout(800);       // 设置超时2秒
-            res = http.get("http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1");
+            // res = http.get("http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1");
+            res = http.get("http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp");
         } catch (error) {
             log(error);
             toastLog("报错了 返回0");
