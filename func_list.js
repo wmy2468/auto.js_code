@@ -423,19 +423,19 @@ function calTimeDiff(area) {
     // 获取时间误差
     switch (area) {
         case "京东时间":
-            timeDiff = Math.trunc((jdTime() + jdTime() + jdTime()) / 3);
+            timeDiff = Math.trunc((jdTime() + jdTime()) / 2);
             break;
         case "北京时间":
-            timeDiff = Math.trunc((beiJingTime() + beiJingTime() + beiJingTime()) / 3);
+            timeDiff = Math.trunc((beiJingTime() + beiJingTime()) / 2);
             break;
         case "淘宝时间":
-            timeDiff = Math.trunc((tbTime() + tbTime() + tbTime()) / 3);
+            timeDiff = Math.trunc((tbTime() + tbTime()) / 2);
             break;
         case "苏宁时间":
-            timeDiff = Math.trunc((snTime() + snTime() + snTime()) / 3);
+            timeDiff = Math.trunc((snTime() + snTime()) / 2);
             break;
         default:
-            timeDiff = Math.trunc((beiJingTime() + beiJingTime() + beiJingTime()) / 3);
+            timeDiff = Math.trunc((beiJingTime() + beiJingTime()) / 2);
             break;
     }
     return timeDiff;
