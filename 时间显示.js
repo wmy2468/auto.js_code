@@ -36,6 +36,7 @@ if (selectIndex == "延迟测试") {
 
         stTimestamp = new Date();
         try {
+            http.__okhttp__.setTimeout(800);       // 设置超时2秒
             res = http.get("https://f.m.suning.com/api/ct.do");
             edTimestamp = new Date();
             resultStr = resultStr + area + "请求时差:" + (edTimestamp - stTimestamp) + "\n";
