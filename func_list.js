@@ -458,7 +458,7 @@ function getToday(needNextDay) {
 //京东时间
 function jdTime() {
     var res, resTime, resTimestamp, sigma, delta, timeLimit;
-    timeLimit = 800;
+    timeLimit = 1000;
     delta = 0;
     log("请求京东时间");
     // 获取取一次时间耗时
@@ -497,7 +497,7 @@ function jdTime() {
 // 北京时间
 function beiJingTime() {
     var res, resTime, resTimestamp, sigma, delta, timeLimit;
-    timeLimit = 800;
+    timeLimit = 1000;
     delta = 0;
     log("请求北京时间");
     // 获取取一次时间耗时
@@ -537,7 +537,7 @@ function beiJingTime() {
 function tbTime() {
     log("请求淘宝时间");
     var res, resTime, resTimestamp, sigma, delta, timeLimit;
-    timeLimit = 600;
+    timeLimit = 1000;
     delta = 0;
     // 获取取一次时间耗时
     while (1) {
@@ -575,7 +575,7 @@ function tbTime() {
 // 苏宁时间
 function snTime() {
     var res, resTime, resTimestamp, sigma, delta, timeLimit;
-    timeLimit = 800;
+    timeLimit = 1000;
     delta = 0;
     log("请求苏宁时间");
     // 获取取一次时间耗时
