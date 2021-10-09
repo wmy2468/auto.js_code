@@ -426,7 +426,8 @@ function calTimeDiff(area) {
             timeDiff = Math.trunc((jdTime() + jdTime()) / 2);
             break;
         case "北京时间":
-            timeDiff = Math.trunc((beiJingTime() + beiJingTime()) / 2);
+            // timeDiff = Math.trunc((beiJingTime() + beiJingTime()) / 2);
+            timeDiff = Math.trunc((tbTime() + tbTime()) / 2);
             break;
         case "淘宝时间":
             timeDiff = Math.trunc((tbTime() + tbTime()) / 2);
@@ -505,8 +506,7 @@ function beiJingTime() {
         stTimestamp = new Date();
         try {
             http.__okhttp__.setTimeout(800);       // 设置超时2秒
-            // res = http.get("http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1");
-            res = http.get("http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp");
+            res = http.get("http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1");
         } catch (error) {
             log(error);
             toastLog("报错了 返回0");
@@ -521,10 +521,8 @@ function beiJingTime() {
         log("请求总时长", edTimestamp - stTimestamp);
 
         if (edTimestamp - stTimestamp <= timeLimit) {
-            // resTime = res.body.string();
-            // resTimestamp = Number(resTime.replace("0=", ""));
-            resTime = res.body.json();
-            resTimestamp = Number(resTime.data.t);
+            resTime = res.body.string();
+            resTimestamp = Number(resTime.replace("0=", ""));
             sigma = edTimestamp - stTimestamp;
             delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2); // 返回的时间-开始时间
             log("时延", sigma);
