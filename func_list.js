@@ -521,8 +521,10 @@ function beiJingTime() {
         log("请求总时长", edTimestamp - stTimestamp);
 
         if (edTimestamp - stTimestamp <= timeLimit) {
-            resTime = res.body.string();
-            resTimestamp = Number(resTime.replace("0=", ""));
+            // resTime = res.body.string();
+            // resTimestamp = Number(resTime.replace("0=", ""));
+            resTime = res.body.json();
+            resTimestamp = Number(resTime.data.t);
             sigma = edTimestamp - stTimestamp;
             delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2); // 返回的时间-开始时间
             log("时延", sigma);
