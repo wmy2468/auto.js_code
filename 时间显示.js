@@ -12,35 +12,42 @@ var selectedArr = [
 var selectIndex = func.dialogsWin(selectedArr);
 
 if (selectIndex == "延迟测试") {
-    var targetAreas, targetArea, targetUrl;
+    var targetAreas, targetUrl;
     targetAreas = ["北京时间", "京东时间", "苏宁时间", "淘宝时间"];
-    targetArea = func.dialogsWin(targetAreas);
-    switch (targetArea) {
-        case "北京时间":
-            targetUrl = "http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1";
-            break;
-        case "京东时间":
-            targetUrl = "https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5";
-            break;
-        case "苏宁时间":
-            targetUrl = "https://f.m.suning.com/api/ct.do";
-            break;
-        case "淘宝时间":
-            targetUrl = "http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp";
-            break;
-    }
-    var res, stTimestamp, edTimestamp;
-    stTimestamp = new Date();
-    try {
-        http.__okhttp__.setTimeout(2000);       // 设置超时2秒
-        res = http.get("https://f.m.suning.com/api/ct.do");
-        edTimestamp = new Date();
-        toastLog("请求时差:" + (edTimestamp - stTimestamp));
-        alert("请求时差:" + (edTimestamp - stTimestamp));
-    } catch (error) {
+    // targetArea = func.dialogsWin(targetAreas);
 
-        alert(error);
-    }
+    var res, stTimestamp, edTimestamp, resultStr;
+    resultStr = ""
+    targetAreas.forEach(area => {
+        switch (area) {
+            case "北京时间":
+                targetUrl = "http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1";
+                break;
+            case "京东时间":
+                targetUrl = "https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5";
+                break;
+            case "苏宁时间":
+                targetUrl = "https://f.m.suning.com/api/ct.do";
+                break;
+            case "淘宝时间":
+                targetUrl = "http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp";
+                break;
+        }
+
+        stTimestamp = new Date();
+        try {
+            http.__okhttp__.setTimeout(2000);       // 设置超时2秒
+            res = http.get("https://f.m.suning.com/api/ct.do");
+            edTimestamp = new Date();
+            resultStr = resultStr + area + "请求时差:" + (edTimestamp - stTimestamp);
+        } catch (error) {
+            resultStr = resultStr + area + "请求失败";
+            log(area + " :" + error);
+        }
+        alert(resultStr);
+    })
+
+
 }
 else {
     var halfHourFlag = 0;
