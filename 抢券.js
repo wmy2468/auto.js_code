@@ -80,6 +80,7 @@ function 中行周二视频捡漏() {
     }
     while (1) {
         if (func.sClick(text(pay5).findOnce()) == true) {
+            toastLog("已点击确认支付");
             while (1) {
                 if (textContains("当日库存已抢购完毕").findOnce() != null) {
                     if (func.sClick(text("确认").findOnce()) == true) {
@@ -87,6 +88,7 @@ function 中行周二视频捡漏() {
                         break;
                     }
                 }
+                sleep(1000);
                 cnt = cnt + 1;
                 if (cnt >= 10) {
                     cnt = 0;
