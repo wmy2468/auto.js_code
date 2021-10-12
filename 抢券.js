@@ -78,11 +78,12 @@ function 中行周二视频捡漏() {
             break;
         }
     }
+    var exflag = false;
     while (1) {
         if (func.sClick(text(pay5).findOnce()) == true) {
             toastLog("已点击确认支付");
             while (1) {
-                if (textContains("当日库存已抢购完毕").findOnce() != null) {
+                if (text("当日库存已抢购完毕，请明日参加活动。").findOnce() != null) {
                     if (func.sClick(text("确认").findOnce()) == true) {
                         sleep(5000);
                         break;
@@ -92,8 +93,13 @@ function 中行周二视频捡漏() {
                 cnt = cnt + 1;
                 if (cnt >= 10) {
                     cnt = 0;
+                    exflag = true;
                     break;
                 }
+            }
+            if (exflag) {
+                toastLog("未找到库存完毕，退出");
+                break;
             }
         } else {
             sleep(1000);
