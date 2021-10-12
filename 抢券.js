@@ -13,7 +13,8 @@ function main() {
         // "京东腾讯月",
         "京喜领券",
         // "掌上生活",
-        "云闪付锦鲤活动"
+        "云闪付锦鲤活动",
+        "中行周二视频捡漏"
         // "农行缴费20-10"
     ];
 
@@ -48,11 +49,56 @@ function main() {
             break;
         case "京喜领券":
             京喜领券();
+            break;
+        case "中行周二视频捡漏":
+            中行周二视频捡漏();
+            break;
+
     }
     toastLog("结束");
     device.cancelKeepingAwake();
 }
 // ------------------------------------------------------
+
+
+function 中行周二视频捡漏() {
+    var aiqiyi, youku, tengx, pay5, cnt;
+    aiqiyi = "爱奇艺VIP";
+    youku = "优酷VIP"
+    tengx = "腾讯视频VIP"
+    pay5 = "确认支付5元";
+    cnt = 0;
+    while (1) {
+        if (textContains(aiqiyi).findOnce == null &&
+            textContains(aiqiyi).findOnce == null &&
+            textContains(aiqiyi).findOnce == null) {
+            toastLog("请跳转到 \" 视频会员 \"，直到提示  已到达等待页面");
+            sleep(2500);
+        } else { break; }
+    }
+    while (1) {
+        if (func.sClick(text(pay5).findOnce()) == true) {
+            while (1) {
+                if (textContains("当日库存已抢购完毕").findOnce() != null) {
+                    if (func.sClick(text("确认").findOnce()) == true) {
+                        sleep(5000);
+                        break;
+                    }
+                }
+                cnt = cnt + 1;
+                if (cnt >= 10) {
+                    cnt = 0;
+                    break;
+                }
+            }
+        } else {
+            sleep(1000);
+        }
+    }
+}
+
+
+
 
 // ------------------------云闪付锦鲤活动--------------------------------------
 function 云闪付捡漏() {
