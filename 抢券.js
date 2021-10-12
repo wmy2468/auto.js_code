@@ -66,13 +66,17 @@ function 中行周二视频捡漏() {
     aiqiyi = "爱奇艺VIP";
     youku = "优酷VIP"
     tengx = "腾讯视频VIP"
-    pay5 = "确认支付5元";
+    pay5 = "确认支付";
     cnt = 0;
     while (1) {
         if (textContains(aiqiyi).findOnce() == null && textContains(youku).findOnce() == null && textContains(tengx).findOnce() == null) {
             toastLog("请跳转到 \" 视频会员 \"，直到提示  已到达等待页面");
             sleep(2500);
-        } else { break; }
+        } else {
+            toastLog("已到 \" 视频会员 \"，页面");
+            sleep(2500);
+            break;
+        }
     }
     while (1) {
         if (func.sClick(text(pay5).findOnce()) == true) {
