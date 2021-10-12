@@ -169,7 +169,7 @@ function 云闪付锦鲤活动() {
         case "每日券":
             counponText = "满10可用";
             targetText = func.dialogsWin(["线下指定商户", "线上指定商户"]);
-            startTime = "08,59,58,500";
+            startTime = "08,59,58,800";
             clockAfter = clock9;
             clockBefore = clock10;
             break;
