@@ -63,8 +63,7 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 
-func.sClick(id('com.jingdong.app.mall:id/ge').findOnce());
-log(device.model);
+log(id("com.icbc:id/ifopges_lock_patterns").findOnce());
 
 function member_card() {
     //toastLog('会员卡');

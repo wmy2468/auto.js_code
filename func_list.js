@@ -219,7 +219,7 @@ function gesture_pwd(appName) {
             log("中国农业银行");
             break;
         case "中国工商银行":
-            point = id("cmb.icbc:id/ifopges_lock_patterns").findOnce();
+            point = id("com.icbc:id/ifopges_lock_patterns").findOnce();
             log("中国工商银行");
             break;
     }
