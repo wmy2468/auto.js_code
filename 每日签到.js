@@ -2,8 +2,7 @@ auto.waitFor();
 var func = require("func_list.js");
 var devModel = device.model;;
 
-// main();
-工商();
+main();
 
 function main() {
     var devMate30, devHonor8, devRedMi;
@@ -36,9 +35,11 @@ function 工商() {
     func.toApp(appName);
     while (textContains("你已经陪小象").findOnce() == null) {
         func.sClick(text("我的").findOnce());
+        sleep(800);
         func.sClick(text("小象乐园").findOnce());
         sleep(800);
         if (text("请输入手势密码登录").findOnce()) {
+            toastLog("已找到手势密码按钮");
             sleep(500);
             func.gesture_pwd(appName);
             sleep(1000);
@@ -51,12 +52,17 @@ function 工商() {
     left_banana = textStartsWith("剩余").findOne();
     mission_btn = left_banana.parent().parent().child(0).child(2);
     func.sClick(mission_btn);
+    sleep(800);
     func.sClick(text("进入任务中心查看更多任务").findOne());
+    sleep(800);
     text("任务中心").findOne();
-    toast("已到达任务中心");
+    toastLog("已到达任务中心");
     sleep(2000);
     if (textStartsWith("sign_done").findOnce() == null) {
         func.sClick(textStartsWith("sign").findOnce());
+    } else {
+        toastLog("今日已签到");
+        sleep(3000);
     }
 }
 
