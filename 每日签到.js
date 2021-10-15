@@ -277,6 +277,11 @@ function jd_sign() {
 
     while (textContains("已连").findOnce() == null) {
         func.cClick(text("签到领京豆").findOnce());
+        if (text("签到日历").findOnce() != null) {
+            sleep(2000);
+            back();
+            sleep(2000);
+        }
         sleep(800);
     }
     toastLog("已签到");
@@ -297,43 +302,7 @@ function jd_sign() {
         sleep(800);
     }
     sleep(1200);
-
-    // 点击领话费券按钮
-    var huafeis, huafeiParent, huafeiLen, huafeiParentChildCount;
-    huafeis = text("话费券").find();
-    if (!huafeis.nonEmpty()) {
-        huafeis = text("话费神券").find();
-    }
-    // 如果话费券非空
-    if (huafeis.nonEmpty()) {
-        huafeiLen = huafeis.length;
-        toastLog("找到" + huafeiLen + "个 话费券");
-        for (let j = 0; j < huafeiLen; j++) {
-            huafei = huafeis[j];
-            try {
-                huafeiParent = huafei.parent();
-                huafeiParentChildCount = huafeiParent.childCount();
-                log("childCount: " + huafeiParentChildCount);
-                log("button Text: " + huafeiParent.child(huafeiParentChildCount - 1).text());
-                if (huafeiParentChildCount == 3 && huafeiParent.child(huafeiParentChildCount - 1).text() == "领取") {
-                    func.sClick(huafeiParent.child(huafeiParentChildCount - 1));
-                    toastLog("准备领取话费券");
-                    sleep(1500);
-                } else {
-                    continue;
-                }
-            } catch (e) {
-                toastLog("找话费券报错了");
-                continue;
-            }
-        }
-    }
-
     var signBtn;
-    // if (device.model == "TAS-AL00") {
-    //     signBtn = text("立即领红包").findOnce();
-    // } else {
-    // 新版本签到
     signBtn = text("签到领奖励").findOnce();
     // }
 
