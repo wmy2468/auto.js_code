@@ -1,26 +1,65 @@
 auto.waitFor();
 var func = require("func_list.js");
+var devModel = device.model;;
 
-main();
-//买单吧();
+// main();
+工商();
+
 function main() {
-    // 中行缤纷生活();
-    // 招商银行();
-    中国农业银行();
-    什么值得买();
-    jd_sign();
-    YunShaofu();
-    浦发银行();
-    //工银e生活();
-    //邮储银行();
-    浦发信用卡();
-    //邮储信用卡();
-    //华彩生活();
-    买单吧();
+    var devMate30, devHonor8, devRedMi;
+    devMate30 = "TAS-AL00";
+    devHonor8 = "FRD-AL00";
+    devRedMi = "Redmi Note 7";
+    // 中行缤纷生活() 邮储银行() 邮储信用卡() 华彩生活() 招商银行()
+    if (devModel == devMate30) {
+        中国农业银行();
+        什么值得买();
+        jd_sign();
+        YunShaofu();
+        浦发银行();
+        浦发信用卡();
+        买单吧();
+        工商();
+    } else if (devModel == devRedMi) {
+        jd_sign();
+    } else if (devModel == devHonor8) {
+        jd_sign();
+        工商();
+    }
     alert("已完成.");
 }
 
 // ======================签到代码==================================
+function 工商() {
+    var appName = "中国工商银行";
+    //closeApp(appName);
+    func.toApp(appName);
+    while (textContains("你已经陪小象").findOnce() == null) {
+        func.sClick(text("我的").findOnce());
+        func.sClick(text("小象乐园").findOnce());
+        sleep(800);
+        if (text("请输入手势密码登录").findOnce()) {
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(1000);
+        }
+    }
+    sleep(2000);
+    // 点击香蕉
+    // 点击任务
+    var left_banana, mission_btn;
+    left_banana = textStartsWith("剩余").findOne();
+    mission_btn = left_banana.parent().parent().child(0).child(2);
+    func.sClick(mission_btn);
+    func.sClick(text("进入任务中心查看更多任务").findOne());
+    text("任务中心").findOne();
+    toast("已到达任务中心");
+    sleep(2000);
+    if (textStartsWith("sign_done").findOnce() == null) {
+        func.sClick(textStartsWith("sign").findOnce());
+    }
+}
+
 
 // 中行缤纷生活
 function 中行缤纷生活() {
@@ -198,6 +237,7 @@ function 浦发银行() {
     sleep(1500);
     scrollDown();
     textStartsWith("+").findOne();
+    sleep(800);
     var signs = textStartsWith("+").find();
     try {
         for (var i = 0; i < signs.length; i++) {
