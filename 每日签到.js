@@ -19,9 +19,9 @@ function main() {
         浦发信用卡();
         买单吧();
         工商();
-    } else if (devModel == devRedMi) {
-        jd_sign();
     } else if (devModel == devHonor8) {
+        jd_sign();
+    } else if (devModel == devRedMi) {
         jd_sign();
         工商();
     }
