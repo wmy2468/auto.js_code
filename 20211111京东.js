@@ -79,11 +79,7 @@ function 互助点击() {
 	}
 	sleep(2000);
 	// 点击助力
-	var for_her, for_her_parent;
-	for_her = textContains('为TA').findOne();
-	for_her_parent = for_her.paren();
-	// func.sClick(textContains('为TA').findOne());// 点击助力
-	func.sClick(for_her_parent.child(for_her_parent.childCount() - 1)); //点击关闭
+	func.sClick(textContains('为TA').findOne());// 点击助力
 	// 延迟等待
 	sleep(2000);
 	home();
@@ -103,7 +99,8 @@ function process() {
 	//等待点击 立即查看按钮
 	func.sClick(className("TextView").textContains("立即").findOne());
 	// 点击助力
-	func.sClick(textContains('助力邀请').findOne().parent().child(6));
+	func.sClick(textContains('助力邀请').findOne().parent().child(7));
+
 	//等待完全加载后，如果出现取消按钮会找不到
 	var sign_for_red_pack, sign_index;		// 点击出现弹窗的按钮
 	while (textContains('邀请好友助力').findOnce() == null) {
@@ -159,7 +156,7 @@ function clickComplete() {
 				if ((todo_mini_title.indexInParent() != 2 && (todo_mini_title.text()).indexOf('可得') == -1)
 					|| (todo_mini_title.text()).indexOf('每邀1个好友可得') != -1) {
 					index_todo_now = index_todo_now + 1;
-					log("不是去完成列表或是邀请好友，index + 1");
+					toastLog("不是去完成列表或是邀请好友，index + 1");
 					continue;
 				}
 				// indexText 为小标题
@@ -250,8 +247,9 @@ function clickComplete() {
 				} else if (detailText.indexOf('去养狗兑京豆') != -1) {
 					index_todo_now = index_todo_now + 1;
 					continue;
-					// } else if (detailText.indexOf('C粉会员卡') != -1) {
-					// 	nextStepDetail = '点击关闭返回';
+				} else if (detailText.indexOf('去种草城') != -1) {
+					index_todo_now = index_todo_now + 1;
+					continue;
 				} else {
 					nextStepDetail = '无';
 				}
@@ -263,6 +261,7 @@ function clickComplete() {
 				}
 
 				func.sClick(btn_todo);
+				toastLog("已点击按钮");
 				log("下一步动作nextStep：" + nextStep);
 				log("下一步动作细节描述nextStepDetail：" + nextStepDetail);
 				sleep(1500);
@@ -312,6 +311,8 @@ function after_click(textStr, details) {
 			break;
 		case '浏览返回':
 			log('浏览返回');
+			sleep(random_second(5000, 100, 1000));
+			waitCompleteDisappear();
 			break;
 		case '浏览商品':
 			log('浏览商品');
@@ -400,7 +401,7 @@ function after_click(textStr, details) {
 function waitCompleteDisappear() {
 	var cnt = 0;
 	while (textContains("邀请好友助力").findOnce() != null) {
-		sleep(random_second(600, 100, 1000));
+		sleep(random_second(600, 100, 300));
 		log("等待去完成消失");
 		cnt = cnt + 1;
 		if (cnt > 10) {
@@ -408,7 +409,7 @@ function waitCompleteDisappear() {
 		}
 	}
 	toastLog("去完成已消失");
-	sleep(random_second(800, 100, 1000));
+	sleep(random_second(800, 100, 300));
 }
 
 // 加入会员
