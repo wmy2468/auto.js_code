@@ -1,0 +1,591 @@
+auto.waitFor();
+var func = require('func_list.js');
+
+var i = 0;
+var appName = '京东';
+var koulingText, devModel, selected;
+selected = "每日任务";
+koulingText = "12.0:/#EAuKH9sf6MOjCf@，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";
+devModel = device.model;
+var devMate30, devHonor8, devRedMi;
+devMate30 = "TAS-AL00";
+devHonor8 = "FRD-AL00";
+devRedMi = "Redmi Note 7";
+
+main();
+// clickComplete();
+
+function main() {
+	var sMission;
+	sMission = func.dialogsWin(['做任务', '互助']);
+	switch (sMission) {
+		case "做任务":
+			做任务();
+			break;
+		case "互助":
+			互助();
+			break;
+	}
+	setClip("");
+	alert('已完成');
+}
+
+function 做任务() {
+	toastLog("启动！！！");
+	setClip(koulingText);
+	sleep(1000);
+	log("正在打开");
+	func.toApp(appName);
+	process();
+}
+
+function 互助() {
+	toastLog("启动！！！");
+	var kouling1, kouling2;
+	switch (device.model) {
+		// 荣耀8
+		case devHonor8:
+			kouling1 = "16.0:/￥E8BzGFzUiiTR7S￥，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";	//LM
+			kouling2 = "12.0:/#EAuKH9sf6MOjCf@，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";		// JJ
+			break;
+		case devRedMi:
+			kouling1 = "LP 好玩星球等你探索！￥946lNE0fgjRvAG￥祛→【猄〤崬】";
+			kouling2 = "12.0:/#EAuKH9sf6MOjCf@，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";		// JJ
+			break;
+		// 华为Mate 30
+		case devMate30:
+			kouling1 = "LP 好玩星球等你探索！￥946lNE0fgjRvAG￥祛→【猄〤崬】";
+			kouling1 = "16.0:/￥E8BzGFzUiiTR7S￥，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";	//LM
+			break;
+		default:
+			return 0;
+	}
+	log("kouling1:" + kouling1);
+	log("kouling2:" + kouling2);
+	setClip(kouling1);
+	互助点击();
+	setClip(kouling2);
+	互助点击();
+}
+
+function 互助点击() {
+	func.toApp(appName);
+	log("正在等待进入活动页面");
+	//等待点击 立即查看按钮
+	while (func.sClick(className("TextView").textContains("立即").findOne(10000)) == false) {
+		home();
+		sleep(4000);
+		func.toApp(appName);
+	}
+	sleep(2000);
+	// 点击助力
+	var for_her, for_her_parent;
+	for_her = textContains('为TA').findOne();
+	for_her_parent = for_her.paren();
+	// func.sClick(textContains('为TA').findOne());// 点击助力
+	func.sClick(for_her_parent.child(for_her_parent.childCount() - 1)); //点击关闭
+	// 延迟等待
+	sleep(2000);
+	home();
+	sleep(2000);
+}
+// function isMyDevice() {
+// 	let devModel = device.model;
+// 	if (devModel == devHonor8 || devModel == devRedMi || devModel == devMate30) {
+// 		return true;
+// 	} else {
+// 		return false;
+// 	}
+// }
+
+function process() {
+	log("正在等待进入活动页面");
+	//等待点击 立即查看按钮
+	func.sClick(className("TextView").textContains("立即").findOne());
+	// 点击助力
+	func.sClick(textContains('助力邀请').findOne().parent().child(6));
+	//等待完全加载后，如果出现取消按钮会找不到
+	var sign_for_red_pack, sign_index;		// 点击出现弹窗的按钮
+	while (textContains('邀请好友助力').findOnce() == null) {
+		sign_for_red_pack = textContains("打卡领红包").findOnce();
+		if (sign_for_red_pack != null) {
+			sign_index = sign_for_red_pack.indexInParent();
+			func.sClick(sign_for_red_pack.parent().child(sign_index + 2));
+		}
+		sleep(3000);
+	}
+	//延迟3秒
+	sleep(3000);
+	switch (selected) {
+		case '每日任务':
+			每日任务();
+			break;
+	}
+}
+
+function 每日任务() {
+	log('等待加载');
+	sleep(2000);
+	textContains('邀请好友助力').findOne();
+	sleep(800);
+	clickComplete();
+}
+
+function clickComplete() {
+	log("去完成");
+	var indexText, detailText;
+	// 查找的关键字， 去完成小标题， 去完成 小标题s，去完成小标题 父控件, 去完成按钮
+	var key_word, todo_mini_title, todo_mini_titles, todo_mini_title_parent, btn_todo;
+	var index_todo_now, index_todo;
+	index_todo_now = 1;
+	key_word = "000汪汪币"
+	while (text('每邀1个好友可得10000汪汪币').exists()) {
+		log("进入查找环节");
+		var nextStep, nextStepDetail;
+		nextStep = '';
+		nextStepDetail = '';
+		sleep(2000);
+		todo_mini_titles = textContains(key_word).find();
+		//toastLog(unComplete.length);
+		if (todo_mini_titles.nonEmpty()) {
+			log("去完成长度:" + todo_mini_titles.length + ",和既定值:" + index_todo_now);
+			if (todo_mini_titles.length <= index_todo_now) {
+				toastLog('去完成长度剩余:' + todo_mini_titles.length);
+				break;
+			} else {
+				todo_mini_title = todo_mini_titles[index_todo_now];		//选择第一个
+				todo_mini_title.text()
+				// 如果不是去完成列表中，则todo index + 1
+				if ((todo_mini_title.indexInParent() != 2 && (todo_mini_title.text()).indexOf('可得') == -1)
+					|| (todo_mini_title.text()).indexOf('每邀1个好友可得') != -1) {
+					index_todo_now = index_todo_now + 1;
+					log("不是去完成列表或是邀请好友，index + 1");
+					continue;
+				}
+				// indexText 为小标题
+				indexText = todo_mini_title.text();					//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
+				todo_mini_title_parent = todo_mini_title.parent(); 				// 查找父控件
+				index_todo = todo_mini_title.indexInParent();		// 查找在父控件中的 索引值-1等于大标题，+1等于 去完成按钮
+				log("去完成索引为：" + index_todo_now);
+				btn_todo = todo_mini_title_parent.child(index_todo + 1);					// 去完成按钮
+				detailText = todo_mini_title_parent.child(index_todo - 1).text(); // 去逛家电买大屏看奥运
+				log("任务小标题indexText：" + indexText);
+				log("任务大标题detailText：" + detailText);
+
+				// 判断当前任务是否已完成
+				// log("-4位置:" + detailText.slice(-4, -3) + ",-2位置:" + detailText.slice(-2, -1));
+				if (detailText.slice(-4, -3) == detailText.slice(-2, -1)) {
+					index_todo_now = index_todo_now + 1;
+					log("当前任务完成， index + 1");
+					continue;
+				}
+
+				if (indexText.indexOf('扩大商圈可得') != -1) {
+					index_todo_now = index_todo_now + 1;
+					continue;
+				}
+
+				if (indexText.indexOf('签到') != -1) {
+					func.sClick(btn_todo);
+					sleep(800);
+					continue;
+				}
+
+				// 正常任务
+				if (indexText.indexOf('秒') != -1) {
+					nextStep = '等待8秒';
+				} else if (indexText.indexOf('S可') != -1) {
+					nextStep = '等待8秒';
+				} else if (indexText.indexOf('s可') != -1) {
+					nextStep = '等待8秒';
+				} else if (indexText.indexOf('成功入会') != -1) {
+					nextStep = '加入会员';
+				} else if (indexText.indexOf('开通品牌会员') != -1) {
+					nextStep = '加入会员';
+				} else if (indexText.indexOf('浏览可得') != -1) {
+					nextStep = '浏览返回';
+				} else if (indexText.indexOf('浏览会场可得') != -1) {
+					nextStep = '浏览返回';
+				} else if (indexText.indexOf('浏览并关注') != -1) {
+					nextStep = '浏览返回';
+				} else if (indexText.indexOf('成功关注') != -1) {
+					nextStep = '浏览返回';
+				} else if (indexText.indexOf('逛店可得') != -1) {
+					nextStep = '浏览返回';
+				} else if (indexText.indexOf('参与可得') != -1) {
+					nextStep = '参与返回';
+				} else if (indexText.indexOf('浏览5个商品可得') != -1) {
+					nextStep = '浏览商品';
+				} else if (indexText.indexOf('浏览5个') != -1) {
+					nextStep = '浏览商品';
+				} else if (indexText.indexOf('加购5个') != -1) {
+					nextStep = '加购物车';
+				} else {
+					index_todo_now = index_todo_now + 1;
+					log("未找到满足条件的任务描述-小字，index + 1");
+					continue;
+				}
+
+				// 详细描述校验，校验小程序
+				if (detailText.indexOf('小程序') != -1) {
+					nextStepDetail = '小程序';
+				} else if (detailText.indexOf('去企有此礼赢取好礼') != -1) {
+					nextStepDetail = '页面含邀请好友';
+				} else if (detailText.indexOf('去逛美妆护肤爆款会场') != -1) {
+					nextStepDetail = '小程序';
+				} else if (detailText.indexOf('2.9元洗衣液限时') != -1) {
+					nextStepDetail = '小程序';
+				} else if (detailText.indexOf('9.9元') != -1) {
+					nextStepDetail = '小程序'
+				} else if (detailText.indexOf('金融神券') != -1) {
+					nextStepDetail = '金融2次返回'
+				} else if (detailText.indexOf('去逛京友圈') != -1) {
+					nextStepDetail = '京友圈';
+				} else if (detailText.indexOf('京享值PK赢') != -1) {
+					nextStepDetail = '金融2次返回';
+				} else if (detailText.indexOf('领百亿购物金') != -1) {
+					nextStepDetail = '20秒等待';
+				} else if (detailText.indexOf('东东超市') != -1) {
+					nextStepDetail = '东东超市';		// 点击完成按钮返回
+				} else if (detailText.indexOf('去养狗兑京豆') != -1) {
+					index_todo_now = index_todo_now + 1;
+					continue;
+					// } else if (detailText.indexOf('C粉会员卡') != -1) {
+					// 	nextStepDetail = '点击关闭返回';
+				} else {
+					nextStepDetail = '无';
+				}
+
+				// 除了Mate 30外，另外2个台古董在小程序卡死
+				if (devModel == devHonor8 && nextStepDetail == '小程序') {
+					index_todo_now = index_todo_now + 1;
+					continue;
+				}
+
+				func.sClick(btn_todo);
+				log("下一步动作nextStep：" + nextStep);
+				log("下一步动作细节描述nextStepDetail：" + nextStepDetail);
+				sleep(1500);
+				after_click(nextStep, nextStepDetail);
+			}
+		}
+	}
+}
+
+
+function waitLog(cnt, textDetail) {
+	while (cnt--) {
+		toastLog(textDetail);
+		sleep(2000);
+	}
+}
+
+function random_second(second, st, ed) {
+	/** *
+	@param {int} second 延迟的时间: 
+	@param {int} st 随机开始值
+	@param {int} ed 随机结束值
+	*/
+	if (st >= ed) {
+		return second;
+	} else {
+		return func.randomNum(st, ed) + second;
+	}
+}
+
+
+function after_click(textStr, details) {
+	var toDoPage;
+	toDoPage = "邀请好友助力";
+	switch (textStr) {
+		case '参与返回':
+			log('参与返回');
+			waitCompleteDisappear();
+			sleep(random_second(2000, 100, 1000));
+			break;
+		case '等待8秒':
+			cnt = 11;
+			log('等待8秒');
+			waitCompleteDisappear();
+			// 等待11秒 应该完成了
+			sleep(random_second(10500, 100, 1000));
+			break;
+		case '浏览返回':
+			log('浏览返回');
+			break;
+		case '浏览商品':
+			log('浏览商品');
+			add_cart(123);
+			break;
+		case '加购物车':
+			log('加购物车');
+			add_cart();
+			break;
+		case '加入会员':
+			log('加入会员');
+			member_card();
+			break;
+		default:
+			break;
+	}
+	// 确保已经切换回京东APP
+
+	if (details == '20秒等待') {
+		toastLog("加载巨慢额外等待10秒");
+		sleep(random_second(10000, 100, 1000));
+		back_way();
+	} else if (details == '金融2次返回') {
+		log("金融返回");
+		back_way();
+		sleep(random_second(2000, 100, 1000));
+		if (currentPackage() != "com.jingdong.app.mall") {
+			func.toApp(appName);
+		}
+		sleep(random_second(3000, 100, 1000));
+		back_way();
+	} else if (details == '小程序') {
+		log('微信返回');
+		i = 10;
+		toastLog('跳转到小程序，等待20秒');
+		sleep(10000);
+		if (currentPackage() != "com.jingdong.app.mall") {
+			waitLog(5, '等待一会儿..跳转回JD');
+			func.toApp(appName);
+		}
+	} else if (details == '东东超市') {
+		sleep(random_second(3800, 100, 1000));
+		while (textContains('邀请好友助力').findOnce() == null) {
+			back();
+			sleep(random_second(2800, 100, 1000));
+		}
+	} else if (details == '页面含邀请好友') {
+		log('页面含邀请好友');
+		toDoPage = "8000好玩豆";
+	} else if (details == '点击关闭返回') {
+		while (textContains(toDoPage).findOnce() == null) {
+			if (func.sClick(desc('关闭页面').findOnce())) {
+				toastLog("点击 desc 关闭按钮返回成功");
+				sleep(random_second(2800, 100, 1000));
+				break;
+			}
+			if (func.sClick(id('com.jingdong.app.mall:id/ge').findOnce())) {
+				toastLog("点击 id 关闭按钮返回成功");
+				sleep(random_second(2800, 100, 1000));
+				break;
+			}
+			toastLog("点击关闭按钮返回");
+			sleep(random_second(2800, 100, 1000));
+		}
+	} else {
+		// 返回
+		back_way();
+		sleep(random_second(2800, 100, 1000));
+	}
+
+	log('等待返回');
+	if (selected == "每日任务" || selected == "金融领金币") {
+		if (textContains(toDoPage).findOnce() == null) {
+			back_way(toDoPage);
+		}
+		textContains(toDoPage).findOne();
+	} else {
+		if (textContains('每日签到').findOnce() == null) { back_way(); }
+		textContains('每日签到').findOne();
+	}
+	sleep(random_second(800, 100, 1000));
+	log('已返回');
+}
+
+
+function waitCompleteDisappear() {
+	var cnt = 0;
+	while (textContains("邀请好友助力").findOnce() != null) {
+		sleep(random_second(600, 100, 1000));
+		log("等待去完成消失");
+		cnt = cnt + 1;
+		if (cnt > 10) {
+			break;
+		}
+	}
+	toastLog("去完成已消失");
+	sleep(random_second(800, 100, 1000));
+}
+
+// 加入会员
+function member_card() {
+	//toastLog('会员卡');
+	sleep(random_second(3800, 100, 1000));
+	if (textContains('邀请好友助力').findOnce() != null) {
+		return 0;
+	}
+	sleep(random_second(850, 100, 1000));
+	if (textContains('确认授权并加入').findOnce() == null) {
+		return 0;
+	}
+	var authority, authorited, memberName, memberMail;
+	authorited = false;		// 表示是否勾选授权
+	while (1) {
+		log('加会员');
+		authority = textContains('确认授权即同意').findOnce();
+		if (authority != null) {
+			if (func.cClick(authority.parent().child(0))) {
+				authorited = true;
+			}
+		}
+		sleep(random_second(1800, 100, 1000));
+		if (authorited) {
+			if (text("姓名").findOnce() != null) {
+				if (devModel == devRedMi) {
+					memberName = "曾卿"
+				} else if (devModel == devHonor8) {
+					memberName = "郑丽"
+				} else if (devModel == devMate30) {
+					memberName = "陈俊"
+				} else {
+					break;
+				}
+				if (setText(1, memberName)) {
+					sleep(1500);
+					back();
+				}
+			}
+			if (text("邮箱").findOnce() != null) {
+				if (devModel == devRedMi) {
+					memberMail = "107910697@qq.com"
+				} else if (devModel == devHonor8) {
+					memberMail = "307458224@qq.com"
+				} else if (devModel == devMate30) {
+					memberMail = "273343029@qq.com"
+				}
+				if (setText(2, memberMail)) {
+					sleep(random_second(1300, 100, 1000));
+					back();
+				}
+			}
+			if (text("生日").findOnce() != null) {
+				func.sClick(className("android.widget.Spinner").findOne());
+				sleep(1000);
+				func.sClick(text("确定").findOnce());
+				sleep(1000);
+			}
+			sleep(2000);
+			if (func.cClick(textContains('确认授权并加入').findOnce())) {
+				sleep(2000);
+				break;
+			}
+		}
+	}
+	sleep(3000);
+	back_way();
+	sleep(2000);
+	func.sClick(desc('关闭页面').findOnce());
+	func.sClick(id('com.jingdong.app.mall:id/ge').findOnce());
+	sleep(1500);
+}
+
+//加购5个商品
+function add_cart(isView) {
+	/**
+	@param isView 是否浏览，传入任意数值
+	 */
+	i = 0;
+	var addText, doller_text, index_doller;
+	// doller_text = "￥"
+	doller_text = "¥"
+	var findDoller, findDoller_parent, btn_add_cart;
+	if (isView == undefined) {
+		addText = '加购5个商品';
+	} else {
+		addText = '浏览5个商品';
+	}
+	var addCartText = textContains(addText).findOne();
+	var completeText;
+	completeText = addCartText.parent().child(2).text();
+	var childCnt;
+	childCnt = 4;
+	while (childCnt != 5) {
+		if (devModel == devHonor8) {
+			if (i >= 3) {
+				scrollDown();
+				sleep(4000);
+			}
+		}
+		textContains(doller_text).findOne();
+		//点击商品加购物车按钮
+		while (1) {
+			try {
+				findDoller = textContains(doller_text).find()[i];
+				findDoller_parent = findDoller.parent();
+				index_doller = findDoller.indexInParent();
+				btn_add_cart = findDoller_parent.child(index_doller + 2);
+				break;
+			}
+			catch (e) {
+				sleep(400);
+				continue;
+			}
+		}
+		log("点击加购物车");
+		func.sClick(btn_add_cart);
+		sleep(2000);
+		addCartText = textContains(addText).findOnce();
+		while (addCartText == null) {
+			back_way();
+			sleep(2500);
+			addCartText = textContains(addText).findOnce();
+		}
+		sleep(1000);
+		try {
+			childCnt = textContains(addText).findOnce().parent().childCount();
+			log("当前已加购数量：" + childCnt);
+		} catch (err) {
+			log("加购失败")
+		}
+		sleep(1000);
+		i = i + 1;
+	}
+}
+
+function back_way(toDoPage) {
+	if (toDoPage == undefined) {
+		toDoPage = "邀请好友助力";
+	} else if (toDoPage == '8000好玩豆') {
+		back();
+		sleep(2000);
+		return 0;
+	}
+	sleep(800);
+	if (textContains('去完成').findOnce() == null && (textContains(toDoPage).findOnce() == null
+		|| textContains('每日签到').findOnce() == null)) {
+		var backBtn = desc('返回').findOnce();
+		if (backBtn == null) {
+			back();
+		} else {
+			if (backBtn.clickable()) {
+				backBtn.click();
+			} else {
+				func.sClick(backBtn);
+			}
+		}
+		sleep(2000);
+		// if (textContains('邀请好友助力').findOnce() == null) {
+		// 	func.sClick(className("android.widget.ImageView").depth(11).findOnce());
+		// }
+
+		// func.sClick(id('com.jd.lib.jshop:id/ge').findOnce());
+		func.sClick(id('com.jd.lib.jshop:id/asj').findOnce());
+		func.sClick(id('com.jd.lib.jshop.feature:id/gd').findOnce());
+		func.sClick(id('com.jd.lib.jshop.feature:id/mj').findOnce());
+
+		func.sClick(idContains('close').findOnce());
+		func.sClick(textContains('离开').findOnce());
+		func.sClick(textContains('我要离开').findOnce());
+		func.sClick(textContains('放弃').findOnce());
+		func.sClick(textContains('知道了').findOnce());
+		func.sClick(textContains('待会再来').findOnce());
+
+		log('返回');
+	} else {
+		log("已在去完成界面");
+	}
+}

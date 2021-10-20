@@ -280,7 +280,7 @@ function randomNum(min, max, digit) {
     @param  digit, 保留的小数位
     */
     var powNum;
-    // 如果没有digit参数，默认2个小数点
+    // 如果没有digit参数，默认没有小数点
     if (digit == undefined) {
         digit = 0;
     }

@@ -62,8 +62,16 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
-
-log(id("com.icbc:id/ifopges_lock_patterns").findOnce());
+i = 1;
+doller_text = "¥"
+findDoller = textContains(doller_text).find()[i];
+log(findDoller);
+findDoller_parent = findDoller.parent();
+index_doller = findDoller.indexInParent();
+log(index_doller);
+btn_add_cart = findDoller_parent.child(index_doller + 2);
+btn_view = findDoller_parent.child(0);
+func.cClick(btn_view);
 
 function member_card() {
     //toastLog('会员卡');
