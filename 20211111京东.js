@@ -79,7 +79,7 @@ function 互助点击() {
 	}
 	sleep(2000);
 	// 点击助力
-	func.sClick(textContains('为TA').findOne());// 点击助力
+	func.sClick(textContains('助力邀请').findOne().parent().child(6));// 点击助力
 	// 延迟等待
 	sleep(2000);
 	home();
