@@ -62,16 +62,20 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
-i = 1;
-doller_text = "¥"
-findDoller = textContains(doller_text).find()[i];
-log(findDoller);
-findDoller_parent = findDoller.parent();
-index_doller = findDoller.indexInParent();
-log(index_doller);
-btn_add_cart = findDoller_parent.child(index_doller + 2);
-btn_view = findDoller_parent.child(0);
-func.cClick(btn_view);
+log(random_second(2000, 100, 120));
+
+function random_second(second, st, ed) {
+    /** *
+    @param {int} second 延迟的时间: 
+    @param {int} st 随机开始值
+    @param {int} ed 随机结束值
+    */
+    if (st >= ed) {
+        return second;
+    } else {
+        return func.randomNum(st, ed) + second;
+    }
+}
 
 function member_card() {
     //toastLog('会员卡');

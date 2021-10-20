@@ -173,7 +173,7 @@ function clickComplete() {
 				// log("-4位置:" + detailText.slice(-4, -3) + ",-2位置:" + detailText.slice(-2, -1));
 				if (detailText.slice(-4, -3) == detailText.slice(-2, -1)) {
 					index_todo_now = index_todo_now + 1;
-					log("当前任务完成， index + 1");
+					toastLog("当前任务完成， index + 1");
 					continue;
 				}
 
@@ -219,7 +219,7 @@ function clickComplete() {
 					nextStep = '加购物车';
 				} else {
 					index_todo_now = index_todo_now + 1;
-					log("未找到满足条件的任务描述-小字，index + 1");
+					toastLog("未找到满足条件的任务描述-小字，index + 1");
 					continue;
 				}
 
@@ -311,7 +311,6 @@ function after_click(textStr, details) {
 			break;
 		case '浏览返回':
 			log('浏览返回');
-			sleep(random_second(5000, 100, 1000));
 			waitCompleteDisappear();
 			break;
 		case '浏览商品':
@@ -380,7 +379,7 @@ function after_click(textStr, details) {
 	} else {
 		// 返回
 		back_way();
-		sleep(random_second(2800, 100, 1000));
+		sleep(random_second(1000, 100, 1000));
 	}
 
 	log('等待返回');
