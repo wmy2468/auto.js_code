@@ -49,12 +49,12 @@ function 互助() {
 			kouling2 = "12.0:/#EAuKH9sf6MOjCf@，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";		// JJ
 			break;
 		case devRedMi:
-			kouling1 = "LP 好玩星球等你探索！￥946lNE0fgjRvAG￥祛→【猄〤崬】";
+			kouling1 = " 11.0:/￥JDpplF8ATGDmSO%，☃﹎壹啓ɡμā汾20億!!!!!！ぷ";		// LP
 			kouling2 = "12.0:/#EAuKH9sf6MOjCf@，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";		// JJ
 			break;
 		// 华为Mate 30
 		case devMate30:
-			kouling1 = "LP 好玩星球等你探索！￥946lNE0fgjRvAG￥祛→【猄〤崬】";
+			kouling1 = " 11.0:/￥JDpplF8ATGDmSO%，☃﹎壹啓ɡμā汾20億!!!!!！ぷ";		//LP
 			kouling1 = "16.0:/￥E8BzGFzUiiTR7S￥，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";	//LM
 			break;
 		default:
