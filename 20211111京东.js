@@ -148,7 +148,11 @@ function process() {
 			if (find_object != null) {
 				toastLog("点击了 关闭助力");
 				find_object_parent = find_object.parent();
-				func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));		// 点击领取
+				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) { }		// 点击领取
+				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+					sleep(800);
+				}		// 点击领取
+
 			}
 
 			// 关闭开启今日环游按钮
@@ -156,21 +160,27 @@ function process() {
 			if (find_object != null) {
 				toastLog("点击了 关闭开启今日环游按钮");
 				find_object_parent = find_object.parent();
-				func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));		// 点击领取
+				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+					sleep(800);
+				}		// 点击领取
 			}
 			// 关闭每日签到
 			find_object = text("不要断签哦~别让大红包飞走").findOnce();
 			if (find_object != null) {
 				toastLog("点击了 关闭每日签到");
 				find_object_parent = find_object.parent().parent().parent().parent();
-				func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+					sleep(800);
+				}
 			}
 			// 关闭开心收下
 			find_object = text("距离下一个红包还要签到").findOnce();
 			if (find_object != null) {
 				toastLog("点击了 关闭开心收下");
 				find_object_parent = find_object.parent().parent().parent();
-				func.sClick(find_object_parent.child(1));
+				if (func.sClick(find_object_parent.child(1))) {
+					sleep(800);
+				}
 			}
 			// 关闭立即抽奖
 			find_object = className("android.view.View").depth(19).findOnce();
@@ -178,8 +188,11 @@ function process() {
 				toastLog("点击了 关闭立即抽奖");
 				find_object_parent = find_object.parent().parent();
 				if (find_object_parent.childCount() >= 3) {
-					func.sClick(find_object_parent.child(1));		// 立即抽奖
-					func.sClick(find_object_parent.child(2));		// 今日环游
+					// 立即抽奖 // 今日环游
+					if (func.sClick(find_object_parent.child(1)) ||
+						func.sClick(find_object_parent.child(2))) {
+						sleep(800);
+					}
 				}
 			}
 			sleep(3000);
@@ -379,6 +392,7 @@ function 城城现金() {
 				while (find_object == null) {
 					toastLog("未发现京口令窗口，请手动点击邀请好友触发，否则不会返回");
 					sleep(3000);
+					find_object = className("TextView").text(find_text).findOnce();
 				}
 				find_object_parent = find_object.parent().parent();
 				func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
