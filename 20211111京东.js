@@ -188,7 +188,7 @@ function process() {
 					}
 				}
 			}
-			
+
 			// 点击任务按钮
 			find_object = textContains("打卡领红包 打卡领红包").findOnce();
 			if (find_object != null) {
@@ -292,8 +292,18 @@ function clickComplete() {
 					nextStep = '点击一下 啥也不干';
 				} else if (indexText.indexOf('成功入会') != -1) {
 					nextStep = '加入会员';
+					if (!(devModel == devRedMi || devModel == devHonor8 || devModel == devMate30)) {
+						index_todo_now = index_todo_now + 1;
+						toastLog("非本人设备 无法处理会员，index + 1");
+						continue;
+					}
 				} else if (indexText.indexOf('开通品牌会员') != -1) {
 					nextStep = '加入会员';
+					if (!(devModel == devRedMi || devModel == devHonor8 || devModel == devMate30)) {
+						index_todo_now = index_todo_now + 1;
+						toastLog("非本人设备 无法处理会员，index + 1");
+						continue;
+					}
 				} else if (indexText.indexOf('浏览可得') != -1) {
 					if (detailText.indexOf('去种草城') != -1) {
 						toastLog("发现 种草城");
@@ -465,7 +475,6 @@ function 种草城() {
 }
 
 function after_click(textStr, details) {
-
 	switch (textStr) {
 		case "点击分现金按钮":
 			城城现金();
