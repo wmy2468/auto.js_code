@@ -305,7 +305,7 @@ function clickComplete() {
 				if (detailText.slice(-4, -3) == detailText.slice(-2, -1)) {
 					index_todo_now = index_todo_now + 1;
 					console.clear();			// 当前任务正常完成，可以清除前面的日志
-					toastLog("当前任务完成， index + 1");
+					toastLog("当前任务" + detailText + "完成， index + 1");
 					continue;
 				}
 
