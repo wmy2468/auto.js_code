@@ -63,41 +63,13 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 
-log(textContains("/5)").findOnce().text() == "(5/5)");
-种草城();
+log(textContains("打卡领红包 打卡领红包").findOnce());
 
-function 种草城() {
-    var find_text, find_object, find_object_text, find_object_parent;	// 定义查找的变量
-    find_text = "/5)";
-    find_object = textContains(find_text).findOnce();
-    while (find_object == null) {
-        find_object = textContains(find_text).findOnce();
-        toastLog("等待种草城页面加载");
-        sleep(2000);
-    }
-    find_object_text = find_object.text();
-    while (find_object_text != "(5/5)") {
-        find_object = textContains(find_text).findOnce();
-        if (find_object != null) {
-            find_object_parent = find_object.parent().parent();
-            func.sClick(find_object_parent.child(2).child(4));
-            // 等待查找文本消失
-            while (textContains(find_text).findOnce() != null) {
-                sleep(2000);
-            }
-            toastLog("种草城页面已消失");
-            while (textContains(find_text).findOnce() == null) {
-                sleep(random_second(500, 100, 500));
-                back_way();
-                toastLog("种草城返回");
-                sleep(random_second(4000, 500, 1000));
-            }
-            find_object = textContains(find_text).findOnce();
-        } else {
-            find_object_text = "";
-            continue;
-        }
-    }
+find_object = textContains("打卡领红包 打卡领红包").findOnce();
+if (find_object != null) {
+    toastLog("点击了 任务框 按钮");
+    find_object_index = find_object.indexInParent();
+    func.sClick(find_object.parent().child(find_object_index + 1));
 }
 
 function random_second(second, st, ed) {

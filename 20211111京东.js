@@ -27,14 +27,17 @@ var to_do_page_text = "邀请好友助力"
 
 
 main();
-// clickComplete();
+// 金融任务();
 
 function main() {
 	var sMission;
-	sMission = func.dialogsWin(['做任务', '互助']);
+	sMission = func.dialogsWin(['做任务', "金融任务", '互助']);
 	switch (sMission) {
 		case "做任务":
 			做任务();
+			break;
+		case "金融任务":
+			金融任务();
 			break;
 		case "互助":
 			互助();
@@ -44,6 +47,43 @@ function main() {
 	console.clear();
 	alert('已完成');
 }
+
+// -----------------------------------------------------
+function 金融任务() {
+	appName = "京东金融";
+	func.toApp(appName);
+	while (textContains("打卡领红包 打卡领红包").findOnce() == null) {
+		func.sClick(id("com.jd.jrapp:id/redPacketIV").findOnce());
+		toastLog("请跳转金融APP，并显示入口banner");
+		sleep(2000);
+	}
+	toastLog("已找到打卡领红包 打卡领红包");
+	sleep(random_second(2000, 100, 500));
+	// 点击任务按钮
+	var find_object, find_object_index, find_object_parent;	// 定义查找的变量
+	while (textContains('邀请好友助力').findOnce() == null) {
+		try {
+			// 点击任务按钮
+			find_object = textContains("打卡领红包 打卡领红包").findOnce();
+			if (find_object != null) {
+				toastLog("点击了 任务框 按钮");
+				find_object_index = find_object.indexInParent();
+				func.sClick(find_object.parent().child(find_object_index + 1));	//此处与JD不同
+			}
+			sleep(3000);
+		} catch (e) {
+			throw "error: " + e;
+		}
+	}
+	//延迟3秒
+	sleep(3000);
+	switch (selected) {
+		case '每日任务':
+			每日任务();
+			break;
+	}
+}
+// -----------------------------------------------------
 
 function 口令启动() {
 	setClip(koulingText);
@@ -64,6 +104,7 @@ function 首页banner启动() {
 		toastLog("请跳转到京东APP，并显示入口banner");
 		sleep(2000);
 	}
+	toastLog("已找到打卡领红包 打卡领红包");
 	sleep(random_second(2000, 100, 500));
 }
 
@@ -312,6 +353,8 @@ function clickComplete() {
 						nextStep = '浏览返回';
 					}
 				} else if (indexText.indexOf('浏览会场可得') != -1) {
+					nextStep = '浏览返回';
+				} else if (indexText.indexOf('浏览即可得') != -1) {
 					nextStep = '浏览返回';
 				} else if (indexText.indexOf('浏览并关注') != -1) {
 					nextStep = '浏览返回';
