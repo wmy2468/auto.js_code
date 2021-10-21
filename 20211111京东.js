@@ -467,6 +467,7 @@ function 种草城() {
 				sleep(random_second(4000, 500, 1000));
 			}
 			find_object_text = find_object.text();
+			toastLog("当前文本:" + find_object_text + "目标文本: (5/5)");
 		} else {
 			find_object_text = "";
 			continue;
