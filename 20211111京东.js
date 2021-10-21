@@ -1,3 +1,15 @@
+// sleep(600) =>
+// sleep(random_second(540, 60, 900));
+// sleep(800) =>
+// sleep(random_second(720, 80, 900));
+// sleep(1000) =>
+// sleep(random_second(900, 100, 300));
+// sleep(1500) =>
+// sleep(random_second(1350, 150, 450));
+// sleep(2000) =>
+// sleep(random_second(1800, 200, 600));
+// sleep(3000) =>
+// sleep(random_second(2700, 300, 900));
 auto.waitFor();
 var func = require('func_list.js');
 
@@ -30,12 +42,30 @@ function main() {
 	alert('已完成');
 }
 
-function 做任务() {
-	toastLog("启动！！！");
+function 口令启动() {
 	setClip(koulingText);
-	sleep(1000);
+	sleep(random_second(900, 100, 300));
 	log("正在打开");
 	func.toApp(appName);
+	sleep(random_second(900, 100, 300));
+	//等待点击 立即查看按钮
+	func.sClick(className("TextView").textContains("立即").findOne());
+	// 点击助力
+	func.sClick(textContains('助力邀请').findOne().parent().child(7));
+}
+
+function 首页banner启动() {
+	func.toApp(appName);
+	while (func.cClick(desc("浮层活动").findOnce()) == false) {
+		toastLog("请跳转到京东APP，并显示入口banner");
+		sleep(2000);
+	}
+	sleep(random_second(2000, 100, 500));
+}
+
+function 做任务() {
+	toastLog("启动！！！");
+	首页banner启动();
 	process();
 }
 
@@ -55,7 +85,7 @@ function 互助() {
 		// 华为Mate 30
 		case devMate30:
 			kouling1 = " 11.0:/￥JDpplF8ATGDmSO%，☃﹎壹啓ɡμā汾20億!!!!!！ぷ";		//LP
-			kouling1 = "16.0:/￥E8BzGFzUiiTR7S￥，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";	//LM
+			kouling2 = "16.0:/￥E8BzGFzUiiTR7S￥，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";	//LM
 			break;
 		default:
 			return 0;
@@ -96,20 +126,46 @@ function 互助点击() {
 
 function process() {
 	log("正在等待进入活动页面");
-	//等待点击 立即查看按钮
-	func.sClick(className("TextView").textContains("立即").findOne());
-	// 点击助力
-	func.sClick(textContains('助力邀请').findOne().parent().child(7));
-
 	//等待完全加载后，如果出现取消按钮会找不到
-	var sign_for_red_pack, sign_index;		// 点击出现弹窗的按钮
+	var find_object, find_object_index, find_object_parent;	// 定义查找的变量
 	while (textContains('邀请好友助力').findOnce() == null) {
-		sign_for_red_pack = textContains("打卡领红包").findOnce();
-		if (sign_for_red_pack != null) {
-			sign_index = sign_for_red_pack.indexInParent();
-			func.sClick(sign_for_red_pack.parent().child(sign_index + 2));
+		// 点击任务按钮
+		find_object = textContains("打卡领红包 打卡领红包 每次消耗").findOnce();
+		if (find_object != null) {
+			find_object_index = find_object.indexInParent();
+			func.sClick(find_object.parent().child(find_object_index + 1));
 		}
-		sleep(3000);
+		// --------------关闭各种弹窗----------------
+		try {
+			// 关闭开启今日环游按钮
+			find_object = text("欢迎加入热爱环游记！").findOnce();
+			if (find_object != null) {
+				find_object_parent = find_object.parent();
+				func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));		// 点击领取
+			}
+			// 关闭每日签到
+			find_object = text("不要断签哦~别让大红包飞走").findOnce();
+			if (find_object != null) {
+				find_object_parent = find_object.parent().parent().parent().parent();
+				func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+			}
+			// 关闭开心收下
+			find_object = text("距离下一个红包还要签到").findOnce();
+			if (find_object != null) {
+				find_object_parent = find_object.parent().parent().parent();
+				func.sClick(find_object_parent.child(1));
+			}
+			// 关闭立即抽奖
+			find_object = className("android.view.View").depth(19).findOnce();
+			if (find_object != null) {
+				find_object_parent = find_object.parent().parent();
+				func.sClick(find_object_parent.child(1));		// 立即抽奖
+				func.sClick(find_object_parent.child(2));		// 今日环游
+			}
+			sleep(3000);
+		} catch (e) {
+			throw "error: " + e;
+		}
 	}
 	//延迟3秒
 	sleep(3000);
@@ -195,6 +251,8 @@ function clickComplete() {
 					nextStep = '等待8秒';
 				} else if (indexText.indexOf('s可') != -1) {
 					nextStep = '等待8秒';
+				} else if (indexText.indexOf('城城分现金') != -1) {
+					nextStep = '点击分现金按钮';
 				} else if (indexText.indexOf('成功入会') != -1) {
 					nextStep = '加入会员';
 				} else if (indexText.indexOf('开通品牌会员') != -1) {
@@ -279,28 +337,68 @@ function waitLog(cnt, textDetail) {
 	}
 }
 
-function random_second(second, st, ed) {
-	/** *
-	@param {int} second 延迟的时间: 
-	@param {int} st 随机开始值
-	@param {int} ed 随机结束值
-	*/
-	if (st >= ed) {
-		return second;
-	} else {
-		return func.randomNum(st, ed) + second;
+function 城城现金() {
+	var find_text, find_object, find_object_index, find_object_parent;	// 定义查找的变量
+	while (1) {
+		find_text = "有机会得大额现金";
+		find_object = textContains(find_text).findOnce();
+		if (find_object != null) {
+			find_object_parent = find_object.parent();
+			if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+				find_text = "京口令已复制";
+				find_object = className("TextView").text(find_text).findOnce();
+				while (find_object == null) {
+					toastLog("未发现京口令窗口，请手动点击邀请好友触发，否则不会返回");
+					sleep(3000);
+				}
+				find_object_parent = find_object.parent().parent();
+				func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+				toastLog("已点击 京口令 关闭按钮");
+				sleep(2000);
+				break;
+			}
+		}
+		try {
+			find_text = "提醒我明日来领钱";
+			find_object = text(find_text).findOnce();
+			if (find_object != null) {
+				find_object_parent = find_object.parent().parent();
+				func.sClick(find_object_parent.child(3));
+			}
+			find_text = "可微信零钱体现";
+			find_object = text(find_text).findOnce();
+			if (find_object != null) {
+				find_object_parent = find_object.parent().parent().parent();
+				func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+			}
+			find_text = "邀请新朋友 更快赚现金";
+			find_object = text(find_text).findOnce();
+			if (find_object != null) {
+				find_object_index = find_object.indexInParent();
+				find_object_parent = find_object.parent();
+				func.sClick(find_object_parent.child(find_object_index - 1));
+			}
+		} catch (e) {
+			throw "error: " + e;
+		}
+		toastLog("等待-有机会得大额现金-加载，其余手动完成");
+		sleep(3000);
 	}
 }
 
 
 function after_click(textStr, details) {
+
 	var toDoPage;
 	toDoPage = "邀请好友助力";
 	switch (textStr) {
+		case "点击分现金按钮":
+			城城现金();
+			break;
 		case '参与返回':
 			log('参与返回');
 			waitCompleteDisappear();
-			sleep(random_second(2000, 100, 1000));
+			sleep(random_second(3000, 300, 900));
 			break;
 		case '等待8秒':
 			cnt = 11;
@@ -464,9 +562,9 @@ function member_card() {
 			}
 			if (text("生日").findOnce() != null) {
 				func.sClick(className("android.widget.Spinner").findOne());
-				sleep(1000);
+				sleep(random_second(900, 100, 300));
 				func.sClick(text("确定").findOnce());
-				sleep(1000);
+				sleep(random_second(900, 100, 300));
 			}
 			sleep(2000);
 			if (func.cClick(textContains('确认授权并加入').findOnce())) {
@@ -534,14 +632,14 @@ function add_cart(isView) {
 			sleep(2500);
 			addCartText = textContains(addText).findOnce();
 		}
-		sleep(1000);
+		sleep(random_second(900, 100, 300));
 		try {
 			childCnt = textContains(addText).findOnce().parent().childCount();
 			log("当前已加购数量：" + childCnt);
 		} catch (err) {
 			log("加购失败")
 		}
-		sleep(1000);
+		sleep(random_second(900, 100, 300));
 		i = i + 1;
 	}
 }
@@ -587,5 +685,18 @@ function back_way(toDoPage) {
 		log('返回');
 	} else {
 		log("已在去完成界面");
+	}
+}
+
+function random_second(second, st, ed) {
+	/** *
+	@param {int} second 延迟的时间: 
+	@param {int} st 随机开始值
+	@param {int} ed 随机结束值
+	*/
+	if (st >= ed) {
+		return second;
+	} else {
+		return func.randomNum(st, ed) + second;
 	}
 }

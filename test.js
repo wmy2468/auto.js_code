@@ -62,7 +62,17 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
-log(random_second(2000, 100, 120));
+
+find_text = "京口令已复制";
+find_object = className("TextView").text(find_text).findOnce();
+while (find_object == null) {
+    toastLog("未发现京口令窗口，请手动点击邀请好友触发，否则不会返回");
+    sleep(3000);
+}
+find_object_parent = find_object.parent().parent();
+func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+
+log(textContains("邀请新朋友").findOnce());
 
 function random_second(second, st, ed) {
     /** *
