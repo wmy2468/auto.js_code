@@ -466,7 +466,7 @@ function 种草城() {
 				toastLog("种草城返回");
 				sleep(random_second(4000, 500, 1000));
 			}
-			find_object = textContains(find_text).findOnce();
+			find_object_text = find_object.text();
 		} else {
 			find_object_text = "";
 			continue;
