@@ -66,13 +66,15 @@ function 金融任务() {
 			// 点击任务按钮
 			find_object = textContains("打卡领红包 打卡领红包").findOnce();
 			if (find_object != null) {
-				toastLog("点击了 任务框 按钮");
 				find_object_index = find_object.indexInParent();
 				func.sClick(find_object.parent().child(find_object_index + 1));	//此处与JD不同
+				func.sClick(find_object.parent().child(find_object_index + 2));	//此处与JD不同
+				toastLog("点击了 任务框 按钮");
 			}
 			sleep(3000);
 		} catch (e) {
-			throw "error: " + e;
+			log("error" + e);
+			continue;
 		}
 	}
 	//延迟3秒
@@ -233,13 +235,15 @@ function process() {
 			// 点击任务按钮
 			find_object = textContains("打卡领红包 打卡领红包").findOnce();
 			if (find_object != null) {
-				toastLog("点击了 任务框 按钮");
 				find_object_index = find_object.indexInParent();
+				func.sClick(find_object.parent().child(find_object_index + 1));
 				func.sClick(find_object.parent().child(find_object_index + 2));
+				toastLog("点击了 任务框 按钮");
 			}
 			sleep(3000);
 		} catch (e) {
-			throw "error: " + e;
+			log("error" + e);
+			continue;
 		}
 	}
 	//延迟3秒
