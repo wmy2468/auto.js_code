@@ -134,13 +134,6 @@ function process() {
 	//等待完全加载后，如果出现取消按钮会找不到
 	var find_object, find_object_index, find_object_parent;	// 定义查找的变量
 	while (textContains('邀请好友助力').findOnce() == null) {
-		// 点击任务按钮
-		find_object = textContains("打卡领红包 打卡领红包").findOnce();
-		if (find_object != null) {
-			toastLog("点击了 任务框 按钮");
-			find_object_index = find_object.indexInParent();
-			func.sClick(find_object.parent().child(find_object_index + 2));
-		}
 		// --------------关闭各种弹窗----------------
 		try {
 			// 关闭助力
@@ -194,6 +187,14 @@ function process() {
 						sleep(800);
 					}
 				}
+			}
+			
+			// 点击任务按钮
+			find_object = textContains("打卡领红包 打卡领红包").findOnce();
+			if (find_object != null) {
+				toastLog("点击了 任务框 按钮");
+				find_object_index = find_object.indexInParent();
+				func.sClick(find_object.parent().child(find_object_index + 2));
 			}
 			sleep(3000);
 		} catch (e) {
