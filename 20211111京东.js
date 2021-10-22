@@ -333,8 +333,8 @@ function clickComplete() {
 					nextStep = '等待8秒';
 				} else if (indexText.indexOf('城城') != -1) {
 					nextStep = '点击分现金按钮';
-				} else if (indexText.indexOf('点击首页浮层') != -1) {
-					nextStep = '点击一下 啥也不干';
+					// } else if (indexText.indexOf('点击首页浮层') != -1) {
+					// 	nextStep = '点击一下 啥也不干';
 				} else if (indexText.indexOf('成功入会') != -1) {
 					nextStep = '加入会员';
 					if (!(devModel == devRedMi || devModel == devHonor8 || devModel == devMate30)) {
