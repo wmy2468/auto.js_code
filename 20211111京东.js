@@ -331,7 +331,7 @@ function clickComplete() {
 					nextStep = '等待8秒';
 				} else if (indexText.indexOf('s可') != -1) {
 					nextStep = '等待8秒';
-				} else if (indexText.indexOf('城城分现金') != -1) {
+				} else if (indexText.indexOf('城城') != -1) {
 					nextStep = '点击分现金按钮';
 				} else if (indexText.indexOf('点击首页浮层') != -1) {
 					nextStep = '点击一下 啥也不干';
