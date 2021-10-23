@@ -195,7 +195,8 @@ function gesture_pwd(appName) {
             log("邮储信用卡");
             break;
         case "浦大喜奔":
-            point = id("com.spdbccc.app:id/pattern_lock_body_layout").findOnce();
+            // point = id("com.spdbccc.app:id/pattern_lock_body_layout").findOnce();
+            point = className("android.widget.FrameLayout").findOnce();
             log("浦大喜奔");
             break;
         case "浦发银行":
@@ -225,14 +226,20 @@ function gesture_pwd(appName) {
     }
     var execStr;
     // 根据APP名称区分滑动持续时间
-    if (appName == "招商银行" || appName == "缤纷生活" || appName == "万商云") {
+    if (appName == "招商银行" || appName == "缤纷生活" || appName == "万商云" || appName == "浦大喜奔") {
         execStr = "gesture(1100";
     } else {
         execStr = "gesture(850";
     }
     if (point == null) { return false; }
-    x = point.bounds().centerX();
-    y = point.bounds().centerY();
+    if (appName == "浦大喜奔") {
+        x = 540;
+        y = 1307;
+    }
+    else {
+        x = point.bounds().centerX();
+        y = point.bounds().centerY();
+    }
     log("x =", x);
     log("y =", y);
     log("offSet =", offSet);

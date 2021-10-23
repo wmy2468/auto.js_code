@@ -376,10 +376,11 @@ function 浦发信用卡() {
         func.toApp(appName);
         sleep(3000);
     }
-    func.sClick(text("签到").findOne());
-    // 输入手势密码
-    textContains("手势密码").findOne();
-    sleep(500);
+    while (textContains("手势密码").findOnce() == null) {
+        func.sClick(text("签到").findOne());
+        sleep(2000);
+    }
+    sleep(1000);
     func.gesture_pwd(appName);
     sleep(1000);
     // 等待签到页面加载

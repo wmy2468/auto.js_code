@@ -63,13 +63,41 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 
-log(text("签到领京豆").findOnce());
-
-find_object = textContains("打卡领红包 打卡领红包").findOnce();
-if (find_object != null) {
-    toastLog("点击了 任务框 按钮");
-    find_object_index = find_object.indexInParent();
-    func.sClick(find_object.parent().child(find_object_index + 1));
+浦发信用卡();
+function 浦发信用卡() {
+    var appName = "浦大喜奔";
+    //closeApp(appName);
+    func.toApp(appName);
+    while (text("我的").findOnce() == null) {
+        func.passAd();
+        func.sClick(idContains("close").findOnce());
+    }
+    func.sClick(text("我的").findOne());
+    // 等待我的页面加载
+    text("我的订单").findOne();
+    while (text("签到").findOnce() == null) {
+        func.toAutojs();
+        func.toApp(appName);
+        sleep(3000);
+    }
+    while (textContains("手势密码").findOnce() == null) {
+        func.sClick(text("签到").findOne());
+        sleep(2000);
+    }
+    sleep(1000);
+    func.gesture_pwd(appName);
+    sleep(1000);
+    // 等待签到页面加载
+    text("天天领福利").findOne();
+    sleep(1000);
+    if (text("已签到").findOnce() == null) {
+        var waitSign = text("立即签到").findOne();
+        sleep(1000);
+        // func.sClick(waitSign.parent().parent().parent().parent().child(4));
+        func.sClick(waitSign);
+    }
+    toastLog(appName + "已签到");
+    sleep(1000);
 }
 
 function random_second(second, st, ed) {
