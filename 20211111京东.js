@@ -54,7 +54,7 @@ function 金融任务() {
 	func.toApp(appName);
 	while (textContains("打卡领红包 打卡领红包").findOnce() == null) {
 		func.sClick(id("com.jd.jrapp:id/redPacketIV").findOnce());
-		toastLog("请跳转金融APP，并显示入口banner");
+		toastLog("请跳转金融APP，如果首页没有入口按钮，需手动跳转到活动界面");
 		sleep(2000);
 	}
 	toastLog("已找到打卡领红包 打卡领红包");
@@ -103,7 +103,7 @@ function 首页banner启动() {
 	func.toApp(appName);
 	while (textContains("打卡领红包 打卡领红包").findOnce() == null) {
 		func.cClick(desc("浮层活动").findOnce());
-		toastLog("请跳转到京东APP，并显示入口banner");
+		toastLog("请跳转到京东APP，如果首页没有入口按钮，需手动跳转到活动界面");
 		sleep(2000);
 	}
 	toastLog("已找到打卡领红包 打卡领红包");
@@ -186,38 +186,10 @@ function process() {
 				find_object_parent = find_object.parent();
 				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) { }		// 点击领取
 				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
-					sleep(800);
-				}		// 点击领取
-
-			}
-
-			// 关闭开启今日环游按钮
-			find_object = text("欢迎加入热爱环游记！").findOnce();
-			if (find_object != null) {
-				toastLog("点击了 关闭开启今日环游按钮");
-				find_object_parent = find_object.parent();
-				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
-					sleep(800);
+					sleep(2000);
 				}		// 点击领取
 			}
-			// 关闭每日签到
-			find_object = text("不要断签哦~别让大红包飞走").findOnce();
-			if (find_object != null) {
-				toastLog("点击了 关闭每日签到");
-				find_object_parent = find_object.parent().parent().parent().parent();
-				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
-					sleep(800);
-				}
-			}
-			// 关闭开心收下
-			find_object = text("距离下一个红包还要签到").findOnce();
-			if (find_object != null) {
-				toastLog("点击了 关闭开心收下");
-				find_object_parent = find_object.parent().parent().parent();
-				if (func.sClick(find_object_parent.child(1))) {
-					sleep(800);
-				}
-			}
+
 			// 关闭立即抽奖
 			find_object = className("android.view.View").depth(19).findOnce();
 			if (find_object != null) {
@@ -227,8 +199,36 @@ function process() {
 					// 立即抽奖 // 今日环游
 					if (func.sClick(find_object_parent.child(1)) ||
 						func.sClick(find_object_parent.child(2))) {
-						sleep(800);
+						sleep(2000);
 					}
+				}
+			}
+
+			// 关闭开启今日环游按钮
+			find_object = text("欢迎加入热爱环游记！").findOnce();
+			if (find_object != null) {
+				toastLog("点击了 关闭开启今日环游按钮");
+				find_object_parent = find_object.parent();
+				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+					sleep(2000);
+				}		// 点击领取
+			}
+			// 关闭每日签到
+			find_object = text("不要断签哦~别让大红包飞走").findOnce();
+			if (find_object != null) {
+				toastLog("点击了 关闭每日签到");
+				find_object_parent = find_object.parent().parent().parent().parent();
+				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+					sleep(2000);
+				}
+			}
+			// 关闭开心收下
+			find_object = text("距离下一个红包还要签到").findOnce();
+			if (find_object != null) {
+				toastLog("点击了 关闭开心收下");
+				find_object_parent = find_object.parent().parent().parent();
+				if (func.sClick(find_object_parent.child(1))) {
+					sleep(2000);
 				}
 			}
 
@@ -404,7 +404,9 @@ function clickComplete() {
 				} else if (detailText.indexOf('领百亿购物金') != -1) {
 					nextStepDetail = '20秒等待';
 				} else if (detailText.indexOf('东东超市') != -1) {
-					nextStepDetail = '东东超市';		// 点击完成按钮返回
+					nextStepDetail = '需要多次点击返回';		// 点击完成按钮返回
+				} else if (detailText.indexOf('去财富岛') != -1) {
+					nextStepDetail = '需要多次点击返回';		// 点击完成按钮返回
 				} else if (detailText.indexOf('去养狗兑京豆') != -1) {
 					index_todo_now = index_todo_now + 1;
 					continue;
@@ -450,12 +452,19 @@ function 城城现金() {
 				while (find_object == null) {
 					toastLog("未发现京口令窗口，请手动点击邀请好友触发，否则不会返回");
 					sleep(3000);
+					// 如果没有找到京口令，但是弹出微信选择框，则退出
+					if (text("使用以下方式打开").findOnce() != null) {
+						find_object = null;
+						break;
+					}
 					find_object = className("TextView").text(find_text).findOnce();
 				}
-				find_object_parent = find_object.parent().parent();
-				func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
-				toastLog("已点击 京口令 关闭按钮");
-				sleep(2000);
+				if (find_object != null) {
+					find_object_parent = find_object.parent().parent();
+					func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+					toastLog("已点击 京口令 关闭按钮");
+					sleep(2000);
+				}
 				break;
 			}
 		}
@@ -585,8 +594,8 @@ function after_click(textStr, details) {
 			waitLog(5, '等待一会儿..跳转回JD');
 			func.toApp(appName);
 		}
-	} else if (details == '东东超市') {
-		sleep(random_second(3800, 100, 1000));
+	} else if (details == '需要多次点击返回') {
+		sleep(random_second(800, 100, 1000));
 		while (textContains(to_do_page_text).findOnce() == null) {
 			back();
 			sleep(random_second(2800, 100, 1000));
