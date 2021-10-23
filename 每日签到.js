@@ -224,6 +224,7 @@ function 浦发银行() {
     sleep(1800);
     while (text("查看收益/收支明细").findOnce() == null) {
         func.sClick(idContains("radio_button5").findOnce());
+        sleep(3000);
     }
     // 签到按钮
     while (text("金豆").findOnce() == null) {
