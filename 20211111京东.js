@@ -182,10 +182,10 @@ function process() {
 			// 关闭助力
 			find_object = text("刚刚又有好友为你助力\n汪汪币又增加啦~").findOnce();
 			if (find_object != null) {
-				toastLog("点击了 关闭助力");
 				find_object_parent = find_object.parent();
 				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) { }		// 点击领取
 				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+					toastLog("点击了 关闭助力");
 					sleep(2000);
 				}		// 点击领取
 			}
@@ -193,12 +193,12 @@ function process() {
 			// 关闭立即抽奖
 			find_object = className("android.view.View").depth(19).findOnce();
 			if (find_object != null) {
-				toastLog("点击了 关闭立即抽奖");
 				find_object_parent = find_object.parent().parent();
 				if (find_object_parent.childCount() >= 3) {
 					// 立即抽奖 // 今日环游
 					if (func.sClick(find_object_parent.child(1)) ||
 						func.sClick(find_object_parent.child(2))) {
+						toastLog("点击了 关闭立即抽奖");
 						sleep(2000);
 					}
 				}
@@ -207,27 +207,27 @@ function process() {
 			// 关闭开启今日环游按钮
 			find_object = text("欢迎加入热爱环游记！").findOnce();
 			if (find_object != null) {
-				toastLog("点击了 关闭开启今日环游按钮");
 				find_object_parent = find_object.parent();
 				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+					toastLog("点击了 关闭开启今日环游按钮");
 					sleep(2000);
 				}		// 点击领取
 			}
 			// 关闭每日签到
 			find_object = text("不要断签哦~别让大红包飞走").findOnce();
 			if (find_object != null) {
-				toastLog("点击了 关闭每日签到");
 				find_object_parent = find_object.parent().parent().parent().parent();
 				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+					toastLog("点击了 关闭每日签到");
 					sleep(2000);
 				}
 			}
 			// 关闭开心收下
 			find_object = text("距离下一个红包还要签到").findOnce();
 			if (find_object != null) {
-				toastLog("点击了 关闭开心收下");
 				find_object_parent = find_object.parent().parent().parent();
 				if (func.sClick(find_object_parent.child(1))) {
+					toastLog("点击了 关闭开心收下");
 					sleep(2000);
 				}
 			}
@@ -240,6 +240,7 @@ function process() {
 				func.sClick(find_object.parent().child(find_object_index + 2));
 				toastLog("点击了 任务框 按钮");
 			}
+			toastLog("正在查找 邀请好友助力 界面");
 			sleep(3000);
 		} catch (e) {
 			log("error" + e);
