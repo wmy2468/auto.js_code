@@ -63,7 +63,7 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 
-log(textContains("打卡领红包 打卡领红包").findOnce());
+log(text("签到领京豆").findOnce());
 
 find_object = textContains("打卡领红包 打卡领红包").findOnce();
 if (find_object != null) {

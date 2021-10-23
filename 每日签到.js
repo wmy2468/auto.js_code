@@ -148,14 +148,15 @@ function 中国农业银行() {
     var appName = "中国农业银行";
     //closeApp(appName);
     func.toApp(appName);
-    lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
-    while (lineBtn == null) {
-        lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
-        sleep(1000);
-    }
-    sleep(1000);
-    //点击我的按钮
-    func.sClick(lineBtn.child(4));
+    // lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
+    // while (lineBtn == null) {
+    //     lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
+    //     sleep(1000);
+    // }
+    // sleep(1000);
+    // //点击我的按钮
+    // func.sClick(lineBtn.child(4));
+    func.sClick(desc("我的").findOne());
     sleep(1200);
     // 签到按钮
     func.cClick(id("tv_my_haidou_unlogin").text("小豆").findOne());
@@ -272,11 +273,14 @@ function jd_sign() {
     var getBeans = text("领京豆").findOne();
     func.sClick(getBeans.parent());
     // 等待页面加载
-    textContains("购物返豆").findOne();
-    sleep(800);
+    // textContains("购物返豆").findOne();
+    // sleep(800);
 
     while (textContains("已连").findOnce() == null) {
-        func.cClick(text("签到领京豆").findOnce());
+        if (func.cClick(text("签到领京豆").findOnce())) {
+            toastLog("已点击 签到领京豆");
+            sleep(2000);
+        }
         if (text("签到日历").findOnce() != null) {
             sleep(2000);
             back();
