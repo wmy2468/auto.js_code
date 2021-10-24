@@ -338,7 +338,8 @@ function 买单吧() {
         func.passAd();
         func.sClick(id("ivADClose").findOnce());
     }
-    func.sClick(text("我的").findOne().parent().parent().parent().parent().child(2));
+    // func.sClick(text("我的").findOne().parent().parent().parent().parent().child(2));
+    func.sClick(desc("买单吧").findOne());      // id-iv_icon
     text("羊毛资讯").findOne();
     sleep(1000);
     // 任意一个找到就退出循环
