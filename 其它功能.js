@@ -133,7 +133,8 @@ function 龙支付_日常任务() {
 
 function WX_刷新() {
     toastLog("刷新");
-    func.sClick(id("com.tencent.mm:id/kl1").findOne());
+    // func.sClick(id("com.tencent.mm:id/kl1").findOne());
+    func.sClick(desc("更多信息").findOne());
     sleep(2000);
     func.sClick(text("刷新").findOne());
     sleep(2000);

@@ -191,24 +191,26 @@ function process() {
 			}
 
 			// 关闭立即抽奖
-			find_object = className("android.view.View").depth(19).findOnce();
-			if (find_object != null) {
-				find_object_parent = find_object.parent().parent();
-				if (find_object_parent.childCount() >= 3) {
-					// 立即抽奖 // 今日环游
-					if (func.sClick(find_object_parent.child(1)) ||
-						func.sClick(find_object_parent.child(2))) {
-						toastLog("点击了 关闭立即抽奖");
-						sleep(2000);
-					}
-				}
-			}
+			// find_object = className("android.view.View").depth(19).findOnce();
+			// if (find_object != null) {
+			// 	find_object_parent = find_object.parent().parent();
+			// 	if (find_object_parent.childCount() >= 3) {
+			// 		// 立即抽奖 // 今日环游
+			// 		if (func.sClick(find_object_parent.child(1)) ||
+			// 			func.sClick(find_object_parent.child(2))) {
+			// 			toastLog("点击了 关闭立即抽奖");
+			// 			sleep(2000);
+			// 		}
+			// 	}
+			// }
 
 			// 关闭开启今日环游按钮
 			find_object = text("欢迎加入热爱环游记！").findOnce();
 			if (find_object != null) {
 				find_object_parent = find_object.parent();
-				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+				find_object_index = find_object.indexInParent();
+				if (func.sClick(find_object_parent.child(find_object_index - 1))) {		// 关闭环游按钮
+					// if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {		// 开启环游按钮
 					toastLog("点击了 关闭开启今日环游按钮");
 					sleep(2000);
 				}		// 点击领取
