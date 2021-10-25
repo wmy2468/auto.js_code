@@ -62,44 +62,34 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
-key_word = "000汪汪币"
-
-// log(text('每邀1个好友可得10000汪汪币').exists());
-todo_mini_titles = className("Image").text("047afc56e31d6d4b").findOne().parent().parent().findByText(key_word);
-log(todo_mini_titles.size());
+func.sClick(text("我的").findOne().parent().parent().parent().parent().child(2));
 //log(className("android.view.View").textEndsWith(key_word).find().length);
 
-function 浦发信用卡() {
-    var appName = "浦大喜奔";
+function 买单吧() {
+    var appName = "买单吧";
     //closeApp(appName);
     func.toApp(appName);
-    while (text("我的").findOnce() == null) {
+    while (className("TextView").id("tv_title").text("我的").findOnce() == null) {
         func.passAd();
-        func.sClick(idContains("close").findOnce());
+        func.sClick(id("ivADClose").findOnce());
     }
-    func.sClick(text("我的").findOne());
-    // 等待我的页面加载
-    text("我的订单").findOne();
-    while (text("签到").findOnce() == null) {
-        func.toAutojs();
-        func.toApp(appName);
-        sleep(3000);
-    }
-    while (textContains("手势密码").findOnce() == null) {
-        func.sClick(text("签到").findOne());
-        sleep(2000);
-    }
+    // func.sClick(text("我的").findOne().parent().parent().parent().parent().child(2));
+    func.cClick(id("iv_icon").desc("买单吧").findOne());      // id-iv_icon
+    text("羊毛资讯").findOne();
     sleep(1000);
-    func.gesture_pwd(appName);
-    sleep(1000);
-    // 等待签到页面加载
-    text("天天领福利").findOne();
-    sleep(1000);
-    if (text("已签到").findOnce() == null) {
-        var waitSign = text("立即签到").findOne();
+    // 任意一个找到就退出循环
+    while (!(textContains("客官明天再来哟").findOnce() != null || textContains("今日已签到").findOnce() != null)) {
+        func.sClick(id("com.bankcomm.maidanba:id/iv_signin").findOnce());
+        func.sClick(text("立即签到").findOnce());
         sleep(1000);
-        // func.sClick(waitSign.parent().parent().parent().parent().child(4));
-        func.sClick(waitSign);
+        func.sClick(id("com.bankcomm.maidanba:id/bt_welfare_lottery").text("去抽奖").findOnce());
+        if (text("手势登录").findOnce() != null) {
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(1000);
+        }
+        // 点击完成按钮
+        func.sClick(id("com.bankcomm.maidanba:id/bt_ws_lottery_close").findOnce());
     }
     toastLog(appName + "已签到");
     sleep(1000);

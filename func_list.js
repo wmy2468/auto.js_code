@@ -12,7 +12,15 @@ function toAutojs() {
 function cClick(element) {
     if (element != null) {
         click(element.bounds().centerX(), element.bounds().centerY());
-        log("cClick_center: " + element.text());
+        if (element.text() != null && element.text() != "") {
+            log("sClick_text: " + element.text());
+        } else if (element.desc() != null && element.desc() != "") {
+            log("sClick_desc: " + element.desc());
+        } else if (element.id() != null && element.id() != "") {
+            log("sClick_id: " + element.id());
+        } else {
+            log("sClick: text/desc/id all empty");
+        }
         return true;
     } else {
         // log("cClick_null");
