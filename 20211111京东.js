@@ -235,7 +235,7 @@ function process() {
 			}
 
 			// 点击任务按钮
-			find_object = textContains("打卡领红包 打卡领红包").findOnce();
+			find_object = className("android.view.View").textContains("打卡领红包 打卡领红包").findOnce();
 			if (find_object != null) {
 				find_object_index = find_object.indexInParent();
 				func.sClick(find_object.parent().child(find_object_index + 1));
@@ -280,7 +280,7 @@ function clickComplete() {
 		nextStep = '';
 		nextStepDetail = '';
 		sleep(2000);
-		todo_mini_titles = textContains(key_word).find();
+		todo_mini_titles = className("android.view.View").textEndsWith(key_word).find();
 		//toastLog(unComplete.length);
 		if (todo_mini_titles.nonEmpty()) {
 			log("去完成长度:" + todo_mini_titles.length + ",和既定值:" + index_todo_now);

@@ -62,8 +62,9 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
+key_word = "000汪汪币"
+log((className("Image").text("047afc56e31d6d4b").findOne().parent().parent()).findByText(key_word).nonEmpty());
 
-浦发信用卡();
 function 浦发信用卡() {
     var appName = "浦大喜奔";
     //closeApp(appName);
