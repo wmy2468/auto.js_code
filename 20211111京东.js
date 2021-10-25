@@ -270,7 +270,7 @@ function clickComplete() {
 	log("去完成");
 	var indexText, detailText;
 	// 查找的关键字， 去完成小标题， 去完成 小标题s，去完成小标题 父控件, 去完成按钮
-	var key_word, todo_mini_title, todo_mini_titles, todo_mini_title_parent, btn_todo;
+	var key_word, todo_mini_title, todo_mini_titles, todo_mini_titles_length, todo_mini_title_parent, btn_todo;
 	var index_todo_now, index_todo;
 	index_todo_now = 1;
 	key_word = "000汪汪币"
@@ -280,15 +280,19 @@ function clickComplete() {
 		nextStep = '';
 		nextStepDetail = '';
 		sleep(2000);
-		todo_mini_titles = className("android.view.View").textEndsWith(key_word).find();
+		// todo_mini_titles = className("android.view.View").textEndsWith(key_word).find();
+		todo_mini_titles = className("Image").text("047afc56e31d6d4b").findOne().parent().parent().findByText(key_word);
 		//toastLog(unComplete.length);
-		if (todo_mini_titles.nonEmpty()) {
-			log("去完成长度:" + todo_mini_titles.length + ",和既定值:" + index_todo_now);
-			if (todo_mini_titles.length <= index_todo_now) {
-				toastLog('去完成长度剩余:' + todo_mini_titles.length);
+		// if (todo_mini_titles.nonEmpty()) {
+		if (!todo_mini_titles.empty) {
+			todo_mini_titles_length = todo_mini_titles.size();
+			log("去完成长度:" + todo_mini_titles_length + ",和既定值:" + index_todo_now);
+			if (todo_mini_titles_length <= index_todo_now) {
+				toastLog('去完成长度剩余:' + todo_mini_titles_length);
 				break;
 			} else {
-				todo_mini_title = todo_mini_titles[index_todo_now];		//选择第一个
+				// todo_mini_title = todo_mini_titles[index_todo_now];		//选择第一个
+				todo_mini_title = todo_mini_titles.get(index_todo_now);		//选择第一个
 				todo_mini_title.text()
 				// 如果不是去完成列表中，则todo index + 1
 				if ((todo_mini_title.indexInParent() != 2 && (todo_mini_title.text()).indexOf('可得') == -1)

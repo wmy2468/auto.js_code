@@ -63,7 +63,11 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 key_word = "000汪汪币"
-log((className("Image").text("047afc56e31d6d4b").findOne().parent().parent()).findByText(key_word).nonEmpty());
+
+// log(text('每邀1个好友可得10000汪汪币').exists());
+todo_mini_titles = className("Image").text("047afc56e31d6d4b").findOne().parent().parent().findByText(key_word);
+log(todo_mini_titles.size());
+//log(className("android.view.View").textEndsWith(key_word).find().length);
 
 function 浦发信用卡() {
     var appName = "浦大喜奔";
