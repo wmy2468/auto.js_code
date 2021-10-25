@@ -456,7 +456,7 @@ function 城城现金() {
 					toastLog("未发现京口令窗口，请手动点击邀请好友触发，否则不会返回");
 					sleep(3000);
 					// 如果没有找到京口令，但是弹出微信选择框，则退出
-					if (text("使用以下方式打开").findOnce() != null) {
+					if (text("使用以下方式打开").findOnce() != null || text("请选择要使用的应用").findOnce() != null) {
 						find_object = null;
 						break;
 					}
