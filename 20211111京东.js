@@ -463,7 +463,7 @@ function 城城现金() {
 					find_object = className("TextView").text(find_text).findOnce();
 				}
 				if (find_object != null) {
-					find_object_parent = find_object.parent().parent();
+					find_object_parent = find_object.parent();
 					func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
 					toastLog("已点击 京口令 关闭按钮");
 					sleep(2000);
