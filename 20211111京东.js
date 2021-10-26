@@ -48,12 +48,43 @@ function main() {
 	alert('已完成');
 }
 
+function mission_page_check() {
+	if (className("android.view.View").textStartsWith("打卡领红包").findOnce() == null) {
+		return false;
+	}
+	if (className("android.view.View").textStartsWith("解锁").findOnce() == null) {
+		return false;
+	}
+	return true;
+}
+
+function click_mission_btn() {
+	var find_object, find_object_index;	// 定义查找的变量
+	// 点击任务按钮
+	find_object = className("android.view.View").textStartsWith("打卡领红包 打卡领红包").findOnce();
+	if (find_object != null) {
+		find_object_index = find_object.indexInParent();
+		func.sClick(find_object.parent().child(find_object_index + 1));
+		func.sClick(find_object.parent().child(find_object_index + 2));
+		toastLog("点击了 任务框 按钮");
+	}
+
+	// 点击任务按钮
+	find_object = className("android.view.View").textStartsWith("解锁").findOnce();
+	if (find_object != null) {
+		find_object_index = find_object.indexInParent();
+		func.sClick(find_object.parent().child(find_object_index + 1));
+		func.sClick(find_object.parent().child(find_object_index + 2));
+		toastLog("点击了 任务框 按钮");
+	}
+}
+
+
 // -----------------------------------------------------
 function 金融任务() {
 	appName = "京东金融";
 	func.toApp(appName);
-	while (className("android.view.View").textStartsWith("打卡领红包").findOnce() == null &&
-		className("android.view.View").textStartsWith("解锁").findOnce() == null) {
+	while (!mission_page_check()) {
 		func.sClick(id("com.jd.jrapp:id/redPacketIV").findOnce());
 		toastLog("请跳转金融APP，如果首页没有入口按钮，需手动跳转到活动界面");
 		sleep(2000);
@@ -65,13 +96,7 @@ function 金融任务() {
 	while (textContains('邀请好友助力').findOnce() == null) {
 		try {
 			// 点击任务按钮
-			find_object = textContains("打卡领红包 打卡领红包").findOnce();
-			if (find_object != null) {
-				find_object_index = find_object.indexInParent();
-				func.sClick(find_object.parent().child(find_object_index + 1));	//此处与JD不同
-				func.sClick(find_object.parent().child(find_object_index + 2));	//此处与JD不同
-				toastLog("点击了 任务框 按钮");
-			}
+			click_mission_btn();
 			sleep(3000);
 		} catch (e) {
 			log("error" + e);
@@ -102,8 +127,7 @@ function 口令启动() {
 
 function 首页banner启动() {
 	func.toApp(appName);
-	while (className("android.view.View").textStartsWith("打卡领红包").findOnce() == null &&
-		className("android.view.View").textStartsWith("解锁").findOnce() == null) {
+	while (!mission_page_check()) {
 		func.cClick(desc("浮层活动").findOnce());
 		toastLog("请跳转到京东APP，如果首页没有入口按钮，需手动跳转到活动界面");
 		sleep(2000);
@@ -236,23 +260,6 @@ function process() {
 				}
 			}
 
-			// 点击任务按钮
-			find_object = className("android.view.View").textStartsWith("打卡领红包 打卡领红包").findOnce();
-			if (find_object != null) {
-				find_object_index = find_object.indexInParent();
-				func.sClick(find_object.parent().child(find_object_index + 1));
-				func.sClick(find_object.parent().child(find_object_index + 2));
-				toastLog("点击了 任务框 按钮");
-			}
-
-			// 点击任务按钮
-			find_object = className("android.view.View").textStartsWith("解锁").findOnce();
-			if (find_object != null) {
-				find_object_index = find_object.indexInParent();
-				func.sClick(find_object.parent().child(find_object_index + 1));
-				func.sClick(find_object.parent().child(find_object_index + 2));
-				toastLog("点击了 任务框 按钮");
-			}
 			toastLog("正在查找 邀请好友助力 界面");
 			sleep(3000);
 		} catch (e) {
