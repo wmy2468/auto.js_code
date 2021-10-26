@@ -257,7 +257,8 @@ function process() {
 					sleep(2000);
 				}
 			}
-
+			// 点击任务按钮
+			click_mission_btn();
 			toastLog("正在查找 邀请好友助力 界面");
 			sleep(3000);
 		} catch (e) {
