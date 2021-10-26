@@ -52,7 +52,8 @@ function main() {
 function 金融任务() {
 	appName = "京东金融";
 	func.toApp(appName);
-	while (textContains("打卡领红包 打卡领红包").findOnce() == null) {
+	while (className("android.view.View").textStartsWith("打卡领红包").findOnce() == null &&
+		className("android.view.View").textStartsWith("解锁").findOnce() == null) {
 		func.sClick(id("com.jd.jrapp:id/redPacketIV").findOnce());
 		toastLog("请跳转金融APP，如果首页没有入口按钮，需手动跳转到活动界面");
 		sleep(2000);
@@ -101,7 +102,7 @@ function 口令启动() {
 
 function 首页banner启动() {
 	func.toApp(appName);
-	while (className("android.view.View").textStartsWith("打卡领红包 打卡领红包").findOnce() == null &&
+	while (className("android.view.View").textStartsWith("打卡领红包").findOnce() == null &&
 		className("android.view.View").textStartsWith("解锁").findOnce() == null) {
 		func.cClick(desc("浮层活动").findOnce());
 		toastLog("请跳转到京东APP，如果首页没有入口按钮，需手动跳转到活动界面");

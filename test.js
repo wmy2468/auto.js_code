@@ -62,7 +62,11 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
-log(className("android.view.View").textStartsWith("打卡领红包 打卡领红包").findOnce());
+
+log(className("android.view.View").textStartsWith("打卡领红包").findOnce() != null);
+log(className("android.view.View").textStartsWith("解锁").findOnce() != null);
+
+toastLog("已找到打卡领红包 打卡领红包");
 //log(className("android.view.View").textEndsWith(key_word).find().length);
 
 function 买单吧() {
