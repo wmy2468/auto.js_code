@@ -13,7 +13,8 @@ function main() {
         // "京东腾讯月",
         "京喜领券",
         // "掌上生活",
-        "云闪付锦鲤活动"
+        "云闪付锦鲤活动",
+        "招商APP"
         // "中行周二视频捡漏"
         // "农行缴费20-10"
     ];
@@ -50,6 +51,9 @@ function main() {
         case "京喜领券":
             京喜领券();
             break;
+        case "招商APP":
+            招商APP();
+            break;
         case "中行周二视频捡漏":
             中行周二视频捡漏();
             break;
@@ -59,6 +63,41 @@ function main() {
     device.cancelKeepingAwake();
 }
 // ------------------------------------------------------
+function 招商领取(page_text, wait_text, popup_wait_text, select_text, sure_btn) {
+    /**
+    @param page_text 等待目标页面 加载的文字
+    @param wait_text 等待时间到点后 加载的文字
+    @param popup_wait_text 等待点击后 弹窗加载的文字
+    @param select_text 等待目标页面 要选择的文字
+    @param sure_btn 等待选择界面后确认 的文字
+     */
+
+    while (text(page_text).findOnce() == null) {
+        toastLog("等待跳转到:" + page_text + "页面");
+        sleep(2200);
+    }
+    while (func.sClick(text(wait_text).findOnce()) == false) {
+        sleep(300);
+    }
+    var popup_parent, popup_child;
+    popup_parent = text(popup_wait_text).findOne().parent();
+    popup_child = popup_parent.findByText(select_text);
+    if (popup_child.size() > 0) {
+        func.cClick(popup_child.get(0));
+    }
+    sleep(200);
+    func.sClick(text(sure_btn).findOne());
+}
+
+function 招商APP() {
+    var page_text, wait_text, popup_wait_text, select_text, sure_btn;
+    page_text = "便民生活 遇见美好";
+    wait_text = "选择奖品";
+    popup_wait_text = "请选择奖品";
+    select_text = "洁柔";
+    sure_btn = "确认领取";
+    招商领取(page_text, wait_text, popup_wait_text, select_text, sure_btn);
+}
 
 
 function 中行周二视频捡漏() {
