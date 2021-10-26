@@ -49,10 +49,8 @@ function main() {
 }
 
 function mission_page_check() {
-	if (className("android.view.View").textStartsWith("打卡领红包").findOnce() == null) {
-		return false;
-	}
-	if (className("android.view.View").textStartsWith("解锁").findOnce() == null) {
+	if (className("android.view.View").textStartsWith("打卡领红包").findOnce() == null &&
+		className("android.view.View").textStartsWith("解锁").findOnce() == null) {
 		return false;
 	}
 	return true;
