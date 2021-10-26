@@ -62,7 +62,7 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
-func.sClick(text("我的").findOne().parent().parent().parent().parent().child(2));
+log(className("android.view.View").textStartsWith("打卡领红包 打卡领红包").findOnce());
 //log(className("android.view.View").textEndsWith(key_word).find().length);
 
 function 买单吧() {

@@ -101,8 +101,8 @@ function 口令启动() {
 
 function 首页banner启动() {
 	func.toApp(appName);
-	while (className("android.view.View").textStartWith("打卡领红包 打卡领红包").findOnce() == null &&
-		className("android.view.View").textStartWith("解锁").findOnce() == null) {
+	while (className("android.view.View").textStartsWith("打卡领红包 打卡领红包").findOnce() == null &&
+		className("android.view.View").textStartsWith("解锁").findOnce() == null) {
 		func.cClick(desc("浮层活动").findOnce());
 		toastLog("请跳转到京东APP，如果首页没有入口按钮，需手动跳转到活动界面");
 		sleep(2000);
@@ -236,7 +236,7 @@ function process() {
 			}
 
 			// 点击任务按钮
-			find_object = className("android.view.View").textStartWith("打卡领红包 打卡领红包").findOnce();
+			find_object = className("android.view.View").textStartsWith("打卡领红包 打卡领红包").findOnce();
 			if (find_object != null) {
 				find_object_index = find_object.indexInParent();
 				func.sClick(find_object.parent().child(find_object_index + 1));
@@ -245,7 +245,7 @@ function process() {
 			}
 
 			// 点击任务按钮
-			find_object = className("android.view.View").textStartWith("解锁").findOnce();
+			find_object = className("android.view.View").textStartsWith("解锁").findOnce();
 			if (find_object != null) {
 				find_object_index = find_object.indexInParent();
 				func.sClick(find_object.parent().child(find_object_index + 1));
