@@ -48,6 +48,7 @@ function main() {
 	alert('已完成');
 }
 
+// 任务框 元素检查
 function mission_page_check() {
 	if (className("android.view.View").textStartsWith("打卡领红包").findOnce() == null &&
 		className("android.view.View").textStartsWith("解锁").findOnce() == null) {
@@ -56,6 +57,7 @@ function mission_page_check() {
 	return true;
 }
 
+// 点击任务框按钮
 function click_mission_btn() {
 	var find_object, find_object_index;	// 定义查找的变量
 	// 点击任务按钮
@@ -80,6 +82,23 @@ function click_mission_btn() {
 }
 
 
+// 邀请好友检查
+function is_in_invite_friend_page(need_find_one) {
+	if (need_find_one == undefined) {
+		if (className("Image").text("047afc56e31d6d4b").findOnce() != null) {
+			toastLog("已找到 邀请好友助力 任务");
+			return true;
+		} else {
+			toastLog("未找到 邀请好友助力 任务");
+			return false;
+		}
+	} else {
+		toastLog("开始查找邀请好友助力 任务");
+		className("Image").text("047afc56e31d6d4b").findOne();
+		toastLog("已找到 邀请好友助力 任务");
+	}
+}
+
 // -----------------------------------------------------
 function 金融任务() {
 	appName = "京东金融";
@@ -92,7 +111,6 @@ function 金融任务() {
 	toastLog("已找到打卡领红包 打卡领红包");
 	sleep(random_second(2000, 100, 500));
 	// 点击任务按钮
-	var find_object, find_object_index, find_object_parent;	// 定义查找的变量
 	while (textContains('邀请好友助力').findOnce() == null) {
 		try {
 			// 点击任务按钮
@@ -202,7 +220,7 @@ function process() {
 	log("正在等待进入活动页面");
 	//等待完全加载后，如果出现取消按钮会找不到
 	var find_object, find_object_index, find_object_parent;	// 定义查找的变量
-	while (textContains('邀请好友助力').findOnce() == null) {
+	while (!is_in_invite_friend_page()) {
 		// --------------关闭各种弹窗----------------
 		try {
 			// 关闭助力
@@ -280,7 +298,7 @@ function process() {
 function 每日任务() {
 	log('等待加载');
 	sleep(2000);
-	textContains('邀请好友助力').findOne();
+	is_in_invite_friend_page("findOne");
 	sleep(800);
 	clickComplete();
 }
@@ -293,7 +311,7 @@ function clickComplete() {
 	var index_todo_now, index_todo;
 	index_todo_now = 1;
 	key_word = "000汪汪币"
-	while (text('每邀1个好友可得10000汪汪币').exists()) {
+	while (is_in_invite_friend_page()) {
 		log("进入查找环节");
 		var nextStep, nextStepDetail;
 		nextStep = '';
@@ -501,7 +519,7 @@ function 城城现金() {
 				find_object_parent = find_object.parent().parent();
 				func.sClick(find_object_parent.child(3));
 			}
-			find_text = "可微信零钱体现";
+			find_text = "可微信零钱提现";
 			find_object = text(find_text).findOnce();
 			if (find_object != null) {
 				find_object_parent = find_object.parent().parent().parent();
@@ -622,12 +640,12 @@ function after_click(textStr, details) {
 		}
 	} else if (details == '需要多次点击返回') {
 		sleep(random_second(800, 100, 1000));
-		while (textContains(to_do_page_text).findOnce() == null) {
+		while (!is_in_invite_friend_page()) {
 			back();
 			sleep(random_second(2800, 100, 1000));
 		}
 	} else if (details == '点击关闭返回') {
-		while (textContains(to_do_page_text).findOnce() == null) {
+		while (!is_in_invite_friend_page()) {
 			if (func.sClick(desc('关闭页面').findOnce())) {
 				toastLog("点击 desc 关闭按钮返回成功");
 				sleep(random_second(2800, 100, 1000));
@@ -649,10 +667,10 @@ function after_click(textStr, details) {
 
 	log('等待返回');
 	if (selected == "每日任务" || selected == "金融领金币") {
-		if (textContains(to_do_page_text).findOnce() == null) {
+		if (!is_in_invite_friend_page()) {
 			back_way(to_do_page_text);
 		}
-		textContains(to_do_page_text).findOne();
+		is_in_invite_friend_page("findOne");
 	} else {
 		if (textContains('每日签到').findOnce() == null) { back_way(); }
 		textContains('每日签到').findOne();
@@ -664,7 +682,7 @@ function after_click(textStr, details) {
 
 function waitCompleteDisappear() {
 	var cnt = 0;
-	while (textContains("邀请好友助力").findOnce() != null) {
+	while (is_in_invite_friend_page()) {
 		sleep(random_second(600, 100, 300));
 		log("等待去完成消失");
 		cnt = cnt + 1;
@@ -680,7 +698,7 @@ function waitCompleteDisappear() {
 function member_card() {
 	toastLog('会员卡');
 	sleep(random_second(3500, 300, 1000));
-	if (textContains(to_do_page_text).findOnce() != null) {
+	if (is_in_invite_friend_page()) {
 		toastLog('已有卡，在去完成界面，直接完成');
 		return 0;
 	}
@@ -818,7 +836,7 @@ function back_way(to_do_page_desc) {
 	}
 	sleep(800);
 	// 如果没找到 说明不在去完成界面
-	if (textContains(to_do_page_desc).findOnce() == null) {
+	if (!is_in_invite_friend_page()) {
 		var backBtn = desc('返回').findOnce();
 		if (backBtn == null) {
 			back();
