@@ -59,8 +59,9 @@ function mission_page_check() {
 
 // 点击任务框按钮
 function click_mission_btn() {
-	var find_object, find_object_index;	// 定义查找的变量
+	var find_object, find_object_index, click_flag;	// 定义查找的变量
 	// 点击任务按钮
+	click_flag = false;
 	find_object = className("android.view.View").textStartsWith("打卡领红包 打卡领红包").findOnce();
 	if (find_object != null) {
 		find_object_index = find_object.indexInParent();
@@ -68,8 +69,8 @@ function click_mission_btn() {
 		func.sClick(find_object.parent().child(find_object_index + 2));
 		sleep(2000);
 		toastLog("点击了 任务框 按钮");
+		click_flag = true;
 	}
-
 	// 点击任务按钮
 	find_object = className("android.view.View").textStartsWith("解锁").findOnce();
 	if (find_object != null) {
@@ -78,6 +79,10 @@ function click_mission_btn() {
 		func.sClick(find_object.parent().child(find_object_index + 2));
 		sleep(2000);
 		toastLog("点击了 任务框 按钮");
+		click_flag = true;
+	}
+	if (!click_flag) {
+		toastLog("未找到 任务框 按钮");
 	}
 }
 
