@@ -64,6 +64,7 @@ function click_mission_btn() {
 		find_object_index = find_object.indexInParent();
 		func.sClick(find_object.parent().child(find_object_index + 1));
 		func.sClick(find_object.parent().child(find_object_index + 2));
+		sleep(2000);
 		toastLog("点击了 任务框 按钮");
 	}
 
@@ -73,6 +74,7 @@ function click_mission_btn() {
 		find_object_index = find_object.indexInParent();
 		func.sClick(find_object.parent().child(find_object_index + 1));
 		func.sClick(find_object.parent().child(find_object_index + 2));
+		sleep(2000);
 		toastLog("点击了 任务框 按钮");
 	}
 }
