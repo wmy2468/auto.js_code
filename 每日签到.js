@@ -50,6 +50,16 @@ function 工商() {
     // 点击任务
     var left_banana, mission_btn;
     left_banana = textStartsWith("剩余").findOne();
+    sleep(1000);
+    // 查找并点击香蕉
+    var bananas;
+    bananas = className("ListView").rowCount(5).findOnce();
+    if (bananas != null) {
+        bananas.children().forEach(bans => {
+            func.cClick(bans);
+            sleep(800);
+        })
+    }
     mission_btn = left_banana.parent().parent().child(0).child(2);
     func.sClick(mission_btn);
     sleep(800);
