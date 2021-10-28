@@ -5,7 +5,7 @@ var func = require("func_list.js");
 main();
 // toastLog(text("领取奖励").find().length);
 function main() {
-    var selectedArr = ["建行财富季", "ZFB捐款"];
+    var selectedArr = ["建行财富季", "财富季浏览", "ZFB捐款"];
     //---------------配置区域-----------------
     var scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本  
     switch (scriptName) {
@@ -14,6 +14,9 @@ function main() {
             break;
         case "ZFB捐款":
             ZFB捐款();
+            break;
+        case "财富季浏览":
+            财富季浏览();
             break;
     }
 
@@ -88,6 +91,18 @@ function ZFB捐款() {
     alert("已完成");
 }
 // -----------------------建行财富季-----------------------
+function 建行财富季() {
+    func.toApp("微信");
+    // 龙支付攒财富
+    龙支付_攒财富();
+    龙支付_日常任务();
+    alert("已完成");
+    // 日常任务
+    // 消保 答题
+    // 外汇答题
+    // 消保 眼力
+}
+
 function 龙支付_日常任务() {
     var checkText = "每日签到涨财富";
     var see, seeText;
@@ -129,15 +144,6 @@ function 龙支付_日常任务() {
         }
     }
     toastLog(checkText + "，已完成！");
-}
-
-function WX_刷新() {
-    toastLog("刷新");
-    // func.sClick(id("com.tencent.mm:id/kl1").findOne());
-    func.sClick(desc("更多信息").findOne());
-    sleep(2000);
-    func.sClick(text("刷新").findOne());
-    sleep(2000);
 }
 
 function 龙支付攒财富_浏览(keyWord) {
@@ -219,18 +225,13 @@ function 龙支付_攒财富() {
     sleep(1000);
     func.sClick(text("立即签到").findOnce());
 }
-
-
-
-function 建行财富季() {
-    func.toApp("微信");
-    // 龙支付攒财富
-    龙支付_攒财富();
-    龙支付_日常任务();
-    alert("已完成");
-    // 日常任务
-    // 消保 答题
-    // 外汇答题
-    // 消保 眼力
-}
 // -----------------------建行财富季-----------------------
+
+function WX_刷新() {
+    toastLog("刷新");
+    // func.sClick(id("com.tencent.mm:id/kl1").findOne());
+    func.sClick(desc("更多信息").findOne());
+    sleep(2000);
+    func.sClick(text("刷新").findOne());
+    sleep(2000);
+}

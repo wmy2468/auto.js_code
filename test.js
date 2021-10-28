@@ -63,17 +63,7 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 
-left_banana = textStartsWith("剩余").findOne();
-sleep(1000);
-// 查找并点击香蕉
-var bananas;
-bananas = className("ListView").rowCount(5).findOnce();
-if (bananas != null) {
-    bananas.children().forEach(bans => {
-        func.cClick(bans);
-        sleep(20000);
-    })
-}
+func.cClick(textContains("http").findOnce());
 
 
 function 买单吧() {
