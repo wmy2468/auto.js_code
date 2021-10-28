@@ -779,16 +779,16 @@ function click_mission_btn() {
 function is_in_invite_friend_page(need_find_one) {
 	if (need_find_one == undefined) {
 		if (className("Image").text("047afc56e31d6d4b").findOnce() != null) {
-			toastLog("已找到 邀请好友助力 任务");
+			// toastLog("已找到 邀请好友助力 任务");
 			return true;
 		} else {
-			toastLog("未找到 邀请好友助力 任务");
+			// toastLog("未找到 邀请好友助力 任务");
 			return false;
 		}
 	} else {
-		toastLog("开始查找邀请好友助力 任务");
+		// toastLog("开始查找邀请好友助力 任务");
 		className("Image").text("047afc56e31d6d4b").findOne();
-		toastLog("已找到 邀请好友助力 任务");
+		// toastLog("已找到 邀请好友助力 任务");
 		return true;
 	}
 }
