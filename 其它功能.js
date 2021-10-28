@@ -5,7 +5,7 @@ var func = require("func_list.js");
 main();
 // toastLog(text("领取奖励").find().length);
 function main() {
-    var selectedArr = ["建行财富季", "财富季浏览", "ZFB捐款"];
+    var selectedArr = ["建行财富季", "ZFB捐款"];
     //---------------配置区域-----------------
     var scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本  
     switch (scriptName) {
@@ -14,9 +14,6 @@ function main() {
             break;
         case "ZFB捐款":
             ZFB捐款();
-            break;
-        case "财富季浏览":
-            财富季浏览();
             break;
     }
 
