@@ -207,6 +207,7 @@ function clickComplete() {
 			exit_cnt = 0;		//只要有找到界面
 		} else {
 			exit_cnt = exit_cnt + 1;
+			log("当前退出计数:" + exit_cnt);
 			if (exit_cnt > 30) {
 				alert("超时未返回，退出");
 				exit();
