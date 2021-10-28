@@ -193,18 +193,31 @@ function 开始做任务() {
 
 function clickComplete() {
 	log("去完成");
-	var indexText, detailText;
+	var indexText, detailText, exit_cnt;
 	// 查找的关键字， 去完成小标题， 去完成 小标题s，去完成小标题 父控件, 去完成按钮
 	var key_word, todo_mini_title, todo_mini_titles, todo_mini_titles_length, todo_mini_title_parent, btn_todo;
 	var index_todo_now, index_todo;
 	index_todo_now = 1;
+	exit_cnt = 0;
 	key_word = "000汪汪币"
-	while (is_in_invite_friend_page()) {
+	// while (is_in_invite_friend_page()) {
+	while (1) {
+		// 如果找到界面，则继续执行, 增加计数，避免未返回的情况卡死
+		if (is_in_invite_friend_page()) {
+			exit_cnt = 0;		//只要有找到界面
+		} else {
+			exit_cnt = exit_cnt + 1;
+			if (exit_cnt > 30) {
+				alert("超时未返回，退出");
+				exit();
+			}
+			continue;
+		}
 		log("进入查找环节");
 		var nextStep, nextStepDetail;
 		nextStep = "";
 		nextStepDetail = "";
-		sleep(2000);
+		sleep(800);
 		// todo_mini_titles = className("android.view.View").textEndsWith(key_word).find();
 		todo_mini_titles = className("Image").text("047afc56e31d6d4b").findOne().parent().parent().findByText(key_word);
 		//toastLog(unComplete.length);
