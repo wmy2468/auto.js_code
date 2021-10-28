@@ -23,7 +23,6 @@ var devMate30, devHonor8, devRedMi;
 devMate30 = "TAS-AL00";
 devHonor8 = "FRD-AL00";
 devRedMi = "Redmi Note 7";
-var to_do_page_text = "邀请好友助力"
 
 
 main();
@@ -461,7 +460,7 @@ function after_click(textStr, details) {
 	log("等待返回");
 	if (selected == "每日任务" || selected == "金融领金币") {
 		if (!is_in_invite_friend_page()) {
-			back_way(to_do_page_text);
+			back_way();
 		}
 		is_in_invite_friend_page("findOne");
 	} else {
@@ -817,10 +816,7 @@ function 首页banner启动() {
 }
 
 
-function back_way(to_do_page_desc) {
-	if (to_do_page_desc == undefined) {
-		to_do_page_desc = to_do_page_text;
-	}
+function back_way() {
 	sleep(800);
 	// 如果没找到 说明不在去完成界面
 	if (!is_in_invite_friend_page()) {
