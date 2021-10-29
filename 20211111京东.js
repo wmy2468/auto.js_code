@@ -61,10 +61,10 @@ function 金融任务() {
 	func.toApp(appName);
 	while (!mission_page_check()) {
 		func.sClick(id("com.jd.jrapp:id/redPacketIV").findOnce());
-		toastLog("请跳转金融APP，如果首页没有入口按钮，需手动跳转到活动界面");
+		toastLog("金融任务: 请跳转金融APP，如果首页没有入口按钮，需手动跳转到活动界面");
 		sleep(2000);
 	}
-	toastLog("已找到打卡领红包 打卡领红包");
+	toastLog("金融任务: 已找到打卡领红包 打卡领红包");
 	sleep(random_second(2000, 100, 500));
 	// 点击任务按钮
 	while (!is_in_invite_friend_page()) {
@@ -75,19 +75,19 @@ function 金融任务() {
 				break;
 			}
 		} catch (e) {
-			log("error" + e);
+			log("金融任务: error" + e);
 			continue;
 		}
 	}
 	//延迟3秒
-	toastLog("延迟3秒，准备启动！");
+	toastLog("金融任务: 延迟3秒，准备启动！");
 	sleep(3000);
 	clickComplete();
 }
 
 // -------------------------互助任务----------------------------
 function 互助() {
-	toastLog("启动！！！");
+	toastLog("互助: 启动！！！");
 	var kouling1, kouling2;
 	switch (device.model) {
 		// 荣耀8
@@ -105,11 +105,11 @@ function 互助() {
 			kouling2 = "16.0:/￥E8BzGFzUiiTR7S￥，汾20億!!!!!！ぷ";	//LM
 			break;
 		default:
-			alert("非预设机型，不执行");
+			alert("互助: 非预设机型，不执行");
 			return 0;
 	}
-	log("kouling1:" + kouling1);
-	log("kouling2:" + kouling2);
+	log("互助: kouling1:" + kouling1);
+	log("互助: kouling2:" + kouling2);
 	setClip(kouling1);
 	互助点击();
 	setClip(kouling2);
@@ -119,7 +119,7 @@ function 互助() {
 
 
 function 开始做任务() {
-	log("正在等待进入活动页面");
+	log("开始做任务: 正在等待进入活动页面");
 	//等待完全加载后，如果出现取消按钮会找不到
 	var find_object, find_object_index, find_object_parent;	// 定义查找的变量
 	while (!is_in_invite_friend_page()) {
@@ -131,11 +131,11 @@ function 开始做任务() {
 				find_object_parent = find_object.parent();
 				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) { }		// 点击领取
 				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
-					toastLog("点击了 关闭助力");
+					toastLog("开始做任务: 点击了 关闭助力");
 					sleep(2000);
 				}		// 点击领取
 			} else {
-				log("未找到 好友助力");
+				log("开始做任务: 未找到 好友助力");
 			}
 
 			// 关闭开启今日环游按钮
@@ -145,55 +145,55 @@ function 开始做任务() {
 				find_object_index = find_object.indexInParent();
 				if (func.sClick(find_object_parent.child(find_object_index - 1))) {		// 关闭环游按钮
 					// if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {		// 开启环游按钮
-					toastLog("点击了 关闭开启今日环游按钮");
+					toastLog("开始做任务: 点击了 关闭开启今日环游按钮");
 					sleep(2000);
 				}		// 点击领取
 			} else {
-				log("未找到 今日环游");
+				log("开始做任务: 未找到 今日环游");
 			}
 			// 关闭每日签到
 			find_object = text("不要断签哦~别让大红包飞走").findOnce();
 			if (find_object != null) {
 				find_object_parent = find_object.parent().parent().parent().parent();
 				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
-					toastLog("点击了 关闭每日签到");
+					toastLog("开始做任务: 点击了 关闭每日签到");
 					sleep(2000);
 				}
 			} else {
-				log("未找到 每日签到");
+				log("开始做任务: 未找到 每日签到");
 			}
 			// 关闭开心收下
 			find_object = text("距离下一个红包还要签到").findOnce();
 			if (find_object != null) {
 				find_object_parent = find_object.parent().parent().parent();
 				if (func.sClick(find_object_parent.child(1))) {
-					toastLog("点击了 关闭开心收下");
+					toastLog("开始做任务: 点击了 关闭开心收下");
 					sleep(2000);
 				}
 			} else {
-				log("未找到 红包开心");
+				log("开始做任务: 未找到 红包开心");
 			}
 			// 点击任务按钮
 			if (click_mission_btn()) {
 				sleep(3000);
 				break;
 			}
-			toastLog("正在查找 邀请好友助力 界面");
+			toastLog("开始做任务: 正在查找 邀请好友助力 界面");
 			sleep(3000);
 		} catch (e) {
-			log("error" + e);
+			log("开始做任务: error" + e);
 			continue;
 		}
 	}
 	//延迟3秒
-	toastLog("延迟3秒，准备启动！");
+	toastLog("开始做任务: 延迟3秒，准备启动！");
 	sleep(3000);
 	clickComplete();
 }
 
 function clickComplete() {
-	log("去完成");
-	var indexText, detailText, exit_cnt;
+	log("clickComplete: 去完成");
+	var indexText, detailText;
 	// 查找的关键字， 去完成小标题， 去完成 小标题s，去完成小标题 父控件, 去完成按钮
 	var key_word, todo_mini_title, todo_mini_titles, todo_mini_titles_length, todo_mini_title_parent, btn_todo;
 	var index_todo_now, index_todo;
@@ -201,20 +201,8 @@ function clickComplete() {
 	exit_cnt = 0;
 	key_word = "000汪汪币"
 	// while (is_in_invite_friend_page()) {
-	while (1) {
-		// 如果找到界面，则继续执行, 增加计数，避免未返回的情况卡死
-		if (is_in_invite_friend_page()) {
-			exit_cnt = 0;		//只要有找到界面
-		} else {
-			exit_cnt = exit_cnt + 1;
-			log("当前退出计数:" + exit_cnt);
-			if (exit_cnt > 30) {
-				alert("超时未返回，退出");
-				exit();
-			}
-			continue;
-		}
-		log("进入查找环节");
+	while (is_in_invite_friend_page()) {
+		log("clickComplete: 进入查找环节");
 		var nextStep, nextStepDetail;
 		nextStep = "";
 		nextStepDetail = "";
@@ -225,9 +213,9 @@ function clickComplete() {
 		// if (todo_mini_titles.nonEmpty()) {
 		if (!todo_mini_titles.empty) {
 			todo_mini_titles_length = todo_mini_titles.size();
-			log("去完成长度:" + todo_mini_titles_length + ",和既定值:" + index_todo_now);
+			log("clickComplete: 去完成长度:" + todo_mini_titles_length + ",和既定值:" + index_todo_now);
 			if (todo_mini_titles_length <= index_todo_now) {
-				toastLog("去完成长度剩余:" + todo_mini_titles_length);
+				toastLog("clickComplete: 去完成长度剩余:" + todo_mini_titles_length);
 				break;
 			} else {
 				// todo_mini_title = todo_mini_titles[index_todo_now];		//选择第一个
@@ -237,25 +225,25 @@ function clickComplete() {
 				if ((todo_mini_title.indexInParent() != 2 && (todo_mini_title.text()).indexOf("可得") == -1)
 					|| (todo_mini_title.text()).indexOf("每邀1个好友可得") != -1) {
 					index_todo_now = index_todo_now + 1;
-					toastLog("不是去完成列表或是邀请好友，index + 1");
+					toastLog("clickComplete: 不是去完成列表或是邀请好友，index + 1");
 					continue;
 				}
 				// indexText 为小标题
 				indexText = todo_mini_title.text();					//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
 				todo_mini_title_parent = todo_mini_title.parent(); 				// 查找父控件
 				index_todo = todo_mini_title.indexInParent();		// 查找在父控件中的 索引值-1等于大标题，+1等于 去完成按钮
-				log("去完成索引为：" + index_todo_now);
+				log("clickComplete: 去完成索引为：" + index_todo_now);
 				btn_todo = todo_mini_title_parent.child(index_todo + 1);					// 去完成按钮
 				detailText = todo_mini_title_parent.child(index_todo - 1).text(); // 去逛家电买大屏看奥运
-				log("任务小标题indexText：" + indexText);
-				log("任务大标题detailText：" + detailText);
+				log("clickComplete: 任务小标题indexText：" + indexText);
+				log("clickComplete: 任务大标题detailText：" + detailText);
 
 				// 判断当前任务是否已完成
 				// log("-4位置:" + detailText.slice(-4, -3) + ",-2位置:" + detailText.slice(-2, -1));
 				if (detailText.slice(-4, -3) == detailText.slice(-2, -1)) {
 					index_todo_now = index_todo_now + 1;
 					console.clear();			// 当前任务正常完成，可以清除前面的日志
-					toastLog("当前任务" + detailText + "完成， index + 1");
+					toastLog("clickComplete: 当前任务" + detailText + "完成， index + 1");
 					continue;
 				}
 
@@ -297,7 +285,7 @@ function clickComplete() {
 					}
 				} else if (indexText.indexOf("浏览可得") != -1) {
 					if (detailText.indexOf("去种草城") != -1) {
-						toastLog("发现 种草城");
+						toastLog("clickComplete: 发现 种草城");
 						nextStep = "种草城";
 					} else {
 						nextStep = "浏览返回";
@@ -316,7 +304,7 @@ function clickComplete() {
 					nextStep = "参与返回";
 				} else if (indexText.indexOf("浏览5个品牌墙店铺") != -1) {
 					index_todo_now = index_todo_now + 1;
-					toastLog("浏览品牌墙-跳过，index + 1");
+					toastLog("clickComplete: 浏览品牌墙-跳过，index + 1");
 					continue;
 				} else if (indexText.indexOf("浏览5个商品可得") != -1) {
 					nextStep = "浏览商品";
@@ -326,7 +314,7 @@ function clickComplete() {
 					nextStep = "加购物车";
 				} else {
 					index_todo_now = index_todo_now + 1;
-					toastLog("未找到满足条件的任务描述-小字，index + 1");
+					toastLog("clickComplete: 未找到满足条件的任务描述-小字，index + 1");
 					continue;
 				}
 
@@ -367,9 +355,9 @@ function clickComplete() {
 				}
 
 				func.sClick(btn_todo);
-				toastLog("已点击按钮");
-				log("下一步动作nextStep：" + nextStep);
-				log("下一步动作细节描述nextStepDetail：" + nextStepDetail);
+				toastLog("clickComplete: 已点击按钮");
+				log("clickComplete: 下一步动作nextStep：" + nextStep);
+				log("clickComplete: 下一步动作细节描述nextStepDetail：" + nextStepDetail);
 				sleep(1500);
 				after_click(nextStep, nextStepDetail);
 			}
@@ -387,31 +375,31 @@ function after_click(textStr, details) {
 			种草城();
 			break;
 		case "参与返回":
-			log("参与返回");
+			log("after_click: 参与返回");
 			waitCompleteDisappear();
 			sleep(random_second(3000, 300, 900));
 			break;
 		case "等待8秒":
 			cnt = 11;
-			log("等待8秒");
+			log("after_click: 等待8秒");
 			waitCompleteDisappear();
 			// 等待11秒 应该完成了
 			sleep(random_second(10500, 100, 1000));
 			break;
 		case "浏览返回":
-			log("浏览返回");
+			log("after_click: 浏览返回");
 			waitCompleteDisappear();
 			break;
 		case "浏览商品":
-			log("浏览商品");
+			log("after_click: 浏览商品");
 			add_cart(123);
 			break;
 		case "加购物车":
-			log("加购物车");
+			log("after_click: 加购物车");
 			add_cart();
 			break;
 		case "加入会员":
-			log("加入会员");
+			log("after_click: 加入会员");
 			member_card();
 			break;
 		default:
@@ -420,11 +408,11 @@ function after_click(textStr, details) {
 	// 确保已经切换回京东APP
 
 	if (details == "20秒等待") {
-		toastLog("加载巨慢额外等待10秒");
+		toastLog("after_click: 加载巨慢额外等待10秒");
 		sleep(random_second(10000, 100, 1000));
 		back_way();
 	} else if (details == "金融2次返回") {
-		log("金融返回");
+		log("after_click: 金融返回");
 		back_way();
 		sleep(random_second(2000, 100, 1000));
 		if (currentPackage() != "com.jingdong.app.mall") {
@@ -433,13 +421,13 @@ function after_click(textStr, details) {
 		sleep(random_second(3000, 100, 1000));
 		back_way();
 	} else if (details == "小程序") {
-		log("微信返回");
-		toastLog("跳转到小程序，等待20秒");
+		log("after_click: 微信返回");
+		toastLog("after_click: 跳转到小程序，等待20秒");
 		sleep(10000);
 		if (currentPackage() != "com.jingdong.app.mall") {
 			cnt = 5;
 			while (cnt--) {
-				toastLog("等待一会儿..跳转回JD");
+				toastLog("after_click: 等待一会儿..跳转回JD");
 				sleep(2000);
 			}
 			func.toApp(appName);
@@ -448,21 +436,21 @@ function after_click(textStr, details) {
 		sleep(random_second(800, 100, 1000));
 		while (!is_in_invite_friend_page()) {
 			back();
-			sleep(random_second(2800, 100, 1000));
+			sleep(random_second(2000, 100, 600));
 		}
 	} else if (details == "点击关闭返回") {
 		while (!is_in_invite_friend_page()) {
 			if (func.sClick(desc("关闭页面").findOnce())) {
-				toastLog("点击 desc 关闭按钮返回成功");
+				toastLog("after_click: 点击 desc 关闭按钮返回成功");
 				sleep(random_second(2800, 100, 1000));
 				break;
 			}
 			if (func.sClick(id("com.jingdong.app.mall:id/ge").findOnce())) {
-				toastLog("点击 id 关闭按钮返回成功");
+				toastLog("after_click: 点击 id 关闭按钮返回成功");
 				sleep(random_second(2800, 100, 1000));
 				break;
 			}
-			toastLog("点击关闭按钮返回");
+			toastLog("after_click: 点击关闭按钮返回");
 			sleep(random_second(2800, 100, 1000));
 		}
 	} else {
@@ -471,18 +459,23 @@ function after_click(textStr, details) {
 		back_way();
 	}
 
-	log("等待返回");
-	if (selected == "每日任务" || selected == "金融领金币") {
-		if (!is_in_invite_friend_page()) {
-			back_way();
+	log("after_click: 等待返回");
+	var exit_cnt = 0
+	// 如果不在去完成界面，则返回，返回后判断
+	if (!is_in_invite_friend_page()) {
+		back_way();
+	}
+
+	while (!is_in_invite_friend_page()) {
+		exit_cnt = exit_cnt + 1;
+		log("after_click: 当前退出计数:" + exit_cnt);
+		if (exit_cnt > 20) {
+			toastLog("after_click: 超时未返回，退出");
+			exit();
 		}
-		is_in_invite_friend_page("findOne");
-	} else {
-		if (textContains("每日签到").findOnce() == null) { back_way(); }
-		textContains("每日签到").findOne();
 	}
 	sleep(random_second(800, 100, 1000));
-	log("已返回");
+	log("after_click: 已返回");
 }
 
 
@@ -490,88 +483,93 @@ function waitCompleteDisappear() {
 	cnt = 0;
 	while (is_in_invite_friend_page()) {
 		sleep(random_second(600, 100, 300));
-		log("等待去完成消失");
+		log("waitCompleteDisappear: 等待去完成消失");
 		cnt = cnt + 1;
 		if (cnt > 10) {
 			break;
 		}
 	}
-	toastLog("去完成已消失");
+	toastLog("waitCompleteDisappear: 去完成已消失");
 	sleep(random_second(800, 100, 300));
 }
 
 // 加入会员
 function member_card() {
-	toastLog("会员卡");
+	var authority, authorited, memberName, memberMail;
 	sleep(random_second(3500, 300, 1000));
 	if (is_in_invite_friend_page()) {
-		toastLog("已有卡，在去完成界面，直接完成");
+		toastLog("member_card: 已有卡，在去完成界面，直接完成");
 		return 0;
 	}
 	if (textContains("确认授权并加入").findOnce() == null) {
-		toastLog("已有卡，未发现去完成描述，直接完成");
+		toastLog("member_card: 已有卡，未发现去完成描述，直接完成");
 		sleep(random_second(1500, 80, 450));
-		return 0;
-	}
-	var authority, authorited, memberName, memberMail;
-	authorited = false;		// 表示是否勾选授权
-	while (1) {
-		log("加会员");
-		authority = textContains("确认授权即同意").findOnce();
-		if (authority != null) {
-			if (func.cClick(authority.parent().child(0))) {
-				authorited = true;
+	} else {
+		authorited = false;		// 表示是否勾选授权
+		while (1) {
+			log("member_card: 加会员");
+			authority = textContains("确认授权即同意").findOnce();
+			if (authority != null) {
+				if (func.cClick(authority.parent().child(0))) {
+					authorited = true;
+				}
 			}
-		}
-		sleep(random_second(1800, 100, 1000));
-		if (authorited) {
-			if (text("姓名").findOnce() != null) {
-				if (devModel == devRedMi) {
-					memberName = "曾卿"
-				} else if (devModel == devHonor8) {
-					memberName = "郑丽"
-				} else if (devModel == devMate30) {
-					memberName = "陈俊"
-				} else {
+			sleep(random_second(1800, 100, 1000));
+			if (authorited) {
+				if (text("姓名").findOnce() != null) {
+					if (devModel == devRedMi) {
+						memberName = "曾卿"
+					} else if (devModel == devHonor8) {
+						memberName = "郑丽"
+					} else if (devModel == devMate30) {
+						memberName = "陈俊"
+					} else {
+						break;
+					}
+					if (setText(1, memberName)) {
+						sleep(1500);
+						back();
+					}
+				}
+				if (text("邮箱").findOnce() != null) {
+					if (devModel == devRedMi) {
+						memberMail = "107910697@qq.com"
+					} else if (devModel == devHonor8) {
+						memberMail = "307458224@qq.com"
+					} else if (devModel == devMate30) {
+						memberMail = "273343029@qq.com"
+					}
+					if (setText(2, memberMail)) {
+						sleep(random_second(1300, 100, 1000));
+						back();
+					}
+				}
+				if (text("生日").findOnce() != null) {
+					func.sClick(className("android.widget.Spinner").findOne());
+					sleep(random_second(900, 100, 300));
+					func.sClick(text("确定").findOnce());
+					sleep(random_second(900, 100, 300));
+				}
+				sleep(2000);
+				if (func.cClick(textContains("确认授权并加入").findOnce())) {
+					sleep(2000);
 					break;
 				}
-				if (setText(1, memberName)) {
-					sleep(1500);
-					back();
-				}
-			}
-			if (text("邮箱").findOnce() != null) {
-				if (devModel == devRedMi) {
-					memberMail = "107910697@qq.com"
-				} else if (devModel == devHonor8) {
-					memberMail = "307458224@qq.com"
-				} else if (devModel == devMate30) {
-					memberMail = "273343029@qq.com"
-				}
-				if (setText(2, memberMail)) {
-					sleep(random_second(1300, 100, 1000));
-					back();
-				}
-			}
-			if (text("生日").findOnce() != null) {
-				func.sClick(className("android.widget.Spinner").findOne());
-				sleep(random_second(900, 100, 300));
-				func.sClick(text("确定").findOnce());
-				sleep(random_second(900, 100, 300));
-			}
-			sleep(2000);
-			if (func.cClick(textContains("确认授权并加入").findOnce())) {
-				sleep(2000);
-				break;
 			}
 		}
+		sleep(3000);
 	}
-	sleep(3000);
-	back_way();
-	sleep(2000);
-	func.sClick(desc("关闭页面").findOnce());
-	func.sClick(id("com.jingdong.app.mall:id/ge").findOnce());
-	sleep(1500);
+	// 如果点击了会员关闭按钮
+	var member_page_close_btn;
+	member_page_close_btn = className("ImageView").desc("关闭页面").findOnce();
+	if (member_page_close_btn == null) {
+		log("member_card: 未找到按钮，直接返回");
+		back_way();
+	} else {
+		log("member_card: 点击到了左上角关闭按钮");
+		func.sClick(member_page_close_btn);
+		sleep(random_second(1800, 100, 600));
+	}
 }
 
 //加购5个商品
@@ -615,7 +613,7 @@ function add_cart(isView) {
 				continue;
 			}
 		}
-		log("点击加购物车");
+		log("add_cart: 点击加购物车");
 		func.sClick(btn_add_cart);
 		sleep(2000);
 		addCartText = textContains(addText).findOnce();
@@ -627,9 +625,9 @@ function add_cart(isView) {
 		sleep(random_second(900, 100, 300));
 		try {
 			childCnt = textContains(addText).findOnce().parent().childCount();
-			toastLog("当前 子控件数量：" + childCnt);
+			toastLog("add_cart: 当前 子控件数量：" + childCnt);
 		} catch (err) {
-			log("加购失败")
+			log("add_cart: 加购失败")
 		}
 		sleep(random_second(900, 100, 300));
 		cnt = cnt + 1;
@@ -668,7 +666,7 @@ function 城城现金() {
 				find_text = "京口令已复制";
 				find_object = className("TextView").text(find_text).findOnce();
 				while (find_object == null) {
-					toastLog("未发现京口令窗口，请手动点击邀请好友触发，否则不会返回");
+					toastLog("城城现金: 未发现京口令窗口，请手动点击邀请好友触发，否则不会返回");
 					sleep(3000);
 					// 如果没有找到京口令，但是弹出微信选择框，则退出
 					if (text("使用以下方式打开").findOnce() != null || text("请选择要使用的应用").findOnce() != null) {
@@ -680,7 +678,7 @@ function 城城现金() {
 				if (find_object != null) {
 					find_object_parent = find_object.parent();
 					func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
-					toastLog("已点击 京口令 关闭按钮");
+					toastLog("城城现金: 已点击 京口令 关闭按钮");
 					sleep(2000);
 				}
 				break;
@@ -707,9 +705,10 @@ function 城城现金() {
 				func.sClick(find_object_parent.child(find_object_index - 1));
 			}
 		} catch (e) {
-			throw "error: " + e;
+			log("城城现金: error: " + e);
+			continue;
 		}
-		toastLog("等待-有机会得大额现金-加载，其余手动完成");
+		toastLog("城城现金: 等待-有机会得大额现金-加载，其余手动完成");
 		sleep(3000);
 	}
 }
@@ -720,7 +719,7 @@ function 种草城() {
 	find_object = textContains(find_text).findOnce();
 	while (find_object == null) {
 		find_object = textContains(find_text).findOnce();
-		toastLog("等待种草城页面加载");
+		toastLog("种草城: 等待种草城页面加载");
 		sleep(2000);
 	}
 	find_object_text = find_object.text();
@@ -733,15 +732,15 @@ function 种草城() {
 			while (textContains(find_text).findOnce() != null) {
 				sleep(2000);
 			}
-			toastLog("种草城页面已消失");
+			toastLog("种草城: 种草城页面已消失");
 			while (textContains(find_text).findOnce() == null) {
 				sleep(random_second(500, 100, 500));
 				back_way();
-				toastLog("种草城返回");
+				toastLog("种草城: 种草城返回");
 				sleep(random_second(4000, 500, 1000));
 			}
 			find_object_text = find_object.text();
-			toastLog("当前文本:" + find_object_text + "目标文本: (5/5)");
+			toastLog("种草城: 当前文本:" + find_object_text + "目标文本: (5/5)");
 		} else {
 			find_object_text = "";
 			continue;
@@ -769,7 +768,7 @@ function click_mission_btn() {
 		find_object_index = find_object.indexInParent();
 		func.sClick(find_object.parent().child(find_object_index + 1));
 		func.sClick(find_object.parent().child(find_object_index + 2));
-		toastLog("点击了 任务框 按钮");
+		toastLog("click_mission_btn: 点击了 任务框 按钮");
 		sleep(2000);
 		return true;
 	}
@@ -779,11 +778,11 @@ function click_mission_btn() {
 		find_object_index = find_object.indexInParent();
 		func.sClick(find_object.parent().child(find_object_index + 1));
 		func.sClick(find_object.parent().child(find_object_index + 2));
-		toastLog("点击了 任务框 按钮");
+		toastLog("click_mission_btn: 点击了 任务框 按钮");
 		sleep(2000);
 		return true;
 	}
-	toastLog("未找到 任务框 按钮");
+	toastLog("click_mission_btn: 未找到 任务框 按钮");
 	return false;
 }
 
@@ -834,6 +833,7 @@ function back_way() {
 	sleep(800);
 	// 如果没找到 说明不在去完成界面
 	if (!is_in_invite_friend_page()) {
+		log("back_way_start");
 		var backBtn = desc("返回").findOnce();
 		if (backBtn == null) {
 			back();
@@ -855,10 +855,9 @@ function back_way() {
 		func.sClick(textContains("放弃").findOnce());
 		func.sClick(textContains("知道了").findOnce());
 		func.sClick(textContains("待会再来").findOnce());
-
-		log("返回");
+		log("back_way_end_finded");
 	} else {
-		log("已在去完成界面");
+		log("back_way:已在去完成界面");
 	}
 }
 
