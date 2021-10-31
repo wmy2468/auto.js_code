@@ -509,6 +509,16 @@ function waitCompleteDisappear() {
 			break;
 		}
 	}
+	var desc_close_btn;
+	desc_close_btn = className("ImageView").desc("关闭页面").findOnce();
+	if (desc_close_btn == null) {
+		log("waitCompleteDisappear: 未找到按钮，直接返回");
+		back_way();
+	} else {
+		log("waitCompleteDisappear: 点击到了左上角关闭按钮");
+		func.sClick(desc_close_btn);
+		sleep(random_second(1800, 100, 600));
+	}
 	toastLog("waitCompleteDisappear: 去完成已消失");
 	sleep(random_second(800, 100, 300));
 }
@@ -730,6 +740,7 @@ function 城城现金() {
 		}
 		// 如果活动结束 则退出
 		if (text("活动已结束").findOnce() != null) {
+			if (func.sClick(text("e300dc37709c6f82").findOnce())) { sleep(2000); }
 			break;
 		}
 		toastLog("城城现金: 等待-有机会得大额现金-加载，其余手动完成");
