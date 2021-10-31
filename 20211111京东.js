@@ -200,6 +200,22 @@ function clickComplete() {
 	index_todo_now = 1;
 	exit_cnt = 0;
 	key_word = "000汪汪币"
+	// 创建线程用于判断，单个任务超时5分钟则退出
+	var lock = threads.lock();
+	var run_count = 0;
+	threads.start(function () {
+		while (true) {
+			lock.lock();
+			run_count = run_count + 1;
+			log("threads-run_count:" + run_count);
+			lock.unlock();
+			sleep(1000);
+			// 超过5分钟未执行完任务，则退出
+			if (run_count > (60 * 5)) {
+				exit();
+			}
+		}
+	})
 	// while (is_in_invite_friend_page()) {
 	while (is_in_invite_friend_page()) {
 		log("clickComplete: 进入查找环节");
@@ -360,6 +376,10 @@ function clickComplete() {
 				log("clickComplete: 下一步动作细节描述nextStepDetail：" + nextStepDetail);
 				sleep(1500);
 				after_click(nextStep, nextStepDetail);
+				// after click之后，如果在时间范围内，将计数值置0
+				lock.lock();
+				run_count = 0;
+				lock.unlock();
 			}
 		}
 	}
@@ -707,6 +727,10 @@ function 城城现金() {
 		} catch (e) {
 			log("城城现金: error: " + e);
 			continue;
+		}
+		// 如果活动结束 则退出
+		if (text("活动已结束").findOnce() != null) {
+			break;
 		}
 		toastLog("城城现金: 等待-有机会得大额现金-加载，其余手动完成");
 		sleep(3000);
