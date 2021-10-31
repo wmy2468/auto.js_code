@@ -406,6 +406,7 @@ function after_click(textStr, details) {
 			log("after_click: 等待8秒");
 			waitCompleteDisappear();
 			// 等待11秒 应该完成了
+			toastLog("去完成小时，延迟10秒返回");
 			sleep(random_second(10500, 100, 1000));
 			break;
 		case "浏览返回":
