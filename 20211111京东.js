@@ -207,11 +207,11 @@ function clickComplete() {
 		while (true) {
 			lock.lock();
 			run_count = run_count + 1;
-			log("threads-run_count:" + run_count);
+			// log("threads-run_count:" + run_count);
 			lock.unlock();
-			sleep(1000);
+			sleep(300);
 			// 超过5分钟未执行完任务，则退出
-			if (run_count > (60 * 5)) {
+			if (run_count > (10 * 20)) {
 				exit();
 			}
 		}
@@ -307,6 +307,8 @@ function clickComplete() {
 						nextStep = "浏览返回";
 					}
 				} else if (indexText.indexOf("浏览会场可得") != -1) {
+					nextStep = "浏览返回";
+				} else if (indexText.indexOf("逛晚会页可") != -1) {
 					nextStep = "浏览返回";
 				} else if (indexText.indexOf("浏览即可得") != -1) {
 					nextStep = "浏览返回";
