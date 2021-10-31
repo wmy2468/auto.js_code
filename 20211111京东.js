@@ -387,6 +387,8 @@ function clickComplete() {
 			}
 		}
 	}
+	// 结束子线程
+	threads.shutDownAll();
 }
 
 
