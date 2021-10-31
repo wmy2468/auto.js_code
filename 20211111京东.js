@@ -205,13 +205,14 @@ function clickComplete() {
 	var run_count = 0;
 	threads.start(function () {
 		while (true) {
+			log("threads-run_count:" + run_count);
+			sleep(5000);
 			lock.lock();
-			run_count = run_count + 1;
+			run_count = run_count + 5;
 			// log("threads-run_count:" + run_count);
 			lock.unlock();
-			sleep(1000);
 			// 超过5分钟未执行完任务，则退出
-			if (run_count > (60 * 3)) {
+			if (run_count > (12 * 3)) {
 				exit();
 			}
 		}
