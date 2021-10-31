@@ -208,11 +208,11 @@ function clickComplete() {
 			log("threads-run_count:" + run_count);
 			sleep(5000);
 			lock.lock();
-			run_count = run_count + 5;
+			run_count = run_count + 1;
 			// log("threads-run_count:" + run_count);
 			lock.unlock();
 			// 超过5分钟未执行完任务，则退出
-			if (run_count > (12 * 5)) {
+			if (run_count > (12 * 3)) {
 				toastLog("threads exits");
 				exit();
 			}
