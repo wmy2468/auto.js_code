@@ -209,9 +209,9 @@ function clickComplete() {
 			run_count = run_count + 1;
 			// log("threads-run_count:" + run_count);
 			lock.unlock();
-			sleep(300);
+			sleep(1000);
 			// 超过5分钟未执行完任务，则退出
-			if (run_count > (10 * 20)) {
+			if (run_count > (60 * 3)) {
 				exit();
 			}
 		}
@@ -402,7 +402,6 @@ function after_click(textStr, details) {
 			sleep(random_second(3000, 300, 900));
 			break;
 		case "等待8秒":
-			cnt = 11;
 			log("after_click: 等待8秒");
 			waitCompleteDisappear();
 			// 等待11秒 应该完成了
@@ -510,16 +509,6 @@ function waitCompleteDisappear() {
 		if (cnt > 10) {
 			break;
 		}
-	}
-	var desc_close_btn;
-	desc_close_btn = className("ImageView").desc("关闭页面").findOnce();
-	if (desc_close_btn == null) {
-		log("waitCompleteDisappear: 未找到按钮，直接返回");
-		back_way();
-	} else {
-		log("waitCompleteDisappear: 点击到了左上角关闭按钮");
-		func.sClick(desc_close_btn);
-		sleep(random_second(1800, 100, 600));
 	}
 	toastLog("waitCompleteDisappear: 去完成已消失");
 	sleep(random_second(800, 100, 300));
