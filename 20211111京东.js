@@ -389,6 +389,7 @@ function clickComplete() {
 	}
 	// 结束子线程
 	threads.shutDownAll();
+	toastLog("子线程已结束");
 }
 
 
