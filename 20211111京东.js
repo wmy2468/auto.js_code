@@ -487,7 +487,6 @@ function after_click(textStr, details) {
 	}
 
 	log("after_click: 等待返回");
-	var exit_cnt = 0
 	// 如果不在去完成界面，则返回，返回后判断
 	if (!is_in_invite_friend_page()) {
 		back_way();
