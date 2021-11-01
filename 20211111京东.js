@@ -493,14 +493,6 @@ function after_click(textStr, details) {
 		back_way();
 	}
 
-	while (!is_in_invite_friend_page()) {
-		exit_cnt = exit_cnt + 1;
-		log("after_click: 当前退出计数:" + exit_cnt);
-		if (exit_cnt > 20) {
-			toastLog("after_click: 超时未返回，退出");
-			exit();
-		}
-	}
 	sleep(random_second(800, 100, 1000));
 	log("after_click: 已返回");
 }
