@@ -357,6 +357,8 @@ function clickComplete() {
 					nextStepDetail = "金融2次返回";
 				} else if (detailText.indexOf("领百亿购物金") != -1) {
 					nextStepDetail = "20秒等待";
+				} else if (detailText.indexOf("榜单会场") != -1) {
+					nextStepDetail = "20秒等待";
 				} else if (detailText.indexOf("东东超市") != -1) {
 					nextStepDetail = "需要多次点击返回";		// 点击完成按钮返回
 				} else if (detailText.indexOf("去财富岛") != -1) {
