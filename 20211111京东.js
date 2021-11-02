@@ -720,8 +720,9 @@ function 品牌墙() {
 			break;
 		}
 	}
-	click_index = 20;
+	click_index = 15;
 	while (click_index--) {
+		toastLog("向上滑动...");
 		scrollUp();
 		sleep(random_second(900, 100, 300));
 	}
