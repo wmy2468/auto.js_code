@@ -93,11 +93,11 @@ function 互助() {
 		// 荣耀8
 		case devHonor8:
 			kouling1 = "16.0:/￥E8BzGFzUiiTR7S￥，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";	//LM
-			kouling2 = "12.0:/#EAuKH9sf6MOjCf@，⛅﹎壹啓ɡμā!!!！ぷ";		// JJ
+			//kouling2 = "12.0:/#EAuKH9sf6MOjCf@，⛅﹎壹啓ɡμā!!!！ぷ";		// JJ
 			break;
 		case devRedMi:
 			kouling1 = " 11.0:/￥JDpplF8ATGDmSO%，☃﹎壹!!!！ぷ";		// LP
-			kouling2 = "12.0:/#EAuKH9sf6MOjCf@，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";		// JJ
+			//kouling2 = "12.0:/#EAuKH9sf6MOjCf@，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";		// JJ
 			break;
 		// 华为Mate 30
 		case devMate30:
