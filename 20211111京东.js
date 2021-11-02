@@ -285,8 +285,8 @@ function clickComplete() {
 					nextStep = "等待8秒";
 				} else if (indexText.indexOf("城城") != -1) {
 					nextStep = "点击分现金按钮";
-					// } else if (indexText.indexOf("点击首页浮层") != -1) {
-					// 	nextStep = "点击一下 啥也不干";
+				} else if (indexText.indexOf("点击首页浮层") != -1) {
+					nextStep = "首页浮层";
 				} else if (indexText.indexOf("成功入会") != -1) {
 					nextStep = "加入会员";
 					if (!(devModel == devRedMi || devModel == devHonor8 || devModel == devMate30)) {
@@ -397,6 +397,9 @@ function clickComplete() {
 
 function after_click(textStr, details) {
 	switch (textStr) {
+		case "首页浮层":
+			sleep(3000);
+			break;
 		case "点击分现金按钮":
 			城城现金();
 			break;
@@ -673,6 +676,10 @@ function 互助点击() {
 	sleep(2000);
 	home();
 	sleep(2000);
+}
+
+function 首页浮层() {
+
 }
 
 function 城城现金() {
