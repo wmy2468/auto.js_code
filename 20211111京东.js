@@ -285,6 +285,8 @@ function clickComplete() {
 					nextStep = "等待8秒";
 				} else if (indexText.indexOf("城城") != -1) {
 					nextStep = "点击分现金按钮";
+				} else if (indexText.indexOf("品牌墙") != -1) {
+					nextStep = "品牌墙";
 				} else if (indexText.indexOf("点击首页浮层") != -1) {
 					nextStep = "首页浮层";
 				} else if (indexText.indexOf("成功入会") != -1) {
@@ -397,6 +399,9 @@ function clickComplete() {
 
 function after_click(textStr, details) {
 	switch (textStr) {
+		case "品牌墙":
+			品牌墙();
+			break;
 		case "首页浮层":
 			sleep(3000);
 			break;
@@ -676,6 +681,60 @@ function 互助点击() {
 	sleep(2000);
 	home();
 	sleep(2000);
+}
+
+function 品牌墙() {
+	var find_text, find_object, find_object_index, find_object_parent;	// 定义查找的变量
+	find_text = "到底了，没有更多了～"
+	var click_index;
+	click_index = 0;
+	while (1) {
+		find_object == null
+		while (find_object == null) {
+			toastLog("等待 " + find_text + " 加载");
+			sleep(2500);
+			find_object = text(find_text).findOnce();
+		}
+		find_object_parent = find_object.parent();
+		find_object_index = find_object.indexInParent();
+		var brands;
+		brands = find_object_parent.child(find_object_index - 1).child(1);
+		// 如果点击成功，延迟8秒 后返回
+		if (func.sClick(brands.child(click_index))) {
+			toastLog("等待跳转，然后返回");
+			sleep(2500);
+			toastLog("等待跳转，然后返回");
+			sleep(2500);
+			toastLog("等待跳转，然后返回");
+			sleep(2500);
+			toastLog("等待跳转，然后返回");
+			sleep(2500);
+			back();
+			click_index = click_index + 1;
+			// 等待返回
+			text(find_text).findOne();
+			toastLog("已返回...");
+			sleep(3000);
+		}
+		if (click_index >= 5) {
+			break;
+		}
+	}
+	click_index = 20;
+	while (click_index--) {
+		scrollUp();
+		sleep(random_second(900, 100, 300));
+	}
+	// 点击启动任务框
+	click_mission_btn();
+	while (is_in_invite_friend_page) {
+		if (click_mission_btn()) {
+			sleep(3000);
+			break;
+		} else {
+			sleep(3000);
+		}
+	}
 }
 
 function 首页浮层() {

@@ -63,7 +63,56 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 
-func.cClick(textContains("http").findOnce());
+品牌墙();
+
+function 品牌墙() {
+    var find_text, find_object, find_object_index, find_object_parent;	// 定义查找的变量
+    find_text = "到底了，没有更多了～"
+    var click_index;
+    click_index = 0;
+    while (1) {
+        find_object == null
+        while (find_object == null) {
+            toastLog("等待 " + find_text + " 加载");
+            sleep(2500);
+            find_object = text(find_text).findOnce();
+        }
+        find_object_parent = find_object.parent();
+        find_object_index = find_object.indexInParent();
+        var brands;
+        brands = find_object_parent.child(find_object_index - 1).child(1);
+        // 如果点击成功，延迟8秒 后返回
+        if (func.sClick(brands.child(click_index))) {
+            toastLog("等待跳转，然后返回");
+            sleep(2500);
+            toastLog("等待跳转，然后返回");
+            sleep(2500);
+            toastLog("等待跳转，然后返回");
+            sleep(2500);
+            toastLog("等待跳转，然后返回");
+            sleep(2500);
+            back();
+            click_index = click_index + 1;
+            // 等待返回
+            find_object = text(find_text).findOne();
+            toastLog("已返回...");
+            sleep(2500);
+        }
+        if (click_index >= 5) {
+            break;
+        }
+        // 1. 等待品牌墙页面加载
+        // 2. 查找品牌，索引1，2，3
+
+        // 3. 完成后back
+        // 4. 检测首页，如是，直接执行banna启动
+    }
+    click_index = 20;
+    while (click_index--) {
+        scrollUp();
+        sleep(random_second(900, 100, 300));
+    }
+}
 
 
 function 买单吧() {
