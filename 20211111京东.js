@@ -334,6 +334,8 @@ function clickComplete() {
 					nextStep = "浏览商品";
 				} else if (indexText.indexOf("加购5个") != -1) {
 					nextStep = "加购物车";
+				} else if (indexText.indexOf("小程序") != -1) {
+					nextStep = "小程序";
 				} else {
 					index_todo_now = index_todo_now + 1;
 					toastLog("clickComplete: 未找到满足条件的任务描述-小字，index + 1");
