@@ -112,8 +112,10 @@ function 互助() {
 	log("互助: kouling2:" + kouling2);
 	setClip(kouling1);
 	互助点击();
-	setClip(kouling2);
-	互助点击();
+	if (device.model == devMate30) {
+		setClip(kouling2);
+		互助点击();
+	}
 }
 // --------------------------大任务汇总区-----------------------------
 
