@@ -108,6 +108,7 @@ function 龙支付_日常任务() {
         toastLog("请跳转到龙支付 每日签到涨财富 界面");
         sleep(2000);
     }
+    func.sClick(text("立即签到").findOnce());
     toastLog("已到达 龙支付 每日签到涨财富 界面");
     sleep(2000);
     see = text(seeText).find();
@@ -220,7 +221,6 @@ function 龙支付_攒财富() {
         sleep(2000);
     }
     sleep(1000);
-    func.sClick(text("立即签到").findOnce());
 }
 // -----------------------建行财富季-----------------------
 
