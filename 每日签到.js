@@ -55,10 +55,10 @@ function 工商() {
     var bananas;
     bananas = className("ListView").rowCount(5).findOnce();
     if (bananas != null) {
-        bananas.children().forEach(bans => {
+        for (var i = bananas.childCount() - 1; i >= 0; i--) {
             func.cClick(bans);
             sleep(800);
-        })
+        }
     }
     mission_btn = left_banana.parent().parent().child(0).child(2);
     func.sClick(mission_btn);
