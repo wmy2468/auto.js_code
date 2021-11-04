@@ -513,11 +513,12 @@ function after_click(textStr, details) {
 
 function waitCompleteDisappear() {
 	cnt = 0;
+	sleep(2000);		// 先延迟2秒，减少工作量
 	while (is_in_invite_friend_page()) {
-		sleep(random_second(600, 100, 300));
+		sleep(random_second(1000, 100, 300));
 		log("waitCompleteDisappear: 等待去完成消失");
 		cnt = cnt + 1;
-		if (cnt > 10) {
+		if (cnt > 9) {
 			break;
 		}
 	}
