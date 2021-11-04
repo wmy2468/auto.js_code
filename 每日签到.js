@@ -56,7 +56,7 @@ function 工商() {
     bananas = className("ListView").rowCount(5).findOnce();
     if (bananas != null) {
         for (var i = bananas.childCount() - 1; i >= 0; i--) {
-            func.cClick(bans);
+            func.cClick(bananas.child[i]);
             sleep(800);
         }
     }
