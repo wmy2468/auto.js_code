@@ -262,7 +262,7 @@ function clickComplete() {
 				// log("-4位置:" + detailText.slice(-4, -3) + ",-2位置:" + detailText.slice(-2, -1));
 				if (detailText.slice(-4, -3) == detailText.slice(-2, -1)) {
 					index_todo_now = index_todo_now + 1;
-					console.clear();			// 当前任务正常完成，可以清除前面的日志
+					// console.clear();			// 当前任务正常完成，可以清除前面的日志
 					toastLog("clickComplete: 当前任务" + detailText + "完成， index + 1");
 					continue;
 				}
