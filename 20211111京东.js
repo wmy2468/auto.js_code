@@ -43,7 +43,7 @@ function main() {
 			break;
 	}
 	setClip("");
-	console.clear();
+	// console.clear();
 	alert("已完成");
 }
 
