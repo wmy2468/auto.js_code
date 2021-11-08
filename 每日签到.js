@@ -15,9 +15,9 @@ function main() {
         什么值得买();
         jd_sign();
         YunShaofu();
-        浦发银行();
         浦发信用卡();
         买单吧();
+        浦发银行();
         工商();
     } else if (devModel == devHonor8) {
         jd_sign();
