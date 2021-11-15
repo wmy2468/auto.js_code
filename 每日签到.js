@@ -56,8 +56,12 @@ function 工商() {
     bananas = className("ListView").rowCount(5).findOnce();
     if (bananas != null) {
         for (var i = bananas.childCount() - 1; i >= 0; i--) {
+            // 点击喂小象
+            func.cClick(left_banana);
+            sleep(1000);
+            // 点击香蕉
             func.cClick(bananas.child(i));
-            sleep(800);
+            sleep(1000);
         }
     }
     mission_btn = left_banana.parent().parent().child(0).child(2);
