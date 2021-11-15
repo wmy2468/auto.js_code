@@ -62,8 +62,8 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
-
-品牌墙();
+var checkText = "龙支付分会场";
+log(text(checkText).findOnce());
 
 function 品牌墙() {
     var find_text, find_object, find_object_index, find_object_parent;	// 定义查找的变量
