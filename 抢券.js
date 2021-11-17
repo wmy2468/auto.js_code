@@ -424,6 +424,8 @@ function 京喜领券() {
             url_页面 = "openapp.jdpingou://virtual?params=%7B%22des%22%3A%22m%22%2C%22url%22%3A%22" + coupon_url + "%22%2C%22category%22%3A%22jump%22%7D";
             break;
     }
+
+    func.toAutojs();
     // 跳转到APP
     app.startActivity({
         action: "android.intent.action.VIEW",
