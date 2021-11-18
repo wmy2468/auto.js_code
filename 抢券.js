@@ -441,6 +441,10 @@ function 京喜领券() {
     }
     func.getTimeDiff(timeArea, startTime);              // 等待时间
     func.sClick(couClick);             // 点击元素
+    sleep(100);
+    func.sClick(couClick);             // 点击元素
+    sleep(100);
+    func.sClick(couClick);             // 点击元素
     toast("已点击");
     sleep(3000);
 
