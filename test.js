@@ -63,7 +63,117 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 
-func.cClick(textContains("http").findOnce());
+浦发银行();
+
+// 浦发金豆签到
+function 浦发银行() {
+    var appName = "浦发银行";
+    //closeApp(appName);
+    func.toApp(appName);
+    while (text("我的账户").findOnce() == null) {
+        func.passAd();
+    }
+    sleep(1800);
+    while (text("查看收益/收支明细").findOnce() == null) {
+        func.sClick(idContains("radio_button5").findOnce());
+        sleep(3000);
+    }
+    // 签到按钮
+    while (text("金豆").findOnce() == null) {
+        func.toAutojs();
+        func.toApp(appName);
+        sleep(3000);
+    }
+    sleep(800);
+    while (text("收支").findOnce() == null) {
+        func.sClick(text("金豆").findOnce());
+        sleep(800);
+        if (text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce()) {
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(1000);
+        }
+    }
+    sleep(1500);
+    scrollDown();
+    textStartsWith("+").findOne();
+    sleep(800);
+    var signs = textStartsWith("+").find();
+    try {
+        for (var i = 0; i < signs.length; i++) {
+            func.sClick(signs[i]);
+        }
+    }
+    catch (e) {
+        toastLog("未找到多余的连续签到");
+        sleep(2000);
+    }
+    toastLog(appName + "已签到");
+    sleep(3000);
+}
+
+// // 问题解决了，参照（http://www.cocoachina.com/bbs/read.php?tid-1689677.html ）用urlscheme跳转京东某个商品页面可行！
+// //            String url = "https://item.jd.com/231023.html";
+// 产品ID = "66144896261";
+// // url = "openapp.jdMobile://virtual?params=%7B%22sourceValue%22:%220_productDetail_97%22,%22des%22:%22productDetail%22,%22skuId%22:%22" + 产品ID + "%22,%22category%22:%22jump%22,%22sourceType%22:%22PCUBE_CHANNEL%22%7D";
+
+// // url = "openapp.jdpingou://virtual?params=%7B%22sourceValue%22:%220_productDetail_97%22,%22des%22:%22productDetail%22,%22skuId%22:%22" + 产品ID + "%22,%22category%22:%22jump%22,%22sourceType%22:%22PCUBE_CHANNEL%22%7D";
+
+// // 惊喜
+// url = "openapp.jdpingou://virtual?params=%7B%22des%22%3A%22m%22%2C%22url%22%3A%22https%3A%2F%2Fitem.m.jd.com%2Fitem%2Fjxview%3Fsku%3D" + 产品ID + "%22%2C%22category%22%3A%22jump%22%7D"
+// app.startActivity({
+//     action: "android.intent.action.VIEW",
+//     data: url,
+// });
+
+function 品牌墙() {
+    var find_text, find_object, find_object_index, find_object_parent;	// 定义查找的变量
+    find_text = "到底了，没有更多了～"
+    var click_index;
+    click_index = 0;
+    while (1) {
+        find_object == null
+        while (find_object == null) {
+            toastLog("等待 " + find_text + " 加载");
+            sleep(2500);
+            find_object = text(find_text).findOnce();
+        }
+        find_object_parent = find_object.parent();
+        find_object_index = find_object.indexInParent();
+        var brands;
+        brands = find_object_parent.child(find_object_index - 1).child(1);
+        // 如果点击成功，延迟8秒 后返回
+        if (func.sClick(brands.child(click_index))) {
+            toastLog("等待跳转，然后返回");
+            sleep(2500);
+            toastLog("等待跳转，然后返回");
+            sleep(2500);
+            toastLog("等待跳转，然后返回");
+            sleep(2500);
+            toastLog("等待跳转，然后返回");
+            sleep(2500);
+            back();
+            click_index = click_index + 1;
+            // 等待返回
+            find_object = text(find_text).findOne();
+            toastLog("已返回...");
+            sleep(2500);
+        }
+        if (click_index >= 5) {
+            break;
+        }
+        // 1. 等待品牌墙页面加载
+        // 2. 查找品牌，索引1，2，3
+
+        // 3. 完成后back
+        // 4. 检测首页，如是，直接执行banna启动
+    }
+    click_index = 20;
+    while (click_index--) {
+        scrollUp();
+        sleep(random_second(900, 100, 300));
+    }
+}
 
 
 function 买单吧() {

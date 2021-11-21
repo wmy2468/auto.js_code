@@ -15,9 +15,9 @@ function main() {
         什么值得买();
         jd_sign();
         YunShaofu();
-        浦发银行();
         浦发信用卡();
         买单吧();
+        浦发银行();
         工商();
     } else if (devModel == devHonor8) {
         jd_sign();
@@ -55,10 +55,14 @@ function 工商() {
     var bananas;
     bananas = className("ListView").rowCount(5).findOnce();
     if (bananas != null) {
-        bananas.children().forEach(bans => {
-            func.cClick(bans);
-            sleep(800);
-        })
+        for (var i = bananas.childCount() - 1; i >= 0; i--) {
+            // 点击喂小象
+            func.cClick(left_banana);
+            sleep(1000);
+            // 点击香蕉
+            func.cClick(bananas.child(i));
+            sleep(1000);
+        }
     }
     mission_btn = left_banana.parent().parent().child(0).child(2);
     func.sClick(mission_btn);

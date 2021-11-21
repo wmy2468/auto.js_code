@@ -43,7 +43,7 @@ function main() {
 			break;
 	}
 	setClip("");
-	console.clear();
+	// console.clear();
 	alert("已完成");
 }
 
@@ -93,11 +93,11 @@ function 互助() {
 		// 荣耀8
 		case devHonor8:
 			kouling1 = "16.0:/￥E8BzGFzUiiTR7S￥，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";	//LM
-			kouling2 = "12.0:/#EAuKH9sf6MOjCf@，⛅﹎壹啓ɡμā!!!！ぷ";		// JJ
+			//kouling2 = "12.0:/#EAuKH9sf6MOjCf@，⛅﹎壹啓ɡμā!!!！ぷ";		// JJ
 			break;
 		case devRedMi:
 			kouling1 = " 11.0:/￥JDpplF8ATGDmSO%，☃﹎壹!!!！ぷ";		// LP
-			kouling2 = "12.0:/#EAuKH9sf6MOjCf@，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";		// JJ
+			//kouling2 = "12.0:/#EAuKH9sf6MOjCf@，⛅﹎壹啓ɡμā汾20億!!!!!！ぷ";		// JJ
 			break;
 		// 华为Mate 30
 		case devMate30:
@@ -112,8 +112,10 @@ function 互助() {
 	log("互助: kouling2:" + kouling2);
 	setClip(kouling1);
 	互助点击();
-	setClip(kouling2);
-	互助点击();
+	if (device.model == devMate30) {
+		setClip(kouling2);
+		互助点击();
+	}
 }
 // --------------------------大任务汇总区-----------------------------
 
@@ -260,7 +262,7 @@ function clickComplete() {
 				// log("-4位置:" + detailText.slice(-4, -3) + ",-2位置:" + detailText.slice(-2, -1));
 				if (detailText.slice(-4, -3) == detailText.slice(-2, -1)) {
 					index_todo_now = index_todo_now + 1;
-					console.clear();			// 当前任务正常完成，可以清除前面的日志
+					// console.clear();			// 当前任务正常完成，可以清除前面的日志
 					toastLog("clickComplete: 当前任务" + detailText + "完成， index + 1");
 					continue;
 				}
@@ -285,8 +287,10 @@ function clickComplete() {
 					nextStep = "等待8秒";
 				} else if (indexText.indexOf("城城") != -1) {
 					nextStep = "点击分现金按钮";
-					// } else if (indexText.indexOf("点击首页浮层") != -1) {
-					// 	nextStep = "点击一下 啥也不干";
+				} else if (indexText.indexOf("品牌墙") != -1) {
+					nextStep = "品牌墙";
+				} else if (indexText.indexOf("点击首页浮层") != -1) {
+					nextStep = "首页浮层";
 				} else if (indexText.indexOf("成功入会") != -1) {
 					nextStep = "加入会员";
 					if (!(devModel == devRedMi || devModel == devHonor8 || devModel == devMate30)) {
@@ -332,6 +336,8 @@ function clickComplete() {
 					nextStep = "浏览商品";
 				} else if (indexText.indexOf("加购5个") != -1) {
 					nextStep = "加购物车";
+				} else if (indexText.indexOf("小程序") != -1) {
+					nextStep = "小程序";
 				} else {
 					index_todo_now = index_todo_now + 1;
 					toastLog("clickComplete: 未找到满足条件的任务描述-小字，index + 1");
@@ -356,6 +362,8 @@ function clickComplete() {
 				} else if (detailText.indexOf("京享值PK赢") != -1) {
 					nextStepDetail = "金融2次返回";
 				} else if (detailText.indexOf("领百亿购物金") != -1) {
+					nextStepDetail = "20秒等待";
+				} else if (detailText.indexOf("榜单会场") != -1) {
 					nextStepDetail = "20秒等待";
 				} else if (detailText.indexOf("东东超市") != -1) {
 					nextStepDetail = "需要多次点击返回";		// 点击完成按钮返回
@@ -395,6 +403,12 @@ function clickComplete() {
 
 function after_click(textStr, details) {
 	switch (textStr) {
+		case "品牌墙":
+			品牌墙();
+			break;
+		case "首页浮层":
+			sleep(3000);
+			break;
 		case "点击分现金按钮":
 			城城现金();
 			break;
@@ -487,20 +501,11 @@ function after_click(textStr, details) {
 	}
 
 	log("after_click: 等待返回");
-	var exit_cnt = 0
 	// 如果不在去完成界面，则返回，返回后判断
 	if (!is_in_invite_friend_page()) {
 		back_way();
 	}
 
-	while (!is_in_invite_friend_page()) {
-		exit_cnt = exit_cnt + 1;
-		log("after_click: 当前退出计数:" + exit_cnt);
-		if (exit_cnt > 20) {
-			toastLog("after_click: 超时未返回，退出");
-			exit();
-		}
-	}
 	sleep(random_second(800, 100, 1000));
 	log("after_click: 已返回");
 }
@@ -508,11 +513,12 @@ function after_click(textStr, details) {
 
 function waitCompleteDisappear() {
 	cnt = 0;
+	sleep(2000);		// 先延迟2秒，减少工作量
 	while (is_in_invite_friend_page()) {
-		sleep(random_second(600, 100, 300));
+		sleep(random_second(1000, 100, 300));
 		log("waitCompleteDisappear: 等待去完成消失");
 		cnt = cnt + 1;
-		if (cnt > 10) {
+		if (cnt > 9) {
 			break;
 		}
 	}
@@ -680,6 +686,65 @@ function 互助点击() {
 	sleep(2000);
 	home();
 	sleep(2000);
+}
+
+function 品牌墙() {
+	var find_text, find_object, find_object_index, find_object_parent;	// 定义查找的变量
+	find_text = "到底了，没有更多了～"
+	var click_index;
+	click_index = 0;
+	while (1) {
+		find_object == null
+		while (find_object == null) {
+			toastLog("等待 " + find_text + " 加载");
+			sleep(2500);
+			find_object = text(find_text).findOnce();
+		}
+		find_object_parent = find_object.parent();
+		find_object_index = find_object.indexInParent();
+		var brands;
+		brands = find_object_parent.child(find_object_index - 1).child(1);
+		// 如果点击成功，延迟8秒 后返回
+		if (func.sClick(brands.child(click_index))) {
+			toastLog("等待跳转，然后返回");
+			sleep(2500);
+			toastLog("等待跳转，然后返回");
+			sleep(2500);
+			toastLog("等待跳转，然后返回");
+			sleep(2500);
+			toastLog("等待跳转，然后返回");
+			sleep(2500);
+			back();
+			click_index = click_index + 1;
+			// 等待返回
+			text(find_text).findOne();
+			toastLog("已返回...");
+			sleep(3000);
+		}
+		if (click_index >= 5) {
+			break;
+		}
+	}
+	click_index = 15;
+	while (click_index--) {
+		toastLog("向上滑动...");
+		scrollUp();
+		sleep(random_second(900, 100, 300));
+	}
+	// 点击启动任务框
+	click_mission_btn();
+	while (is_in_invite_friend_page) {
+		if (click_mission_btn()) {
+			sleep(3000);
+			break;
+		} else {
+			sleep(3000);
+		}
+	}
+}
+
+function 首页浮层() {
+
 }
 
 function 城城现金() {

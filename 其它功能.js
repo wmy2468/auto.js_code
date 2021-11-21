@@ -89,10 +89,12 @@ function ZFB捐款() {
 }
 // -----------------------建行财富季-----------------------
 function 建行财富季() {
-    func.toApp("微信");
-    // 龙支付攒财富
-    龙支付_攒财富();
-    // 龙支付_日常任务();
+    func.toAppMulti("微信", 1);
+    龙支付_戳泡泡();
+    龙支付_日常任务();
+    func.toAppMulti("微信", 2);
+    龙支付_戳泡泡();
+    龙支付_日常任务();
     alert("已完成");
     // 日常任务
     // 消保 答题
@@ -108,6 +110,7 @@ function 龙支付_日常任务() {
         toastLog("请跳转到龙支付 每日签到涨财富 界面");
         sleep(2000);
     }
+    func.sClick(text("立即签到").findOnce());
     toastLog("已到达 龙支付 每日签到涨财富 界面");
     sleep(2000);
     see = text(seeText).find();
@@ -121,15 +124,14 @@ function 龙支付_日常任务() {
             }
             log("LZF 每日签到涨财富 已消失");
             sleep(2000);
-            back();                             // 返回
+            back();
+            sleep(2500);                        // 返回
             // 检查是否已返回
             while (text(checkText).findOnce() == null) {
-                func.sClick(text("拒绝").findOnce());
-                // 如果点击了 获取位置的否，需要等待1秒，再返回
-                if (func.sClick(text("否").findOnce()) == true) {
-                    sleep(1000);
-                    back();
-                }
+                if (func.sClick(text("拒绝").findOnce())) { sleep(2000); }
+                if (func.sClick(text("否").findOnce())) { sleep(2000); }
+                back();
+                sleep(3000);
             }
             sleep(800);
             log("LZF 每日签到涨财富 已找到");
@@ -144,7 +146,8 @@ function 龙支付_日常任务() {
 }
 
 function 龙支付攒财富_浏览(keyWord) {
-    var checkText = "龙支付分会场";
+
+    var checkText = "龙支付5周年 “5”限畅享";
     var see, seeText, refreshCnt;
     refreshCnt = 0;
     seeText = "去看看";
@@ -177,15 +180,52 @@ function 龙支付攒财富_浏览(keyWord) {
         }
         sleep(1000);
         log("LZF 会场 已找到");
-        func.sClick(text(keyWord).findOne());   // 点击关键字
+        if (keyWord != undefined) {
+            func.sClick(text(keyWord).findOne());   // 点击关键字
+        }
         sleep(1500);
         see = text(seeText).find();        // 重新检索
     }
-    toastLog(keyWord + "，已完成！");
+}
+
+function 龙支付_戳泡泡() {
+
+    var checkText = "龙支付5周年 “5”限畅享";
+    while (text(checkText).findOnce() == null) {
+        toastLog("请跳转到龙支付 攒财富 界面");
+        sleep(2000);
+    }
+    toastLog("已到达 龙支付 攒财富 界面");
+    sleep(2000);
+    龙支付攒财富_浏览();
+    // 切换到主会场
+    var refresh, main_place;
+    refresh = true;
+    sleep(1000);
+    while (text("每日签到涨财富").findOnce() == null) {
+        main_place = textEndsWith("次机会 >").findOnce();
+        if (main_place != null) {
+            if (func.sClick(main_place.parent().child(1))) {
+                toastLog("已点击 主会场 按钮，等待切换");
+                refresh = false;
+                sleep(4000);
+            }
+        } else {
+            if (refresh) {
+                WX_刷新();
+            }
+        }
+        // func.sClick(className("android.view.View").text("/").depth(22).findOnce());
+        if (func.sClick(text("做任务").findOnce())) {
+            refresh = false;
+        }
+        sleep(2000);
+    }
+    sleep(1000);
 }
 
 function 龙支付_攒财富() {
-    var checkText = "龙支付分会场";
+    var checkText = "龙支付5周年 “5”限畅享";
     var keyList;
     keyList = ["在路上", "商超日", "乐活日"];
     while (text(checkText).findOnce() == null) {
@@ -220,7 +260,6 @@ function 龙支付_攒财富() {
         sleep(2000);
     }
     sleep(1000);
-    func.sClick(text("立即签到").findOnce());
 }
 // -----------------------建行财富季-----------------------
 
