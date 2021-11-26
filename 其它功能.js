@@ -199,28 +199,28 @@ function 龙支付_戳泡泡() {
     sleep(2000);
     龙支付攒财富_浏览();
     // 切换到主会场
-    var refresh, main_place;
-    refresh = true;
-    sleep(1000);
-    while (text("每日签到涨财富").findOnce() == null) {
-        main_place = textEndsWith("次机会 >").findOnce();
-        if (main_place != null) {
-            if (func.sClick(main_place.parent().child(1))) {
-                toastLog("已点击 主会场 按钮，等待切换");
-                refresh = false;
-                sleep(4000);
-            }
-        } else {
-            if (refresh) {
-                WX_刷新();
-            }
-        }
-        // func.sClick(className("android.view.View").text("/").depth(22).findOnce());
-        if (func.sClick(text("做任务").findOnce())) {
-            refresh = false;
-        }
-        sleep(2000);
-    }
+    // var refresh, main_place;
+    // refresh = true;
+    // sleep(1000);
+    // while (text("每日签到涨财富").findOnce() == null) {
+    //     main_place = textEndsWith("次机会 >").findOnce();
+    //     if (main_place != null) {
+    //         if (func.sClick(main_place.parent().child(1))) {
+    //             toastLog("已点击 主会场 按钮，等待切换");
+    //             refresh = false;
+    //             sleep(4000);
+    //         }
+    //     } else {
+    //         if (refresh) {
+    //             WX_刷新();
+    //         }
+    //     }
+    //     // func.sClick(className("android.view.View").text("/").depth(22).findOnce());
+    //     if (func.sClick(text("做任务").findOnce())) {
+    //         refresh = false;
+    //     }
+    //     sleep(2000);
+    // }
     sleep(1000);
 }
 
