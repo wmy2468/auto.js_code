@@ -64,15 +64,13 @@ var func = require("func_list.js");
 // }
 
 浦发银行();
+// func.sClick(idContains("radio_button5").findOnce());
 
 // 浦发金豆签到
 function 浦发银行() {
     var appName = "浦发银行";
     //closeApp(appName);
     func.toApp(appName);
-    while (text("我的账户").findOnce() == null) {
-        func.passAd();
-    }
     sleep(1800);
     while (text("查看收益/收支明细").findOnce() == null) {
         func.sClick(idContains("radio_button5").findOnce());
