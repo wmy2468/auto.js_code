@@ -19,14 +19,15 @@ function main() {
         买单吧();
         浦发银行();
         工商();
+        招商便民()
     } else if (devModel == devHonor8) {
         YunShaofu();
-        招商便民()
         jd_sign();
+        招商便民()
     } else if (devModel == devRedMi) {
         YunShaofu();
-        招商便民()
         jd_sign();
+        招商便民()
         工商();
     }
     alert("已完成.");
@@ -114,12 +115,14 @@ function 招商便民() {
     plus_parent_childcount = plus_parent.childCount();
     var sign_btn, sign_text;
     sign_btn = plus_parent.child(plus_parent_childcount - 1);
+    sleep(1200);
     if (sign_btn.childCount() != 0) {
         sign_text = sign_btn.child(0).text();
         if (sign_text == "去签到") {
             func.sClick(sign_btn);
             sleep(5000);
             back();
+            sleep(5000);
         }
     }
     toastLog(appName + ", 已签到");
