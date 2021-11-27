@@ -2,8 +2,8 @@
 // ----------------------通用功能区-----------------------
 // 切换到autojs
 function toAutojs() {
-    while (currentPackage() != getPackageName("Auto.js")) {
-        launchApp("Auto.js");
+    while (currentPackage() != ("org.autojs.autojs")) {
+        launch("org.autojs.autojs");
         log("启动autoJS");
         sleep(1200);
     }

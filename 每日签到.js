@@ -17,11 +17,15 @@ function main() {
         YunShaofu();
         浦发信用卡();
         买单吧();
-        工商();
         浦发银行();
+        工商();
     } else if (devModel == devHonor8) {
+        YunShaofu();
+        招商便民()
         jd_sign();
     } else if (devModel == devRedMi) {
+        YunShaofu();
+        招商便民()
         jd_sign();
         工商();
     }
@@ -32,12 +36,16 @@ function main() {
 function 工商() {
     var appName = "中国工商银行";
     //closeApp(appName);
-    func.toApp(appName);
+    func.toAutojs();
+
+    var url_工行小象 = "com.icbc.androidclient://startType=PORTALINJECT&menuId=xiaoxiangleyuan&shareCurrentUUID=";
+    // 启动小象
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        data: url_工行小象,
+    });
+
     while (textContains("你已经陪小象").findOnce() == null) {
-        func.sClick(text("我的").findOnce());
-        sleep(800);
-        func.sClick(text("小象乐园").findOnce());
-        sleep(800);
         if (text("请输入手势密码登录").findOnce()) {
             toastLog("已找到手势密码按钮");
             sleep(500);
@@ -78,6 +86,42 @@ function 工商() {
         toastLog("今日已签到");
         sleep(3000);
     }
+}
+
+
+function 招商便民() {
+    var appName = "招商银行";
+    var url_招商便民 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=791166&cmb_app_trans_parms_start=here&channel=share&appflag=0";
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        data: url_招商便民,
+    });
+    // 等待手势密码加载
+    id("vGestureContentView").findOne();
+    sleep(500);
+    func.gesture_pwd(appName);
+    sleep(2000);
+    var my_energy, get_energy;
+    my_energy = text("我的能量：").findOne();
+    get_energy = my_energy.parent().parent().child(2);
+    sleep(1200);
+    func.sClick(get_energy);
+    text("查询我的公积金").findOne();
+    var plus30, plus_parent, plus_parent_childcount;
+    plus30 = text("+30").findOne();
+    plus_parent = plus30.parent().parent();
+    plus_parent_childcount = plus_parent.childCount();
+    var sign_btn, sign_text;
+    sign_btn = plus_parent.child(plus_parent_childcount - 1);
+    if (sign_btn.childCount() != 0) {
+        sign_text = sign_btn.child(0).text();
+        if (sign_text == "去签到") {
+            func.sClick(sign_btn);
+            sleep(5000);
+            back();
+        }
+    }
+    toastLog(appName + ", 已签到");
 }
 
 
@@ -161,19 +205,13 @@ function 中行缤纷生活() {
 function 中国农业银行() {
     var appName = "中国农业银行";
     //closeApp(appName);
-    func.toApp(appName);
-    // lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
-    // while (lineBtn == null) {
-    //     lineBtn = className("android.widget.LinearLayout").id("alphaTabsIndicator").findOnce();
-    //     sleep(1000);
-    // }
-    // sleep(1000);
-    // //点击我的按钮
-    // func.sClick(lineBtn.child(4));
-    func.sClick(desc("我的").findOne());
-    sleep(1200);
-    // 签到按钮
-    func.cClick(id("tv_my_haidou_unlogin").text("小豆").findOne());
+    func.toAutojs();
+    var url_农行小豆 = "bankabc://%7B%22method%22%3A%22jumpToSharedProduct%22%2C%22param%22%3A%22rR4uOmAzpF49gqwDYQiLp20AltfnLciJg3Fyp5ijEIlD6KSfPdLMNyKsM8JboO6MwU4dRe9KEsPXqC4shEX19X6hEiWyiILqbgLFXv9xJ5Jc7WP8cgtQBKyWQwTlznpR47%2BlnPSHUcgGQwprcCrZljQQsb3H9RhiJ2D2qeBt4JJz84Yh2iQ9R1lu%2FY%2BWKtaP25m0LbNLiCBYzuVXpAI%2BZfQKjVDNu72M0bgLPJtM1yg7oAXVGsadNuQMbKRz0XWTmkZzKVNYYupr4XqG08l6VvoOh1qETuzMO5mSCup%2FrhpJbwn4v5yYWC68q2FmK6K8YXpHZRtZyVIQwKrZKYjGCZ%2BdeHNIQKJe2plRNjawvy1QfB%2FYEIxcT68HT63j3KJK0%2FxlZSrAvT9cbSKRHkxleVMdKn8uj8HVMWs8l1DMdrLJK0tNFerEfKnSptOj4bSiQ6kvE4M2fMWrUzVIDPYLCHe2xvp9kZOZufXgyE5wze30A6S1HhYbMbNNCql08lmP0wQ3l%2Fp8fBF6hmgoQ73vZPphwCEOQxonP7IzQJC9%2Bl03cbmmPDij%2BBHrrczU55456whyF167TTNstajIJ4rERfcYdlkv3VOQEaXo%2BsUUrdXbI6wjb9vErff5hUgaW2%2FMl%2FZjNZthSCybk58RIUT3ndyGTtBSg%2B3hP4C4%2FvzRl3TXL0yiIELKVkzrELbYENRqWib%2B5aGXN1a54ll48VdKQiJFSZhEfYp27AW49Qxe7epmorgOuUBd76FZwMZCR%2Bg1QRnSS21%2F0PRVHSvWj3BDeST7nIue51s83rsZb9rkrE52ADZNwBV5mFrcRYyQoaKe%22%7D"
+
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        data: url_农行小豆,
+    });
     //toastLog("我的已点击");
     while (textContains("小豆订单").findOnce() == null) {
         if (text("切换登录方式").findOnce() != null) {
@@ -228,33 +266,21 @@ function 邮储银行() {
 function 浦发银行() {
     var appName = "浦发银行";
     //closeApp(appName);
-    func.toApp(appName);
-    // while (text("我的账户").findOnce() == null) {
-    //     func.passAd();
-    // }
-    sleep(1800);
-    while (text("查看收益/收支明细").findOnce() == null) {
-        func.sClick(idContains("radio_button5").findOnce());
-        sleep(3000);
+    func.toAutojs();
+    var url_浦发储蓄卡金豆页面 = "spdbbank://wap.spdb.com.cn/awakeapp?login_flag=0&support_type=1&path=vue|mspmk-cli-welfare/goldenBean&APP_VERSION=@appVersion&from=shouye&login_flag=0&support_type=1";
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        data: url_浦发储蓄卡金豆页面,
+    });
+
+    while (!(text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce())) {
+        toastLog("等待登录窗口加载");
+        sleep(2000);
     }
-    // 签到按钮
-    while (text("金豆").findOnce() == null) {
-        func.toAutojs();
-        func.toApp(appName);
-        sleep(3000);
-    }
-    sleep(800);
-    while (text("收支").findOnce() == null) {
-        func.sClick(text("金豆").findOnce());
-        sleep(800);
-        if (text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce()) {
-            sleep(500);
-            func.gesture_pwd(appName);
-            sleep(1000);
-        }
-    }
-    sleep(1500);
-    scrollDown();
+    sleep(500);
+    func.gesture_pwd(appName);
+    sleep(1000);
+
     textStartsWith("+").findOne();
     sleep(800);
     var signs = textStartsWith("+").find();
@@ -525,41 +551,6 @@ function 工银e生活() {
 
     toastLog(appName + "已签到");
     sleep(1000);
-}
-
-function 招商银行() {
-    var appName = "招商银行";
-    // setClip("＆https://t.cmbchina.com/RZV7f2＆");
-    sleep(600);
-    func.toApp(appName);
-    func.passAd();
-    // func.sClick(text("立即查看").findOne());
-    func.sClick(id("cmb.pb:id/textMarquee").findOne());
-    text("历史搜索").findOne();
-    sleep(2500);
-    setText(0, "刮刮乐");
-    sleep(800);
-    func.sClick(text("功能").findOne());
-    func.sClick(text("招牌便民刮刮乐").findOne());
-    sleep(500);
-    while (text("周日").findOnce() == null) {
-
-        if (id("ivBigHeadImage").findOnce() != null) {
-            sleep(500);
-            func.gesture_pwd(appName);
-            sleep(1000);
-        }
-    }
-    sleep(2000);
-    var monday = text("周一").findOne();
-    func.sClick(monday.parent().parent().parent().child(3));
-    text("医保电子凭证").findOne();
-    sleep(1200);
-    back();
-    sleep(800);
-    setClip("");
-    toastLog(appName + "已签到");
-    sleep(1200);
 }
 
 function 什么值得买() {

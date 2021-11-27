@@ -63,37 +63,62 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 
-浦发银行();
+招商便民();
+
 // func.sClick(idContains("radio_button5").findOnce());
+function 招商便民() {
+    var appName = "招商银行";
+    var url_招商便民 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=791166&cmb_app_trans_parms_start=here&channel=share&appflag=0";
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        data: url_招商便民,
+    });
+    // 等待手势密码加载
+    id("vGestureContentView").findOne();
+    sleep(500);
+    func.gesture_pwd(appName);
+    sleep(2000);
+    var my_energy, get_energy;
+    my_energy = text("我的能量：").findOne();
+    get_energy = my_energy.parent().parent().child(2);
+    sleep(1200);
+    func.sClick(get_energy);
+    text("查询我的公积金").findOne();
+    var plus30, plus_parent, plus_parent_childcount;
+    plus30 = text("+30").findOne();
+    plus_parent = plus30.parent().parent();
+    plus_parent_childcount = plus_parent.childCount();
+    var sign_btn, sign_text;
+    sign_btn = plus_parent.child(plus_parent_childcount - 1);
+    if (sign_btn.childCount() != 0) {
+        sign_text = sign_btn.child(0).text();
+        if (sign_text == "去签到") {
+            func.sClick(sign_btn);
+            sleep(5000);
+            back();
+        }
+    }
+    toastLog(appName + ", 已签到");
+}
+
 
 // 浦发金豆签到
 function 浦发银行() {
     var appName = "浦发银行";
     //closeApp(appName);
-    func.toApp(appName);
-    sleep(1800);
-    while (text("查看收益/收支明细").findOnce() == null) {
-        func.sClick(idContains("radio_button5").findOnce());
-        sleep(3000);
-    }
-    // 签到按钮
-    while (text("金豆").findOnce() == null) {
-        func.toAutojs();
-        func.toApp(appName);
-        sleep(3000);
-    }
-    sleep(800);
-    while (text("收支").findOnce() == null) {
-        func.sClick(text("金豆").findOnce());
-        sleep(800);
+    func.toAutojs();
+    var url_浦发储蓄卡金豆页面 = "spdbbank://wap.spdb.com.cn/awakeapp?login_flag=0&support_type=1&path=vue|mspmk-cli-welfare/goldenBean&APP_VERSION=@appVersion&from=shouye&login_flag=0&support_type=1";
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        data: url_浦发储蓄卡金豆页面,
+    });
+    while (textContains("任务领取海量金豆").findOnce() == null) {
         if (text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce()) {
             sleep(500);
             func.gesture_pwd(appName);
             sleep(1000);
         }
     }
-    sleep(1500);
-    scrollDown();
     textStartsWith("+").findOne();
     sleep(800);
     var signs = textStartsWith("+").find();
