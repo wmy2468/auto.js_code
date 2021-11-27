@@ -17,8 +17,8 @@ function main() {
         YunShaofu();
         浦发信用卡();
         买单吧();
-        浦发银行();
         工商();
+        浦发银行();
     } else if (devModel == devHonor8) {
         jd_sign();
     } else if (devModel == devRedMi) {
