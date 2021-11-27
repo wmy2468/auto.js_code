@@ -90,6 +90,7 @@ function 工商() {
 
 
 function 招商便民() {
+    func.toAutojs();
     var appName = "招商银行";
     var url_招商便民 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=791166&cmb_app_trans_parms_start=here&channel=share&appflag=0";
     app.startActivity({
