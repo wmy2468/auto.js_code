@@ -129,7 +129,7 @@ function 招商便民() {
             sleep(1000);
             plus_parent = plus30.parent().parent();
             plus_parent_childcount = plus_parent.childCount();
-            func.sClick(plus_parent_childcount - 1);        // 点击领取
+            func.sClick(plus_parent.child(plus_parent_childcount - 1));        // 点击领取
         }
     }
     toastLog(appName + ", 已签到");
