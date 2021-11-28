@@ -19,16 +19,16 @@ function main() {
         买单吧();
         浦发银行();
         工商();
-        招商便民()
+        招商便民();
     } else if (devModel == devHonor8) {
         YunShaofu();
         jd_sign();
-        招商便民()
+        招商便民();
     } else if (devModel == devRedMi) {
         YunShaofu();
         jd_sign();
-        招商便民()
         工商();
+        招商便民();
     }
     alert("已完成.");
 }
