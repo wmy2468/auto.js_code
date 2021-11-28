@@ -235,7 +235,7 @@ function gesture_pwd(appName) {
     var execStr;
     // 根据APP名称区分滑动持续时间
     if (appName == "招商银行" || appName == "缤纷生活" || appName == "万商云" || appName == "浦大喜奔") {
-        execStr = "gesture(1200";
+        execStr = "gesture(1100";
     } else {
         execStr = "gesture(850";
     }
