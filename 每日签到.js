@@ -106,8 +106,9 @@ function 招商便民() {
     var my_energy, get_energy;
     my_energy = text("我的能量：").findOne();
     get_energy = my_energy.parent().parent().child(2);
-    sleep(1200);
+    sleep(3000);
     func.sClick(get_energy);
+    toast("已点击，集能量");
     text("查询我的公积金").findOne();
     var plus30, plus_parent, plus_parent_childcount;
     plus30 = text("+30").findOne();
@@ -120,9 +121,15 @@ function 招商便民() {
         sign_text = sign_btn.child(0).text();
         if (sign_text == "去签到") {
             func.sClick(sign_btn);
+            toast("已点击，去签到，5秒后返回");
             sleep(5000);
             back();
-            sleep(5000);
+            toast("已返回，等待领取");
+            plus30 = text("+30").findOne();
+            sleep(1000);
+            plus_parent = plus30.parent().parent();
+            plus_parent_childcount = plus_parent.childCount();
+            func.sClick(plus_parent_childcount - 1);        // 点击领取
         }
     }
     toastLog(appName + ", 已签到");
