@@ -76,8 +76,15 @@ function 招商领取(page_text, wait_text, popup_wait_text, select_text, sure_b
         toastLog("等待跳转到:" + page_text + "页面");
         sleep(2200);
     }
+    var cnt;
+    cnt = 0
     while (func.sClick(text(wait_text).findOnce()) == false) {
+        if (cnt % 10 == 0) {
+            toast("等待选择奖品");
+        }
+        cnt = cnt + 1;
         sleep(300);
+
     }
     var popup_parent, popup_child;
     popup_parent = text(popup_wait_text).findOne().parent();
