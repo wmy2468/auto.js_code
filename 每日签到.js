@@ -18,8 +18,8 @@ function main() {
         浦发信用卡();
         买单吧();
         浦发银行();
-        工商();
         招商便民();
+        工商();
     } else if (devModel == devHonor8) {
         YunShaofu();
         jd_sign();
@@ -27,8 +27,8 @@ function main() {
     } else if (devModel == devRedMi) {
         YunShaofu();
         jd_sign();
-        工商();
         招商便民();
+        工商();
     }
     alert("已完成.");
 }
@@ -130,6 +130,7 @@ function 招商便民() {
                 toast("已点击，等待服务大厅加载");
                 sleep(2500);
             }
+            toast("服务大厅 已加载");
             sleep(3000);
             back();
             toast("返回，等待领取");
@@ -144,9 +145,12 @@ function 招商便民() {
                 sleep(1000);
             }
             func.sClick(sign_btn);      // 点击领取
+            toast("已点击领取");
+            sleep(2000);
         }
     }
     toastLog(appName + ", 已签到");
+    sleep(2000);
 }
 
 
