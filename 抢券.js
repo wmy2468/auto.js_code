@@ -71,9 +71,8 @@ function 招商领取(page_text, wait_text, popup_wait_text, select_text, sure_b
     @param select_text 等待目标页面 要选择的文字
     @param sure_btn 等待选择界面后确认 的文字
      */
-
     while (text(page_text).findOnce() == null) {
-        toastLog("等待跳转到:" + page_text + "页面");
+        toast("等待跳转到:" + page_text + "页面");
         sleep(2200);
     }
     var cnt;
@@ -103,6 +102,11 @@ function 招商APP() {
     popup_wait_text = "请选择奖品";
     select_text = "洁柔";
     sure_btn = "确认领取";
+    url_target = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https%253A%252F%252Factship-activityui.paas.cmbchina.com%252FActPage.html%253FactivityId%253DAGP20210716120235UDcjClqm%2526behavior_entryid%253Dundefined&shortUrl=https%253A%252F%252Fcmbt.cn%252Fa%252FhtREAc%253FactivityId%253DAGP20210716120235UDcjClqm%2526behavior_entryid%253Dundefined&appflag=0"
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        data: url_target,
+    });
     招商领取(page_text, wait_text, popup_wait_text, select_text, sure_btn);
 }
 
