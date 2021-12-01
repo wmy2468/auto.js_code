@@ -11,6 +11,7 @@ function main() {
     devRedMi = "Redmi Note 7";
     // 中行缤纷生活() 邮储银行() 邮储信用卡() 华彩生活() 招商银行()
     if (devModel == devMate30) {
+        龙支付签到();
         中国农业银行();
         什么值得买();
         jd_sign();
@@ -34,6 +35,22 @@ function main() {
 }
 
 // ======================签到代码==================================
+
+function 龙支付签到() {
+    var url_ccb签到 = "ccbapp://utils?ccbEncodeParam=i8zHyJJS9cmdvTjpr9t8IEmOi6ozP%2BL52wT%2FCvKg7NBYCqAQkkQwpI4zm1bqcufOp4g2WYGlsm42e1bYhPjbRdSpUin%2FXtlXYWe%2FBCBYefhb6XhldPcF3rJAW0s3%2BQAe9Z3OmzkJqCS27g7X8Vf9rBiX%2F%2FPdYwgpO5WYEHRNlrCoXPVKsMXUJh2Kq0M%3D"
+
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        data: url_ccb签到,
+    });
+    while (text("今日已签到").findOnce() == null) {
+        func.sClick(textContains("签到").findOnce());
+        sleep(3000);
+    }
+    toastLog("龙支付, 已签到");
+    sleep(2000);
+}
+
 function 工商() {
     var appName = "中国工商银行";
     //closeApp(appName);
