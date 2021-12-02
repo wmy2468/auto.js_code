@@ -44,7 +44,7 @@ function 龙支付签到() {
         data: url_ccb签到,
     });
     while (text("今日已签到").findOnce() == null) {
-        func.cClick(textContains("签到").findOnce());
+        func.sClick(text("立即签到").findOnce());
         sleep(3000);
     }
     toastLog("龙支付, 已签到");
