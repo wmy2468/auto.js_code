@@ -713,10 +713,10 @@ function 中信活动() {
             // log(nowDate.getHours() <= 9);
             // 如果当前小时数 大于10，则是15点场
             if (nowDate.getHours() <= 9) {
-                startTime = "09,59,50,000"
+                startTime = "09,59,52,000"
                 couDes = ["星巴克中杯饮品电子券", "迪士尼", "必胜客20元", "奈雪", "喜茶25元", "苏宁支付券20元", "京东支付券20元", "天猫20元", "滴滴出行20元", "美团外卖20元"];
             } else {
-                startTime = "14,59,50,000"
+                startTime = "14,59,53,000"
                 couDes = ["【下午茶】喜茶25元抵用券（15点抢兑）"];
             }
 
@@ -745,12 +745,13 @@ function 中信活动() {
             text(targetViewText).findOne();             // 等待进入指定页面
             toastLog("已到达指定页面，等待");
             //点击元素
-            while (func.sClick(text("去兑换").findOnce()) == false) {
+            var to_pay = null;
+            while (to_pay == null) {
+                func.sClick(text("去兑换").findOnce());
+                to_pay = text("去支付").findOnce();
                 sleep(100);
             }
-            while (func.sClick(text("去支付").findOnce()) == false) {
-                sleep(100);
-            }
+            func.sClick(to_pay);
             toastLog("已点击，等待验证码");
             sleep(3000);
             break;
