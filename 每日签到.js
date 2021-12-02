@@ -12,13 +12,13 @@ function main() {
     // 中行缤纷生活() 邮储银行() 邮储信用卡() 华彩生活() 招商银行()
     if (devModel == devMate30) {
         龙支付签到();
+        浦发银行();
         中国农业银行();
         什么值得买();
         jd_sign();
         YunShaofu();
         浦发信用卡();
         买单吧();
-        浦发银行();
         招商便民();
         工商();
     } else if (devModel == devHonor8) {
