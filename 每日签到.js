@@ -326,7 +326,8 @@ function 浦发银行() {
     sleep(500);
     func.gesture_pwd(appName);
     sleep(1000);
-
+    text("做任务领取海量金豆").findOne();
+    sleep(2000);
     textStartsWith("+").findOne();
     sleep(800);
     var signs = textStartsWith("+").find();
