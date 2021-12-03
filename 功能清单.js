@@ -17,7 +17,7 @@ var url_浦发储蓄卡金豆页面 = "spdbbank://wap.spdb.com.cn/awakeapp?login
 
 var url_招商便民 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=791166&cmb_app_trans_parms_start=here&channel=share&appflag=0";
 
-var url_ccb签到 = "ccbapp://utils?ccbEncodeParam=i8zHyJJS9cmdvTjpr9t8IEmOi6ozP%2BL52wT%2FCvKg7NBYCqAQkkQwpI4zm1bqcufOp4g2WYGlsm42e1bYhPjbRdSpUin%2FXtlXYWe%2FBCBYefhb6XhldPcF3rJAW0s3%2BQAe9Z3OmzkJqCS27g7X8Vf9rBiX%2F%2FPdYwgpO5WYEHRNlrCoXPVKsMXUJh2Kq0M%3D"
+var url_ccb签到 = "ccbapp://utils?ccbEncodeParam=ruapsj7I2qua8pR6GnzLuNDjkpEFwI6MLyIzj8A6hPaK13CAzdfO7%2F6FFEhz6IaYUiKwTF8ckUCewiBaPOk9a0gAifErjtXiC0HouhULgghYW08MmyPehRxGnG7a2aIGU2QjeJhu7V0b6NBf0Dn4bm%2BVZNZM91%2FAchT1Q3CtLi5xA7XtYGFbHP%2FS3%2FE%3D"
 
 app.startActivity({
     action: "android.intent.action.VIEW",

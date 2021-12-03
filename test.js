@@ -64,7 +64,7 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 
-toastLog(text("确定").findOnce());
+浦发银行()
 
 // func.sClick(idContains("radio_button5").findOnce());
 function 招商便民() {
@@ -137,19 +137,24 @@ function 浦发银行() {
         action: "android.intent.action.VIEW",
         data: url_浦发储蓄卡金豆页面,
     });
-    while (textContains("任务领取海量金豆").findOnce() == null) {
-        if (text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce()) {
-            sleep(500);
-            func.gesture_pwd(appName);
-            sleep(1000);
-        }
+
+    while (!(text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce())) {
+        toastLog("等待登录窗口加载");
+        sleep(2000);
     }
-    textStartsWith("+").findOne();
+    sleep(500);
+    func.gesture_pwd(appName);
+    sleep(1000);
+    text("做任务领取海量金豆").findOne();
+    sleep(2000);
+    textContains("+").findOne();
     sleep(800);
-    var signs = textStartsWith("+").find();
+    var signs = textContains("+").find();
     try {
         for (var i = 0; i < signs.length; i++) {
-            func.sClick(signs[i]);
+            if (signs[i].text().length <= 10) {
+                func.sClick(signs[i]);
+            }
         }
     }
     catch (e) {
