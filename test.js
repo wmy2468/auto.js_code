@@ -64,7 +64,7 @@ var func = require("func_list.js");
 //     func.sClick(signs[i]);
 // }
 
-招商便民();
+toastLog(text("确定").findOnce());
 
 // func.sClick(idContains("radio_button5").findOnce());
 function 招商便民() {

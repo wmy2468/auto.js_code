@@ -9,7 +9,7 @@ function main() {
         "光大活动",
         "中信活动",
         // "工行活动",
-        // "交行9点5积分",
+        "交行5积分",
         // "京东腾讯月",
         "京喜领券",
         // "掌上生活",
@@ -36,7 +36,7 @@ function main() {
         case "掌上生活":
             掌上生活活动();
             break;
-        case "交行9点5积分":
+        case "交行5积分":
             交行9点5积分();
             break;
         case "京东腾讯月":
@@ -639,60 +639,27 @@ function 光大活动() {
 function 交行9点5积分() {
     toastLog("等待页面变化");
     var appName = "买单吧";
-    var actNames = ["加油卡充值30元红包", "缴费类15元红包", "话费20元红包", "话费10元红包"];
+    startTime = "08,59,57,000"
+    var actNames = ["加油卡充值30元红包", "缴费类15元红包", "话费20元红包", "话费10元红包", "本月2倍积分"];
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
     func.toApp(appName);
     // 等待进入指定页面
-    var gasPacket;
-    text("本月可用兑换资格2次").findOne();
-    var countDown, countDownParent, idxCountDown, minuteIdx, secIdx, minuteText, secText;
-    var tempSec = "", cnt = 0;
+    var get_packet, packet_parent, packet_childcount;
+    textContains("本月可用兑换资格").findOne();
+    toastLog("已到达指定页面");
+    func.getTimeDiff(timeArea, startTime);              // 等待时间
     while (1) {
-        countDown = text("抢兑倒计时：").findOne();
-        countDownParent = countDown.parent();
-        // 获取倒计时在母空间的位置
-        idxCountDown = countDown.indexInParent();
-        // 分钟和时钟的位置
-        minuteIdx = idxCountDown + 1;
-        secIdx = idxCountDown + 3;
-        // 分钟和时钟的值
-        minuteText = countDownParent.child(minuteIdx).text();
-        secText = countDownParent.child(secIdx).text();
-        cnt = cnt + 1;
-        if (!(tempSec == secText)) {
-            if (cnt >= 5) {
-                cnt = 0;
-                toastLog("倒计时 分钟:" + minuteText + " 秒:" + secText);
+        get_packet = text(actName).findOnce();
+        if (get_packet != null) {
+            packet_parent = get_packet.parent().parent();
+            packet_childcount = packet_parent.childCount();
+            if (func.sClick(packet_parent.child(packet_childcount - 1))) {
+                sleep(100);
             }
         }
-        tempSec = secText;
-        if (minuteText == "00" && secText == "01") {
-            sleep(500);
+        if (func.sClick(text("确定").findOnce())) {
+            toastLog("已点击确定");
             break;
-        }
-    }
-    var sureBtn;
-    while (1) {
-        //点击元素
-        try {
-            sureBtn = className("android.view.View").text("确认").findOnce();
-            //如果找到确认按钮则不继续点击抢兑
-            if (sureBtn == null) {
-                gasPacket = className("android.view.View").text(actName).findOnce().parent().parent().child(1);
-                if (gasPacket.text() == "抢兑") {
-                    func.sClick(gasPacket);
-                    sleep(300);
-                } else {
-                    continue;
-                }
-            } else {
-                if (func.sClick(sureBtn)) {
-                    toastLog("已点击");
-                    break;
-                }
-            }
-        } catch (e) {
-            continue;
         }
     }
 }
@@ -748,8 +715,9 @@ function 中信活动() {
             var to_pay = null;
             while (to_pay == null) {
                 func.sClick(text("去兑换").findOnce());
-                to_pay = text("去支付").findOnce();
+                func.sClick(text("未开始").findOnce());
                 sleep(100);
+                to_pay = text("去支付").findOnce();
             }
             func.sClick(to_pay);
             toastLog("已点击，等待验证码");
