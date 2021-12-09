@@ -41,8 +41,10 @@ function 万商3比() {
             break;
     }
     func.toApp(appName);
+    sum = 0;
     while (count > 0) {
         inputVal = func.randomNum(min, max, digit = 1);
+        sum = sum + inputVal
         while (text("请输入收款金额").findOnce() == null) {
             func.sClick(id("home_qrcodepay").findOnce());
             if (text("请绘制手势密码登录").findOnce()) {
@@ -70,7 +72,7 @@ function 万商3比() {
         back();
         count = count - 1;
     }
-    alert("已完成");
+    alert("已完成,共计:" + sum + "元");
 }
 
 function 钱宝3比() { }
