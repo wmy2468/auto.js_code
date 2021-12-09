@@ -63,106 +63,107 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
+toastLog("今日已打卡");
 
-浦发银行()
-
-// func.sClick(idContains("radio_button5").findOnce());
-function 招商便民() {
-    func.toAutojs();
-    var appName = "招商银行";
-    var url_招商便民 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=791166&cmb_app_trans_parms_start=here&channel=share&appflag=0";
-    app.startActivity({
-        action: "android.intent.action.VIEW",
-        data: url_招商便民,
-    });
-    // 等待手势密码加载
-    id("vGestureContentView").findOne();
-    sleep(500);
-    func.gesture_pwd(appName);
-    sleep(2000);
-    var my_energy, get_energy;
-    while (text("查询我的公积金").findOnce() == null) {
-        my_energy = text("我的能量：").findOnce();
-        if (my_energy != null) {
-            get_energy = my_energy.parent().parent().child(2);
-            sleep(1200);
-            func.sClick(get_energy);
+function 招商() {
+    this.饭票签到 = function () {
+        func.toAutojs();
+        var url_招商饭票签到 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=100856&cmb_app_trans_parms_start=here&param=v2&appflag=0"
+        app.startActivity({
+            action: "android.intent.action.VIEW",
+            data: url_招商饭票签到,
+        });
+        var today;
+        today = text("今日").depth(12).findOne();
+        sleep(1500);
+        func.sClick(today.parent().parent().child(1));
+        toast("已点击打卡领饭票,等待5s");
+        sleep(5000);
+        // 判断如果还在饭票页面则说明 已经打过卡
+        if (text("每周一到周五打卡浏览指定页面，打卡当天可获得一次抽奖机会").findOnce() == null) {
+            back();
+        }
+        toast("今日已打卡");
+        sleep(3000);
+    }
+    this.便民生活 = function () {
+        func.toAutojs();
+        var appName = "招商银行";
+        var url_招商便民 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=791166&cmb_app_trans_parms_start=here&channel=share&appflag=0";
+        app.startActivity({
+            action: "android.intent.action.VIEW",
+            data: url_招商便民,
+        });
+        // 等待手势密码加载
+        id("vGestureContentView").findOne();
+        sleep(500);
+        func.gesture_pwd(appName);
+        sleep(2000);
+        var my_energy, get_energy;
+        while (text("查询我的公积金").findOnce() == null) {
+            my_energy = text("我的能量：").findOnce();
+            if (my_energy != null) {
+                get_energy = my_energy.parent().parent().child(2);
+                sleep(1200);
+                func.sClick(get_energy);
+            }
+            sleep(2000);
         }
         sleep(2000);
-    }
-    sleep(2000);
-    var plus30, plus_parent, plus_parent_childcount;
-    var sign_btn, sign_text;
+        var plus30, plus_parent, plus_parent_childcount;
+        var sign_btn, sign_text;
 
-    plus30 = text("+30").depth(14).findOne();
-    plus_parent = plus30.parent().parent();
-    plus_parent_childcount = plus_parent.childCount();
-    sign_btn = plus_parent.child(plus_parent_childcount - 1);
-    sleep(1200);
-    if (sign_btn.childCount() != 0) {
-        sign_text = sign_btn.child(0).text();
-        if (sign_text == "去签到") {
-            func.sClick(sign_btn);          // 点击签到
-            while (text("服务大厅").findOnce() == null) {
-                toast("已点击，等待服务大厅加载");
-                sleep(2500);
-            }
-            sleep(3000);
-            back();
-            toast("返回，等待领取");
-            while (sign_text == "去签到") {
-                plus30 = text("+30").depth(14).findOnce();
-                if (plus30 != null) {
-                    plus_parent = plus30.parent().parent();
-                    plus_parent_childcount = plus_parent.childCount();
-                    sign_btn = plus_parent.child(plus_parent_childcount - 1);
-                    sign_text = sign_btn.child(0).text();
+        plus30 = text("+30").depth(14).findOne();
+        plus_parent = plus30.parent().parent();
+        plus_parent_childcount = plus_parent.childCount();
+        sign_btn = plus_parent.child(plus_parent_childcount - 1);
+        sleep(1200);
+        if (sign_btn.childCount() != 0) {
+            sign_text = sign_btn.child(0).text();
+            if (sign_text == "去签到") {
+                func.sClick(sign_btn);          // 点击签到
+                while (text("服务大厅").findOnce() == null) {
+                    toast("已点击，等待服务大厅加载");
+                    sleep(2500);
                 }
-                sleep(1000);
+                toast("服务大厅 已加载");
+                sleep(3000);
+                back();
+                toast("返回，等待领取");
+                while (sign_text == "去签到") {
+                    plus30 = text("+30").depth(14).findOnce();
+                    if (plus30 != null) {
+                        plus_parent = plus30.parent().parent();
+                        plus_parent_childcount = plus_parent.childCount();
+                        sign_btn = plus_parent.child(plus_parent_childcount - 1);
+                        sign_text = sign_btn.child(0).text();
+                    }
+                    sleep(1000);
+                }
+                func.sClick(sign_btn);      // 点击领取
+                toast("已点击领取");
+                sleep(2000);
             }
-            func.sClick(sign_btn);      // 点击领取
         }
+        toastLog("便民生活, 已签到");
+        sleep(3000);
     }
-    toastLog(appName + ", 已签到");
+    return this;
 }
+
+// func.sClick(idContains("radio_button5").findOnce());
+
 
 
 // 浦发金豆签到
 function 浦发银行() {
-    var appName = "浦发银行";
-    //closeApp(appName);
-    func.toAutojs();
-    var url_浦发储蓄卡金豆页面 = "spdbbank://wap.spdb.com.cn/awakeapp?login_flag=0&support_type=1&path=vue|mspmk-cli-welfare/goldenBean&APP_VERSION=@appVersion&from=shouye&login_flag=0&support_type=1";
-    app.startActivity({
-        action: "android.intent.action.VIEW",
-        data: url_浦发储蓄卡金豆页面,
-    });
-
-    while (!(text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce())) {
-        toastLog("等待登录窗口加载");
-        sleep(2000);
+    this.ppf = function () {
+        toastLog(123)
     }
-    sleep(500);
-    func.gesture_pwd(appName);
-    sleep(1000);
-    text("做任务领取海量金豆").findOne();
-    sleep(2000);
-    textContains("+").findOne();
-    sleep(800);
-    var signs = textContains("+").find();
-    try {
-        for (var i = 0; i < signs.length; i++) {
-            if (signs[i].text().length <= 10) {
-                func.sClick(signs[i]);
-            }
-        }
+    this.ppb = function () {
+        toastLog(456)
     }
-    catch (e) {
-        toastLog("未找到多余的连续签到");
-        sleep(2000);
-    }
-    toastLog(appName + "已签到");
-    sleep(3000);
+    return this;
 }
 
 // // 问题解决了，参照（http://www.cocoachina.com/bbs/read.php?tid-1689677.html ）用urlscheme跳转京东某个商品页面可行！

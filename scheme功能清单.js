@@ -19,9 +19,11 @@ var url_招商便民 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpn
 
 var url_ccb签到 = "ccbapp://utils?ccbEncodeParam=ruapsj7I2qua8pR6GnzLuNDjkpEFwI6MLyIzj8A6hPaK13CAzdfO7%2F6FFEhz6IaYUiKwTF8ckUCewiBaPOk9a0gAifErjtXiC0HouhULgghYW08MmyPehRxGnG7a2aIGU2QjeJhu7V0b6NBf0Dn4bm%2BVZNZM91%2FAchT1Q3CtLi5xA7XtYGFbHP%2FS3%2FE%3D"
 
+var url_招商饭票签到 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=100856&cmb_app_trans_parms_start=here&param=v2&appflag=0"
+
 app.startActivity({
     action: "android.intent.action.VIEW",
-    data: url_ccb签到,
+    data: url_招商饭票签到,
 });
 
 // --------------url scheme--------------
