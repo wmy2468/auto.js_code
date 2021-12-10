@@ -639,7 +639,8 @@ function 光大活动() {
 function 交行9点5积分() {
     toastLog("等待页面变化");
     var appName = "买单吧";
-    startTime = "08,59,57,000"
+    var timeArea = "北京时间";
+    var startTime = "08,59,57,000"
     var actNames = ["加油卡充值30元红包", "缴费类15元红包", "话费20元红包", "话费10元红包", "本月2倍积分"];
     var actName = func.dialogsWin(actNames);      // 设置查找的文本
     func.toApp(appName);
