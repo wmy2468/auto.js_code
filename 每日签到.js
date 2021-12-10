@@ -353,7 +353,11 @@ function 浦发银行() {
     sleep(500);
     func.gesture_pwd(appName);
     sleep(1000);
-    text("做任务领取海量金豆").findOne();
+    text("开启签到提醒").findOne();
+    // 当签到0天 表示未加载完成
+    while (text("已连续签到0天").findOnce() != null) {
+        sleep(1000);
+    }
     sleep(2000);
     textContains("+").findOne();
     sleep(800);
