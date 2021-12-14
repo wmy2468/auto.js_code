@@ -23,9 +23,11 @@ var url_招商饭票签到 = "cmbmobilebank://cmbls/functionjump?action=gocorpno
 
 var url_ysf会员中心 = "upwallet://applet?encryptAppId=472741b326b7bb5c&toLink=https%3A%2F%2Fcloudvip.95516.com%2F&scenarioId=1006"
 
+var url_中信 = "citicbankdkkj://go?dl=ctrl%3A%2F%2FcommonWap%7B%22wapType%22%3A%22noMerchantNum%22%2C%22merchantNum%22%3A%22%22%2C%22merchantUrl%22%3A%22https%3A%2F%2Fmtp.creditcard.ecitic.com%2Fciticcard%2Fmtplocallife%2Findex.html%23%2FgoodsDetail%3Fitem_id%3D000001774871d8380001ab01%22%2C%22utm_info%22%3A%7B%22utm_campaign%22%3A%22%22%2C%22utm_entrance%22%3A%22%22%2C%22utm_source%22%3A%22%22%2C%22utm_term%22%3A%22%22%7D%7D"
+
 app.startActivity({
     action: "android.intent.action.VIEW",
-    data: url_ysf会员中心,
+    data: url_中信,
 });
 
 // --------------url scheme--------------
