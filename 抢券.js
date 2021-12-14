@@ -12,9 +12,9 @@ function main() {
         "交行5积分",
         // "京东腾讯月",
         "京喜领券",
-        // "掌上生活",
-        "云闪付锦鲤活动",
-        "招商APP"
+        "掌上生活",
+        // "云闪付锦鲤活动",
+        "招商便民生活"
         // "中行周二视频捡漏"
         // "农行缴费20-10"
     ];
@@ -51,8 +51,8 @@ function main() {
         case "京喜领券":
             京喜领券();
             break;
-        case "招商APP":
-            招商APP();
+        case "招商便民生活":
+            招商便民生活();
             break;
         case "中行周二视频捡漏":
             中行周二视频捡漏();
@@ -95,14 +95,14 @@ function 招商领取(page_text, wait_text, popup_wait_text, select_text, sure_b
     func.sClick(text(sure_btn).findOne());
 }
 
-function 招商APP() {
+function 招商便民生活() {
     var page_text, wait_text, popup_wait_text, select_text, sure_btn;
     page_text = "便民生活 遇见美好";
     wait_text = "选择奖品";
     popup_wait_text = "请选择奖品";
-    select_text = "洁柔";
+    select_text = func.dialogsWin(["双立人", "洁柔", "6000微克", "5000微克", "4000微克"]);
     sure_btn = "确认领取";
-    url_target = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https%253A%252F%252Factship-activityui.paas.cmbchina.com%252FActPage.html%253FactivityId%253DAGP20210716120235UDcjClqm%2526behavior_entryid%253Dundefined&shortUrl=https%253A%252F%252Fcmbt.cn%252Fa%252FhtREAc%253FactivityId%253DAGP20210716120235UDcjClqm%2526behavior_entryid%253Dundefined&appflag=0"
+    url_target = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https%253A%252F%252Factship-activityui.paas.cmbchina.com%252FActPage.html%253FactivityId%253DAGP20211201095436sH6P8jxK%2526behavior_entryid%253Dundefined&shortUrl=https%253A%252F%252Fcmbt.cn%252Fa%252FhtREAc%253FactivityId%253DAGP20211201095436sH6P8jxK%2526behavior_entryid%253Dundefined&appflag=0"
     app.startActivity({
         action: "android.intent.action.VIEW",
         data: url_target,
@@ -531,14 +531,14 @@ function 掌上生活活动() {
             targetViewText = "星巴克中杯手工调制饮品";
             func.toApp(appName);
             // 等待进入指定页面
-            while (!text("成团领奖").findOnce()) {
+            while (!textContains("成团").findOnce()) {
                 toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
                 sleep(800);
             }
             toastLog("已到达指定页面，等待");
             //  提前10秒 开始进入
             func.getTimeDiff(timeArea, startTime);
-            func.sClick(text("成团领奖").findOnce());
+            func.sClick(textContains("成团").findOnce());
             var clickBtn;
             func.getTimeDiff(timeArea, "09,59,59,700");
             while (1) {
