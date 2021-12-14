@@ -11,25 +11,29 @@ function main() {
     devRedMi = "Redmi Note 7";
     // 中行缤纷生活() 邮储银行() 邮储信用卡() 华彩生活() 招商银行()
     zs = 招商();
+    ysf = 云闪付();
     if (devModel == devMate30) {
         // 龙支付签到();
         浦发银行();
         中国农业银行();
         什么值得买();
         jd_sign();
-        YunShaofu();
+        ysf.签到();
+        ysf.领积点();
         浦发信用卡();
         买单吧();
         zs.便民生活();
         zs.饭票签到();
         工商();
     } else if (devModel == devHonor8) {
-        YunShaofu();
+        ysf.签到();
+        ysf.领积点();
         jd_sign();
         zs.便民生活();
         zs.饭票签到();
     } else if (devModel == devRedMi) {
-        YunShaofu();
+        ysf.签到();
+        ysf.领积点();
         jd_sign();
         zs.便民生活();
         zs.饭票签到();
@@ -39,23 +43,54 @@ function main() {
 }
 
 // ======================签到代码==================================
-
-function 龙支付签到() {
-    func.toAutojs();
-
-    var url_ccb签到 = "ccbapp://utils?ccbEncodeParam=ruapsj7I2qua8pR6GnzLuNDjkpEFwI6MLyIzj8A6hPaK13CAzdfO7%2F6FFEhz6IaYUiKwTF8ckUCewiBaPOk9a0gAifErjtXiC0HouhULgghYW08MmyPehRxGnG7a2aIGU2QjeJhu7V0b6NBf0Dn4bm%2BVZNZM91%2FAchT1Q3CtLi5xA7XtYGFbHP%2FS3%2FE%3D"
-
-    app.startActivity({
-        action: "android.intent.action.VIEW",
-        data: url_ccb签到,
-    });
-    while (text("今日已签到").findOnce() == null) {
-        func.sClick(text("立即签到").findOnce());
-        sleep(3000);
+function 云闪付() {
+    this.领积点 = function () {
+        func.toAutojs();
+        var url_ysf会员中心 = "upwallet://applet?encryptAppId=472741b326b7bb5c&toLink=https%3A%2F%2Fcloudvip.95516.com%2F&scenarioId=1006"
+        app.startActivity({
+            action: "android.intent.action.VIEW",
+            data: url_ysf会员中心,
+        });
+        while (!(text("我的积点").findOnce() != null &&
+            text("积点乐园").findOnce() != null)) {
+            sleep(3000);
+        }
+        sleep(5000);
+        func.sClick(text("全部收取").findOnce());
+        toastLog("云闪付, 已领取积点");
+        sleep(2000);
     }
-    toastLog("龙支付, 已签到");
-    sleep(2000);
+
+    this.签到 = function () {
+        var appName = "com.unionpay";
+        //closeApp(appName);
+        func.toPackage(appName);
+        while (className("TextView").text("我的").findOnce() == null) {
+            if (textContains("跳过").findOnce() != null || descContains("跳过").findOnce() != null) {
+                sleep(800);
+                continue;
+            }
+            sleep(1000);
+        }
+        sleep(1500);
+        func.sClick(className("TextView").text("首页").findOnce());
+        //点击签到按钮
+        func.sClick(id("com.unionpay:id/frog_float").findOne());
+        // 等待签到页面加载
+        textContains("连续签到").findOne();
+
+        if (text("今日已签到").findOnce() == null) {
+            func.sClick(text("立即签到").findOnce());
+            sleep(1500);
+        }
+        toastLog(appName + "已签到");
+        sleep(1000);
+    }
+    return this;
 }
+
+
+
 
 function 工商() {
     var appName = "中国工商银行";
@@ -574,32 +609,6 @@ function 华彩生活() {
             func.gesture_pwd(appName);
             sleep(1000);
         }
-    }
-    toastLog(appName + "已签到");
-    sleep(1000);
-}
-
-function YunShaofu() {
-    var appName = "com.unionpay";
-    //closeApp(appName);
-    func.toPackage(appName);
-    while (className("TextView").text("我的").findOnce() == null) {
-        if (textContains("跳过").findOnce() != null || descContains("跳过").findOnce() != null) {
-            sleep(800);
-            continue;
-        }
-        sleep(1000);
-    }
-    sleep(1500);
-    func.sClick(className("TextView").text("首页").findOnce());
-    //点击签到按钮
-    func.sClick(id("com.unionpay:id/frog_float").findOne());
-    // 等待签到页面加载
-    textContains("连续签到").findOne();
-
-    if (text("今日已签到").findOnce() == null) {
-        func.sClick(text("立即签到").findOnce());
-        sleep(1500);
     }
     toastLog(appName + "已签到");
     sleep(1000);

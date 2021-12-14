@@ -21,9 +21,11 @@ var url_ccb签到 = "ccbapp://utils?ccbEncodeParam=ruapsj7I2qua8pR6GnzLuNDjkpEFw
 
 var url_招商饭票签到 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=100856&cmb_app_trans_parms_start=here&param=v2&appflag=0"
 
+var url_ysf会员中心 = "upwallet://applet?encryptAppId=472741b326b7bb5c&toLink=https%3A%2F%2Fcloudvip.95516.com%2F&scenarioId=1006"
+
 app.startActivity({
     action: "android.intent.action.VIEW",
-    data: url_招商饭票签到,
+    data: url_ysf会员中心,
 });
 
 // --------------url scheme--------------
