@@ -97,7 +97,8 @@ function 工商() {
     //closeApp(appName);
     func.toAutojs();
 
-    var url_工行小象 = "com.icbc.androidclient://startType=PORTALINJECT&menuId=xiaoxiangleyuan&shareCurrentUUID=";
+    // var url_工行小象 = "com.icbc.androidclient://startType=PORTALINJECT&menuId=xiaoxiangleyuan&shareCurrentUUID=";
+    var url_工行小象 = "com.icbc.androidclient://startType=PORTALINJECT&menuId=taskCenter&injectParams=dGFyZ2V0PWVsZmxk&shareCurrentUUID="
     // 启动小象
     app.startActivity({
         action: "android.intent.action.VIEW",
@@ -155,8 +156,25 @@ function 招商() {
             action: "android.intent.action.VIEW",
             data: url_招商饭票签到,
         });
-        var today;
-        today = text("今日").depth(12).findOne();
+        var congratulation, getAir, item_parent, today = null;
+        while (today == null) {
+            congratulation = textContains("恭喜您在").findOnce();
+            getAir = textContains("空气").findOnce();
+            if (congratulation != null) {
+                item_parent = congratulation.parent().parent().parent();
+                func.sClick(item_parent.child(item_parent.childCount() - 1));
+                sleep(1000);
+            }
+            getAir = textContains("空气").findOnce();
+            if (getAir != null) {
+                item_parent = congratulation.parent().parent().parent();
+                func.sClick(item_parent.child(item_parent.childCount() - 1));
+                sleep(1000);
+            }
+
+            today = text("今日").depth(12).findOnce();
+            sleep(1000);
+        }
         sleep(1500);
         func.sClick(today.parent().parent().child(1));
         toast("已点击打卡领饭票,等待5s");

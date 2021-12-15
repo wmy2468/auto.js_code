@@ -63,7 +63,10 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
-toastLog("今日已打卡");
+congratulation = textContains("恭喜您在").findOnce();
+log(congratulation);
+item_parent = congratulation.parent().parent().parent();
+func.sClick(item_parent.child(item_parent.childCount() - 1));
 
 function 招商() {
     this.饭票签到 = function () {
