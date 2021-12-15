@@ -160,15 +160,14 @@ function 招商() {
         var congratulation, getAir, item_parent, today = null;
         while (today == null) {
             congratulation = textContains("恭喜您在").findOnce();
-            getAir = textContains("空气").findOnce();
             if (congratulation != null) {
                 item_parent = congratulation.parent().parent().parent();
                 func.sClick(item_parent.child(item_parent.childCount() - 1));
                 sleep(1000);
             }
-            getAir = textContains("空气").findOnce();
+            getAir = textContains("很遗憾抽中了空气").findOnce();
             if (getAir != null) {
-                item_parent = congratulation.parent().parent().parent();
+                item_parent = getAir.parent().parent().parent();
                 func.sClick(item_parent.child(item_parent.childCount() - 1));
                 sleep(1000);
             }
