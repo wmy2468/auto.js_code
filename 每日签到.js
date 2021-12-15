@@ -98,8 +98,8 @@ function 工商() {
     //closeApp(appName);
     func.toAutojs();
 
-    // var url_工行小象 = "com.icbc.androidclient://startType=PORTALINJECT&menuId=xiaoxiangleyuan&shareCurrentUUID=";
-    var url_工行小象 = "com.icbc.androidclient://startType=PORTALINJECT&menuId=taskCenter&injectParams=dGFyZ2V0PWVsZmxk&shareCurrentUUID="
+    var url_工行小象 = "com.icbc.androidclient://startType=PORTALINJECT&menuId=xiaoxiangleyuan&shareCurrentUUID=";
+    // var url_工行小象 = "com.icbc.androidclient://startType=PORTALINJECT&menuId=taskCenter&injectParams=dGFyZ2V0PWVsZmxk&shareCurrentUUID="
     // 启动小象
     app.startActivity({
         action: "android.intent.action.VIEW",
