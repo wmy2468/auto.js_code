@@ -91,7 +91,8 @@ function 云闪付有礼花领券() {
     while (textContains(target_text).findOnce() == null) {
         cnt = cnt + 1;
         sleep(100);
-        if (cnt > 25) {
+        if (cnt > 30) {
+            cnt = 0;
             toastLog("等待加载...");
         }
     }
