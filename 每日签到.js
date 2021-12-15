@@ -55,6 +55,7 @@ function 云闪付() {
             text("积点乐园").findOnce() != null)) {
             sleep(3000);
         }
+        toastLog("已到达领取页面，等待...");
         sleep(5000);
         func.sClick(text("全部收取").findOnce());
         toastLog("云闪付, 已领取积点");
