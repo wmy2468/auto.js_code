@@ -63,10 +63,175 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
-congratulation = textContains("恭喜您在").findOnce();
-log(congratulation);
-item_parent = congratulation.parent().parent().parent();
-func.sClick(item_parent.child(item_parent.childCount() - 1));
+中信活动();
+
+function 中信活动() {
+    var appName = "动卡空间";
+    var timeArea = "北京时间";
+    var startTime, targetViewText;
+    var actNames = ["10点-15点-9积分兑换", "周三六11点-5折必胜客百果园", "9积分捡漏"];
+    var actName = func.dialogsWin(actNames);      // 设置查找的文本
+    var couDes;    // 券描述列表
+    var nowDate = new Date();
+    var item_page_text = "价格: 1个权益+9个积分";
+    switch (actName) {
+        case "10点-15点-9积分兑换":
+            toastLog("等待页面变化");
+            // log(nowDate.getHours() <= 9);
+            // 如果当前小时数 大于10，则是15点场
+            if (nowDate.getHours() <= 9) {
+                startTime = "09,59,52,000"
+                couDes = ["App Store 充值卡20元", "迪士尼", "必胜客20元", "奈雪", "喜茶25元",
+                    "苏宁支付券20元", "京东支付券20元", "天猫20元", "百果园20元", "滴滴出行20元", "美团外卖20元", "星巴克中杯饮品电子券"];
+            } else {
+                startTime = "14,59,53,000"
+                couDes = ["【下午茶】喜茶25元抵用券（15点抢兑）"];
+            }
+
+            if (couDes.length == 1) {
+                targetViewText = couDes[0];               // 设置查找的文本
+            } else {
+                targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+            }
+
+            func.toApp(appName);             // 启动APP
+            var couClick = null;          // 找券
+            while (couClick == null) {
+                if (couDes == "星巴克中杯饮品电子券") {
+                    couClick = text(targetViewText).findOnce();          // 找券
+                } else {
+                    couClick = textContains(targetViewText).findOnce();          // 找券
+                }
+                toastLog("请跳转到券 列表 页面，直到提示  已到达等待页面");
+                sleep(1000);
+            }
+            // toastLog("已到达等待页面，提前15秒自动进入");
+            toastLog("元素文本：" + couClick.text());
+            func.getTimeDiff(timeArea, startTime);              // 等待到15秒的时候再进入
+            func.sClick(couClick);              // 点击标签
+            text(item_page_text).findOne();             // 等待进入指定页面
+            toastLog("已到达指定页面，等待");
+            //点击元素
+            var to_pay = null;
+            while (to_pay == null) {
+                func.sClick(text("去兑换").findOnce());
+                func.sClick(text("未开始").findOnce());
+                sleep(100);
+                to_pay = text("去支付").findOnce();
+            }
+            func.sClick(to_pay);
+            toastLog("已点击，等待验证码");
+            sleep(3000);
+            break;
+        case "周三六11点-5折必胜客百果园":
+            toastLog("到点点击");
+            startTime = "10,59,59,850";             // 设置时间点
+            couDes = ["必胜客100元代金券", "达美乐50元代金券", "肯德基50元"];             // 券名称
+            targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+            func.toApp(appName);             // 启动APP
+            // 等待进入指定页面
+            var couClick = textContains(targetViewText).findOnce();
+            while (!couClick) {
+                couClick = textContains(targetViewText).findOnce();
+                toastLog("请跳转到券 列表 页面，直到提示  已到达等待页面");
+            }
+            toastLog("元素文本：" + couClick.text());
+            func.getTimeDiff(timeArea, startTime);              // 等待时间
+            func.sClick(couClick);             // 点击元素
+            // 点击元素
+            while (func.sClick(text("确认").findOnce()) == false) {
+                func.sClick(className("Button").text("立即购买").findOnce());
+                func.sClick(className("Button").text("已售罄").findOnce());
+                sleep(100);
+            }
+            // func.sClick(text("确认").findOne());
+            toastLog("已点击，请确认结果");
+            sleep(3000);
+            break;
+        case "9积分捡漏":
+            appName = "动卡空间"
+            var cnt = 0;
+            couDes = ["App Store 充值卡20元", "迪士尼", "必胜客20元", "奈雪", "喜茶25元",
+                "苏宁支付券20元", "京东支付券20元", "天猫20元", "百果园20元", "滴滴出行20元", "美团外卖20元"];
+            targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+            func.toApp(appName);             // 启动APP
+            while (text(item_page_text).findOnce() == null) {
+                sleep(100);
+                cnt = cnt + 1;
+                if (cnt >= 25) {
+                    cnt = 0;
+                    toastLog("请手动切换到要捡漏的商品页面");
+                }
+            }             // 等待进入指定页面
+            sleep(300);
+            var exWhile = false;
+            // 门店查找方式
+            if (text("适用门店").findOnce() != null) {
+                while (1) {
+                    if (func.sClick(text("去兑换").findOnce())) {
+                        func.sClick(text("去支付").findOne());
+                        while (1) {
+                            if (text("适用门店").findOnce() != null) {
+                                exWhile = false
+                                break;
+                            }
+                            if (text("交易时间").findOnce() != null) {
+                                exWhile = true
+                                break;
+                            }
+                        }
+                        if (exWhile) { break; }
+                    }
+                    if (func.sClick(text("适用门店").findOnce())) {
+                        className("EditText").depth(14).findOne();
+                        back();
+                        sleep(400);
+                    }
+                    sleep(150);
+                }
+            } else {
+                var item = null;
+                // 无门店查找
+                while (1) {
+                    if (func.sClick(text("去兑换").findOnce())) {
+                        func.sClick(text("去支付").findOne());
+                        while (1) {
+                            if (text("适用门店").findOnce() != null) {
+                                exWhile = false
+                                break;
+                            }
+                            if (text("交易时间").findOnce() != null) {
+                                exWhile = true
+                                break;
+                            }
+                        }
+                        if (exWhile) { break; }
+                    } else {
+                        back();
+                        item = textContains(targetViewText).depth(17).findOnce();
+                        cnt = 0;
+                        while (item == null) {
+                            item = textContains(targetViewText).depth(17).findOnce();
+                            sleep(50);
+                            scrollDown(0);
+                            cnt = cnt + 1;
+                            // 滑动3次就手动滑动一次
+                            if (cnt >= 3) {
+                                swipe(500, 850, 500, 600, 100);
+                                cnt = 0;
+                            }
+                            sleep(50);
+                            func.sClick(text("点击查看更多").findOnce());
+                            sleep(50);
+                        }
+                        func.sClick(item);
+                        text(item_page_text).findOne();
+                    }
+                    sleep(150);
+                }
+            }
+    }
+}
 
 function 招商() {
     this.饭票签到 = function () {
