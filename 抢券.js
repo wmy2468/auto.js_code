@@ -14,7 +14,6 @@ function main() {
         "京喜领券",
         "掌上生活",
         // "云闪付锦鲤活动",
-        "云闪付有礼花领券",
         "招商便民生活"
         // "中行周二视频捡漏"
         // "农行缴费20-10"
@@ -58,51 +57,9 @@ function main() {
         case "中行周二视频捡漏":
             中行周二视频捡漏();
             break;
-        case "云闪付有礼花领券":
-            云闪付有礼花领券();
-            break;
-
-
     }
     toastLog("结束");
     device.cancelKeepingAwake();
-}
-
-
-function 云闪付有礼花领券() {
-    func.toApp("云闪付");
-    var cnt = 0, get_list;
-
-    var devMate30, devHonor8, devRedMi, devModel;
-    devMate30 = "TAS-AL00";
-    devHonor8 = "FRD-AL00";
-    devRedMi = "Redmi Note 7";
-    devModel = device.model;
-    if (devModel == devRedMi) {
-        get_list = ["话费100元", "腾讯视频会员", "奈雪的茶100元"]
-    } else if (devModel == devHonor8) {
-        get_list = ["话费100元", "芒果TV", "奈雪100元"];
-    } else if (devModel == devMate30) {
-        get_list = ["话费100元", "京东PLUS年卡", "奈雪100元"];
-    }
-
-    var target_text = "话费100元";
-
-    while (textContains(target_text).findOnce() == null) {
-        cnt = cnt + 1;
-        sleep(100);
-        if (cnt > 30) {
-            cnt = 0;
-            toastLog("等待加载...");
-        }
-    }
-    toastLog("已加载加载...");
-    for (var i = 0; i < get_list.length; i++) {
-        func.sClick(textContains(get_list[i]).findOnce());
-        sleep(350);
-    }
-    func.sClick(textContains("确认领取").findOnce());
-    toastLog("已点击完成...");
 }
 
 // ------------------------------------------------------
