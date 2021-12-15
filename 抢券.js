@@ -70,20 +70,23 @@ function main() {
 
 
 function 云闪付有礼花领券() {
-    var devMate30, devHonor8, devRedMi;
+    func.toApp("云闪付");
+    var cnt = 0, get_list;
+
+    var devMate30, devHonor8, devRedMi, devModel;
     devMate30 = "TAS-AL00";
     devHonor8 = "FRD-AL00";
     devRedMi = "Redmi Note 7";
-    var cnt = 0, get_list;
+    devModel = device.model;
     if (devModel == devRedMi) {
-        get_list = ["话费100元", "芒果TV", "奈雪的茶100元"]
+        get_list = ["话费100元", "腾讯视频会员", "奈雪的茶100元"]
     } else if (devModel == devHonor8) {
-        get_list = ["话费100元", "腾讯视频会员", "奈雪100元"];
+        get_list = ["话费100元", "芒果TV", "奈雪100元"];
     } else if (devModel == devMate30) {
         get_list = ["话费100元", "京东PLUS年卡", "奈雪100元"];
     }
 
-    target_text = "话费100元";
+    var target_text = "话费100元";
 
     while (textContains(target_text).findOnce() == null) {
         cnt = cnt + 1;
