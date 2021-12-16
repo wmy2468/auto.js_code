@@ -171,6 +171,15 @@ function 中信活动() {
                     toastLog("请手动切换到要捡漏的商品页面");
                 }
             }             // 等待进入指定页面
+            nowDate = new Date();
+            if (nowDate.getHours() <= 10) {
+                startTime = "10,18,20,000"
+            } else if (nowDate.getHours() >= 15) {
+                startTime = "15,18,20,000"
+            } else {
+                startTime = "00,01,01,100"
+            }
+            func.getTimeDiff(timeArea, startTime);              // 等待时间
             sleep(300);
             var exWhile = false;
             // 门店查找方式
