@@ -63,7 +63,15 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
-中信活动();
+var url_中信 = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https%253A%252F%252Factship-activityui.paas.cmbchina.com%252FActPage.html%253FactivityId%253DAGP2021120309185158x69WfE%2526behavior_entryid%253Dundefined&shortUrl=https%253A%252F%252Fcmbt.cn%252Fa%252FhtREAc%253FactivityId%253DAGP2021120309185158x69WfE%2526behavior_entryid%253Dundefined&appflag=0"
+
+app.startActivity({
+    action: "android.intent.action.VIEW",
+    data: url_中信,
+});
+
+func.sClick(textContains("立即领取").findOne());
+toastLog("已点击");
 
 function 中信活动() {
     var appName = "动卡空间";
