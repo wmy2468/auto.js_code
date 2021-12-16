@@ -765,6 +765,7 @@ function 中信活动() {
             }             // 等待进入指定页面
             sleep(300);
             nowDate = new Date();
+
             if (nowDate.getHours() <= 10) {
                 startTime = "10,18,20,000"
             } else if (nowDate.getHours() >= 15) {
@@ -772,6 +773,7 @@ function 中信活动() {
             } else {
                 startTime = "00,01,01,100"
             }
+            toastLog("18分启动.....");
             func.getTimeDiff(timeArea, startTime);              // 等待时间
             var exWhile = false;
             // 门店查找方式
