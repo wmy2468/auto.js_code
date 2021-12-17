@@ -5,12 +5,12 @@ var func = require("func_list.js");
 main();
 
 function main() {
-    var selectedArr = ["光大活动", "中信活动", "交行5积分", "京喜领券", "掌上生活", "招商便民生活", "招商倒计时领取",
+    let selectedArr = ["光大活动", "中信活动", "交行5积分", "京喜领券", "掌上生活", "招商便民生活", "招商倒计时领取",
         // "中行周二视频捡漏",  // "云闪付锦鲤活动",  // "农行缴费20-10", // "京东腾讯月",   // "工行活动",
     ];
 
     //---------------配置区域-----------------
-    var scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本        
+    let scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本        
     // 设置屏幕常亮6分钟
     device.keepScreenOn(1000 * 60 * 6);
     if (scriptName == "光大活动") { 光大活动(); }
@@ -63,7 +63,7 @@ function 招商领取(page_text, wait_text, popup_wait_text, select_text, sure_b
         toast("等待跳转到:" + page_text + "页面");
         sleep(2200);
     }
-    var cnt;
+    let cnt;
     cnt = 0
     while (func.sClick(text(wait_text).findOnce()) == false) {
         if (cnt % 10 == 0) {
@@ -73,7 +73,7 @@ function 招商领取(page_text, wait_text, popup_wait_text, select_text, sure_b
         sleep(300);
 
     }
-    var popup_parent, popup_child;
+    let popup_parent, popup_child;
     popup_parent = text(popup_wait_text).findOne().parent();
     popup_child = popup_parent.findByText(select_text);
     if (popup_child.size() > 0) {
@@ -84,7 +84,7 @@ function 招商领取(page_text, wait_text, popup_wait_text, select_text, sure_b
 }
 
 function 招商便民生活() {
-    var page_text, wait_text, popup_wait_text, select_text, sure_btn;
+    let page_text, wait_text, popup_wait_text, select_text, sure_btn;
     page_text = "便民生活 遇见美好";
     wait_text = "选择奖品";
     popup_wait_text = "请选择奖品";
@@ -100,7 +100,7 @@ function 招商便民生活() {
 
 
 function 中行周二视频捡漏() {
-    var aiqiyi, youku, tengx, pay5, cnt;
+    let aiqiyi, youku, tengx, pay5, cnt;
     aiqiyi = "爱奇艺VIP";
     youku = "优酷VIP"
     tengx = "腾讯视频VIP"
@@ -116,7 +116,7 @@ function 中行周二视频捡漏() {
             break;
         }
     }
-    var exflag = false;
+    let exflag = false;
     while (1) {
         if (func.sClick(text(pay5).findOnce()) == true) {
             toastLog("已点击确认支付");
@@ -150,7 +150,7 @@ function 中行周二视频捡漏() {
 
 // ------------------------云闪付锦鲤活动--------------------------------------
 function 云闪付捡漏() {
-    var targetViewText, targetText;
+    let targetViewText, targetText;
     // targetViewText = func.dialogsWin(["10-2线上", "10-2线下"]);
     while (text("奖励中心").findOnce() == null) {
         toastLog("请跳转到 \" 奖励中心 \"，直到提示  已到达等待页面");
@@ -166,7 +166,7 @@ function 云闪付捡漏() {
     //         targetText = "线下指定商户";
     //         break;
     // }
-    var clickFlag, exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
+    let clickFlag, exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
     exWhile = false;
     clickFlag = 1;
     while (1) {
@@ -185,7 +185,7 @@ function 云闪付捡漏() {
                 clickItems = text(counponText).find();
                 log("找到 " + counponText + " 数量：" + clickItems.length);
                 if (clickItems.nonEmpty()) {
-                    for (var i = 0; i < clickItems.length; i++) {
+                    for (let i = 0; i < clickItems.length; i++) {
                         clickItem = clickItems[i];
                         itemIndex = clickItem.indexInParent();
                         itemParent = clickItem.parent();
@@ -231,13 +231,13 @@ function 云闪付捡漏() {
 
 
 function 云闪付锦鲤活动() {
-    var startTime;
-    var appName = "云闪付";
-    var timeArea = "北京时间";
+    let startTime;
+    let appName = "云闪付";
+    let timeArea = "北京时间";
     toastLog("到点点击");
 
-    var currentWeekday = new Date().getDay();
-    var counponText;
+    let currentWeekday = new Date().getDay();
+    let counponText;
     // 返回的周日0 周一返回1，周二2
     switch (currentWeekday) {
         case 5:
@@ -250,11 +250,11 @@ function 云闪付锦鲤活动() {
             counponText = "满50可用";
             break;
     }
-    var selectFunc;
+    let selectFunc;
     selectFunc = func.dialogsWin(["每日券", "云闪付捡漏", "周五六日10点", "周五六日15点"]);
-    var clockBefore, clockAfter;
-    var clock9, clock10, clock15;
-    var targetText;
+    let clockBefore, clockAfter;
+    let clock9, clock10, clock15;
+    let targetText;
     targetText = "线下指定商户";
     clock9 = "09:00";
     clock10 = "10:00";
@@ -281,7 +281,7 @@ function 云闪付锦鲤活动() {
             云闪付捡漏();
             break;
     }
-    var getCouponWay;       //定义领券方式
+    let getCouponWay;       //定义领券方式
     getCouponWay = func.dialogsWin(["提前1秒进入页面领取", "切换时间标签领券"]);
     func.toApp(appName);
     while (text("明日预告").findOnce() == null) {
@@ -309,7 +309,7 @@ function 云闪付锦鲤活动() {
         sleep(1500);
     }
     toastLog("已到达 \" 奖励中心 \"");
-    var clickBtn, clickItems;
+    let clickBtn, clickItems;
     if (getCouponWay == "提前1秒进入页面领取") {
         func.sClick(text(clockAfter).findOne());   //点击目标时间按钮
         sleep(1000);
@@ -319,7 +319,7 @@ function 云闪付锦鲤活动() {
                 clickItems = text(counponText).find();
                 log("找到 " + counponText + " 数量：" + clickItems.length);
                 if (clickItems.nonEmpty()) {
-                    for (var i = 0; i < clickItems.length; i++) {
+                    for (let i = 0; i < clickItems.length; i++) {
                         clickBtn = clickItems[i];
                         itemIndex = clickBtn.indexInParent();
                         itemParent = clickBtn.parent();
@@ -358,7 +358,7 @@ function 云闪付锦鲤活动() {
         func.sClick(text(clockBefore).findOne());
         sleep(800);
         // 定义子按钮的位置
-        var childIdx;
+        let childIdx;
         switch (selectFunc) {
             case "每日券":
                 if (counponText == "线下指定商户") {
@@ -375,7 +375,7 @@ function 云闪付锦鲤活动() {
                 break;
         }
         // 定义目标时间，提前获取
-        var targetClock;
+        let targetClock;
         targetClock = text(clockAfter).findOne();
         toastLog("已到达指定页面，等待");
         //  等待倒计时
@@ -410,11 +410,11 @@ function 云闪付锦鲤活动() {
 // ------------------------云闪付锦鲤活动--------------------------------------
 
 function 京喜领券() {
-    var timeArea = "京东时间";
-    var startTime, targetViewText;
-    var actNames = ["0点京喜95折", "京东券"];
-    var actName = func.dialogsWin(actNames);      // 设置查找的文本
-    var coupon_url, url_页面;
+    let timeArea = "京东时间";
+    let startTime, targetViewText;
+    let actNames = ["0点京喜95折", "京东券"];
+    let actName = func.dialogsWin(actNames);      // 设置查找的文本
+    let coupon_url, url_页面;
     switch (actName) {
         case "0点京喜95折":
             startTime = "23,59,59,990";
@@ -432,7 +432,7 @@ function 京喜领券() {
     });
 
     // 等待进入指定页面
-    var couClick = textContains(targetViewText).findOnce();
+    let couClick = textContains(targetViewText).findOnce();
     while (couClick == null) {
         couClick = textContains(targetViewText).findOnce();
         toastLog("等待跳转到京喜优惠券页面");
@@ -450,15 +450,15 @@ function 京喜领券() {
 }
 
 function 农行缴费() {
-    var startTime, targetViewText;
-    var appName = "云闪付";
-    var timeArea = "北京时间";
+    let startTime, targetViewText;
+    let appName = "云闪付";
+    let timeArea = "北京时间";
     toastLog("到点点击");
     startTime = "09,59,59,700";
     targetViewText = "[6179]";
     func.toApp(appName);
     // 等待进入指定页面
-    var card = textContains(targetViewText).findOnce();
+    let card = textContains(targetViewText).findOnce();
     while (card == null) {
         card = textContains(targetViewText).findOnce();
         toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
@@ -480,12 +480,12 @@ function 农行缴费() {
 
 
 function 掌上生活活动() {
-    var startTime, targetViewText;
-    var actNames = ["周三五折", "10点拼团星巴克"];
-    var actName = func.dialogsWin(actNames);      // 设置查找的文本
-    var appName = "掌上生活";
-    var timeArea = "北京时间";
-    var cnt = 3;
+    let startTime, targetViewText;
+    let actNames = ["周三五折", "10点拼团星巴克"];
+    let actName = func.dialogsWin(actNames);      // 设置查找的文本
+    let appName = "掌上生活";
+    let timeArea = "北京时间";
+    let cnt = 3;
     switch (actName) {
         // 10点
         case "周三五折":            //10点
@@ -527,7 +527,7 @@ function 掌上生活活动() {
             //  提前10秒 开始进入
             func.getTimeDiff(timeArea, startTime);
             func.sClick(textContains("成团").findOnce());
-            var clickBtn;
+            let clickBtn;
             func.getTimeDiff(timeArea, "09,59,59,700");
             while (1) {
                 try {
@@ -551,11 +551,11 @@ function 掌上生活活动() {
 // 到点点击
 function 光大活动() {
     toastLog("到点点击");
-    var startTime, targetViewText;
-    var actNames = ["必胜客50买100元", "青桔单车2.5买月卡",
+    let startTime, targetViewText;
+    let actNames = ["必胜客50买100元", "青桔单车2.5买月卡",
         "饿了么1分买6元", "饿了么1分买10元"
     ];
-    var actName = func.dialogsWin(actNames);      // 设置查找的文本
+    let actName = func.dialogsWin(actNames);      // 设置查找的文本
     switch (actName) {
         // 10点
         case "必胜客50买100元":            //10点
@@ -589,8 +589,8 @@ function 光大活动() {
             break;
     }
 
-    var appName = "阳光惠生活";
-    var timeArea = "北京时间";
+    let appName = "阳光惠生活";
+    let timeArea = "北京时间";
     func.toApp(appName);
     // 等待进入指定页面
     while (!textContains(targetViewText).findOnce()) {
@@ -600,7 +600,7 @@ function 光大活动() {
     toastLog("已到达指定页面，等待");
     //   定位元素
     func.getTimeDiff(timeArea, startTime);
-    var cnt = 0, loopBreak;
+    let cnt = 0, loopBreak;
     while (1) {
         loopBreak = 75;
         func.sClick(className("android.view.View").text("确认购买").findOne());
@@ -626,14 +626,14 @@ function 光大活动() {
 // 等待页面加载
 function 交行9点5积分() {
     toastLog("等待页面变化");
-    var appName = "买单吧";
-    var timeArea = "北京时间";
-    var startTime = "08,59,57,000"
-    var actNames = ["加油卡充值30元红包", "缴费类15元红包", "话费20元红包", "话费10元红包", "本月2倍积分", "一键加油15元红包"];
-    var actName = func.dialogsWin(actNames);      // 设置查找的文本
+    let appName = "买单吧";
+    let timeArea = "北京时间";
+    let startTime = "08,59,57,000"
+    let actNames = ["加油卡充值30元红包", "缴费类15元红包", "话费20元红包", "话费10元红包", "本月2倍积分", "一键加油15元红包"];
+    let actName = func.dialogsWin(actNames);      // 设置查找的文本
     func.toApp(appName);
     // 等待进入指定页面
-    var get_packet, packet_parent, packet_childcount;
+    let get_packet, packet_parent, packet_childcount;
     textContains("本月可用兑换资格").findOne();
     toastLog("已到达指定页面");
     func.getTimeDiff(timeArea, startTime);              // 等待时间
@@ -656,14 +656,14 @@ function 交行9点5积分() {
 
 // 等待页面变价
 function 中信活动() {
-    var appName = "动卡空间";
-    var timeArea = "北京时间";
-    var startTime, targetViewText;
-    var actNames = ["10点-15点-9积分兑换", "周三六11点-5折必胜客百果园", "9积分捡漏"];
-    var actName = func.dialogsWin(actNames);      // 设置查找的文本
-    var couDes;    // 券描述列表
-    var nowDate = new Date();
-    var item_page_text = "价格: 1个权益+9个积分";
+    let appName = "动卡空间";
+    let timeArea = "北京时间";
+    let startTime, targetViewText;
+    let actNames = ["10点-15点-9积分兑换", "周三六11点-5折必胜客百果园", "9积分捡漏"];
+    let actName = func.dialogsWin(actNames);      // 设置查找的文本
+    let couDes;    // 券描述列表
+    let nowDate = new Date();
+    let item_page_text = "价格: 1个权益+9个积分";
     couDes = ["App Store", "迪士尼25", "必胜客20", "奈雪", "喜茶25元", "苏宁支付券", "京东支付券", "天猫20",
         "星巴克中杯饮品电子券", "名创优品20", "网易严选20", "百果园20", "美团外卖20", "优酷VIP", "腾讯视频", "芒果TV", "爱奇艺VIP"];
     switch (actName) {
@@ -685,7 +685,7 @@ function 中信活动() {
             }
 
             func.toApp(appName);             // 启动APP
-            var couClick = null;          // 找券
+            let couClick = null;          // 找券
             while (couClick == null) {
                 if (couDes == "星巴克中杯饮品电子券") {
                     couClick = text(targetViewText).findOnce();          // 找券
@@ -702,7 +702,7 @@ function 中信活动() {
             text(item_page_text).findOne();             // 等待进入指定页面
             toastLog("已到达指定页面，等待");
             //点击元素
-            var to_pay = null;
+            let to_pay = null;
             while (to_pay == null) {
                 func.sClick(text("去兑换").findOnce());
                 func.sClick(text("未开始").findOnce());
@@ -720,7 +720,7 @@ function 中信活动() {
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             func.toApp(appName);             // 启动APP
             // 等待进入指定页面
-            var couClick = textContains(targetViewText).findOnce();
+            let couClick = textContains(targetViewText).findOnce();
             while (!couClick) {
                 couClick = textContains(targetViewText).findOnce();
                 toastLog("请跳转到券 列表 页面，直到提示  已到达等待页面");
@@ -740,7 +740,7 @@ function 中信活动() {
             break;
         case "9积分捡漏":
             appName = "动卡空间"
-            var cnt = 0;
+            let cnt = 0;
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             func.toApp(appName);             // 启动APP
             while (text(item_page_text).findOnce() == null) {
@@ -763,7 +763,7 @@ function 中信活动() {
             }
             toastLog("18分启动.....");
             func.getTimeDiff(timeArea, startTime);              // 等待时间
-            var exWhile = false;
+            let exWhile = false;
             // 门店查找方式
             if (text("适用门店").findOnce() != null) {
                 while (1) {
@@ -789,7 +789,7 @@ function 中信活动() {
                     sleep(150);
                 }
             } else {
-                var item = null;
+                let item = null;
                 // 无门店查找
                 while (1) {
                     if (func.sClick(text("去兑换").findOnce())) {
@@ -834,12 +834,12 @@ function 中信活动() {
 
 // 等待页面变价
 function 京东腾讯月() {
-    var actNames = ["腾讯视频VIP月卡"]; //, "肯德基10元代金券"];
-    //var actName = func.dialogsWin(actNames);      // 设置查找的文本
+    let actNames = ["腾讯视频VIP月卡"]; //, "肯德基10元代金券"];
+    //let actName = func.dialogsWin(actNames);      // 设置查找的文本
     toastLog("等待页面变化");
-    var appName = "京东金融";
+    let appName = "京东金融";
     func.toApp(appName);
-    var tVip, getBtn;
+    let tVip, getBtn;
     // 等待进入指定页面
     toastLog("请跳转到腾讯月卡领取页面，直到提示  已到达等待页面");
     sleep(800);
@@ -870,9 +870,9 @@ function 京东腾讯月() {
 }
 
 function 工行活动() {
-    var appName = "工银e生活";
-    var timeArea = "北京时间";
-    var startTime = "10,29,59,680";
+    let appName = "工银e生活";
+    let timeArea = "北京时间";
+    let startTime = "10,29,59,680";
     couName = "确定"
     func.toApp(appName);             // 启动APP
     // 找到使用流程，且找到对应券名称沃尔玛的情况下就是 券的详情页
@@ -880,7 +880,7 @@ function 工行活动() {
         toastLog("请进入活动页面，直到提示  已到达等待页面");
         sleep(333);
     }
-    var sureBtn = className("android.widget.Button").text(couName).findOne();
+    let sureBtn = className("android.widget.Button").text(couName).findOne();
     toastLog("已到达指定页面，等待");
     func.getTimeDiff(timeArea, startTime);              // 等待时间
     // 等待点击立即购买

@@ -77,7 +77,7 @@ function toPackage(packageName) {
 
 
 function toJdSku(sellId) {
-    // var appName = "京东";
+    // let appName = "京东";
     // while (currentPackage() != getPackageName(appName)) {
     //     launchApp(appName);
     //     sleep(300);
@@ -113,7 +113,7 @@ function toAppMulti(appName, cnt) {
 
 
 function huaweiUnlock() {
-    var pwd = "081573" //解锁密码
+    let pwd = "081573" //解锁密码
     if (!device.isScreenOn()) {
         while (!device.isScreenOn()) {
             device.wakeUp();
@@ -126,15 +126,15 @@ function huaweiUnlock() {
             sleep(900);
         }
         toastLog("输入密码");
-        for (var i = 0; i < pwd.length; i++) {
+        for (let i = 0; i < pwd.length; i++) {
             desc(pwd[i]).findOne().click();
         }
     }
 }
 
 function xiaomiUnlock() {
-    var pwd = "081573" //解锁密码
-    var stDelay = 90;
+    let pwd = "081573" //解锁密码
+    let stDelay = 90;
     if (!device.isScreenOn()) {
         while (!device.isScreenOn()) {
             device.wakeUp();
@@ -147,7 +147,7 @@ function xiaomiUnlock() {
         }
         toastLog(stDelay);
         sleep(1200);
-        for (var i = 0; i < pwd.length; i++) {
+        for (let i = 0; i < pwd.length; i++) {
             sClick(desc(pwd[i]).findOnce());
         }
     }
@@ -168,9 +168,9 @@ function lockScr() {
 
 // 手势解锁密码 xy为中心点坐标，offset为滑动区域 两个点之间的距离
 function gesture_pwd(appName) {
-    var pwd = "147895";
-    var pointX, pointY, point;
-    var offSet;
+    let pwd = "147895";
+    let pointX, pointY, point;
+    let offSet;
     offSet = device.width * 0.25;
     // 增加判断，避免小米手机判断成0的情况
     if (offSet == 0) {
@@ -232,7 +232,7 @@ function gesture_pwd(appName) {
             log("中国工商银行");
             break;
     }
-    var execStr;
+    let execStr;
     // 根据APP名称区分滑动持续时间
     if (appName == "招商银行" || appName == "缤纷生活" || appName == "万商云" || appName == "浦大喜奔") {
         execStr = "gesture(1100";
@@ -251,8 +251,8 @@ function gesture_pwd(appName) {
     log("x =", x);
     log("y =", y);
     log("offSet =", offSet);
-    var arr = pwd.split("");
-    for (var i = 0; i < arr.length; i++) {
+    let arr = pwd.split("");
+    for (let i = 0; i < arr.length; i++) {
         if (arr[i] == 1) {
             pointX = x - offSet;
             pointY = y - offSet;
@@ -294,7 +294,7 @@ function randomNum(min, max, digit) {
     @param  max, 最大数
     @param  digit, 保留的小数位
     */
-    var powNum;
+    let powNum;
     // 如果没有digit参数，默认没有小数点
     if (digit == undefined) {
         digit = 0;
@@ -309,14 +309,14 @@ function randomNum(min, max, digit) {
 }
 // -----------通用功能区------------------
 function floatyMove(window, view, clickAction) {
-    var show = function () { }
+    let show = function () { }
     //记录按键被按下时的触摸坐标
-    var x = 0, y = 0;
+    let x = 0, y = 0;
     //记录按键被按下时的悬浮窗位置
-    var windowX, windowY;
+    let windowX, windowY;
     //记录按键被按下的时间以便判断长按等动作
-    var downTime;
-    var onClick = show
+    let downTime;
+    let onClick = show
     if (clickAction) {
         onClick = () => { clickAction() }
     }
@@ -378,7 +378,7 @@ function setFloatyVal(window, textVal) {
 }
 
 function countDownInit() {
-    var floatyWin = floaty.window(
+    let floatyWin = floaty.window(
         <frame gravity="center" bg="#1F1F1F" h="25dp" >
             <text id="text" textSize="16sp" textStyle="bold" typeface="monospace" textColor="#00FFFF"></text>
         </frame >
@@ -388,40 +388,46 @@ function countDownInit() {
     return floatyWin;
 }
 
+
+function strTime_to_timestamp(strTime) {
+    let tDate, stDate;
+    // 如果输入的时间是0点，则目标天数要+1
+    if (strTime.substr(0, 2) == "00") {
+        tDate = getToday(needNextDay = true) + "," + strTime;
+    } else {
+        tDate = getToday() + "," + strTime;
+    }
+    stDate = tDate.split(",");
+    return (new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime());
+}
+
+
 // 时间校准 获取时间差函数
 function getTimeDiff(area, targetTime) {
     // 生成今天的时间戳
-    var tDate, stDate, targetTimestamp;
-    // 如果输入的时间是0点，则目标天数要+1
-    if (targetTime.substr(0, 2) == "00") {
-        tDate = getToday(needNextDay = true) + "," + targetTime;
-    } else {
-        tDate = getToday() + "," + targetTime;
-    }
-    stDate = tDate.split(",");
-    targetTimestamp = new Date(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4], stDate[5], stDate[6]).getTime();
+    let targetTimestamp;
+    targetTimestamp = strTime_to_timestamp(targetTime);
     // 获取当前时间戳
     curTimestamp = new Date().getTime();
 
     if (targetTimestamp < curTimestamp) {
         toastLog("目标时间小于当前时间，退出不执行");
-        exit();
+        return 0;
     }
 
-    var floatWin = countDownInit();
-
+    let floatWin = countDownInit();
     //当剩余时间超过15秒的时候 等待
     while (targetTimestamp - curTimestamp > 15000) {
         curTimestamp = new Date().getTime();
         setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000));
         //console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
         // toastLog("剩余时间:", targetTimestamp - curTimestamp);
-        sleep(1000);
+        sleep(999);
     }
 
-    var timeDiff = calTimeDiff(area);
+    let timeDiff = calTimeDiff(area);
 
-    var cnt = 0;
+    let cnt = 0;
     curTimestamp = new Date().getTime() + timeDiff;
     while (curTimestamp < targetTimestamp) {
         sleep(10);
@@ -438,7 +444,7 @@ function getTimeDiff(area, targetTime) {
 }
 
 function calTimeDiff(area) {
-    var timeDiff;
+    let timeDiff;
     // 获取时间误差
     switch (area) {
         case "京东时间":
@@ -462,22 +468,22 @@ function calTimeDiff(area) {
 }
 
 function getToday(needNextDay) {
-    var date;
+    let date;
     date = new Date();
     // 如果下一天有值，则加1
     if (needNextDay != undefined) {
         date.setDate(date.getDate() + 1);
     }
-    var seperator1 = ",";
-    var year = date.getFullYear();
-    var month = date.getMonth();
-    var strDate = date.getDate();
+    let seperator1 = ",";
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let strDate = date.getDate();
     return year + seperator1 + month + seperator1 + strDate;
 }
 
 //京东时间
 function jdTime() {
-    var res, resTime, resTimestamp, sigma, delta, timeLimit;
+    let res, resTime, resTimestamp, sigma, delta, timeLimit;
     timeLimit = 1000;
     delta = 0;
     log("请求京东时间");
@@ -516,7 +522,7 @@ function jdTime() {
 
 // 北京时间
 function beiJingTime() {
-    var res, resTime, resTimestamp, sigma, delta, timeLimit;
+    let res, resTime, resTimestamp, sigma, delta, timeLimit;
     timeLimit = 1000;
     delta = 0;
     log("请求北京时间");
@@ -556,7 +562,7 @@ function beiJingTime() {
 // 淘宝时间
 function tbTime() {
     log("请求淘宝时间");
-    var res, resTime, resTimestamp, sigma, delta, timeLimit;
+    let res, resTime, resTimestamp, sigma, delta, timeLimit;
     timeLimit = 1000;
     delta = 0;
     // 获取取一次时间耗时
@@ -594,7 +600,7 @@ function tbTime() {
 
 // 苏宁时间
 function snTime() {
-    var res, resTime, resTimestamp, sigma, delta, timeLimit;
+    let res, resTime, resTimestamp, sigma, delta, timeLimit;
     timeLimit = 1000;
     delta = 0;
     log("请求苏宁时间");
@@ -633,7 +639,7 @@ function snTime() {
 }
 
 function dialogsWin(inArr) {
-    var selIdx = dialogs.select("选择启动", inArr);
+    let selIdx = dialogs.select("选择启动", inArr);
     if (selIdx == -1) {
         exit();
     }
