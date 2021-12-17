@@ -5,64 +5,52 @@ var func = require("func_list.js");
 main();
 
 function main() {
-    var selectedArr = [
-        "光大活动",
-        "中信活动",
-        // "工行活动",
-        "交行5积分",
-        // "京东腾讯月",
-        "京喜领券",
-        "掌上生活",
-        // "云闪付锦鲤活动",
-        "招商便民生活"
-        // "中行周二视频捡漏"
-        // "农行缴费20-10"
+    var selectedArr = ["光大活动", "中信活动", "交行5积分", "京喜领券", "掌上生活", "招商便民生活", "招商倒计时领取",
+        // "中行周二视频捡漏",  // "云闪付锦鲤活动",  // "农行缴费20-10", // "京东腾讯月",   // "工行活动",
     ];
 
     //---------------配置区域-----------------
     var scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本        
     // 设置屏幕常亮6分钟
     device.keepScreenOn(1000 * 60 * 6);
-    switch (scriptName) {
-        case "光大活动":
-            光大活动();
-            break;
-        case "中信活动":
-            中信活动();
-            break;
-        case "工行活动":
-            工行活动();
-            break;
-        case "掌上生活":
-            掌上生活活动();
-            break;
-        case "交行5积分":
-            交行9点5积分();
-            break;
-        case "京东腾讯月":
-            京东腾讯月();
-            break;
-        case "农行缴费20-10":
-            农行缴费();
-            break;
-        case "云闪付锦鲤活动":
-            云闪付锦鲤活动();
-            break;
-        case "京喜领券":
-            京喜领券();
-            break;
-        case "招商便民生活":
-            招商便民生活();
-            break;
-        case "中行周二视频捡漏":
-            中行周二视频捡漏();
-            break;
-    }
+    if (scriptName == "光大活动") { 光大活动(); }
+    else if (scriptName == "中信活动") { 中信活动(); }
+    else if (scriptName == "工行活动") { 工行活动(); }
+    else if (scriptName == "掌上生活") { 掌上生活活动(); }
+    else if (scriptName == "交行5积分") { 交行9点5积分(); }
+    else if (scriptName == "京东腾讯月") { 京东腾讯月(); }
+    else if (scriptName == "农行缴费20-10") { 农行缴费(); }
+    else if (scriptName == "云闪付锦鲤活动") { 云闪付锦鲤活动(); }
+    else if (scriptName == "京喜领券") { 京喜领券(); }
+    else if (scriptName == "招商便民生活") { 招商便民生活(); }
+    else if (scriptName == "招商倒计时领取") { 招商倒计时领取(); }
+    else if (scriptName == "中行周二视频捡漏") { 中行周二视频捡漏(); }
     toastLog("结束");
     device.cancelKeepingAwake();
 }
 
 // ------------------------------------------------------
+function 招商倒计时领取() {
+    let select_txt, appName, url;
+    appName = "招商银行"
+    select_txt = func.dialogsWin(["年末美食狂欢节M1", "年末美食狂欢节M4", "啥也不选"])
+    if (select_txt == "年末美食狂欢节M1") { url = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https%253A%252F%252Fmarket.cmbchina.com%252FMPage%252Fonline%252F211025170821628%252Fftbb.html%253Fbehavior_entryid%253Dlff003001%2526behavior_pageid%253D31B15ED7%2526DeviceType%253DE%2526Version%253D9.9.0%2526SystemVersion%253D10%2526ATraceID%253De47883770b17411eb2449805822210bc%2526msid%253Dc5ada3aa3ff0464a918ae2af77adb890&shortUrl=https%253A%252F%252Fcmbt.cn%252Fa%252F456xRYghZ%253Fbehavior_entryid%253Dlff003001%2526behavior_pageid%253D31B15ED7%2526DeviceType%253DE%2526Version%253D9.9.0%2526SystemVersion%253D10%2526ATraceID%253De47883770b17411eb2449805822210bc%2526msid%253Dc5ada3aa3ff0464a918ae2af77adb890&appflag=0"; }
+    else if (select_txt == "年末美食狂欢节M4") { url = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https%253A%252F%252Fmarket.cmbchina.com%252FMPage%252Fonline%252F211025170821628%252Fftbb.html%253Fbehavior_entryid%253Dlff003001%2526behavior_pageid%253D31B15ED7%2526DeviceType%253DE%2526Version%253D9.9.0%2526SystemVersion%253D10%2526ATraceID%253De47883770b17411eb2449805822210bc%2526msid%253Dc5ada3aa3ff0464a918ae2af77adb890&shortUrl=https%253A%252F%252Fcmbt.cn%252Fa%252F456xRYghZ%253Fbehavior_entryid%253Dlff003001%2526behavior_pageid%253D31B15ED7%2526DeviceType%253DE%2526Version%253D9.9.0%2526SystemVersion%253D10%2526ATraceID%253De47883770b17411eb2449805822210bc%2526msid%253Dc5ada3aa3ff0464a918ae2af77adb890&appflag=0"; }
+    else if (select_txt == "啥也不选") { url = ""; }
+
+    if (url != "") {
+        app.startActivity({
+            action: "android.intent.action.VIEW",
+            data: url,
+        });
+    } else {
+        func.toApp(appName);
+    }
+    toastLog("等待立即领取出现");
+    func.sClick(textContains("立即领取").findOne());
+    toastLog("已点击");
+}
+
 function 招商领取(page_text, wait_text, popup_wait_text, select_text, sure_btn) {
     /**
     @param page_text 等待目标页面 加载的文字
