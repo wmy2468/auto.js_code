@@ -661,7 +661,7 @@ function 中信活动() {
     let startTime, targetViewText;
     let actNames = ["10点-15点-9积分兑换", "周三六11点-5折必胜客百果园", "9积分捡漏"];
     let actName = func.dialogsWin(actNames);      // 设置查找的文本
-    let couDes;    // 券描述列表
+    let couDes, couClick;    // 券描述列表
     let nowDate = new Date();
     let item_page_text = "价格: 1个权益+9个积分";
     couDes = ["App Store", "迪士尼25", "必胜客20", "奈雪", "喜茶25元", "苏宁支付券", "京东支付券", "天猫20",
@@ -685,7 +685,7 @@ function 中信活动() {
             }
 
             func.toApp(appName);             // 启动APP
-            let couClick = null;          // 找券
+            couClick = null;          // 找券
             while (couClick == null) {
                 if (couDes == "星巴克中杯饮品电子券") {
                     couClick = text(targetViewText).findOnce();          // 找券
@@ -720,7 +720,7 @@ function 中信活动() {
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             func.toApp(appName);             // 启动APP
             // 等待进入指定页面
-            let couClick = textContains(targetViewText).findOnce();
+            couClick = textContains(targetViewText).findOnce();
             while (!couClick) {
                 couClick = textContains(targetViewText).findOnce();
                 toastLog("请跳转到券 列表 页面，直到提示  已到达等待页面");
