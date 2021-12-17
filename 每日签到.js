@@ -697,9 +697,9 @@ function 什么值得买() {
         signBtn = id("tv_login_sign").findOnce();
         func.sClick(id("tab_usercenter").text("我的").findOnce());
         sleep(800);
-        func.sClick(id("dialog_home_ads_close").findOnce());
+        func.sClick(idContains("close").findOnce());
         sleep(800);
-        func.passAd();
+        //func.passAd();
     }
     sleep(800);
     func.sClick(signBtn);

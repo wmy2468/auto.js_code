@@ -63,11 +63,28 @@ var func = require("func_list.js");
 // for (var i = 0; i < signs.length; i++) {
 //     func.sClick(signs[i]);
 // }
-let url_浦发储蓄卡金豆页面 = "spdbbank://wap.spdb.com.cn/awakeapp?login_flag=0&support_type=1&path=vue|mspmk-cli-welfare/goldenBean/";
-app.startActivity({
-    action: "android.intent.action.VIEW",
-    data: url_浦发储蓄卡金豆页面,
-});
+
+什么值得买();
+
+function 什么值得买() {
+    let appName = "什么值得买";
+    func.toApp(appName);
+    let signBtn = null;
+    while (signBtn == null) {
+        signBtn = id("tv_login_sign").findOnce();
+        func.sClick(id("tab_usercenter").text("我的").findOnce());
+        sleep(800);
+        func.sClick(idContains("close").findOnce());
+        sleep(800);
+        //func.passAd();
+    }
+    sleep(800);
+    func.sClick(signBtn);
+    sleep(1000);
+    //textContains("已连续签到").findOne();
+    toastLog(appName + "已签到");
+    sleep(1200);
+}
 
 function 中信活动() {
     var appName = "动卡空间";
