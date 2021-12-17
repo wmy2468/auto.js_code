@@ -672,9 +672,9 @@ function 中信活动() {
             // log(nowDate.getHours() <= 9);
             // 如果当前小时数 大于10，则是15点场
             if (nowDate.getHours() <= 9) {
-                startTime = "09,59,52,000"
+                startTime = "09,59,50,000"
             } else {
-                startTime = "14,59,53,000"
+                startTime = "14,59,50,000"
                 couDes = ["【下午茶】喜茶25元抵用券（15点抢兑）"];
             }
 
@@ -702,10 +702,13 @@ function 中信活动() {
             text(item_page_text).findOne();             // 等待进入指定页面
             toastLog("已到达指定页面，等待");
             //点击元素
-            let to_pay = null;
+            let un_start, to_pay = null;
+            un_start = text("未开始").findOne();
+            let un_x, un_y;
+            un_x = un_start.bounds().centerX();
+            un_y = un_start.bounds().centerY();
             while (to_pay == null) {
-                func.sClick(text("去兑换").findOnce());
-                func.sClick(text("未开始").findOnce());
+                click(un_x, un_y);
                 sleep(100);
                 to_pay = text("去支付").findOnce();
             }
