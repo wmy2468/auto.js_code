@@ -396,7 +396,7 @@ function 浦发银行() {
     let appName = "浦发银行";
     //closeApp(appName);
     func.toAutojs();
-    let url_浦发储蓄卡金豆页面 = "spdbbank://wap.spdb.com.cn/awakeapp?login_flag=0&support_type=1&path=vue|mspmk-cli-welfare/goldenBean&APP_VERSION=@appVersion&from=shouye&login_flag=0&support_type=1";
+    let url_浦发储蓄卡金豆页面 = "spdbbank://wap.spdb.com.cn/awakeapp?login_flag=0&support_type=1&path=vue|mspmk-cli-welfare/goldenBean/";
     app.startActivity({
         action: "android.intent.action.VIEW",
         data: url_浦发储蓄卡金豆页面,
