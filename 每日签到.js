@@ -503,6 +503,7 @@ function 京东() {
         }
     }
     this.陪伴签到 = function () {
+        func.toAutojs();
         let signed, unsign, txt1, txt2;
         txt1 = "陪伴频道签到赚京豆";
         txt2 = "活动规则";
