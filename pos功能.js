@@ -51,8 +51,6 @@ function 万商3比() {
                 sleep(1000);
                 func.gesture_pwd(appName);
                 sleep(4000);
-                id("home_qrcodepay").findOne();
-                sleep(500);
             }
             func.sClick(text("扫一扫").findOnce());
             sleep(500);
