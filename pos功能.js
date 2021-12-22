@@ -21,6 +21,26 @@ switch (selectFunc) {
 
 
 function 万商3比() {
+    var now, h, m;
+    now = new Date();
+    h = now.getHours();
+    m = now.getMinutes();
+    if (h >= 7 && h <= 18) {
+        if (m >= 40 && m <= 50) {
+            alert("宾馆不刷，退出");
+            exit();
+        }
+    } else if (h >= 19 && h <= 22) {
+        if (m >= 20 && m <= 30) {
+            alert("宾馆不刷，退出");
+            exit();
+        }
+    } else if (h >= 23 || h <= 6) {
+        if ((m >= 50 && m <= 60) || (m >= 10 && m <= 20)) {
+            alert("宾馆不刷，退出");
+            exit();
+        }
+    }
     var count, inputVal, appName;
     count = dialogs.rawInput("请输入次数", 3);
     numRange = func.dialogsWin(["10-15", "15-20", "20-23"])
