@@ -3,7 +3,7 @@ auto.waitFor();
 var func = require("func_list.js");
 //test on laptop
 
-什么值得买();
+log(idContains("cancel").findOnce().click());
 
 function 什么值得买() {
     let appName = "什么值得买";
