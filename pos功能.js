@@ -26,17 +26,17 @@ function 万商3比() {
     h = now.getHours();
     m = now.getMinutes();
     if (h >= 7 && h <= 18) {
-        if (m >= 40 && m <= 50) {
+        if (m >= 39 && m <= 50) {
             alert("宾馆不刷，退出");
             exit();
         }
     } else if (h >= 19 && h <= 22) {
-        if (m >= 20 && m <= 30) {
+        if (m >= 19 && m <= 30) {
             alert("宾馆不刷，退出");
             exit();
         }
     } else if (h >= 23 || h <= 6) {
-        if ((m >= 50 && m <= 60) || (m >= 10 && m <= 20)) {
+        if ((m >= 49 && m <= 60) || (m >= 9 && m <= 20)) {
             alert("宾馆不刷，退出");
             exit();
         }
