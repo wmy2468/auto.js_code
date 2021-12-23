@@ -37,7 +37,8 @@ function main() {
     } else if (devModel == devRedMi) {
         ysf.签到();
         ysf.领积点();
-        jd_sign();
+        jd.jd_sign();
+        jd.陪伴签到();
         zs.便民生活();
         zs.饭票签到();
         工商();
