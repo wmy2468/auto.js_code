@@ -107,12 +107,13 @@ function 沃钱包() {
         if (paopao != null) { paopao.parent().click(); }
         func.sClick(text("每日签到得好礼").findOnce());
     }
-    sleep(3000);
+    sleep(3500);
     if (textContains("今日已签到").findOnce() == null) {
         func.sClick(textContains("签到领奖励").findOne());
+        sleep(2500);
     }
-    sleep(4000);
     toastLog(appName + ",已签到");
+    sleep(2000);
 }
 
 function 工商() {
