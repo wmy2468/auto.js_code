@@ -3,7 +3,23 @@ auto.waitFor();
 var func = require("func_list.js");
 //test on laptop
 
-log(idContains("cancel").findOnce().click());
+log(text("每日签到得好礼").findOnce().click());
+function union_pay() {
+    let appName = "沃钱包";
+    func.toApp(appName);
+    let paopao;
+    while (textContains("第3天").textStartsWith("+").findOnce() == null) {
+        paopao = idContains("wopay_mine_item_name_tv").text("泡泡").findOnce();
+        if (paopao != null) { paopao.parent().click(); }
+        func.sClick(text("每日签到得好礼").findOnce());
+    }
+    sleep(3000);
+    if (textContains("今日已签到").findOnce() == null) {
+        func.sClick(textContains("签到领奖励").findOne());
+    }
+    sleep(4000);
+    toastLog(appName + ",已签到");
+}
 
 function 什么值得买() {
     let appName = "什么值得买";

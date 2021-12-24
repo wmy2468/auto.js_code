@@ -15,6 +15,7 @@ function main() {
     jd = 京东();
     if (devModel == devMate30) {
         // 龙支付签到();
+        沃钱包();
         浦发银行();
         中国农业银行();
         什么值得买();
@@ -95,7 +96,22 @@ function 云闪付() {
 }
 
 
-
+function 沃钱包() {
+    let appName = "沃钱包";
+    func.toApp(appName);
+    let paopao;
+    while (textContains("第3天").textStartsWith("+").findOnce() == null) {
+        paopao = idContains("wopay_mine_item_name_tv").text("泡泡").findOnce();
+        if (paopao != null) { paopao.parent().click(); }
+        func.sClick(text("每日签到得好礼").findOnce());
+    }
+    sleep(3000);
+    if (textContains("今日已签到").findOnce() == null) {
+        func.sClick(textContains("签到领奖励").findOne());
+    }
+    sleep(4000);
+    toastLog(appName + ",已签到");
+}
 
 function 工商() {
     let appName = "中国工商银行";
