@@ -1,10 +1,9 @@
 auto.waitFor();
 //toastLog(id("com.jd.lib.cashier.feature:id/cd").findOnce().click());
 var func = require("func_list.js");
-//test on laptop
-// wode = idContains("wopay_mine_item_name_tv").text("我的").findOnce();
-// if (wode != null) { wode.parent().click(); }
-log(idContains("wopay_main_mine_tv").text("我的").findOnce().parent().click());
+
+setText(0, "188");
+
 function union_pay() {
     let appName = "沃钱包";
     func.toApp(appName);
