@@ -5,7 +5,7 @@ var func = require("func_list.js");
 main();
 // toastLog(text("领取奖励").find().length);
 function main() {
-    let selectedArr = ["建行财富季", "ZFB捐款", "余额宝转出"];
+    let selectedArr = ["建行财富季", "ZFB捐款", "余额宝转出", "余额宝转入"];
     //---------------配置区域-----------------
     let scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本  
     let zfb = 支付宝();
@@ -50,6 +50,22 @@ function 支付宝() {
             action: "android.intent.action.VIEW",
             data: url_zfb_余额宝,
         });
+        let pwd = "188";
+        while (text("使用密码").findOnce() == null) {
+            func.sClick(text("转入").findOnce());
+            if (textContains("转入余额宝").findOnce() != null) {
+                func.sClick(text("请输入转入金额").findOne());
+                sleep(1000);
+                for (let i = 0; i < pwd.length; i++) {
+                    log(pwd[i]);
+                    text(pwd[i]).findOne().click();
+                    sleep(500);
+                }
+                sleep(1500);
+                func.sClick(text("确认转入").findOne());
+            }
+        }
+        toastLog("已完成。。。");
     }
     this.ZFB捐款 = function () {
         var defaultCount, count, cardNum, banks;
