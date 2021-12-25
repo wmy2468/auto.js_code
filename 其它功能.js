@@ -40,6 +40,7 @@ function 支付宝() {
                 sleep(1500);
                 func.sClick(text("确认转出").findOnce());
             }
+            sleep(100);
         }
         toastLog("已完成。。。");
     }
@@ -64,6 +65,7 @@ function 支付宝() {
                 sleep(1500);
                 func.sClick(text("确认转入").findOne());
             }
+            sleep(100);
         }
         toastLog("已完成。。。");
     }
