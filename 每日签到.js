@@ -14,7 +14,7 @@ function main() {
     ysf = 云闪付();
     jd = 京东();
     if (devModel == devMate30) {
-        // 龙支付签到();
+        龙支付签到();
         沃钱包();
         浦发银行();
         中国农业银行();
@@ -48,6 +48,12 @@ function main() {
 }
 
 // ======================签到代码==================================
+function 龙支付签到() {
+    let url_ccb = "ccbapp://applet.ccb.com?funcid=18001001&app_type=1&appid=app2021071500000001&appName=龙支付签到&launchFrom=desktop&launchFrom=desktop"
+    func.to_scheme(url_ccb);
+
+}
+
 function 云闪付() {
     this.领积点 = function () {
         let url_ysf会员中心 = "upwallet://applet?encryptAppId=472741b326b7bb5c&toLink=https%3A%2F%2Fcloudvip.95516.com%2F&scenarioId=1006"

@@ -34,9 +34,11 @@ let url_ysf = "upwallet://rn/rncoupondetail?couponId=3102021122131595";
 
 let url_auto_Js = "upwallet://rn/rncoupondetail?couponId=3102021122131595";
 
+let url_ccb = "ccbapp://applet.ccb.com?funcid=18001001&app_type=1&appid=app2021071500000001&appName=龙支付签到&launchFrom=desktop&launchFrom=desktop"
+
 app.startActivity({
     action: "android.intent.action.VIEW",
-    data: url_ysf,
+    data: url_ccb,
 });
 
 // --------------url scheme--------------
