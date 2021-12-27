@@ -55,17 +55,20 @@ function 支付宝() {
         while (text("使用密码").findOnce() == null) {
             func.sClick(text("转入").findOnce());
             if (textContains("转入余额宝").findOnce() != null) {
-                func.sClick(text("请输入转入金额").findOne());
-                sleep(1000);
-                for (let i = 0; i < pwd.length; i++) {
-                    log(pwd[i]);
-                    text(pwd[i]).findOne().click();
-                    sleep(500);
+                if (func.sClick(text("请输入转入金额").findOnce())) {
+                    sleep(1000);
+                    for (let i = 0; i < pwd.length; i++) {
+                        log(pwd[i]);
+                        text(pwd[i]).findOne().click();
+                        sleep(500);
+                    }
+                    sleep(1500);
                 }
-                sleep(1500);
-                func.sClick(text("确认转入").findOne());
+                if (func.sClick(text("确认转入").findOnce())) {
+                    sleep(2000);
+                }
             }
-            sleep(100);
+            sleep(300);
         }
         toastLog("已完成。。。");
     }
