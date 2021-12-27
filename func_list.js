@@ -2,10 +2,9 @@
 // ----------------------通用功能区-----------------------
 // 切换到autojs
 function to_autojs() {
-    let pkg_name = "org.autojs.autojs"
     app.startActivity({
-        packageName: pkg_name,
-        className: "org.autojs.autojs.ui.settings.SettingsActivity_",
+        packageName: "org.autojs.autojs",
+        className: "org.autojs.autojs.ui.main.MainActivity_",
     });
     waitForPackage(pkg_name, period = 200);
     toast("已到达autojs");

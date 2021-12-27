@@ -5,8 +5,8 @@ var func = require("func_list.js");
 let url_jd = "openApp.jdMobile://"
 
 app.startActivity({
-    action: "android.intent.action.VIEW",
-    data: url_jd,
+    packageName: "com.jingdong.app.mall",
+    data: url_jd
 });
 
 function union_pay() {
