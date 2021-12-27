@@ -54,9 +54,9 @@ function 支付宝() {
         let pwd = "188";
         while (text("使用密码").findOnce() == null) {
             func.sClick(text("转入").findOnce());
-            if (textContains("转入余额宝").findOnce() != null) {
+            if (textContains("转入金额").findOnce() != null) {
                 if (func.sClick(text("请输入转入金额").findOnce())) {
-                    sleep(1000);
+                    sleep(1500);
                     for (let i = 0; i < pwd.length; i++) {
                         log(pwd[i]);
                         text(pwd[i]).findOne().click();
@@ -65,7 +65,7 @@ function 支付宝() {
                     sleep(1500);
                 }
                 if (func.sClick(text("确认转入").findOnce())) {
-                    sleep(2000);
+                    sleep(1500);
                 }
             }
             sleep(300);
