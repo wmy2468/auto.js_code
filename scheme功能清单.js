@@ -30,9 +30,11 @@ let url_jd_陪伴计划签到 = "openApp.jdMobile://virtual?params=%7B%22categor
 
 let url_zfb_余额宝 = "alipays://platformapi/startapp?appId=20000032";
 
+let url_ysf = "upwallet://rn/rncoupondetail?couponId=3102021122131595";
+
 app.startActivity({
     action: "android.intent.action.VIEW",
-    data: url_zfb_余额宝,
+    data: url_ysf,
 });
 
 // --------------url scheme--------------

@@ -4,7 +4,7 @@
 function toAutojs() {
     while (currentPackage() != ("org.autojs.autojs")) {
         launch("org.autojs.autojs");
-        log("启动autoJS");
+        toast("启动autoJS");
         sleep(1200);
     }
 }
