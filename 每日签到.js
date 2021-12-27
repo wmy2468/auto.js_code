@@ -354,6 +354,7 @@ function 中国农业银行() {
         if (func.sClick(text("签到有礼").findOnce())) { sleep(1200); }
         if (func.sClick(text("签到得豆").findOnce())) { sleep(1200); }
     }
+    if (func.sClick(text("已经签到").findOnce())) { sleep(1200); }
     toastLog(appName + "已签到");
     sleep(1000);
 }
