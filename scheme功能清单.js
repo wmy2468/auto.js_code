@@ -32,6 +32,8 @@ let url_zfb_余额宝 = "alipays://platformapi/startapp?appId=20000032";
 
 let url_ysf = "upwallet://rn/rncoupondetail?couponId=3102021122131595";
 
+let url_auto_Js = "upwallet://rn/rncoupondetail?couponId=3102021122131595";
+
 app.startActivity({
     action: "android.intent.action.VIEW",
     data: url_ysf,

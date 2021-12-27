@@ -22,7 +22,7 @@ function main() {
                 break;
         }
     }
-    func.toAppMulti("京东", appNumbers);
+    func.to_appMulti("京东", appNumbers);
 
     kouling();
     monster();
@@ -228,7 +228,7 @@ function runApps(appNames) {
     if (device.brand == "xiaomi") {
         // 如果是小米双开则选择当前的数字
         if (doubleApp) {
-            func.toAppMulti(appNames, appNumbers);
+            func.to_appMulti(appNames, appNumbers);
         } else {
             launchApp(appNames);
         }

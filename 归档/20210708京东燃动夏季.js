@@ -29,7 +29,7 @@ function main() {
 	setClip(koulingText);
 	sleep(1000);
 	log("正在打开");
-	func.toApp(appName);
+	func.to_app(appName);
 	process();
 	alert('已完成');
 }
@@ -351,7 +351,7 @@ function after_click(textStr, details) {
 		back_way();
 		sleep(2000);
 		if (currentPackage() != "com.jingdong.app.mall") {
-			func.toApp(appName);
+			func.to_app(appName);
 		}
 		sleep(3000);
 		back_way();
@@ -362,7 +362,7 @@ function after_click(textStr, details) {
 		sleep(10000);
 		if (currentPackage() != "com.jingdong.app.mall") {
 			waitLog(5, '等待一会儿..跳转回JD');
-			func.toApp(appName);
+			func.to_app(appName);
 		}
 	} else if (details == 'imgClick') {
 		func.sClick(desc('关闭页面').findOnce());

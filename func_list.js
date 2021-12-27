@@ -1,13 +1,45 @@
 
 // ----------------------通用功能区-----------------------
 // 切换到autojs
-function toAutojs() {
-    while (currentPackage() != ("org.autojs.autojs")) {
-        launch("org.autojs.autojs");
-        toast("启动autoJS");
-        sleep(1200);
+function to_autojs() {
+    let pkg_name = "org.autojs.autojs"
+    app.startActivity({
+        packageName: pkg_name,
+        className: "org.autojs.autojs.ui.settings.SettingsActivity_",
+    });
+    waitForPackage(pkg_name, period = 200);
+    toast("已到达autojs");
+}
+
+function to_scheme(data_url) {
+    to_autojs();
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        data: data_url,
+    });
+}
+
+function to_app(appName) {
+    to_autojs();
+    sleep(800);
+    while (currentPackage() != getPackageName(appName)) {
+        launchApp(appName);
+        sleep(2000);
     }
 }
+
+function toJdSku(sellId) {
+    // let appName = "京东";
+    // while (currentPackage() != getPackageName(appName)) {
+    //     launchApp(appName);
+    //     sleep(300);
+    // }
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        data: "openapp.jdmobile://virtual?params=%7B%22sourceValue%22:%220_productDetail_97%22,%22des%22:%22productDetail%22,%22skuId%22:%22" + sellId + "%22,%22category%22:%22jump%22,%22sourceType%22:%22PCUBE_CHANNEL%22%7D",
+    });
+}
+
 
 function cClick(element) {
     if (element != null) {
@@ -54,45 +86,11 @@ function passAd() {
     //sClick(text("取消").findOnce());
     //sClick(text("放弃转账").findOnce());*/
 }
-
-
-function toApp(appName) {
-    toAutojs();
-    sleep(800);
-    while (currentPackage() != getPackageName(appName)) {
-        launchApp(appName);
-        sleep(2000);
-    }
-}
-
-
-function toPackage(packageName) {
-    toAutojs();
-    sleep(800);
-    while (currentPackage() != packageName) {
-        launch(packageName);
-        sleep(2000);
-    }
-}
-
-
-function toJdSku(sellId) {
-    // let appName = "京东";
-    // while (currentPackage() != getPackageName(appName)) {
-    //     launchApp(appName);
-    //     sleep(300);
-    // }
-    app.startActivity({
-        action: "android.intent.action.VIEW",
-        data: "openapp.jdmobile://virtual?params=%7B%22sourceValue%22:%220_productDetail_97%22,%22des%22:%22productDetail%22,%22skuId%22:%22" + sellId + "%22,%22category%22:%22jump%22,%22sourceType%22:%22PCUBE_CHANNEL%22%7D",
-    });
-}
-
 /*
     小米使用参数1，2，华为使用0
 */
 function toAppMulti(appName, cnt) {
-    toAutojs();
+    to_autojs();
     sleep(800);
     launchApp(appName);
     if (cnt != 0) {
@@ -648,12 +646,12 @@ function dialogsWin(inArr) {
 
 module.exports = {
     floatyMove: floatyMove,
-    toAutojs: toAutojs,
+    to_autojs: to_autojs,
     cClick: cClick,
     sClick: sClick,
     passAd: passAd,
-    toApp: toApp,
-    toPackage: toPackage,
+    to_app: to_app,
+    to_scheme: to_scheme,
     toAppMulti: toAppMulti,
     huaweiUnlock: huaweiUnlock,
     xiaomiUnlock: xiaomiUnlock,

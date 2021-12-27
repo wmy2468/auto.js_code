@@ -35,7 +35,7 @@ function 做任务() {
 	setClip(koulingText);
 	sleep(1000);
 	log("正在打开");
-	func.toApp(appName);
+	func.to_app(appName);
 	process();
 }
 
@@ -70,13 +70,13 @@ function 互助() {
 }
 
 function 互助点击() {
-	func.toApp(appName);
+	func.to_app(appName);
 	log("正在等待进入活动页面");
 	//等待点击 立即查看按钮
 	while (func.sClick(className("TextView").textContains("立即").findOne(10000)) == false) {
 		home();
 		sleep(4000);
-		func.toApp(appName);
+		func.to_app(appName);
 	}
 	sleep(2000);
 	// 点击助力
@@ -334,7 +334,7 @@ function after_click(textStr, details) {
 		back_way();
 		sleep(2000);
 		if (currentPackage() != "com.jingdong.app.mall") {
-			func.toApp(appName);
+			func.to_app(appName);
 		}
 		sleep(3000);
 		back_way();
@@ -345,7 +345,7 @@ function after_click(textStr, details) {
 		sleep(10000);
 		if (currentPackage() != "com.jingdong.app.mall") {
 			waitLog(5, '等待一会儿..跳转回JD');
-			func.toApp(appName);
+			func.to_app(appName);
 		}
 	} else if (details == '东东超市') {
 		sleep(4000);

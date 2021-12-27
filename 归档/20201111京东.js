@@ -20,25 +20,25 @@ function main() {
 	sleep(1000);
 	log("正在打开");
 	if (devBrand == 'HUAWEI') {
-		func.toApp(appName);
+		func.to_app(appName);
 		process();
 	} else if (devBrand == 'xiaomi') {
 		if (小米双开) {
 			k = 1;
-			func.toAppMulti(appName, k);
+			func.to_appMulti(appName, k);
 			process();
 			toastLog('第一个已完成');
 			setClip(kouLing);
 			sleep(1000);
 			k = k + 1;
-			func.toAppMulti(appName, k);
+			func.to_appMulti(appName, k);
 			process();
 		} else {
-			func.toApp(appName);
+			func.to_app(appName);
 			process();
 		}
 	} else {
-		func.toApp(appName);
+		func.to_app(appName);
 		process();
 	}
 	alert('已完成');
@@ -337,18 +337,18 @@ function after_click(textStr, details) {
 				toastLog('跳转到小程序，等待20秒');
 				if (devBrand == 'HUAWEI') {
 					waitLog(8, '等待一会儿..跳转回JD');
-					func.toApp(appName);
+					func.to_app(appName);
 				} else if (devBrand == 'xiaomi') {
 					if (小米双开) {
 						waitLog(15, '等待一会儿..跳转回JD');
-						func.toAppMulti(appName, k);
+						func.to_appMulti(appName, k);
 					} else {
 						waitLog(15, '等待一会儿..跳转回JD');
-						func.toApp(appName);
+						func.to_app(appName);
 					}
 				} else {
 					waitLog(15, '等待一会儿..跳转回JD');
-					func.toApp(appName);
+					func.to_app(appName);
 				}
 				sleep(2500);
 			} else {

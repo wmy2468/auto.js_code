@@ -60,7 +60,7 @@ function 万商3比() {
             max = 23;
             break;
     }
-    func.toApp(appName);
+    func.to_app(appName);
     sum = 0;
     while (count > 0) {
         inputVal = func.randomNum(min, max, digit = 1);
@@ -108,7 +108,7 @@ function 手续费() {
 
 function 快钱手续费() {
     appName = "万商云";
-    func.toApp(appName);
+    func.to_app(appName);
     while (text("资产明细").findOnce() == null) {
         toastLog("请打开资产明细页面");
         sleep(2000);
@@ -158,7 +158,7 @@ function 快钱手续费() {
 
 function 钱宝手续费() {
     appName = "招钱进宝";
-    func.toApp(appName);
+    func.to_app(appName);
     while (text("账户明细").findOnce() == null) {
         toastLog("请打开账户明细页面");
         sleep(2000);

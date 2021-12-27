@@ -12,7 +12,7 @@ function main() {
 
 // ======================签到代码==================================
 function jd_sign() {
-    func.toApp("京东");
+    func.to_app("京东");
     //等待首页加载
     while (text("首页").findOnce() == null) {
         func.sClick(id("xk").findOnce());
@@ -114,7 +114,7 @@ function 招商银行() {
     var appName = "招商银行";
     // setClip("＆https://t.cmbchina.com/RZV7f2＆");
     sleep(600);
-    func.toApp(appName);
+    func.to_app(appName);
     func.passAd();
     // func.sClick(text("立即查看").findOne());
     func.sClick(id("cmb.pb:id/textMarquee").findOne());

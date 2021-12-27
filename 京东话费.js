@@ -58,7 +58,7 @@ function 话费支付() {
 
     var cardEndNumber;
     if (result == "微信") {
-        func.toApp("京东");
+        func.to_app("京东");
         weiXinn();
     } else if (result == "华为支付" || result == "云闪付" || result == "JD支付") {
         // var cardName = func.dialogsWin(["JJ-中信", "JJ-华为中信", "LP-中信", "华夏", "JJ-京东红卡", "浦发", "交通", "LM-中行", "邮储", "JJ-建行"]);
@@ -66,7 +66,7 @@ function 话费支付() {
         // 根据人名 获取卡的尾号 字典
         personCardList = cardPerson[person];
         cardEndNumber = personCardList[func.dialogsWin(Object.keys(personCardList))];
-        func.toApp("京东");
+        func.to_app("京东");
         while (text(textPay).findOnce() == null) {
             func.sClick(text("我的").findOnce());
             sleep(1000);
@@ -88,7 +88,7 @@ function 话费支付() {
 function 进90减2界面领券() {
     var timeArea;
     timeArea = "京东时间";
-    func.toApp("京东");
+    func.to_app("京东");
 
     var pay90_40, targetView;
     targetView = desc("购物车").depth(14).findOnce();
@@ -141,7 +141,7 @@ function 进90减2界面领券() {
 function 删除话费订单() {
     var cnt;
     cnt = 0;
-    func.toApp("京东");
+    func.to_app("京东");
     while (text("筛选").findOnce() == null) {
         func.sClick(text("我的").findOnce());
         func.sClick(text("我的订单").findOnce());

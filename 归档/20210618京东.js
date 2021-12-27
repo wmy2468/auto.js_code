@@ -27,25 +27,25 @@ function main() {
 	sleep(1000);
 	log("正在打开");
 	if (devBrand == 'HUAWEI') {
-		func.toApp(appName);
+		func.to_app(appName);
 		process();
 	} else if (devBrand == 'xiaomi') {
 		if (小米双开) {
 			k = 1;
-			func.toAppMulti(appName, k);
+			func.to_appMulti(appName, k);
 			process();
 			toastLog('第一个已完成');
 			setClip(koulingText);
 			sleep(1000);
 			k = k + 1;
-			func.toAppMulti(appName, k);
+			func.to_appMulti(appName, k);
 			process();
 		} else {
-			func.toApp(appName);
+			func.to_app(appName);
 			process();
 		}
 	} else {
-		func.toApp(appName);
+		func.to_app(appName);
 		process();
 	}
 	alert('已完成');
@@ -354,7 +354,7 @@ function after_click(textStr, details) {
 		back_way();
 		sleep(2000);
 		if (currentPackage() != "com.jingdong.app.mall") {
-			func.toApp(appName);
+			func.to_app(appName);
 		}
 		sleep(3000);
 		back_way();
@@ -366,18 +366,18 @@ function after_click(textStr, details) {
 		if (currentPackage() != "com.jingdong.app.mall") {
 			if (devBrand == 'HUAWEI') {
 				waitLog(5, '等待一会儿..跳转回JD');
-				func.toApp(appName);
+				func.to_app(appName);
 			} else if (devBrand == 'xiaomi') {
 				if (小米双开) {
 					waitLog(5, '等待一会儿..跳转回JD');
-					func.toAppMulti(appName, k);
+					func.to_appMulti(appName, k);
 				} else {
 					waitLog(5, '等待一会儿..跳转回JD');
-					func.toApp(appName);
+					func.to_app(appName);
 				}
 			} else {
 				waitLog(5, '等待一会儿..跳转回JD');
-				func.toApp(appName);
+				func.to_app(appName);
 			}
 		}
 	} else {

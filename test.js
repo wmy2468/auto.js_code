@@ -2,11 +2,16 @@ auto.waitFor();
 //toastLog(id("com.jd.lib.cashier.feature:id/cd").findOnce().click());
 var func = require("func_list.js");
 
-log(textContains("转入余额宝").findOnce());
+let url_jd = "openApp.jdMobile://"
+
+app.startActivity({
+    action: "android.intent.action.VIEW",
+    data: url_jd,
+});
 
 function union_pay() {
     let appName = "沃钱包";
-    func.toApp(appName);
+    func.to_app(appName);
     let paopao;
     while (textContains("第3天").textStartsWith("+").findOnce() == null) {
         paopao = idContains("wopay_mine_item_name_tv").text("泡泡").findOnce();
@@ -23,7 +28,7 @@ function union_pay() {
 
 function 什么值得买() {
     let appName = "什么值得买";
-    func.toApp(appName);
+    func.to_app(appName);
     let signBtn = null;
     while (signBtn == null) {
         signBtn = id("tv_login_sign").findOnce();
@@ -70,7 +75,7 @@ function 中信活动() {
                 targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             }
 
-            func.toApp(appName);             // 启动APP
+            func.to_app(appName);             // 启动APP
             var couClick = null;          // 找券
             while (couClick == null) {
                 if (couDes == "星巴克中杯饮品电子券") {
@@ -104,7 +109,7 @@ function 中信活动() {
             startTime = "10,59,59,850";             // 设置时间点
             couDes = ["必胜客100元代金券", "达美乐50元代金券", "肯德基50元"];             // 券名称
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
-            func.toApp(appName);             // 启动APP
+            func.to_app(appName);             // 启动APP
             // 等待进入指定页面
             var couClick = textContains(targetViewText).findOnce();
             while (!couClick) {
@@ -130,7 +135,7 @@ function 中信活动() {
             couDes = ["App Store 充值卡20元", "迪士尼", "必胜客20元", "奈雪", "喜茶25元",
                 "苏宁支付券20元", "京东支付券20元", "天猫20元", "百果园20元", "滴滴出行20元", "美团外卖20元"];
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
-            func.toApp(appName);             // 启动APP
+            func.to_app(appName);             // 启动APP
             while (text(item_page_text).findOnce() == null) {
                 sleep(100);
                 cnt = cnt + 1;
@@ -220,7 +225,7 @@ function 中信活动() {
 
 function 招商() {
     this.饭票签到 = function () {
-        func.toAutojs();
+        func.to_autojs();
         var url_招商饭票签到 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=100856&cmb_app_trans_parms_start=here&param=v2&appflag=0"
         app.startActivity({
             action: "android.intent.action.VIEW",
@@ -240,7 +245,7 @@ function 招商() {
         sleep(3000);
     }
     this.便民生活 = function () {
-        func.toAutojs();
+        func.to_autojs();
         var appName = "招商银行";
         var url_招商便民 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=791166&cmb_app_trans_parms_start=here&channel=share&appflag=0";
         app.startActivity({
@@ -386,7 +391,7 @@ function 品牌墙() {
 function 买单吧() {
     var appName = "买单吧";
     //closeApp(appName);
-    func.toApp(appName);
+    func.to_app(appName);
     while (className("TextView").id("tv_title").text("我的").findOnce() == null) {
         func.passAd();
         func.sClick(id("ivADClose").findOnce());
@@ -656,7 +661,7 @@ function 云闪付锦鲤活动() {
             startTime = "14,59,59,600";
             break;
     }
-    func.toApp(appName);
+    func.to_app(appName);
     while (text("激励金提现").findOnce() == null) {
         // 如果能点击按钮，就等待设置文本
         if (func.sClick(id("rl_search_coupon").findOnce()) == true) {

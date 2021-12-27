@@ -30,10 +30,7 @@ function main() {
 function 支付宝() {
     this.余额宝转出 = function () {
         let url_zfb_余额宝 = "alipays://platformapi/startapp?appId=20000032";
-        app.startActivity({
-            action: "android.intent.action.VIEW",
-            data: url_zfb_余额宝,
-        });
+        func.to_scheme(url_zfb_余额宝);
         while (text("使用密码").findOnce() == null) {
             func.sClick(text("转出").findOnce());
             if (func.sClick(text("全部").findOnce()) == true) {
@@ -46,11 +43,7 @@ function 支付宝() {
     }
     this.余额宝转入 = function () {
         let url_zfb_余额宝 = "alipays://platformapi/startapp?appId=20000032";
-
-        app.startActivity({
-            action: "android.intent.action.VIEW",
-            data: url_zfb_余额宝,
-        });
+        func.to_scheme(url_zfb_余额宝);
         let pwd = "188";
         while (text("使用密码").findOnce() == null) {
             func.sClick(text("转入").findOnce());
@@ -86,7 +79,7 @@ function 支付宝() {
                 break;
         }
         count = dialogs.rawInput("请输入捐款次数", defaultCount);
-        func.toApp("支付宝");
+        func.to_app("支付宝");
         var cnt = 1;
         sleep(1000);
         while (count > 0) {
@@ -145,10 +138,10 @@ function 支付宝() {
 }
 // -----------------------建行财富季-----------------------
 function 建行财富季() {
-    func.toAppMulti("微信", 1);
+    func.to_appMulti("微信", 1);
     龙支付_戳泡泡();
     // 龙支付_日常任务();
-    func.toAppMulti("微信", 2);
+    func.to_appMulti("微信", 2);
     龙支付_戳泡泡();
     // 龙支付_日常任务();
     alert("已完成");

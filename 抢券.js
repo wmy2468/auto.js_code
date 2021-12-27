@@ -47,12 +47,9 @@ function 招商倒计时领取() {
     else if (select_txt == "啥也不选") { url = ""; }
 
     if (url != "") {
-        app.startActivity({
-            action: "android.intent.action.VIEW",
-            data: url,
-        });
+        func.to_scheme(url);
     } else {
-        func.toApp(appName);
+        func.to_app(appName);
     }
     toastLog("等待立即领取出现");
     func.sClick(textContains("立即领取").findOne());
@@ -99,10 +96,7 @@ function 招商便民生活() {
     select_text = func.dialogsWin(["双立人", "洁柔", "6000微克", "5000微克", "4000微克"]);
     sure_btn = "确认领取";
     url_target = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https%253A%252F%252Factship-activityui.paas.cmbchina.com%252FActPage.html%253FactivityId%253DAGP20211201095436sH6P8jxK%2526behavior_entryid%253Dundefined&shortUrl=https%253A%252F%252Fcmbt.cn%252Fa%252FhtREAc%253FactivityId%253DAGP20211201095436sH6P8jxK%2526behavior_entryid%253Dundefined&appflag=0"
-    app.startActivity({
-        action: "android.intent.action.VIEW",
-        data: url_target,
-    });
+    func.to_scheme(url_target);
     招商领取(page_text, wait_text, popup_wait_text, select_text, sure_btn);
 }
 
@@ -172,13 +166,10 @@ function 云闪付() {
         }
         coupon_id = coupon_dict[func.dialogsWin(Object.keys(coupon_dict))];
         url_ysf = "upwallet://rn/rncoupondetail?couponId=" + coupon_id;
-        func.toAutojs();
+        func.to_autojs();
         // 准备倒计时
         func.getTimeDiff(timeArea, startTime);
-        app.startActivity({
-            action: "android.intent.action.VIEW",
-            data: url_ysf,
-        });
+        func.to_scheme(url_ysf);
         func.sClick(text("立即领取").findOne(10000));
     }
     this.云闪付捡漏 = function () {
@@ -314,7 +305,7 @@ function 云闪付() {
         }
         let getCouponWay;       //定义领券方式
         getCouponWay = func.dialogsWin(["提前1秒进入页面领取", "切换时间标签领券"]);
-        func.toApp(appName);
+        func.to_app(appName);
         while (text("明日预告").findOnce() == null) {
             // 如果能点击按钮，就等待设置文本
             try {
@@ -455,13 +446,8 @@ function 京喜领券() {
             url_页面 = "openapp.jdpingou://virtual?params=%7B%22des%22%3A%22m%22%2C%22url%22%3A%22" + coupon_url + "%22%2C%22category%22%3A%22jump%22%7D";
             break;
     }
-
-    func.toAutojs();
     // 跳转到APP
-    app.startActivity({
-        action: "android.intent.action.VIEW",
-        data: url_页面,
-    });
+    func.to_scheme(url_页面);
 
     // 等待进入指定页面
     let couClick = textContains(targetViewText).findOnce();
@@ -488,7 +474,7 @@ function 农行缴费() {
     toastLog("到点点击");
     startTime = "09,59,59,700";
     targetViewText = "[6179]";
-    func.toApp(appName);
+    func.to_app(appName);
     // 等待进入指定页面
     let card = textContains(targetViewText).findOnce();
     while (card == null) {
@@ -526,7 +512,7 @@ function 掌上生活活动() {
             targetViewText = func.dialogsWin(["（周三5折）喜茶20元代金券",
                 "（周三5折）必胜客50元代金券",
                 "（周三5折）肯德基20元全场通兑代金券"]);
-            func.toApp(appName);
+            func.to_app(appName);
             // 等待进入指定页面
             while (!text(targetViewText).findOnce()) {
                 toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
@@ -549,7 +535,7 @@ function 掌上生活活动() {
             toastLog("提前15秒 进入");
             startTime = "09,59,45,000";
             targetViewText = "星巴克中杯手工调制饮品";
-            func.toApp(appName);
+            func.to_app(appName);
             // 等待进入指定页面
             while (!textContains("成团").findOnce()) {
                 toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
@@ -623,7 +609,7 @@ function 光大活动() {
 
     let appName = "阳光惠生活";
     let timeArea = "北京时间";
-    func.toApp(appName);
+    func.to_app(appName);
     // 等待进入指定页面
     while (!textContains(targetViewText).findOnce()) {
         toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
@@ -663,7 +649,7 @@ function 交行9点5积分() {
     let startTime = "08,59,57,000"
     let actNames = ["加油卡充值30元红包", "缴费类15元红包", "话费20元红包", "话费10元红包", "本月2倍积分", "一键加油15元红包"];
     let actName = func.dialogsWin(actNames);      // 设置查找的文本
-    func.toApp(appName);
+    func.to_app(appName);
     // 等待进入指定页面
     let get_packet, packet_parent, packet_childcount;
     textContains("本月可用兑换资格").findOne();
@@ -716,7 +702,7 @@ function 中信活动() {
                 targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
             }
 
-            func.toApp(appName);             // 启动APP
+            func.to_app(appName);             // 启动APP
             couClick = null;          // 找券
             while (couClick == null) {
                 if (couDes == "星巴克中杯饮品电子券") {
@@ -753,7 +739,7 @@ function 中信活动() {
             startTime = "10,59,59,850";             // 设置时间点
             couDes = ["必胜客100元代金券", "达美乐50元代金券", "肯德基50元"];             // 券名称
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
-            func.toApp(appName);             // 启动APP
+            func.to_app(appName);             // 启动APP
             // 等待进入指定页面
             couClick = textContains(targetViewText).findOnce();
             while (!couClick) {
@@ -777,7 +763,7 @@ function 中信活动() {
             appName = "动卡空间"
             let cnt = 0;
             targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
-            func.toApp(appName);             // 启动APP
+            func.to_app(appName);             // 启动APP
             while (text(item_page_text).findOnce() == null) {
                 sleep(100);
                 cnt = cnt + 1;
@@ -873,7 +859,7 @@ function 京东腾讯月() {
     //let actName = func.dialogsWin(actNames);      // 设置查找的文本
     toastLog("等待页面变化");
     let appName = "京东金融";
-    func.toApp(appName);
+    func.to_app(appName);
     let tVip, getBtn;
     // 等待进入指定页面
     toastLog("请跳转到腾讯月卡领取页面，直到提示  已到达等待页面");
@@ -909,7 +895,7 @@ function 工行活动() {
     let timeArea = "北京时间";
     let startTime = "10,29,59,680";
     couName = "确定"
-    func.toApp(appName);             // 启动APP
+    func.to_app(appName);             // 启动APP
     // 找到使用流程，且找到对应券名称沃尔玛的情况下就是 券的详情页
     while (!(text("安全验证").findOnce())) {
         toastLog("请进入活动页面，直到提示  已到达等待页面");

@@ -58,7 +58,7 @@ function 做任务() {
 // -------------------------金融任务----------------------------
 function 金融任务() {
 	appName = "京东金融";
-	func.toApp(appName);
+	func.to_app(appName);
 	while (!mission_page_check()) {
 		func.sClick(id("com.jd.jrapp:id/redPacketIV").findOnce());
 		toastLog("金融任务: 请跳转金融APP，如果首页没有入口按钮，需手动跳转到活动界面");
@@ -457,7 +457,7 @@ function after_click(textStr, details) {
 		back_way();
 		sleep(random_second(2000, 100, 1000));
 		if (currentPackage() != "com.jingdong.app.mall") {
-			func.toApp(appName);
+			func.to_app(appName);
 		}
 		sleep(random_second(3000, 100, 1000));
 		back_way();
@@ -471,7 +471,7 @@ function after_click(textStr, details) {
 				toastLog("after_click: 等待一会儿..跳转回JD");
 				sleep(2000);
 			}
-			func.toApp(appName);
+			func.to_app(appName);
 		}
 	} else if (details == "需要多次点击返回") {
 		sleep(random_second(800, 100, 1000));
@@ -671,13 +671,13 @@ function add_cart(isView) {
 
 // --------------------单独某项任务--------------------------------------
 function 互助点击() {
-	func.toApp(appName);
+	func.to_app(appName);
 	log("正在等待进入活动页面");
 	//等待点击 立即查看按钮
 	while (func.sClick(className("TextView").textContains("立即").findOne(10000)) == false) {
 		home();
 		sleep(4000);
-		func.toApp(appName);
+		func.to_app(appName);
 	}
 	sleep(2000);
 	// 点击助力
@@ -906,7 +906,7 @@ function 口令启动() {
 	setClip(koulingText);
 	sleep(random_second(900, 100, 300));
 	log("正在打开");
-	func.toApp(appName);
+	func.to_app(appName);
 	sleep(random_second(900, 100, 300));
 	//等待点击 立即查看按钮
 	func.sClick(className("TextView").textContains("立即").findOne());
@@ -915,7 +915,7 @@ function 口令启动() {
 }
 
 function 首页banner启动() {
-	func.toApp(appName);
+	func.to_app(appName);
 	while (!mission_page_check()) {
 		func.cClick(desc("浮层活动").findOnce());
 		toastLog("请跳转到京东APP，如果首页没有入口按钮，需手动跳转到活动界面");

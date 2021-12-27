@@ -22,7 +22,7 @@ function main() {
                 break;
         }
     }
-    func.toAppMulti("京东", appNumbers);
+    func.to_appMulti("京东", appNumbers);
 
     kouling();
     monster();

@@ -6,7 +6,7 @@ var func = require("func_list.js");
 main();
 
 function main() {
-    func.toApp("京东");
+    func.to_app("京东");
     while (text("话费充值").findOnce() == null) {
         func.sClick(text("我的").findOnce());
         func.sClick(text("我的订单").findOnce());
