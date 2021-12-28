@@ -35,8 +35,9 @@ function config_dict() {
 // ----------------------通用功能区-----------------------
 // 切换到autojs
 function to_autojs() {
+    let pkg_name = "org.autojs.autojs";
     app.startActivity({
-        packageName: "org.autojs.autojs",
+        packageName: pkg_name,
         className: "org.autojs.autojs.ui.main.MainActivity_",
     });
     waitForPackage(pkg_name, period = 200);
