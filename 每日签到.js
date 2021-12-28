@@ -76,7 +76,7 @@ function 云闪付() {
     }
 
     this.签到 = function () {
-        let appName = "com.unionpay";
+        let appName = "云闪付";
         //closeApp(appName);
         func.to_app(appName);
         while (className("TextView").text("我的").findOnce() == null) {
