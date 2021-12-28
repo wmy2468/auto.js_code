@@ -135,7 +135,7 @@ function 工商() {
             toastLog("已找到手势密码按钮");
             sleep(500);
             func.gesture_pwd(appName);
-            sleep(2500);
+            sleep(5000);
             func.to_scheme(cfg["url_scheme"]["工商"]["小象2"]);
         }
     }

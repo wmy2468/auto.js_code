@@ -4,9 +4,58 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
-url = "bankabc://%7B%22method%22%3A%22jumpToSharedProduct%22%2C%22param%22%3A%22rR4uOmAzpF49gqwDYQiLp20AltfnLciJg3Fyp5ijEIlD6KSfPdLMNyKsM8JboO6MwU4dRe9KEsPXqC4shEX19X6hEiWyiILqbgLFXv9xJ5Jc7WP8cgtQBKyWQwTlznpR47%2BlnPSHUcgGQwprcCrZljQQsb3H9RhiJ2D2qeBt4JJz84Yh2iQ9R1lu%2FY%2BWKtaP25m0LbNLiCBYzuVXpAI%2BZfQKjVDNu72M0bgLPJtM1yg7oAXVGsadNuQMbKRz0XWTmkZzKVNYYupr4XqG08l6VvoOh1qETuzMO5mSCup%2FrhpJbwn4v5yYWC68q2FmK6K8YXpHZRtZyVIQwKrZKYjGCZ%2BdeHNIQKJe2plRNjawvy1QfB%2FYEIxcT68HT63j3KJK0%2FxlZSrAvT9cbSKRHkxleVMdKn8uj8HVMWs8l1DMdrLJK0tNFerEfKnSptOj4bSiQ6kvE4M2fMWrUzVIDPYLCHe2xvp9kZOZufXgyE5wze30A6S1HhYbMbNNCql08lmP0wQ3l%2Fp8fBF6hmgoQ73vZPphwCEOQxonP7IzQJC9%2Bl03cbmmPDij%2BBHrrczU55456whyF167TTNstajIJ4rERfcYdlkv3VOQEaXo%2BsUUrdXbI6wjb9vErff5hUgaW2%2FMl%2FZjNZthSCybk58RIUT3ndyGTtBSg%2B3hP4C4%2FvzRl3TXL0yiIELKVkzrELbYENRqWib%2B5aGXN1a54ll48VdKQiJFSZhEfYp27AW49Qxe7epmorgOuUBd76FZwMZCR%2Bg1QRnSS21%2F0PRVHSvWj3BDeST7nIue51s83rsZb9rkrE52ADZNwBV5mFrcRYyQoaKe%22%7D"
+工商();
 
-func.to_scheme(url);
+function 工商() {
+    let appName = "中国工商银行";
+    //closeApp(appName);
+    func.to_scheme(cfg["url_scheme"]["工商"]["小象1"]);
+
+    while (textContains("你已经陪小象").findOnce() == null) {
+        if (text("请输入手势密码登录").findOnce()) {
+            toastLog("已找到手势密码按钮");
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(3500);
+            func.to_autojs();
+            sleep(3500);
+            func.to_scheme(cfg["url_scheme"]["工商"]["小象2"]);
+        }
+    }
+    sleep(2000);
+    // 点击香蕉
+    // 点击任务
+    let left_banana, mission_btn;
+    left_banana = textStartsWith("剩余").findOne();
+    sleep(1000);
+    // 查找并点击香蕉
+    let bananas;
+    bananas = className("ListView").rowCount(5).findOnce();
+    if (bananas != null) {
+        for (let i = bananas.childCount() - 1; i >= 0; i--) {
+            // 点击喂小象
+            func.cClick(left_banana);
+            sleep(1000);
+            // 点击香蕉
+            func.cClick(bananas.child(i));
+            sleep(1000);
+        }
+    }
+    mission_btn = left_banana.parent().parent().child(0).child(2);
+    func.sClick(mission_btn);
+    sleep(800);
+    func.sClick(text("进入任务中心查看更多任务").findOne());
+    sleep(800);
+    text("任务中心").findOne();
+    toastLog("已到达任务中心");
+    sleep(2000);
+    if (textStartsWith("sign_done").findOnce() == null) {
+        func.sClick(textStartsWith("sign").findOnce());
+    } else {
+        toastLog("今日已签到");
+        sleep(3000);
+    }
+}
 
 function union_pay() {
     let appName = "沃钱包";

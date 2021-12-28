@@ -43,7 +43,7 @@ function to_autojs() {
         className: "org.autojs.autojs.ui.main.MainActivity_",
     });
     waitForPackage(pkg_name, period = 200);
-    toast("已到达autojs");
+    // toast("已到达autojs");
 }
 
 function to_scheme(data_url) {
