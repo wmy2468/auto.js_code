@@ -48,7 +48,7 @@ function 支付宝() {
             func.sClick(text("转入").findOnce());
             if (textContains("转入金额").findOnce() != null) {
                 if (func.sClick(text("请输入转入金额").findOnce())) {
-                    sleep(1500);
+                    sleep(3000);
                     for (let i = 0; i < pwd.length; i++) {
                         log(pwd[i]);
                         text(pwd[i]).findOne().click();
