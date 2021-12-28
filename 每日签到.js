@@ -127,7 +127,7 @@ function 沃钱包() {
 function 工商() {
     let appName = "中国工商银行";
     //closeApp(appName);
-    func.to_scheme(cfg["url_scheme"]["工商"]["小象乐园"]);
+    func.to_scheme(cfg["url_scheme"]["工商"]["小象1"]);
 
     while (textContains("你已经陪小象").findOnce() == null) {
         if (text("请输入手势密码登录").findOnce()) {
@@ -135,7 +135,7 @@ function 工商() {
             sleep(500);
             func.gesture_pwd(appName);
             sleep(1500);
-            func.to_scheme(cfg["url_scheme"]["工商"]["小象乐园"]);
+            func.to_scheme(cfg["url_scheme"]["工商"]["小象2"]);
         }
     }
     sleep(2000);

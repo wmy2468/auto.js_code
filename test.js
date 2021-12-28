@@ -1,10 +1,10 @@
 auto.waitFor();
 //toastLog(id("com.jd.lib.cashier.feature:id/cd").findOnce().click());
 var func = require("func_list.js");
-
+var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
-log(text("今天").findOnce());
+func.to_scheme(cfg["url_scheme"]["工商"]["小象2"]);
 
 function union_pay() {
     let appName = "沃钱包";
