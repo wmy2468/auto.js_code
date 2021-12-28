@@ -4,58 +4,9 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
-工商();
-
-function 工商() {
-    let appName = "中国工商银行";
-    //closeApp(appName);
-    func.to_scheme(cfg["url_scheme"]["工商"]["小象1"]);
-
-    while (textContains("你已经陪小象").findOnce() == null) {
-        if (text("请输入手势密码登录").findOnce()) {
-            toastLog("已找到手势密码按钮");
-            sleep(500);
-            func.gesture_pwd(appName);
-            sleep(3500);
-            func.to_autojs();
-            sleep(3500);
-            func.to_scheme(cfg["url_scheme"]["工商"]["小象2"]);
-        }
-    }
-    sleep(2000);
-    // 点击香蕉
-    // 点击任务
-    let left_banana, mission_btn;
-    left_banana = textStartsWith("剩余").findOne();
-    sleep(1000);
-    // 查找并点击香蕉
-    let bananas;
-    bananas = className("ListView").rowCount(5).findOnce();
-    if (bananas != null) {
-        for (let i = bananas.childCount() - 1; i >= 0; i--) {
-            // 点击喂小象
-            func.cClick(left_banana);
-            sleep(1000);
-            // 点击香蕉
-            func.cClick(bananas.child(i));
-            sleep(1000);
-        }
-    }
-    mission_btn = left_banana.parent().parent().child(0).child(2);
-    func.sClick(mission_btn);
-    sleep(800);
-    func.sClick(text("进入任务中心查看更多任务").findOne());
-    sleep(800);
-    text("任务中心").findOne();
-    toastLog("已到达任务中心");
-    sleep(2000);
-    if (textStartsWith("sign_done").findOnce() == null) {
-        func.sClick(textStartsWith("sign").findOnce());
-    } else {
-        toastLog("今日已签到");
-        sleep(3000);
-    }
-}
+coupon_url = "http://coupon.m.jd.com/coupons/show.action?key=g7udi9d8e5260e8b7a8a76c0d01209e8&roleId=62130462";
+url_页面 = (cfg["url_scheme"]["京东"]["京喜_券"]).replace("replace_url", coupon_url);
+func.to_scheme(url_页面);
 
 function union_pay() {
     let appName = "沃钱包";

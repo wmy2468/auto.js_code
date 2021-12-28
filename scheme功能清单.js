@@ -37,9 +37,11 @@ let url_ccb = "ccbapp://applet.ccb.com?funcid=18001001&app_type=1&appid=app20210
 
 let url_云闪付签到 = "upwallet://html/open.95516.com/s/open/html/oauth.html?redirectUri=https://youhui.95516.com/newsign/unionpay/oauth"
 
+let url_test = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https://market.cmbchina.com/MPage/online/211025170821628/ftbb.html?behavior_entryid=lff003001&behavior_pageid=31B15ED7&DeviceType=E&Version=9.9.0&SystemVersion=10&ATraceID=e47883770b17411eb2449805822210bc&msid=c5ada3aa3ff0464a918ae2af77adb890&shortUrl=https://cmbt.cn/a/456xRYghZ?behavior_entryid=lff003001&behavior_pageid=31B15ED7&DeviceType=E&Version=9.9.0&SystemVersion=10&ATraceID=e47883770b17411eb2449805822210bc&msid=c5ada3aa3ff0464a918ae2af77adb890&appflag=0";
+
 app.startActivity({
     action: "android.intent.action.VIEW",
-    data: url_云闪付签到,
+    data: url_test,
 });
 
 // --------------url scheme--------------

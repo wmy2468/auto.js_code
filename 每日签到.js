@@ -136,6 +136,8 @@ function 工商() {
             sleep(500);
             func.gesture_pwd(appName);
             sleep(5000);
+            func.to_autojs();
+            sleep(3500);
             func.to_scheme(cfg["url_scheme"]["工商"]["小象2"]);
         }
     }

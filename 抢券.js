@@ -95,7 +95,7 @@ function 招商便民生活() {
     popup_wait_text = "请选择奖品";
     select_text = func.dialogsWin(["双立人", "洁柔", "6000微克", "5000微克", "4000微克"]);
     sure_btn = "确认领取";
-    url_target = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https%253A%252F%252Factship-activityui.paas.cmbchina.com%252FActPage.html%253FactivityId%253DAGP20211201095436sH6P8jxK%2526behavior_entryid%253Dundefined&shortUrl=https%253A%252F%252Fcmbt.cn%252Fa%252FhtREAc%253FactivityId%253DAGP20211201095436sH6P8jxK%2526behavior_entryid%253Dundefined&appflag=0"
+    url_target = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https://actship-activityui.paas.cmbchina.com/ActPage.html?activityId=AGP20211201095436sH6P8jxK&behavior_entryid=undefined&shortUrl=https://cmbt.cn/a/htREAc?activityId=AGP20211201095436sH6P8jxK&behavior_entryid=undefined&appflag=0"
     func.to_scheme(url_target);
     招商领取(page_text, wait_text, popup_wait_text, select_text, sure_btn);
 }
@@ -159,13 +159,15 @@ function 云闪付() {
         startTime = "10,59,55,000";
         timeArea = "北京时间";
         coupon_dict = {
-            "全国畅享-5折电商券": "3102021122031298", "全国畅享-xyk还款": "3102021121630580", "精选-苏宁5折": "3102021122131595",
-            "精选-中石油5折": "3102021122031343", "本地-厦门-商超": "3102021121529747", "本地-厦门-便利店": "3102021121529743",
-            "本地-非厦门-商超": "3102021122031140", "本地-非厦门-便利": "3102021122031124", "本地-非厦门-餐饮": "3102021122031135",
-            "本地-非厦门-线上": "3102021122031149", "闪付-50减10": "3102021122031281", "闪付10减5": "3102021122031286"
+            "全国畅享-5折电商券": "3102021122031298", "全国畅享-5折商超": "3102021122031319", "全国畅享-xyk还款": "3102021121630580",
+            "精选-苏宁5折": "3102021122131595", "精选-中石油5折": "3102021122031343",
+            "本地-厦门-商超": "3102021121529747", "本地-厦门-便利店": "3102021121529743",
+            "本地-非厦门-商超": "3102021122031140", "本地-非厦门-便利": "3102021122031124", "本地-非厦门-餐饮": "3102021122031135", "本地-非厦门-线上": "3102021122031149",
+            "闪付-50减10": "3102021122031281", "闪付10减5": "3102021122031286"
         }
         coupon_id = coupon_dict[func.dialogsWin(Object.keys(coupon_dict))];
-        url_ysf = "upwallet://rn/rncoupondetail?couponId=" + coupon_id;
+        url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券"] + coupon_id;
+
         func.to_autojs();
         // 准备倒计时
         func.getTimeDiff(timeArea, startTime);
@@ -443,7 +445,7 @@ function 京喜领券() {
             startTime = "23,59,59,990";
             targetViewText = "立即领取";
             coupon_url = "http://coupon.m.jd.com/coupons/show.action?key=g7udi9d8e5260e8b7a8a76c0d01209e8&roleId=62130462";
-            url_页面 = "openapp.jdpingou://virtual?params=%7B%22des%22%3A%22m%22%2C%22url%22%3A%22" + coupon_url + "%22%2C%22category%22%3A%22jump%22%7D";
+            url_页面 = (cfg["url_scheme"]["京东"]["京喜_券"]).replace("replace_url", coupon_url);
             break;
     }
     // 跳转到APP
