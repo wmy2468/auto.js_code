@@ -516,16 +516,22 @@ function 京东() {
     }
     this.金融签到 = function () {
         func.to_scheme(cfg["url_scheme"]["京东金融"]["金融签到"]);
-        while (text("今天").findOnce()) {
+        while (text("今天").findOnce() == null) {
             toast("等待跳转到金融签到页面");
         }
-        sleep(1500);
-        func.sClick(text("签到领金贴").findOnce());
+        sleep(2500);
+        let sign_for_gold;
+        sign_for_gold = text("签到领金贴").findOnce();
+        if (sign_for_gold == null) {
+            toastLog("金融 已签到")
+        } else {
+            func.sClick(sign_for_gold);
+        }
         sleep(3000);
     }
     this.金融双签 = function () {
         func.to_scheme(cfg["url_scheme"]["京东金融"]["金融签到"]);
-        while (text("领取京豆奖励").findOnce()) {
+        while (text("领取京豆奖励").findOnce() == null) {
             toast("等待跳转到双签页面");
         }
         sleep(1500);

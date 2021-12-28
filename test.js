@@ -4,8 +4,9 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
+func.to_scheme(cfg["url_scheme"]["京东金融"]["金融签到"]);
 // func.to_scheme(cfg["url_scheme"]["京东金融"]["双签领取页"]);
-log(textContains("今日已领取").findOnce());
+// log(textContains("今日已领取").findOnce());
 // 签到领金贴
 function union_pay() {
     let appName = "沃钱包";
