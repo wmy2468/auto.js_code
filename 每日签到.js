@@ -520,6 +520,7 @@ function 京东() {
             toast("等待跳转到金融签到页面");
             sleep(2200);
         }
+        toast("已到达指定页面");
         sleep(2500);
         let already_sign;
         already_sign = text("签到领金贴").findOnce();
@@ -537,6 +538,7 @@ function 京东() {
             toast("等待跳转到双签页面");
             sleep(2200);
         }
+        toast("已到达指定页面");
         sleep(2500);
         let already_sign;
         already_sign = textContains("今日已领取").findOnce();
