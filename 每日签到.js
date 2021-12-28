@@ -518,15 +518,16 @@ function 京东() {
         func.to_scheme(cfg["url_scheme"]["京东金融"]["金融签到"]);
         while (text("今天").findOnce() == null) {
             toast("等待跳转到金融签到页面");
+            sleep(2200);
         }
         sleep(2500);
-        let sign_for_gold;
-        sign_for_gold = text("签到领金贴").findOnce();
-        if (sign_for_gold == null) {
+        let already_sign;
+        already_sign = text("签到领金贴").findOnce();
+        if (already_sign == null) {
             toastLog("金融 已签到");
             sleep(2200);
         } else {
-            func.sClick(sign_for_gold);
+            func.sClick(already_sign);
         }
         sleep(3000);
     }
@@ -536,10 +537,15 @@ function 京东() {
             toast("等待跳转到双签页面");
             sleep(2200);
         }
-        sleep(1500);
-        while (textContains("今日已领取").findOnce() == null) {
+        sleep(2500);
+        let already_sign;
+        already_sign = textContains("今日已领取").findOnce();
+        if (already_sign == null) {
             func.sClick(text("立即领取").findOnce());
+            toast("已点击领取");
+            sleep(3000);
         }
+        toastLog("双签奖励已领取");
         sleep(3000);
     }
     return this;
