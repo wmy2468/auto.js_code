@@ -4,10 +4,7 @@ var func = require("func_list.js");
 
 let url_jd = "openApp.jdMobile://"
 
-app.startActivity({
-    packageName: "com.jingdong.app.mall",
-    data: url_jd
-});
+log(text("今日已签到").findOnce());
 
 function union_pay() {
     let appName = "沃钱包";

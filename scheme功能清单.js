@@ -35,9 +35,11 @@ let url_auto_Js = "upwallet://rn/rncoupondetail?couponId=3102021122131595";
 
 let url_ccb = "ccbapp://applet.ccb.com?funcid=18001001&app_type=1&appid=app2021071500000001&appName=龙支付签到&launchFrom=desktop&launchFrom=desktop";
 
+let url_test = "com.icbc.androidclient://startType=PORTALINJECT&menuId=xiaoxiangleyuan&shareCurrentUUID="
+
 app.startActivity({
     action: "android.intent.action.VIEW",
-    data: url_jd_test,
+    data: url_test,
 });
 
 // --------------url scheme--------------

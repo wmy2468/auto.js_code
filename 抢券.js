@@ -1,7 +1,7 @@
 auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
-const func_list = require("./func_list");
+var cfg = func.config_dict();
 
 main();
 

@@ -1,5 +1,6 @@
 auto.waitFor();
 var func = require("func_list.js");
+var cfg = func.config_dict();
 var devModel = device.model;;
 var devMate30, devHonor8, devRedMi;
 devMate30 = "TAS-AL00";
@@ -49,15 +50,19 @@ function main() {
 
 // ======================签到代码==================================
 function 龙支付签到() {
-    let url_ccb = "ccbapp://applet.ccb.com?funcid=18001001&app_type=1&appid=app2021071500000001&appName=龙支付签到&launchFrom=desktop&launchFrom=desktop"
-    func.to_scheme(url_ccb);
-
+    func.to_scheme(cfg["url_scheme"]["建行"]["lzf签到"]);
+    text("今天").findOne();
+    while (text("今日已签到").findOnce() != null) {
+        if (func.sClick(text("立即签到").findOnce())) {
+            sleep(3000);
+        }
+    }
+    toast("LZF已签到");
 }
 
 function 云闪付() {
     this.领积点 = function () {
-        let url_ysf会员中心 = "upwallet://applet?encryptAppId=472741b326b7bb5c&toLink=https%3A%2F%2Fcloudvip.95516.com%2F&scenarioId=1006"
-        func.to_scheme(url_ysf会员中心);
+        func.to_scheme(cfg["url_scheme"]["云闪付"]["会员中心"]);
         while (!(text("我的积点").findOnce() != null &&
             text("积点乐园").findOnce() != null)) {
             sleep(3000);
@@ -121,8 +126,7 @@ function 沃钱包() {
 function 工商() {
     let appName = "中国工商银行";
     //closeApp(appName);
-    let url_工行小象 = "com.icbc.androidclient://startType=PORTALINJECT&menuId=xiaoxiangleyuan&shareCurrentUUID=";
-    func.to_scheme(url_工行小象);
+    func.to_scheme(cfg["url_scheme"]["工商"]["小象乐园"]);
 
     while (textContains("你已经陪小象").findOnce() == null) {
         if (text("请输入手势密码登录").findOnce()) {
@@ -169,8 +173,7 @@ function 工商() {
 
 function 招商() {
     this.饭票签到 = function () {
-        let url_招商饭票签到 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=100856&cmb_app_trans_parms_start=here&param=v2&appflag=0"
-        func.to_scheme(url_招商饭票签到);
+        func.to_scheme(cfg["url_scheme"]["招商"]["饭票签到"]);
         let congratulation, getAir, item_parent, today = null;
         while (today == null) {
             congratulation = textContains("恭喜您在").findOnce();
@@ -201,10 +204,8 @@ function 招商() {
         sleep(3000);
     }
     this.便民生活 = function () {
-
         let appName = "招商银行";
-        let url_招商便民 = "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=791166&cmb_app_trans_parms_start=here&channel=share&appflag=0";
-        func.to_scheme(url_招商便民);
+        func.to_scheme(cfg["url_scheme"]["招商"]["便民生活"]);
         // 等待手势密码加载
         id("vGestureContentView").findOne();
         sleep(500);
@@ -342,9 +343,7 @@ function 中行缤纷生活() {
 function 中国农业银行() {
     let appName = "中国农业银行";
     //closeApp(appName);
-    let url_农行小豆 = "bankabc://%7B%22method%22%3A%22jumpToSharedProduct%22%2C%22param%22%3A%22rR4uOmAzpF49gqwDYQiLp20AltfnLciJg3Fyp5ijEIlD6KSfPdLMNyKsM8JboO6MwU4dRe9KEsPXqC4shEX19X6hEiWyiILqbgLFXv9xJ5Jc7WP8cgtQBKyWQwTlznpR47%2BlnPSHUcgGQwprcCrZljQQsb3H9RhiJ2D2qeBt4JJz84Yh2iQ9R1lu%2FY%2BWKtaP25m0LbNLiCBYzuVXpAI%2BZfQKjVDNu72M0bgLPJtM1yg7oAXVGsadNuQMbKRz0XWTmkZzKVNYYupr4XqG08l6VvoOh1qETuzMO5mSCup%2FrhpJbwn4v5yYWC68q2FmK6K8YXpHZRtZyVIQwKrZKYjGCZ%2BdeHNIQKJe2plRNjawvy1QfB%2FYEIxcT68HT63j3KJK0%2FxlZSrAvT9cbSKRHkxleVMdKn8uj8HVMWs8l1DMdrLJK0tNFerEfKnSptOj4bSiQ6kvE4M2fMWrUzVIDPYLCHe2xvp9kZOZufXgyE5wze30A6S1HhYbMbNNCql08lmP0wQ3l%2Fp8fBF6hmgoQ73vZPphwCEOQxonP7IzQJC9%2Bl03cbmmPDij%2BBHrrczU55456whyF167TTNstajIJ4rERfcYdlkv3VOQEaXo%2BsUUrdXbI6wjb9vErff5hUgaW2%2FMl%2FZjNZthSCybk58RIUT3ndyGTtBSg%2B3hP4C4%2FvzRl3TXL0yiIELKVkzrELbYENRqWib%2B5aGXN1a54ll48VdKQiJFSZhEfYp27AW49Qxe7epmorgOuUBd76FZwMZCR%2Bg1QRnSS21%2F0PRVHSvWj3BDeST7nIue51s83rsZb9rkrE52ADZNwBV5mFrcRYyQoaKe%22%7D"
-
-    func.to_scheme(url_农行小豆);
+    func.to_scheme(cfg["url_scheme"]["农行"]["小豆"]);
     //toastLog("我的已点击");
     while (textContains("小豆订单").findOnce() == null) {
         if (text("切换登录方式").findOnce() != null) {
@@ -400,8 +399,7 @@ function 邮储银行() {
 function 浦发银行() {
     let appName = "浦发银行";
     //closeApp(appName);
-    let url_浦发储蓄卡金豆页面 = "spdbbank://wap.spdb.com.cn/awakeapp?login_flag=0&support_type=1&path=vue|mspmk-cli-welfare/goldenBean/";
-    func.to_scheme(url_浦发储蓄卡金豆页面);
+    func.to_scheme(cfg["url_scheme"]["浦发"]["金豆"]);
 
     while (!(text("切换登录方式").findOnce() || text("更多快捷方式登录").findOnce())) {
         toastLog("等待登录窗口加载");
@@ -509,8 +507,7 @@ function 京东() {
         txt2 = "活动规则";
         signed = "今日已签";
         unsign = "签到";
-        let url_jd_陪伴计划签到 = "openApp.jdMobile://virtual?params=%7B%22category%22%3A%22jump%22%2C%22des%22%3A%22m%22%2C%22url%22%3A%22https%3A%2F%2Fprodev.m.jd.com%2Fmall%2Factive%2FkPM3Xedz1PBiGQjY4ZYGmeVvrts%2Findex.html%22%7D";
-        func.to_scheme(url_jd_陪伴计划签到);
+        func.to_scheme(cfg["url_scheme"]["京东"]["陪伴计划"]);
         while (!(text(txt1).findOnce() != null && text(txt2).findOnce() != null)) {
             sleep(800);
         }

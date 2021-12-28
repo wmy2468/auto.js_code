@@ -1,6 +1,7 @@
 auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
+var cfg = func.config_dict();
 
 main();
 // toastLog(text("领取奖励").find().length);
@@ -29,8 +30,7 @@ function main() {
 
 function 支付宝() {
     this.余额宝转出 = function () {
-        let url_zfb_余额宝 = "alipays://platformapi/startapp?appId=20000032";
-        func.to_scheme(url_zfb_余额宝);
+        func.to_scheme(cfg["url_scheme"]["支付宝"]["余额宝"]);
         while (text("使用密码").findOnce() == null) {
             func.sClick(text("转出").findOnce());
             if (func.sClick(text("全部").findOnce()) == true) {
@@ -42,8 +42,7 @@ function 支付宝() {
         toastLog("已完成。。。");
     }
     this.余额宝转入 = function () {
-        let url_zfb_余额宝 = "alipays://platformapi/startapp?appId=20000032";
-        func.to_scheme(url_zfb_余额宝);
+        func.to_scheme(cfg["url_scheme"]["支付宝"]["余额宝"]);
         let pwd = "188";
         while (text("使用密码").findOnce() == null) {
             func.sClick(text("转入").findOnce());
