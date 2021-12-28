@@ -134,7 +134,8 @@ function 工商() {
             toastLog("已找到手势密码按钮");
             sleep(500);
             func.gesture_pwd(appName);
-            sleep(1000);
+            sleep(1500);
+            func.to_scheme(cfg["url_scheme"]["工商"]["小象乐园"]);
         }
     }
     sleep(2000);
