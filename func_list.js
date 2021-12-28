@@ -13,7 +13,8 @@ function config_dict() {
                 "lzf签到": "ccbapp://applet.ccb.com?funcid=18001001&app_type=1&appid=app2021071500000001&appName=龙支付签到&launchFrom=desktop&launchFrom=desktop"
             },
             "云闪付": {
-                "会员中心": "upwallet://applet?encryptAppId=472741b326b7bb5c&toLink=https%3A%2F%2Fcloudvip.95516.com%2F&scenarioId=1006"
+                "会员中心": "upwallet://applet?encryptAppId=472741b326b7bb5c&toLink=https%3A%2F%2Fcloudvip.95516.com%2F&scenarioId=1006",
+                "签到": "upwallet://html/open.95516.com/s/open/html/oauth.html?redirectUri=https://youhui.95516.com/newsign/unionpay/oauth"
             },
             "招商": {
                 "饭票签到": "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=100856&cmb_app_trans_parms_start=here&param=v2&appflag=0",

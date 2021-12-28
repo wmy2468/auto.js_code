@@ -78,18 +78,19 @@ function 云闪付() {
     this.签到 = function () {
         let appName = "云闪付";
         //closeApp(appName);
-        func.to_app(appName);
-        while (className("TextView").text("我的").findOnce() == null) {
-            if (textContains("跳过").findOnce() != null || descContains("跳过").findOnce() != null) {
-                sleep(800);
-                continue;
-            }
-            sleep(1000);
-        }
-        sleep(1500);
-        func.sClick(className("TextView").text("首页").findOnce());
-        //点击签到按钮
-        func.sClick(id("com.unionpay:id/frog_float").findOne());
+        // func.to_app(appName);
+        // while (className("TextView").text("我的").findOnce() == null) {
+        //     if (textContains("跳过").findOnce() != null || descContains("跳过").findOnce() != null) {
+        //         sleep(800);
+        //         continue;
+        //     }
+        //     sleep(1000);
+        // }
+        // sleep(1500);
+        // func.sClick(className("TextView").text("首页").findOnce());
+        // //点击签到按钮
+        // func.sClick(id("com.unionpay:id/frog_float").findOne());
+        func.to_scheme(cfg["url_scheme"]["云闪付"]["签到"]);
         // 等待签到页面加载
         textContains("连续签到").findOne();
 
@@ -134,7 +135,7 @@ function 工商() {
             toastLog("已找到手势密码按钮");
             sleep(500);
             func.gesture_pwd(appName);
-            sleep(1500);
+            sleep(2500);
             func.to_scheme(cfg["url_scheme"]["工商"]["小象2"]);
         }
     }
