@@ -10,6 +10,10 @@ function config_dict() {
                 "陪伴计划": "openApp.jdMobile://virtual?params=%7B%22category%22%3A%22jump%22%2C%22des%22%3A%22m%22%2C%22url%22%3A%22https%3A%2F%2Fprodev.m.jd.com%2Fmall%2Factive%2FkPM3Xedz1PBiGQjY4ZYGmeVvrts%2Findex.html%22%7D",
                 "京喜_券": "openapp.jdpingou://virtual?params={%22des%22%3A%22m%22%2C%22category%22%3A%22jump%22%2C%22url%22%3A%22replace_url%22}",
             },
+            "京东金融": {
+                "金融签到": "jdmobile://share?jumpType=7&jumpUrl=4120&channel=default&sourceUrl=1000*https://f.ua.jd.com/downloadApp/index.html?id=7038",
+                "双签领取页": "jdmobile://share?jumpType=7&jumpUrl=1374&sourceUrl=1000*https://u2.jr.jd.com/downloadApp/index.html?id=1709",
+            },
             "建行": {
                 "lzf签到": "ccbapp://applet.ccb.com?funcid=18001001&app_type=1&appid=app2021071500000001&appName=龙支付签到&launchFrom=desktop&launchFrom=desktop",
             },

@@ -4,10 +4,9 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
-coupon_url = "http://coupon.m.jd.com/coupons/show.action?key=g7udi9d8e5260e8b7a8a76c0d01209e8&roleId=62130462";
-url_页面 = (cfg["url_scheme"]["京东"]["京喜_券"]).replace("replace_url", coupon_url);
-func.to_scheme(url_页面);
-
+// func.to_scheme(cfg["url_scheme"]["京东金融"]["双签领取页"]);
+log(textContains("今日已领取").findOnce());
+// 签到领金贴
 function union_pay() {
     let appName = "沃钱包";
     func.to_app(appName);

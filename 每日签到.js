@@ -14,35 +14,26 @@ function main() {
     zs = 招商();
     ysf = 云闪付();
     jd = 京东();
+    jd.jd_sign();
+    jd.金融签到();
+    jd.金融双签();
+    jd.陪伴签到();
+    ysf.签到();
+    ysf.领积点();
+    zs.便民生活();
+    zs.饭票签到();
     if (devModel == devMate30) {
         龙支付签到();
         沃钱包();
         浦发银行();
         中国农业银行();
         什么值得买();
-        jd.jd_sign();
-        jd.陪伴签到();
-        ysf.签到();
-        ysf.领积点();
         浦发信用卡();
         买单吧();
-        zs.便民生活();
-        zs.饭票签到();
         工商();
     } else if (devModel == devHonor8) {
-        ysf.签到();
-        ysf.领积点();
-        jd.jd_sign();
-        jd.陪伴签到();
-        zs.便民生活();
-        zs.饭票签到();
+        toast("123");
     } else if (devModel == devRedMi) {
-        ysf.签到();
-        ysf.领积点();
-        jd.jd_sign();
-        jd.陪伴签到();
-        zs.便民生活();
-        zs.饭票签到();
         工商();
     }
     alert("已完成.");
@@ -521,6 +512,26 @@ function 京东() {
             func.sClick(text(unsign).findOnce());
         }
         toastLog("已签到");
+        sleep(3000);
+    }
+    this.金融签到 = function () {
+        func.to_scheme(cfg["url_scheme"]["京东金融"]["金融签到"]);
+        while (text("今天").findOnce()) {
+            toast("等待跳转到金融签到页面");
+        }
+        sleep(1500);
+        func.sClick(text("签到领金贴").findOnce());
+        sleep(3000);
+    }
+    this.金融双签 = function () {
+        func.to_scheme(cfg["url_scheme"]["京东金融"]["金融签到"]);
+        while (text("领取京豆奖励").findOnce()) {
+            toast("等待跳转到双签页面");
+        }
+        sleep(1500);
+        while (textContains("今日已领取").findOnce() == null) {
+            func.sClick(text("立即领取").findOnce());
+        }
         sleep(3000);
     }
     return this;
