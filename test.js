@@ -4,7 +4,7 @@ var func = require("func_list.js");
 
 let url_jd = "openApp.jdMobile://"
 
-log(text("今日已签到").findOnce());
+log(text("今天").findOnce());
 
 function union_pay() {
     let appName = "沃钱包";

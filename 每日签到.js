@@ -52,12 +52,13 @@ function main() {
 function 龙支付签到() {
     func.to_scheme(cfg["url_scheme"]["建行"]["lzf签到"]);
     text("今天").findOne();
-    while (text("今日已签到").findOnce() != null) {
+    while (text("今日已签到").findOnce() == null) {
         if (func.sClick(text("立即签到").findOnce())) {
             sleep(3000);
         }
     }
     toast("LZF已签到");
+    sleep(3000);
 }
 
 function 云闪付() {
