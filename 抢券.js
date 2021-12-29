@@ -6,7 +6,7 @@ var cfg = func.config_dict();
 main();
 
 function main() {
-    let selectedArr = ["光大活动", "中信活动", "交行5积分", "京喜领券", "掌上生活", "招商便民生活", "招商倒计时领取", "云闪付2022新年", "云闪付有礼花"
+    let selectedArr = ["光大活动", "中信活动", "交行5积分", "京喜领券", "掌上生活", "招商便民生活", "招商倒计时领取", "云闪付2022新年"
         // "中行周二视频捡漏",  // "云闪付锦鲤活动",  // "农行缴费20-10", // "京东腾讯月",   // "工行活动",
     ];
     let ysf;
@@ -148,21 +148,23 @@ function 中行周二视频捡漏() {
 
 function 云闪付() {
     this.云闪付2022新年 = function () {
-        let url_ysf, coupon_id, coupon_dict;
+        let url_ysf, coupon_desc, coupon_id;
         let startTime, timeArea;
         startTime = "10,59,55,000";
         timeArea = "北京时间";
 
-        coupon_class = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]))
-        coupon_id_name = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_class]))
+        coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]))
+        coupon_id = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc]))
 
-        url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_class][coupon_id_name];
+        url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc][coupon_id];
 
         func.to_autojs();
         // 准备倒计时
         func.getTimeDiff(timeArea, startTime);
         func.to_scheme(url_ysf);
-        func.sClick(text("立即领取").findOne(10000));
+        if (func.sClick(text("立即领取").findOne(10000))) {
+            toastLog("超时退出");
+        }
     }
     this.云闪付捡漏 = function () {
         let targetViewText, targetText;

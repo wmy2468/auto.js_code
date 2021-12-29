@@ -4,7 +4,15 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
-func.to_scheme(cfg["url_scheme"]["京东金融"]["金融签到"]);
+
+// while (!(text("评价").findOne().parent().click())) { sleep(1000); }
+// child(3).child(0).click()
+log(className("ImageButton").depth(5).findOnce());
+// while (!(text("默认排序").findOnce() != null && text("最新排序").findOnce() != null)) { sleep(1000); }
+// while (text("评价").findOnce() == null) {
+//     scrollDown();
+//     sleep(2000);
+// }
 // func.to_scheme(cfg["url_scheme"]["京东金融"]["双签领取页"]);
 // log(textContains("今日已领取").findOnce());
 // 签到领金贴

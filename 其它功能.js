@@ -20,31 +20,58 @@ function main() {
 
 
 function 京东评价() {
+    if (!requestScreenCapture()) {
+        toast("请求截图失败");
+        exit();
+    }
     // 1. 跳转评价中心
     func.to_scheme(cfg["url_scheme"]["京东"]["评价中心"]);
     // 2. 判断是否到达
-    className("TextView").text("已评价/追评").findOne();
+    while (className("TextView").text("已评价/追评").findOnce() == null) {
+        toastLog("未到达评价界面");
+        sleep(2500);
+    }
     // 3. 点击评价商品
+    func.sClick(className("TextView").text("评价").findOne().parent().parent());
     // fullId = com.jd.lib.evaluatecenter.feature:id/dm =>text == text = · 47
     // fullId = com.jd.lib.evaluatecenter.feature:id/m8,text = 评价
-    评价 = className("TextView").text("评价").findOne();
-    评价.parent().parent();
     // items = className = android.widget.ListView, fullId = android:id/list =>list[1]
-    // 4. 下滑获取评价按钮
-    // text = 评价, fullId = com.jd.lib.productdetail.feature: id / aho
+    // 4. 确保到达商品页面 下滑获取评价按钮
+    className("TextView").text("购物车").findOne();
+    sleep(1000);
+    scrollDown();
+    sleep(2500);
+    while (!(text("评价").findOne().parent().click())) { sleep(1000); }
     // 5. 判断到评价详情界面
-    // text = 最新排序，text = 默认排序
+    while (!(text("默认排序").findOnce() != null && text("最新排序").findOnce() != null)) { sleep(1000); }
+    sleep(2500);
     // 6. 选择是否有图
     // text = 图/视频 700+，fullId = com.jd.lib.shareorder.feature:id/d1，className = android.widget.CheckBox
+    // textContains("图/视频").findOne().click()
     // 7. 没图就复制文案，有图就截屏
+    let comment_text, comment = null;
+    while (comment == null) {
+        try {
+            comment = text("最新排序").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0);
+            sleep(1500);
+        } catch (e) {
+            sleep(1500);
+            continue;
+        }
+    }
+    comment_text = comment.text();
+    func.sClick(comment);
     // 有图：最新排序.parent.parent.parent.parent.parent.child(1).child(1)
     // 8 判断到达评价详情
-    // text =   说点儿什么呗~
+    text("  说点儿什么呗~").findOne();
+    sleep(1000);
     // 9. 获取文本
     // fullId = com.jd.lib.evaluatecenter.feature:id/g5，depth = 9
     // 点击图片
+    func.sClick(className("RatingBar").findOnce().parent().parent().parent().child(3).child(0));
     // className = android.widget.ImageView，depth = 9
     // 确认放大btn已加载
+    className("ImageButton").depth(5).findOnce()
     // className = android.widget.ImageButton，depth = 5，fullId = com.jd.lib.evaluatecenter.feature:id/b2
     // 截屏
     // 返回到评价页面，点击评价
@@ -55,15 +82,13 @@ function 京东评价() {
 
 
 function 跳转指定Scheme() {
-    let sel_scheme_a, sel_scheme, list_b;
-    sel_scheme_a = func.dialogsWin(Object.keys(cfg["url_scheme"]));
-    list_b = Object.keys(cfg["url_scheme"][sel_scheme_a]);
-    if (list_b.length == 1) {
-        sel_scheme = cfg["url_scheme"][sel_scheme_a][list_b[0]];
-    } else {
-        sel_scheme = cfg["url_scheme"][sel_scheme_a][func.dialogsWin(list_b)];
+    let obj, obj_key;
+    obj = cfg["url_scheme"];
+    while (typeof (obj) != "string") {
+        obj_key = func.dialogsWin(Object.keys(obj));
+        obj = obj[obj_key];
     }
-    func.to_scheme(sel_scheme);
+    func.to_scheme(obj);
 
 }
 
