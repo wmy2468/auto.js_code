@@ -249,7 +249,7 @@ function 云闪付() {
     }
     this.云闪付有礼花 = function () {
         let btn_confirm, cnt = 0;
-        let timeArea = "京东时间";
+        let timeArea = "北京时间";
         let startTime = "11,00,00,100";
         btn_confirm = className("android.widget.Image").text("btn_confirm").findOnce();
         while (btn_confirm == null) {
