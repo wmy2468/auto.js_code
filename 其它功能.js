@@ -24,6 +24,12 @@ function 京东评价() {
         toast("请求截图失败");
         exit();
     }
+    let height, width, x, y;
+    height = devive.height;
+    width = devive.width;
+    x = 0;
+    y = Math.floor(height / 6);
+    height = Math.floor(height / 3 * 2);
     // 1. 跳转评价中心
     func.to_scheme(cfg["url_scheme"]["京东"]["评价中心"]);
     // 2. 判断是否到达
@@ -74,6 +80,13 @@ function 京东评价() {
     className("ImageButton").depth(5).findOnce()
     // className = android.widget.ImageButton，depth = 5，fullId = com.jd.lib.evaluatecenter.feature:id/b2
     // 截屏
+    let img, img_clip, save_path, filename, dt;
+    save_path = "/sdcard/DCIM/screenshots/IMG_"
+    img = images.captureScreen();
+    img_clip = images.clip(img, x, y, width, height);
+    dt = new Date();
+    file_name = dt.getFullYear() + dt.getMonth() + dt.getDay() + "_" + dt.getHours() + dt.getMinutes() + dt.getSeconds() + ".png";
+    images.save(img_clip, save_path + filename);
     // 返回到评价页面，点击评价
 
 

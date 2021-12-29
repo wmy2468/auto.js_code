@@ -5,6 +5,28 @@ var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
 
+if (!requestScreenCapture()) {
+    toast("请求截图失败");
+    exit();
+}
+let height, width, x, y;
+height = device.height;
+width = device.width;
+x = 0;
+y = Math.floor(height / 6);
+height = Math.floor(height / 3 * 2);
+
+
+let img, img_clip, save_path, filename, dt;
+save_path = "/sdcard/DCIM/screenshots/IMG_"
+img = images.captureScreen();
+img_clip = images.clip(img, x, y, width, height);
+dt = new Date();
+log(dt.getFullYear() + dt.getMonth() + 1);
+file_name = dt.getFullYear() + dt.getMonth() + dt.getDay() + "_" + dt.getHours() + dt.getMinutes() + dt.getSeconds() + ".png";
+log(filename);
+//images.save(img_clip, save_path + filename);
+
 // while (!(text("评价").findOne().parent().click())) { sleep(1000); }
 // child(3).child(0).click()
 log(className("ImageButton").depth(5).findOnce());
