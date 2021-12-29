@@ -474,7 +474,7 @@ function getTimeDiff(area, targetTime) {
     while (curTimestamp < targetTimestamp) {
         sleep(10);
         cnt = cnt + 1;
-        if (cnt >= 100) {
+        if (cnt >= 99) {
             setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000))
             //console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
             cnt = 0;
