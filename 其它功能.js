@@ -18,10 +18,16 @@ function main() {
 
 
 function 跳转指定Scheme() {
-    let sel_scheme_a, sel_scheme_b;
+    let sel_scheme_a, sel_scheme, list_b;
     sel_scheme_a = func.dialogsWin(Object.keys(cfg["url_scheme"]));
-    sel_scheme_b = func.dialogsWin(Object.keys(cfg["url_scheme"][sel_scheme_a]));
-    func.to_scheme(cfg["url_scheme"][sel_scheme_a][sel_scheme_b]);
+    list_b = Object.keys(cfg["url_scheme"][sel_scheme_a]);
+    if (list_b.length == 1) {
+        sel_scheme = cfg["url_scheme"][sel_scheme_a][list_b[0]];
+    } else {
+        sel_scheme = cfg["url_scheme"][sel_scheme_a][func.dialogsWin(list_b)];
+    }
+    func.to_scheme(sel_scheme);
+
 }
 
 

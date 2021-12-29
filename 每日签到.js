@@ -430,22 +430,7 @@ function 浦发银行() {
 
 function 京东() {
     this.jd_sign = function () {
-        func.to_app("京东");
-        //等待首页加载
-        while (text("首页").findOnce() == null) {
-            func.sClick(id("xk").findOnce());
-            toastLog("等待首页...");
-            func.passAd();
-            func.sClick(textContains("取消").findOnce());
-            func.sClick(descContains("取消").findOnce());
-            sleep(1500);
-        }
-        let getBeans = text("领京豆").findOne();
-        func.sClick(getBeans.parent());
-        // 等待页面加载
-        // textContains("购物返豆").findOne();
-        // sleep(800);
-
+        func.to_scheme(cfg["url_scheme"]["京东"]["领京豆"])
         while (textContains("已连").findOnce() == null) {
             if (func.cClick(text("签到领京豆").findOnce())) {
                 toastLog("已点击 签到领京豆");
@@ -459,20 +444,9 @@ function 京东() {
             sleep(800);
         }
         toastLog("已签到");
-        sleep(1000);
-
-        while (text("首页").findOnce() == null) {
-            back();
-            sleep(2000);
-        }
-        let getCon = text("领券").findOne();
-        func.sClick(getCon.parent());
-
+        sleep(2500);
+        func.to_scheme(cfg["url_scheme"]["京东"]["领券中心"])
         while (className("ImageView").desc("领券中心").findOnce() == null) {
-            // let closeBtn = id("com.jd.lib.coupon.feature:id/db").findOnce();
-            // if (closeBtn != null) {
-            //     func.sClick(closeBtn.parent().child(1));
-            // }
             sleep(800);
         }
         sleep(1200);
