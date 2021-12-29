@@ -21,7 +21,7 @@ function 跳转指定Scheme() {
     let sel_scheme_a, sel_scheme_b;
     sel_scheme_a = func.dialogsWin(Object.keys(cfg["url_scheme"]));
     sel_scheme_b = func.dialogsWin(Object.keys(cfg["url_scheme"][sel_scheme_a]));
-    func.to_scheme(sel_scheme_b);
+    func.to_scheme(cfg["url_scheme"][sel_scheme_a][sel_scheme_b]);
 }
 
 
