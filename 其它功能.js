@@ -6,25 +6,22 @@ var cfg = func.config_dict();
 main();
 // toastLog(text("领取奖励").find().length);
 function main() {
-    let selectedArr = ["建行财富季", "ZFB捐款", "余额宝转出", "余额宝转入"];
+    let selectedArr = ["跳转指定Scheme", "ZFB捐款", "余额宝转出", "余额宝转入"];
     //---------------配置区域-----------------
     let scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本  
-    let zfb = 支付宝();
-    switch (scriptName) {
-        case "建行财富季":
-            建行财富季();
-            break;
-        case "ZFB捐款":
-            zfb.ZFB捐款();
-            break;
-        case "余额宝转入":
-            zfb.余额宝转入();
-            break;
-        case "余额宝转出":
-            zfb.余额宝转出();
-            break;
-    }
+    if (scriptName == "建行财富季") { 建行财富季(); }
+    else if (scriptName == "ZFB捐款") { ZFB捐款(); }
+    else if (scriptName == "余额宝转入") { let zfb = 支付宝(); zfb.余额宝转入(); }
+    else if (scriptName == "余额宝转出") { let zfb = 支付宝(); zfb.余额宝转出(); }
+    else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
+}
 
+
+function 跳转指定Scheme() {
+    let sel_scheme_a, sel_scheme_b;
+    sel_scheme_a = func.dialogsWin([Object.keys(cfg["url_scheme"])]);
+    sel_scheme_b = func.dialogsWin([Object.keys(cfg["url_scheme"][sel_scheme_a])]);
+    func.to_scheme(sel_scheme_b);
 }
 
 
