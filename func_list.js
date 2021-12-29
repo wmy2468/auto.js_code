@@ -11,6 +11,7 @@ function config_dict() {
                 "京喜_券": "openapp.jdpingou://virtual?params={%22des%22%3A%22m%22%2C%22category%22%3A%22jump%22%2C%22url%22%3A%22replace_url%22}",
                 "领京豆": "openapp.jdmobile://virtual?params=%7B%22category%22%3A%22jump%22%2C%22des%22%3A%22m%22%2C%22url%22%3A%22https%3A%2F%2Fbean.m.jd.com%22%7D",
                 "领券中心": "openapp.jdmobile://virtual?params=%7B%22category%22%3A%22jump%22%2C%22des%22%3A%22m%22%2C%22url%22%3A%22https%3A%2F%2Fcoupon.m.jd.com%2Fcenter%2FgetCouponCenter.action%22%7D",
+                "评价中心": "openApp.jdMobile://virtual?params=%7B%22des%22%3A%22commentCenter%22%2C%22business%22%3A%221%22%2C%22category%22%3A%22jump%22%7D",
             },
             "京东金融": {
                 "金融签到": "jdmobile://share?jumpType=7&jumpUrl=4120&channel=default&sourceUrl=1000*https://f.ua.jd.com/downloadApp/index.html?id=7038",

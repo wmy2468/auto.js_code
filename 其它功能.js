@@ -6,7 +6,7 @@ var cfg = func.config_dict();
 main();
 // toastLog(text("领取奖励").find().length);
 function main() {
-    let selectedArr = ["跳转指定Scheme", "ZFB捐款", "余额宝转出", "余额宝转入"];
+    let selectedArr = ["跳转指定Scheme", "ZFB捐款", "余额宝转出", "余额宝转入", "京东评价"];
     //---------------配置区域-----------------
     let scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行财富季") { 建行财富季(); }
@@ -14,6 +14,43 @@ function main() {
     else if (scriptName == "余额宝转入") { let zfb = 支付宝(); zfb.余额宝转入(); }
     else if (scriptName == "余额宝转出") { let zfb = 支付宝(); zfb.余额宝转出(); }
     else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
+    else if (scriptName == "京东评价") { 京东评价(); }
+}
+
+
+
+function 京东评价() {
+    // 1. 跳转评价中心
+    func.to_scheme(cfg["url_scheme"]["京东"]["评价中心"]);
+    // 2. 判断是否到达
+    className("TextView").text("已评价/追评").findOne();
+    // 3. 点击评价商品
+    // fullId = com.jd.lib.evaluatecenter.feature:id/dm =>text == text = · 47
+    // fullId = com.jd.lib.evaluatecenter.feature:id/m8,text = 评价
+    评价 = className("TextView").text("评价").findOne();
+    评价.parent().parent();
+    // items = className = android.widget.ListView, fullId = android:id/list =>list[1]
+    // 4. 下滑获取评价按钮
+    // text = 评价, fullId = com.jd.lib.productdetail.feature: id / aho
+    // 5. 判断到评价详情界面
+    // text = 最新排序，text = 默认排序
+    // 6. 选择是否有图
+    // text = 图/视频 700+，fullId = com.jd.lib.shareorder.feature:id/d1，className = android.widget.CheckBox
+    // 7. 没图就复制文案，有图就截屏
+    // 有图：最新排序.parent.parent.parent.parent.parent.child(1).child(1)
+    // 8 判断到达评价详情
+    // text =   说点儿什么呗~
+    // 9. 获取文本
+    // fullId = com.jd.lib.evaluatecenter.feature:id/g5，depth = 9
+    // 点击图片
+    // className = android.widget.ImageView，depth = 9
+    // 确认放大btn已加载
+    // className = android.widget.ImageButton，depth = 5，fullId = com.jd.lib.evaluatecenter.feature:id/b2
+    // 截屏
+    // 返回到评价页面，点击评价
+
+
+
 }
 
 
