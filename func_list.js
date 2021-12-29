@@ -452,6 +452,8 @@ function getTimeDiff(area, targetTime) {
 
     if (targetTimestamp < curTimestamp) {
         toastLog("目标时间小于当前时间，退出不执行");
+        log("targetTimestamp:" + targetTimestamp);
+        log("curTimestamp:" + curTimestamp);
         return 0;
     }
 
