@@ -152,15 +152,11 @@ function 云闪付() {
         let startTime, timeArea;
         startTime = "10,59,55,000";
         timeArea = "北京时间";
-        coupon_dict = {
-            "全国畅享-5折电商券": "3102021122031298", "全国畅享-5折商超": "3102021122031319", "全国畅享-xyk还款": "3102021121630580",
-            "精选-苏宁5折": "3102021122131595", "精选-中石油5折": "3102021122031343",
-            "本地-厦门-商超": "3102021121529747", "本地-厦门-便利店": "3102021121529743",
-            "本地-非厦门-商超": "3102021122031140", "本地-非厦门-便利": "3102021122031124", "本地-非厦门-餐饮": "3102021122031135", "本地-非厦门-线上": "3102021122031149",
-            "闪付-50减10": "3102021122031281", "闪付10减5": "3102021122031286"
-        }
-        coupon_id = coupon_dict[func.dialogsWin(Object.keys(coupon_dict))];
-        url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券"] + coupon_id;
+
+        coupon_class = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]))
+        coupon_id_name = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_class]))
+
+        url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_class][coupon_id_name];
 
         func.to_autojs();
         // 准备倒计时

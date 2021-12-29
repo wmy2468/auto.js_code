@@ -37,7 +37,7 @@ let url_ccb = "ccbapp://applet.ccb.com?funcid=18001001&app_type=1&appid=app20210
 
 let url_云闪付签到 = "upwallet://html/open.95516.com/s/open/html/oauth.html?redirectUri=https://youhui.95516.com/newsign/unionpay/oauth"
 
-let url_test = "openApp.jdMobile://virtual?params=%7B%22des%22%3A%22commentCenter%22%2C%22business%22%3A%221%22%2C%22category%22%3A%22jump%22%7D";
+let url_test = "upwallet://rn/rncoupondetail?couponId=" + "3112021122332449";
 
 app.startActivity({
     action: "android.intent.action.VIEW",
