@@ -6,7 +6,7 @@ var cfg = func.config_dict();
 main();
 
 function main() {
-    let selectedArr = ["光大活动", "中信活动", "交行5积分", "京喜领券", "掌上生活", "招商便民生活", "招商倒计时领取", "云闪付2022新年"
+    let selectedArr = ["光大活动", "中信活动", "交行5积分", "京喜领券", "掌上生活", "招商便民生活", "招商倒计时领取", "云闪付2022新年", "云闪付有礼花"
         // "中行周二视频捡漏",  // "云闪付锦鲤活动",  // "农行缴费20-10", // "京东腾讯月",   // "工行活动",
     ];
     let ysf;
@@ -25,14 +25,8 @@ function main() {
     else if (scriptName == "招商便民生活") { 招商便民生活(); }
     else if (scriptName == "招商倒计时领取") { 招商倒计时领取(); }
     else if (scriptName == "中行周二视频捡漏") { 中行周二视频捡漏(); }
-    else if (scriptName == "云闪付2022新年") {
-        ysf = 云闪付();
-        ysf.云闪付2022新年();
-    }
-    else if (scriptName == "云闪付锦鲤活动") {
-        ysf = 云闪付();
-        ysf.云闪付锦鲤活动();
-    }
+    else if (scriptName == "云闪付2022新年") { ysf = 云闪付(); ysf.云闪付2022新年(); }
+    else if (scriptName == "云闪付有礼花") { ysf = 云闪付(); ysf.云闪付有礼花(); }
     toastLog("结束");
     device.cancelKeepingAwake();
 }
@@ -253,7 +247,7 @@ function 云闪付() {
             }
         }
     }
-    this.有礼花点确认 = function () {
+    this.云闪付有礼花 = function () {
         let btn_confirm, cnt = 0;
         let timeArea = "京东时间";
         let startTime = "11,00,00,100";
