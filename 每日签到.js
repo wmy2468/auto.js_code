@@ -454,22 +454,19 @@ function 京东() {
         signBtn = text("签到领奖励").findOnce();
         // }
 
-        if (signBtn == null) {
-            toastLog("今日已领券");
-        }
-        else {
+        if (signBtn != null) {
             func.sClick(signBtn);
             sleep(2000);
             className("ImageView").desc("关闭弹窗").findOne();
             func.sClick(className("ImageView").desc("关闭弹窗").findOne());
-            toastLog("今日已领券");
-            sleep(1000);
+            sleep(1200);
         }
-
-        while (text("首页").findOnce() == null) {
-            back();
-            sleep(2000);
-        }
+        toastLog("今日已领券");
+        sleep(2500);
+        // while (text("首页").findOnce() == null) {
+        //     back();
+        //     sleep(2000);
+        // }
     }
     this.陪伴签到 = function () {
         let signed, unsign, txt1, txt2;
