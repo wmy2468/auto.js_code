@@ -253,7 +253,29 @@ function 云闪付() {
             }
         }
     }
-
+    this.有礼花点确认 = function () {
+        let btn_confirm, cnt = 0;
+        let timeArea = "京东时间";
+        let startTime = "11,00,00,100";
+        btn_confirm = className("android.widget.Image").text("btn_confirm").findOnce();
+        while (btn_confirm == null) {
+            if (cnt > 10 || cnt == 0) {
+                toastLog("请跳转到云闪付，输入完成验证码界面");
+                cnt = 0;
+            }
+            cnt = cnt + 1;
+            sleep(300);
+            btn_confirm = className("android.widget.Image").text("btn_confirm").findOnce();
+        }
+        toastLog("已到达指定页面");
+        try {
+            func.getTimeDiff(timeArea, startTime);              // 等待时间
+            func.sClick(btn_confirm);
+        }
+        catch (e) {
+            func.sClick(className("android.widget.Image").text("btn_confirm").findOnce());
+        }
+    }
     this.云闪付锦鲤活动 = function () {
         let startTime;
         let appName = "云闪付";
