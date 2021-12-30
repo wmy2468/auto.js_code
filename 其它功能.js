@@ -6,7 +6,7 @@ var cfg = func.config_dict();
 main();
 // toastLog(text("领取奖励").find().length);
 function main() {
-    let selectedArr = ["跳转指定Scheme", "ZFB捐款", "余额宝转出", "余额宝转入", "京东评价"];
+    let selectedArr = ["万商3比", "ZFB捐款", "余额宝转出", "余额宝转入", "京东评价", "跳转指定Scheme"];
     //---------------配置区域-----------------
     let scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行财富季") { 建行财富季(); }
@@ -15,7 +15,82 @@ function main() {
     else if (scriptName == "余额宝转出") { let zfb = 支付宝(); zfb.余额宝转出(); }
     else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
     else if (scriptName == "京东评价") { 京东评价(); }
+    else if (scriptName == "万商3比") { 万商3比(); }
 }
+
+function 万商3比() {
+    var now, h, m;
+    now = new Date();
+    h = now.getHours();
+    m = now.getMinutes();
+    if (h >= 7 && h <= 18) {
+        if (m >= 39 && m <= 50) {
+            alert("宾馆不刷，退出");
+            exit();
+        }
+    } else if (h >= 19 && h <= 22) {
+        if (m >= 19 && m <= 30) {
+            alert("宾馆不刷，退出");
+            exit();
+        }
+    } else if (h >= 23 || h <= 6) {
+        if ((m >= 49 && m <= 60) || (m >= 9 && m <= 20)) {
+            alert("宾馆不刷，退出");
+            exit();
+        }
+    }
+    var count, inputVal, appName;
+    count = dialogs.rawInput("请输入次数", 3);
+    numRange = func.dialogsWin(["10-15", "15-20", "20-23"])
+    appName = "万商云";
+    var min, max;
+    switch (numRange) {
+        case "10-15":
+            min = 10;
+            max = 15;
+            break;
+        case "15-20":
+            min = 15;
+            max = 20;
+            break;
+        case "20-23":
+            min = 20;
+            max = 23;
+            break;
+    }
+    func.to_app(appName);
+    sum = 0;
+    while (count > 0) {
+        inputVal = func.randomNum(min, max, digit = 1);
+        sum = sum + inputVal * 10
+        while (text("请输入收款金额").findOnce() == null) {
+            func.sClick(id("home_qrcodepay").findOnce());
+            if (text("请绘制手势密码登录").findOnce()) {
+                sleep(1000);
+                func.gesture_pwd(appName);
+                sleep(4000);
+            }
+            func.sClick(text("扫一扫").findOnce());
+            sleep(500);
+            // 如果找到信用卡认证，则点击关闭
+            func.sClick(idContains("cancel").findOnce());
+        }
+        setText(inputVal);
+        sleep(500);
+        while (text("将二维码/条码放入框内，即可自动扫描").findOnce() == null) {
+            func.sClick(text("确定").findOnce());
+            sleep(500);
+        }
+        while (text("支付成功！").findOnce() == null) {
+            sleep(2000);
+        }
+        sleep(1000);
+        back();
+        count = count - 1;
+    }
+    alert("已完成,共计:" + sum / 10 + "元");
+}
+
 function 京东评价() {
     if (!requestScreenCapture()) {
         toast("请求截图失败");
