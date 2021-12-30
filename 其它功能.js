@@ -123,7 +123,7 @@ function 京东评价() {
         let comment_text_b, comment_text, comment = null;
         while (comment == null) {
             try {
-                comment = text("按型号查看评价").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0);
+                comment = textStartsWith("按").textEndsWith("查看评价").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0);
                 sleep(800);
             } catch (e) {
                 sleep(500);
@@ -142,7 +142,7 @@ function 京东评价() {
             comment = null;
             while (comment == null) {
                 try {
-                    comment = text("最新排序").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0);
+                    comment = textStartsWith("按").textEndsWith("查看评价").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0);
                     sleep(800);
                 } catch (e) {
                     sleep(500);
