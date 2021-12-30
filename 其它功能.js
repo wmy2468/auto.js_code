@@ -116,7 +116,7 @@ function 京东评价() {
         sleep(2500);
         text("评价").findOne().parent().click();
         // 5. 判断到评价详情界面
-        while (textContains("按型号查看评价").findOnce() = null) { toastLog("未到达,评价详情"); sleep(2500); }
+        while (textContains("按型号查看评价").findOnce() == null) { toastLog("未到达,评价详情"); sleep(2500); }
         toastLog("到达商品评价处");
         sleep(2500);
         // 记录评论内容
