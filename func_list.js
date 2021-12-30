@@ -117,19 +117,6 @@ function to_app(appName) {
     }
 }
 
-function toJdSku(sellId) {
-    // let appName = "京东";
-    // while (currentPackage() != getPackageName(appName)) {
-    //     launchApp(appName);
-    //     sleep(300);
-    // }
-    app.startActivity({
-        action: "android.intent.action.VIEW",
-        data: "openapp.jdmobile://virtual?params=%7B%22sourceValue%22:%220_productDetail_97%22,%22des%22:%22productDetail%22,%22skuId%22:%22" + sellId + "%22,%22category%22:%22jump%22,%22sourceType%22:%22PCUBE_CHANNEL%22%7D",
-    });
-}
-
-
 function cClick(element) {
     if (element != null) {
         click(element.bounds().centerX(), element.bounds().centerY());
@@ -240,18 +227,6 @@ function xiaomiUnlock() {
     }
 }
 
-//锁屏功能
-function lockScr() {
-    home();
-    sleep(1200);
-    while (1) {
-        if (sClick(desc("一键锁屏").findOnce()) || sClick(desc("锁屏").findOnce())) {
-            break;
-        } else {
-            back();
-        }
-    }
-}
 
 // 手势解锁密码 xy为中心点坐标，offset为滑动区域 两个点之间的距离
 function gesture_pwd(appName) {
@@ -738,19 +713,17 @@ function dialogsWin(inArr) {
 module.exports = {
     config_dict: config_dict,
     floatyMove: floatyMove,
-    to_autojs: to_autojs,
     cClick: cClick,
     sClick: sClick,
     passAd: passAd,
     to_app: to_app,
+    to_autojs: to_autojs,
     to_scheme: to_scheme,
     toAppMulti: toAppMulti,
     // huaweiUnlock: huaweiUnlock,
     // xiaomiUnlock: xiaomiUnlock,
     gesture_pwd: gesture_pwd,
     randomNum: randomNum,
-    lockScr: lockScr,
-    toJdSku: toJdSku,
     getTimeDiff: getTimeDiff,
     calTimeDiff: calTimeDiff,
     dialogsWin: dialogsWin

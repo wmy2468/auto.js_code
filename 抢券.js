@@ -161,6 +161,7 @@ function 云闪付() {
         func.to_scheme(url_ysf);
         toastLog("测试查看,2秒后 切回autojs");
         textContains("活动咨询").findOne();
+        sleep(1000);
         func.to_autojs();
         // 准备倒计时
         func.getTimeDiff(timeArea, startTime);
