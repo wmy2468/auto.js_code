@@ -123,7 +123,7 @@ function 京东评价() {
         let comment_text_b, comment_text, comment = null;
         while (comment == null) {
             try {
-                comment = text("最新排序").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0);
+                comment = text("按型号查看评价").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0);
                 sleep(800);
             } catch (e) {
                 sleep(500);
@@ -139,22 +139,23 @@ function 京东评价() {
             func.sClick(pic_video);
             toastLog("已点击 图/视频 按钮");
             sleep(2500);
+            comment = null;
+            while (comment == null) {
+                try {
+                    comment = text("最新排序").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0);
+                    sleep(800);
+                } catch (e) {
+                    sleep(500);
+                    continue;
+                }
+            }
+            comment_text_b = comment.text();
+            if (random(0, 9) >= 5) {
+                comment_text = comment_text_b;
+            }
         };
         // textContains("图/视频").findOne().click()
-        comment = null;
-        while (comment == null) {
-            try {
-                comment = text("最新排序").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0);
-                sleep(800);
-            } catch (e) {
-                sleep(500);
-                continue;
-            }
-        }
-        comment_text_b = comment.text();
-        if (random(0, 9) >= 5) {
-            comment_text = comment_text_b;
-        }
+
         // 7. 没图就复制文案，有图就截屏
         let big_pic, pic_text, cur_pic, all_pic;
         let height, width, x, y;
@@ -200,6 +201,9 @@ function 京东评价() {
                 sleep(1500);
             }
             toastLog("截屏完成");
+            sleep(2500);
+        } else {
+            toastLog("无图片，直接返回");
             sleep(2500);
         }
         // 返回到评价页面，点击评价
@@ -261,20 +265,24 @@ function 京东评价() {
         text_a = beans_a.text().substring(1, 3);
         text_b = beans_b.text();
         if (text_a != text_b) {
-            alert("豆子未满");
+            alert("豆子未满，请检查 是否有误，并手动提交");
         } else {
             // 提交
-            func.sClick(text("提交").findOne());
-            toastLog("已点击提交");
+            while (!func.sClick(textContains("提交").findOnce())) {
+                toastLog("未成功，点击提交");
+                sleep(2500);
+            }
+            toastLog("已成功，点击提交");
             sleep(2500);
             // 评价成功    
-            while (text("评价成功，感谢您！").findOnce() == null) {
-                func.sClick(text("确认提交").findOnce());
-                sleep(1000);
-            }
-            toastLog("评价已完成，等待返回");
-            sleep(2500);
         }
+        while (text("评价成功，感谢您！").findOnce() == null) {
+            if (func.sClick(text("确认提交").findOnce())) { sleep(1500); }
+            if (func.sClick(text("提交").findOnce())) { sleep(1500); }
+            sleep(1000);
+        }
+        toastLog("评价已完成，等待返回");
+        sleep(2500);
         // 返回到评价页面，点击评价
         while (className("TextView").text("已评价/追评").findOnce() == null) { back(); toastLog("未到达评价界面"); sleep(3500); }
     }

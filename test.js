@@ -5,7 +5,7 @@ var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
 // log(random(0, 5))
-log(device.brand);
+log(text("按型号查看评价").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0).text());
 // log(text("最新排序").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0).text());
 // 京东评价();
 
