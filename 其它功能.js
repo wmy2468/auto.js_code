@@ -190,9 +190,12 @@ function 京东评价() {
         } else {
             // 提交
             func.sClick(text("提交").findOne());
+            toastLog("已点击提交");
+            sleep(2500);
             // 评价成功    
             text("评价成功，感谢您！").findOne();
-            sleep(1000);
+            toastLog("评价已完成，等待返回");
+            sleep(2500);
         }
         // 返回到评价页面，点击评价
         while (className("TextView").text("已评价/追评").findOnce() == null) { back(); toastLog("未到达评价界面"); sleep(3500); }
