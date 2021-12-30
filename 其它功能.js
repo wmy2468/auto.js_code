@@ -41,7 +41,7 @@ function 京东评价() {
         sleep(2500);
         text("评价").findOne().parent().click();
         // 5. 判断到评价详情界面
-        while (!(text("默认排序").findOnce() != null && text("最新排序").findOnce() != null)) { toastLog("未到达,评价详情"); sleep(2500); }
+        while (textContains("按型号查看评价").findOnce() = null) { toastLog("未到达,评价详情"); sleep(2500); }
         toastLog("到达商品评价处");
         sleep(2500);
         // 记录评论内容
@@ -193,7 +193,10 @@ function 京东评价() {
             toastLog("已点击提交");
             sleep(2500);
             // 评价成功    
-            text("评价成功，感谢您！").findOne();
+            while (text("评价成功，感谢您！").findOnce() == null) {
+                func.sClick(text("确认提交").findOnce());
+                sleep(1000);
+            }
             toastLog("评价已完成，等待返回");
             sleep(2500);
         }
