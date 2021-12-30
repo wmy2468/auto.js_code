@@ -108,7 +108,7 @@ function 京东评价() {
             all_pic = pic_text.substring(pic_text.length - 1);
             log("cur_pic:" + cur_pic);
             log("all_pic:" + all_pic);
-            if (all_pic > 4) { all_pic = 4; }
+            if (all_pic > 8) { all_pic = 8; }
             // className = android.widget.ImageButton，depth = 5，fullId = com.jd.lib.evaluatecenter.feature:id/b2
             let img, img_clip, file_path;
             while (cur_pic <= all_pic) {
@@ -157,7 +157,7 @@ function 京东评价() {
         sleep(1500);
         if (has_pic) {
             // 点击选择图片
-            func.sClick(text("添加图片").findOnce());
+            func.sClick(textContains("添加图片").findOnce());
             className("android.widget.TextView").depth(6).text("最近添加").findOne();
             sleep(1000);
             let img_list, img_cnt;
