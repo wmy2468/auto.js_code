@@ -18,18 +18,35 @@ height = Math.floor(height / 3 * 2);
 
 
 let img, img_clip, save_path, filename, dt;
-save_path = "/sdcard/DCIM/screenshots/IMG_"
+save_path = "/sdcard/DCIM/screenshots/IMG_"     //xiaomi
+save_path = "/sdcard/Pictures/Screenshots/Screenshot_"     //华为
 img = images.captureScreen();
 img_clip = images.clip(img, x, y, width, height);
-dt = new Date();
-log(dt.getFullYear() + dt.getMonth() + 1);
-file_name = dt.getFullYear() + dt.getMonth() + dt.getDay() + "_" + dt.getHours() + dt.getMinutes() + dt.getSeconds() + ".png";
-log(filename);
-//images.save(img_clip, save_path + filename);
+log(date_string());
+file_name = save_path + date_string();
+log(file_name);
+images.save(img_clip, file_name);
+app.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, android.net.Uri.fromFile(java.io.File(file_name))));        //刷新图库
+
+function date_string() {
+    let dt, monthes, dates, hours, minutes, seconds;
+    dt = new Date();
+    monthes = dt.getMonth() + 1;
+    dates = dt.getDate();
+    hours = dt.getHours();
+    minutes = dt.getMinutes();
+    seconds = dt.getSeconds();
+    if (monthes < 10) { monthes = "0" + monthes } else { monthes = monthes.toString(); }
+    if (dates < 10) { dates = "0" + dates } else { dates = dates.toString(); }
+    if (hours < 10) { hours = "0" + hours } else { hours = hours.toString(); }
+    if (minutes < 10) { minutes = "0" + minutes } else { minutes = minutes.toString(); }
+    if (seconds < 10) { seconds = "0" + seconds } else { seconds = seconds.toString(); }
+    return (dt.getFullYear().toString() + monthes + dates + "-" + hours + minutes + seconds + ".jpg");
+}
 
 // while (!(text("评价").findOne().parent().click())) { sleep(1000); }
 // child(3).child(0).click()
-log(className("ImageButton").depth(5).findOnce());
+// log(className("ImageButton").depth(5).findOnce());
 // while (!(text("默认排序").findOnce() != null && text("最新排序").findOnce() != null)) { sleep(1000); }
 // while (text("评价").findOnce() == null) {
 //     scrollDown();

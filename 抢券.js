@@ -158,6 +158,9 @@ function 云闪付() {
 
         url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc][coupon_id];
 
+        func.to_scheme(url_ysf);
+        toastLog("测试查看,2秒后 切回autojs");
+        sleep(2000);
         func.to_autojs();
         // 准备倒计时
         func.getTimeDiff(timeArea, startTime);

@@ -29,7 +29,7 @@ function 京东评价() {
     width = devive.width;
     x = 0;
     y = Math.floor(height / 6);
-    height = Math.floor(height / 3 * 2);
+    height = Math.floor(height / 4 * 3);
     // 1. 跳转评价中心
     func.to_scheme(cfg["url_scheme"]["京东"]["评价中心"]);
     // 2. 判断是否到达
@@ -85,7 +85,8 @@ function 京东评价() {
     img = images.captureScreen();
     img_clip = images.clip(img, x, y, width, height);
     dt = new Date();
-    file_name = dt.getFullYear() + dt.getMonth() + dt.getDay() + "_" + dt.getHours() + dt.getMinutes() + dt.getSeconds() + ".png";
+    file_name = dt.getFullYear().toString() + dt.getMonth().toString() + dt.getDay().toString()
+        + "_" + dt.getHours().toString() + dt.getMinutes().toString() + dt.getSeconds().toString() + ".png";
     images.save(img_clip, save_path + filename);
     // 返回到评价页面，点击评价
 
