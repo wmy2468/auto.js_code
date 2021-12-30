@@ -278,7 +278,7 @@ function 京东评价() {
         }
         while (text("评价成功，感谢您！").findOnce() == null) {
             if (func.sClick(text("确认提交").findOnce())) { sleep(1500); }
-            if (func.sClick(text("提交").findOnce())) { sleep(1500); }
+            // if (func.sClick(text("提交").findOnce())) { sleep(1500); }
             sleep(1000);
         }
         toastLog("评价已完成，等待返回");
