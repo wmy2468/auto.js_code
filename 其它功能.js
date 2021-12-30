@@ -211,7 +211,7 @@ function 京东评价() {
         // 点击评价商品
         func.sClick(className("TextView").text("评价").findOne());
         // 等待商品评价页面加载
-        text("物流服务评价").findOne();
+        textStartsWith("/").textEndsWith("京豆").findOne();
         sleep(1500);
         // 点击所有rate
         className("android.widget.RatingBar").findOne();
@@ -257,7 +257,7 @@ function 京东评价() {
             sleep(1500);
         }
         // 返回商品评价页面
-        text("物流服务评价").findOne();
+        textStartsWith("/").textEndsWith("京豆").findOne();
         // 检查评价京豆是否已满
         let beans_a, beans_b, text_a, text_b;
         beans_a = textContains("京豆").findOne();
