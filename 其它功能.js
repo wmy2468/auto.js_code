@@ -300,9 +300,9 @@ function rate_click(element) {
 }
 
 function path_date_string() {
-    let save_path = "/sdcard/DCIM/screenshots/IMG_"
-    if (device.brand == "HUAWEI") { save_path = "/sdcard/Pictures/Screenshots/Screenshot_" }
-    else if (device.brand == "xiaomi") { save_path = "/sdcard/DCIM/screenshots/IMG_" }
+    let dev_brand = device.brand;
+    if (dev_brand == "HUAWEI" || dev_brand == "honor") { save_path = "/sdcard/Pictures/Screenshots/Screenshot_" }
+    else if (dev_brand == "xiaomi") { save_path = "/sdcard/DCIM/screenshots/IMG_" }
     let dt, monthes, dates, hours, minutes, seconds;
     dt = new Date();
     monthes = dt.getMonth() + 1;
