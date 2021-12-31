@@ -20,8 +20,8 @@ function main() {
     jd.陪伴签到();
     ysf.签到();
     ysf.领积点();
-    zs.便民生活();
-    zs.饭票签到();
+    // zs.便民生活();
+    // zs.饭票签到();
     if (devModel == devMate30) {
         龙支付签到();
         沃钱包();
