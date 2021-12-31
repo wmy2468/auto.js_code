@@ -126,8 +126,10 @@ function 工商() {
             toastLog("已找到手势密码按钮");
             sleep(500);
             func.gesture_pwd(appName);
+            toastLog("已输入 mima");
             sleep(5000);
             func.to_autojs();
+            toastLog("已切换到autojs，等待回去");
             sleep(3500);
             func.to_scheme(cfg["url_scheme"]["工商"]["小象2"]);
         }
