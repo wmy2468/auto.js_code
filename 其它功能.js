@@ -351,15 +351,18 @@ function 支付宝() {
         while (text("使用密码").findOnce() == null) {
             func.sClick(text("转入").findOnce());
             if (textContains("转入金额").findOnce() != null) {
-                if (func.sClick(text("请输入转入金额").findOnce())) {
+                while (text("确定").rowSpan(2).depth(16).findOnce() == null) {
+                    func.sClick(text("请输入转入金额").findOnce());
+                    toastLog("已尝试点击 输入金额框");
                     sleep(3000);
-                    for (let i = 0; i < pwd.length; i++) {
-                        log(pwd[i]);
-                        text(pwd[i]).findOne().click();
-                        sleep(500);
-                    }
-                    sleep(1500);
                 }
+                sleep(3000);
+                for (let i = 0; i < pwd.length; i++) {
+                    log(pwd[i]);
+                    text(pwd[i]).findOne().click();
+                    sleep(500);
+                }
+                sleep(1500);
                 if (func.sClick(text("确认转入").findOnce())) {
                     sleep(1500);
                 }
