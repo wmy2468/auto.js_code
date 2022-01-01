@@ -116,7 +116,8 @@ function 京东评价() {
         sleep(2500);
         text("评价").findOne().parent().click();
         // 5. 判断到评价详情界面
-        while (textStartsWith("按").textEndsWith("查看评价").findOnce() == null) { toastLog("未到达,评价详情"); sleep(2500); }
+        // while (textStartsWith("按").textEndsWith("查看评价").findOnce() == null) { toastLog("未到达,评价详情"); sleep(2500); }
+        while (className("RatingBar").depth(20).findOnce() == null) { toastLog("未到达,评价详情"); sleep(2500); }
         toastLog("到达商品评价处");
         sleep(2500);
         // 记录评论内容
@@ -315,7 +316,7 @@ function path_date_string() {
     if (hours < 10) { hours = "0" + hours } else { hours = hours.toString(); }
     if (minutes < 10) { minutes = "0" + minutes } else { minutes = minutes.toString(); }
     if (seconds < 10) { seconds = "0" + seconds } else { seconds = seconds.toString(); }
-    return (dt.getFullYear().toString() + monthes + dates + "-" + hours + minutes + seconds + ".png");
+    return (save_path + dt.getFullYear().toString() + monthes + dates + "-" + hours + minutes + seconds + ".png");
 }
 
 
