@@ -4,10 +4,12 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
-// log(random(0, 5))
-log(textStartsWith("按").textEndsWith("查看评价").findOnce());
-// 京东评价();
-log(textContains("查看评价").findOnce());
+numRange = func.dialogsWin(["11-16", "16-20", "20-23"])
+var min, max;
+min = numRange.substring(0, 2) * 1;
+max = numRange.substring(3, 5) * 1;
+
+log(max);
 
 function 京东评价() {
     if (!requestScreenCapture()) {
