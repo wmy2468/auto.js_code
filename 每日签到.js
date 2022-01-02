@@ -496,9 +496,9 @@ function 京东() {
         toast("已到达指定页面");
         sleep(2500);
         let already_sign;
-        already_sign = text("签到领金贴").findOnce();
+        already_sign = textContains("签到领金贴").findOnce();
         if (already_sign == null) {
-            already_sign = text("签到并瓜分金贴").findOnce();
+            already_sign = textContains("签到并瓜分金贴").findOnce();
         }
         // 判断两种签到按钮
         if (already_sign == null) {
