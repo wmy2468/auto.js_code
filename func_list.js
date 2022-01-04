@@ -50,15 +50,15 @@ function config_dict() {
                     "周三14点-心愿大礼-switch": "upwallet://rn/rncoupondetail?couponId=3112021122332447",
                     "周三14点-心愿大礼-携程": "upwallet://rn/rncoupondetail?couponId=3112021122432462",
 
-                    "周三14点-品质爆款-飞利浦电动牙刷": "upwallet://rn/rncoupondetail?couponId=3112021122332449",
+                    "周三14点-品质爆款-电动牙刷": "upwallet://rn/rncoupondetail?couponId=3112021122332449",
                     "周三14点-品质爆款-家乐福800": "upwallet://rn/rncoupondetail?couponId=3112021122432757",
-                    "周三14点-品质爆款-悟空手办套装": "upwallet://rn/rncoupondetail?couponId=3112021122332454",
-                    "周三14点-品质爆款-三星堆手办套装": "upwallet://rn/rncoupondetail?couponId=3112021122332452",
+                    "周三14点-品质爆款-悟空套装": "upwallet://rn/rncoupondetail?couponId=3112021122332454",
+                    "周三14点-品质爆款-三星堆套装": "upwallet://rn/rncoupondetail?couponId=3112021122332452",
 
                     "周三14点-口碑好货-还款券50": "upwallet://rn/rncoupondetail?couponId=3112021122432463",
                     "周三14点-口碑好货-美团券50": "upwallet://rn/rncoupondetail?couponId=3112021122332456",
-                    "周三14点-口碑好货-悟空手办单个": "upwallet://rn/rncoupondetail?couponId=3112021122332453",
-                    "周三14点-口碑好货-三星堆手办单个": "upwallet://rn/rncoupondetail?couponId=3112021122332451",
+                    "周三14点-口碑好货-悟空单个": "upwallet://rn/rncoupondetail?couponId=3112021122332453",
+                    "周三14点-口碑好货-三星堆办单个": "upwallet://rn/rncoupondetail?couponId=3112021122332451",
                 },
             },
             "招商": {
@@ -693,8 +693,11 @@ function snTime() {
     return delta;
 }
 
-function dialogsWin(inArr) {
-    let selIdx = dialogs.select("选择启动", inArr);
+function dialogsWin(inArr, titles) {
+    if (titles == undefined) {
+        titles = "选择启动";
+    }
+    let selIdx = dialogs.select(titles, inArr);
     if (selIdx == -1) {
         exit();
     }

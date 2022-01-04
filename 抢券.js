@@ -6,9 +6,7 @@ var cfg = func.config_dict();
 main();
 
 function main() {
-    let selectedArr = ["光大活动", "中信活动", "交行5积分", "京喜领券", "掌上生活", "招商便民生活", "招商倒计时领取", "云闪付2022新年"
-        // "中行周二视频捡漏",  // "云闪付锦鲤活动",  // "农行缴费20-10", // "京东腾讯月",   // "工行活动",
-    ];
+    let selectedArr = ["光大活动", "中信活动", "交行5积分", "招商便民生活", "招商倒计时领取", "云闪付2022新年", "云闪付2022新年捡漏"];
     let ysf;
     //---------------配置区域-----------------
     let scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本        
@@ -16,17 +14,11 @@ function main() {
     device.keepScreenOn(1000 * 60 * 6);
     if (scriptName == "光大活动") { 光大活动(); }
     else if (scriptName == "中信活动") { 中信活动(); }
-    else if (scriptName == "工行活动") { 工行活动(); }
-    else if (scriptName == "掌上生活") { 掌上生活活动(); }
     else if (scriptName == "交行5积分") { 交行9点5积分(); }
-    else if (scriptName == "京东腾讯月") { 京东腾讯月(); }
-    else if (scriptName == "农行缴费20-10") { 农行缴费(); }
-    else if (scriptName == "京喜领券") { 京喜领券(); }
     else if (scriptName == "招商便民生活") { 招商便民生活(); }
     else if (scriptName == "招商倒计时领取") { 招商倒计时领取(); }
-    // else if (scriptName == "中行周二视频捡漏") { 中行周二视频捡漏(); }
     else if (scriptName == "云闪付2022新年") { ysf = 云闪付(); ysf.云闪付2022新年(); }
-    else if (scriptName == "云闪付有礼花") { ysf = 云闪付(); ysf.云闪付有礼花(); }
+    else if (scriptName == "云闪付2022新年捡漏") { ysf = 云闪付(); ysf.云闪付2022新年捡漏(); }
     toastLog("结束");
     device.cancelKeepingAwake();
 }
@@ -94,73 +86,54 @@ function 招商便民生活() {
     招商领取(page_text, wait_text, popup_wait_text, select_text, sure_btn);
 }
 
-
-function 中行周二视频捡漏() {
-    let aiqiyi, youku, tengx, pay5, cnt;
-    aiqiyi = "爱奇艺VIP";
-    youku = "优酷VIP"
-    tengx = "腾讯视频VIP"
-    pay5 = "确认支付";
-    cnt = 0;
-    while (1) {
-        if (textContains(aiqiyi).findOnce() == null && textContains(youku).findOnce() == null && textContains(tengx).findOnce() == null) {
-            toastLog("请跳转到 \" 视频会员 \"，直到提示  已到达等待页面");
-            sleep(2500);
-        } else {
-            toastLog("已到 \" 视频会员 \"，页面");
-            sleep(2500);
-            break;
-        }
-    }
-    let exflag = false;
-    while (1) {
-        if (func.sClick(text(pay5).findOnce()) == true) {
-            toastLog("已点击确认支付");
-            while (1) {
-                if (text("当日库存已抢购完毕，请明日参加活动。").findOnce() != null) {
-                    if (func.sClick(text("确认").findOnce()) == true) {
-                        sleep(5000);
-                        break;
-                    }
-                }
-                sleep(1000);
-                cnt = cnt + 1;
-                if (cnt >= 10) {
-                    cnt = 0;
-                    exflag = true;
-                    break;
-                }
-            }
-            if (exflag) {
-                toastLog("未找到库存完毕，退出");
-                break;
-            }
-        } else {
-            sleep(1000);
-        }
-    }
-}
-
-
-
-
 // ------------------------云闪付锦鲤活动--------------------------------------
 
 function 云闪付() {
     this.云闪付2022新年捡漏 = function () {
-        coupon_id = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]));
-        
+        let coupon_desc, coupon_id, url_jump, url_origin;
+        coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]));
+        url_jump = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
+        coupon_id = url_jump.slice(-16);
+        url_origin = "https://content.95516.com/koala-pre/koala/coupon/state?cityCd=350200&couponId=" + coupon_id;
+        http.__okhttp__.setTimeout(1000);       // 设置超时2秒
+        let res, res_text, coupon_percent;
+        while (text("恭喜您领取成功").findOnce() == null) {
+            try {
+                res = http.get(url_origin);
+                res_text = res.body.json();
+                coupon_percent = res_text["params"]["couponQuotaPercent"];
+                log(res_text["params"]["couponQuota"]);
+                // 如果券的百分比不为0，则跳转, xm券为null
+                if (coupon_percent != "0") {
+                    func.to_scheme(url_jump);
+                    // func.sClick(text("立即领取").findOnce());
+                    if (func.sClick(text("立即领取").findOne(5000))) {
+                        text("请完成安全验证").findOne();
+                        while (text("请完成安全验证").findOnce() != null) {
+                            toast("请完成验证");
+                            sleep(2500);
+                        }
+                    }
+                }
+            } catch (e) {
+                log("报错：" + e);
+            }
+            toast(coupon_desc + ",未成功，等待3秒，继续...");
+            sleep(3000);
+        }
+        alert("捡漏完成，退出");
+        sleep(3000);
     }
     this.云闪付2022新年 = function () {
-        let url_ysf, coupon_desc, coupon_id;
+        let url_ysf, coupon_desc;
         let startTime, timeArea;
         startTime = "10,59,55,000";
         timeArea = "北京时间";
 
-        coupon_id = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]))
+        coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]))
         // coupon_id = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc]))
 
-        url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc][coupon_id];
+        url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
 
         func.to_scheme(url_ysf);
         toastLog("测试查看,2秒后 切回autojs");
@@ -174,420 +147,8 @@ function 云闪付() {
             toastLog("超时退出");
         }
     }
-    this.云闪付捡漏 = function () {
-        let targetViewText, targetText;
-        // targetViewText = func.dialogsWin(["10-2线上", "10-2线下"]);
-        while (text("奖励中心").findOnce() == null) {
-            toastLog("请跳转到 \" 奖励中心 \"，直到提示  已到达等待页面");
-            sleep(2000);
-        }
-        // switch (targetViewText) {
-        //     case "10-2线上":
-        //         counponText = "满10可用";
-        //         targetText = "线上指定商户";
-        //         break;
-        //     case "10-2线下":
-        //         counponText = "满10可用";
-        //         targetText = "线下指定商户";
-        //         break;
-        // }
-        let clickFlag, exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
-        exWhile = false;
-        clickFlag = 1;
-        while (1) {
-            if (clickFlag == 1) {
-                counponText = "满10可用";
-                targetText = "线下指定商户";
-                clickFlag = 2;
-            } else {
-                counponText = "满10可用";
-                targetText = "线上指定商户";
-                clickFlag = 1;
-            }
-            // 查找券位置
-            while (1) {
-                try {
-                    clickItems = text(counponText).find();
-                    log("找到 " + counponText + " 数量：" + clickItems.length);
-                    if (clickItems.nonEmpty()) {
-                        for (let i = 0; i < clickItems.length; i++) {
-                            clickItem = clickItems[i];
-                            itemIndex = clickItem.indexInParent();
-                            itemParent = clickItem.parent();
-                            upItemText = (itemParent.child(itemIndex + 1)).text();
-                            log(upItemText);
-                            // 如果文本一致，就退出选择
-                            if (upItemText == targetText) {
-                                exWhile = true;
-                                break;
-                            }
-                        }
-                    }
-                    // 如果退出选项
-                    if (exWhile) {
-                        break;
-                    }
-                }
-                catch (e) {
-                    log("123");
-                }
-            }
-            // 点击进入 等待
-            func.sClick(clickItem);
-            // 等待是否到达立即领取页面
-            text("优惠券到账后24小时内有效").findOne();
-            // 如有立即领取，点击 退出程序
-            if (func.sClick(text("立即领取").findOnce())) {
-                // 如果已点击，就等待手动返回
-                while (text("奖励中心").findOnce() == null) {
-                    toastLog("等待手动返回...");
-                    sleep(2500);
-                }
-            } else {
-                toastLog("未捡漏成功....");
-                sleep(2000);
-                back();
-                text("奖励中心").findOne();
-                toastLog("已返回....");
-                sleep(1500);
-            }
-        }
-    }
-    this.云闪付有礼花 = function () {
-        let btn_confirm, cnt = 0;
-        let timeArea = "北京时间";
-        let startTime = "11,00,00,100";
-        btn_confirm = className("android.widget.Image").text("btn_confirm").findOnce();
-        while (btn_confirm == null) {
-            if (cnt > 10 || cnt == 0) {
-                toastLog("请跳转到云闪付，输入完成验证码界面");
-                cnt = 0;
-            }
-            cnt = cnt + 1;
-            sleep(300);
-            btn_confirm = className("android.widget.Image").text("btn_confirm").findOnce();
-        }
-        toastLog("已到达指定页面");
-        try {
-            func.getTimeDiff(timeArea, startTime);              // 等待时间
-            func.sClick(btn_confirm);
-        }
-        catch (e) {
-            func.sClick(className("android.widget.Image").text("btn_confirm").findOnce());
-        }
-    }
-    this.云闪付锦鲤活动 = function () {
-        let startTime;
-        let appName = "云闪付";
-        let timeArea = "北京时间";
-        toastLog("到点点击");
 
-        let currentWeekday = new Date().getDay();
-        let counponText;
-        // 返回的周日0 周一返回1，周二2
-        switch (currentWeekday) {
-            case 5:
-                counponText = "满20可用";
-                break;
-            case 6:
-                counponText = "满35可用";
-                break;
-            case 0:
-                counponText = "满50可用";
-                break;
-        }
-        let selectFunc;
-        selectFunc = func.dialogsWin(["每日券", "云闪付捡漏", "周五六日10点", "周五六日15点"]);
-        let clockBefore, clockAfter;
-        let clock9, clock10, clock15;
-        let targetText;
-        targetText = "线下指定商户";
-        clock9 = "09:00";
-        clock10 = "10:00";
-        clock15 = "15:00";
-        switch (selectFunc) {
-            case "每日券":
-                counponText = "满10可用";
-                targetText = func.dialogsWin(["线下指定商户", "线上指定商户"]);
-                startTime = "08,59,58,800";
-                clockAfter = clock9;
-                clockBefore = clock10;
-                break;
-            case "周五六日10点":
-                startTime = "09,59,58,500";
-                clockAfter = clock10;
-                clockBefore = clock15;
-                break;
-            case "周五六日15点":
-                startTime = "14,59,58,500";
-                clockAfter = clock15;
-                clockBefore = clock10;
-                break;
-            case "云闪付捡漏":
-                云闪付捡漏();
-                break;
-        }
-        let getCouponWay;       //定义领券方式
-        getCouponWay = func.dialogsWin(["提前1秒进入页面领取", "切换时间标签领券"]);
-        func.to_app(appName);
-        while (text("明日预告").findOnce() == null) {
-            // 如果能点击按钮，就等待设置文本
-            try {
-                if (func.sClick(className("ViewFlipper").idContains("marquee").findOnce()) == true) {
-                    // 只要找到一个不为空
-                    if (textContains("跳过").findOnce() != null || descContains("跳过").findOnce() != null) {
-                        sleep(600);
-                        continue;
-                    } else {
-                        text("历史记录").findOne();
-                        func.sClick(text("奖励中心").depth(15).findOne());
-                        func.sClick(text("奖励中心").depth(17).findOne());
-                    }
-                }
-            }
-            catch (e) {
-                continue;
-            }
-        }
-        // 等待进入指定页面
-        while (text("奖励中心").findOnce() == null) {
-            toastLog("请跳转到 \" 奖励中心 \"，直到提示  已到达等待页面");
-            sleep(1500);
-        }
-        toastLog("已到达 \" 奖励中心 \"");
-        let clickBtn, clickItems;
-        if (getCouponWay == "提前1秒进入页面领取") {
-            func.sClick(text(clockAfter).findOne());   //点击目标时间按钮
-            sleep(1000);
-            // 查找券位置
-            while (1) {
-                try {
-                    clickItems = text(counponText).find();
-                    log("找到 " + counponText + " 数量：" + clickItems.length);
-                    if (clickItems.nonEmpty()) {
-                        for (let i = 0; i < clickItems.length; i++) {
-                            clickBtn = clickItems[i];
-                            itemIndex = clickBtn.indexInParent();
-                            itemParent = clickBtn.parent();
-                            upItemText = (itemParent.child(itemIndex + 1)).text();
-                            log(upItemText);
-                            // 如果文本一致，就退出选择
-                            if (upItemText == targetText) {
-                                exWhile = true;
-                                break;
-                            }
-                        }
-                    }
-                    // 如果退出选项
-                    if (exWhile) {
-                        break;
-                    }
-                }
-                catch (e) {
-                    log(e);
-                }
-            }
-            // 准备倒计时
-            func.getTimeDiff(timeArea, startTime);
-
-            func.sClick(clickBtn);// 时间到达 点击Jk
-            text("优惠券到账后24小时内有效").findOne();         // 等待是否到达立即领取页面
-            if (func.sClick(text("立即领取").findOne(10000)) == false) {
-                toastLog("超时退出...");
-            }
-        } else if (getCouponWay == "切换时间标签领券") {
-            // 点击另一个时间
-            func.sClick(text(clockBefore).findOne());
-            sleep(500);
-            func.sClick(text(clockBefore).findOne());
-            sleep(500);
-            func.sClick(text(clockBefore).findOne());
-            sleep(800);
-            // 定义子按钮的位置
-            let childIdx;
-            switch (selectFunc) {
-                case "每日券":
-                    if (counponText == "线下指定商户") {
-                        childIdx = 2;
-                    }
-                    else if (counponText == "线上指定商户") {
-                        childIdx = 8;
-                    }
-                case "周五六日10点":
-                    childIdx = 2;
-                    break;
-                case "周五六日15点":
-                    childIdx = 2;
-                    break;
-            }
-            // 定义目标时间，提前获取
-            let targetClock;
-            targetClock = text(clockAfter).findOne();
-            toastLog("已到达指定页面，等待");
-            //  等待倒计时
-            func.getTimeDiff(timeArea, startTime);
-            // 寻找目标按钮
-            func.sClick(targetClock);
-            while (1) {
-                // 点击目标时间
-                try {
-                    clickBtn = text(counponText).findOnce().parent().parent().child(childIdx);
-                } catch (error) {
-                    continue;
-                }
-                if (clickBtn.text() != "立即领取") {
-                    func.sClick(text(clockBefore).findOne());
-                    sleep(100);
-                    func.sClick(text(clockAfter).findOne());
-                    sleep(100);
-                    while (text(counponText).findOnce() == null) {
-                        func.sClick(text(clockAfter).findOnce());
-                        sleep(100);
-                    }
-                } else {
-                    break;
-                }
-            }
-            func.sClick(clickBtn);
-        }
-        toastLog("已完成");
-    }
     return this;
-}
-// ------------------------云闪付锦鲤活动--------------------------------------
-
-function 京喜领券() {
-    let timeArea = "京东时间";
-    let startTime, targetViewText;
-    let actNames = ["0点京喜95折", "京东券"];
-    let actName = func.dialogsWin(actNames);      // 设置查找的文本
-    let coupon_url, url_页面;
-    switch (actName) {
-        case "0点京喜95折":
-            startTime = "23,59,59,990";
-            targetViewText = "立即领取";
-            coupon_url = "http://coupon.m.jd.com/coupons/show.action?key=g7udi9d8e5260e8b7a8a76c0d01209e8&roleId=62130462";
-            url_页面 = (cfg["url_scheme"]["京东"]["京喜_券"]).replace("replace_url", coupon_url);
-            break;
-    }
-    // 跳转到APP
-    func.to_scheme(url_页面);
-
-    // 等待进入指定页面
-    let couClick = textContains(targetViewText).findOnce();
-    while (couClick == null) {
-        couClick = textContains(targetViewText).findOnce();
-        toastLog("等待跳转到京喜优惠券页面");
-        sleep(1000);
-    }
-    func.getTimeDiff(timeArea, startTime);              // 等待时间
-    func.sClick(couClick);             // 点击元素
-    sleep(100);
-    func.sClick(couClick);             // 点击元素
-    sleep(100);
-    func.sClick(couClick);             // 点击元素
-    toast("已点击");
-    sleep(3000);
-
-}
-
-function 农行缴费() {
-    let startTime, targetViewText;
-    let appName = "云闪付";
-    let timeArea = "北京时间";
-    toastLog("到点点击");
-    startTime = "09,59,59,700";
-    targetViewText = "[6179]";
-    func.to_app(appName);
-    // 等待进入指定页面
-    let card = textContains(targetViewText).findOnce();
-    while (card == null) {
-        card = textContains(targetViewText).findOnce();
-        toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
-        sleep(800);
-    }
-    toastLog("已到达指定页面，等待");
-    //  等待倒计时
-    func.getTimeDiff(timeArea, startTime);
-    // 点击进入 等待
-    func.sClick(card);
-    while (1) {
-        if (text('¥10.00').findOnce()) {
-            if (func.sClick(text("确认付款").findOnce())) { break; }
-        } else {
-            sleep(50);
-        }
-    }
-}
-
-
-function 掌上生活活动() {
-    let startTime, targetViewText;
-    let actNames = ["周三五折", "10点拼团星巴克"];
-    let actName = func.dialogsWin(actNames);      // 设置查找的文本
-    let appName = "掌上生活";
-    let timeArea = "北京时间";
-    let cnt = 3;
-    switch (actName) {
-        // 10点
-        case "周三五折":            //10点
-            toastLog("提前5秒进入");
-            startTime = "09,59,55,000";
-            targetViewText = func.dialogsWin(["（周三5折）喜茶20元代金券",
-                "（周三5折）必胜客50元代金券",
-                "（周三5折）肯德基20元全场通兑代金券"]);
-            func.to_app(appName);
-            // 等待进入指定页面
-            while (!text(targetViewText).findOnce()) {
-                toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
-                sleep(800);
-            }
-            toastLog("已到达指定页面，等待");
-            //  提前10秒 开始查找
-            func.getTimeDiff(timeArea, startTime);
-            // 点击进入 等待
-            func.sClick(text(targetViewText).findOne());
-            while (1) {
-                if (!func.sClick(textContains("立即抢购").findOnce())) {
-                    sleep(200);
-                } else {
-                    break;
-                }
-            }
-            break;
-        case "10点拼团星巴克":            //10点
-            toastLog("提前15秒 进入");
-            startTime = "09,59,45,000";
-            targetViewText = "星巴克中杯手工调制饮品";
-            func.to_app(appName);
-            // 等待进入指定页面
-            while (!textContains("成团").findOnce()) {
-                toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
-                sleep(800);
-            }
-            toastLog("已到达指定页面，等待");
-            //  提前10秒 开始进入
-            func.getTimeDiff(timeArea, startTime);
-            func.sClick(textContains("成团").findOnce());
-            let clickBtn;
-            func.getTimeDiff(timeArea, "09,59,59,700");
-            while (1) {
-                try {
-                    clickBtn = text(targetViewText).findOnce().parent().child(8).child(0);
-                    // 点击立即抢
-                    while (cnt > 0) {
-                        clickBtn.click();
-                        sleep(200);
-                        cnt = cnt - 1;
-                    }
-                    break;
-                }
-                catch (e) { continue; }
-            }
-            break;
-    }
-    toastLog("已点击，请确认结果");
-    sleep(3000);
 }
 
 // 到点点击
@@ -877,6 +438,411 @@ function 中信活动() {
     }
 }
 
+/*------------------------------------NOT VALID------------------------------------
+this.云闪付捡漏 = function () {
+        let targetViewText, targetText;
+        // targetViewText = func.dialogsWin(["10-2线上", "10-2线下"]);
+        while (text("奖励中心").findOnce() == null) {
+            toastLog("请跳转到 \" 奖励中心 \"，直到提示  已到达等待页面");
+            sleep(2000);
+        }
+        // switch (targetViewText) {
+        //     case "10-2线上":
+        //         counponText = "满10可用";
+        //         targetText = "线上指定商户";
+        //         break;
+        //     case "10-2线下":
+        //         counponText = "满10可用";
+        //         targetText = "线下指定商户";
+        //         break;
+        // }
+        let clickFlag, exWhile, clickItems, clickItem, itemParent, itemIndex, upItemText;
+        exWhile = false;
+        clickFlag = 1;
+        while (1) {
+            if (clickFlag == 1) {
+                counponText = "满10可用";
+                targetText = "线下指定商户";
+                clickFlag = 2;
+            } else {
+                counponText = "满10可用";
+                targetText = "线上指定商户";
+                clickFlag = 1;
+            }
+            // 查找券位置
+            while (1) {
+                try {
+                    clickItems = text(counponText).find();
+                    log("找到 " + counponText + " 数量：" + clickItems.length);
+                    if (clickItems.nonEmpty()) {
+                        for (let i = 0; i < clickItems.length; i++) {
+                            clickItem = clickItems[i];
+                            itemIndex = clickItem.indexInParent();
+                            itemParent = clickItem.parent();
+                            upItemText = (itemParent.child(itemIndex + 1)).text();
+                            log(upItemText);
+                            // 如果文本一致，就退出选择
+                            if (upItemText == targetText) {
+                                exWhile = true;
+                                break;
+                            }
+                        }
+                    }
+                    // 如果退出选项
+                    if (exWhile) {
+                        break;
+                    }
+                }
+                catch (e) {
+                    log("123");
+                }
+            }
+            // 点击进入 等待
+            func.sClick(clickItem);
+            // 等待是否到达立即领取页面
+            text("优惠券到账后24小时内有效").findOne();
+            // 如有立即领取，点击 退出程序
+            if (func.sClick(text("立即领取").findOnce())) {
+                // 如果已点击，就等待手动返回
+                while (text("奖励中心").findOnce() == null) {
+                    toastLog("等待手动返回...");
+                    sleep(2500);
+                }
+            } else {
+                toastLog("未捡漏成功....");
+                sleep(2000);
+                back();
+                text("奖励中心").findOne();
+                toastLog("已返回....");
+                sleep(1500);
+            }
+        }
+    }
+this.云闪付锦鲤活动 = function () {
+        let startTime;
+        let appName = "云闪付";
+        let timeArea = "北京时间";
+        toastLog("到点点击");
+
+        let currentWeekday = new Date().getDay();
+        let counponText;
+        // 返回的周日0 周一返回1，周二2
+        switch (currentWeekday) {
+            case 5:
+                counponText = "满20可用";
+                break;
+            case 6:
+                counponText = "满35可用";
+                break;
+            case 0:
+                counponText = "满50可用";
+                break;
+        }
+        let selectFunc;
+        selectFunc = func.dialogsWin(["每日券", "云闪付捡漏", "周五六日10点", "周五六日15点"]);
+        let clockBefore, clockAfter;
+        let clock9, clock10, clock15;
+        let targetText;
+        targetText = "线下指定商户";
+        clock9 = "09:00";
+        clock10 = "10:00";
+        clock15 = "15:00";
+        switch (selectFunc) {
+            case "每日券":
+                counponText = "满10可用";
+                targetText = func.dialogsWin(["线下指定商户", "线上指定商户"]);
+                startTime = "08,59,58,800";
+                clockAfter = clock9;
+                clockBefore = clock10;
+                break;
+            case "周五六日10点":
+                startTime = "09,59,58,500";
+                clockAfter = clock10;
+                clockBefore = clock15;
+                break;
+            case "周五六日15点":
+                startTime = "14,59,58,500";
+                clockAfter = clock15;
+                clockBefore = clock10;
+                break;
+            case "云闪付捡漏":
+                云闪付捡漏();
+                break;
+        }
+        let getCouponWay;       //定义领券方式
+        getCouponWay = func.dialogsWin(["提前1秒进入页面领取", "切换时间标签领券"]);
+        func.to_app(appName);
+        while (text("明日预告").findOnce() == null) {
+            // 如果能点击按钮，就等待设置文本
+            try {
+                if (func.sClick(className("ViewFlipper").idContains("marquee").findOnce()) == true) {
+                    // 只要找到一个不为空
+                    if (textContains("跳过").findOnce() != null || descContains("跳过").findOnce() != null) {
+                        sleep(600);
+                        continue;
+                    } else {
+                        text("历史记录").findOne();
+                        func.sClick(text("奖励中心").depth(15).findOne());
+                        func.sClick(text("奖励中心").depth(17).findOne());
+                    }
+                }
+            }
+            catch (e) {
+                continue;
+            }
+        }
+        // 等待进入指定页面
+        while (text("奖励中心").findOnce() == null) {
+            toastLog("请跳转到 \" 奖励中心 \"，直到提示  已到达等待页面");
+            sleep(1500);
+        }
+        toastLog("已到达 \" 奖励中心 \"");
+        let clickBtn, clickItems;
+        if (getCouponWay == "提前1秒进入页面领取") {
+            func.sClick(text(clockAfter).findOne());   //点击目标时间按钮
+            sleep(1000);
+            // 查找券位置
+            while (1) {
+                try {
+                    clickItems = text(counponText).find();
+                    log("找到 " + counponText + " 数量：" + clickItems.length);
+                    if (clickItems.nonEmpty()) {
+                        for (let i = 0; i < clickItems.length; i++) {
+                            clickBtn = clickItems[i];
+                            itemIndex = clickBtn.indexInParent();
+                            itemParent = clickBtn.parent();
+                            upItemText = (itemParent.child(itemIndex + 1)).text();
+                            log(upItemText);
+                            // 如果文本一致，就退出选择
+                            if (upItemText == targetText) {
+                                exWhile = true;
+                                break;
+                            }
+                        }
+                    }
+                    // 如果退出选项
+                    if (exWhile) {
+                        break;
+                    }
+                }
+                catch (e) {
+                    log(e);
+                }
+            }
+            // 准备倒计时
+            func.getTimeDiff(timeArea, startTime);
+
+            func.sClick(clickBtn);// 时间到达 点击Jk
+            text("优惠券到账后24小时内有效").findOne();         // 等待是否到达立即领取页面
+            if (func.sClick(text("立即领取").findOne(10000)) == false) {
+                toastLog("超时退出...");
+            }
+        } else if (getCouponWay == "切换时间标签领券") {
+            // 点击另一个时间
+            func.sClick(text(clockBefore).findOne());
+            sleep(500);
+            func.sClick(text(clockBefore).findOne());
+            sleep(500);
+            func.sClick(text(clockBefore).findOne());
+            sleep(800);
+            // 定义子按钮的位置
+            let childIdx;
+            switch (selectFunc) {
+                case "每日券":
+                    if (counponText == "线下指定商户") {
+                        childIdx = 2;
+                    }
+                    else if (counponText == "线上指定商户") {
+                        childIdx = 8;
+                    }
+                case "周五六日10点":
+                    childIdx = 2;
+                    break;
+                case "周五六日15点":
+                    childIdx = 2;
+                    break;
+            }
+            // 定义目标时间，提前获取
+            let targetClock;
+            targetClock = text(clockAfter).findOne();
+            toastLog("已到达指定页面，等待");
+            //  等待倒计时
+            func.getTimeDiff(timeArea, startTime);
+            // 寻找目标按钮
+            func.sClick(targetClock);
+            while (1) {
+                // 点击目标时间
+                try {
+                    clickBtn = text(counponText).findOnce().parent().parent().child(childIdx);
+                } catch (error) {
+                    continue;
+                }
+                if (clickBtn.text() != "立即领取") {
+                    func.sClick(text(clockBefore).findOne());
+                    sleep(100);
+                    func.sClick(text(clockAfter).findOne());
+                    sleep(100);
+                    while (text(counponText).findOnce() == null) {
+                        func.sClick(text(clockAfter).findOnce());
+                        sleep(100);
+                    }
+                } else {
+                    break;
+                }
+            }
+            func.sClick(clickBtn);
+        }
+        toastLog("已完成");
+    }
+function 京喜领券() {
+    let timeArea = "京东时间";
+    let startTime, targetViewText;
+    let actNames = ["0点京喜95折", "京东券"];
+    let actName = func.dialogsWin(actNames);      // 设置查找的文本
+    let coupon_url, url_页面;
+    switch (actName) {
+        case "0点京喜95折":
+            startTime = "23,59,59,990";
+            targetViewText = "立即领取";
+            coupon_url = "http://coupon.m.jd.com/coupons/show.action?key=g7udi9d8e5260e8b7a8a76c0d01209e8&roleId=62130462";
+            url_页面 = (cfg["url_scheme"]["京东"]["京喜_券"]).replace("replace_url", coupon_url);
+            break;
+    }
+    // 跳转到APP
+    func.to_scheme(url_页面);
+
+    // 等待进入指定页面
+    let couClick = textContains(targetViewText).findOnce();
+    while (couClick == null) {
+        couClick = textContains(targetViewText).findOnce();
+        toastLog("等待跳转到京喜优惠券页面");
+        sleep(1000);
+    }
+    func.getTimeDiff(timeArea, startTime);              // 等待时间
+    func.sClick(couClick);             // 点击元素
+    sleep(100);
+    func.sClick(couClick);             // 点击元素
+    sleep(100);
+    func.sClick(couClick);             // 点击元素
+    toast("已点击");
+    sleep(3000);
+
+}
+function 农行缴费() {
+    let startTime, targetViewText;
+    let appName = "云闪付";
+    let timeArea = "北京时间";
+    toastLog("到点点击");
+    startTime = "09,59,59,700";
+    targetViewText = "[6179]";
+    func.to_app(appName);
+    // 等待进入指定页面
+    let card = textContains(targetViewText).findOnce();
+    while (card == null) {
+        card = textContains(targetViewText).findOnce();
+        toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
+        sleep(800);
+    }
+    toastLog("已到达指定页面，等待");
+    //  等待倒计时
+    func.getTimeDiff(timeArea, startTime);
+    // 点击进入 等待
+    func.sClick(card);
+    while (1) {
+        if (text('¥10.00').findOnce()) {
+            if (func.sClick(text("确认付款").findOnce())) { break; }
+        } else {
+            sleep(50);
+        }
+    }
+}
+function 掌上生活活动() {
+    let startTime, targetViewText;
+    let actNames = ["周三五折", "10点拼团星巴克"];
+    let actName = func.dialogsWin(actNames);      // 设置查找的文本
+    let appName = "掌上生活";
+    let timeArea = "北京时间";
+    let cnt = 3;
+    switch (actName) {
+        // 10点
+        case "周三五折":            //10点
+            toastLog("提前5秒进入");
+            startTime = "09,59,55,000";
+            targetViewText = func.dialogsWin(["（周三5折）喜茶20元代金券",
+                "（周三5折）必胜客50元代金券",
+                "（周三5折）肯德基20元全场通兑代金券"]);
+            func.to_app(appName);
+            // 等待进入指定页面
+            while (!text(targetViewText).findOnce()) {
+                toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
+                sleep(800);
+            }
+            toastLog("已到达指定页面，等待");
+            //  提前10秒 开始查找
+            func.getTimeDiff(timeArea, startTime);
+            // 点击进入 等待
+            func.sClick(text(targetViewText).findOne());
+            while (1) {
+                if (!func.sClick(textContains("立即抢购").findOnce())) {
+                    sleep(200);
+                } else {
+                    break;
+                }
+            }
+            break;
+        case "10点拼团星巴克":            //10点
+            toastLog("提前15秒 进入");
+            startTime = "09,59,45,000";
+            targetViewText = "星巴克中杯手工调制饮品";
+            func.to_app(appName);
+            // 等待进入指定页面
+            while (!textContains("成团").findOnce()) {
+                toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
+                sleep(800);
+            }
+            toastLog("已到达指定页面，等待");
+            //  提前10秒 开始进入
+            func.getTimeDiff(timeArea, startTime);
+            func.sClick(textContains("成团").findOnce());
+            let clickBtn;
+            func.getTimeDiff(timeArea, "09,59,59,700");
+            while (1) {
+                try {
+                    clickBtn = text(targetViewText).findOnce().parent().child(8).child(0);
+                    // 点击立即抢
+                    while (cnt > 0) {
+                        clickBtn.click();
+                        sleep(200);
+                        cnt = cnt - 1;
+                    }
+                    break;
+                }
+                catch (e) { continue; }
+            }
+            break;
+    }
+    toastLog("已点击，请确认结果");
+    sleep(3000);
+}
+function 工行活动() {
+    let appName = "工银e生活";
+    let timeArea = "北京时间";
+    let startTime = "10,29,59,680";
+    couName = "确定"
+    func.to_app(appName);             // 启动APP
+    // 找到使用流程，且找到对应券名称沃尔玛的情况下就是 券的详情页
+    while (!(text("安全验证").findOnce())) {
+        toastLog("请进入活动页面，直到提示  已到达等待页面");
+        sleep(333);
+    }
+    let sureBtn = className("android.widget.Button").text(couName).findOne();
+    toastLog("已到达指定页面，等待");
+    func.getTimeDiff(timeArea, startTime);              // 等待时间
+    // 等待点击立即购买
+    func.sClick(sureBtn);
+    toastLog("已点击，请确认结果");
+    sleep(3000);
+}
 // 等待页面变价
 function 京东腾讯月() {
     let actNames = ["腾讯视频VIP月卡"]; //, "肯德基10元代金券"];
@@ -913,23 +879,49 @@ function 京东腾讯月() {
         }
     }
 }
-
-function 工行活动() {
-    let appName = "工银e生活";
-    let timeArea = "北京时间";
-    let startTime = "10,29,59,680";
-    couName = "确定"
-    func.to_app(appName);             // 启动APP
-    // 找到使用流程，且找到对应券名称沃尔玛的情况下就是 券的详情页
-    while (!(text("安全验证").findOnce())) {
-        toastLog("请进入活动页面，直到提示  已到达等待页面");
-        sleep(333);
+function 中行周二视频捡漏() {
+    let aiqiyi, youku, tengx, pay5, cnt;
+    aiqiyi = "爱奇艺VIP";
+    youku = "优酷VIP"
+    tengx = "腾讯视频VIP"
+    pay5 = "确认支付";
+    cnt = 0;
+    while (1) {
+        if (textContains(aiqiyi).findOnce() == null && textContains(youku).findOnce() == null && textContains(tengx).findOnce() == null) {
+            toastLog("请跳转到 \" 视频会员 \"，直到提示  已到达等待页面");
+            sleep(2500);
+        } else {
+            toastLog("已到 \" 视频会员 \"，页面");
+            sleep(2500);
+            break;
+        }
     }
-    let sureBtn = className("android.widget.Button").text(couName).findOne();
-    toastLog("已到达指定页面，等待");
-    func.getTimeDiff(timeArea, startTime);              // 等待时间
-    // 等待点击立即购买
-    func.sClick(sureBtn);
-    toastLog("已点击，请确认结果");
-    sleep(3000);
+    let exflag = false;
+    while (1) {
+        if (func.sClick(text(pay5).findOnce()) == true) {
+            toastLog("已点击确认支付");
+            while (1) {
+                if (text("当日库存已抢购完毕，请明日参加活动。").findOnce() != null) {
+                    if (func.sClick(text("确认").findOnce()) == true) {
+                        sleep(5000);
+                        break;
+                    }
+                }
+                sleep(1000);
+                cnt = cnt + 1;
+                if (cnt >= 10) {
+                    cnt = 0;
+                    exflag = true;
+                    break;
+                }
+            }
+            if (exflag) {
+                toastLog("未找到库存完毕，退出");
+                break;
+            }
+        } else {
+            sleep(1000);
+        }
+    }
 }
+------------------------------------NOT VALID------------------------------------*/

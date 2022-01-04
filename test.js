@@ -4,12 +4,14 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
-numRange = func.dialogsWin(["11-16", "16-20", "20-23"])
-var min, max;
-min = numRange.substring(0, 2) * 1;
-max = numRange.substring(3, 5) * 1;
+coupon_id = "3102021121529747";
+url_origin = "https://content.95516.com/koala-pre/koala/coupon/state?cityCd=350200&couponId=" + coupon_id;
+res = http.get(url_origin);
+res_text = res.body.json();
+coupon_percent = res_text["params"]["couponQuotaPercent"];
+log(typeof (coupon_percent))
+log(coupon_percent == null)
 
-log(max);
 
 function 京东评价() {
     if (!requestScreenCapture()) {
