@@ -104,7 +104,7 @@ function 云闪付() {
                 coupon_percent = res_text["params"]["couponQuotaPercent"];
                 log(res_text["params"]["couponQuota"]);
                 // 如果券的百分比不为0，则跳转, xm券为null
-                if (coupon_percent != "0") {
+                if (coupon_percent != "0" && coupon_percent != null) {
                     func.to_scheme(url_jump);
                     // func.sClick(text("立即领取").findOnce());
                     if (func.sClick(text("立即领取").findOne(5000))) {
