@@ -114,6 +114,8 @@ function 云闪付() {
                             sleep(2500);
                         }
                     }
+                } else {
+                    log(coupon_quota);
                 }
             } catch (e) {
                 log("报错：" + e);
