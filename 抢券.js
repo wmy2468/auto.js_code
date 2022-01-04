@@ -96,15 +96,15 @@ function 云闪付() {
         coupon_id = url_jump.slice(-16);
         url_origin = "https://content.95516.com/koala-pre/koala/coupon/state?cityCd=350200&couponId=" + coupon_id;
         http.__okhttp__.setTimeout(1000);       // 设置超时2秒
-        let res, res_text, coupon_percent;
+        let res, res_text, coupon_quota;
         while (text("恭喜您领取成功").findOnce() == null) {
             try {
                 res = http.get(url_origin);
                 res_text = res.body.json();
-                coupon_percent = res_text["params"]["couponQuotaPercent"];
-                log(res_text["params"]["couponQuota"]);
+                coupon_quota = res_text["params"]["couponQuota"];
+                // log(res_text["params"]["couponQuota"]);
                 // 如果券的百分比不为0，则跳转, xm券为null
-                if (coupon_percent != "0" && coupon_percent != null) {
+                if (coupon_quota != "以实际宣传为准" && coupon_quota != "今日已抢完") {
                     func.to_scheme(url_jump);
                     // func.sClick(text("立即领取").findOnce());
                     if (func.sClick(text("立即领取").findOne(5000))) {
@@ -122,7 +122,6 @@ function 云闪付() {
             sleep(3000);
         }
         alert("捡漏完成，退出");
-        sleep(3000);
     }
     this.云闪付2022新年 = function () {
         let url_ysf, coupon_desc;
