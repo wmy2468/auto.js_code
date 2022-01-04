@@ -26,48 +26,39 @@ function config_dict() {
                 // 云闪付_券 尾部拼接券ID
                 "云闪付_券": "upwallet://rn/rncoupondetail?couponId=",
                 "云闪付_券_圆梦新年": {
-                    "全国畅享": {
-                        "5折电商券10": "upwallet://rn/rncoupondetail?couponId=3102021122031298",
-                        "5折商超30": "upwallet://rn/rncoupondetail?couponId=3102021122031319",
-                        "xyk还款10": "upwallet://rn/rncoupondetail?couponId=3102021121630580"
-                    },
-                    "精选": {
-                        "苏宁5折15": "upwallet://rn/rncoupondetail?couponId=3102021122131595",
-                        "中石油5折20": "upwallet://rn/rncoupondetail?couponId=3102021122031343"
-                    },
-                    "本地-厦门": {
-                        "商超30": "upwallet://rn/rncoupondetail?couponId=3102021121529747",
-                        "便利店10": "upwallet://rn/rncoupondetail?couponId=3102021121529743",
-                    },
-                    "本地-非厦门": {
-                        "商超30": "upwallet://rn/rncoupondetail?couponId=3102021122031140",
-                        "便利店10": "upwallet://rn/rncoupondetail?couponId=3102021122031124",
-                        "餐饮10": "upwallet://rn/rncoupondetail?couponId=3102021122031135",
-                        "线上券10": "upwallet://rn/rncoupondetail?couponId=3102021122031149"
-                    },
-                    "闪付": {
-                        "50减10": "upwallet://rn/rncoupondetail?couponId=3102021122031281",
-                        "10减5": "upwallet://rn/rncoupondetail?couponId=3102021122031286",
-                    },
-                    "周三14点-心愿大礼": {
-                        "华为P50": "upwallet://rn/rncoupondetail?couponId=3112021122332450",
-                        "红包5K": "upwallet://rn/rncoupondetail?couponId=3112021122332455",
-                        "Dyson": "upwallet://rn/rncoupondetail?couponId=3112021122332448",
-                        "switch": "upwallet://rn/rncoupondetail?couponId=3112021122332447",
-                        "携程": "upwallet://rn/rncoupondetail?couponId=3112021122432462"
-                    },
-                    "周三14点-品质爆款": {
-                        "飞利浦电动牙刷": "upwallet://rn/rncoupondetail?couponId=3112021122332449",
-                        "家乐福800": "upwallet://rn/rncoupondetail?couponId=3112021122432757",
-                        "悟空手办套装": "upwallet://rn/rncoupondetail?couponId=3112021122332454",
-                        "三星堆手办套装": "upwallet://rn/rncoupondetail?couponId=3112021122332452"
-                    },
-                    "周三14点-口碑好货": {
-                        "还款券50": "upwallet://rn/rncoupondetail?couponId=3112021122432463",
-                        "美团券50": "upwallet://rn/rncoupondetail?couponId=3112021122332456",
-                        "悟空手办单个": "upwallet://rn/rncoupondetail?couponId=3112021122332453",
-                        "三星堆手办单个": "upwallet://rn/rncoupondetail?couponId=3112021122332451"
-                    },
+                    "全国畅享-5折电商券10": "upwallet://rn/rncoupondetail?couponId=3102021122031298",
+                    "全国畅享-5折商超30": "upwallet://rn/rncoupondetail?couponId=3102021122031319",
+                    "全国畅享-xyk还款10": "upwallet://rn/rncoupondetail?couponId=3102021121630580",
+
+                    "精选-苏宁5折15": "upwallet://rn/rncoupondetail?couponId=3102021122131595",
+                    "精选-中石油5折20": "upwallet://rn/rncoupondetail?couponId=3102021122031343",
+
+                    "本地-厦门-商超30": "upwallet://rn/rncoupondetail?couponId=3102021121529747",
+                    "本地-厦门-便利店10": "upwallet://rn/rncoupondetail?couponId=3102021121529743",
+
+                    "本地-非厦门-商超30": "upwallet://rn/rncoupondetail?couponId=3102021122031140",
+                    "本地-非厦门-便利店10": "upwallet://rn/rncoupondetail?couponId=3102021122031124",
+                    "本地-非厦门-餐饮10": "upwallet://rn/rncoupondetail?couponId=3102021122031135",
+                    "本地-非厦门-线上券10": "upwallet://rn/rncoupondetail?couponId=3102021122031149",
+
+                    "闪付-50减10": "upwallet://rn/rncoupondetail?couponId=3102021122031281",
+                    "闪付-10减5": "upwallet://rn/rncoupondetail?couponId=3102021122031286",
+
+                    "周三14点-心愿大礼-华为P50": "upwallet://rn/rncoupondetail?couponId=3112021122332450",
+                    "周三14点-心愿大礼-红包5K": "upwallet://rn/rncoupondetail?couponId=3112021122332455",
+                    "周三14点-心愿大礼-Dyson": "upwallet://rn/rncoupondetail?couponId=3112021122332448",
+                    "周三14点-心愿大礼-switch": "upwallet://rn/rncoupondetail?couponId=3112021122332447",
+                    "周三14点-心愿大礼-携程": "upwallet://rn/rncoupondetail?couponId=3112021122432462",
+
+                    "周三14点-品质爆款-飞利浦电动牙刷": "upwallet://rn/rncoupondetail?couponId=3112021122332449",
+                    "周三14点-品质爆款-家乐福800": "upwallet://rn/rncoupondetail?couponId=3112021122432757",
+                    "周三14点-品质爆款-悟空手办套装": "upwallet://rn/rncoupondetail?couponId=3112021122332454",
+                    "周三14点-品质爆款-三星堆手办套装": "upwallet://rn/rncoupondetail?couponId=3112021122332452",
+
+                    "周三14点-口碑好货-还款券50": "upwallet://rn/rncoupondetail?couponId=3112021122432463",
+                    "周三14点-口碑好货-美团券50": "upwallet://rn/rncoupondetail?couponId=3112021122332456",
+                    "周三14点-口碑好货-悟空手办单个": "upwallet://rn/rncoupondetail?couponId=3112021122332453",
+                    "周三14点-口碑好货-三星堆手办单个": "upwallet://rn/rncoupondetail?couponId=3112021122332451",
                 },
             },
             "招商": {

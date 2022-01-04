@@ -24,7 +24,7 @@ function main() {
     else if (scriptName == "京喜领券") { 京喜领券(); }
     else if (scriptName == "招商便民生活") { 招商便民生活(); }
     else if (scriptName == "招商倒计时领取") { 招商倒计时领取(); }
-    else if (scriptName == "中行周二视频捡漏") { 中行周二视频捡漏(); }
+    // else if (scriptName == "中行周二视频捡漏") { 中行周二视频捡漏(); }
     else if (scriptName == "云闪付2022新年") { ysf = 云闪付(); ysf.云闪付2022新年(); }
     else if (scriptName == "云闪付有礼花") { ysf = 云闪付(); ysf.云闪付有礼花(); }
     toastLog("结束");
@@ -147,14 +147,18 @@ function 中行周二视频捡漏() {
 // ------------------------云闪付锦鲤活动--------------------------------------
 
 function 云闪付() {
+    this.云闪付2022新年捡漏 = function () {
+        coupon_id = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]));
+        
+    }
     this.云闪付2022新年 = function () {
         let url_ysf, coupon_desc, coupon_id;
         let startTime, timeArea;
         startTime = "10,59,55,000";
         timeArea = "北京时间";
 
-        coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]))
-        coupon_id = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc]))
+        coupon_id = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]))
+        // coupon_id = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc]))
 
         url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc][coupon_id];
 
