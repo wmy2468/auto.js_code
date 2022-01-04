@@ -27,8 +27,10 @@ function config_dict() {
                 "云闪付_券": "upwallet://rn/rncoupondetail?couponId=",
                 "云闪付_券_圆梦新年": {
                     "全国畅享-5折电商券10": "upwallet://rn/rncoupondetail?couponId=3102021122031298",
-                    "全国畅享-5折商超30": "upwallet://rn/rncoupondetail?couponId=3102021122031319",
-                    "全国畅享-xyk还款10": "upwallet://rn/rncoupondetail?couponId=3102021121630580",
+                    "全国畅享-5折商超券30": "upwallet://rn/rncoupondetail?couponId=3102021122031319",
+                    "全国畅享-xyk还款券10": "upwallet://rn/rncoupondetail?couponId=3102021121630580",
+                    "全国畅享-生活缴费券6-3": "upwallet://rn/rncoupondetail?couponId=3102021122031307",
+                    "全国畅享-折扣汇5券": "upwallet://rn/rncoupondetail?couponId=3112021122031315",
 
                     "精选-苏宁5折15": "upwallet://rn/rncoupondetail?couponId=3102021122131595",
                     "精选-中石油5折20": "upwallet://rn/rncoupondetail?couponId=3102021122031343",
