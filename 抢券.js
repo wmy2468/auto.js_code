@@ -87,9 +87,9 @@ function 招商便民生活() {
     page_text = "便民生活 遇见美好";
     wait_text = "选择奖品";
     popup_wait_text = "请选择奖品";
-    select_text = func.dialogsWin(["双立人", "洁柔", "6000微克", "5000微克", "4000微克"]);
+    select_text = func.dialogsWin(["双立人", "洁柔", "九阳", "1.8元", "5000微克", "4000微克"]);
     sure_btn = "确认领取";
-    url_target = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https://actship-activityui.paas.cmbchina.com/ActPage.html?activityId=AGP20211201095436sH6P8jxK&behavior_entryid=undefined&shortUrl=https://cmbt.cn/a/htREAc?activityId=AGP20211201095436sH6P8jxK&behavior_entryid=undefined&appflag=0"
+    url_target = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https://actship-activityui.paas.cmbchina.com/ActPage.html?activityId=AGP202112301606513rnnPfOT&behavior_entryid=undefined&shortUrl=https://cmbt.cn/a/htREAc?activityId=AGP202112301606513rnnPfOT&behavior_entryid=undefined&appflag=0"
     func.to_scheme(url_target);
     招商领取(page_text, wait_text, popup_wait_text, select_text, sure_btn);
 }
