@@ -128,14 +128,19 @@ function 云闪付() {
     this.云闪付2022新年 = function () {
         let url_ysf, coupon_desc;
         let startTime, timeArea;
-        startTime = "10,59,55,000";
+
         timeArea = "北京时间";
 
         coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]))
         // coupon_id = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc]))
 
         url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
-
+        if (coupon_desc.substring(0, 5) == "周三14点") {
+            startTime = "13,59,55,000";
+        } else {
+            startTime = "10,59,55,000";
+        }
+        alert(startTime);
         func.to_scheme(url_ysf);
         toastLog("测试查看,2秒后 切回autojs");
         textContains("活动咨询").findOne();
