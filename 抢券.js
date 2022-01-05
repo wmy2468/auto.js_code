@@ -146,9 +146,11 @@ function 云闪付() {
         textContains("活动咨询").findOne();
         sleep(1000);
         func.to_autojs();
+        toastLog("等待55秒，自动跳转至云闪付对应券页面");
         // 准备倒计时
         func.getTimeDiff(timeArea, startTime);
         func.to_scheme(url_ysf);
+        toastLog("已跳转云闪付，如未跳转，请手动切换");
         if (func.sClick(text("立即领取").findOne(10000))) {
             toastLog("超时退出");
         }
