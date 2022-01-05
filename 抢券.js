@@ -140,7 +140,7 @@ function 云闪付() {
         } else {
             startTime = "10,59,55,000";
         }
-        alert(startTime);
+        toastLog("开始时间:" + startTime);
         func.to_scheme(url_ysf);
         toastLog("测试查看,2秒后 切回autojs");
         textContains("活动咨询").findOne();
