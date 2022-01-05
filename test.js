@@ -4,7 +4,15 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
-device.vibrate(500);
+log(new Date().getTime());
+device.vibrate(1000);
+// thd_vibrate = threads.start(function () {
+//     device.vibrate(1000);
+// })
+// log(new Date());
+// func.to_scheme(url_jump);
+log(new Date().getTime());
+log("------------------");
 
 
 function 京东评价() {
