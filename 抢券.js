@@ -109,10 +109,14 @@ function 云闪付() {
                     func.to_scheme(url_jump);
                     // func.sClick(text("立即领取").findOnce());
                     if (func.sClick(text("立即领取").findOne(5000))) {
-                        text("请完成安全验证").findOne();
-                        while (text("请完成安全验证").findOnce() != null) {
-                            toast("请完成验证");
-                            sleep(2500);
+                        if (text("请完成安全验证").findOne(5000)) {
+                            while (text("请完成安全验证").findOnce() != null) {
+                                toast("请完成验证");
+                                sleep(2500);
+                            }
+                        } else {
+                            toast("查找安全验证超时，继续");
+                            continue;
                         }
                     }
                 } else {
