@@ -95,7 +95,7 @@ function 云闪付() {
         url_jump = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
         coupon_id = url_jump.slice(-16);
         url_origin = "https://content.95516.com/koala-pre/koala/coupon/state?cityCd=350200&couponId=" + coupon_id;
-        http.__okhttp__.setTimeout(1000);       // 设置超时2秒
+        http.__okhttp__.setTimeout(3000);       // 设置超时2秒
         let res, res_text, coupon_quota;
         while (text("恭喜您领取成功").findOnce() == null) {
             try {
@@ -105,6 +105,7 @@ function 云闪付() {
                 // log(res_text["params"]["couponQuota"]);
                 // 如果券的百分比不为0，则跳转, xm券为null
                 if (coupon_quota != "以实际宣传为准" && coupon_quota != "今日已抢完") {
+                    device.vibrate(500);
                     func.to_scheme(url_jump);
                     // func.sClick(text("立即领取").findOnce());
                     if (func.sClick(text("立即领取").findOne(5000))) {
@@ -155,7 +156,6 @@ function 云闪付() {
             toastLog("超时退出");
         }
     }
-
     return this;
 }
 
