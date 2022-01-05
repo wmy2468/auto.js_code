@@ -94,6 +94,7 @@ function 云闪付() {
         coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]));
         url_jump = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
         coupon_id = url_jump.slice(-16);
+        func.to_scheme(url_jump);
         url_origin = "https://content.95516.com/koala-pre/koala/coupon/state?cityCd=350200&couponId=" + coupon_id;
         http.__okhttp__.setTimeout(3000);       // 设置超时2秒
         let res, res_text, coupon_quota, thd_vibrate;
