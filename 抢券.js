@@ -98,9 +98,9 @@ function 云闪付() {
         url_origin = "https://content.95516.com/koala-pre/koala/coupon/state?cityCd=350200&couponId=" + coupon_id;
         http.__okhttp__.setTimeout(3000);       // 设置超时2秒
         let res, res_text, coupon_quota, to_js_flag;
-        to_js_flag = false;
+        // to_js_flag = false;
         while (text("恭喜您领取成功").findOnce() == null) {
-            if (to_js_flag) { func.to_autojs(); to_js_flag = false; }
+            // if (to_js_flag) { func.to_autojs(); to_js_flag = false; }
             try {
                 res = http.get(url_origin);
                 res_text = res.body.json();
@@ -110,7 +110,7 @@ function 云闪付() {
                 if (coupon_quota != "以实际宣传为准" && coupon_quota != "今日已抢完") {
                     device.vibrate(1000);
                     func.to_scheme(url_jump);
-                    to_js_flag = true;
+                    // to_js_flag = true;
                     // func.sClick(text("立即领取").findOnce());
                     if (func.sClick(text("立即领取").findOne(5000))) {
                         if (text("请完成安全验证").findOne(5000) != null) {
