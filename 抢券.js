@@ -124,9 +124,8 @@ function 云闪付() {
                         }
                     }
 
-                } else {
-                    log(coupon_quota);
                 }
+                log(coupon_quota);
             } catch (e) {
                 log("报错：" + e);
             }
