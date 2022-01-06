@@ -107,7 +107,7 @@ function 云闪付() {
                 coupon_quota = res_text["params"]["couponQuota"];
                 // log(res_text["params"]["couponQuota"]);
                 // 如果券的百分比不为0，则跳转, xm券为null
-                if (coupon_quota != "以实际宣传为准" && coupon_quota != "今日已抢完") {
+                if (coupon_quota != "以实际宣传为准" && coupon_quota != "今日已抢完" && coupon_quota != "今日剩余1张") {
                     device.vibrate(1000);
                     func.to_scheme(url_jump);
                     // to_js_flag = true;
@@ -129,8 +129,8 @@ function 云闪付() {
             } catch (e) {
                 log("报错：" + e);
             }
-            toast(coupon_desc + ",未成功，等待3秒，继续...");
-            sleep(3000);
+            toast(coupon_desc + ",未成功，等待继续...");
+            // sleep(3000);
         }
         alert("捡漏完成，退出");
     }
