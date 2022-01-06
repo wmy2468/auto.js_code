@@ -97,7 +97,7 @@ function 云闪付() {
         // func.to_scheme(url_jump);
         url_origin = "https://content.95516.com/koala-pre/koala/coupon/state?cityCd=350200&couponId=" + coupon_id;
         http.__okhttp__.setTimeout(3000);       // 设置超时2秒
-        let res, res_text, coupon_quota, to_js_flag;
+        let res, res_text, coupon_quota;
         // to_js_flag = false;
         while (text("恭喜您领取成功").findOnce() == null) {
             // if (to_js_flag) { func.to_autojs(); to_js_flag = false; }
