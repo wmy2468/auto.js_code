@@ -127,10 +127,10 @@ function 工商() {
             sleep(500);
             func.gesture_pwd(appName);
             toastLog("已输入 mima");
-            sleep(5000);
+            sleep(4000);
             func.to_autojs();
             toastLog("已切换到autojs，等待回去");
-            sleep(3500);
+            sleep(4500);
             func.to_scheme(cfg["url_scheme"]["工商"]["小象2"]);
         }
     }
