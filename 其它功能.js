@@ -41,7 +41,7 @@ function 万商3比() {
     }
     var count, inputVal, appName;
     count = dialogs.rawInput("请输入次数", 3);
-    numRange = func.dialogsWin(["11-16", "16-20", "20-23"]);
+    numRange = func.dialogsWin(["11-15", "16-20", "20-23"]);
     appName = "万商云";
     var min, max;
     min = numRange.substring(0, 2) * 1;
