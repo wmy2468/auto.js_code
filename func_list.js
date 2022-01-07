@@ -45,7 +45,8 @@ function config_dict() {
 
                     "闪付-50减10": "upwallet://rn/rncoupondetail?couponId=3102021122031281",
                     "闪付-10减5": "upwallet://rn/rncoupondetail?couponId=3102021122031286",
-
+                },
+                "云闪付_券_圆梦新年_周三14点": {
                     "周三14点-心愿大礼-华为P50": "upwallet://rn/rncoupondetail?couponId=3112021122332450",
                     "周三14点-心愿大礼-红包5K": "upwallet://rn/rncoupondetail?couponId=3112021122332455",
                     "周三14点-心愿大礼-Dyson": "upwallet://rn/rncoupondetail?couponId=3112021122332448",
