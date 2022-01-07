@@ -89,7 +89,7 @@ function to_autojs() {
         packageName: pkg_name,
         className: "org.autojs.autojs.ui.main.MainActivity_",
     });
-    waitForPackage(pkg_name, period = 200);
+    waitForPackage(pkg_name, period = 100);
     // toast("已到达autojs");
 }
 
