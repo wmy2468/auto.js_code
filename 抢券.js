@@ -90,46 +90,66 @@ function 招商便民生活() {
 
 function 云闪付() {
     this.云闪付2022新年捡漏 = function () {
-        let coupon_desc, coupon_id, url_jump, url_origin;
-        coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]));
-        url_jump = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
-        coupon_id = url_jump.slice(-16);
+        let coupon_ount, cur_count;
+        coupon_ount = func.dialogsWin([1, 2, 3, 4, 5, 6, 7], "想要同时捡漏的券");
+        let coupon_desc, coupon_id, url_jump, url_origin, coupon_id_list, coupon_dict;
+        cur_count = 1;
+        coupon_id_list = [];
+        coupon_dict = {};
+        while (cur_count <= coupon_ount) {
+            coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]), "请选择要抢的第" + cur_count + "个券");
+            log("已选择了：" + coupon_desc);
+            url_jump = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
+            coupon_id = url_jump.slice(-16);
+            // list.join(delimeter)
+            // str.indexOf(search_text)
+            if (coupon_id_list.join(",").indexOf(coupon_id) != -1) {
+                toastLog("请选择不重复的券");
+                sleep(2000);
+                continue;
+            } else {
+                coupon_dict[coupon_id] = coupon_desc;
+                coupon_id_list.push(coupon_id);
+            }
+            cur_count = cur_count + 1;
+        }
         func.to_app("云闪付");
-        url_origin = "https://content.95516.com/koala-pre/koala/coupon/state?cityCd=350200&couponId=" + coupon_id;
         http.__okhttp__.setTimeout(3000);       // 设置超时2秒
         let res, res_text, coupon_quota;
         // to_js_flag = false;
         while (text("恭喜您领取成功").findOnce() == null) {
-            // if (to_js_flag) { func.to_autojs(); to_js_flag = false; }
-            try {
-                res = http.get(url_origin);
-                res_text = res.body.json();
-                coupon_quota = res_text["params"]["couponQuota"];
-                // log(res_text["params"]["couponQuota"]);
-                // 如果券的百分比不为0，则跳转, xm券为null
-                if (coupon_quota != "以实际宣传为准" && coupon_quota != "今日已抢完") {
-                    func.to_scheme(url_jump);
-                    device.vibrate(1000);
-                    // to_js_flag = true;
-                    // func.sClick(text("立即领取").findOnce());
-                    if (func.sClick(text("立即领取").findOne(5000))) {
-                        if (text("请完成安全验证").findOne(5000) != null) {
-                            while (text("请完成安全验证").findOnce() != null) {
-                                toast("请完成验证");
-                                sleep(2500);
+            coupon_id_list.forEach(coupon_id => {
+                url_origin = "https://content.95516.com/koala-pre/koala/coupon/state?cityCd=350200&couponId=" + coupon_id;
+                try {
+                    res = http.get(url_origin);
+                    res_text = res.body.json();
+                    coupon_quota = res_text["params"]["couponQuota"];
+                    // log(coupon_quota);
+                    log(coupon_dict[coupon_id] + ":" + coupon_quota);
+                    // sleep(100);
+                    // log(res_text["params"]["couponQuota"]);
+                    // 如果券的百分比不为0，则跳转, xm券为null
+                    if (coupon_quota != "以实际宣传为准" && coupon_quota != "今日已抢完") {
+                        func.to_scheme(url_jump);
+                        device.vibrate(1000);
+                        // to_js_flag = true;
+                        // func.sClick(text("立即领取").findOnce());
+                        if (func.sClick(text("立即领取").findOne(5000))) {
+                            if (text("请完成安全验证").findOne(5000) != null) {
+                                while (text("请完成安全验证").findOnce() != null) {
+                                    toast("请完成验证");
+                                    sleep(2500);
+                                }
+                            } else {
+                                toast("查找安全验证超时，继续");
                             }
-                        } else {
-                            toast("查找安全验证超时，继续");
-                            continue;
                         }
                     }
-
+                } catch (e) {
+                    log("报错：" + e);
                 }
-                log(coupon_quota);
-            } catch (e) {
-                log("报错：" + e);
-            }
-            toast(coupon_desc + ",未成功，等待继续...");
+            })
+            toast("未成功，等待3s继续...");
             sleep(3000);
         }
         alert("捡漏完成，退出");

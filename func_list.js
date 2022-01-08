@@ -26,7 +26,8 @@ function config_dict() {
                 // 云闪付_券 尾部拼接券ID
                 "云闪付_券": "upwallet://rn/rncoupondetail?couponId=",
                 "云闪付_券_圆梦新年": {
-                    "全国畅享-5折电商券10": "upwallet://rn/rncoupondetail?couponId=3102021122031298",
+                    "全国畅享-5折10电商券1": "upwallet://rn/rncoupondetail?couponId=3102021122031298",
+                    "全国畅享-5折10电商券2": "upwallet://rn/rncoupondetail?couponId=3102021122031260",
                     "全国畅享-5折商超券30": "upwallet://rn/rncoupondetail?couponId=3102021122031319",
                     "全国畅享-xyk还款券10": "upwallet://rn/rncoupondetail?couponId=3102021121630580",
                     "全国畅享-生活缴费券6-3": "upwallet://rn/rncoupondetail?couponId=3102021122031307",
