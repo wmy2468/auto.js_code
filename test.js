@@ -5,7 +5,10 @@ var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
 a = [1, 2, 3]
-log((a.join("+").indexOf('-2')))
+b = func.dialogs_checkbox(a);
+print(b);
+print(b == -1)
+// log((a.join("+").indexOf('-2')))
 
 function 京东评价() {
     if (!requestScreenCapture()) {

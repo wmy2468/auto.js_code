@@ -90,42 +90,32 @@ function 招商便民生活() {
 
 function 云闪付() {
     this.云闪付2022新年捡漏 = function () {
-        let coupon_ount, cur_count;
-        coupon_ount = func.dialogsWin([1, 2, 3, 4, 5, 6, 7], "想要同时捡漏的券");
-        let coupon_desc, coupon_id, url_jump, url_origin, coupon_id_list, coupon_dict;
-        cur_count = 1;
+        let coupon_id, url_jump, coupon_dict, coupon_id_list;
         coupon_id_list = [];
         coupon_dict = {};
-        while (cur_count <= coupon_ount) {
-            coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]), "请选择要抢的第" + cur_count + "个券");
-            log("已选择了：" + coupon_desc);
+        coupon_desc_list = func.dialogs_checkbox(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]), "请选择要抢的券", "多选");
+        coupon_desc_list.forEach(coupon_desc => {
             url_jump = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
             coupon_id = url_jump.slice(-16);
-            // list.join(delimeter)
-            // str.indexOf(search_text)
-            if (coupon_id_list.join(",").indexOf(coupon_id) != -1) {
-                toastLog("请选择不重复的券");
-                sleep(2000);
-                continue;
-            } else {
-                coupon_dict[coupon_id] = coupon_desc;
-                coupon_id_list.push(coupon_id);
-            }
-            cur_count = cur_count + 1;
-        }
+            coupon_id_list.push(coupon_id);
+            coupon_dict[coupon_id] = coupon_desc;
+        })
+        print(coupon_desc_list);
         func.to_app("云闪付");
         http.__okhttp__.setTimeout(3000);       // 设置超时2秒
-        let res, res_text, coupon_quota;
-        // to_js_flag = false;
-        while (text("恭喜您领取成功").findOnce() == null) {
-            coupon_id_list.forEach(coupon_id => {
+        let res, res_text, coupon_quota, break_flag, url_origin;
+        break_flag = false;
+        while (true) {
+            // coupon_id_list.forEach(coupon_id => {
+            for (let i = 0; i < coupon_id_list.length; i++) {
+                coupon_id = coupon_id_list[i];
                 url_origin = "https://content.95516.com/koala-pre/koala/coupon/state?cityCd=350200&couponId=" + coupon_id;
                 try {
                     res = http.get(url_origin);
                     res_text = res.body.json();
                     coupon_quota = res_text["params"]["couponQuota"];
                     // log(coupon_quota);
-                    log(coupon_dict[coupon_id] + ":" + coupon_quota);
+                    // log(coupon_dict[coupon_id] + ":" + coupon_quota);
                     // sleep(100);
                     // log(res_text["params"]["couponQuota"]);
                     // 如果券的百分比不为0，则跳转, xm券为null
@@ -144,11 +134,18 @@ function 云闪付() {
                                 toast("查找安全验证超时，继续");
                             }
                         }
+                        if (text("恭喜您领取成功").findOnce() != null) {
+                            break_flag = true;
+                            break;
+                        }
                     }
                 } catch (e) {
                     log("报错：" + e);
                 }
-            })
+            }
+            if (break_flag) {
+                break;
+            }
             toast("未成功，等待3s继续...");
             sleep(3000);
         }

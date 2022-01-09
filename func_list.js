@@ -697,6 +697,33 @@ function snTime() {
     return delta;
 }
 
+function dialogs_checkbox(inArr, titles, multi_choice) {
+    if (titles == undefined) {
+        titles = "选择启动";
+    }
+    let select_index_list;
+    if (multi_choice == undefined) {
+        select_index_list = dialogs.singleChoice(titles, inArr);
+    } else {
+        select_index_list = dialogs.multiChoice(titles, inArr);
+    }
+
+    if (select_index_list == -1 || select_index_list == []) {
+        exit();
+    }
+    let select_item;
+    if (multi_choice == undefined) {
+        return [inArr[select_index_list]];
+    } else {
+        select_item = [];
+        select_index_list.forEach(idx => {
+            select_item.push(inArr[idx]);
+        })
+        return select_item;
+    }
+
+}
+
 function dialogsWin(inArr, titles) {
     if (titles == undefined) {
         titles = "选择启动";
@@ -724,5 +751,6 @@ module.exports = {
     randomNum: randomNum,
     getTimeDiff: getTimeDiff,
     calTimeDiff: calTimeDiff,
-    dialogsWin: dialogsWin
+    dialogsWin: dialogsWin,
+    dialogs_checkbox: dialogs_checkbox
 }
