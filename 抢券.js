@@ -114,14 +114,11 @@ function 云闪付() {
                     res = http.get(url_origin);
                     res_text = res.body.json();
                     coupon_quota = res_text["params"]["couponQuota"];
-                    // log(coupon_quota);
-                    log(coupon_dict[coupon_id] + ":" + coupon_quota);
-                    // sleep(100);
-                    // log(res_text["params"]["couponQuota"]);
                     // 如果券的百分比不为0，则跳转, xm券为null
                     if (coupon_quota != "以实际宣传为准" && coupon_quota != "今日已抢完") {
                         func.to_scheme(url_jump);
                         device.vibrate(1000);
+                        log(coupon_dict[coupon_id] + ":" + coupon_quota);
                         // to_js_flag = true;
                         // func.sClick(text("立即领取").findOnce());
                         if (func.sClick(text("立即领取").findOne(5000))) {
