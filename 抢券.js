@@ -115,7 +115,7 @@ function 云闪付() {
                     res_text = res.body.json();
                     coupon_quota = res_text["params"]["couponQuota"];
                     // log(coupon_quota);
-                    // log(coupon_dict[coupon_id] + ":" + coupon_quota);
+                    log(coupon_dict[coupon_id] + ":" + coupon_quota);
                     // sleep(100);
                     // log(res_text["params"]["couponQuota"]);
                     // 如果券的百分比不为0，则跳转, xm券为null
