@@ -30,8 +30,11 @@ function config_dict() {
                     "全国畅享-5折10电商券2": "upwallet://rn/rncoupondetail?couponId=3102021122031260",
                     "全国畅享-5折商超券30": "upwallet://rn/rncoupondetail?couponId=3102021122031319",
                     "全国畅享-xyk还款券10": "upwallet://rn/rncoupondetail?couponId=3102021121630580",
-                    "全国畅享-生活缴费券6-3": "upwallet://rn/rncoupondetail?couponId=3102021122031307",
-                    "全国畅享-折扣汇5券": "upwallet://rn/rncoupondetail?couponId=3112021122031315",
+
+                    "本地-非厦门-商超30": "upwallet://rn/rncoupondetail?couponId=3102021122031140",
+                    "本地-非厦门-便利店10": "upwallet://rn/rncoupondetail?couponId=3102021122031124",
+                    "本地-非厦门-餐饮10": "upwallet://rn/rncoupondetail?couponId=3102021122031135",
+                    "本地-非厦门-线上券10": "upwallet://rn/rncoupondetail?couponId=3102021122031149",
 
                     "精选-苏宁5折15": "upwallet://rn/rncoupondetail?couponId=3102021122131595",
                     "精选-中石油5折20": "upwallet://rn/rncoupondetail?couponId=3102021122031343",
@@ -39,13 +42,11 @@ function config_dict() {
                     "本地-厦门-商超30": "upwallet://rn/rncoupondetail?couponId=3102021121529747",
                     "本地-厦门-便利店10": "upwallet://rn/rncoupondetail?couponId=3102021121529743",
 
-                    "本地-非厦门-商超30": "upwallet://rn/rncoupondetail?couponId=3102021122031140",
-                    "本地-非厦门-便利店10": "upwallet://rn/rncoupondetail?couponId=3102021122031124",
-                    "本地-非厦门-餐饮10": "upwallet://rn/rncoupondetail?couponId=3102021122031135",
-                    "本地-非厦门-线上券10": "upwallet://rn/rncoupondetail?couponId=3102021122031149",
-
                     "闪付-50减10": "upwallet://rn/rncoupondetail?couponId=3102021122031281",
                     "闪付-10减5": "upwallet://rn/rncoupondetail?couponId=3102021122031286",
+
+                    "全国畅享-生活缴费券6-3": "upwallet://rn/rncoupondetail?couponId=3102021122031307",
+                    "全国畅享-折扣汇5券": "upwallet://rn/rncoupondetail?couponId=3112021122031315",
                 },
                 "云闪付_券_圆梦新年_周三14点": {
                     "周三14点-心愿大礼-华为P50": "upwallet://rn/rncoupondetail?couponId=3112021122332450",
