@@ -4,13 +4,10 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
-let start_text1, start_text2, end_text;
-start_text1 = "集爆竹炸年兽";
-start_text2 = "解锁";
-end_text = "个爆竹";
-log(className("android.view.View").textStartsWith(start_text1).textEndsWith(end_text).findOnce());
-log(className("android.view.View").textStartsWith(start_text2).findOnce());
-// click_mission_btn();
+var invite_friend_img_text = "047afc56e31d6d4b";
+var mission_key_word = "0爆竹";
+todo_mini_titles = className("Image").text(invite_friend_img_text).findOne().parent().parent().findByText(mission_key_word)
+log(todo_mini_titles.length)
 
 function click_mission_btn() {
     let start_text, end_text;

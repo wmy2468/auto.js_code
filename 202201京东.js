@@ -255,9 +255,9 @@ function clickComplete(apps) {
 				else if (arr_in_text(indexText, ["浏览5个", "浏览4个"])) { nextStep = "浏览商品"; }
 				else if (arr_in_text(indexText, ["加购5个", "加购4个"])) { nextStep = "加购物车"; }
 				// --------------------其它疑难杂症区------------------
-				else if (indexText.indexOf("城城") != -1) {
-					nextStep = "点击分现金按钮";
-				} else if (indexText.indexOf("品牌墙") != -1) {
+				// else if (indexText.indexOf("城城") != -1) {
+				// 	nextStep = "点击分现金按钮";}
+				else if (indexText.indexOf("品牌墙") != -1) {
 					nextStep = "品牌墙";
 				} else if (indexText.indexOf("点击首页浮层") != -1) {
 					nextStep = "首页浮层";
