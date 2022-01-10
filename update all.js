@@ -41,6 +41,7 @@ if (selectIndex == -1) {
     } else {
         // 写入文件
         files.write(filePath, req.body.string());
+        alert("更新完成，请刷新页面");
     }
 } else {
     // 遍历读取文件
