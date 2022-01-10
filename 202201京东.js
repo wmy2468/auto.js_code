@@ -174,13 +174,21 @@ function clickComplete(apps) {
 		}
 	})
 	// while (is_in_invite_friend_page()) {
+	let nextStep, nextStepDetail, to_do_mini_title_last;
 	while (is_in_invite_friend_page()) {
 		log("clickComplete: 进入查找环节");
-		let nextStep, nextStepDetail;
+
 		nextStep = "";
 		nextStepDetail = "";
+		todo_mini_titles = "";
+		to_do_mini_title_last = ""
 		sleep(800);
 		todo_mini_titles = className("Image").text(invite_friend_img_text).findOne().parent().parent().findByText(mission_key_word);
+		while (todo_mini_titles.text() == to_do_mini_title_last) {
+			sleep(2000);
+			todo_mini_titles = className("Image").text(invite_friend_img_text).findOne().parent().parent().findByText(mission_key_word);
+		}
+		to_do_mini_title_last = todo_mini_titles.text();
 		//toastLog(unComplete.length);
 		// if (todo_mini_titles.nonEmpty()) {
 		if (!todo_mini_titles.empty) {
@@ -256,10 +264,6 @@ function clickComplete(apps) {
 					nextStep = "首页浮层";
 				} else if (indexText.indexOf("参与可得") != -1) {
 					nextStep = "参与返回";
-				} else if (indexText.indexOf("浏览5个品牌墙店铺") != -1) {
-					index_todo_now = index_todo_now + 1;
-					toastLog("clickComplete: 浏览品牌墙-跳过，index + 1");
-					continue;
 				} else if (indexText.indexOf("小程序") != -1) {
 					nextStep = "小程序";
 				} else {
