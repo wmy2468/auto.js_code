@@ -710,12 +710,17 @@ function arr_in_text(target_str, arr) {
 
 // 任务框 元素检查
 function mission_page_check() {
-	let start_text1, start_text2, end_text;
-	start_text1 = "集爆竹炸年兽"
-	start_text2 = "解锁"
-	end_text = "个爆竹"
-	if (className("android.view.View").textStartsWith(start_text1).textEndsWith(end_text).findOnce() != null ||
-		className("android.view.View").textStartsWith(start_text2).textEndsWith(end_text).findOnce() != null) {
+	let start_text, end_text;
+	start_text = "集爆竹炸年兽"
+	end_text = "0个爆竹"
+
+	find_object = className("android.view.View").textStartsWith(start_text).textEndsWith(end_text).findOnce();
+	if (find_object == null) { find_object = className("android.view.View").descStartsWith(start_text).descEndsWith(end_text).findOnce(); }
+	start_text = "解锁";
+	if (find_object == null) { find_object = className("android.view.View").textStartsWith(start_text).textEndsWith(end_text).findOnce(); }
+	if (find_object == null) { find_object = className("android.view.View").descStartsWith(start_text).descEndsWith(end_text).findOnce(); }
+
+	if (find_object != null) {
 		log("已在做任务页面");
 		return true;
 	}
@@ -730,11 +735,11 @@ function click_mission_btn() {
 	let find_object, find_object_index;	// 定义查找的变量
 	// 点击任务按钮
 	find_object = className("android.view.View").textStartsWith(start_text).textEndsWith(end_text).findOnce();
-	if (find_object == null) {
-		// 解锁新春游庙会 解锁新春游庙会 每次消耗11550个爆竹
-		start_text = "解锁";
-		find_object = className("android.view.View").textStartsWith(start_text).textEndsWith(end_text).findOnce();
-	}
+	if (find_object == null) { find_object = className("android.view.View").descStartsWith(start_text).descEndsWith(end_text).findOnce(); }
+	start_text = "解锁";
+	if (find_object == null) { find_object = className("android.view.View").textStartsWith(start_text).textEndsWith(end_text).findOnce(); }
+	if (find_object == null) { find_object = className("android.view.View").descStartsWith(start_text).descEndsWith(end_text).findOnce(); }
+
 	if (find_object != null) {
 		find_object_index = find_object.indexInParent();
 		func.sClick(find_object.parent().child(find_object_index + 1));

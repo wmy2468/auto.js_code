@@ -4,7 +4,13 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
-click_mission_btn();
+let start_text1, start_text2, end_text;
+start_text1 = "集爆竹炸年兽";
+start_text2 = "解锁";
+end_text = "个爆竹";
+log(className("android.view.View").textStartsWith(start_text1).textEndsWith(end_text).findOnce());
+log(className("android.view.View").textStartsWith(start_text2).findOnce());
+// click_mission_btn();
 
 function click_mission_btn() {
     let start_text, end_text;
@@ -13,11 +19,11 @@ function click_mission_btn() {
     let find_object, find_object_index;	// 定义查找的变量
     // 点击任务按钮
     find_object = className("android.view.View").textStartsWith(start_text).textEndsWith(end_text).findOnce();
-    if (find_object == null) {
-        // 解锁新春游庙会 解锁新春游庙会 每次消耗11550个爆竹
-        start_text = "解锁";
-        find_object = className("android.view.View").textStartsWith(start_text).textEndsWith(end_text).findOnce();
-    }
+    if (find_object == null) { find_object = className("android.view.View").descStartsWith(start_text).descEndsWith(end_text).findOnce(); }
+    // 解锁新春游庙会 解锁新春游庙会 每次消耗11550个爆竹
+    start_text = "解锁";
+    find_object = className("android.view.View").textStartsWith(start_text).findOnce();
+
     if (find_object != null) {
         find_object_index = find_object.indexInParent();
         func.sClick(find_object.parent().child(find_object_index + 1));
