@@ -5,31 +5,109 @@ var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
-todo_mini_titles = className("Image").text(invite_friend_img_text).findOne().parent().parent().findByText(mission_key_word);
-//toastLog(unComplete.length);
-// if (todo_mini_titles.nonEmpty()) {
-to_do_mini_title_last = ""
-index_todo_now = 2;
-if (!todo_mini_titles.empty) {
-    todo_mini_titles_length = todo_mini_titles.size();
-    log("clickComplete: 去完成长度:" + todo_mini_titles_length + ",和既定值:" + index_todo_now);
-    if (todo_mini_titles_length <= index_todo_now) {
-        toast("clickComplete: 去完成长度剩余:" + todo_mini_titles_length);
+
+member_card();
+
+function member_card() {
+    let authority, authority_idx;
+    sleep(random_second(3500, 300, 1000));
+    if (is_in_invite_friend_page()) {
+        toastLog("member_card: 已有卡，在去完成界面，直接完成");
+        return 0;
+    }
+    if (textContains("确认授权并加入").findOnce() == null) {
+        toastLog("member_card: 已有卡，未发现去完成描述，直接完成");
+        sleep(random_second(1500, 80, 450));
     } else {
-        // todo_mini_title = todo_mini_titles[index_todo_now];		//选择第一个
-        todo_mini_title = todo_mini_titles.get(index_todo_now);		//选择第一个
-        // 如果不是去完成列表中，则todo index + 1
-        // indexText 为小标题
-        indexText = todo_mini_title.text();					//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
-        todo_mini_title_parent = todo_mini_title.parent(); 				// 查找父控件
-        index_todo = todo_mini_title.indexInParent();		// 查找在父控件中的 索引值-1等于大标题，+1等于 去完成按钮
-        log("clickComplete: 去完成索引为：" + index_todo_now);
-        btn_todo = todo_mini_title_parent.child(index_todo + 1);					// 去完成按钮
-        detailText = todo_mini_title_parent.child(index_todo - 1).text(); // 去逛家电买大屏看奥运
-        log("clickComplete: 任务小标题indexText：" + indexText);
-        log("clickComplete: 任务大标题detailText：" + detailText);
+        while (1) {
+            log("member_card: 加会员");
+            authority = textContains("确认授权即同意").findOnce();
+            if (authority != null) {
+                authority_idx = authority.indexInParent();
+                func.cClick(authority.parent().child(authority_idx - 1));       // 同意按钮
+                sleep(random_second(1800, 100, 1000));
+                click("确认授权并加入");
+            }
+            sleep(3000);
+        }
+        // 如果点击了会员关闭按钮
+        let member_page_close_btn;
+        member_page_close_btn = className("ImageView").desc("关闭页面").findOnce();
+        if (member_page_close_btn == null) {
+            log("member_card: 未找到按钮，直接返回");
+            back_way();
+        } else {
+            log("member_card: 点击到了左上角关闭按钮");
+            func.sClick(member_page_close_btn);
+            sleep(random_second(1800, 100, 600));
+        }
     }
 }
+
+function 城城现金() {
+    let find_text, find_object, find_object_index, find_object_parent;	// 定义查找的变量
+    while (1) {
+        find_text = "有机会得大额现金";
+        find_object = textContains(find_text).findOnce();
+        if (find_object != null) {
+            find_object_parent = find_object.parent();
+            if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+                find_text = "京口令已复制";
+                find_object = className("TextView").text(find_text).findOnce();
+                while (find_object == null) {
+                    toastLog("城城现金: 未发现京口令窗口，请手动点击邀请好友触发，否则不会返回");
+                    sleep(3000);
+                    // 如果没有找到京口令，但是弹出微信选择框，则退出
+                    if (text("使用以下方式打开").findOnce() != null || text("请选择要使用的应用").findOnce() != null) {
+                        find_object = null;
+                        break;
+                    }
+                    find_object = className("TextView").text(find_text).findOnce();
+                }
+                if (find_object != null) {
+                    find_object_parent = find_object.parent();
+                    func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+                    toastLog("城城现金: 已点击 京口令 关闭按钮");
+                    sleep(2000);
+                }
+                break;
+            }
+        }
+        try {
+            find_text = "提醒我明日来领钱";
+            find_object = text(find_text).findOnce();
+            if (find_object != null) {
+                find_object_parent = find_object.parent().parent();
+                func.sClick(find_object_parent.child(3));
+            }
+            find_text = "可微信零钱提现";
+            find_object = text(find_text).findOnce();
+            if (find_object != null) {
+                find_object_parent = find_object.parent().parent().parent();
+                func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+            }
+            find_text = "邀请新朋友 更快赚现金";
+            find_object = text(find_text).findOnce();
+            if (find_object != null) {
+                find_object_index = find_object.indexInParent();
+                find_object_parent = find_object.parent();
+                func.sClick(find_object_parent.child(find_object_index - 1));
+            }
+        } catch (e) {
+            log("城城现金: error: " + e);
+            continue;
+        }
+        // 如果活动结束 则退出
+        if (text("活动已结束").findOnce() != null) {
+            if (func.sClick(text("e300dc37709c6f82").findOnce())) { sleep(2000); }
+            break;
+        }
+        toastLog("城城现金: 等待-有机会得大额现金-加载，其余手动完成");
+        sleep(3000);
+    }
+}
+
+
 function click_mission_btn() {
     let start_text, end_text;
     start_text = "集爆竹炸年兽"

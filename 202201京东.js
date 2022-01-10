@@ -405,21 +405,20 @@ function after_click(textStr, details, apps) {
 	if (!is_in_invite_friend_page()) {
 		back_way();
 	}
-
 	is_in_apps(apps);
-
 	sleep(random_second(800, 100, 1000));
 	log("after_click: 已返回");
 }
 
 function is_in_apps(appss) {
-	log("currentPackage():" + currentPackage());
-	log("app.getPackageName(appss):" + app.getPackageName(appss));
+	log("is_in_apps-currentPackage():" + currentPackage());
+	log("is_in_apps:-getPackageName(appss):" + app.getPackageName(appss));
 	// 判断是否在当前app
 	while (currentPackage() != app.getPackageName(appss)) {
 		func.to_app(appss);
 		sleep(3500);
 	}
+	log("is_in_apps: back way")
 	back_way();
 }
 
