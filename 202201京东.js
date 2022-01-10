@@ -351,13 +351,6 @@ function after_click(textStr, details, apps) {
 		default:
 			break;
 	}
-	log("currentPackage()" + currentPackage());
-	log("app.getPackageName(apps)" + app.getPackageName(apps));
-	// 判断是否在当前app
-	if (currentPackage() != app.getPackageName(apps)) {
-		log();
-		func.to_app(apps);
-	}
 	// 确保已经切换回京东APP
 	if (details == "20秒等待") {
 		toastLog("after_click: 加载巨慢额外等待10秒");
@@ -413,10 +406,22 @@ function after_click(textStr, details, apps) {
 		back_way();
 	}
 
+	is_in_apps(apps);
+
 	sleep(random_second(800, 100, 1000));
 	log("after_click: 已返回");
 }
 
+function is_in_apps(appss) {
+	log("currentPackage():" + currentPackage());
+	log("app.getPackageName(appss):" + app.getPackageName(appss));
+	// 判断是否在当前app
+	while (currentPackage() != app.getPackageName(appss)) {
+		func.to_app(appss);
+		sleep(3500);
+	}
+	back_way();
+}
 
 function waitCompleteDisappear() {
 	cnt = 0;
