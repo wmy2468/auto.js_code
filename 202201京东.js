@@ -22,8 +22,7 @@ devMate30 = "TAS-AL00";
 devHonor8 = "FRD-AL00";
 devRedMi = "Redmi Note 7";
 
-var invite_friend_img_text = "047afc56e31d6d4b";
-var mission_key_word = "0爆竹";
+ 
 
 main();
 
