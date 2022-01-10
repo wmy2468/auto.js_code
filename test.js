@@ -4,11 +4,11 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
-a = [1, 2, 3]
-b = func.dialogs_checkbox(a);
-print(b);
-print(b == -1)
-// log((a.join("+").indexOf('-2')))
+brand_walls = className("Image").find();
+brand_wall_parent = brand_walls[1].parent().parent().parent().parent().parent().parent();
+brand_walls_idx = brand_wall_parent.childCount() - 1;
+brand_wall_back_btn = brand_wall_parent.child(brand_walls_idx);
+func.sClick(brand_wall_back_btn);
 
 function 京东评价() {
     if (!requestScreenCapture()) {
