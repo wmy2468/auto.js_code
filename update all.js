@@ -24,13 +24,15 @@ if (selectIndex == -1) {
         toastLog("未输入文件名，退出");
         exit();
     }
+    // 判断文件名
     if (fileName.indexOf('.js') == -1) {
         fileName = fileName + '.js';
     }
+    // 路径
     filePath = dir + '/' + fileName;    // 文件路径
     fileUrl = originUrl + fileName;     // 网络文件路径
     log(fileUrl);
-
+    // 请求
     req = http.get(fileUrl)
     if (req.statusCode != '200') {
         toastLog('网络读取错误，可能文件不存在')
@@ -39,32 +41,30 @@ if (selectIndex == -1) {
     } else {
         // 写入文件
         files.write(filePath, req.body.string());
-        alert('更新完成');
     }
-} else {
-    // 变例读取文件
-
-    for (i = 0; i <= jsFiles.length - 1; i++) {
-        fileName = jsFiles[i];              // 文件名
-        filePath = dir + '/' + fileName;    // 文件路径
-        fileUrl = originUrl + fileName;     // 网络文件路径
-        try {
-            // req = http.get(fileUrl, timeout = 2) 
-            req = http.get(fileUrl)
-            if (req.statusCode != '200') {
-                log(fileName + '网络读取错误，可能文件不存在')
-                sleep(800);
-            } else {
-                log(fileName + ',更新完成 写入文件')
-                successCnt = successCnt + 1;
-                // 写入文件
-                files.write(filePath, req.body.string());
-            }
-        }
-        catch (err) {
-            log(err);
-            continue;
-        }
-    }
-    alert('更新' + successCnt + '/' + jsFiles.length + '个文件');
 }
+
+// 遍历读取文件
+for (i = 0; i <= jsFiles.length - 1; i++) {
+    fileName = jsFiles[i];              // 文件名
+    filePath = dir + '/' + fileName;    // 文件路径
+    fileUrl = originUrl + fileName;     // 网络文件路径
+    try {
+        // req = http.get(fileUrl, timeout = 2) 
+        req = http.get(fileUrl)
+        if (req.statusCode != '200') {
+            log(fileName + '网络读取错误，可能文件不存在')
+            sleep(800);
+        } else {
+            log(fileName + ',更新完成 写入文件')
+            successCnt = successCnt + 1;
+            // 写入文件
+            files.write(filePath, req.body.string());
+        }
+    }
+    catch (err) {
+        log(err);
+        continue;
+    }
+}
+alert('更新' + successCnt + '/' + jsFiles.length + '个文件');
