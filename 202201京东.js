@@ -175,20 +175,15 @@ function clickComplete(apps) {
 	})
 	// while (is_in_invite_friend_page()) {
 	let nextStep, nextStepDetail, to_do_mini_title_last;
+	to_do_mini_title_last = ""
 	while (is_in_invite_friend_page()) {
 		log("clickComplete: 进入查找环节");
 
 		nextStep = "";
 		nextStepDetail = "";
 		todo_mini_titles = "";
-		to_do_mini_title_last = ""
 		sleep(800);
 		todo_mini_titles = className("Image").text(invite_friend_img_text).findOne().parent().parent().findByText(mission_key_word);
-		while (todo_mini_titles.text() == to_do_mini_title_last) {
-			sleep(2000);
-			todo_mini_titles = className("Image").text(invite_friend_img_text).findOne().parent().parent().findByText(mission_key_word);
-		}
-		to_do_mini_title_last = todo_mini_titles.text();
 		//toastLog(unComplete.length);
 		// if (todo_mini_titles.nonEmpty()) {
 		if (!todo_mini_titles.empty) {
@@ -200,7 +195,6 @@ function clickComplete(apps) {
 			} else {
 				// todo_mini_title = todo_mini_titles[index_todo_now];		//选择第一个
 				todo_mini_title = todo_mini_titles.get(index_todo_now);		//选择第一个
-				log(todo_mini_title.text());
 				// 如果不是去完成列表中，则todo index + 1
 				if ((todo_mini_title.indexInParent() != 2 && (todo_mini_title.text()).indexOf("可得") == -1)
 					|| (todo_mini_title.text()).indexOf("每邀1个好友可得") != -1) {
@@ -217,7 +211,12 @@ function clickComplete(apps) {
 				detailText = todo_mini_title_parent.child(index_todo - 1).text(); // 去逛家电买大屏看奥运
 				log("clickComplete: 任务小标题indexText：" + indexText);
 				log("clickComplete: 任务大标题detailText：" + detailText);
-
+				if (todo_mini_titles == detailText) {
+					sleep(3000);
+					log("文本未加载，等待3秒");
+					continue;
+				}
+				todo_mini_titles = detailText;
 				// 判断当前任务是否已完成
 				// log("-4位置:" + detailText.slice(-4, -3) + ",-2位置:" + detailText.slice(-2, -1));
 				if (detailText.slice(-4, -3) == detailText.slice(-2, -1)) {
