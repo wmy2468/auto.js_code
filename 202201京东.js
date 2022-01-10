@@ -269,39 +269,16 @@ function clickComplete(apps) {
 				}
 
 				// 详细描述校验，校验小程序
-				if (detailText.indexOf("小程序") != -1) {
-					nextStepDetail = "小程序";
-				} else if (detailText.indexOf("去企有此礼赢取好礼") != -1) {
-					nextStepDetail = "页面含邀请好友";
-				} else if (detailText.indexOf("去逛美妆护肤爆款会场") != -1) {
-					nextStepDetail = "小程序";
-				} else if (detailText.indexOf("2.9元洗衣液限时") != -1) {
-					nextStepDetail = "小程序";
-				} else if (detailText.indexOf("9.9元") != -1) {
-					nextStepDetail = "小程序"
-				} else if (detailText.indexOf("金融神券") != -1) {
-					nextStepDetail = "金融2次返回"
-				} else if (detailText.indexOf("去逛京友圈") != -1) {
-					nextStepDetail = "京友圈";
-				} else if (detailText.indexOf("京享值PK赢") != -1) {
-					nextStepDetail = "金融2次返回";
-				} else if (detailText.indexOf("领百亿购物金") != -1) {
-					nextStepDetail = "20秒等待";
-				} else if (detailText.indexOf("榜单会场") != -1) {
-					nextStepDetail = "20秒等待";
-				} else if (detailText.indexOf("东东超市") != -1) {
-					nextStepDetail = "需要多次点击返回";		// 点击完成按钮返回
-				} else if (detailText.indexOf("去财富岛") != -1) {
-					nextStepDetail = "需要多次点击返回";		// 点击完成按钮返回
-				} else if (detailText.indexOf("去养狗兑京豆") != -1) {
-					index_todo_now = index_todo_now + 1;
-					continue;
-				} else {
-					nextStepDetail = "无";
-				}
+				nextStepDetail = "无";
+				if (arr_in_text(detailText, ["小程序", "去逛美妆护肤爆款会场", "2.9元洗衣液限时", "去逛美妆护肤爆款会场"])) { nextStepDetail = "小程序"; }
+				else if (arr_in_text(detailText, ["金融神券", "京享值PK赢"])) { nextStepDetail = "金融2次返回"; }
+				else if (arr_in_text(detailText, ["领百亿购物金", "榜单会场"])) { nextStepDetail = "20秒等待"; }
+				else if (arr_in_text(detailText, ["东东超市", "去财富岛"])) { nextStepDetail = "需要多次点击返回"; }
+				else if (arr_in_text(detailText, ["去逛京友圈"])) { nextStepDetail = "京友圈"; continue; }
+				else if (arr_in_text(detailText, ["去企有此礼赢取好礼"])) { nextStepDetail = "页面含邀请好友"; }
 
 				// 除了Mate 30外，另外2个台古董在小程序卡死
-				if (devModel == devHonor8 && nextStepDetail == "小程序") {
+				if ((devModel == devHonor8 || devModel == devRedMi) && nextStepDetail == "小程序") {
 					index_todo_now = index_todo_now + 1;
 					continue;
 				}
