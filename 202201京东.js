@@ -1,4 +1,4 @@
-// sleep(600) =>
+https://api.m.jd.com/client.action?functionId=newBabelAwardCollection&body=%7B%22activityId%22%3A%22UcLBtK9kh8rA8M2h6pBfhd7rsd7%22%2C%22scene%22%3A%221%22%2C%22args%22%3A%22key=DD98BDDD838A0F60578BEC06CF63F1E027D176A315E60F18E48104FE15076D58FFA18701879AA339876F5FB4B7F513F9_bingo,roleId=9E2C6D36242771388D05258F238C6CD4_bingo,strengthenKey=19F512DCD8EE34ABE9C4FB4A92C2F42AD9E7D4E209C7E54FA67BF30135A95927_bingo%22%7D&client=wh5// sleep(600) =>
 // sleep(random_second(540, 60, 900));
 // sleep(800) =>
 // sleep(random_second(720, 80, 900));
@@ -174,14 +174,11 @@ function clickComplete(apps) {
 		}
 	})
 	// while (is_in_invite_friend_page()) {
-	let nextStep, nextStepDetail, to_do_mini_title_last;
-	to_do_mini_title_last = ""
 	while (is_in_invite_friend_page()) {
 		log("clickComplete: 进入查找环节");
-
+		let nextStep, nextStepDetail;
 		nextStep = "";
 		nextStepDetail = "";
-		todo_mini_titles = "";
 		sleep(800);
 		todo_mini_titles = className("Image").text(invite_friend_img_text).findOne().parent().parent().findByText(mission_key_word);
 		//toastLog(unComplete.length);
@@ -195,6 +192,7 @@ function clickComplete(apps) {
 			} else {
 				// todo_mini_title = todo_mini_titles[index_todo_now];		//选择第一个
 				todo_mini_title = todo_mini_titles.get(index_todo_now);		//选择第一个
+				log(todo_mini_title.text());
 				// 如果不是去完成列表中，则todo index + 1
 				if ((todo_mini_title.indexInParent() != 2 && (todo_mini_title.text()).indexOf("可得") == -1)
 					|| (todo_mini_title.text()).indexOf("每邀1个好友可得") != -1) {
@@ -211,12 +209,7 @@ function clickComplete(apps) {
 				detailText = todo_mini_title_parent.child(index_todo - 1).text(); // 去逛家电买大屏看奥运
 				log("clickComplete: 任务小标题indexText：" + indexText);
 				log("clickComplete: 任务大标题detailText：" + detailText);
-				if (todo_mini_titles == detailText) {
-					sleep(3000);
-					log("文本未加载，等待3秒");
-					continue;
-				}
-				todo_mini_titles = detailText;
+
 				// 判断当前任务是否已完成
 				// log("-4位置:" + detailText.slice(-4, -3) + ",-2位置:" + detailText.slice(-2, -1));
 				if (detailText.slice(-4, -3) == detailText.slice(-2, -1)) {
@@ -255,14 +248,18 @@ function clickComplete(apps) {
 				else if (arr_in_text(indexText, ["浏览5个", "浏览4个"])) { nextStep = "浏览商品"; }
 				else if (arr_in_text(indexText, ["加购5个", "加购4个"])) { nextStep = "加购物车"; }
 				// --------------------其它疑难杂症区------------------
-				// else if (indexText.indexOf("城城") != -1) {
-				// 	nextStep = "点击分现金按钮";}
-				else if (indexText.indexOf("品牌墙") != -1) {
+				else if (indexText.indexOf("城城") != -1) {
+					nextStep = "点击分现金按钮";
+				} else if (indexText.indexOf("品牌墙") != -1) {
 					nextStep = "品牌墙";
 				} else if (indexText.indexOf("点击首页浮层") != -1) {
 					nextStep = "首页浮层";
 				} else if (indexText.indexOf("参与可得") != -1) {
 					nextStep = "参与返回";
+				} else if (indexText.indexOf("浏览5个品牌墙店铺") != -1) {
+					index_todo_now = index_todo_now + 1;
+					toastLog("clickComplete: 浏览品牌墙-跳过，index + 1");
+					continue;
 				} else if (indexText.indexOf("小程序") != -1) {
 					nextStep = "小程序";
 				} else {

@@ -3,12 +3,33 @@ auto.waitFor();
 var func = require("func_list.js");
 var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
-
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
-todo_mini_titles = className("Image").text(invite_friend_img_text).findOne().parent().parent().findByText(mission_key_word)
-log(todo_mini_titles.length)
-
+todo_mini_titles = className("Image").text(invite_friend_img_text).findOne().parent().parent().findByText(mission_key_word);
+//toastLog(unComplete.length);
+// if (todo_mini_titles.nonEmpty()) {
+to_do_mini_title_last = ""
+index_todo_now = 2;
+if (!todo_mini_titles.empty) {
+    todo_mini_titles_length = todo_mini_titles.size();
+    log("clickComplete: 去完成长度:" + todo_mini_titles_length + ",和既定值:" + index_todo_now);
+    if (todo_mini_titles_length <= index_todo_now) {
+        toast("clickComplete: 去完成长度剩余:" + todo_mini_titles_length);
+    } else {
+        // todo_mini_title = todo_mini_titles[index_todo_now];		//选择第一个
+        todo_mini_title = todo_mini_titles.get(index_todo_now);		//选择第一个
+        // 如果不是去完成列表中，则todo index + 1
+        // indexText 为小标题
+        indexText = todo_mini_title.text();					//浏览8秒可得，逛店8秒可得，浏览可得，浏览5个商品
+        todo_mini_title_parent = todo_mini_title.parent(); 				// 查找父控件
+        index_todo = todo_mini_title.indexInParent();		// 查找在父控件中的 索引值-1等于大标题，+1等于 去完成按钮
+        log("clickComplete: 去完成索引为：" + index_todo_now);
+        btn_todo = todo_mini_title_parent.child(index_todo + 1);					// 去完成按钮
+        detailText = todo_mini_title_parent.child(index_todo - 1).text(); // 去逛家电买大屏看奥运
+        log("clickComplete: 任务小标题indexText：" + indexText);
+        log("clickComplete: 任务大标题detailText：" + detailText);
+    }
+}
 function click_mission_btn() {
     let start_text, end_text;
     start_text = "集爆竹炸年兽"
