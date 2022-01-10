@@ -4,11 +4,31 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 
-brand_walls = className("Image").find();
-brand_wall_parent = brand_walls[1].parent().parent().parent().parent().parent().parent();
-brand_walls_idx = brand_wall_parent.childCount() - 1;
-brand_wall_back_btn = brand_wall_parent.child(brand_walls_idx);
-func.sClick(brand_wall_back_btn);
+click_mission_btn();
+
+function click_mission_btn() {
+    let start_text, end_text;
+    start_text = "集爆竹炸年兽"
+    end_text = "0个爆竹"
+    let find_object, find_object_index;	// 定义查找的变量
+    // 点击任务按钮
+    find_object = className("android.view.View").textStartsWith(start_text).textEndsWith(end_text).findOnce();
+    if (find_object == null) {
+        // 解锁新春游庙会 解锁新春游庙会 每次消耗11550个爆竹
+        start_text = "解锁";
+        find_object = className("android.view.View").textStartsWith(start_text).textEndsWith(end_text).findOnce();
+    }
+    if (find_object != null) {
+        find_object_index = find_object.indexInParent();
+        func.sClick(find_object.parent().child(find_object_index + 1));
+        func.sClick(find_object.parent().child(find_object_index + 2));
+        toastLog("click_mission_btn: 点击了 任务框 按钮");
+        sleep(2000);
+        return true;
+    }
+    toastLog("click_mission_btn: 未找到 任务框 按钮");
+    return false;
+}
 
 function 京东评价() {
     if (!requestScreenCapture()) {
