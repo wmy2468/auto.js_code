@@ -42,29 +42,29 @@ if (selectIndex == -1) {
         // 写入文件
         files.write(filePath, req.body.string());
     }
-}
-
-// 遍历读取文件
-for (i = 0; i <= jsFiles.length - 1; i++) {
-    fileName = jsFiles[i];              // 文件名
-    filePath = dir + '/' + fileName;    // 文件路径
-    fileUrl = originUrl + fileName;     // 网络文件路径
-    try {
-        // req = http.get(fileUrl, timeout = 2) 
-        req = http.get(fileUrl)
-        if (req.statusCode != '200') {
-            log(fileName + '网络读取错误，可能文件不存在')
-            sleep(800);
-        } else {
-            log(fileName + ',更新完成 写入文件')
-            successCnt = successCnt + 1;
-            // 写入文件
-            files.write(filePath, req.body.string());
+} else {
+    // 遍历读取文件
+    for (i = 0; i <= jsFiles.length - 1; i++) {
+        fileName = jsFiles[i];              // 文件名
+        filePath = dir + '/' + fileName;    // 文件路径
+        fileUrl = originUrl + fileName;     // 网络文件路径
+        try {
+            // req = http.get(fileUrl, timeout = 2) 
+            req = http.get(fileUrl)
+            if (req.statusCode != '200') {
+                log(fileName + '网络读取错误，可能文件不存在')
+                sleep(800);
+            } else {
+                log(fileName + ',更新完成 写入文件')
+                successCnt = successCnt + 1;
+                // 写入文件
+                files.write(filePath, req.body.string());
+            }
+        }
+        catch (err) {
+            log(err);
+            continue;
         }
     }
-    catch (err) {
-        log(err);
-        continue;
-    }
+    alert('更新' + successCnt + '/' + jsFiles.length + '个文件');
 }
-alert('更新' + successCnt + '/' + jsFiles.length + '个文件');
