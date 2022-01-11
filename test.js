@@ -6,7 +6,7 @@ let url_jd = "openApp.jdMobile://"
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
 
-log(textContains("A*ccswT6bSKCsAAAAAAAAAAAAAARQnAQ").find())
+func.to_scheme("taobao://");
 
 function 芭芭农场() {
     let obj = {

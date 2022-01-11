@@ -102,7 +102,7 @@ function 芭芭农场() {
             obj.to_tb();
             let click_text;
             click_text = ["去浏览", "去完成", "去逛逛"];
-            let todo_text, todo_btn, todo_idx, step, todo_btn_text;
+            let todo_text, todo_btn, todo_idx, step, todo_btn_text, todo_detail_text;
             todo_idx = 8;
             step = 1;
             obj.unitl_in_mission_view();
@@ -114,12 +114,19 @@ function 芭芭农场() {
                 log("当前todo_idx=" + todo_idx);
                 todo_btn = views.child(todo_idx).child(1);
                 todo_btn_text = todo_btn.text();
+                todo_detail_text = views.child(todo_idx).child(0).child(0).text();
                 todo_text = views.child(todo_idx).child(0).child(1).child(0).text();
                 if (obj.arr_in_text(todo_text, ["秒"]) && click_text.indexOf(todo_btn_text) != -1) {
                     log(todo_text);
                     func.sClick(todo_btn);
                     while (obj.in_mission_view()) { toastLog("等待任务视图消失"); sleep(2500); }
                     toastLog("Mission 视图已消失");
+                    log("todo_detail_text=" + todo_detail_text);
+                    if (todo_detail_text == "逛逛'买多少返多少'(0/1)" || todo_detail_text == "浏览天天领现金(0/1)") {
+                        toastLog("找到买返 红包");
+                        func.sClick(text("打开链接").findOne());
+                        sleep(3000);
+                    }
                     obj.view_15_second();
                     sleep(2500);
                 } else {
