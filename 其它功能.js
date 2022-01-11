@@ -55,7 +55,7 @@ function 芭芭农场() {
                         func.sClick(tb_ele.parent().child(2));
                     }
                 } catch (e) { sleep(500); continue; }
-                sleep(2000);
+                sleep(3000);
             }
             toastLog("已到达农场任务界面");
         },
@@ -69,8 +69,11 @@ function 芭芭农场() {
             help_parent = help_for_her.parent().parent();
             func.sClick(help_parent.child(help_parent.childCount() - 1));
         },
-        to_tb: function () {
-            setClip("5嘻能不我去他么小年多去着嘻táo️Ьáò或点这里链节 https://m.tb.cn/h.fQaWymR?sm=7cf63f 至浏览er【╭ァ菓樹⒐筷種好ロ拉℅！壹定要️啊！】");
+        to_tb: function (is_lucky_bag) {
+            if (is_lucky_bag == undefined) {
+                setClip("5嘻能不我去他么小年多去着嘻táo️Ьáò或点这里链节 https://m.tb.cn/h.fQaWymR?sm=7cf63f 至浏览er【╭ァ菓樹⒐筷種好ロ拉℅！壹定要️啊！】");
+            }
+            else { setClip("68哈时时学起他么小小要中看， https://m.tb.cn/h.fkypFpu?sm=fb04a3  你收到一条拜年祝福啦～快点击收下！领福气红包一起分1亿！"); }
             sleep(1500);
             func.to_app("淘宝");
             while (1) {
@@ -80,11 +83,11 @@ function 芭芭农场() {
             let help_for_her, help_parent;
             while (1) {
                 help_for_her = text("为TA助力").findOnce();
-                if (help_for_her == null) {
-                    help_for_her = text("去种果树").findOnce();
-                }
+                if (help_for_her == null) { help_for_her = text("去种果树").findOnce(); }
+                if (help_for_her == null) { help_for_her = text("我也要拿红包").findOnce(); }
+                if (help_for_her == null) { help_for_her = text("马上拜年").findOnce(); }
                 if (help_for_her != null) { break; }
-                sleep(2000);
+                sleep(3000);
             }
             help_parent = help_for_her.parent().parent();
             func.sClick(help_parent.child(help_parent.childCount() - 1));
@@ -104,6 +107,10 @@ function 芭芭农场() {
     }
     // 支付宝
     let work = {
+        tb_lucky_bag: function () {
+            let click_text;
+            click_text = ["去浏览", "去完成", "去逛逛"];
+        },
         tb: function () {
             obj.to_tb();
             let click_text;
@@ -141,7 +148,7 @@ function 芭芭农场() {
                     sleep(300);
                 }
             }
-            click("领取");
+            // click("领取");
             sleep(2000);
             alert("已完成");
         },
@@ -175,7 +182,7 @@ function 芭芭农场() {
                     sleep(300);
                 }
             }
-            click("领取");
+            // click("领取");
             sleep(2000);
             alert("已完成");
         }
