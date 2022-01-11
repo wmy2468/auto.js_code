@@ -418,6 +418,7 @@ function after_click(textStr, details, apps) {
 	}
 	is_in_apps(apps);
 	back_way();
+	back_way();
 	sleep(random_second(800, 100, 1000));
 	log("after_click: 已返回");
 }
@@ -431,6 +432,7 @@ function is_in_apps(appss) {
 		sleep(3500);
 	}
 	log("is_in_apps: back way")
+	sleep(2500);
 }
 
 function waitCompleteDisappear() {
