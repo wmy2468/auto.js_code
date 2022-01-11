@@ -64,7 +64,7 @@ function 芭芭农场() {
             func.sClick(help_parent.child(help_parent.childCount() - 1));
         },
         to_tb: function () {
-            setClip("r【╭ァ菓樹⒐筷種好ロ拉℅！壹定要️啊！】");
+            setClip("5嘻能不我去他么小年多去着嘻táo️Ьáò或点这里链节 https://m.tb.cn/h.fQaWymR?sm=7cf63f 至浏览er【╭ァ菓樹⒐筷種好ロ拉℅！壹定要️啊！】");
             sleep(1500);
             func.to_app("淘宝");
             while (1) {
