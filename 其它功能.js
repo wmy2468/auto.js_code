@@ -185,9 +185,11 @@ function 芭芭农场() {
             alert("已完成");
         }
     }
-    let select_item = func.dialogsWin(["淘宝", "支付宝"])
+    let select_item = func.dialogsWin(["淘宝", "淘宝福气红包", "支付宝"])
     if (select_item == "淘宝") {
         work.tb();
+    } else if (select_item == "淘宝福气红包") {
+        work.tb(123);
     } else {
         work.zfb();
     }
