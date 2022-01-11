@@ -6,7 +6,7 @@ var cfg = func.config_dict();
 main();
 // toastLog(text("领取奖励").find().length);
 function main() {
-    let selectedArr = ["万商3比", "ZFB捐款", "余额宝转出", "余额宝转入", "京东评价", "跳转指定Scheme"];
+    let selectedArr = ["芭芭农场", "万商3比", "ZFB捐款", "余额宝转出", "余额宝转入", "京东评价", "跳转指定Scheme"];
     //---------------配置区域-----------------
     let scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行财富季") { 建行财富季(); }
@@ -16,7 +16,26 @@ function main() {
     else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
     else if (scriptName == "京东评价") { 京东评价(); }
     else if (scriptName == "万商3比") { 万商3比(); }
+    else if (scriptName == "芭芭农场") { 芭芭农场(); }
 }
+
+function 芭芭农场() {
+    this.in_mission_view = function () {
+        if (text("今天").depth(21).findOnce() == null) {
+            return false;
+        } return true;
+    }
+    // 支付宝
+    let click_text;
+    click_text = ["去浏览", "去完成", "去逛逛"];
+    let to_do;
+    while (!this.in_mission_view()) {
+        toastLog("请手动跳转到农场界面");
+        sleep(2000);
+    }
+    
+}
+
 
 function 万商3比() {
     var now, h, m;

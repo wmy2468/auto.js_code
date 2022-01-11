@@ -39,9 +39,16 @@ let url_云闪付签到 = "upwallet://html/open.95516.com/s/open/html/oauth.html
 
 let url_test = "upwallet://rn/rncoupondetail?couponId=" + "3112021122332449";
 
+scheme_list = {
+    "支付宝扫一扫": "alipays://platformapi/startapp?saId=10000007",
+    "支付宝芭芭农场": "scheme=alipays://platformapi/startapp?saId=10000007&qrcode=https://qr.alipay.com/0f717178r1shfuri0jpira4",
+    "支付宝蚂蚁森林": "alipay://platformapi/startapp?appId=60000002",
+}
+
+
 app.startActivity({
     action: "android.intent.action.VIEW",
-    data: url_test,
+    data: scheme_list["支付宝蚂蚁森林"],
 });
 
 // --------------url scheme--------------

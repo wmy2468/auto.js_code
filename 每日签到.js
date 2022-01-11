@@ -145,6 +145,7 @@ function 工商() {
         if (left_banana != null) { break; }
         left_banana = textContains("加载中...").findOnce();
         if (left_banana != null) { break; }
+        sleep(1000);
     }
     sleep(1000);
     // 查找并点击香蕉
