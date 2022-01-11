@@ -41,9 +41,14 @@ function 芭芭农场() {
             }
         },
         unitl_in_mission_view: function () {
+            let tb_ele;
             while (!obj.in_mission_view()) {
                 toastLog("请手动跳转到农场任务界面");
                 func.sClick(text("A*ccswT6bSKCsAAAAAAAAAAAAAARQnAQ").findOnce());
+                tb_ele = text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
+                if (tb_ele != null) {
+                    func.sClick(tb_ele.parent().child(2));
+                }
                 sleep(2000);
             }
             toastLog("已到达农场任务界面");
@@ -59,10 +64,13 @@ function 芭芭农场() {
             func.sClick(help_parent.child(help_parent.childCount() - 1));
         },
         to_tb: function () {
-            setClip("0嘻地要中好他么对多下到好信🍑{Ьáò或点几url链 https://m.tb.cn/h.f9BE0MW?sm=624352 至浏览er【╭ァ菓樹⒐筷種好ロ拉℅！壹定要️啊！】");
+            setClip("r【╭ァ菓樹⒐筷種好ロ拉℅！壹定要️啊！】");
             sleep(1500);
-            func.to_app("手机淘宝");
-            func.sClick(desc("查看详情").findOne());
+            func.to_app("淘宝");
+            while (1) {
+                if (func.sClick(desc("查看详情").findOnce()) || func.sClick(desc("打开").findOnce())) { break; }
+                sleep(2000);
+            }
             let help_for_her, help_parent;
             while (1) {
                 help_for_her = text("为TA助力").findOnce();
