@@ -43,6 +43,10 @@ function 芭芭农场() {
         unitl_in_mission_view: function () {
             let tb_ele;
             while (!obj.in_mission_view()) {
+                // if (text("最近你的队友都有努力种树哦").findOnce() != null) {}
+                func.sClick(text("继续努力").findOnce());
+                // if (textContains("亲密度达到了").textEndsWith("获得了亲密度奖励").findOnce() != null) {}
+                func.sClick(text("关闭").depth(13).findOnce());
                 toastLog("请手动跳转到农场任务界面");
                 func.sClick(text("A*ccswT6bSKCsAAAAAAAAAAAAAARQnAQ").findOnce());
                 tb_ele = text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
