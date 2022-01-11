@@ -31,9 +31,9 @@ function 芭芭农场() {
         },
         in_mission_view: function () {
             if (currentPackage() == "com.taobao.taobao") {
-                if (text("做任务赢奖励").depth(14).findOnce() == null) {
-                    return false;
-                } return true;
+                if (text("做任务赢奖励").depth(14).findOnce() != null || text("拆福袋领奖励").depth(15).findOnce() != null) {
+                    return true;
+                } return false;
             } else {
                 if (text("今天").depth(21).findOnce() == null) {
                     return false;
