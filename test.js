@@ -6,7 +6,128 @@ let url_jd = "openApp.jdMobile://"
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
 
-log(click("领取"))
+log(textContains("A*ccswT6bSKCsAAAAAAAAAAAAAARQnAQ").find())
+
+function 芭芭农场() {
+    let obj = {
+        in_mission_view: function () {
+            if (currentPackage() == "com.taobao.taobao") {
+                if (text("做任务赢奖励").depth(14).findOnce() == null) {
+                    return false;
+                } return true;
+            } else {
+                if (text("今天").depth(21).findOnce() == null) {
+                    return false;
+                } return true;
+            }
+        },
+        unitl_in_mission_view: function () {
+            while (!obj.in_mission_view()) {
+                toastLog("请手动跳转到农场任务界面");
+                sleep(2000);
+            }
+            toastLog("已到达农场任务界面");
+        },
+        arr_in_text: function (target_str, arr) {
+            for (let i = 0; i < arr.length; i++) {
+                if (target_str.indexOf(arr[i]) != -1) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        view_15_second: function () {
+            sleep(5000);
+            swipe(500, 800, 500, 600, 200);
+            toastLog("已滑动，等待15秒");
+            sleep(17000);
+            toastLog("完成，准备返回");
+            while (obj.in_mission_view() == false) {
+                back();
+                sleep(4000);
+            }
+            toastLog("已返回...");
+        }
+    }
+    // 支付宝
+    let work = {
+        tb: function () {
+            let click_text;
+            click_text = ["去浏览", "去完成", "去逛逛"];
+            let todo_text, todo_btn, todo_idx, step, todo_btn_text;
+            todo_idx = 8;
+            step = 1;
+            obj.unitl_in_mission_view();
+            sleep(2000);
+            while (1) {
+                views = className("ListView").findOnce();
+                if (views == null) { break; }
+                if (todo_idx + 1 >= views.childCount() - 1) { break; }
+                log("当前todo_idx=" + todo_idx);
+                todo_btn = views.child(todo_idx).child(1);
+                todo_btn_text = todo_btn.text();
+                todo_text = views.child(todo_idx).child(0).child(1).child(0).text();
+                if (obj.arr_in_text(todo_text, ["秒"]) && click_text.indexOf(todo_btn_text) != -1) {
+                    log(todo_text);
+                    func.sClick(todo_btn);
+                    while (obj.in_mission_view()) { sleep(1500); }
+                    toastLog("Mission 视图已消失");
+                    obj.view_15_second();
+                    sleep(2500);
+                } else {
+                    todo_idx = todo_idx + step;
+                    log("todo_idx 增加 step");
+                    sleep(300);
+                }
+            }
+            click("领取");
+            sleep(2000);
+            alert("已完成");
+        },
+        zfb: function () {
+            let click_text;
+            click_text = ["去浏览", "去完成", "去逛逛"];
+            let todo_text, todo_btn, todo_idx, step, todo_btn_text;
+            todo_idx = 1;
+            step = 4
+            obj.unitl_in_mission_view();
+            sleep(2000);
+            while (1) {
+                views = className("android.view.View").scrollable(true).findOnce();
+                if (views == null) { break; }
+                if (todo_idx + 3 >= views.childCount() - 1) { break; }
+                log("当前todo_idx=" + todo_idx);
+                todo_btn = views.child(todo_idx + 3).child(0);
+                todo_btn_text = todo_btn.text();
+                todo_text = views.child(todo_idx + 2).text();
+                if (obj.arr_in_text(todo_text, ["秒"]) && click_text.indexOf(todo_btn_text) != -1) {
+                    log(todo_text);
+                    func.sClick(todo_btn);
+                    while (obj.in_mission_view()) { sleep(1500); }
+                    toastLog("Mission 视图已消失");
+                    obj.view_15_second();
+                    sleep(2500);
+                } else {
+                    todo_idx = todo_idx + step;
+                    log("todo_idx 增加 step");
+                    sleep(300);
+                }
+            }
+            click("领取");
+            sleep(2000);
+            alert("已完成");
+        }
+    }
+    let select_item = func.dialogsWin(["淘宝", "支付宝"])
+    if (select_item == "淘宝") {
+        work.tb();
+    } else {
+        work.zfb();
+    }
+}
+// log(todo_btn.length)
+
+// log(text("去完成").findOnce().indexInParent())
 
 function member_card() {
     let authority, authority_idx;
