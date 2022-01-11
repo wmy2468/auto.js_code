@@ -133,12 +133,19 @@ function 工商() {
             sleep(4500);
             func.to_scheme(cfg["url_scheme"]["工商"]["小象2"]);
         }
+        sleep(2000);
     }
+    log("已跳转回工商，等待查找剩余香蕉");
     sleep(2000);
     // 点击香蕉
     // 点击任务
     let left_banana, mission_btn;
-    left_banana = textStartsWith("剩余").findOne();
+    while (1) {
+        left_banana = textStartsWith("剩余").findOnce();
+        if (left_banana != null) { break; }
+        left_banana = textContains("加载中...").findOnce();
+        if (left_banana != null) { break; }
+    }
     sleep(1000);
     // 查找并点击香蕉
     let bananas;
