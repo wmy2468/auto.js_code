@@ -49,10 +49,12 @@ function 芭芭农场() {
                 func.sClick(text("关闭").depth(13).findOnce());
                 toastLog("请手动跳转到农场任务界面");
                 func.sClick(text("A*ccswT6bSKCsAAAAAAAAAAAAAARQnAQ").findOnce());
-                tb_ele = text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
-                if (tb_ele != null) {
-                    func.sClick(tb_ele.parent().child(2));
-                }
+                try {
+                    tb_ele = text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
+                    if (tb_ele != null) {
+                        func.sClick(tb_ele.parent().child(2));
+                    }
+                } catch (e) { sleep(500); continue; }
                 sleep(2000);
             }
             toastLog("已到达农场任务界面");
