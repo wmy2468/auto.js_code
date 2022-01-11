@@ -1,15 +1,3 @@
-https://api.m.jd.com/client.action?functionId=newBabelAwardCollection&body=%7B%22activityId%22%3A%22UcLBtK9kh8rA8M2h6pBfhd7rsd7%22%2C%22scene%22%3A%221%22%2C%22args%22%3A%22key=DD98BDDD838A0F60578BEC06CF63F1E027D176A315E60F18E48104FE15076D58FFA18701879AA339876F5FB4B7F513F9_bingo,roleId=9E2C6D36242771388D05258F238C6CD4_bingo,strengthenKey=19F512DCD8EE34ABE9C4FB4A92C2F42AD9E7D4E209C7E54FA67BF30135A95927_bingo%22%7D&client=wh5// sleep(600) =>
-// sleep(random_second(540, 60, 900));
-// sleep(800) =>
-// sleep(random_second(720, 80, 900));
-// sleep(1000) =>
-// sleep(random_second(900, 100, 300));
-// sleep(1500) =>
-// sleep(random_second(1350, 150, 450));
-// sleep(2000) =>
-// sleep(random_second(1800, 200, 600));
-// sleep(3000) =>
-// sleep(random_second(2700, 300, 900));
 auto.waitFor();
 var func = require("func_list.js");
 
@@ -445,32 +433,27 @@ function member_card() {
 		toastLog("member_card: 已有卡，在去完成界面，直接完成");
 		return 0;
 	}
-	if (textContains("确认授权并加入").findOnce() == null) {
+	let authority_join;
+	authority_join = textContains("确认授权并加入").findOnce();
+	if (authority_join == null) {
 		toastLog("member_card: 已有卡，未发现去完成描述，直接完成");
 		sleep(random_second(1500, 80, 450));
 	} else {
-		authorited = false;		// 表示是否勾选授权
+		log("member_card2: 加会员");
 		while (1) {
-			log("member_card: 加会员");
 			authority = textContains("确认授权即同意").findOnce();
 			if (authority != null) {
 				authority_idx = authority.indexInParent();
-				func.cClick(authority.parent().child(authority_idx - 1));
+				if (func.cClick(authority.parent().child(authority_idx - 1))) {
+					sleep(random_second(1800, 100, 1000));
+					break;
+				}
 				sleep(random_second(1800, 100, 1000));
 			}
-			sleep(3000);
 		}
-		// 如果点击了会员关闭按钮
-		let member_page_close_btn;
-		member_page_close_btn = className("ImageView").desc("关闭页面").findOnce();
-		if (member_page_close_btn == null) {
-			log("member_card: 未找到按钮，直接返回");
-			back_way();
-		} else {
-			log("member_card: 点击到了左上角关闭按钮");
-			func.sClick(member_page_close_btn);
-			sleep(random_second(1800, 100, 600));
-		}
+		sleep(1500);
+		func.sClick(authority_join);
+		sleep(3000);
 	}
 }
 

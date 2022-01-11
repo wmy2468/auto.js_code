@@ -15,32 +15,27 @@ function member_card() {
         toastLog("member_card: 已有卡，在去完成界面，直接完成");
         return 0;
     }
-    if (textContains("确认授权并加入").findOnce() == null) {
+    let authority_join;
+    authority_join = textContains("确认授权并加入").findOnce();
+    if (authority_join == null) {
         toastLog("member_card: 已有卡，未发现去完成描述，直接完成");
         sleep(random_second(1500, 80, 450));
     } else {
+        log("member_card2: 加会员");
         while (1) {
-            log("member_card: 加会员");
             authority = textContains("确认授权即同意").findOnce();
             if (authority != null) {
                 authority_idx = authority.indexInParent();
-                func.cClick(authority.parent().child(authority_idx - 1));       // 同意按钮
+                if (func.cClick(authority.parent().child(authority_idx - 1))) {
+                    sleep(random_second(1800, 100, 1000));
+                    break;
+                }
                 sleep(random_second(1800, 100, 1000));
-                click("确认授权并加入");
             }
-            sleep(3000);
         }
-        // 如果点击了会员关闭按钮
-        let member_page_close_btn;
-        member_page_close_btn = className("ImageView").desc("关闭页面").findOnce();
-        if (member_page_close_btn == null) {
-            log("member_card: 未找到按钮，直接返回");
-            back_way();
-        } else {
-            log("member_card: 点击到了左上角关闭按钮");
-            func.sClick(member_page_close_btn);
-            sleep(random_second(1800, 100, 600));
-        }
+        sleep(1500);
+        // func.sClick(authority_join);
+        sleep(3000);
     }
 }
 
