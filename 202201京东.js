@@ -417,6 +417,7 @@ function after_click(textStr, details, apps) {
 		back_way();
 	}
 	is_in_apps(apps);
+	back_way();
 	sleep(random_second(800, 100, 1000));
 	log("after_click: 已返回");
 }
@@ -430,7 +431,6 @@ function is_in_apps(appss) {
 		sleep(3500);
 	}
 	log("is_in_apps: back way")
-	back_way();
 }
 
 function waitCompleteDisappear() {
@@ -638,36 +638,14 @@ function 城城现金() {
 				break;
 			}
 		}
-		try {
-			find_text = "提醒我明日来领钱";
-			find_object = text(find_text).findOnce();
-			if (find_object != null) {
-				find_object_parent = find_object.parent().parent();
-				func.sClick(find_object_parent.child(3));
-			}
-			find_text = "可微信零钱提现";
-			find_object = text(find_text).findOnce();
-			if (find_object != null) {
-				find_object_parent = find_object.parent().parent().parent();
-				func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
-			}
-			find_text = "邀请新朋友 更快赚现金";
-			find_object = text(find_text).findOnce();
-			if (find_object != null) {
-				find_object_index = find_object.indexInParent();
-				find_object_parent = find_object.parent();
-				func.sClick(find_object_parent.child(find_object_index - 1));
-			}
-		} catch (e) {
-			log("城城现金: error: " + e);
-			continue;
-		}
 		// 如果活动结束 则退出
 		if (text("活动已结束").findOnce() != null) {
 			if (func.sClick(text("e300dc37709c6f82").findOnce())) { sleep(2000); }
 			break;
 		}
-		toastLog("城城现金: 等待-有机会得大额现金-加载，其余手动完成");
+		if (!is_in_invite_friend_page()) {
+			toastLog("城城现金: 已点击，如未返回，请手动完成返回");
+		}
 		sleep(3000);
 	}
 }
