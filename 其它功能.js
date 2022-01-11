@@ -108,16 +108,28 @@ function 芭芭农场() {
     // 支付宝
     let work = {
         tb: function (lucky_bag) {
-            if (lucky_bag == undefined) {
-                obj.to_tb()
-            } else { obj.to_tb(lucky_bag); }
             let click_text;
             click_text = ["去浏览", "去完成", "去逛逛"];
             let todo_text, todo_btn, todo_idx, step, todo_btn_text, todo_detail_text;
-            todo_idx = 8;
+
             step = 1;
-            obj.unitl_in_mission_view();
-            sleep(2000);
+            if (lucky_bag == undefined) {
+                todo_idx = 8;
+                obj.to_tb();
+                obj.unitl_in_mission_view();
+            } else {
+                todo_idx = 0;
+                obj.to_tb(lucky_bag);
+                obj.unitl_in_mission_view();
+                while (text("拆福袋领奖励").depth(15).findOnce() == null) {
+                    func.sClick(text("领红包").depth(17).findOnce());
+                    toastLog("等待跳转到福袋页面");
+                    sleep(2500);
+                }
+                toastLog("已到达福袋页面");
+            }
+            sleep(3000);
+            let continue_flag = false;
             while (1) {
                 views = className("ListView").findOnce();
                 if (views == null) { break; }
@@ -127,12 +139,28 @@ function 芭芭农场() {
                 todo_btn_text = todo_btn.text();
                 todo_detail_text = views.child(todo_idx).child(0).child(0).text();
                 todo_text = views.child(todo_idx).child(0).child(1).child(0).text();
-                if (obj.arr_in_text(todo_text, ["秒"]) && click_text.indexOf(todo_btn_text) != -1) {
-                    log(todo_text);
+                log("todo_text=" + todo_text);
+                log("todo_detail_text=" + todo_detail_text);
+                if (click_text.indexOf(todo_btn_text) != -1) {
+                    if (lucky_bag == undefined) {
+                        if (!obj.arr_in_text(todo_text, ["秒"])) {
+                            continue_flag = true;
+                        }
+                    } else {
+                        if (todo_detail_text.indexOf("邀请") != -1) {
+                            continue_flag = true;
+                        }
+                    }
+                    if (continue_flag) {
+                        continue_flag = false;
+                        todo_idx = todo_idx + step;
+                        log("todo_idx 增加 step");
+                        sleep(300);
+                        continue;
+                    }
                     func.sClick(todo_btn);
                     while (obj.in_mission_view()) { toastLog("等待任务视图消失"); sleep(2500); }
                     toastLog("Mission 视图已消失");
-                    log("todo_detail_text=" + todo_detail_text);
                     if (todo_detail_text == "逛逛'买多少返多少'(0/1)" || todo_detail_text == "浏览天天领现金(0/1)") {
                         toastLog("找到买返 红包");
                         func.sClick(text("打开链接").findOne());
