@@ -107,12 +107,10 @@ function 芭芭农场() {
     }
     // 支付宝
     let work = {
-        tb_lucky_bag: function () {
-            let click_text;
-            click_text = ["去浏览", "去完成", "去逛逛"];
-        },
-        tb: function () {
-            obj.to_tb();
+        tb: function (lucky_bag) {
+            if (lucky_bag == undefined) {
+                obj.to_tb()
+            } else { obj.to_tb(lucky_bag); }
             let click_text;
             click_text = ["去浏览", "去完成", "去逛逛"];
             let todo_text, todo_btn, todo_idx, step, todo_btn_text, todo_detail_text;
