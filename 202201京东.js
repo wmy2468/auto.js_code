@@ -82,11 +82,10 @@ function 开始做任务() {
 		// --------------关闭各种弹窗----------------
 		try {
 			// 关闭助力
-			find_object = text("刚刚又有好友为你助力\n爆竹又增加啦~").findOnce();
+			find_object = textContains("爆竹又增加啦~").findOnce();
 			if (find_object != null) {
 				find_object_parent = find_object.parent();
-				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) { }		// 点击领取
-				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+				if (func.sClick(find_object_parent.child(0))) {
 					toastLog("开始做任务: 点击了 关闭助力");
 					sleep(2000);
 				}		// 点击领取
@@ -94,11 +93,35 @@ function 开始做任务() {
 				log("开始做任务: 未找到 好友助力");
 			}
 
-			// 关闭每日签到
-			find_object = text("不要断签哦~别让大红包飞走").findOnce();
+			// 关闭 继续环游
+			find_object = textContains("继续环游").findOnce();
 			if (find_object != null) {
-				find_object_parent = find_object.parent().parent().parent().parent();
-				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+				find_object_parent = find_object.parent();
+				if (func.sClick(find_object_parent.child(1))) {
+					toastLog("开始做任务: 点击了 继续环游");
+					sleep(2000);
+				}
+			} else {
+				log("开始做任务: 未找到 继续环游");
+			}
+
+			// 关闭欢迎回来
+			find_object = text("欢迎回来").findOnce();
+			if (find_object != null) {
+				find_object_parent = find_object.parent();
+				if (func.sClick(find_object_parent.child(1))) {
+					toastLog("开始做任务: 点击了 关闭欢迎回来");
+					sleep(2000);
+				}
+			} else {
+				log("开始做任务: 未找到 欢迎回来");
+			}
+
+			// 关闭每日签到
+			find_object = textContains("不要断签哦~别让大红包飞走").findOnce();
+			if (find_object != null) {
+				find_object_parent = find_object.parent();
+				if (func.sClick(find_object_parent.child(0)) || func.sClick(find_object_parent.child(1))) {
 					toastLog("开始做任务: 点击了 关闭每日签到");
 					sleep(2000);
 				}
@@ -106,10 +129,10 @@ function 开始做任务() {
 				log("开始做任务: 未找到 每日签到");
 			}
 			// 关闭开心收下
-			find_object = text("距离下一个红包还要签到").findOnce();
+			find_object = textContains("距离下一个红包还要签到").findOnce();
 			if (find_object != null) {
-				find_object_parent = find_object.parent().parent().parent();
-				if (func.sClick(find_object_parent.child(1))) {
+				find_object_parent = find_object.parent();
+				if (func.sClick(find_object_parent.child(0)) || func.sClick(find_object_parent.child(1))) {
 					toastLog("开始做任务: 点击了 关闭开心收下");
 					sleep(2000);
 				}
