@@ -103,7 +103,8 @@ function 云闪付() {
         print(coupon_desc_list);
         func.to_app("云闪付");
         http.__okhttp__.setTimeout(3000);       // 设置超时2秒
-        let res, res_text, coupon_quota, break_flag, url_origin;
+        let res, res_text, coupon_quota, break_flag, url_origin, url_jump_prefix;
+        url_jump_prefix = url_jump.slice(0, -16);
         break_flag = false;
         while (true) {
             // coupon_id_list.forEach(coupon_id => {
@@ -116,7 +117,7 @@ function 云闪付() {
                     coupon_quota = res_text["params"]["couponQuota"];
                     // 如果券的百分比不为0，则跳转, xm券为null
                     if (coupon_quota != "以实际宣传为准" && coupon_quota != "今日已抢完") {
-                        func.to_scheme(url_jump);
+                        func.to_scheme(url_jump_prefix + coupon_id);
                         device.vibrate(1000);
                         log(coupon_dict[coupon_id] + ":" + coupon_quota);
                         // to_js_flag = true;
