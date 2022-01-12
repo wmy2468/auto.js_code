@@ -192,11 +192,17 @@ function 芭芭农场() {
             else if (dev_model == dev_honor8) { url1 = url_mate30; url2 = url_redmi; }
             else if (dev_model == dev_redmi) { url1 = url_mate30; url2 = url_honor; }
             func.to_scheme(url1);
+            toastLog("已跳转URL 1");
+            text("为Ta助力").findOne();
+            sleep(2000);
             func.sClick(text("为Ta助力").findOne());
             toastLog("已点击助力，等待下一个");
             sleep(3000);
             home();
             func.to_scheme(url2);
+            toastLog("已跳转URL 2");
+            text("为Ta助力").findOne();
+            sleep(2000);
             func.sClick(text("为Ta助力").findOne());
             sleep(3000);
         }
