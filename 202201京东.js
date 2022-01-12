@@ -655,16 +655,31 @@ function 品牌墙() {
 }
 
 function 城城现金() {
-	let find_text, find_object, find_object_parent;	// 定义查找的变量
+	let find_text, find_object, find_object_parent, click_flag;	// 定义查找的变量
+	click_flag = false;
 	while (1) {
 		find_text = "有机会得大额现金";
 		find_object = textContains(find_text).findOnce();
 		try {
-			if (find_object != null) {
+			if (find_object != null && click_flag == false) {
 				find_object_parent = find_object.parent();
 				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+					click_flag = true;
 					toastLog("已点击邀请好友按钮，退出");
 					sleep(3000);
+					continue;
+				}
+			}
+			if (click_flag == true) {
+				sleep(3000);
+				find_text = "京口令已复制";
+				find_object = className("TextView").text(find_text).findOnce();
+				if (find_object != null) {
+					find_object_parent = find_object.parent();
+					func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+					func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+					toastLog("城城现金: 已点击 京口令 关闭按钮");
+					sleep(2000);
 					break;
 				}
 			}
@@ -797,7 +812,7 @@ function close_popup() {
 	let find_object, find_object_parent;	// 定义查找的变量
 	try {
 		let target_text = ["不要断签哦~别让大红包飞走", "距离下一个红包还要签到",
-			"爆竹又增加啦~", "继续环游", "欢迎回来", "欢迎您", "立即抽奖"];
+			"爆竹又增加啦~", "继续环游", "欢迎回来", "欢迎您", "立即抽奖","开启今日环游"];
 		for (let i = 0; i < target_text.length; i++) {
 			// 关闭助力
 			find_object = textContains(target_text[i]).findOnce();
