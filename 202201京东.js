@@ -146,9 +146,11 @@ function 图鉴() {
 			target_list = target.parent();
 			log("start_idx=" + start_idx);
 			log("target_list.childCount=" + target_list.childCount());
-			if (start_idx - 2 > target_list.childCount() - 1) { break; }
+			if (start_idx > target_list.childCount() - 2) { break; }
 			// 2. 进入独立图鉴中
+
 			items = target_list.child(start_idx).child(0);
+			log("------------stations=" + items.child(0).text());
 			item_go = items.child(3);
 		} catch (e) { log("error=" + e); continue; }
 		func.sClick(item_go);
