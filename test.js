@@ -6,26 +6,9 @@ let url_jd = "openApp.jdMobile://"
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
 
-func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
-let tb_ele;
-while (!in_mission_view()) {
-    // if (text("最近你的队友都有努力种树哦").findOnce() != null) {}
-    func.sClick(text("继续努力").findOnce());
-    // if (textContains("亲密度达到了").textEndsWith("获得了亲密度奖励").findOnce() != null) {}
-    func.sClick(text("关闭").depth(13).findOnce());
-    toastLog("请手动跳转到农场任务界面");
-    func.sClick(text("A*ccswT6bSKCsAAAAAAAAAAAAAARQnAQ").findOnce());
-    try {
-        tb_ele = text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
-        if (tb_ele != null) {
-            func.sClick(tb_ele.parent().child(2));
-        }
-    } catch (e) { sleep(500); continue; }
-    sleep(3000);
-}
-toastLog("已到达农场任务界面");
-views = className("android.view.View").scrollable(true).findOne();
-func.sClick(views.child(views.childCount() - 2));
+
+log(text("为Ta助力").findOne());
+func.sClick(text("为Ta助力").findOne());
 
 
 function in_mission_view() {

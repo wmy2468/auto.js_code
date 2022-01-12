@@ -2,6 +2,11 @@ auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
 var cfg = func.config_dict();
+var dev_model = device.model;
+var dev_mate30, dev_honor8, dev_redmi;
+dev_mate30 = "TAS-AL00";
+dev_honor8 = "FRD-AL00";
+dev_redmi = "Redmi Note 7";
 
 main();
 // toastLog(text("领取奖励").find().length);
@@ -176,10 +181,28 @@ function 芭芭农场() {
             }
             // click("领取");
             sleep(2000);
+        },
+        zfb助力: function () {
+            let url_mate30, url_redmi, url_honor;
+            url_mate30 = "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjU2NjcxNDcyMDA5cDFyY0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802566714720&chInfo=ch_share__chsub_Weixin&apshareid=67021669-4f86-433a-b0f8-e9a3d92ffa4a";
+            url_redmi = "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgzMjgzNTY5OTY5MjBkMGk1MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088832835699692&chInfo=ch_share__chsub_Weixin&apshareid=b1f3a960-e284-41ad-a05b-893d49edbca1";
+            url_honor = "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODE0MjMxMzQ4OTE4ODBvNWR3MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088142313489188&chInfo=ch_share__chsub_Weixin&apshareid=f33b8fe2-57ba-468b-8179-708d640216c0";
+            let url1, url2;
+            if (dev_model == dev_mate30) { url1 = url_redmi; url2 = url_honor; }
+            else if (dev_model == dev_honor8) { url1 = url_mate30; url2 = url_redmi; }
+            else if (dev_model == dev_redmi) { url1 = url_mate30; url2 = url_honor; }
+            func.to_scheme(url1);
+            func.sClick(text("为Ta助力").findOne());
+            toastLog("已点击助力，等待下一个");
+            sleep(3000);
+            home();
+            func.to_scheme(url2);
+            func.sClick(text("为Ta助力").findOne());
+            sleep(3000);
         }
     }
     // 执行函数
-    let select_item = func.dialogsWin(["淘宝+淘宝福气红包", "淘宝", "淘宝福气红包", "支付宝"])
+    let select_item = func.dialogsWin(["淘宝+淘宝福气红包", "淘宝", "淘宝福气红包", "支付宝", "支付宝助力"])
     if (select_item == "淘宝") {
         work.tb();
     } else if (select_item == "淘宝福气红包") {
@@ -187,6 +210,8 @@ function 芭芭农场() {
     } else if (select_item == "淘宝+淘宝福气红包") {
         work.tb();
         work.tb(123);
+    } else if (select_item == "支付宝助力") {
+        work.zfb助力();
     } else {
         work.zfb();
     }
