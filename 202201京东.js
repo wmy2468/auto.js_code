@@ -131,7 +131,7 @@ function 图鉴() {
 		if (func.sClick(text("送爆竹").findOnce())) { toastLog("已点击 图鉴入口"); sleep(3000); }
 	}
 	// 3. 执行独立任务
-	let target, items, item_go, target_list;
+	let target, items, item_go, target_list, station_count;
 	let start_idx = 2, mission_btn;
 	while (1) {
 		log("clickComplete: 进入查找环节");
@@ -148,12 +148,12 @@ function 图鉴() {
 			log("target_list.childCount=" + target_list.childCount());
 			if (start_idx > target_list.childCount() - 2) { break; }
 			// 2. 进入独立图鉴中
-
 			items = target_list.child(start_idx).child(0);
 			toastLog("------------stations=" + items.child(0).text());
 			item_go = items.child(3);
 		} catch (e) { log("error=" + e); continue; }
 		func.sClick(item_go);
+		station_count = 0;
 		// toastLog("已点击第" + (start_idx - 1) + "个图鉴");
 		while (!func_in_func.draw_mission_page_check()) {
 			try {
@@ -164,7 +164,13 @@ function 图鉴() {
 					toastLog("已点击任务按钮...");
 				}
 			} catch (e) { log("报错=" + e); continue; }
+			station_count = station_count + 1;
 			sleep(3000);
+			if (station_count > 10) {
+				toastLog("任务加载失败或未找到任务.....即将返回");
+				sleep(3000);
+				break;
+			}
 		}
 		func_in_func.draw_click();
 		start_idx = start_idx + 1;
