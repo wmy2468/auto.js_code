@@ -154,11 +154,17 @@ function 云闪付() {
         let startTime, timeArea;
 
         timeArea = "北京时间";
+        if (func.dialogsWin(["日常11点券", "周三14点券"]) == "日常11点券") {
+            coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]));
+            url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
+        } else {
+            coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年_周三14点"]));
+            url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年_周三14点"][coupon_desc];
+        }
 
-        coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]))
         // coupon_id = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc]))
 
-        url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
+
         if (coupon_desc.substring(0, 5) == "周三14点") {
             startTime = "13,59,55,000";
         } else {

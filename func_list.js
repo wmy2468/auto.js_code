@@ -78,6 +78,7 @@ function config_dict() {
             },
             "支付宝": {
                 "余额宝": "alipays://platformapi/startapp?appId=20000032",
+                "芭芭农场": "alipays://platformapi/startapp?appId=68687599",
             }
         },
     }

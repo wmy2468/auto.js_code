@@ -60,14 +60,15 @@ function 芭芭农场() {
             toastLog("已到达农场任务界面");
         },
         to_zfb: function () {
-            setClip("手一抖肥料到手！ https://mobile.alipay.com/DZa37Al697s#快来帮我助力，使用此消息去支、付、宝查、看，动动小手得奖励，一、起种果树，领水果！");
-            sleep(1500);
-            func.to_app("支付宝");
-            func.sClick(text("去看看").findOne());
-            let help_for_her, help_parent;
-            help_for_her = text("为Ta助力").findOne();
-            help_parent = help_for_her.parent().parent();
-            func.sClick(help_parent.child(help_parent.childCount() - 1));
+            func.to_scheme(cfg["支付宝"]["芭芭农场"]);
+            // setClip("手一抖肥料到手！ https://mobile.alipay.com/DZa37Al697s#快来帮我助力，使用此消息去支、付、宝查、看，动动小手得奖励，一、起种果树，领水果！");
+            // sleep(1500);
+            // func.to_app("支付宝");
+            // func.sClick(text("去看看").findOne());
+            // let help_for_her, help_parent;
+            // help_for_her = text("为Ta助力").findOne();
+            // help_parent = help_for_her.parent().parent();
+            // func.sClick(help_parent.child(help_parent.childCount() - 1));
         },
         to_tb: function (is_lucky_bag) {
             if (is_lucky_bag == undefined) {
