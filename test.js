@@ -6,10 +6,17 @@ let url_jd = "openApp.jdMobile://"
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
 
-
-log(textContains("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce());
+find_text = "个有机会得大额现金";
+find_object = textContains(find_text).findOnce();
+log(find_object);
 // func.sClick(text("为Ta助力").findOne());
-
+if (find_object != null) {
+    find_object_parent = find_object.parent();
+    if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+        toastLog("已点击邀请好友按钮，退出");
+        sleep(3000);
+    }
+}
 
 function in_mission_view() {
     if (currentPackage() == "com.taobao.taobao") {

@@ -648,42 +648,29 @@ function 品牌墙() {
 }
 
 function 城城现金() {
-	let find_text, find_object, find_object_index, find_object_parent;	// 定义查找的变量
+	let find_text, find_object, find_object_parent;	// 定义查找的变量
 	while (1) {
 		find_text = "有机会得大额现金";
 		find_object = textContains(find_text).findOnce();
-		if (find_object != null) {
-			find_object_parent = find_object.parent();
-			if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
-				find_text = "京口令已复制";
-				find_object = className("TextView").text(find_text).findOnce();
-				while (find_object == null) {
-					toastLog("城城现金: 未发现京口令窗口，请手动点击邀请好友触发，否则不会返回");
+		try {
+			if (find_object != null) {
+				find_object_parent = find_object.parent();
+				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+					toastLog("已点击邀请好友按钮，退出");
 					sleep(3000);
-					// 如果没有找到京口令，但是弹出微信选择框，则退出
-					if (text("使用以下方式打开").findOnce() != null || text("请选择要使用的应用").findOnce() != null) {
-						find_object = null;
-						break;
-					}
-					find_object = className("TextView").text(find_text).findOnce();
+					break;
 				}
-				if (find_object != null) {
-					find_object_parent = find_object.parent();
-					func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
-					toastLog("城城现金: 已点击 京口令 关闭按钮");
-					sleep(2000);
-				}
-				break;
 			}
+		} catch (e) {
+			log("城城现金报错=" + e);
+			continue;
 		}
 		// 如果活动结束 则退出
 		if (text("活动已结束").findOnce() != null) {
 			if (func.sClick(text("e300dc37709c6f82").findOnce())) { sleep(2000); }
 			break;
 		}
-		if (!is_in_invite_friend_page()) {
-			toastLog("城城现金: 已点击，如未返回，请手动完成返回");
-		}
+		toastLog("如果城城现金长时间未返回、未点击任何按钮，请手动处理");
 		sleep(3000);
 	}
 }
