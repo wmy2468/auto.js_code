@@ -49,7 +49,7 @@ scheme_list = {
 
 app.startActivity({
     action: "android.intent.action.VIEW",
-    data: scheme_list["test"],
+    data: scheme_list["支付宝芭芭农场"],
 });
 
 // --------------url scheme--------------

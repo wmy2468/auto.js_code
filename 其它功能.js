@@ -81,6 +81,7 @@ function 芭芭农场() {
 
             step = 1;
             func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
+            sleep(2500);
             obj.unitl_in_mission_view();
             if (lucky_bag == undefined) {
                 todo_idx = 8;
@@ -145,6 +146,7 @@ function 芭芭农场() {
         },
         zfb: function () {
             func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
+            sleep(2500);
             let click_text;
             click_text = ["去浏览", "去完成", "去逛逛"];
             let todo_text, todo_btn, todo_idx, step, todo_btn_text;
