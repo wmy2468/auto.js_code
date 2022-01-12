@@ -6,7 +6,244 @@ let url_jd = "openApp.jdMobile://"
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
 
-log(className("ListView").find().length);
+log(idContains("diary-mysterious").findOnce());
+
+function 图鉴() {
+    let func_in_func = {
+        draw_page_check: function () {
+            if (textStartsWith("已解锁").textEndsWith("/20").findOnce() != null
+                && id("diary-mysterious").findOnce() != null) { return true; }
+            else { return false; }
+        },
+        draw_mission_page_close_popup: function () {
+            let shop_lucky_bag, luckey_bag_parent;
+            shop_lucky_bag = text("37a630946f6ea871").findOnce();
+            if (shop_lucky_bag != null) {
+                luckey_bag_parent = shop_lucky_bag.parent().parent();
+                func.sClick(luckey_bag_parent.child(luckey_bag_parent.childCount() - 1));
+            }
+        },
+        draw_mission_page_check: function () {
+            if (text("邀1位好友开品牌会员").depth(18).findOnce() != null) { return true; }
+            else { return false; }
+        },
+        draw_click: function () {
+            let todo_idx, todo_parent, todo_idx_in_parent, todo_text, todo;
+            todo_idx = 0;
+            while (draw_mission_page_check()) {
+                todo = text("去完成").find();
+                if (todo.length == 0) { return 0; }
+                if (todo_idx > todo.length - 1) { return 0; }
+                todo_parent = todo[todo_idx].parent();
+                todo_idx_in_parent = todo[todo_idx].indexInParent();
+                todo_text = todo_parent.child(todo_idx_in_parent - 3).text();
+                toastLog("当前todo_text=" + todo_text);
+                func.sClick(todo[todo_idx]);
+                if (arr_in_text(todo_text, ["去逛"])) { sleep(6000); back_way(); }
+                else if (arr_in_text(todo_text, ["会员"])) { member_card(); }
+                else if (arr_in_text(todo_text, ["签到"])) { sleep(5000); }
+                else {
+                    toastLog("未找到满足条件的文本，idx+1");
+                    todo_idx = todo_idx + 1;
+                    sleep(2000);
+                    continue;
+                }
+            }
+        }
+    }
+    // 1. 进入图鉴界面
+    首页banner启动();
+    while (!func_in_func.draw_page_check()) {
+        toastLog("图鉴主界面未加载"); sleep(3000);
+        close_popup(); sleep(3000);
+        if (func.sClick(text("送爆竹").findOnce())) { sleep(3000); }
+    }
+    // 3. 执行独立任务
+    let target, items, item_go, target_list;
+    let start_idx = 2, mission_btn;
+    while (func_in_func.draw_page_check()) {
+        target = id("diary-mysterious").findOnce();
+        if (target == null) {
+            toastLog("图鉴主界面未加载"); sleep(3000);
+            continue;
+        }
+        target_list = target.parent();
+        // 2. 进入独立图鉴中
+        for (let i = start_idx; i < target_list.childCount() - 1; i++) {
+            items = target_list[i].child(0);
+            item_go = items.child(3);
+            func.sClick(item_go);
+            while (!func_in_func.draw_mission_page_check()) {
+                try {
+                    mission_btn = idContains("/pages/index/index").findOnce();
+                    if (mission_btn != null) { mission_btn.child(2).click(); }
+                } catch (e) { log("报错=" + e); continue; }
+                sleep(3000);
+            }
+            func_in_func.draw_click();
+        }
+    }
+}
+
+function member_card() {
+    let authority, authority_idx;
+    sleep(random_second(3500, 300, 1000));
+    if (is_in_invite_friend_page()) {
+        toastLog("member_card: 已有卡，在去完成界面，直接完成");
+        return 0;
+    }
+    let authority_join;
+    authority_join = textContains("确认授权并加入").findOnce();
+    if (authority_join == null) {
+        toastLog("member_card: 已有卡，未发现去完成描述，直接完成");
+        sleep(random_second(1500, 80, 450));
+    } else {
+        log("member_card2: 加会员");
+        while (1) {
+            authority = textContains("确认授权即同意").findOnce();
+            if (authority != null) {
+                authority_idx = authority.indexInParent();
+                if (func.cClick(authority.parent().child(authority_idx - 1))) {
+                    sleep(random_second(1800, 100, 1000));
+                    break;
+                }
+                sleep(random_second(1800, 100, 1000));
+            }
+        }
+        sleep(1500);
+        func.sClick(authority_join);
+        sleep(3000);
+    }
+}
+
+function arr_in_text(target_str, arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if (target_str.indexOf(arr[i]) != -1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function close_popup() {
+    let find_object, find_object_parent;	// 定义查找的变量
+    try {
+        let target_text = ["不要断签哦~别让大红包飞走", "距离下一个红包还要签到",
+            "爆竹又增加啦~", "继续环游", "欢迎回来", "欢迎您", "立即抽奖"];
+        for (let i = 0; i < target_text.length; i++) {
+            // 关闭助力
+            find_object = textContains(target_text[i]).findOnce();
+            if (find_object != null) {
+                find_object_parent = find_object.parent();
+                if (func.sClick(find_object_parent.child(1)) == true) {
+                    toastLog("开始做任务: 点击了 关闭助力");
+                    sleep(2000);
+                    break;
+                }
+                if (func.sClick(find_object_parent.child(0)) == true) {
+                    // if (func.sClick(find_object_parent.child(0))) {
+                    toastLog("开始做任务: 点击了 关闭助力");
+                    sleep(2000);
+                    break;
+                }		// 点击领取
+            } else {
+                log("开始做任务: 未找到 好友助力");
+            }
+        }
+
+        // // 关闭助力
+        // find_object = textContains("爆竹又增加啦~").findOnce();
+        // if (find_object != null) {
+        // 	find_object_parent = find_object.parent();
+        // 	if (func.sClick(find_object_parent.child(0))) {
+        // 		toastLog("开始做任务: 点击了 关闭助力");
+        // 		sleep(2000);
+        // 	}		// 点击领取
+        // } else {
+        // 	log("开始做任务: 未找到 好友助力");
+        // }
+
+        // // 关闭 继续环游
+        // find_object = textContains("继续环游").findOnce();
+        // if (find_object != null) {
+        // 	find_object_parent = find_object.parent();
+        // 	if (func.sClick(find_object_parent.child(1))) {
+        // 		toastLog("开始做任务: 点击了 继续环游");
+        // 		sleep(2000);
+        // 	}
+        // } else {
+        // 	log("开始做任务: 未找到 继续环游");
+        // }
+
+        // // 关闭欢迎回来
+        // find_object = text("欢迎回来").findOnce();
+        // if (find_object != null) {
+        // 	find_object_parent = find_object.parent();
+        // 	if (func.sClick(find_object_parent.child(1))) {
+        // 		toastLog("开始做任务: 点击了 关闭欢迎回来");
+        // 		sleep(2000);
+        // 	}
+        // } else {
+        // 	log("开始做任务: 未找到 欢迎回来");
+        // }
+
+        // // 关闭每日签到
+        // find_object = textContains("不要断签哦~别让大红包飞走").findOnce();
+        // if (find_object != null) {
+        // 	find_object_parent = find_object.parent();
+        // 	if (func.sClick(find_object_parent.child(0)) || func.sClick(find_object_parent.child(1))) {
+        // 		toastLog("开始做任务: 点击了 关闭每日签到");
+        // 		sleep(2000);
+        // 	}
+        // } else {
+        // 	log("开始做任务: 未找到 每日签到");
+        // }
+        // // 关闭开心收下
+        // find_object = textContains("距离下一个红包还要签到").findOnce();
+        // if (find_object != null) {
+        // 	find_object_parent = find_object.parent();
+        // 	if (func.sClick(find_object_parent.child(0)) || func.sClick(find_object_parent.child(1))) {
+        // 		toastLog("开始做任务: 点击了 关闭开心收下");
+        // 		sleep(2000);
+        // 	}
+        // } else {
+        // 	log("开始做任务: 未找到 红包开心");
+        // }
+        // 点击任务按钮
+        toastLog("开始做任务: 正在查找 邀请好友助力 界面");
+        sleep(3000);
+    } catch (e) {
+        log("开始做任务: error" + e);
+    }
+}
+
+function 首页banner启动() {
+    func.to_app(appName);
+    while (!mission_page_check()) {
+        func.cClick(desc("浮层活动").findOnce());
+        toastLog("请跳转到京东APP，如果首页没有入口按钮，需手动跳转到活动界面");
+        sleep(2000);
+    }
+    toastLog("已找到打卡领红包 打卡领红包");
+    sleep(random_second(2000, 100, 500));
+}
+function mission_page_check() {
+    let start_text, end_text;
+    start_text = "集爆竹炸年兽"
+    end_text = "0个爆竹"
+
+    find_object = className("android.view.View").textStartsWith(start_text).textEndsWith(end_text).findOnce();
+    if (find_object == null) { find_object = className("android.view.View").descStartsWith(start_text).descEndsWith(end_text).findOnce(); }
+    start_text = "解锁";
+    if (find_object == null) { find_object = className("android.view.View").textStartsWith(start_text).textEndsWith(end_text).findOnce(); }
+    if (find_object == null) { find_object = className("android.view.View").descStartsWith(start_text).descEndsWith(end_text).findOnce(); }
+
+    if (find_object != null) {
+        log("已在做任务页面");
+        return true;
+    }
+    return false;
+}
 
 function 芭芭农场() {
     let obj = {

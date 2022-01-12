@@ -213,6 +213,7 @@ function 芭芭农场() {
             alert("已完成");
         }
     }
+    // 执行函数
     let select_item = func.dialogsWin(["淘宝", "淘宝福气红包", "支付宝"])
     if (select_item == "淘宝") {
         work.tb();
@@ -221,6 +222,7 @@ function 芭芭农场() {
     } else {
         work.zfb();
     }
+    setClip("");
 }
 
 

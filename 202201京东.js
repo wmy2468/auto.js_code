@@ -17,7 +17,7 @@ main();
 
 function main() {
 	let sMission;
-	sMission = func.dialogsWin(["做任务", "金融任务"]);
+	sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click"]);
 	switch (sMission) {
 		case "做任务":
 			做任务();
@@ -25,9 +25,9 @@ function main() {
 		case "金融任务":
 			金融任务();
 			break;
-		// case "互助":
-		// 	互助();
-		// 	break;
+		case "图鉴Click":
+			图鉴();
+			break;
 	}
 	setClip("");
 	// console.clear();
@@ -71,84 +71,118 @@ function 金融任务() {
 	sleep(3000);
 	clickComplete("京东金融");
 }
-
-
+// -------------------------图鉴任务----------------------------
+function 图鉴() {
+	let func_in_func = {
+		draw_page_check: function () {
+			if (textStartsWith("已解锁").textEndsWith("/20").findOnce() != null
+				&& idContains("diary-mysterious").findOnce() != null) { return true; }
+			else { return false; }
+		},
+		draw_mission_page_close_popup: function () {
+			let shop_lucky_bag, luckey_bag_parent;
+			shop_lucky_bag = text("37a630946f6ea871").findOnce();
+			if (shop_lucky_bag != null) {
+				luckey_bag_parent = shop_lucky_bag.parent().parent();
+				func.sClick(luckey_bag_parent.child(luckey_bag_parent.childCount() - 1));
+				toastLog("已点击 关闭弹窗");
+			}
+		},
+		draw_mission_page_check: function () {
+			if (text("邀1位好友开品牌会员").depth(18).findOnce() != null) { return true; }
+			else { return false; }
+		},
+		draw_click: function () {
+			let todo_idx, todo_parent, todo_idx_in_parent, todo_text, todo;
+			todo_idx = 0;
+			while (text("邀1位好友开品牌会员").depth(18).findOnce() != null) {
+				todo = text("去完成").find();
+				if (todo.length == 0) { break; }
+				if (todo_idx > todo.length - 1) { break; }
+				todo_parent = todo[todo_idx].parent();
+				todo_idx_in_parent = todo[todo_idx].indexInParent();
+				todo_text = todo_parent.child(todo_idx_in_parent - 3).text();
+				toastLog("当前todo_text=" + todo_text);
+				if (arr_in_text(todo_text, ["邀1位好友", "加购商品"])) {
+					toastLog("未找到满足条件的文本，idx+1");
+					todo_idx = todo_idx + 1;
+					sleep(2000);
+					continue;
+				} else {
+					func.sClick(todo[todo_idx]);
+					if (arr_in_text(todo_text, ["去逛"])) { sleep(6000); back_way(); }
+					else if (arr_in_text(todo_text, ["会员"])) { member_card(); }
+					else if (arr_in_text(todo_text, ["签到"])) { sleep(5000); }
+					else {
+						toastLog("未找到满足条件的文本，idx+1");
+						todo_idx = todo_idx + 1;
+						sleep(2000);
+						continue;
+					}
+				}
+			}
+		}
+	}
+	// 1. 进入图鉴界面
+	首页banner启动();
+	while (!func_in_func.draw_page_check()) {
+		toastLog("图鉴主界面未加载"); sleep(3000);
+		close_popup(); sleep(3000);
+		if (func.sClick(text("送爆竹").findOnce())) { toastLog("已点击 图鉴入口"); sleep(3000); }
+	}
+	// 3. 执行独立任务
+	let target, items, item_go, target_list;
+	let start_idx = 2, mission_btn;
+	while (1) {
+		log("clickComplete: 进入查找环节");
+		target = idContains("diary-mysterious").findOnce();
+		if (target == null) {
+			toastLog("图鉴主界面未加载,如长时间未加载，请手动跳转");
+			sleep(5000);
+			continue;
+		}
+		try {
+			// target_list.childCount() 有23个。start_idx 从2 开始
+			target_list = target.parent();
+			log("start_idx=" + start_idx);
+			log("target_list.childCount=" + target_list.childCount());
+			if (start_idx - 2 > target_list.childCount() - 1) { break; }
+			// 2. 进入独立图鉴中
+			items = target_list.child(start_idx).child(0);
+			item_go = items.child(3);
+		} catch (e) { log("error=" + e); continue; }
+		func.sClick(item_go);
+		toastLog("已点击第" + (start_idx - 1) + "个图鉴");
+		while (!func_in_func.draw_mission_page_check()) {
+			try {
+				func_in_func.draw_mission_page_close_popup();
+				mission_btn = idContains("/pages/index/index").findOnce();
+				if (mission_btn != null) {
+					mission_btn.child(2).click();
+					toastLog("已点击任务按钮...");
+				}
+			} catch (e) { log("报错=" + e); continue; }
+			sleep(3000);
+		}
+		func_in_func.draw_click();
+		start_idx = start_idx + 1;
+		while (!func_in_func.draw_page_check()) {
+			back();
+			toastLog("返回 图鉴主界面...");
+			sleep(6000);
+		}
+		toastLog("已返回 图鉴主界面...");
+	}
+}
 // --------------------------大任务汇总区-----------------------------
 function 开始做任务() {
 	log("开始做任务: 正在等待进入活动页面");
 	//等待完全加载后，如果出现取消按钮会找不到
-	let find_object, find_object_index, find_object_parent;	// 定义查找的变量
 	while (!is_in_invite_friend_page()) {
-		// --------------关闭各种弹窗----------------
-		try {
-			// 关闭助力
-			find_object = textContains("爆竹又增加啦~").findOnce();
-			if (find_object != null) {
-				find_object_parent = find_object.parent();
-				if (func.sClick(find_object_parent.child(0))) {
-					toastLog("开始做任务: 点击了 关闭助力");
-					sleep(2000);
-				}		// 点击领取
-			} else {
-				log("开始做任务: 未找到 好友助力");
-			}
-
-			// 关闭 继续环游
-			find_object = textContains("继续环游").findOnce();
-			if (find_object != null) {
-				find_object_parent = find_object.parent();
-				if (func.sClick(find_object_parent.child(1))) {
-					toastLog("开始做任务: 点击了 继续环游");
-					sleep(2000);
-				}
-			} else {
-				log("开始做任务: 未找到 继续环游");
-			}
-
-			// 关闭欢迎回来
-			find_object = text("欢迎回来").findOnce();
-			if (find_object != null) {
-				find_object_parent = find_object.parent();
-				if (func.sClick(find_object_parent.child(1))) {
-					toastLog("开始做任务: 点击了 关闭欢迎回来");
-					sleep(2000);
-				}
-			} else {
-				log("开始做任务: 未找到 欢迎回来");
-			}
-
-			// 关闭每日签到
-			find_object = textContains("不要断签哦~别让大红包飞走").findOnce();
-			if (find_object != null) {
-				find_object_parent = find_object.parent();
-				if (func.sClick(find_object_parent.child(0)) || func.sClick(find_object_parent.child(1))) {
-					toastLog("开始做任务: 点击了 关闭每日签到");
-					sleep(2000);
-				}
-			} else {
-				log("开始做任务: 未找到 每日签到");
-			}
-			// 关闭开心收下
-			find_object = textContains("距离下一个红包还要签到").findOnce();
-			if (find_object != null) {
-				find_object_parent = find_object.parent();
-				if (func.sClick(find_object_parent.child(0)) || func.sClick(find_object_parent.child(1))) {
-					toastLog("开始做任务: 点击了 关闭开心收下");
-					sleep(2000);
-				}
-			} else {
-				log("开始做任务: 未找到 红包开心");
-			}
-			// 点击任务按钮
-			if (click_mission_btn()) {
-				sleep(3000);
-				break;
-			}
-			toastLog("开始做任务: 正在查找 邀请好友助力 界面");
+		close_popup(); // --------------关闭各种弹窗----------------
+		if (click_mission_btn()) {
 			sleep(3000);
-		} catch (e) {
-			log("开始做任务: error" + e);
-			continue;
+			break;
 		}
 	}
 	//延迟3秒
@@ -749,6 +783,8 @@ function is_in_invite_friend_page(need_find_one) {
 		if (className("Image").text(invite_friend_img_text).findOnce() != null) {
 			// toastLog("已找到 邀请好友助力 任务");
 			return true;
+		} else if (text("邀1位好友开品牌会员").findOnce() != null) {
+			return true;
 		} else {
 			// toastLog("未找到 邀请好友助力 任务");
 			return false;
@@ -758,6 +794,96 @@ function is_in_invite_friend_page(need_find_one) {
 		className("Image").text(invite_friend_img_text).findOne();
 		// toastLog("已找到 邀请好友助力 任务");
 		return true;
+	}
+}
+
+function close_popup() {
+	let find_object, find_object_parent;	// 定义查找的变量
+	try {
+		let target_text = ["不要断签哦~别让大红包飞走", "距离下一个红包还要签到",
+			"爆竹又增加啦~", "继续环游", "欢迎回来", "欢迎您", "立即抽奖"];
+		for (let i = 0; i < target_text.length; i++) {
+			// 关闭助力
+			find_object = textContains(target_text[i]).findOnce();
+			if (find_object != null) {
+				find_object_parent = find_object.parent();
+				if (func.sClick(find_object_parent.child(1)) == true) {
+					toastLog("开始做任务: 点击了 关闭助力");
+					sleep(2000);
+					break;
+				}
+				if (func.sClick(find_object_parent.child(0)) == true) {
+					// if (func.sClick(find_object_parent.child(0))) {
+					toastLog("开始做任务: 点击了 关闭助力");
+					sleep(2000);
+					break;
+				}		// 点击领取
+			}
+		}
+
+		// // 关闭助力
+		// find_object = textContains("爆竹又增加啦~").findOnce();
+		// if (find_object != null) {
+		// 	find_object_parent = find_object.parent();
+		// 	if (func.sClick(find_object_parent.child(0))) {
+		// 		toastLog("开始做任务: 点击了 关闭助力");
+		// 		sleep(2000);
+		// 	}		// 点击领取
+		// } else {
+		// 	log("开始做任务: 未找到 好友助力");
+		// }
+
+		// // 关闭 继续环游
+		// find_object = textContains("继续环游").findOnce();
+		// if (find_object != null) {
+		// 	find_object_parent = find_object.parent();
+		// 	if (func.sClick(find_object_parent.child(1))) {
+		// 		toastLog("开始做任务: 点击了 继续环游");
+		// 		sleep(2000);
+		// 	}
+		// } else {
+		// 	log("开始做任务: 未找到 继续环游");
+		// }
+
+		// // 关闭欢迎回来
+		// find_object = text("欢迎回来").findOnce();
+		// if (find_object != null) {
+		// 	find_object_parent = find_object.parent();
+		// 	if (func.sClick(find_object_parent.child(1))) {
+		// 		toastLog("开始做任务: 点击了 关闭欢迎回来");
+		// 		sleep(2000);
+		// 	}
+		// } else {
+		// 	log("开始做任务: 未找到 欢迎回来");
+		// }
+
+		// // 关闭每日签到
+		// find_object = textContains("不要断签哦~别让大红包飞走").findOnce();
+		// if (find_object != null) {
+		// 	find_object_parent = find_object.parent();
+		// 	if (func.sClick(find_object_parent.child(0)) || func.sClick(find_object_parent.child(1))) {
+		// 		toastLog("开始做任务: 点击了 关闭每日签到");
+		// 		sleep(2000);
+		// 	}
+		// } else {
+		// 	log("开始做任务: 未找到 每日签到");
+		// }
+		// // 关闭开心收下
+		// find_object = textContains("距离下一个红包还要签到").findOnce();
+		// if (find_object != null) {
+		// 	find_object_parent = find_object.parent();
+		// 	if (func.sClick(find_object_parent.child(0)) || func.sClick(find_object_parent.child(1))) {
+		// 		toastLog("开始做任务: 点击了 关闭开心收下");
+		// 		sleep(2000);
+		// 	}
+		// } else {
+		// 	log("开始做任务: 未找到 红包开心");
+		// }
+		// 点击任务按钮
+		toastLog("关闭弹窗: 已点击完成，如有未关闭，请反馈");
+		sleep(3000);
+	} catch (e) {
+		log("关闭弹窗: error" + e);
 	}
 }
 
