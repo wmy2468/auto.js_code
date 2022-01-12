@@ -35,7 +35,7 @@ function 芭芭农场() {
                     return true;
                 } return false;
             } else {
-                if (text("今天").depth(21).findOnce() == null) {
+                if (textStartsWith("第").textEndsWith("天").depth(21).findOnce() == null) {
                     return false;
                 } return true;
             }
