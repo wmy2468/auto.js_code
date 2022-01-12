@@ -142,7 +142,6 @@ function 芭芭农场() {
             }
             // click("领取");
             sleep(2000);
-            alert("已完成");
         },
         zfb: function () {
             func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
@@ -177,19 +176,22 @@ function 芭芭农场() {
             }
             // click("领取");
             sleep(2000);
-            alert("已完成");
         }
     }
     // 执行函数
-    let select_item = func.dialogsWin(["淘宝", "淘宝福气红包", "支付宝"])
+    let select_item = func.dialogsWin(["淘宝+淘宝福气红包", "淘宝", "淘宝福气红包", "支付宝"])
     if (select_item == "淘宝") {
         work.tb();
     } else if (select_item == "淘宝福气红包") {
+        work.tb(123);
+    } else if (select_item == "淘宝+淘宝福气红包") {
+        work.tb();
         work.tb(123);
     } else {
         work.zfb();
     }
     setClip("");
+    alert("已完成");
 }
 
 
