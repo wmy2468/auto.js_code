@@ -60,7 +60,7 @@ function 芭芭农场() {
             toastLog("已到达农场任务界面");
         },
         to_zfb: function () {
-            setClip("小手、一抖领~~肥~~料~~ https://mobile.alipay.com/s7blGEP72ln#一起互相助力，复~制本消、息去支付宝首页看看，你也会领肥~料一起来种真水果");
+            setClip("手一抖肥料到手！ https://mobile.alipay.com/DZa37Al697s#快来帮我助力，使用此消息去支、付、宝查、看，动动小手得奖励，一、起种果树，领水果！");
             sleep(1500);
             func.to_app("支付宝");
             func.sClick(text("去看看").findOne());
