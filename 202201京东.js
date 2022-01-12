@@ -150,11 +150,11 @@ function 图鉴() {
 			// 2. 进入独立图鉴中
 
 			items = target_list.child(start_idx).child(0);
-			log("------------stations=" + items.child(0).text());
+			toastLog("------------stations=" + items.child(0).text());
 			item_go = items.child(3);
 		} catch (e) { log("error=" + e); continue; }
 		func.sClick(item_go);
-		toastLog("已点击第" + (start_idx - 1) + "个图鉴");
+		// toastLog("已点击第" + (start_idx - 1) + "个图鉴");
 		while (!func_in_func.draw_mission_page_check()) {
 			try {
 				func_in_func.draw_mission_page_close_popup();
