@@ -165,6 +165,7 @@ function 图鉴() {
 				}
 			} catch (e) { log("报错=" + e); continue; }
 			station_count = station_count + 1;
+			toastLog("任务加载中..第" + station_count + "次");
 			sleep(3000);
 			if (station_count > 10) {
 				toastLog("任务加载失败或未找到任务.....即将返回");
