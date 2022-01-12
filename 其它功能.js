@@ -59,40 +59,6 @@ function 芭芭农场() {
             }
             toastLog("已到达农场任务界面");
         },
-        to_zfb: function () {
-            func.to_scheme(cfg["支付宝"]["芭芭农场"]);
-            // setClip("手一抖肥料到手！ https://mobile.alipay.com/DZa37Al697s#快来帮我助力，使用此消息去支、付、宝查、看，动动小手得奖励，一、起种果树，领水果！");
-            // sleep(1500);
-            // func.to_app("支付宝");
-            // func.sClick(text("去看看").findOne());
-            // let help_for_her, help_parent;
-            // help_for_her = text("为Ta助力").findOne();
-            // help_parent = help_for_her.parent().parent();
-            // func.sClick(help_parent.child(help_parent.childCount() - 1));
-        },
-        to_tb: function (is_lucky_bag) {
-            if (is_lucky_bag == undefined) {
-                setClip("5嘻能不我去他么小年多去着嘻táo️Ьáò或点这里链节 https://m.tb.cn/h.fQaWymR?sm=7cf63f 至浏览er【╭ァ菓樹⒐筷種好ロ拉℅！壹定要️啊！】");
-            }
-            else { setClip("68哈时时学起他么小小要中看， https://m.tb.cn/h.fkypFpu?sm=fb04a3  你收到一条拜年祝福啦～快点击收下！领福气红包一起分1亿！"); }
-            sleep(1500);
-            func.to_app("淘宝");
-            while (1) {
-                if (func.sClick(desc("查看详情").findOnce()) || func.sClick(desc("打开").findOnce())) { break; }
-                sleep(2000);
-            }
-            let help_for_her, help_parent;
-            while (1) {
-                help_for_her = text("为TA助力").findOnce();
-                if (help_for_her == null) { help_for_her = text("去种果树").findOnce(); }
-                if (help_for_her == null) { help_for_her = text("我也要拿红包").findOnce(); }
-                if (help_for_her == null) { help_for_her = text("马上拜年").findOnce(); }
-                if (help_for_her != null) { break; }
-                sleep(3000);
-            }
-            help_parent = help_for_her.parent().parent();
-            func.sClick(help_parent.child(help_parent.childCount() - 1));
-        },
         view_15_second: function () {
             sleep(5000);
             swipe(500, 800, 500, 600, 200);
@@ -114,14 +80,12 @@ function 芭芭农场() {
             let todo_text, todo_btn, todo_idx, step, todo_btn_text, todo_detail_text;
 
             step = 1;
+            func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
+            obj.unitl_in_mission_view();
             if (lucky_bag == undefined) {
                 todo_idx = 8;
-                obj.to_tb();
-                obj.unitl_in_mission_view();
             } else {
                 todo_idx = 0;
-                obj.to_tb(lucky_bag);
-                obj.unitl_in_mission_view();
                 while (text("拆福袋领奖励").depth(15).findOnce() == null) {
                     func.sClick(text("领红包").depth(17).findOnce());
                     toastLog("等待跳转到福袋页面");
@@ -180,7 +144,7 @@ function 芭芭农场() {
             alert("已完成");
         },
         zfb: function () {
-            obj.to_zfb();
+            func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
             let click_text;
             click_text = ["去浏览", "去完成", "去逛逛"];
             let todo_text, todo_btn, todo_idx, step, todo_btn_text;

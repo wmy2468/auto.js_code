@@ -43,7 +43,7 @@ scheme_list = {
     "支付宝扫一扫": "alipays://platformapi/startapp?saId=10000007",
     "支付宝芭芭农场": "alipays://platformapi/startapp?appId=68687599",
     "支付宝蚂蚁森林": "alipay://platformapi/startapp?appId=60000002",
-    "test": "alipays://platformapi/startapp?appId=2021001156619196",
+    "test": "tbopen://m.taobao.com/tbopen/index.html?action=ali.open.nav&module=h5&bootImage=0&bc_fl_src=zfb_spare1&visa=&h5Url=https://pages.tmall.com/wow/hdwk/act/2020nhj-single?wh_biz=tm&disableNav=YES&disableProgress=YES&hd_from=alipay_mayifarm",
 }
 
 
