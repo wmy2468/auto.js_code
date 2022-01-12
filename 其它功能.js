@@ -148,6 +148,29 @@ function 芭芭农场() {
             // click("领取");
             sleep(2000);
         },
+        tb施肥: function () {
+            func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
+            let btn_ele = null;
+            while (btn_ele == null) {
+                btn_ele = text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
+                if (btn_ele != null) {
+                    break;
+                } else {
+                    toastLog("如长时间未跳转到淘宝农场页面，请手动跳转");
+                    sleep(3000);
+                }
+            }
+            let btn_x, btn_y;
+            btn_y = btn_ele.bounds().top + btn_ele.bounds().height() / 2;
+            btn_x = device.width / 2;
+            log(btn_x);
+            log(btn_y);
+            while (1) {
+                click(btn_x, btn_y);
+                toast("如需要停止，手动操作");
+                sleep(2000);
+            }
+        },
         zfb: function () {
             func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
             sleep(2500);
@@ -208,9 +231,13 @@ function 芭芭农场() {
         }
     }
     // 执行函数
-    let select_item = func.dialogsWin(["淘宝+淘宝福气红包", "淘宝", "淘宝福气红包", "支付宝", "支付宝助力"])
+    let select_item = func.dialogsWin(
+        ["淘宝+淘宝福气红包", "支付宝", "支付宝助力", "淘宝施肥", "淘宝", "淘宝福气红包"]
+    )
     if (select_item == "淘宝") {
         work.tb();
+    } else if (select_item == "淘宝施肥") {
+        work.tb施肥();
     } else if (select_item == "淘宝福气红包") {
         work.tb(123);
     } else if (select_item == "淘宝+淘宝福气红包") {

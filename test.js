@@ -7,8 +7,8 @@ var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
 
 
-log(text("为Ta助力").findOne());
-func.sClick(text("为Ta助力").findOne());
+log(textContains("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce());
+// func.sClick(text("为Ta助力").findOne());
 
 
 function in_mission_view() {
