@@ -102,17 +102,18 @@ function 图鉴() {
 				todo_parent = todo[todo_idx].parent();
 				todo_idx_in_parent = todo[todo_idx].indexInParent();
 				todo_text = todo_parent.child(todo_idx_in_parent - 3).text();
-				toastLog("当前todo_text=" + todo_text);
+				log("当前todo_text=" + todo_text);
 				if (arr_in_text(todo_text, ["邀1位好友", "加购商品"])) {
 					toastLog("未找到满足条件的文本，idx+1");
 					todo_idx = todo_idx + 1;
 					sleep(2000);
 					continue;
 				} else {
+					// toastLog("当前todo_text=" + todo_text);
 					func.sClick(todo[todo_idx]);
 					if (arr_in_text(todo_text, ["去逛"])) { sleep(6000); back_way(); }
 					else if (arr_in_text(todo_text, ["会员"])) { member_card(); }
-					else if (arr_in_text(todo_text, ["签到"])) { sleep(5000); }
+					else if (arr_in_text(todo_text, ["签到"])) { sleep(1000); }
 					else {
 						toastLog("未找到满足条件的文本，idx+1");
 						todo_idx = todo_idx + 1;
@@ -120,6 +121,8 @@ function 图鉴() {
 						continue;
 					}
 				}
+				toastLog("等待返回....");
+				sleep(4000);
 			}
 		}
 	}
@@ -162,17 +165,19 @@ function 图鉴() {
 				if (mission_btn != null) {
 					mission_btn.child(2).click();
 					toastLog("已点击任务按钮...");
+					sleep(2500);
 				}
 			} catch (e) { log("报错=" + e); continue; }
 			station_count = station_count + 1;
-			toastLog("任务加载中..第" + station_count + "次");
+			toastLog("任务页面加载中..第" + station_count + "次");
 			sleep(3000);
 			if (station_count > 10) {
-				toastLog("任务加载失败或未找到任务.....即将返回");
+				toastLog("任务页面加载失败或未找到任务.....即将返回");
 				sleep(3000);
 				break;
 			}
 		}
+		// scrollDown();
 		func_in_func.draw_click();
 		start_idx = start_idx + 1;
 		while (!func_in_func.draw_page_check()) {
@@ -812,7 +817,7 @@ function close_popup() {
 	let find_object, find_object_parent;	// 定义查找的变量
 	try {
 		let target_text = ["不要断签哦~别让大红包飞走", "距离下一个红包还要签到",
-			"爆竹又增加啦~", "继续环游", "欢迎回来", "欢迎您", "立即抽奖","开启今日环游"];
+			"爆竹又增加啦~", "继续环游", "欢迎回来", "欢迎您", "立即抽奖", "开启今日环游"];
 		for (let i = 0; i < target_text.length; i++) {
 			// 关闭助力
 			find_object = textContains(target_text[i]).findOnce();
