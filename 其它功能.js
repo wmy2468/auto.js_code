@@ -179,7 +179,7 @@ function 芭芭农场() {
             while (1) {
                 click(btn_x, btn_y);
                 toast("如需要停止，手动操作");
-                sleep(1500);
+                sleep(2500);
             }
         },
         zfb: function () {
