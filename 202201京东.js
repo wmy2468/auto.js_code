@@ -4,11 +4,11 @@ var func = require("func_list.js");
 var cnt = 0;
 var appName = "京东";
 
-var devModel = device.model;
-var devMate30, devHonor8, devRedMi;
-devMate30 = "TAS-AL00";
-devHonor8 = "FRD-AL00";
-devRedMi = "Redmi Note 7";
+var dev_model = device.model;
+var dev_mate30, dev_honor8, dev_redmi;
+dev_mate30 = "TAS-AL00";
+dev_honor8 = "FRD-AL00";
+dev_redmi = "Redmi Note 7";
 
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
@@ -17,7 +17,11 @@ main();
 
 function main() {
 	let sMission;
-	sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click"]);
+	if (dev_model == dev_mate30) {
+		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click", "助力"]);
+	} else {
+		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click"]);
+	}
 	switch (sMission) {
 		case "做任务":
 			做任务();
@@ -28,6 +32,9 @@ function main() {
 		case "图鉴Click":
 			图鉴();
 			break;
+		case "助力":
+			互助点击("LM 26:/#5Aldk9vJsYm8H%扌丁kai鶁崠，嘿！﹎壹啓ɡμā汾10億!!!!!！ぷ");
+			互助点击("LP 27:/￥29j4ICaXdRECR￥大家买买买都→猄栋，☘﹎壹啓ɡμā汾10億!!!!!！ぷ");
 	}
 	setClip("");
 	// console.clear();
@@ -346,7 +353,7 @@ function clickComplete(apps) {
 				else if (arr_in_text(detailText, ["去企有此礼赢取好礼"])) { nextStepDetail = "页面含邀请好友"; }
 
 				// 除了Mate 30外，另外2个台古董在小程序卡死
-				if ((devModel == devHonor8 || devModel == devRedMi) && nextStepDetail == "小程序") {
+				if ((dev_model == dev_honor8 || dev_model == dev_redmi) && nextStepDetail == "小程序") {
 					index_todo_now = index_todo_now + 1;
 					continue;
 				}
@@ -559,7 +566,7 @@ function add_cart(isView) {
 	let childCnt;
 	childCnt = 4;
 	while (childCnt != 5) {
-		if (devModel == devHonor8) {
+		if (dev_model == dev_honor8) {
 			if (cnt >= 3) {
 				scrollDown();
 				sleep(4000);
@@ -603,7 +610,11 @@ function add_cart(isView) {
 
 
 // --------------------单独某项任务--------------------------------------
-function 互助点击() {
+function 互助点击(kouling) {
+	// let work = {
+	// 	action: function () {
+	setClip(kouling);
+	sleep(2000);
 	func.to_app(appName);
 	log("正在等待进入活动页面");
 	//等待点击 立即查看按钮
@@ -619,6 +630,8 @@ function 互助点击() {
 	sleep(2000);
 	home();
 	sleep(2000);
+	// 	}
+	// }
 }
 
 function 品牌墙() {
