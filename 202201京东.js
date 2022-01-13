@@ -18,7 +18,9 @@ main();
 function main() {
 	let sMission;
 	if (dev_model == dev_mate30) {
-		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click", "助力"]);
+		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click", "城城助力", "助力"]);
+	} else if (dev_model == dev_honor8 || dev_model == dev_redmi) {
+		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click", "城城助力"]);
 	} else {
 		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click"]);
 	}
@@ -32,6 +34,8 @@ function main() {
 		case "图鉴Click":
 			图鉴();
 			break;
+		case "城城助力":
+			城城助力();
 		case "助力":
 			互助点击("LM 26:/#5Aldk9vJsYm8H%扌丁kai鶁崠，嘿！﹎壹啓ɡμā汾10億!!!!!！ぷ");
 			互助点击("LP 27:/￥29j4ICaXdRECR￥大家买买买都→猄栋，☘﹎壹啓ɡμā汾10億!!!!!！ぷ");
@@ -203,6 +207,24 @@ function 图鉴() {
 		}
 		toastLog("已返回 图鉴主界面...");
 	}
+}
+// -------------------------城城助力----------------------------
+function 城城助力() {
+	let kouling1, kouling2;
+	if (dev_model == dev_honor8) {
+		kouling1 = "城城28:/￥16E4UBxjKGw3W%买买"
+		kouling2 = "LM 诚诚25:/￥6DT4I3CRvX1Zy%扌丁开"
+	} else if (dev_model == dev_redmi) {
+		kouling1 = "LP城城29:/#7470JFyXpZrny@达kai→亰栋"
+		kouling2 = "城城28:/￥16E4UBxjKGw3W%买买"
+	} else if (dev_model == dev_mate30) {
+		kouling1 = "LP城城29:/#7470JFyXpZrny@达kai→亰栋"
+		kouling2 = "LM 诚诚25:/￥6DT4I3CRvX1Zy%扌丁开"
+	} else {
+		return 0;
+	}
+	互助点击(kouling1);
+	互助点击(kouling2);
 }
 // --------------------------大任务汇总区-----------------------------
 function 开始做任务() {
@@ -610,7 +632,7 @@ function add_cart(isView) {
 
 
 // --------------------单独某项任务--------------------------------------
-function 互助点击(kouling) {
+function 互助点击(kouling, is_chengcheng) {
 	// let work = {
 	// 	action: function () {
 	setClip(kouling);
@@ -625,7 +647,9 @@ function 互助点击(kouling) {
 	}
 	sleep(2000);
 	// 点击助力
-	func.sClick(textContains("为TA助力").findOne(10000));// 点击助力
+	if (is_chengcheng == undefined) {
+		func.sClick(textContains("为TA助力").findOne(10000));// 点击助力
+	}
 	// 延迟等待
 	sleep(2000);
 	home();
