@@ -36,9 +36,11 @@ function main() {
 			break;
 		case "城城助力":
 			城城助力();
+			break;
 		case "助力":
 			互助点击("LM 26:/#5Aldk9vJsYm8H%扌丁kai鶁崠，嘿！﹎壹啓ɡμā汾10億!!!!!！ぷ");
 			互助点击("LP 27:/￥29j4ICaXdRECR￥大家买买买都→猄栋，☘﹎壹啓ɡμā汾10億!!!!!！ぷ");
+			break;
 	}
 	setClip("");
 	// console.clear();
