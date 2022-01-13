@@ -710,7 +710,11 @@ function dialogs_checkbox(inArr, titles, multi_choice) {
     } else {
         select_index_list = dialogs.multiChoice(titles, inArr);
     }
-
+    if (typeof (select_index_list) == "object") {
+        if (select_index_list.length == 0) { exit(); }
+    } else {
+        if (select_index_list == -1) { exit(); }
+    }
     if (select_index_list == -1 || select_index_list == []) {
         exit();
     }

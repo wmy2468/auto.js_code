@@ -6,7 +6,12 @@ let url_jd = "openApp.jdMobile://"
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
 
-log(text("去完成").find().length)
+a = dialogs.multiChoice("adf", [1, 2, 3, 45, 6])
+// a = dialogs.singleChoice("adf", [1, 2, 3, 45, 6])
+log(typeof (a) == "object")
+b = new Array();
+log(b)
+log(a == b)
 
 function in_mission_view() {
     if (currentPackage() == "com.taobao.taobao") {
