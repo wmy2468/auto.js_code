@@ -625,7 +625,7 @@ function 互助点击(kouling) {
 	}
 	sleep(2000);
 	// 点击助力
-	func.sClick(textContains("助力").findOne(10000));// 点击助力
+	func.sClick(textContains("为TA助力").findOne(10000));// 点击助力
 	// 延迟等待
 	sleep(2000);
 	home();
