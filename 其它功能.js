@@ -46,18 +46,29 @@ function 芭芭农场() {
             }
         },
         unitl_in_mission_view: function () {
-            let tb_ele;
+            let tb_ele, zfb_ele, zfb_施肥标志;
+            zfb_施肥标志 = false;
             while (!obj.in_mission_view()) {
                 // if (text("最近你的队友都有努力种树哦").findOnce() != null) {}
                 func.sClick(text("继续努力").findOnce());
                 // if (textContains("亲密度达到了").textEndsWith("获得了亲密度奖励").findOnce() != null) {}
                 func.sClick(text("关闭").depth(13).findOnce());
                 toastLog("请手动跳转到农场任务界面");
-                func.sClick(text("A*ccswT6bSKCsAAAAAAAAAAAAAARQnAQ").findOnce());
                 try {
+                    zfb_ele = text("A*ccswT6bSKCsAAAAAAAAAAAAAARQnAQ").findOnce();
+                    if (zfb_ele != null) {
+                        if (zfb_施肥标志 == false) {
+                            if (func.cClick(device.width / 2, zfb_ele.centerY())) {
+                                zfb_施肥标志 = true;
+                            }
+                        }
+                        func.sClick(zfb_ele);
+                        sleep(2000);
+                    }
                     tb_ele = text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
                     if (tb_ele != null) {
                         func.sClick(tb_ele.parent().child(2));
+                        sleep(2000);
                     }
                 } catch (e) { sleep(500); continue; }
                 sleep(3000);
@@ -221,7 +232,9 @@ function 芭芭农场() {
             func.sClick(text("为Ta助力").findOne());
             toastLog("已点击助力，等待下一个");
             sleep(3000);
-            home();
+            func.to_autojs();
+            toastLog("切换到autojs，等待3秒");
+            sleep(3000);
             func.to_scheme(url2);
             toastLog("已跳转URL 2");
             text("为Ta助力").findOne();
