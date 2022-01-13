@@ -710,6 +710,7 @@ function 品牌墙() {
 function 城城现金() {
 	let find_text, find_object, find_object_parent, click_flag;	// 定义查找的变量
 	click_flag = false;
+	cnt = 0;
 	while (1) {
 		find_text = "有机会得大额现金";
 		find_object = textContains(find_text).findOnce();
@@ -735,7 +736,9 @@ function 城城现金() {
 					sleep(2000);
 					break;
 				}
+				cnt = cnt + 1;
 			}
+			toastLog("当前城城查找 城城京口令 ，第" + cnt + "/5 次，超时后将直接返回");
 		} catch (e) {
 			log("城城现金报错=" + e);
 			continue;
