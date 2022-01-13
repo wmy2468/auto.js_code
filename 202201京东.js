@@ -839,7 +839,7 @@ function close_popup() {
 	let find_object, find_object_parent;	// 定义查找的变量
 	try {
 		let target_text = ["不要断签哦~别让大红包飞走", "距离下一个红包还要签到",
-			"爆竹又增加啦~", "继续环游", "欢迎回来", "欢迎您", "立即抽奖", "开启今日环游"];
+			"爆竹又增加啦~", "继续环游", "欢迎回来", "欢迎您", "立即抽奖", "开启今日环游", "开心收下"];
 		for (let i = 0; i < target_text.length; i++) {
 			// 关闭助力
 			find_object = textContains(target_text[i]).findOnce();
