@@ -102,22 +102,31 @@ function 图鉴() {
 				todo_parent = todo[todo_idx].parent();
 				todo_idx_in_parent = todo[todo_idx].indexInParent();
 				todo_text = todo_parent.child(todo_idx_in_parent - 3).text();
-				log("当前todo_text=" + todo_text);
 				if (arr_in_text(todo_text, ["邀1位好友", "加购商品"])) {
-					toastLog("未找到满足条件的文本，idx+1");
+					log("未找到满足条件的文本，idx+1,todo=" + todo_text);
 					todo_idx = todo_idx + 1;
-					sleep(2500);
+					sleep(500);
 					continue;
 				} else {
 					// toastLog("当前todo_text=" + todo_text);
 					func.sClick(todo[todo_idx]);
-					if (arr_in_text(todo_text, ["去逛"])) { sleep(6000); back_way(); }
-					else if (arr_in_text(todo_text, ["会员"])) { member_card(); }
-					else if (arr_in_text(todo_text, ["签到"])) { sleep(1000); }
+					if (arr_in_text(todo_text, ["去逛"])) {
+						toastLog("当前todo_text=" + todo_text);
+						sleep(6000);
+						back_way();
+					}
+					else if (arr_in_text(todo_text, ["会员"])) {
+						toastLog("当前todo_text=" + todo_text);
+						member_card();
+					}
+					else if (arr_in_text(todo_text, ["签到"])) {
+						toastLog("当前todo_text=" + todo_text);
+						sleep(1000);
+					}
 					else {
-						toastLog("未找到满足条件的文本，idx+1");
+						log("未找到满足条件的文本，idx+1,todo=" + todo_text);
 						todo_idx = todo_idx + 1;
-						sleep(2500);
+						sleep(500);
 						continue;
 					}
 				}
