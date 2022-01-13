@@ -17,8 +17,8 @@ function main() {
     else if (scriptName == "交行5积分") { 交行9点5积分(); }
     else if (scriptName == "招商便民生活") { 招商便民生活(); }
     else if (scriptName == "招商倒计时领取") { 招商倒计时领取(); }
-    else if (scriptName == "云闪付2022新年") { ysf = 云闪付(); ysf.云闪付2022新年(); }
-    else if (scriptName == "云闪付2022新年捡漏") { ysf = 云闪付(); ysf.云闪付2022新年捡漏(); }
+    else if (scriptName == "云闪付2022新年") { 云闪付().云闪付2022新年(); }
+    else if (scriptName == "云闪付2022新年捡漏") { 云闪付().云闪付2022新年捡漏(); }
     toastLog("结束");
     device.cancelKeepingAwake();
 }
@@ -89,103 +89,105 @@ function 招商便民生活() {
 // ------------------------云闪付锦鲤活动--------------------------------------
 
 function 云闪付() {
-    this.云闪付2022新年捡漏 = function () {
-        let coupon_id, url_jump, coupon_dict, coupon_id_list;
-        coupon_id_list = [];
-        coupon_dict = {};
-        coupon_desc_list = func.dialogs_checkbox(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]), "请选择要抢的券", "多选");
-        coupon_desc_list.forEach(coupon_desc => {
-            url_jump = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
-            coupon_id = url_jump.slice(-16);
-            coupon_id_list.push(coupon_id);
-            coupon_dict[coupon_id] = coupon_desc;
-        })
-        print(coupon_desc_list);
-        func.to_app("云闪付");
-        http.__okhttp__.setTimeout(3000);       // 设置超时2秒
-        let res, res_text, coupon_quota, break_flag, url_origin, url_jump_prefix;
-        url_jump_prefix = url_jump.slice(0, -16);
-        break_flag = false;
-        while (true) {
-            // coupon_id_list.forEach(coupon_id => {
-            for (let i = 0; i < coupon_id_list.length; i++) {
-                coupon_id = coupon_id_list[i];
-                url_origin = "https://content.95516.com/koala-pre/koala/coupon/state?cityCd=350200&couponId=" + coupon_id;
-                try {
-                    res = http.get(url_origin);
-                    res_text = res.body.json();
-                    coupon_quota = res_text["params"]["couponQuota"];
-                    // 如果券的百分比不为0，则跳转, xm券为null
-                    if (coupon_quota != "以实际宣传为准" && coupon_quota != "今日已抢完") {
-                        func.to_scheme(url_jump_prefix + coupon_id);
-                        device.vibrate(1000);
-                        log(coupon_dict[coupon_id] + ":" + coupon_quota);
-                        // to_js_flag = true;
-                        // func.sClick(text("立即领取").findOnce());
-                        if (func.sClick(text("立即领取").findOne(5000))) {
-                            if (text("请完成安全验证").findOne(5000) != null) {
-                                while (text("请完成安全验证").findOnce() != null) {
-                                    toast("请完成验证");
-                                    sleep(2500);
+    let work = {
+        云闪付2022新年捡漏: function () {
+            let coupon_id, url_jump, coupon_dict, coupon_id_list;
+            coupon_id_list = [];
+            coupon_dict = {};
+            coupon_desc_list = func.dialogs_checkbox(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]), "请选择要抢的券", "多选");
+            coupon_desc_list.forEach(coupon_desc => {
+                url_jump = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
+                coupon_id = url_jump.slice(-16);
+                coupon_id_list.push(coupon_id);
+                coupon_dict[coupon_id] = coupon_desc;
+            })
+            print(coupon_desc_list);
+            func.to_app("云闪付");
+            http.__okhttp__.setTimeout(3000);       // 设置超时2秒
+            let res, res_text, coupon_quota, break_flag, url_origin, url_jump_prefix;
+            url_jump_prefix = url_jump.slice(0, -16);
+            break_flag = false;
+            while (true) {
+                // coupon_id_list.forEach(coupon_id => {
+                for (let i = 0; i < coupon_id_list.length; i++) {
+                    coupon_id = coupon_id_list[i];
+                    url_origin = "https://content.95516.com/koala-pre/koala/coupon/state?cityCd=350200&couponId=" + coupon_id;
+                    try {
+                        res = http.get(url_origin);
+                        res_text = res.body.json();
+                        coupon_quota = res_text["params"]["couponQuota"];
+                        // 如果券的百分比不为0，则跳转, xm券为null
+                        if (coupon_quota != "以实际宣传为准" && coupon_quota != "今日已抢完") {
+                            func.to_scheme(url_jump_prefix + coupon_id);
+                            device.vibrate(1000);
+                            log(coupon_dict[coupon_id] + ":" + coupon_quota);
+                            // to_js_flag = true;
+                            // func.sClick(text("立即领取").findOnce());
+                            if (func.sClick(text("立即领取").findOne(5000))) {
+                                if (text("请完成安全验证").findOne(5000) != null) {
+                                    while (text("请完成安全验证").findOnce() != null) {
+                                        toast("请完成验证");
+                                        sleep(2500);
+                                    }
+                                } else {
+                                    toast("查找安全验证超时，继续");
                                 }
-                            } else {
-                                toast("查找安全验证超时，继续");
+                            }
+                            if (text("恭喜您领取成功").findOnce() != null) {
+                                break_flag = true;
+                                break;
                             }
                         }
-                        if (text("恭喜您领取成功").findOnce() != null) {
-                            break_flag = true;
-                            break;
-                        }
+                    } catch (e) {
+                        log("报错：" + e);
                     }
-                } catch (e) {
-                    log("报错：" + e);
                 }
+                if (break_flag) {
+                    break;
+                }
+                toast("未成功，等待3s继续...");
+                sleep(3000);
             }
-            if (break_flag) {
-                break;
+            alert("捡漏完成，退出");
+        },
+        云闪付2022新年: function () {
+            let url_ysf, coupon_desc;
+            let startTime, timeArea;
+
+            timeArea = "北京时间";
+            if (func.dialogsWin(["日常11点券", "周三14点券"]) == "日常11点券") {
+                coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]));
+                url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
+            } else {
+                coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年_周三14点"]));
+                url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年_周三14点"][coupon_desc];
             }
-            toast("未成功，等待3s继续...");
-            sleep(3000);
-        }
-        alert("捡漏完成，退出");
-    }
-    this.云闪付2022新年 = function () {
-        let url_ysf, coupon_desc;
-        let startTime, timeArea;
 
-        timeArea = "北京时间";
-        if (func.dialogsWin(["日常11点券", "周三14点券"]) == "日常11点券") {
-            coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]));
-            url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
-        } else {
-            coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年_周三14点"]));
-            url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年_周三14点"][coupon_desc];
-        }
-
-        // coupon_id = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc]))
+            // coupon_id = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc]))
 
 
-        if (coupon_desc.substring(0, 5) == "周三14点") {
-            startTime = "13,59,55,000";
-        } else {
-            startTime = "10,59,55,000";
-        }
-        toastLog("开始时间:" + startTime);
-        func.to_scheme(url_ysf);
-        toastLog("测试查看,2秒后 切回autojs");
-        textContains("活动咨询").findOne();
-        sleep(1000);
-        func.to_autojs();
-        toastLog("等待55秒，自动跳转至云闪付对应券页面");
-        // 准备倒计时
-        func.getTimeDiff(timeArea, startTime);
-        func.to_scheme(url_ysf);
-        toastLog("已跳转云闪付，如未跳转，请手动切换");
-        if (func.sClick(text("立即领取").findOne(10000))) {
-            toastLog("超时退出");
+            if (coupon_desc.substring(0, 5) == "周三14点") {
+                startTime = "13,59,55,000";
+            } else {
+                startTime = "10,59,55,000";
+            }
+            toastLog("开始时间:" + startTime);
+            func.to_scheme(url_ysf);
+            toastLog("测试查看,2秒后 切回autojs");
+            textContains("活动咨询").findOne();
+            sleep(1000);
+            func.to_autojs();
+            toastLog("等待55秒，自动跳转至云闪付对应券页面");
+            // 准备倒计时
+            func.getTimeDiff(timeArea, startTime);
+            func.to_scheme(url_ysf);
+            toastLog("已跳转云闪付，如未跳转，请手动切换");
+            if (func.sClick(text("立即领取").findOne(10000))) {
+                toastLog("超时退出");
+            }
         }
     }
-    return this;
+    return work;
 }
 
 // 到点点击
