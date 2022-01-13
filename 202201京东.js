@@ -106,7 +106,7 @@ function 图鉴() {
 				if (arr_in_text(todo_text, ["邀1位好友", "加购商品"])) {
 					toastLog("未找到满足条件的文本，idx+1");
 					todo_idx = todo_idx + 1;
-					sleep(2000);
+					sleep(2500);
 					continue;
 				} else {
 					// toastLog("当前todo_text=" + todo_text);
@@ -117,7 +117,7 @@ function 图鉴() {
 					else {
 						toastLog("未找到满足条件的文本，idx+1");
 						todo_idx = todo_idx + 1;
-						sleep(2000);
+						sleep(2500);
 						continue;
 					}
 				}
