@@ -737,8 +737,14 @@ function 城城现金() {
 					break;
 				}
 				cnt = cnt + 1;
+				toastLog("当前城城查找 城城京口令 ，第" + cnt + "/5 次，超时后将直接返回");
+				sleep(2500);
+				if (cnt > 5) {
+					break;
+				}
 			}
-			toastLog("当前城城查找 城城京口令 ，第" + cnt + "/5 次，超时后将直接返回");
+
+
 		} catch (e) {
 			log("城城现金报错=" + e);
 			continue;
