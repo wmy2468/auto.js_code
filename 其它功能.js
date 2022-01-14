@@ -31,7 +31,12 @@ function main() {
 function 芭芭农场() {
     let obj = {
         zfb_element: function () {
-            return className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).findOnce();
+                        let btn;
+                                    btn = className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).find();
+                                                if (btn.length == 2) { return btn[1]);}
+                                                            else {return null;}
+
+           // return className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).findOnce();
         },
         tb_element: function () {
             // return text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
