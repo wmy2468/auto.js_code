@@ -30,6 +30,20 @@ function main() {
 
 function 芭芭农场() {
     let obj = {
+        zfb_element: function () {
+            return className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).findOnce();
+        },
+        tb_element: function () {
+            // return text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
+            btn = className("Image").textContains("jpg").depth(13).findOnce();
+            if (btn == null) {
+                btn = className("Image").textContains("png").depth(13).findOnce();
+                if (btn == null) {
+                    btn = className("Image").textContains("gif").depth(13).findOnce();
+                }
+            }
+            return btn;
+        },
         arr_in_text: function (target_str, arr) {
             for (let i = 0; i < arr.length; i++) {
                 if (target_str.indexOf(arr[i]) != -1) {
@@ -50,7 +64,7 @@ function 芭芭农场() {
             }
         },
         unitl_in_mission_view: function () {
-            let tb_ele, zfb_ele, zfb_施肥标志;
+            let tb_ele, zfb_ele,  zfb_施肥标志;
             zfb_施肥标志 = false;
             while (!obj.in_mission_view()) {
                 // if (text("最近你的队友都有努力种树哦").findOnce() != null) {}
@@ -60,7 +74,7 @@ function 芭芭农场() {
                 toastLog("请手动跳转到农场任务界面");
                 sleep(3000);
                 try {
-                    zfb_ele = textStartsWith("A*").textEndsWith("AAARQnAQ").findOnce();
+                    zfb_ele = this.zfb_element();
                     if (zfb_ele != null) {
                         if (zfb_施肥标志 == false) {
                             if (func.cClick(device.width / 2, zfb_ele.centerY())) {
@@ -70,7 +84,7 @@ function 芭芭农场() {
                         func.sClick(zfb_ele);
                         sleep(2000);
                     }
-                    tb_ele = text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
+                    tb_ele = this.tb_element();
                     if (tb_ele != null) {
                         func.sClick(tb_ele.parent().child(2));
                         sleep(2000);
@@ -91,7 +105,7 @@ function 芭芭农场() {
                 sleep(4000);
             }
             toastLog("已返回...");
-        }
+        },
     }
     // 支付宝
     let work = {
@@ -168,7 +182,7 @@ function 芭芭农场() {
             func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
             let btn_ele = null;
             while (btn_ele == null) {
-                btn_ele = text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
+                btn_ele = this.tb_element();
                 if (btn_ele != null) {
                     break;
                 } else {

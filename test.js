@@ -6,12 +6,19 @@ let url_jd = "openApp.jdMobile://"
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
 
-a = dialogs.multiChoice("adf", [1, 2, 3, 45, 6])
-// a = dialogs.singleChoice("adf", [1, 2, 3, 45, 6])
-log(typeof (a) == "object")
-b = new Array();
-log(b)
-log(a == b)
+func.sClick(tb_element().parent().child(2))
+
+function tb_element() {
+    // return text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
+    btn = className("Image").textContains("jpg").depth(13).findOnce();
+    if (btn == null) {
+        btn = className("Image").textContains("png").depth(13).findOnce();
+        if (btn == null) {
+            btn = className("Image").textContains("gif").depth(13).findOnce();
+        }
+    }
+    return btn;
+}
 
 function in_mission_view() {
     if (currentPackage() == "com.taobao.taobao") {
