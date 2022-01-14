@@ -86,7 +86,7 @@ function 芭芭农场() {
                                 zfb_施肥标志 = true;
                             }
                         }
-                        func.sClick(zfb_ele);
+                        func.sClick(zfb_ele.parent());
                         sleep(2000);
                     }
                     tb_ele = this.tb_element();
