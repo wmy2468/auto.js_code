@@ -11,7 +11,7 @@ dev_redmi = "Redmi Note 7";
 main();
 // toastLog(text("领取奖励").find().length);
 function main() {
-    let selectedArr = ["芭芭农场", "万商3比", "京东评价", "跳转指定Scheme"];
+    let selectedArr = ["芭芭农场", "万商3比", "ZFB相关", "京东评价", "跳转指定Scheme"];
     //---------------配置区域-----------------
     let scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行财富季") { 建行财富季(); }
