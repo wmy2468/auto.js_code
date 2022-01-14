@@ -6,7 +6,7 @@ let url_jd = "openApp.jdMobile://"
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
 
-log(get_zfb().click())
+click("查看详情");
 
 function get_zfb() {
     let btn;

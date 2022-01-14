@@ -234,7 +234,7 @@ function 芭芭农场() {
             sleep(2000);
         },
         zfb助力: function () {
-            let url_mate30, url_redmi, url_honor;
+            let url_mate30, url_redmi, url_honor, url_lm;
             url_mate30 = "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjU2NjcxNDcyMDA5cDFyY0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802566714720&chInfo=ch_share__chsub_Weixin&apshareid=67021669-4f86-433a-b0f8-e9a3d92ffa4a";
             url_redmi = "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgzMjgzNTY5OTY5MjBkMGk1MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088832835699692&chInfo=ch_share__chsub_Weixin&apshareid=b1f3a960-e284-41ad-a05b-893d49edbca1";
             url_honor = "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODE0MjMxMzQ4OTE4ODBvNWR3MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088142313489188&chInfo=ch_share__chsub_Weixin&apshareid=f33b8fe2-57ba-468b-8179-708d640216c0";
@@ -255,11 +255,41 @@ function 芭芭农场() {
                 toastLog("切换到autojs，等待3秒");
                 sleep(2000);
             })
+        },
+        tb助力: function () {
+            let url_mate30, url_redmi, url_honor, url_lm;
+            url_mate30 = "6，去一是要他之得你他么的嘻";
+            url_redmi = "8 666:/信里心看她他之得年着学和信";
+            url_honor = "1 666:/微生起以么他之得年可么他嘻";
+            url_lm = "6，去一是要他之得你他么的嘻";
+
+            let url1, url2, url3, btn_detail;
+            if (dev_model == dev_mate30) { url1 = url_redmi; url2 = url_honor; url3 = url_lm; }
+            else if (dev_model == dev_honor8) { url1 = url_mate30; url2 = url_redmi; url3 = url_lm; }
+            else if (dev_model == dev_redmi) { url1 = url_mate30; url2 = url_honor; url3 = url_lm; }
+            [url1, url2, url3].forEach(jump_url => {
+                setClip(jump_url);          // 设置剪贴板
+                toastLog("已跳转URL");
+                btn_detail = null;
+                while (btn_detail == null) {
+                    btn_detail = text("查看详情").findOnce();
+                    if (btn_detail == null) { btn_detail = desc("查看详情").findOnce(); }
+                    toastLog("等待淘口令弹窗加载");
+                    sleep(2500);
+                }
+                sleep(2400);
+                text("为TA助力").findOne().click();
+                toastLog("已点击助力，等待下一个");
+                sleep(3000);
+                func.to_autojs();
+                toastLog("切换到autojs，等待3秒");
+                sleep(2000);
+            })
         }
     }
     // 执行函数
     let select_item = func.dialogsWin(
-        ["淘宝+淘宝福气红包", "支付宝助力", "支付宝", "淘宝施肥", "淘宝", "淘宝福气红包"]
+        ["淘宝+淘宝福气红包", "淘宝支付宝助力", "支付宝", "淘宝施肥", "--------------", "淘宝", "淘宝福气红包"]
     )
     if (select_item == "淘宝") {
         work.tb();
@@ -270,10 +300,13 @@ function 芭芭农场() {
     } else if (select_item == "淘宝+淘宝福气红包") {
         work.tb();
         work.tb(123);
-    } else if (select_item == "支付宝助力") {
+    } else if (select_item == "淘宝支付宝助力") {
         work.zfb助力();
-    } else {
+        work.tb助力();
+    } else if (select_item == "支付宝") {
         work.zfb();
+    } else {
+        toastLog("未选择");
     }
     setClip("");
     alert("已完成");
