@@ -68,8 +68,7 @@ function 芭芭农场() {
             }
         },
         unitl_in_mission_view: function () {
-            let tb_ele, zfb_ele, zfb_施肥标志;
-            zfb_施肥标志 = false;
+            let tb_ele, zfb_ele;
             while (!obj.in_mission_view()) {
                 // if (text("最近你的队友都有努力种树哦").findOnce() != null) {}
                 func.sClick(text("继续努力").findOnce());
@@ -78,17 +77,12 @@ function 芭芭农场() {
                 toastLog("请手动跳转到农场任务界面");
                 sleep(3000);
                 try {
-                    zfb_ele = this.zfb_element();
+                    zfb_ele = obj.zfb_element();
                     if (zfb_ele != null) {
-                        if (zfb_施肥标志 == false) {
-                            if (func.cClick(device.width / 2, zfb_ele.centerY())) {
-                                zfb_施肥标志 = true;
-                            }
-                        }
-                        func.sClick(zfb_ele.parent());
+                        log(func.sClick(zfb_ele));
                         sleep(2000);
                     }
-                    tb_ele = this.tb_element();
+                    tb_ele = obj.tb_element();
                     if (tb_ele != null) {
                         func.sClick(tb_ele.parent().child(2));
                         sleep(2000);
@@ -186,7 +180,7 @@ function 芭芭农场() {
             func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
             let btn_ele = null;
             while (btn_ele == null) {
-                btn_ele = this.tb_element();
+                btn_ele = obj.tb_element();
                 if (btn_ele != null) {
                     break;
                 } else {
@@ -265,7 +259,7 @@ function 芭芭农场() {
     }
     // 执行函数
     let select_item = func.dialogsWin(
-        ["淘宝+淘宝福气红包", "支付宝", "支付宝助力", "淘宝施肥", "淘宝", "淘宝福气红包"]
+        ["淘宝+淘宝福气红包", "支付宝助力", "支付宝", "淘宝施肥", "淘宝", "淘宝福气红包"]
     )
     if (select_item == "淘宝") {
         work.tb();
