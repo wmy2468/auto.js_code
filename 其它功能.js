@@ -58,8 +58,9 @@ function 芭芭农场() {
                 // if (textContains("亲密度达到了").textEndsWith("获得了亲密度奖励").findOnce() != null) {}
                 func.sClick(text("关闭").depth(13).findOnce());
                 toastLog("请手动跳转到农场任务界面");
+                sleep(3000);
                 try {
-                    zfb_ele = text("A*ccswT6bSKCsAAAAAAAAAAAAAARQnAQ").findOnce();
+                    zfb_ele = textStartsWith("A*").textEndsWith("AAARQnAQ").findOnce();
                     if (zfb_ele != null) {
                         if (zfb_施肥标志 == false) {
                             if (func.cClick(device.width / 2, zfb_ele.centerY())) {
@@ -75,7 +76,7 @@ function 芭芭农场() {
                         sleep(2000);
                     }
                 } catch (e) { sleep(500); continue; }
-                sleep(3000);
+
             }
             toastLog("已到达农场任务界面");
         },
