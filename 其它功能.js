@@ -33,7 +33,7 @@ function 芭芭农场() {
         zfb_element: function () {
                         let btn;
                                     btn = className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).find();
-                                                if (btn.length == 2) { return btn[1]);}
+                                                if (btn.length == 2) { return btn[1];}
                                                             else {return null;}
 
            // return className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).findOnce();
