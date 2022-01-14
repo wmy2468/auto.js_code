@@ -6,7 +6,8 @@ let url_jd = "openApp.jdMobile://"
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
 
-func.sClick(tb_element().parent().child(2))
+
+log(className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).find()[0].click())
 
 function tb_element() {
     // return text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();

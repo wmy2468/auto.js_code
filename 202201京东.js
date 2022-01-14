@@ -58,8 +58,22 @@ function 做任务() {
 // -------------------------金融任务----------------------------
 function 金融任务() {
 	appName = "京东金融";
-	金融口令启动();
+	let kouling = "26:/￥53QDG9zffRCAb%，❄1.打开最新版金融APP粘贴口令到首页搜索框内触发口令弹窗  2.立即参与";
+	setClip(kouling);
+	sleep(1500);
+	func.to_app("京东金融");
+	let help_her, help_win_close_btn;
+
 	while (!mission_page_check()) {
+		func.sClick(id("tv_btn").text("立即参与").findOnce());
+		help_her = className("android.view.View").text("为TA助力为TA助力").findOnce();
+		toast("已找到为他助力弹窗");
+		if (help_her != null) {
+			try {
+				help_win_close_btn = help_her.parent().parent().parent().child(2);
+				func.sClick(help_win_close_btn);
+			} catch (e) { continue; }
+		}
 		func.sClick(id("com.jd.jrapp:id/redPacketIV").findOnce());
 		toastLog("金融任务: 请跳转金融APP，如果没有弹窗，需手动跳转到活动界面");
 		sleep(2000);
