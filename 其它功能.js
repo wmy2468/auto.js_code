@@ -11,13 +11,17 @@ dev_redmi = "Redmi Note 7";
 main();
 // toastLog(text("领取奖励").find().length);
 function main() {
-    let selectedArr = ["芭芭农场", "万商3比", "ZFB捐款", "余额宝转出", "余额宝转入", "京东评价", "跳转指定Scheme"];
+    let selectedArr = ["芭芭农场", "万商3比", "京东评价", "跳转指定Scheme"];
     //---------------配置区域-----------------
     let scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行财富季") { 建行财富季(); }
-    else if (scriptName == "ZFB捐款") { ZFB捐款(); }
-    else if (scriptName == "余额宝转入") { let zfb = 支付宝(); zfb.余额宝转入(); }
-    else if (scriptName == "余额宝转出") { let zfb = 支付宝(); zfb.余额宝转出(); }
+    else if (scriptName == "ZFB相关") {
+        let zfb_func;
+        zfb_func = func.dialogsWin(["ZFB捐款", "余额宝转出", "余额宝转入"]);
+        if (zfb_func == "ZFB捐款") { 支付宝().ZFB捐款(); }
+        else if (zfb_func == "余额宝转入") { 支付宝().余额宝转入(); }
+        else if (zfb_func == "余额宝转出") { 支付宝().余额宝转出(); }
+    }
     else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
     else if (scriptName == "京东评价") { 京东评价(); }
     else if (scriptName == "万商3比") { 万商3比(); }
@@ -569,114 +573,115 @@ function 跳转指定Scheme() {
 
 
 function 支付宝() {
-    this.余额宝转出 = function () {
-        func.to_scheme(cfg["url_scheme"]["支付宝"]["余额宝"]);
-        while (text("使用密码").findOnce() == null) {
-            func.sClick(text("转出").findOnce());
-            if (func.sClick(text("全部").findOnce()) == true) {
-                sleep(1500);
-                func.sClick(text("确认转出").findOnce());
-            }
-            sleep(100);
-        }
-        toastLog("已完成。。。");
-    }
-    this.余额宝转入 = function () {
-        func.to_scheme(cfg["url_scheme"]["支付宝"]["余额宝"]);
-        let pwd = "188";
-        while (text("使用密码").findOnce() == null) {
-            func.sClick(text("转入").findOnce());
-            if (textContains("转入金额").findOnce() != null) {
-                while (text("确定").rowSpan(2).depth(16).findOnce() == null) {
-                    func.sClick(text("请输入转入金额").findOnce());
-                    toastLog("已尝试点击 输入金额框");
-                    sleep(3000);
-                }
-                sleep(3000);
-                for (let i = 0; i < pwd.length; i++) {
-                    log(pwd[i]);
-                    text(pwd[i]).findOne().click();
-                    sleep(500);
-                }
-                sleep(1500);
-                if (func.sClick(text("确认转入").findOnce())) {
+    let zfb = {
+        余额宝转出: function () {
+            func.to_scheme(cfg["url_scheme"]["支付宝"]["余额宝"]);
+            while (text("使用密码").findOnce() == null) {
+                func.sClick(text("转出").findOnce());
+                if (func.sClick(text("全部").findOnce()) == true) {
                     sleep(1500);
+                    func.sClick(text("确认转出").findOnce());
                 }
+                sleep(100);
             }
-            sleep(300);
-        }
-        toastLog("已完成。。。");
-    }
-    this.ZFB捐款 = function () {
-        var defaultCount, count, cardNum, banks;
-        banks = func.dialogsWin(["渣打5比", "交行3比"])
-        switch (banks) {
-            case "渣打5比":
-                cardNum = "(9101)";
-                defaultCount = 5;
-                break;
-            case "交行3比":
-                cardNum = "(5629)";
-                defaultCount = 3;
-                break;
-        }
-        count = dialogs.rawInput("请输入捐款次数", defaultCount);
-        func.to_app("支付宝");
-        var cnt = 1;
-        sleep(1000);
-        while (count > 0) {
-            while (text("项目介绍").findOnce() == null) {
-                toastLog("请跳转到 捐赠项目 界面...");
-                sleep(2500);
-            }
-            while (1) {
-                if (func.sClick(text("单笔捐").findOnce())) {
-                    break;
-                }
-                if (func.sClick(text("再捐一笔").findOnce())) {
-                    break;
-                }
-            }
-            text("《支付宝爱心捐赠协议》").findOne();
-            sleep(800);
-            func.sClick(className("EditText").findOnce());
-            sleep(800);
-            setText(0, "0.01");
-            sleep(800);
-            func.sClick(text("匿名捐款").findOne());
-            sleep(800);
-            func.sClick(text("同意协议并捐款").findOne());
-            text("立即付款").findOne();
-            sleep(800);
-            while (textContains(cardNum).findOnce() == null) {
-                func.sClick(text("付款方式").findOnce());
-                if (text("选择付款方式").findOnce() != null) {
-                    sleep(800);
-                    if (func.cClick(text(cardNum).findOnce()) == false) {
-                        scrollDown();
-                        sleep(800);
-                    } else {
-                        toastLog("已选择银行卡，等待...");
-                        sleep(3200);
+            toastLog("已完成。。。");
+        },
+        余额宝转入: function () {
+            func.to_scheme(cfg["url_scheme"]["支付宝"]["余额宝"]);
+            let pwd = "188";
+            while (text("使用密码").findOnce() == null) {
+                func.sClick(text("转入").findOnce());
+                if (textContains("转入金额").findOnce() != null) {
+                    while (text("确定").rowSpan(2).depth(16).findOnce() == null) {
+                        func.sClick(text("请输入转入金额").findOnce());
+                        toastLog("已尝试点击 输入金额框");
+                        sleep(3000);
+                    }
+                    sleep(3000);
+                    for (let i = 0; i < pwd.length; i++) {
+                        log(pwd[i]);
+                        text(pwd[i]).findOne().click();
+                        sleep(500);
+                    }
+                    sleep(1500);
+                    if (func.sClick(text("确认转入").findOnce())) {
+                        sleep(1500);
                     }
                 }
+                sleep(300);
             }
-            func.sClick(text("立即付款").findOne());
-            text("支付成功").findOne();
-            sleep(1200);
-            func.sClick(text("完成").findOne());
-            text("感谢捐助").findOne();
-            sleep(1500);
-            back();
-            toastLog("已完成第 " + cnt + " 次...");
-            cnt = cnt + 1;
-            sleep(2500);
-            count = count - 1;
+            toastLog("已完成。。。");
+        },
+        ZFB捐款: function () {
+            var defaultCount, count, cardNum, banks;
+            banks = func.dialogsWin(["渣打5比", "交行3比"])
+            switch (banks) {
+                case "渣打5比":
+                    cardNum = "(9101)";
+                    defaultCount = 5;
+                    break;
+                case "交行3比":
+                    cardNum = "(5629)";
+                    defaultCount = 3;
+                    break;
+            }
+            count = dialogs.rawInput("请输入捐款次数", defaultCount);
+            func.to_app("支付宝");
+            var cnt = 1;
+            sleep(1000);
+            while (count > 0) {
+                while (text("项目介绍").findOnce() == null) {
+                    toastLog("请跳转到 捐赠项目 界面...");
+                    sleep(2500);
+                }
+                while (1) {
+                    if (func.sClick(text("单笔捐").findOnce())) {
+                        break;
+                    }
+                    if (func.sClick(text("再捐一笔").findOnce())) {
+                        break;
+                    }
+                }
+                text("《支付宝爱心捐赠协议》").findOne();
+                sleep(800);
+                func.sClick(className("EditText").findOnce());
+                sleep(800);
+                setText(0, "0.01");
+                sleep(800);
+                func.sClick(text("匿名捐款").findOne());
+                sleep(800);
+                func.sClick(text("同意协议并捐款").findOne());
+                text("立即付款").findOne();
+                sleep(800);
+                while (textContains(cardNum).findOnce() == null) {
+                    func.sClick(text("付款方式").findOnce());
+                    if (text("选择付款方式").findOnce() != null) {
+                        sleep(800);
+                        if (func.cClick(text(cardNum).findOnce()) == false) {
+                            scrollDown();
+                            sleep(800);
+                        } else {
+                            toastLog("已选择银行卡，等待...");
+                            sleep(3200);
+                        }
+                    }
+                }
+                func.sClick(text("立即付款").findOne());
+                text("支付成功").findOne();
+                sleep(1200);
+                func.sClick(text("完成").findOne());
+                text("感谢捐助").findOne();
+                sleep(1500);
+                back();
+                toastLog("已完成第 " + cnt + " 次...");
+                cnt = cnt + 1;
+                sleep(2500);
+                count = count - 1;
+            }
+            alert("已完成");
         }
-        alert("已完成");
     }
-
-    return this;
+    return zfb;
 }
 // -----------------------建行财富季-----------------------
 function 建行财富季() {
