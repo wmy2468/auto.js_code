@@ -565,7 +565,7 @@ function member_card() {
 			}
 		}
 		sleep(1500);
-		func.sClick(authority_join);
+		func.cClick(authority_join);
 		sleep(3000);
 	}
 }
