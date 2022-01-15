@@ -262,7 +262,7 @@ function 芭芭农场() {
             url_mate30 = "6，去一是要他之得你他么的嘻";
             url_redmi = "8 666:/信里心看她他之得年着学和信";
             url_honor = "1 666:/微生起以么他之得年可么他嘻";
-            url_lm = "6，去一是要他之得你他么的嘻";
+            url_lm = "7 2:/！她出她着他之天里家以那哈";
 
             let url1, url2, url3, btn_detail;
             if (dev_model == dev_mate30) { url1 = url_redmi; url2 = url_honor; url3 = url_lm; }
