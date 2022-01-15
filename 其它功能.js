@@ -274,9 +274,13 @@ function 芭芭农场() {
                 while (btn_detail == null) {
                     btn_detail = text("查看详情").findOnce();
                     if (btn_detail == null) { btn_detail = desc("查看详情").findOnce(); }
+                    if (btn_detail == null) { btn_detail = text("打开").findOnce(); }
+                    if (btn_detail == null) { btn_detail = desc("打开").findOnce(); }
                     toastLog("等待淘口令弹窗加载");
                     sleep(2500);
                 }
+                func.sClick(btn_detail);
+                toastLog("已点击查看详情")
                 sleep(2400);
                 text("为TA助力").findOne().click();
                 toastLog("已点击助力，等待下一个");

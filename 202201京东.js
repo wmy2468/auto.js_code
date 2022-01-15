@@ -357,6 +357,8 @@ function clickComplete(apps) {
 						nextStep = "浏览返回";
 					}
 				}
+				// --------------------点击 区------------------
+				else if (arr_in_text(indexText, ["点击首页浮层", "9点打卡"])) { nextStep = "首页浮层"; }
 				// --------------------浏览加购N个区------------------
 				else if (arr_in_text(indexText, ["浏览5个", "浏览4个"])) { nextStep = "浏览商品"; }
 				else if (arr_in_text(indexText, ["加购5个", "加购4个"])) { nextStep = "加购物车"; }
@@ -365,8 +367,6 @@ function clickComplete(apps) {
 					nextStep = "点击分现金按钮";
 				} else if (indexText.indexOf("品牌墙") != -1) {
 					nextStep = "品牌墙";
-				} else if (indexText.indexOf("点击首页浮层") != -1) {
-					nextStep = "首页浮层";
 				} else if (indexText.indexOf("参与可得") != -1) {
 					nextStep = "参与返回";
 				} else if (indexText.indexOf("浏览5个品牌墙店铺") != -1) {
