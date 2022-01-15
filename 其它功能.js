@@ -79,7 +79,8 @@ function 芭芭农场() {
                 try {
                     zfb_ele = obj.zfb_element();
                     if (zfb_ele != null) {
-                        log(func.sClick(zfb_ele));
+                        click(device.width / 2, zfb_ele.centerY());
+                        func.sClick(zfb_ele);
                         sleep(2000);
                     }
                     tb_ele = obj.tb_element();
