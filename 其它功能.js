@@ -271,6 +271,7 @@ function 芭芭农场() {
                 setClip(jump_url);          // 设置剪贴板
                 toastLog("已跳转URL");
                 btn_detail = null;
+                func.to_app("淘宝");
                 while (btn_detail == null) {
                     btn_detail = text("查看详情").findOnce();
                     if (btn_detail == null) { btn_detail = desc("查看详情").findOnce(); }
