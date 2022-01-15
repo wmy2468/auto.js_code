@@ -138,7 +138,7 @@ function 图鉴() {
 				} else {
 					// toastLog("当前todo_text=" + todo_text);
 					func.sClick(todo[todo_idx]);
-					if (arr_in_text(todo_text, ["去逛", "浏览"])) {
+					if (arr_in_text(todo_text, ["去逛", "逛", "浏览"])) {
 						toastLog("当前todo_text=" + todo_text);
 						sleep(6000);
 						back_way();
