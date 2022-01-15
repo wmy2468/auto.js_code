@@ -309,7 +309,7 @@ function 中信活动() {
 
     switch (actName) {
         case "10点-15点-9积分兑换":
-            if (func.dialogsWin(["基础权益", "额外权益"]) == "额外权益") {
+            if (func.dialogsWin(["基础权益", "额外权益"]) == "基础权益") {
                 couDes = ["京东支付券15元", "天猫15元", "奈雪18元", "百果园18元", "腾讯视频VIP"];
             }
             else {
