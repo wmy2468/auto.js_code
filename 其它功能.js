@@ -79,7 +79,8 @@ function 芭芭农场() {
                 try {
                     zfb_ele = obj.zfb_element();
                     if (zfb_ele != null) {
-                        click(device.width / 2, zfb_ele.centerY());
+                        // log(zfb_ele);
+                        // click(device.width / 2, zfb_ele.centerY());
                         func.sClick(zfb_ele);
                         sleep(2000);
                     }
@@ -294,16 +295,16 @@ function 芭芭农场() {
         }
     }
     // 执行函数
-    let select_item = func.dialogsWin(["淘宝", "淘宝支付宝助力", "支付宝", "淘宝施肥"])
+    let select_item = func.dialogsWin(["淘宝支付宝浏览", "淘宝支付宝助力", "淘宝施肥", "淘宝", "支付宝"])
     if (select_item == "淘宝") {
         work.tb();
     } else if (select_item == "淘宝施肥") {
         work.tb施肥();
     } else if (select_item == "淘宝福气红包") {
         work.tb(123);
-    } else if (select_item == "淘宝+淘宝福气红包") {
+    } else if (select_item == "淘宝支付宝浏览") {
         work.tb();
-        work.tb(123);
+        work.zfb();
     } else if (select_item == "淘宝支付宝助力") {
         work.zfb助力();
         work.tb助力();
