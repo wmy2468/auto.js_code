@@ -230,7 +230,7 @@ function 芭芭农场() {
                     sleep(300);
                 }
             }
-            // click("领取");
+            click("领取");
             sleep(2000);
         },
         zfb助力: function () {
