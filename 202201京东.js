@@ -67,8 +67,9 @@ function 金融任务() {
 	while (!mission_page_check()) {
 		func.sClick(id("tv_btn").text("立即参与").findOnce());
 		help_her = className("android.view.View").text("为TA助力为TA助力").findOnce();
-		toast("已找到为他助力弹窗");
 		if (help_her != null) {
+			toast("已找到为他助力弹窗");
+			sleep(2000);
 			try {
 				help_win_close_btn = help_her.parent().parent().parent().child(2);
 				func.sClick(help_win_close_btn);
