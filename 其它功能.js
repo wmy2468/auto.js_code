@@ -293,9 +293,7 @@ function 芭芭农场() {
         }
     }
     // 执行函数
-    let select_item = func.dialogsWin(
-        ["淘宝+淘宝福气红包", "淘宝支付宝助力", "支付宝", "淘宝施肥", "--------------", "淘宝", "淘宝福气红包"]
-    )
+    let select_item = func.dialogsWin(["淘宝", "淘宝支付宝助力", "支付宝", "淘宝施肥"])
     if (select_item == "淘宝") {
         work.tb();
     } else if (select_item == "淘宝施肥") {
