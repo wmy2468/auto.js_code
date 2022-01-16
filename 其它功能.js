@@ -265,7 +265,7 @@ function 芭芭农场() {
             url_honor = "1 666:/微生起以么他之得年可么他嘻";
             url_lm = "7 2:/！她出她着他之天里家以那哈";
 
-            let url1, url2, url3, btn_detail;
+            let url1, url2, url3, btn_detail, help_for;
             if (dev_model == dev_mate30) { url1 = url_redmi; url2 = url_honor; url3 = url_lm; }
             else if (dev_model == dev_honor8) { url1 = url_mate30; url2 = url_redmi; url3 = url_lm; }
             else if (dev_model == dev_redmi) { url1 = url_mate30; url2 = url_honor; url3 = url_lm; }
@@ -279,13 +279,19 @@ function 芭芭农场() {
                     if (btn_detail == null) { btn_detail = desc("查看详情").findOnce(); }
                     if (btn_detail == null) { btn_detail = text("打开").findOnce(); }
                     if (btn_detail == null) { btn_detail = desc("打开").findOnce(); }
+                    func.sClick(idContains("update_imageview_cancel").findOnce());
                     toastLog("等待淘口令弹窗加载");
                     sleep(2500);
                 }
                 func.sClick(btn_detail);
                 toastLog("已点击查看详情")
                 sleep(2400);
-                text("为TA助力").findOne().click();
+                help_for = text("为TA助力").findOnce();
+                while (help_for == null) {
+                    func.sClick(idContains("update_imageview_cancel").findOnce());
+                    sleep(2500);
+                }
+                func.sClick(help_for);
                 toastLog("已点击助力，等待下一个");
                 sleep(3000);
                 func.to_autojs();
