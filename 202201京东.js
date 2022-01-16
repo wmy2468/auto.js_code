@@ -894,7 +894,11 @@ function close_popup() {
 			// 关闭助力
 			find_object = textContains(target_text[i]).findOnce();
 			if (find_object != null) {
-				find_object_parent = find_object.parent();
+				if (target_text[i] == "欢迎您") {
+					find_object_parent = find_object.parent().parent();
+				} else {
+					find_object_parent = find_object.parent();
+				}
 				if (func.sClick(find_object_parent.child(1)) == true) {
 					toastLog("开始做任务: 点击了 关闭助力");
 					sleep(2000);
