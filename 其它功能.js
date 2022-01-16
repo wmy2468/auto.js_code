@@ -290,6 +290,7 @@ function 芭芭农场() {
                 while (help_for == null) {
                     func.sClick(idContains("update_imageview_cancel").findOnce());
                     sleep(2500);
+                    help_for = text("为TA助力").findOnce();
                 }
                 func.sClick(help_for);
                 toastLog("已点击助力，等待下一个");
