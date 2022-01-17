@@ -2,7 +2,6 @@ auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
 var cfg = func.config_dict();
-var local_config = storages.create("get_coupon_config");
 
 main();
 
@@ -95,16 +94,7 @@ function 云闪付() {
             let coupon_id, url_jump, coupon_dict, coupon_id_list;
             coupon_id_list = [];
             coupon_dict = {};
-            let last_selected, cfg_key;
-            cfg_key = "云闪付新年捡漏券记录";
-            if (local_config.contains(cfg_key)) {
-                // 如果存在配置则读取
-                last_selected = local_config.get(cfg_key);
-            } else {
-                coupon_desc_list = func.dialogs_checkbox(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]), "抢券_云闪付新年捡漏", "多选");
-                local_config.put(cfg_key, coupon_desc_list);
-            }
-
+            coupon_desc_list = func.dialogs_checkbox(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]), "抢券_云闪付新年捡漏", "多选");
             coupon_desc_list.forEach(coupon_desc => {
                 url_jump = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
                 coupon_id = url_jump.slice(-16);
