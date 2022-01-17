@@ -17,9 +17,9 @@ main();
 
 function main() {
 	let sMission;
-	if (dev_model == dev_mate30) {
+	if (dev_model == dev_honor8 || dev_model == dev_mate30) {
 		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click", "城城助力", "助力"]);
-	} else if (dev_model == dev_honor8 || dev_model == dev_redmi) {
+	} else if (dev_model == dev_redmi) {
 		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click", "城城助力"]);
 	} else {
 		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click"]);
@@ -38,8 +38,12 @@ function main() {
 			城城助力();
 			break;
 		case "助力":
-			互助点击("LM 26:/#5Aldk9vJsYm8H%扌丁kai鶁崠，嘿！﹎壹啓ɡμā汾10億!!!!!！ぷ");
-			互助点击("LP 27:/￥29j4ICaXdRECR￥大家买买买都→猄栋，☘﹎壹啓ɡμā汾10億!!!!!！ぷ");
+			if (dev_model == dev_honor8) {
+				互助点击("LM 23:/￥124lZFNIHwAAM%达kai→亰栋{a※pp}，✔﹎壹啓ɡμā汾10億!!!!!！ぷ");
+			} else {
+				互助点击("LM 23:/￥124lZFNIHwAAM%达kai→亰栋{a※pp}，✔﹎壹啓ɡμā汾10億!!!!!！ぷ");
+				互助点击("LP 28:/￥4CektFwm3dJSL%dakai》猄】崠】，⭐﹎壹啓ɡμā汾10億!!!!!！ぷ");
+			}
 			break;
 	}
 	setClip("");
