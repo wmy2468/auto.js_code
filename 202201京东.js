@@ -233,14 +233,14 @@ function 图鉴() {
 function 城城助力() {
 	let kouling1, kouling2;
 	if (dev_model == dev_honor8) {
-		kouling1 = "城城28:/￥16E4UBxjKGw3W%买买"
-		kouling2 = "LM 诚诚25:/￥6DT4I3CRvX1Zy%扌丁开"
+		kouling1 = "LM城城 26:/￥75Y4k6QYe5Gfv￥祛→【猄〤崬】，✔そ點①點ひ领哯唫！"
+		kouling2 = "JJ城城 27:/￥152IQB39jbkOa￥去【京東】吧※，⛄帮我_點㊦﹎íぺ壹起领现金ㄚΙ"
 	} else if (dev_model == dev_redmi) {
-		kouling1 = "LP城城29:/#7470JFyXpZrny@达kai→亰栋"
-		kouling2 = "城城28:/￥16E4UBxjKGw3W%买买"
+		kouling1 = "LP城城 29:/￥43vm3EC9HzoaM%祛→亰岽逛逛GO，⛄帮我_點㊦﹎íぺ壹起领现金ㄚΙ"
+		kouling2 = "JJ城城 27:/￥152IQB39jbkOa￥去【京東】吧※，⛄帮我_點㊦﹎íぺ壹起领现金ㄚΙ"
 	} else if (dev_model == dev_mate30) {
-		kouling1 = "LP城城29:/#7470JFyXpZrny@达kai→亰栋"
-		kouling2 = "LM 诚诚25:/￥6DT4I3CRvX1Zy%扌丁开"
+		kouling1 = "LP城城 29:/￥43vm3EC9HzoaM%祛→亰岽逛逛GO，⛄帮我_點㊦﹎íぺ壹起领现金ㄚΙ"
+		kouling2 = "LM城城 26:/￥75Y4k6QYe5Gfv￥祛→【猄〤崬】，✔そ點①點ひ领哯唫！"
 	} else {
 		return 0;
 	}
