@@ -44,6 +44,15 @@ if (selectIndex == -1) {
         alert("更新完成，请刷新页面");
     }
 } else {
+    let download_progress = dialogs.build(
+        {
+            title: "下载进度",
+            progress: {
+                max: jsFiles.length
+            }
+        }
+    );
+    download_progress.show();
     // 遍历读取文件
     for (i = 0; i <= jsFiles.length - 1; i++) {
         fileName = jsFiles[i];              // 文件名
@@ -61,11 +70,13 @@ if (selectIndex == -1) {
                 // 写入文件
                 files.write(filePath, req.body.string());
             }
+            download_progress.setProgress(i + 1);
         }
         catch (err) {
             log(err);
             continue;
         }
     }
+    download_progress.dismiss();
     alert('更新' + successCnt + '/' + jsFiles.length + '个文件');
 }

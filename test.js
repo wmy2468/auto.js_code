@@ -9,9 +9,16 @@ titles = "asdfasf";
 inArr = [1, 23, 4, 5];
 last_indices = [0];
 
-a = new Array();
+download_progress = dialogs.build(
+    {
+        title: "下载测试",
+        progress: {
+            max: 100
+        }
+    }
+).show();
 
-log(dialogs.multiChoice(titles, inArr, last_indices) == a);
+download_progress.setProgress(5);
 
 function get_zfb() {
     let btn;

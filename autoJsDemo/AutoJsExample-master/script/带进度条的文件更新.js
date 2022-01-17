@@ -1,5 +1,5 @@
  # 带进度条的文件更新.js
-```
+
 /*
  * @Author: NickHopps 
  * @Last Modified by: NickHopps
@@ -21,12 +21,12 @@ importClass(java.security.MessageDigest);
  */
 function GetUpdateList(server, path) {
   const _server = server,
-        _path = path,
-        _processor = "服务器上的处理程序";
+    _path = path,
+    _processor = "服务器上的处理程序";
 
   let _ignore_list = [];
 
-  const _generate_md5 = function(file) {
+  const _generate_md5 = function (file) {
     let md5 = MessageDigest.getInstance("MD5");
     let hex = [];
     md5.update(file);
@@ -40,7 +40,7 @@ function GetUpdateList(server, path) {
 
   const _generate_postdata = function func(path, data) {
     data = data || {};
-    files.listDir(path).forEach(function(file_name) {
+    files.listDir(path).forEach(function (file_name) {
       let new_path = files.join(path, file_name);
       if (_ignore_list.indexOf(file_name) < 0) {
         if (!files.isDir(new_path)) {
@@ -61,10 +61,10 @@ function GetUpdateList(server, path) {
     set ignore_list(arr) {
       _ignore_list = arr;
     },
-    get_updateList: function() {
+    get_updateList: function () {
       const postdata = _generate_postdata(_path);
       if (Object.keys(postdata).length > 0) {
-        let url = files.join(_server, _processor); 
+        let url = files.join(_server, _processor);
         let res = http.postJson(url, postdata);
         if (res.statusCode != 200) {
           toastLog("请求失败: " + res.statusCode + " " + res.statusMessage);
@@ -87,27 +87,27 @@ function GetUpdateList(server, path) {
  */
 function DownloadUtil(url, path, listener) {
   const _url = url,
-        _path = path,
-        _listener = listener;
+    _path = path,
+    _listener = listener;
 
   let _len = -1,
-      _temp = 0,
-      _total_bytes = 0,
-      _input_stream = null,
-      _output_stream = null,
-      _file_temp = null,
-      _buffer = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
-  
+    _temp = 0,
+    _total_bytes = 0,
+    _input_stream = null,
+    _output_stream = null,
+    _file_temp = null,
+    _buffer = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
+
   return {
-    download: function() {
+    download: function () {
       let client = new OkHttpClient();
       let request = new Request.Builder().url(_url).get().build();
       client.newCall(request).enqueue(new Callback({
-        onFailure: function(call, err) {
+        onFailure: function (call, err) {
           toast("请求失败");
           console.error("请求失败：" + err);
         },
-        onResponse: function(call, res) {
+        onResponse: function (call, res) {
           try {
             if (res.code() != 200) throw res.code() + " " + res.message();
             _total_bytes = res.body().contentLength();
@@ -125,7 +125,7 @@ function DownloadUtil(url, path, listener) {
           } finally {
             try {
               if (_input_stream != null)
-              _input_stream.close();
+                _input_stream.close();
             } catch (err) {
               toast("文件流处理失败");
               console.error("文件流处理失败：" + err);
@@ -141,7 +141,7 @@ function DownloadUtil(url, path, listener) {
   let get_update_list = new GetUpdateList("服务器地址", "本地查询更新的文件");
   get_update_list.ignore_list = [".", "..", ".git"]; // 忽略更新的目录
   let update_list = get_update_list.get_updateList(); // 获取可更新文件，应该返回一个包含可更新文件相对路径的数组
-  
+
   if (update_list.length) {
     // 这里进行多文件下载的处理
   } else {
@@ -152,7 +152,7 @@ function DownloadUtil(url, path, listener) {
   let downloadDialog = null;
   let url = "下载地址";       // http://xxx/x.jpg
   let path = "本地保存地址";  // ./x.jpg
-  dialogs.build({ 
+  dialogs.build({
     title: "发现新版本",
     content: "下载提示框中的文本内容",
     positive: "更新",
@@ -170,20 +170,20 @@ function DownloadUtil(url, path, listener) {
       downloadDialog.dismiss();
       downloadDialog = null;
     }).show();
-    
+
     new DownloadUtil(url, path, {
-      onDownloadSuccess: function(file) {
+      onDownloadSuccess: function (file) {
         downloadDialog.dismiss();
         downloadDialog = null;
         toastLog("更新完成");
       },
-      onDownloading: function(progress) {
+      onDownloading: function (progress) {
         downloadDialog.setProgress(progress);
       },
-      onDownloadFailed: function(err) {
+      onDownloadFailed: function (err) {
         toast("下载失败");
         console.error("下载失败：" + err);
       }
     }).download();
   }).show();
-})();```
+})();
