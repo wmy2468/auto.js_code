@@ -701,15 +701,28 @@ function snTime() {
 }
 
 function dialogs_checkbox(inArr, titles, multi_choice) {
+    /**
+      @param  inArr 传入的显示的数组
+      @param  titles, 显示的标题，同时是配置的key
+      @param  multi_choice, 是否多选，默认单选
+  */
+    let local_config = storages.create("local_config");
     if (titles == undefined) {
         titles = "选择启动";
     }
-    let select_index_list;
-    if (multi_choice == undefined) {
-        select_index_list = dialogs.singleChoice(titles, inArr);
+    let select_index_list, last_indices;
+    if (local_config.contains(titles)) {
+        last_indices = local_config.get(titles);
     } else {
-        select_index_list = dialogs.multiChoice(titles, inArr);
+        last_indices = [0];
     }
+    // 根据不同传入参数，显示单选或多选
+    if (multi_choice == undefined) {
+        select_index_list = dialogs.singleChoice(titles, inArr, last_indices[0]);
+    } else {
+        select_index_list = dialogs.multiChoice(titles, inArr, last_indices);
+    }
+
     if (typeof (select_index_list) == "object") {
         if (select_index_list.length == 0) { exit(); }
     } else {
@@ -720,8 +733,11 @@ function dialogs_checkbox(inArr, titles, multi_choice) {
     }
     let select_item;
     if (multi_choice == undefined) {
+        // 如果是单选，返回单选的值
+        local_config.put(titles, [select_index_list]);      // 保存上一次的配置
         return [inArr[select_index_list]];
     } else {
+        local_config.put(titles, select_index_list);        // 保存上一次的配置
         select_item = [];
         select_index_list.forEach(idx => {
             select_item.push(inArr[idx]);

@@ -5,8 +5,13 @@ var cfg = func.config_dict();
 let url_jd = "openApp.jdMobile://"
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
+titles = "asdfasf";
+inArr = [1, 23, 4, 5];
+last_indices = [0];
 
-click("查看详情");
+a = new Array();
+
+log(dialogs.multiChoice(titles, inArr, last_indices) == a);
 
 function get_zfb() {
     let btn;
