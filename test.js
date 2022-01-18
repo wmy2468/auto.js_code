@@ -8,17 +8,43 @@ var mission_key_word = "0爆竹";
 titles = "asdfasf";
 inArr = [1, 23, 4, 5];
 last_indices = [0];
+var dev_model = device.model;
+var dev_mate30, dev_honor8, dev_redmi;
+dev_mate30 = "TAS-AL00";
+dev_honor8 = "FRD-AL00";
+dev_redmi = "Redmi Note 7";
 
-download_progress = dialogs.build(
-    {
-        title: "下载测试",
-        progress: {
-            max: 100
-        }
+
+url = "openjdlite://virtual?params={\"category\":\"jump\",\"des\":\"m\",\"url\":\"https://prodev.m.jd.com/jdlite/active/31U4T6S4PbcK83HyLPioeCWrD63j/index.html\"}"
+
+func.to_scheme(url);
+
+function AA() {
+    let url1, url2;
+    if (dev_model == dev_honor8) {
+        url1 = cfg["url_scheme"]["京东"]["极速版挖宝"]["JJ"];
+        url2 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LM"];
+    } else if (dev_model == dev_redmi) {
+        url1 = cfg["url_scheme"]["京东"]["极速版挖宝"]["JJ"];
+        url2 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LP"];
+    } else if (dev_model == dev_mate30) {
+        url1 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LM"];
+        url2 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LP"];
+    } else {
+        return 0;
     }
-).show();
-
-download_progress.setProgress(5);
+    [url1, url2].forEach(jump_url => {
+        func.to_scheme(jump_url);
+        toastLog("已跳转第一个URL");
+        sleep(2500);
+        while (!func.sClick(text("立即助力").findOnce())) {
+            toastLog("等待点击立即助力按钮"); sleep(2500);
+        }
+        sleep(3500);
+        func.to_autojs();
+        sleep(3500);
+    })
+}
 
 function get_zfb() {
     let btn;

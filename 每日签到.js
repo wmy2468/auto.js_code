@@ -1,11 +1,12 @@
 auto.waitFor();
 var func = require("func_list.js");
 var cfg = func.config_dict();
-var devModel = device.model;;
-var devMate30, devHonor8, devRedMi;
-devMate30 = "TAS-AL00";
-devHonor8 = "FRD-AL00";
-devRedMi = "Redmi Note 7";
+
+var dev_model = device.model;
+var dev_mate30, dev_honor8, dev_redmi;
+dev_mate30 = "TAS-AL00";
+dev_honor8 = "FRD-AL00";
+dev_redmi = "Redmi Note 7";
 
 main();
 
@@ -14,6 +15,7 @@ function main() {
     zs = 招商();
     ysf = 云闪付();
     jd = 京东();
+    jd.极速版助力();
     jd.jd_sign();
     jd.金融签到();
     jd.金融双签();
@@ -440,103 +442,158 @@ function 浦发银行() {
 }
 
 function 京东() {
-    this.jd_sign = function () {
-        func.to_scheme(cfg["url_scheme"]["京东"]["领京豆"])
-        while (textContains("已连").findOnce() == null) {
-            if (func.cClick(text("签到领京豆").findOnce())) {
-                toastLog("已点击 签到领京豆");
-                sleep(2000);
+    let obj = {
+        极速版领红包: function () {
+            func.to_scheme(cfg["url_scheme"]["京东"]["极速版领红包"]);
+            let left_today, left_today_parent, left_idx;
+            left_today = text("今日剩余").findOnce();
+            while (left_today == null) {
+                left_today = text("今日剩余").findOnce();
+                toastLog("等待加载");
+                sleep(3500);
             }
-            if (text("签到日历").findOnce() != null) {
-                sleep(2000);
-                back();
-                sleep(2000);
+            left_times = 1;
+            while (left_times != 0) {
+                left_today = text("今日剩余").findOnce();
+                if (left_today != null) {
+                    try {
+                        left_idx = left_today.indexInParent();
+                        left_today_parent = left_today.parent();
+                        let left_times;
+                        left_times = left_today_parent.child(left_idx + 1).text();
+                    } catch (e) {
+                        continue;
+                    }
+                    func.sClick(left_today.parent().parent());
+                }
+                sleep(2500);
             }
-            sleep(800);
-        }
-        toastLog("已签到");
-        sleep(2500);
-        func.to_scheme(cfg["url_scheme"]["京东"]["领券中心"])
-        while (className("ImageView").desc("领券中心").findOnce() == null) {
-            sleep(800);
-        }
-        sleep(1200);
-        let signBtn;
-        signBtn = text("签到领奖励").findOnce();
-        // }
-
-        if (signBtn != null) {
-            func.sClick(signBtn);
-            sleep(2000);
-            className("ImageView").desc("关闭弹窗").findOne();
-            func.sClick(className("ImageView").desc("关闭弹窗").findOne());
+        },
+        极速版助力: function () {
+            let url1, url2;
+            if (dev_model == dev_honor8) {
+                url1 = cfg["url_scheme"]["京东"]["极速版挖宝"]["JJ"];
+                url2 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LM"];
+            } else if (dev_model == dev_redmi) {
+                url1 = cfg["url_scheme"]["京东"]["极速版挖宝"]["JJ"];
+                url2 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LP"];
+            } else if (dev_model == dev_mate30) {
+                url1 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LM"];
+                url2 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LP"];
+            } else {
+                return 0;
+            }
+            [url1, url2].forEach(jump_url => {
+                func.to_scheme(jump_url);
+                toastLog("已跳转第一个URL");
+                sleep(2500);
+                while (!func.sClick(text("立即助力").findOnce())) {
+                    toastLog("等待点击立即助力按钮"); sleep(2500);
+                }
+                sleep(3500);
+                func.to_autojs();
+                sleep(3500);
+            })
+        },
+        jd_sign: function () {
+            func.to_scheme(cfg["url_scheme"]["京东"]["领京豆"])
+            while (textContains("已连").findOnce() == null) {
+                if (func.cClick(text("签到领京豆").findOnce())) {
+                    toastLog("已点击 签到领京豆");
+                    sleep(2000);
+                }
+                if (text("签到日历").findOnce() != null) {
+                    sleep(2000);
+                    back();
+                    sleep(2000);
+                }
+                sleep(800);
+            }
+            toastLog("已签到");
+            sleep(2500);
+            func.to_scheme(cfg["url_scheme"]["京东"]["领券中心"])
+            while (className("ImageView").desc("领券中心").findOnce() == null) {
+                sleep(800);
+            }
             sleep(1200);
-        }
-        toastLog("今日已领券");
-        sleep(2500);
-        // while (text("首页").findOnce() == null) {
-        //     back();
-        //     sleep(2000);
-        // }
-    }
-    this.陪伴签到 = function () {
-        let signed, unsign, txt1, txt2;
-        txt1 = "陪伴频道签到赚京豆";
-        txt2 = "活动规则";
-        signed = "今日已签";
-        unsign = "签到";
-        func.to_scheme(cfg["url_scheme"]["京东"]["陪伴计划"]);
-        while (!(text(txt1).findOnce() != null && text(txt2).findOnce() != null)) {
-            sleep(800);
-        }
-        sleep(3500);
-        if (text(signed).findOnce() == null) {
-            func.sClick(text(unsign).findOnce());
-        }
-        toastLog("已签到");
-        sleep(3000);
-    }
-    this.金融签到 = function () {
-        func.to_scheme(cfg["url_scheme"]["京东金融"]["金融签到"]);
-        while (text("今天").findOnce() == null) {
-            toast("等待跳转到金融签到页面");
-            sleep(2200);
-        }
-        toast("已到达指定页面");
-        sleep(2500);
-        let already_sign;
-        already_sign = textContains("签到领金贴").findOnce();
-        if (already_sign == null) {
-            already_sign = textContains("签到并瓜分金贴").findOnce();
-        }
-        // 判断两种签到按钮
-        if (already_sign == null) {
-            toastLog("金融 已签到");
-            sleep(2200);
-        } else {
-            func.sClick(already_sign);
-        }
-        sleep(3000);
-    }
-    this.金融双签 = function () {
-        func.to_scheme(cfg["url_scheme"]["京东金融"]["双签领取页"]);
-        while (text("领取京豆奖励").findOnce() == null) {
-            toast("等待跳转到双签页面");
-            sleep(2200);
-        }
-        toast("已到达指定页面");
-        sleep(2500);
-        let already_sign;
-        already_sign = textContains("今日已领取").findOnce();
-        if (already_sign == null) {
-            func.sClick(text("立即领取").findOnce());
-            toast("已点击领取");
+            let signBtn;
+            signBtn = text("签到领奖励").findOnce();
+            // }
+
+            if (signBtn != null) {
+                func.sClick(signBtn);
+                sleep(2000);
+                className("ImageView").desc("关闭弹窗").findOne();
+                func.sClick(className("ImageView").desc("关闭弹窗").findOne());
+                sleep(1200);
+            }
+            toastLog("今日已领券");
+            sleep(2500);
+            // while (text("首页").findOnce() == null) {
+            //     back();
+            //     sleep(2000);
+            // }
+        },
+        陪伴签到: function () {
+            let signed, unsign, txt1, txt2;
+            txt1 = "陪伴频道签到赚京豆";
+            txt2 = "活动规则";
+            signed = "今日已签";
+            unsign = "签到";
+            func.to_scheme(cfg["url_scheme"]["京东"]["陪伴计划"]);
+            while (!(text(txt1).findOnce() != null && text(txt2).findOnce() != null)) {
+                sleep(800);
+            }
+            sleep(3500);
+            if (text(signed).findOnce() == null) {
+                func.sClick(text(unsign).findOnce());
+            }
+            toastLog("已签到");
             sleep(3000);
-        }
-        toastLog("双签奖励已领取");
-        sleep(3000);
+        },
+        金融签到: function () {
+            func.to_scheme(cfg["url_scheme"]["京东金融"]["金融签到"]);
+            while (text("今天").findOnce() == null) {
+                toast("等待跳转到金融签到页面");
+                sleep(2200);
+            }
+            toast("已到达指定页面");
+            sleep(2500);
+            let already_sign;
+            already_sign = textContains("签到领金贴").findOnce();
+            if (already_sign == null) {
+                already_sign = textContains("签到并瓜分金贴").findOnce();
+            }
+            // 判断两种签到按钮
+            if (already_sign == null) {
+                toastLog("金融 已签到");
+                sleep(2200);
+            } else {
+                func.sClick(already_sign);
+            }
+            sleep(3000);
+        },
+        金融双签: function () {
+            func.to_scheme(cfg["url_scheme"]["京东金融"]["双签领取页"]);
+            while (text("领取京豆奖励").findOnce() == null) {
+                toast("等待跳转到双签页面");
+                sleep(2200);
+            }
+            toast("已到达指定页面");
+            sleep(2500);
+            let already_sign;
+            already_sign = textContains("今日已领取").findOnce();
+            if (already_sign == null) {
+                func.sClick(text("立即领取").findOnce());
+                toast("已点击领取");
+                sleep(3000);
+            }
+            toastLog("双签奖励已领取");
+            sleep(3000);
+        },
     }
-    return this;
+
+    return obj;
 }
 
 // 买单吧
