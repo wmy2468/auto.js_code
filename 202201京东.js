@@ -150,10 +150,11 @@ function 图鉴() {
 					else if (arr_in_text(todo_text, ["会员"])) {
 						toastLog("当前todo_text=" + todo_text);
 						member_card();
+						back_way();
 					}
 					else if (arr_in_text(todo_text, ["签到"])) {
 						toastLog("当前todo_text=" + todo_text);
-						sleep(1000);
+						sleep(2500);
 					}
 					else {
 						log("未找到满足条件的文本，idx+1,todo=" + todo_text);
