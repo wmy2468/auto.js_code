@@ -62,7 +62,7 @@ function 做任务() {
 // -------------------------金融任务----------------------------
 function 金融任务() {
 	appName = "京东金融";
-	let kouling = "26:/￥53QDG9zffRCAb%，❄1.打开最新版金融APP粘贴口令到首页搜索框内触发口令弹窗  2.立即参与";
+	let kouling = "22:/￥05B7E6yqTy2OY￥，嗨！1.打开最新版金融APP粘贴口令到首页搜索框内触发口令弹窗  2.立即参与";
 	setClip(kouling);
 	sleep(1500);
 	func.to_app("京东金融");
