@@ -18,11 +18,11 @@ main();
 function main() {
 	let sMission;
 	if (dev_model == dev_honor8 || dev_model == dev_mate30) {
-		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click", "城城助力", "助力"]);
+		sMission = func.dialogs_select(["做任务", "金融任务", "图鉴Click", "城城助力", "助力"]);
 	} else if (dev_model == dev_redmi) {
-		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click", "城城助力"]);
+		sMission = func.dialogs_select(["做任务", "金融任务", "图鉴Click", "城城助力"]);
 	} else {
-		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click"]);
+		sMission = func.dialogs_select(["做任务", "金融任务", "图鉴Click"]);
 	}
 	switch (sMission) {
 		case "做任务":

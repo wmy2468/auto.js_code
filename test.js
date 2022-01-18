@@ -14,10 +14,19 @@ dev_mate30 = "TAS-AL00";
 dev_honor8 = "FRD-AL00";
 dev_redmi = "Redmi Note 7";
 
+log(textContains("已领取双签").findOnce())
 
-url = "openjdlite://virtual?params={\"category\":\"jump\",\"des\":\"m\",\"url\":\"https://prodev.m.jd.com/jdlite/active/31U4T6S4PbcK83HyLPioeCWrD63j/index.html\"}"
-
-func.to_scheme(url);
+function aa() {
+    let ob = {
+        bb: function () {
+            log(123);
+        },
+        cc: function () {
+            log(456);
+        }
+    }
+    return ob;
+}
 
 function AA() {
     let url1, url2;
@@ -425,7 +434,7 @@ function 芭芭农场() {
             alert("已完成");
         }
     }
-    let select_item = func.dialogsWin(["淘宝", "支付宝"])
+    let select_item = func.dialogs_select(["淘宝", "支付宝"])
     if (select_item == "淘宝") {
         work.tb();
     } else {
@@ -815,7 +824,7 @@ function 中信活动() {
     var timeArea = "北京时间";
     var startTime, targetViewText;
     var actNames = ["10点-15点-9积分兑换", "周三六11点-5折必胜客百果园", "9积分捡漏"];
-    var actName = func.dialogsWin(actNames);      // 设置查找的文本
+    var actName = func.dialogs_select(actNames);      // 设置查找的文本
     var couDes;    // 券描述列表
     var nowDate = new Date();
     var item_page_text = "价格: 1个权益+9个积分";
@@ -836,7 +845,7 @@ function 中信活动() {
             if (couDes.length == 1) {
                 targetViewText = couDes[0];               // 设置查找的文本
             } else {
-                targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+                targetViewText = func.dialogs_select(couDes);               // 设置查找的文本
             }
 
             func.to_app(appName);             // 启动APP
@@ -872,7 +881,7 @@ function 中信活动() {
             toastLog("到点点击");
             startTime = "10,59,59,850";             // 设置时间点
             couDes = ["必胜客100元代金券", "达美乐50元代金券", "肯德基50元"];             // 券名称
-            targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+            targetViewText = func.dialogs_select(couDes);               // 设置查找的文本
             func.to_app(appName);             // 启动APP
             // 等待进入指定页面
             var couClick = textContains(targetViewText).findOnce();
@@ -898,7 +907,7 @@ function 中信活动() {
             var cnt = 0;
             couDes = ["App Store 充值卡20元", "迪士尼", "必胜客20元", "奈雪", "喜茶25元",
                 "苏宁支付券20元", "京东支付券20元", "天猫20元", "百果园20元", "滴滴出行20元", "美团外卖20元"];
-            targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+            targetViewText = func.dialogs_select(couDes);               // 设置查找的文本
             func.to_app(appName);             // 启动APP
             while (text(item_page_text).findOnce() == null) {
                 sleep(100);
@@ -1409,12 +1418,12 @@ function 云闪付锦鲤活动() {
             break;
     }
 
-    targetViewText = func.dialogsWin(["每日券", "周五六日10点", "周五六日15点"]);
+    targetViewText = func.dialogs_select(["每日券", "周五六日10点", "周五六日15点"]);
     var targetText, everyText;
     targetText = "线下指定商户";
     switch (targetViewText) {
         case "每日券":
-            targetText = func.dialogsWin(["线下指定商户", "线上指定商户"]);
+            targetText = func.dialogs_select(["线下指定商户", "线上指定商户"]);
             startTime = "08,59,59,600";
             counponText = "满10可用"
             break;

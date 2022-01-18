@@ -13,18 +13,18 @@ main();
 function main() {
     let selectedArr = ["芭芭农场", "万商3比", "ZFB相关", "JD相关", "跳转指定Scheme"];
     //---------------配置区域-----------------
-    let scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本  
+    let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行财富季") { 建行财富季(); }
     else if (scriptName == "ZFB相关") {
         let zfb_func;
-        zfb_func = func.dialogsWin(["ZFB捐款", "余额宝转出", "余额宝转入"]);
+        zfb_func = func.dialogs_select(["ZFB捐款", "余额宝转出", "余额宝转入"]);
         if (zfb_func == "ZFB捐款") { 支付宝().ZFB捐款(); }
         else if (zfb_func == "余额宝转入") { 支付宝().余额宝转入(); }
         else if (zfb_func == "余额宝转出") { 支付宝().余额宝转出(); }
     }
     else if (scriptName == "JD相关") {
         let jd_func;
-        jd_func = func.dialogsWin(["极速版领红包", "极速版助力", "京东评价"]);
+        jd_func = func.dialogs_select(["极速版领红包", "极速版助力", "京东评价"]);
         if (jd_func == "极速版领红包") { jd().极速版领红包(); }
         else if (jd_func == "极速版助力") { jd().极速版助力(); }
         else if (jd_func == "京东评价") { 京东评价(); }
@@ -368,7 +368,7 @@ function 芭芭农场() {
         }
     }
     // 执行函数
-    let select_item = func.dialogsWin(["淘宝支付宝浏览", "淘宝支付宝助力", "淘宝施肥", "淘宝", "支付宝"])
+    let select_item = func.dialogs_select(["淘宝支付宝浏览", "淘宝支付宝助力", "淘宝施肥", "淘宝", "支付宝"])
     if (select_item == "淘宝") {
         work.tb();
     } else if (select_item == "淘宝施肥") {
@@ -414,7 +414,7 @@ function 万商3比() {
     }
     var count, inputVal, appName;
     count = dialogs.rawInput("请输入次数", 3);
-    numRange = func.dialogsWin(["11-15", "16-20", "20-23"]);
+    numRange = func.dialogs_select(["11-15", "16-20", "20-23"]);
     appName = "万商云";
     var min, max;
     min = numRange.substring(0, 2) * 1;
@@ -685,7 +685,7 @@ function 跳转指定Scheme() {
     let obj, obj_key;
     obj = cfg["url_scheme"];
     while (typeof (obj) != "string") {
-        obj_key = func.dialogsWin(Object.keys(obj));
+        obj_key = func.dialogs_select(Object.keys(obj));
         obj = obj[obj_key];
     }
     func.to_scheme(obj);
@@ -735,7 +735,7 @@ function 支付宝() {
         },
         ZFB捐款: function () {
             var defaultCount, count, cardNum, banks;
-            banks = func.dialogsWin(["渣打5比", "交行3比"])
+            banks = func.dialogs_select(["渣打5比", "交行3比"])
             switch (banks) {
                 case "渣打5比":
                     cardNum = "(9101)";

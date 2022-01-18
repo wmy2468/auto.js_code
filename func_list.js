@@ -159,13 +159,6 @@ function sClick(element) {
     return false;
 }
 
-function passAd() {
-    sClick(textContains("跳过").findOnce());
-    sClick(descContains("跳过").findOnce());
-    sClick(idContains("close").findOnce());
-    //sClick(text("取消").findOnce());
-    //sClick(text("放弃转账").findOnce());*/
-}
 /*
     小米使用参数1，2，华为使用0
 */
@@ -711,6 +704,7 @@ function dialogs_checkbox(inArr, titles, multi_choice) {
       @param  inArr 传入的显示的数组
       @param  titles, 显示的标题，同时是配置的key，格式，文件名_function名
       @param  multi_choice, 单选/多选，默认单选
+      返回选择的
   */
     let local_config = storages.create("local_config");
     if (titles == undefined) {
@@ -759,7 +753,7 @@ function dialogs_checkbox(inArr, titles, multi_choice) {
 
 }
 
-function dialogsWin(inArr, titles) {
+function dialogs_select(inArr, titles) {
     if (titles == undefined) {
         titles = "选择启动";
     }
@@ -775,7 +769,6 @@ module.exports = {
     floatyMove: floatyMove,
     cClick: cClick,
     sClick: sClick,
-    passAd: passAd,
     to_app: to_app,
     to_autojs: to_autojs,
     to_scheme: to_scheme,
@@ -786,6 +779,6 @@ module.exports = {
     randomNum: randomNum,
     getTimeDiff: getTimeDiff,
     calTimeDiff: calTimeDiff,
-    dialogsWin: dialogsWin,
+    dialogs_select: dialogs_select,
     dialogs_checkbox: dialogs_checkbox
 }

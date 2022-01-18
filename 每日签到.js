@@ -2,41 +2,35 @@ auto.waitFor();
 var func = require("func_list.js");
 var cfg = func.config_dict();
 
-var dev_model = device.model;
-var dev_mate30, dev_honor8, dev_redmi;
-dev_mate30 = "TAS-AL00";
-dev_honor8 = "FRD-AL00";
-dev_redmi = "Redmi Note 7";
+// var dev_model = device.model;
+// var dev_mate30, dev_honor8, dev_redmi;
+// dev_mate30 = "TAS-AL00";
+// dev_honor8 = "FRD-AL00";
+// dev_redmi = "Redmi Note 7";
 
 main();
 
 function main() {
-    // 中行缤纷生活() 邮储银行() 邮储信用卡() 华彩生活() 招商银行()
-    zs = 招商();
-    ysf = 云闪付();
-    jd = 京东();
-    jd.jd_sign();
-    jd.金融签到();
-    jd.金融双签();
-    jd.陪伴签到();
-    ysf.签到();
-    ysf.领积点();
-    // zs.便民生活();
-    // zs.饭票签到();
-    if (devModel == devMate30) {
-        // 龙支付签到();
-        沃钱包();
-        浦发银行();
-        中国农业银行();
-        什么值得买();
-        浦发信用卡();
-        买单吧();
-        工商();
-    } else if (devModel == devHonor8) {
-        toast("123");
-    } else if (devModel == devRedMi) {
-        工商();
-    }
+    let show_arr;
+    show_arr = ["京东_签到领豆", "京东_金融签到", "京东_金融双签", "京东_陪伴计划签到",
+        "ysf_签到", "ysf_领取积点",
+        "沃钱包_泡泡签到", "浦发_金豆签到", "浦发xyk_积分签到", "农行_小豆签到", "值得买_签到", "买单吧_签到", "工商_小象乐园"]
+    let select_items = func.dialogs_checkbox(show_arr, "每日签到记录", "多选");
+    select_items.forEach(item => {
+        if (item == "京东_签到领豆") { 京东().签到领豆(); }
+        else if (item == "京东_金融签到") { 京东().金融签到(); }
+        else if (item == "京东_金融双签") { 京东().金融双签(); }
+        else if (item == "京东_陪伴计划签到") { 京东().陪伴签到(); }
+        else if (item == "ysf_签到") { 云闪付().签到(); }
+        else if (item == "ysf_领取积点") { 云闪付().领积点(); }
+        else if (item == "沃钱包_泡泡签到") { 沃钱包(); }
+        else if (item == "浦发_金豆签到") { 浦发_金豆签到(); }
+        else if (item == "浦发xyk_积分签到") { 浦发xyk_积分签到(); }
+        else if (item == "农行_小豆签到") { 农行_小豆签到(); }
+        else if (item == "值得买_签到") { 值得买_签到(); }
+        else if (item == "买单吧_签到") { 买单吧_签到(); }
+        else if (item == "工商_小象乐园") { 工商_小象乐园(); }
+    });
     alert("已完成.");
 }
 
@@ -54,46 +48,48 @@ function 龙支付签到() {
 }
 
 function 云闪付() {
-    this.领积点 = function () {
-        func.to_scheme(cfg["url_scheme"]["云闪付"]["会员中心"]);
-        while (!(text("我的积点").findOnce() != null &&
-            text("积点乐园").findOnce() != null)) {
-            sleep(3000);
-        }
-        toastLog("已到达领取页面，等待...");
-        sleep(5000);
-        func.sClick(text("全部收取").findOnce());
-        toastLog("云闪付, 已领取积点");
-        sleep(2000);
-    }
+    let obj = {
+        领积点: function () {
+            func.to_scheme(cfg["url_scheme"]["云闪付"]["会员中心"]);
+            while (!(text("我的积点").findOnce() != null &&
+                text("积点乐园").findOnce() != null)) {
+                sleep(3000);
+            }
+            toastLog("已到达领取页面，等待...");
+            sleep(5000);
+            func.sClick(text("全部收取").findOnce());
+            toastLog("云闪付, 已领取积点");
+            sleep(2000);
+        },
 
-    this.签到 = function () {
-        let appName = "云闪付";
-        //closeApp(appName);
-        // func.to_app(appName);
-        // while (className("TextView").text("我的").findOnce() == null) {
-        //     if (textContains("跳过").findOnce() != null || descContains("跳过").findOnce() != null) {
-        //         sleep(800);
-        //         continue;
-        //     }
-        //     sleep(1000);
-        // }
-        // sleep(1500);
-        // func.sClick(className("TextView").text("首页").findOnce());
-        // //点击签到按钮
-        // func.sClick(id("com.unionpay:id/frog_float").findOne());
-        func.to_scheme(cfg["url_scheme"]["云闪付"]["签到"]);
-        // 等待签到页面加载
-        textContains("连续签到").findOne();
+        签到: function () {
+            let appName = "云闪付";
+            //closeApp(appName);
+            // func.to_app(appName);
+            // while (className("TextView").text("我的").findOnce() == null) {
+            //     if (textContains("跳过").findOnce() != null || descContains("跳过").findOnce() != null) {
+            //         sleep(800);
+            //         continue;
+            //     }
+            //     sleep(1000);
+            // }
+            // sleep(1500);
+            // func.sClick(className("TextView").text("首页").findOnce());
+            // //点击签到按钮
+            // func.sClick(id("com.unionpay:id/frog_float").findOne());
+            func.to_scheme(cfg["url_scheme"]["云闪付"]["签到"]);
+            // 等待签到页面加载
+            textContains("连续签到").findOne();
 
-        if (text("今日已签到").findOnce() == null) {
-            func.sClick(text("立即签到").findOnce());
-            sleep(1500);
+            if (text("今日已签到").findOnce() == null) {
+                func.sClick(text("立即签到").findOnce());
+                sleep(1500);
+            }
+            toastLog(appName + "已签到");
+            sleep(1000);
         }
-        toastLog(appName + "已签到");
-        sleep(1000);
     }
-    return this;
+    return obj;
 }
 
 
@@ -118,12 +114,14 @@ function 沃钱包() {
     sleep(2000);
 }
 
-function 工商() {
+function 工商_小象乐园() {
     let appName = "中国工商银行";
     //closeApp(appName);
     func.to_scheme(cfg["url_scheme"]["工商"]["小象1"]);
 
     while (textContains("你已经陪小象").findOnce() == null) {
+        toastLog("等待小象界面加载...");
+        sleep(2500);
         if (text("请输入手势密码登录").findOnce()) {
             toastLog("已找到手势密码按钮");
             sleep(500);
@@ -132,10 +130,11 @@ function 工商() {
             sleep(4000);
             func.to_autojs();
             toastLog("已切换到autojs，等待回去");
-            sleep(4500);
+            sleep(5000);
             func.to_scheme(cfg["url_scheme"]["工商"]["小象2"]);
+            toastLog("已切换回工商");
+            sleep(4500);
         }
-        sleep(2000);
     }
     log("已跳转回工商，等待查找剩余香蕉");
     sleep(2000);
@@ -348,7 +347,7 @@ function 中行缤纷生活() {
 }
 
 // 农行小豆
-function 中国农业银行() {
+function 农行_小豆签到() {
     let appName = "中国农业银行";
     //closeApp(appName);
     func.to_scheme(cfg["url_scheme"]["农行"]["小豆"]);
@@ -361,11 +360,12 @@ function 中国农业银行() {
             sleep(2000);
         }
     }
-    //toastLog("找签到");
+    sleep(3000);
     while (text("已经签到").findOnce() == null) {
-        if (func.sClick(text("收起").findOnce())) { sleep(1200); }
-        if (func.sClick(text("签到有礼").findOnce())) { sleep(1200); }
-        if (func.sClick(text("签到得豆").findOnce())) { sleep(1200); }
+        if (func.sClick(text("签到有礼").findOnce())) { sleep(1800); }
+        if (func.sClick(text("签到得豆").findOnce())) { sleep(1800); }
+        if (func.sClick(text("收起").findOnce())) { sleep(1800); }
+        sleep(1200);
     }
     if (func.sClick(text("已经签到").findOnce())) { sleep(1200); }
     toastLog(appName + "已签到");
@@ -404,7 +404,7 @@ function 邮储银行() {
 }
 
 // 浦发金豆签到
-function 浦发银行() {
+function 浦发_金豆签到() {
     let appName = "浦发银行";
     //closeApp(appName);
     func.to_scheme(cfg["url_scheme"]["浦发"]["金豆"]);
@@ -442,7 +442,7 @@ function 浦发银行() {
 
 function 京东() {
     let obj = {
-        jd_sign: function () {
+        签到领豆: function () {
             func.to_scheme(cfg["url_scheme"]["京东"]["领京豆"])
             while (textContains("已连").findOnce() == null) {
                 if (func.cClick(text("签到领京豆").findOnce())) {
@@ -531,9 +531,11 @@ function 京东() {
             let already_sign;
             already_sign = textContains("今日已领取").findOnce();
             if (already_sign == null) {
-                func.sClick(text("立即领取").findOnce());
-                toast("已点击领取");
-                sleep(3000);
+                while (text("您已领取双签礼包").findOnce() == null) {
+                    func.sClick(text("立即领取").findOnce());
+                    toast("已点击领取,等待已领取加载");
+                    sleep(3000);
+                }
             }
             toastLog("双签奖励已领取");
             sleep(3000);
@@ -544,7 +546,7 @@ function 京东() {
 }
 
 // 买单吧
-function 买单吧() {
+function 买单吧_签到() {
     let appName = "买单吧";
     //closeApp(appName);
     func.to_app(appName);
@@ -570,11 +572,11 @@ function 买单吧() {
         func.sClick(id("com.bankcomm.maidanba:id/bt_ws_lottery_close").findOnce());
     }
     toastLog(appName + "已签到");
-    sleep(1000);
+    sleep(3000);
 }
 
 // 浦发
-function 浦发信用卡() {
+function 浦发xyk_积分签到() {
     let appName = "浦大喜奔";
     //closeApp(appName);
     func.to_app(appName);
@@ -704,7 +706,7 @@ function 工银e生活() {
     sleep(1000);
 }
 
-function 什么值得买() {
+function 值得买_签到() {
     let appName = "什么值得买";
     func.to_app(appName);
     let signBtn = null;

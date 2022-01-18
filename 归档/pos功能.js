@@ -5,7 +5,7 @@ var func = require("func_list.js");
 
 var appName, count, inputVal;
 var selectFunc;
-selectFunc = func.dialogsWin(["万商付3比", "钱宝付3比", "计算手续费"]);
+selectFunc = func.dialogs_select(["万商付3比", "钱宝付3比", "计算手续费"]);
 
 switch (selectFunc) {
     case "万商付3比":
@@ -43,7 +43,7 @@ function 万商3比() {
     }
     var count, inputVal, appName;
     count = dialogs.rawInput("请输入次数", 3);
-    numRange = func.dialogsWin(["10-15", "15-20", "20-23"])
+    numRange = func.dialogs_select(["10-15", "15-20", "20-23"])
     appName = "万商云";
     var min, max;
     switch (numRange) {
@@ -97,7 +97,7 @@ function 钱宝3比() { }
 
 
 function 手续费() {
-    selectFunc = func.dialogsWin(["钱宝手续费", "快钱手续费"]);
+    selectFunc = func.dialogs_select(["钱宝手续费", "快钱手续费"]);
     if (selectFunc == "钱宝手续费") {
         钱宝手续费();
     }
