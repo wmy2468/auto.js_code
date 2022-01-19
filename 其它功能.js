@@ -42,22 +42,19 @@ function ysf() {
         YSF福气助力: function () {
             let url_head, url_end;
             url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3D";
-            url_end = "%26greetingId%3D1%26baifuId%3D11&encryptAppId=46411c55b29f8b49&scenarioId=1006";
+            url_end = "%26greetingId%3D1%26baifuId%3D1&encryptAppId=46411c55b29f8b49&scenarioId=1006";
             url_dict = {
+                "JJ-MATE30": "cb895525e54c56e009b24face50d5a814ba088",
+                "luyi1": "cb895525e54c50e709b249a0ea0458814aad8a",
+                "luyi2": "cb895525e64a55e104b54aa1e00c58804dae84",
+                "luyi3": "cb895525e54c50e104b74ea5e50c5b8c4da088",
+                "luyi4": "cb895525e64852ef06b14aace50d5c864aa88c",
+                "BP1": "cb895525e64a57e201b749ade5045c8145a98e",
+                "BP2": "cb895525e64a54e103b549a0ea0754864ca084",
                 "JJ-REDMI": "cb895525e64b5be602b64cace1035c834eaa88",
+                "LP-HONOR8": "cb895525e64b5bef08b641a7e206598049a888",
+                "LP-IPHONE": "cb895525e64a53e601b34da6e50459854aac8c"
             }
-            // url_dict = {
-            //     "JJ-MATE30": "cb895525e54c56e009b24face50d5a814ba088",
-            //     "luyi1": "cb895525e54c50e709b249a0ea0458814aad8a",
-            //     "luyi2": "cb895525e64a55e104b54aa1e00c58804dae84",
-            //     "luyi3": "cb895525e54c50e104b74ea5e50c5b8c4da088",
-            //     "luyi4": "cb895525e64852ef06b14aace50d5c864aa88c",
-            //     "BP1": "cb895525e64a57e201b749ade5045c8145a98e",
-            //     "BP2": "cb895525e64a54e103b549a0ea0754864ca084",
-            //     "JJ-REDMI": "cb895525e64b5be602b64cace1035c834eaa88",
-            //     "LP-HONOR8": "cb895525e64b5bef08b641a7e206598049a888",
-            //     "LP-IPHONE": "cb895525e64a53e601b34da6e50459854aac8c"
-            // }
             let user_id;
             Object.keys(url_dict).forEach(user_name => {
                 user_id = url_dict[user_name];
