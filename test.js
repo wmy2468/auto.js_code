@@ -14,46 +14,66 @@ dev_mate30 = "TAS-AL00";
 dev_honor8 = "FRD-AL00";
 dev_redmi = "Redmi Note 7";
 
-log(textContains("已领取双签").findOnce())
+ccccc()
 
-function aa() {
-    let ob = {
-        bb: function () {
-            log(123);
-        },
-        cc: function () {
-            log(456);
+function ccccc() {
+    log(123);
+    let find_text, find_object, find_object_parent, click_flag;	// 定义查找的变量
+    click_flag = false;
+    cnt = 0;
+    while (1) {
+        find_text = "有机会得大额现金";
+        find_object = textContains(find_text).findOnce();
+        try {
+            if (find_object != null && click_flag == false) {
+                find_object_parent = find_object.parent();
+                if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+                    click_flag = true;
+                    toastLog("已点击邀请好友按钮，退出");
+                    sleep(3000);
+                    continue;
+                }
+            }
+            if (click_flag == true) {
+                sleep(3000);
+                find_text = "京口令已复制";
+                find_object = className("TextView").text(find_text).findOnce();
+                if (find_object != null) {
+                    find_object_parent = find_object.parent();
+                    func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+                    func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+                    toastLog("城城现金: 已点击 京口令 关闭按钮");
+                    sleep(2000);
+                    break;
+                }
+                cnt = cnt + 1;
+                toastLog("当前城城查找 城城京口令 ，第" + cnt + "/5 次，超时后将直接返回");
+                sleep(2500);
+                if (cnt > 5) {
+                    break;
+                }
+            }
+            find_text = "活动已结束";
+            find_object = textContains(find_text).findOnce();
+            // 如果活动结束 则退出
+            if (find_object != null) {
+                find_object_parent = find_object.parent().parent().parent();
+                if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 2))) {
+                    toastLog("点击城城活动结束按钮");
+                    sleep(2500);
+                    break;
+                }
+            }
+
+        } catch (e) {
+            log("城城现金报错=" + e);
+            continue;
         }
+        toastLog("如果城城现金长时间未返回、未点击任何按钮，请手动处理");
+        sleep(3000);
     }
-    return ob;
 }
 
-function AA() {
-    let url1, url2;
-    if (dev_model == dev_honor8) {
-        url1 = cfg["url_scheme"]["京东"]["极速版挖宝"]["JJ"];
-        url2 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LM"];
-    } else if (dev_model == dev_redmi) {
-        url1 = cfg["url_scheme"]["京东"]["极速版挖宝"]["JJ"];
-        url2 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LP"];
-    } else if (dev_model == dev_mate30) {
-        url1 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LM"];
-        url2 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LP"];
-    } else {
-        return 0;
-    }
-    [url1, url2].forEach(jump_url => {
-        func.to_scheme(jump_url);
-        toastLog("已跳转第一个URL");
-        sleep(2500);
-        while (!func.sClick(text("立即助力").findOnce())) {
-            toastLog("等待点击立即助力按钮"); sleep(2500);
-        }
-        sleep(3500);
-        func.to_autojs();
-        sleep(3500);
-    })
-}
 
 function get_zfb() {
     let btn;

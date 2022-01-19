@@ -125,13 +125,13 @@ function cClick(element) {
     if (element != null) {
         click(element.bounds().centerX(), element.bounds().centerY());
         if (element.text() != null && element.text() != "") {
-            log("sClick_text: " + element.text());
+            log("cClick_text: " + element.text());
         } else if (element.desc() != null && element.desc() != "") {
-            log("sClick_desc: " + element.desc());
+            log("cClick_desc: " + element.desc());
         } else if (element.id() != null && element.id() != "") {
-            log("sClick_id: " + element.id());
+            log("cClick_id: " + element.id());
         } else {
-            log("sClick: text/desc/id all empty");
+            log("cClick: text/desc/id all empty");
         }
         return true;
     } else {
@@ -142,17 +142,20 @@ function cClick(element) {
 
 function sClick(element) {
     if (element != null) {
-        if (!element.click()) {
+        if (!element.clickable()) {
+            log("sClick_not_clickable_text: " + element.text());
             click(element.bounds().centerX(), element.bounds().centerY());
-        }
-        if (element.text() != null && element.text() != "") {
-            log("sClick_text: " + element.text());
-        } else if (element.desc() != null && element.desc() != "") {
-            log("sClick_desc: " + element.desc());
-        } else if (element.id() != null && element.id() != "") {
-            log("sClick_id: " + element.id());
         } else {
-            log("sClick: text/desc/id all empty");
+            element.click();
+            if (element.text() != null && element.text() != "") {
+                log("sClick_text: " + element.text());
+            } else if (element.desc() != null && element.desc() != "") {
+                log("sClick_desc: " + element.desc());
+            } else if (element.id() != null && element.id() != "") {
+                log("sClick_id: " + element.id());
+            } else {
+                log("sClick: text/desc/id all empty");
+            }
         }
         return true;
     }

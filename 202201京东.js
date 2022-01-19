@@ -767,16 +767,21 @@ function 城城现金() {
 					break;
 				}
 			}
-
+			find_text = "活动已结束";
+			find_object = textContains(find_text).findOnce();
+			// 如果活动结束 则退出
+			if (find_object != null) {
+				find_object_parent = find_object.parent().parent().parent();
+				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 2))) {
+					toastLog("点击城城活动结束按钮");
+					sleep(2500);
+					break;
+				}
+			}
 
 		} catch (e) {
 			log("城城现金报错=" + e);
 			continue;
-		}
-		// 如果活动结束 则退出
-		if (text("活动已结束").findOnce() != null) {
-			if (func.sClick(text("e300dc37709c6f82").findOnce())) { sleep(2000); }
-			break;
 		}
 		toastLog("如果城城现金长时间未返回、未点击任何按钮，请手动处理");
 		sleep(3000);

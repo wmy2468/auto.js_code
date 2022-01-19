@@ -514,9 +514,13 @@ function 京东() {
             // 判断两种签到按钮
             if (already_sign == null) {
                 toastLog("金融 已签到");
-                sleep(2200);
             } else {
-                func.sClick(already_sign);
+                while (textContains("签到成功获").findOnce() == null) {
+                    func.sClick(already_sign);
+                    toastLog("金融 已点击签到按钮，等待...");
+                    sleep(2500);
+                }
+                toastLog("金融 已签到");
             }
             sleep(3000);
         },
