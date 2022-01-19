@@ -64,11 +64,12 @@ function ysf() {
                 sleep(2500);
                 desc("关闭按钮").findOne();
                 toastLog("等待助力界面加载...");
-                sleep(4000);
+                sleep(6000);
                 func.to_autojs();
                 toastLog("助力完成,等待下一个...");
                 sleep(3000);
             })
+            alert("已完成");
         }
     }
     return obj;
@@ -76,7 +77,6 @@ function ysf() {
 
 function jd() {
     let obj_jd = {
-
         极速版助力: function () {
             let url1, url2;
             if (dev_model == dev_honor8) {
@@ -464,6 +464,7 @@ function 万商3比() {
         back();
         count = count - 1;
     }
+    log("total amount = " + sum / 10);
     alert("已完成,共计:" + sum / 10 + "元");
 }
 
