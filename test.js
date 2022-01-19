@@ -14,7 +14,11 @@ dev_mate30 = "TAS-AL00";
 dev_honor8 = "FRD-AL00";
 dev_redmi = "Redmi Note 7";
 
-ccccc()
+let url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3Dcb895525e54c56e009b24face50d5a814ba088%26greetingId%3D1%26baifuId%3D1&encryptAppId=46411c55b29f8b49&scenarioId=1006"
+
+
+// log(textContains("击鼓领福气").findOnce());
+func.to_scheme(url_head);
 
 function ccccc() {
     log(123);

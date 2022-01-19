@@ -11,32 +11,75 @@ dev_redmi = "Redmi Note 7";
 main();
 // toastLog(text("领取奖励").find().length);
 function main() {
-    let selectedArr = ["芭芭农场", "万商3比", "ZFB相关", "JD相关", "跳转指定Scheme"];
+    let select_func;
+    let selectedArr = ["芭芭农场", "万商3比", "ZFB相关", "JD相关", "YSF相关", "跳转指定Scheme"];
     //---------------配置区域-----------------
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行财富季") { 建行财富季(); }
     else if (scriptName == "ZFB相关") {
-        let zfb_func;
-        zfb_func = func.dialogs_select(["ZFB捐款", "余额宝转出", "余额宝转入"]);
-        if (zfb_func == "ZFB捐款") { 支付宝().ZFB捐款(); }
-        else if (zfb_func == "余额宝转入") { 支付宝().余额宝转入(); }
-        else if (zfb_func == "余额宝转出") { 支付宝().余额宝转出(); }
+        select_func = func.dialogs_select(["ZFB捐款", "余额宝转出", "余额宝转入"]);
+        if (select_func == "ZFB捐款") { 支付宝().ZFB捐款(); }
+        else if (select_func == "余额宝转入") { 支付宝().余额宝转入(); }
+        else if (select_func == "余额宝转出") { 支付宝().余额宝转出(); }
     }
     else if (scriptName == "JD相关") {
-        let jd_func;
-        jd_func = func.dialogs_select(["极速版领红包", "极速版助力", "京东评价"]);
-        if (jd_func == "极速版领红包") { jd().极速版领红包(); }
-        else if (jd_func == "极速版助力") { jd().极速版助力(); }
-        else if (jd_func == "京东评价") { 京东评价(); }
+        select_func = func.dialogs_select(["极速版领红包", "极速版助力", "京东评价"]);
+        if (select_func == "极速版领红包") { jd().极速版领红包(); }
+        else if (select_func == "极速版助力") { jd().极速版助力(); }
+        else if (select_func == "京东评价") { 京东评价(); }
+    }
+    else if (scriptName == "YSF相关") {
+        select_func = func.dialogs_select(["YSF福气助力"]);
+        if (select_func == "YSF福气助力") { ysf().YSF福气助力(); }
     }
     else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
     else if (scriptName == "万商3比") { 万商3比(); }
     else if (scriptName == "芭芭农场") { 芭芭农场(); }
 }
 
+function ysf() {
+    let obj = {
+        YSF福气助力: function () {
+            let url_head, url_end;
+            url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3D";
+            url_end = "%26greetingId%3D1%26baifuId%3D1&encryptAppId=46411c55b29f8b49&scenarioId=1006";
+            url_dict = {
+                "JJ-REDMI": "cb895525e64b5be602b64cace1035c834eaa88",
+            }
+            // url_dict = {
+            //     "JJ-MATE30": "cb895525e54c56e009b24face50d5a814ba088",
+            //     "luyi1": "cb895525e54c50e709b249a0ea0458814aad8a",
+            //     "luyi2": "cb895525e64a55e104b54aa1e00c58804dae84",
+            //     "luyi3": "cb895525e54c50e104b74ea5e50c5b8c4da088",
+            //     "luyi4": "cb895525e64852ef06b14aace50d5c864aa88c",
+            //     "BP1": "cb895525e64a57e201b749ade5045c8145a98e",
+            //     "BP2": "cb895525e64a54e103b549a0ea0754864ca084",
+            //     "JJ-REDMI": "cb895525e64b5be602b64cace1035c834eaa88",
+            //     "LP-HONOR8": "cb895525e64b5bef08b641a7e206598049a888",
+            //     "LP-IPHONE": "cb895525e64a53e601b34da6e50459854aac8c"
+            // }
+            let user_id;
+            Object.keys(url_dict).forEach(user_name => {
+                user_id = url_dict[user_name];
+                log(url_head + user_id + url_end);
+                func.to_scheme(url_head + user_id + url_end);
+                toastLog("当前为:" + user_name + ",助力...");
+                sleep(2500);
+                desc("关闭按钮").findOne();
+                toastLog("等待助力界面加载...");
+                sleep(4000);
+                func.to_autojs();
+                toastLog("助力完成,等待下一个...");
+                sleep(3000);
+            })
+        }
+    }
+    return obj;
+}
+
 function jd() {
     let obj_jd = {
-        
+
         极速版助力: function () {
             let url1, url2;
             if (dev_model == dev_honor8) {
