@@ -278,7 +278,7 @@ function 中行缤纷生活() {
     //closeApp(appName);
     func.to_app(appName);
     while (text("我的").findOnce() == null) {
-        func.passAd();
+        ;
     }
     sleep(1000);
     while (text("登录手机号更改").findOnce() == null) {
@@ -379,7 +379,7 @@ function 邮储银行() {
     //closeApp(appName);
     func.to_app(appName);
     while (className("RadioButton").text("我的").findOnce() == null) {
-        func.passAd();
+        ;
     }
     sleep(1000);
     func.sClick(text("我的").findOnce());
@@ -586,7 +586,7 @@ function 买单吧_签到() {
     //closeApp(appName);
     func.to_app(appName);
     while (className("TextView").id("tv_title").text("我的").findOnce() == null) {
-        func.passAd();
+        ;
         func.sClick(id("ivADClose").findOnce());
     }
     func.sClick(text("我的").findOne().parent().parent().parent().parent().child(2));
@@ -616,7 +616,6 @@ function 浦发xyk_积分签到() {
     //closeApp(appName);
     func.to_app(appName);
     while (text("我的").findOnce() == null) {
-        func.passAd();
         func.sClick(idContains("close").findOnce());
     }
     func.sClick(text("我的").findOne());
@@ -652,7 +651,7 @@ function 邮储信用卡() {
     let appName = "邮储信用卡";
     func.to_app(appName);
     while (text("我的").findOnce() == null) {
-        func.passAd();
+        ;
         func.sClick(text("确认").findOnce());
         let Continue = className("TextView").text("继续使用").findOnce();
         if (Continue != null) {
@@ -685,7 +684,7 @@ function 华彩生活() {
     //closeApp(appName);
     func.to_app(appName);
     while (text("我的").findOnce() == null) {
-        func.passAd();
+        ;
     }
     sleep(1000);
     func.sClick(text("我的").findOnce());
@@ -718,7 +717,7 @@ function 工银e生活() {
     //closeApp(appName);
     func.to_app(appName);
     while (id("radio_button1").text("生活").findOnce() == null) {
-        func.passAd();
+        ;
     }
     func.sClick(id("radio_button1").text("生活").findOne());
     // 点击输入框
@@ -751,7 +750,7 @@ function 值得买_签到() {
         sleep(800);
         func.sClick(idContains("close").findOnce());
         sleep(800);
-        //func.passAd();
+        //;
     }
     sleep(800);
     func.sClick(signBtn);

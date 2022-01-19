@@ -829,7 +829,7 @@ function 什么值得买() {
         sleep(800);
         func.sClick(idContains("close").findOnce());
         sleep(800);
-        //func.passAd();
+        //;
     }
     sleep(800);
     func.sClick(signBtn);
@@ -1186,7 +1186,7 @@ function 买单吧() {
     //closeApp(appName);
     func.to_app(appName);
     while (className("TextView").id("tv_title").text("我的").findOnce() == null) {
-        func.passAd();
+        ;
         func.sClick(id("ivADClose").findOnce());
     }
     // func.sClick(text("我的").findOne().parent().parent().parent().parent().child(2));

@@ -95,7 +95,7 @@ function 进90减2界面领券() {
     payBtn = text("生活·缴费").findOnce();
     while (targetView == null) {
         targetView = desc("购物车").depth(14).findOnce();
-        func.passAd();
+        ;
         func.sClick(text("生活·缴费").findOnce());
         pay90_40 = className("TextView").text("抢90减40话费券").findOnce();
         if (pay90_40 != null) {
