@@ -394,11 +394,7 @@ function clickComplete(apps) {
 				else if (arr_in_text(detailText, ["领百亿购物金", "榜单会场"])) { nextStepDetail = "20秒等待"; }
 				else if (arr_in_text(detailText, ["东东超市", "去财富岛"])) { nextStepDetail = "需要多次点击返回"; }
 				else if (arr_in_text(detailText, ["去企有此礼赢取好礼"])) { nextStepDetail = "页面含邀请好友"; }
-				else if (arr_in_text(detailText, ["浏览免费领保险"])) {
-					index_todo_now = index_todo_now + 1;
-					toastLog("clickComplete: 未找到满足条件的任务描述-小字，index + 1");
-					continue;
-				}
+				else if (arr_in_text(detailText, ["浏览免费领保险"])) { nextStepDetail = "点击领取才会继续"; }
 
 				// 除了Mate 30外，另外2个台古董在小程序卡死
 				if ((dev_model == dev_honor8 || dev_model == dev_redmi) && nextStepDetail == "小程序") {
@@ -496,6 +492,14 @@ function after_click(textStr, details, apps) {
 			}
 			func.to_app(appName);
 		}
+	} else if (details == "点击领取才会继续") {
+		func.sClick(text("立即领取").findOnce());
+		while (text("立即领取").findOnce() != null) {
+			toastLog("未跳转新页面，请手动点击，立即领取按钮");
+			sleep(2500);
+		}
+		toastLog("已跳转新页面，等待");
+		sleep(random_second(10500, 100, 1000));
 	} else if (details == "需要多次点击返回") {
 		sleep(random_second(800, 100, 1000));
 		while (!is_in_invite_friend_page()) {
