@@ -617,6 +617,8 @@ function 浦发xyk_积分签到() {
     func.to_app(appName);
     while (text("我的").findOnce() == null) {
         func.sClick(idContains("close").findOnce());
+        toastLog("等待 我的 按钮加载");
+        sleep(2500);
     }
     func.sClick(text("我的").findOne());
     // 等待我的页面加载
