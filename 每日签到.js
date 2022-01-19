@@ -354,6 +354,11 @@ function 农行_小豆签到() {
     func.to_scheme(cfg["url_scheme"]["农行"]["小豆"]);
     //toastLog("我的已点击");
     while (textContains("小豆订单").findOnce() == null) {
+        if (func.sClick(desc("我的").depth(6).findOnce())) { sleep(1500); }
+        else if (func.sClick(text("我的").depth(6).findOnce())) { sleep(1500); }
+        if (func.sClick(text("小豆").depth(15).findOnce())) { sleep(1500); }
+        else if (func.sClick(desc("小豆").depth(15).findOnce())) { sleep(1500); }
+
         if (text("切换登录方式").findOnce() != null) {
             //toastLog("滑动手势");
             sleep(500);
@@ -363,10 +368,10 @@ function 农行_小豆签到() {
     }
     sleep(3000);
     while (text("已经签到").findOnce() == null) {
-        if (func.sClick(text("签到有礼").findOnce())) { sleep(1800); }
-        if (func.sClick(text("签到得豆").findOnce())) { sleep(1800); }
-        if (func.sClick(text("收起").findOnce())) { sleep(1800); }
-        sleep(1200);
+        if (func.sClick(text("收起").findOnce())) { sleep(1200); }
+        if (func.sClick(text("签到有礼").findOnce())) { sleep(1200); }
+        if (func.sClick(text("签到得豆").findOnce())) { sleep(1200); }
+        sleep(2500);
     }
     if (func.sClick(text("已经签到").findOnce())) { sleep(1200); }
     toastLog(appName + "已签到");

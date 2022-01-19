@@ -14,7 +14,9 @@ dev_mate30 = "TAS-AL00";
 dev_honor8 = "FRD-AL00";
 dev_redmi = "Redmi Note 7";
 
-log(textContains("今日剩余").findOnce());
+// func.to_scheme(cfg["url_scheme"]["农行"]["小豆"]);
+func.sClick(text("小豆").depth(15).findOnce())
+log(text("已经签到").findOnce());
 
 function ccccc() {
     log(123);
