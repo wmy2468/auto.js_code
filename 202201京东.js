@@ -393,8 +393,12 @@ function clickComplete(apps) {
 				else if (arr_in_text(detailText, ["金融神券", "京享值PK赢"])) { nextStepDetail = "金融2次返回"; }
 				else if (arr_in_text(detailText, ["领百亿购物金", "榜单会场"])) { nextStepDetail = "20秒等待"; }
 				else if (arr_in_text(detailText, ["东东超市", "去财富岛"])) { nextStepDetail = "需要多次点击返回"; }
-				else if (arr_in_text(detailText, ["去逛京友圈"])) { nextStepDetail = "京友圈"; continue; }
 				else if (arr_in_text(detailText, ["去企有此礼赢取好礼"])) { nextStepDetail = "页面含邀请好友"; }
+				else if (arr_in_text(detailText, ["浏览免费领保险"])) {
+					index_todo_now = index_todo_now + 1;
+					toastLog("clickComplete: 未找到满足条件的任务描述-小字，index + 1");
+					continue;
+				}
 
 				// 除了Mate 30外，另外2个台古董在小程序卡死
 				if ((dev_model == dev_honor8 || dev_model == dev_redmi) && nextStepDetail == "小程序") {
