@@ -494,7 +494,7 @@ function after_click(textStr, details, apps) {
 		}
 	} else if (details == "点击领取才会继续") {
 		func.sClick(text("立即领取").findOne());
-		toastLog("已跳转新页面，等待");
+		toastLog("已点击领取，等待");
 		sleep(random_second(10500, 100, 1000));
 	} else if (details == "需要多次点击返回") {
 		sleep(random_second(800, 100, 1000));
