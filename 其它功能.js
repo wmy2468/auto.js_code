@@ -51,9 +51,10 @@ function ysf() {
                 "luyi4": "cb895525e64852ef06b14aace50d5c864aa88c",
                 "BP1": "cb895525e64a57e201b749ade5045c8145a98e",
                 "BP2": "cb895525e64a54e103b549a0ea0754864ca084",
+                "BP3": "cb895525e64d55ef04b04face20355874ea884",
                 "JJ-REDMI": "cb895525e64b5be602b64cace1035c834eaa88",
                 "LP-HONOR8": "cb895525e64b5bef08b641a7e206598049a888",
-                "LP-IPHONE": "cb895525e64a53e601b34da6e50459854aac8c"
+                "LP-IPHONE": "cb895525e64a53e601b34da6e50459854aac8c",
             }
             let user_id;
             Object.keys(url_dict).forEach(user_name => {
