@@ -128,13 +128,13 @@ function 工商_小象乐园() {
             sleep(500);
             func.gesture_pwd(appName);
             toastLog("已输入 mima");
-            sleep(4000);
+            sleep(6000);
             func.to_autojs();
             toastLog("已切换到autojs，等待回去");
-            sleep(5000);
+            sleep(8000);
             func.to_scheme(cfg["url_scheme"]["工商"]["小象2"]);
             toastLog("已切换回工商");
-            sleep(4500);
+            sleep(3000);
         }
     }
     log("已跳转回工商，等待查找剩余香蕉");
