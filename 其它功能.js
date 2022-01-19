@@ -42,7 +42,7 @@ function ysf() {
         YSF福气助力: function () {
             let url_head, url_end;
             url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3D";
-            url_end = "%26greetingId%3D1%26baifuId%3D1&encryptAppId=46411c55b29f8b49&scenarioId=1006";
+            url_end = "%26greetingId%3D1%26baifuId%3D11&encryptAppId=46411c55b29f8b49&scenarioId=1006";
             url_dict = {
                 "JJ-REDMI": "cb895525e64b5be602b64cace1035c834eaa88",
             }
