@@ -36,32 +36,7 @@ function main() {
 
 function jd() {
     let obj_jd = {
-        极速版领红包: function () {
-            func.to_scheme(cfg["url_scheme"]["京东"]["极速版领红包"]);
-            let left_today, left_today_parent, left_idx;
-            left_today = text("今日剩余").findOnce();
-            while (left_today == null) {
-                left_today = text("今日剩余").findOnce();
-                toastLog("等待加载");
-                sleep(3500);
-            }
-            left_times = 1;
-            while (left_times != 0) {
-                left_today = text("今日剩余").findOnce();
-                if (left_today != null) {
-                    try {
-                        left_idx = left_today.indexInParent();
-                        left_today_parent = left_today.parent();
-                        let left_times;
-                        left_times = left_today_parent.child(left_idx + 1).text();
-                    } catch (e) {
-                        continue;
-                    }
-                    func.sClick(left_today.parent().parent());
-                }
-                sleep(2500);
-            }
-        },
+        
         极速版助力: function () {
             let url1, url2;
             if (dev_model == dev_honor8) {

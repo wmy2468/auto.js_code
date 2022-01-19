@@ -12,7 +12,7 @@ main();
 
 function main() {
     let show_arr;
-    show_arr = ["京东_签到领豆", "京东_金融签到", "京东_金融双签", "京东_陪伴计划签到",
+    show_arr = ["京东_签到领豆", "京东_金融签到", "京东_金融双签", "京东_极速版领红包", "京东_陪伴计划签到",
         "ysf_签到", "ysf_领取积点",
         "沃钱包_泡泡签到", "浦发_金豆签到", "浦发xyk_积分签到", "农行_小豆签到", "值得买_签到", "买单吧_签到", "工商_小象乐园"]
     let select_items = func.dialogs_checkbox(show_arr, "每日签到记录", "多选");
@@ -20,6 +20,7 @@ function main() {
         if (item == "京东_签到领豆") { 京东().签到领豆(); }
         else if (item == "京东_金融签到") { 京东().金融签到(); }
         else if (item == "京东_金融双签") { 京东().金融双签(); }
+        else if (item == "京东_极速版领红包") { 京东().极速版领红包(); }
         else if (item == "京东_陪伴计划签到") { 京东().陪伴签到(); }
         else if (item == "ysf_签到") { 云闪付().签到(); }
         else if (item == "ysf_领取积点") { 云闪付().领积点(); }
@@ -442,6 +443,32 @@ function 浦发_金豆签到() {
 
 function 京东() {
     let obj = {
+        极速版领红包: function () {
+            func.to_scheme(cfg["url_scheme"]["京东"]["极速版领红包"]);
+            let left_today, left_today_parent, left_idx;
+            left_today = text("今日剩余").findOnce();
+            while (left_today == null) {
+                left_today = text("今日剩余").findOnce();
+                toastLog("等待加载");
+                sleep(3500);
+            }
+            left_times = 1;
+            while (left_times != 0) {
+                left_today = text("今日剩余").findOnce();
+                if (left_today != null) {
+                    try {
+                        left_idx = left_today.indexInParent();
+                        left_today_parent = left_today.parent();
+                        let left_times;
+                        left_times = left_today_parent.child(left_idx + 1).text();
+                    } catch (e) {
+                        continue;
+                    }
+                    func.sClick(left_today.parent().parent());
+                }
+                sleep(2500);
+            }
+        },
         签到领豆: function () {
             func.to_scheme(cfg["url_scheme"]["京东"]["领京豆"])
             while (textContains("已连").findOnce() == null) {
