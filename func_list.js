@@ -715,7 +715,11 @@ function dialogs_checkbox(inArr, titles, multi_choice) {
     }
     let select_index_list, last_indices;
     if (local_config.contains(titles)) {
-        last_indices = local_config.get(titles);
+        try {
+            last_indices = local_config.get(titles);
+        } catch (e) {
+            last_indices = [0];
+        }
     } else {
         last_indices = [0];
     }
