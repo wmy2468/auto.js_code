@@ -448,19 +448,23 @@ function 京东() {
             let left_today, left_today_parent, left_idx;
             left_today = text("今日剩余").findOnce();
             while (left_today == null) {
-                left_today = text("今日剩余").findOnce();
+                left_today = textContains("今日剩余").findOnce();
                 toastLog("等待加载");
                 sleep(3500);
             }
-            left_times = 1;
+            let left_times = 1;
             while (left_times != 0) {
-                left_today = text("今日剩余").findOnce();
+                left_today = textContains("今日剩余").findOnce();
                 if (left_today != null) {
                     try {
-                        left_idx = left_today.indexInParent();
-                        left_today_parent = left_today.parent();
-                        let left_times;
-                        left_times = left_today_parent.child(left_idx + 1).text();
+                        if (left_today.text() == "今日剩余") {
+                            left_idx = left_today.indexInParent();
+                            left_today_parent = left_today.parent();
+                            left_times = left_today_parent.child(left_idx + 1).text();
+                        } else {
+                            left_times = left_today.text().slice(4, 5);
+                        }
+                        toastLog("当前剩余次数=" + left_times);
                     } catch (e) {
                         continue;
                     }
