@@ -505,9 +505,11 @@ function 京东() {
             // }
             if (signBtn != null) {
                 while (!func.sClick(className("ImageView").desc("关闭弹窗").findOnce())) {
-                    func.sClick(text("签到领奖励").findOnce());
-                    func.sClick(text("领点点券").findOnce());
-                    func.sClick(text("立即签到").findOnce());
+                    if (!func.sClick(text("签到领奖励").findOnce())) {
+                        if (!func.sClick(text("领点点券").findOnce())) {
+                            func.sClick(text("立即签到").findOnce());
+                        }
+                    }
                     toastLog("已点击 签到按钮,等待弹窗加载");
                     sleep(1200);
                 }
