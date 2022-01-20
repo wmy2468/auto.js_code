@@ -496,19 +496,21 @@ function 京东() {
             sleep(2500);
             func.to_scheme(cfg["url_scheme"]["京东"]["领券中心"])
             while (className("ImageView").desc("领券中心").findOnce() == null) {
-                sleep(800);
+                toastLog("等待领券中心加载");
+                sleep(2500);
             }
             sleep(1200);
             let signBtn;
             signBtn = text("签到领奖励").findOnce();
             // }
-
             if (signBtn != null) {
-                func.sClick(signBtn);
-                sleep(2000);
-                className("ImageView").desc("关闭弹窗").findOne();
-                func.sClick(className("ImageView").desc("关闭弹窗").findOne());
-                sleep(1200);
+                while (!func.sClick(className("ImageView").desc("关闭弹窗").findOnce())) {
+                    func.sClick(text("签到领奖励").findOnce());
+                    func.sClick(text("领点点券").findOnce());
+                    func.sClick(text("立即签到").findOnce());
+                    toastLog("已点击 签到按钮,等待弹窗加载");
+                    sleep(1200);
+                }
             }
             toastLog("今日已领券");
             sleep(2500);

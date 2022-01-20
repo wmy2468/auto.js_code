@@ -152,6 +152,8 @@ function sClick(element) {
             } else {
                 log("sClick: text/desc/id all empty");
             }
+        } else {
+            click(element.bounds().centerX(), element.bounds().centerY());
         }
         return true;
     }
