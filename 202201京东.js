@@ -170,7 +170,8 @@ function 图鉴() {
 		}
 	}
 	// 1. 进入图鉴界面
-	首页banner启动();
+	// 首页banner启动();
+	func.to_scheme('openApp.jdMobile://virtual?params={"category":"jump","des":"m","sourceValue":"babel-act","sourceType":"babel","url":"https://wbbny.m.jd.com/babelDiy/Zeus/41AJZXRUJeTqdBK9bPoPgUJiodcU/index.html?babelChannel="}');
 	while (!func_in_func.draw_page_check()) {
 		toastLog("图鉴主界面未加载"); sleep(3000);
 		close_popup(); sleep(3000);
