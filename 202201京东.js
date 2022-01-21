@@ -62,26 +62,27 @@ function 做任务() {
 // -------------------------金融任务----------------------------
 function 金融任务() {
 	appName = "京东金融";
-	let kouling = "22:/￥05B7E6yqTy2OY￥，嗨！1.打开最新版金融APP粘贴口令到首页搜索框内触发口令弹窗  2.立即参与";
-	setClip(kouling);
+	// let kouling = "22:/￥05B7E6yqTy2OY￥，嗨！1.打开最新版金融APP粘贴口令到首页搜索框内触发口令弹窗  2.立即参与";
+	// setClip(kouling);
 	sleep(1500);
-	func.to_app("京东金融");
-	let help_her, help_win_close_btn;
+	// func.to_app("京东金融");
+	func.to_scheme('jdmobile://share?jumpType=7&jumpUrl=4390&channel=default&sourceUrl=1000*https://f.ua.jd.com/downloadApp/index.html?id=7423&source=')
+	// let help_her, help_win_close_btn;
 
 	while (!mission_page_check()) {
-		func.sClick(id("tv_btn").text("立即参与").findOnce());
-		help_her = className("android.view.View").text("为TA助力为TA助力").findOnce();
-		if (help_her != null) {
-			toast("已找到为他助力弹窗");
-			sleep(2000);
-			try {
-				help_win_close_btn = help_her.parent().parent().parent().child(2);
-				func.sClick(help_win_close_btn);
-			} catch (e) { continue; }
-		}
+		// func.sClick(id("tv_btn").text("立即参与").findOnce());
+		// help_her = className("android.view.View").text("为TA助力为TA助力").findOnce();
+		// if (help_her != null) {
+		// 	toast("已找到为他助力弹窗");
+		// 	sleep(2000);
+		// 	try {
+		// 		help_win_close_btn = help_her.parent().parent().parent().child(2);
+		// 		func.sClick(help_win_close_btn);
+		// 	} catch (e) { continue; }
+		// }
 		func.sClick(id("com.jd.jrapp:id/redPacketIV").findOnce());
 		toastLog("金融任务: 请跳转金融APP，如果没有弹窗，需手动跳转到活动界面");
-		sleep(2000);
+		sleep(2500);
 	}
 	toastLog("金融任务: 已找到打卡领红包 打卡领红包");
 	sleep(random_second(2000, 100, 500));

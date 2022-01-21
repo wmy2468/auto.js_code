@@ -14,9 +14,9 @@ dev_mate30 = "TAS-AL00";
 dev_honor8 = "FRD-AL00";
 dev_redmi = "Redmi Note 7";
 
-// func.to_scheme(cfg["url_scheme"]["农行"]["小豆"]);
-func.sClick(text("小豆").depth(15).findOnce())
-log(text("已经签到").findOnce());
+log(123)
+// func.to_scheme('jdmobile://share?jumpType=7&jumpUrl=1374&sourceUrl=1000*https://f.ua.jd.com/downloadApp/index.html?id=7423&activityId=4390');
+func.to_scheme('jdmobile://share?jumpType=7&jumpUrl=4390&channel=default&sourceUrl=1000*https://f.ua.jd.com/downloadApp/index.html?id=7423&source=')
 
 function ccccc() {
     log(123);
