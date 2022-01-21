@@ -73,9 +73,9 @@ function ysf() {
                     cnt = cnt + 1;
                 }
                 toastLog("已找到100%");
-                sleep(3000);
+                sleep(4000);
                 toastLog("等待完成，准备切回autojs");
-                sleep(3000);
+                sleep(2000);
                 func.to_autojs();
                 toastLog("助力完成,等待下一个...");
                 sleep(3000);
