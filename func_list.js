@@ -142,11 +142,7 @@ function cClick(element) {
 
 function sClick(element) {
     if (element != null) {
-        if (!element.clickable()) {
-            log("sClick_not_clickable_text: " + element.text());
-            click(element.bounds().centerX(), element.bounds().centerY());
-        } else {
-            element.click();
+        if (element.click()) {
             if (element.text() != null && element.text() != "") {
                 log("sClick_text: " + element.text());
             } else if (element.desc() != null && element.desc() != "") {
@@ -156,9 +152,12 @@ function sClick(element) {
             } else {
                 log("sClick: text/desc/id all empty");
             }
+        } else {
+            click(element.bounds().centerX(), element.bounds().centerY());
         }
         return true;
     }
+    log("sclick_failed");
     return false;
 }
 

@@ -496,19 +496,19 @@ function 京东() {
             sleep(2500);
             func.to_scheme(cfg["url_scheme"]["京东"]["领券中心"])
             while (className("ImageView").desc("领券中心").findOnce() == null) {
-                sleep(800);
+                toastLog("等待领券中心加载");
+                sleep(2500);
             }
             sleep(1200);
             let signBtn;
             signBtn = text("签到领奖励").findOnce();
             // }
-
             if (signBtn != null) {
-                func.sClick(signBtn);
-                sleep(2000);
-                className("ImageView").desc("关闭弹窗").findOne();
-                func.sClick(className("ImageView").desc("关闭弹窗").findOne());
-                sleep(1200);
+                while (!func.sClick(className("ImageView").desc("关闭弹窗").findOnce())) {
+                    func.sClick(text("签到领奖励").findOnce());
+                    toastLog("已点击 签到按钮,等待弹窗加载");
+                    sleep(2500);
+                }
             }
             toastLog("今日已领券");
             sleep(2500);
@@ -573,6 +573,8 @@ function 京东() {
             if (already_sign == null) {
                 while (text("您已领取双签礼包").findOnce() == null) {
                     func.sClick(text("立即领取").findOnce());
+                    sleep(1500);
+                    func.sClick(textContains("双签领取").findOnce());
                     toast("已点击领取,等待已领取加载");
                     sleep(3000);
                 }
