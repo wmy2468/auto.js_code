@@ -14,9 +14,12 @@ dev_mate30 = "TAS-AL00";
 dev_honor8 = "FRD-AL00";
 dev_redmi = "Redmi Note 7";
 
-log(123)
-// func.to_scheme('jdmobile://share?jumpType=7&jumpUrl=1374&sourceUrl=1000*https://f.ua.jd.com/downloadApp/index.html?id=7423&activityId=4390');
-func.to_scheme('jdmobile://share?jumpType=7&jumpUrl=4390&channel=default&sourceUrl=1000*https://f.ua.jd.com/downloadApp/index.html?id=7423&source=')
+url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3D";
+url_end = "%26greetingId%3D1%26baifuId%3D1&encryptAppId=46411c55b29f8b49&scenarioId=1006";
+url_dict = "cb895525e54c56e009b24face50d5a814ba088";
+
+func.to_scheme(url_head + url_dict + url_end);
+log(textContains("100%").findOne());
 
 function ccccc() {
     log(123);

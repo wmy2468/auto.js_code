@@ -56,16 +56,26 @@ function ysf() {
                 "LP-HONOR8": "cb895525e64b5bef08b641a7e206598049a888",
                 "LP-IPHONE": "cb895525e64a53e601b34da6e50459854aac8c",
             }
-            let user_id;
+            let user_id, cnt;
             Object.keys(url_dict).forEach(user_name => {
+                cnt = 0;
                 user_id = url_dict[user_name];
                 log(url_head + user_id + url_end);
                 func.to_scheme(url_head + user_id + url_end);
                 toastLog("当前为:" + user_name + ",助力...");
-                sleep(2500);
-                desc("关闭按钮").findOne();
-                toastLog("等待助力界面加载...");
-                sleep(6000);
+                sleep(2000);
+                while (text("100%").findOnce() == null) {
+                    if (cnt > 25 || cnt == 0) {
+                        toastLog("等待助力界面加载...");
+                        cnt = 1;
+                    }
+                    sleep(100);
+                    cnt = cnt + 1;
+                }
+                toastLog("已找到100%");
+                sleep(3000);
+                toastLog("等待完成，准备切回autojs");
+                sleep(3000);
                 func.to_autojs();
                 toastLog("助力完成,等待下一个...");
                 sleep(3000);
