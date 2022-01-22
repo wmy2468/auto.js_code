@@ -343,7 +343,10 @@ function 芭芭农场() {
                 text("为Ta助力").findOne();
                 toastLog("已找到，为Ta助力");
                 sleep(2500);
-                func.sClick(text("为Ta助力").findOne());
+                while (!func.sClick(text("为Ta助力").findOne())) {
+                    toastLog("点击 为Ta助力 失败");
+                    sleep(2500);
+                }
                 toastLog("已点击，为Ta助力");
                 sleep(2500);
                 toastLog("已点击助力");
