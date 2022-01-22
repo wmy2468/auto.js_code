@@ -9,12 +9,12 @@ var selectedArr = [
     "延迟测试"
 ];
 
-var selectIndex = func.dialogsWin(selectedArr);
+var selectIndex = func.dialogs_select(selectedArr);
 
 if (selectIndex == "延迟测试") {
     var targetAreas, targetUrl;
     targetAreas = ["北京时间", "京东时间", "苏宁时间", "淘宝时间"];
-    // targetArea = func.dialogsWin(targetAreas);
+    // targetArea = func.dialogs_select(targetAreas);
 
     var res, stTimestamp, edTimestamp, resultStr;
     resultStr = ""

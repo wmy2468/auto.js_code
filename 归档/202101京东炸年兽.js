@@ -12,7 +12,7 @@ function main() {
     var selectedArr = ["第一个APP", "第二个APP"]
     var selNum;
     if (device.brand == "xiaomi") {
-        selNum = func.dialogsWin(selectedArr);
+        selNum = func.dialogs_select(selectedArr);
         switch (selNum) {
             case "第一个APP":
                 appNumbers = 1;

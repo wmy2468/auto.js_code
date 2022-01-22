@@ -66,26 +66,27 @@ function 京东任务() {
 // -------------------------金融任务----------------------------
 function 金融任务() {
 	appName = "京东金融";
-	let kouling = "26:/￥53QDG9zffRCAb%，❄1.打开最新版金融APP粘贴口令到首页搜索框内触发口令弹窗  2.立即参与";
-	setClip(kouling);
+	// let kouling = "22:/￥05B7E6yqTy2OY￥，嗨！1.打开最新版金融APP粘贴口令到首页搜索框内触发口令弹窗  2.立即参与";
+	// setClip(kouling);
 	sleep(1500);
-	func.to_app("京东金融");
-	let help_her, help_win_close_btn;
+	// func.to_app("京东金融");
+	func.to_scheme('jdmobile://share?jumpType=7&jumpUrl=4390&channel=default&sourceUrl=1000*https://f.ua.jd.com/downloadApp/index.html?id=7423&source=')
+	// let help_her, help_win_close_btn;
 
 	while (!mission_page_check()) {
-		func.sClick(id("tv_btn").text("立即参与").findOnce());
-		help_her = className("android.view.View").text("为TA助力为TA助力").findOnce();
-		if (help_her != null) {
-			toast("已找到为他助力弹窗");
-			sleep(2000);
-			try {
-				help_win_close_btn = help_her.parent().parent().parent().child(2);
-				func.sClick(help_win_close_btn);
-			} catch (e) { continue; }
-		}
+		// func.sClick(id("tv_btn").text("立即参与").findOnce());
+		// help_her = className("android.view.View").text("为TA助力为TA助力").findOnce();
+		// if (help_her != null) {
+		// 	toast("已找到为他助力弹窗");
+		// 	sleep(2000);
+		// 	try {
+		// 		help_win_close_btn = help_her.parent().parent().parent().child(2);
+		// 		func.sClick(help_win_close_btn);
+		// 	} catch (e) { continue; }
+		// }
 		func.sClick(id("com.jd.jrapp:id/redPacketIV").findOnce());
 		toastLog("金融任务: 请跳转金融APP，如果没有弹窗，需手动跳转到活动界面");
-		sleep(2000);
+		sleep(2500);
 	}
 	toastLog("金融任务: 已找到打卡领红包 打卡领红包");
 	sleep(random_second(2000, 100, 500));
@@ -154,10 +155,11 @@ function 图鉴() {
 					else if (arr_in_text(todo_text, ["会员"])) {
 						toastLog("当前todo_text=" + todo_text);
 						member_card();
+						back_way();
 					}
 					else if (arr_in_text(todo_text, ["签到"])) {
 						toastLog("当前todo_text=" + todo_text);
-						sleep(1000);
+						sleep(2500);
 					}
 					else {
 						log("未找到满足条件的文本，idx+1,todo=" + todo_text);
@@ -172,7 +174,8 @@ function 图鉴() {
 		}
 	}
 	// 1. 进入图鉴界面
-	首页banner启动();
+	// 首页banner启动();
+	func.to_scheme('openApp.jdMobile://virtual?params={"category":"jump","des":"m","sourceValue":"babel-act","sourceType":"babel","url":"https://wbbny.m.jd.com/babelDiy/Zeus/41AJZXRUJeTqdBK9bPoPgUJiodcU/index.html?babelChannel="}');
 	while (!func_in_func.draw_page_check()) {
 		toastLog("图鉴主界面未加载"); sleep(3000);
 		close_popup(); sleep(3000);
@@ -396,8 +399,8 @@ function clickComplete(apps) {
 				else if (arr_in_text(detailText, ["金融神券", "京享值PK赢"])) { nextStepDetail = "金融2次返回"; }
 				else if (arr_in_text(detailText, ["领百亿购物金", "榜单会场"])) { nextStepDetail = "20秒等待"; }
 				else if (arr_in_text(detailText, ["东东超市", "去财富岛"])) { nextStepDetail = "需要多次点击返回"; }
-				else if (arr_in_text(detailText, ["去逛京友圈"])) { nextStepDetail = "京友圈"; continue; }
 				else if (arr_in_text(detailText, ["去企有此礼赢取好礼"])) { nextStepDetail = "页面含邀请好友"; }
+				else if (arr_in_text(detailText, ["浏览免费领保险"])) { nextStepDetail = "点击领取才会继续"; }
 
 				// 除了Mate 30外，另外2个台古董在小程序卡死
 				if ((dev_model == dev_honor8 || dev_model == dev_redmi) && nextStepDetail == "小程序") {
@@ -495,6 +498,10 @@ function after_click(textStr, details, apps) {
 			}
 			func.to_app(appName);
 		}
+	} else if (details == "点击领取才会继续") {
+		func.cClick(text("立即领取").findOne());
+		toastLog("已点击领取，等待");
+		sleep(random_second(10500, 100, 1000));
 	} else if (details == "需要多次点击返回") {
 		sleep(random_second(800, 100, 1000));
 		while (!is_in_invite_friend_page()) {
@@ -766,16 +773,21 @@ function 城城现金() {
 					break;
 				}
 			}
-
+			find_text = "活动已结束";
+			find_object = textContains(find_text).findOnce();
+			// 如果活动结束 则退出
+			if (find_object != null) {
+				find_object_parent = find_object.parent().parent().parent();
+				if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 2))) {
+					toastLog("点击城城活动结束按钮");
+					sleep(2500);
+					break;
+				}
+			}
 
 		} catch (e) {
 			log("城城现金报错=" + e);
 			continue;
-		}
-		// 如果活动结束 则退出
-		if (text("活动已结束").findOnce() != null) {
-			if (func.sClick(text("e300dc37709c6f82").findOnce())) { sleep(2000); }
-			break;
 		}
 		toastLog("如果城城现金长时间未返回、未点击任何按钮，请手动处理");
 		sleep(3000);
@@ -1003,6 +1015,11 @@ function 金融口令启动() {
 
 
 function 首页banner启动() {
+	// app.startActivity({
+	// 	action: "VIEW",
+	// 	data: 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","sourceValue":"babel-act","sourceType":"babel","url":"https://wbbny.m.jd.com/babelDiy/Zeus/41AJZXRUJeTqdBK9bPoPgUJiodcU/index.html?babelChannel=","M_sourceFrom":"h5auto","msf_type":"auto"}'
+	// })
+
 	func.to_app(appName);
 	while (!mission_page_check()) {
 		func.cClick(desc("浮层活动").findOnce());

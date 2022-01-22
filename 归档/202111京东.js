@@ -30,7 +30,7 @@ main();
 
 function main() {
 	var sMission;
-	sMission = func.dialogsWin(["做任务", "金融任务", "互助"]);
+	sMission = func.dialogs_select(["做任务", "金融任务", "互助"]);
 	switch (sMission) {
 		case "做任务":
 			做任务();

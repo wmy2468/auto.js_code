@@ -17,7 +17,7 @@ function jd_sign() {
     while (text("首页").findOnce() == null) {
         func.sClick(id("xk").findOnce());
         toastLog("等待首页...");
-        func.passAd();
+        ;
         func.sClick(textContains("取消").findOnce());
         func.sClick(descContains("取消").findOnce());
         sleep(1500);
@@ -115,7 +115,7 @@ function 招商银行() {
     // setClip("＆https://t.cmbchina.com/RZV7f2＆");
     sleep(600);
     func.to_app(appName);
-    func.passAd();
+    ;
     // func.sClick(text("立即查看").findOne());
     func.sClick(id("cmb.pb:id/textMarquee").findOne());
     text("历史搜索").findOne();

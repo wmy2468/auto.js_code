@@ -5,7 +5,7 @@ var i = 0;
 var appName = '京东';
 var koulingText, devModel, selected;
 selected = "每日任务";
-// var selected = func.dialogsWin(['每日任务', '图鉴'])
+// var selected = func.dialogs_select(['每日任务', '图鉴'])
 koulingText = "21.0复制整段话 Https:/JleNO0uhZGi1YB 来【东东玩家】探索好玩星球分现金红包！#41aPpAsQIPmDMg%扌丁kai鶁崠";
 devModel = device.model;
 var devMate30, devHonor8, devRedMi;
@@ -17,7 +17,7 @@ main();
 
 function main() {
 	var sMission;
-	sMission = func.dialogsWin(['做任务', '互助']);
+	sMission = func.dialogs_select(['做任务', '互助']);
 	switch (sMission) {
 		case "做任务":
 			做任务();

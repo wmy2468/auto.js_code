@@ -11,7 +11,7 @@ var pwds = ['0', '8', '1', '5', '7', '3'];
 var pwdYsf = ['1', '0', '0', '0', '0', '0'];
 
 
-var selectFunc = func.dialogsWin(["话费支付", "删除话费订单", "进90减2界面领券"]);
+var selectFunc = func.dialogs_select(["话费支付", "删除话费订单", "进90减2界面领券"]);
 switch (selectFunc) {
     case "话费支付":
         话费支付();
@@ -54,18 +54,18 @@ function 话费支付() {
     };
     // 定义选择卡对应的人
     var person, personCardList;
-    result = func.dialogsWin(selectArr);
+    result = func.dialogs_select(selectArr);
 
     var cardEndNumber;
     if (result == "微信") {
         func.to_app("京东");
         weiXinn();
     } else if (result == "华为支付" || result == "云闪付" || result == "JD支付") {
-        // var cardName = func.dialogsWin(["JJ-中信", "JJ-华为中信", "LP-中信", "华夏", "JJ-京东红卡", "浦发", "交通", "LM-中行", "邮储", "JJ-建行"]);
-        person = func.dialogsWin(selectPerson);
+        // var cardName = func.dialogs_select(["JJ-中信", "JJ-华为中信", "LP-中信", "华夏", "JJ-京东红卡", "浦发", "交通", "LM-中行", "邮储", "JJ-建行"]);
+        person = func.dialogs_select(selectPerson);
         // 根据人名 获取卡的尾号 字典
         personCardList = cardPerson[person];
-        cardEndNumber = personCardList[func.dialogsWin(Object.keys(personCardList))];
+        cardEndNumber = personCardList[func.dialogs_select(Object.keys(personCardList))];
         func.to_app("京东");
         while (text(textPay).findOnce() == null) {
             func.sClick(text("我的").findOnce());
@@ -95,7 +95,7 @@ function 进90减2界面领券() {
     payBtn = text("生活·缴费").findOnce();
     while (targetView == null) {
         targetView = desc("购物车").depth(14).findOnce();
-        func.passAd();
+        ;
         func.sClick(text("生活·缴费").findOnce());
         pay90_40 = className("TextView").text("抢90减40话费券").findOnce();
         if (pay90_40 != null) {

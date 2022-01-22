@@ -7,6 +7,12 @@ function config_dict() {
                 "小象2": "com.icbc.androidclient://startType=PORTALINJECT&menuId=taskCenter&injectParams=dGFyZ2V0PWVsZmxk&shareCurrentUUID=",
             },
             "京东": {
+                "极速版领红包": "openjdlite://virtual?params={\"category\":\"jump\",\"des\":\"m\",\"url\":\"https://prodev.m.jd.com/jdlite/active/31U4T6S4PbcK83HyLPioeCWrD63j/index.html\"}",
+                "极速版挖宝": {
+                    "JJ": "jdlite://virtual?params={\"category\":\"jump\",\"des\":\"m\",\"url\":\"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=GPfTfqpoxK_2areokkk14n-eAjU2q2sAooXR8mdQZps&inviterCode=4b6897c9e34a41e1ba123b2ab0b7eff713671642474396464&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends\"}",
+                    "LP": "jdlite://virtual?params={\"category\":\"jump\",\"des\":\"m\",\"url\":\"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=YCQC5KqI8pcwIWRdZoUtoV1TkoIVm_064LWtTUNvKIg&inviterCode=49d6dac384ab45aabbb0d069023e2da698371642474397746&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends\"}",
+                    "LM": "jdlite://virtual?params={\"category\":\"jump\",\"des\":\"m\",\"url\":\"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=QXGSqDiCJNtOjdF5hkeTeg&inviterCode=410a8f7b3ace43eb8a0940821e8aa55a69811642474397931&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends\"}",
+                },
                 "陪伴计划": "openApp.jdMobile://virtual?params=%7B%22category%22%3A%22jump%22%2C%22des%22%3A%22m%22%2C%22url%22%3A%22https%3A%2F%2Fprodev.m.jd.com%2Fmall%2Factive%2FkPM3Xedz1PBiGQjY4ZYGmeVvrts%2Findex.html%22%7D",
                 "京喜_券": "openapp.jdpingou://virtual?params={%22des%22%3A%22m%22%2C%22category%22%3A%22jump%22%2C%22url%22%3A%22replace_url%22}",
                 "领京豆": "openapp.jdmobile://virtual?params=%7B%22category%22%3A%22jump%22%2C%22des%22%3A%22m%22%2C%22url%22%3A%22https%3A%2F%2Fbean.m.jd.com%22%7D",
@@ -119,13 +125,13 @@ function cClick(element) {
     if (element != null) {
         click(element.bounds().centerX(), element.bounds().centerY());
         if (element.text() != null && element.text() != "") {
-            log("sClick_text: " + element.text());
+            log("cClick_text: " + element.text());
         } else if (element.desc() != null && element.desc() != "") {
-            log("sClick_desc: " + element.desc());
+            log("cClick_desc: " + element.desc());
         } else if (element.id() != null && element.id() != "") {
-            log("sClick_id: " + element.id());
+            log("cClick_id: " + element.id());
         } else {
-            log("sClick: text/desc/id all empty");
+            log("cClick: text/desc/id all empty");
         }
         return true;
     } else {
@@ -136,30 +142,25 @@ function cClick(element) {
 
 function sClick(element) {
     if (element != null) {
-        if (!element.click()) {
-            click(element.bounds().centerX(), element.bounds().centerY());
-        }
-        if (element.text() != null && element.text() != "") {
-            log("sClick_text: " + element.text());
-        } else if (element.desc() != null && element.desc() != "") {
-            log("sClick_desc: " + element.desc());
-        } else if (element.id() != null && element.id() != "") {
-            log("sClick_id: " + element.id());
+        if (element.click()) {
+            if (element.text() != null && element.text() != "") {
+                log("sClick_text: " + element.text());
+            } else if (element.desc() != null && element.desc() != "") {
+                log("sClick_desc: " + element.desc());
+            } else if (element.id() != null && element.id() != "") {
+                log("sClick_id: " + element.id());
+            } else {
+                log("sClick: text/desc/id all empty");
+            }
         } else {
-            log("sClick: text/desc/id all empty");
+            click(element.bounds().centerX(), element.bounds().centerY());
         }
         return true;
     }
+    log("sclick_failed");
     return false;
 }
 
-function passAd() {
-    sClick(textContains("跳过").findOnce());
-    sClick(descContains("跳过").findOnce());
-    sClick(idContains("close").findOnce());
-    //sClick(text("取消").findOnce());
-    //sClick(text("放弃转账").findOnce());*/
-}
 /*
     小米使用参数1，2，华为使用0
 */
@@ -705,6 +706,7 @@ function dialogs_checkbox(inArr, titles, multi_choice) {
       @param  inArr 传入的显示的数组
       @param  titles, 显示的标题，同时是配置的key，格式，文件名_function名
       @param  multi_choice, 单选/多选，默认单选
+      返回选择的
   */
     let local_config = storages.create("local_config");
     if (titles == undefined) {
@@ -712,7 +714,11 @@ function dialogs_checkbox(inArr, titles, multi_choice) {
     }
     let select_index_list, last_indices;
     if (local_config.contains(titles)) {
-        last_indices = local_config.get(titles);
+        try {
+            last_indices = local_config.get(titles);
+        } catch (e) {
+            last_indices = [0];
+        }
     } else {
         last_indices = [0];
     }
@@ -753,7 +759,7 @@ function dialogs_checkbox(inArr, titles, multi_choice) {
 
 }
 
-function dialogsWin(inArr, titles) {
+function dialogs_select(inArr, titles) {
     if (titles == undefined) {
         titles = "选择启动";
     }
@@ -769,7 +775,6 @@ module.exports = {
     floatyMove: floatyMove,
     cClick: cClick,
     sClick: sClick,
-    passAd: passAd,
     to_app: to_app,
     to_autojs: to_autojs,
     to_scheme: to_scheme,
@@ -780,6 +785,6 @@ module.exports = {
     randomNum: randomNum,
     getTimeDiff: getTimeDiff,
     calTimeDiff: calTimeDiff,
-    dialogsWin: dialogsWin,
+    dialogs_select: dialogs_select,
     dialogs_checkbox: dialogs_checkbox
 }

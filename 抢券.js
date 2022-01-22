@@ -9,7 +9,7 @@ function main() {
     let selectedArr = ["光大活动", "中信活动", "交行5积分", "招商便民生活", "招商倒计时领取",
         "云闪付2022新年", "云闪付2022新年捡漏"];
     //---------------配置区域-----------------
-    let scriptName = func.dialogsWin(selectedArr);      // 设置查找的文本        
+    let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本        
     // 设置屏幕常亮6分钟
     device.keepScreenOn(1000 * 60 * 6);
     if (scriptName == "光大活动") { 光大活动(); }
@@ -27,7 +27,7 @@ function main() {
 function 招商倒计时领取() {
     let select_txt, appName, url;
     appName = "招商银行"
-    select_txt = func.dialogsWin(["年末美食狂欢节M1", "年末美食狂欢节M4", "啥也不选"])
+    select_txt = func.dialogs_select(["年末美食狂欢节M1", "年末美食狂欢节M4", "啥也不选"])
     if (select_txt == "年末美食狂欢节M1") { url = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https%253A%252F%252Fmarket.cmbchina.com%252FMPage%252Fonline%252F211025170821628%252Fftbb.html%253Fbehavior_entryid%253Dlff003001%2526behavior_pageid%253D31B15ED7%2526DeviceType%253DE%2526Version%253D9.9.0%2526SystemVersion%253D10%2526ATraceID%253De47883770b17411eb2449805822210bc%2526msid%253Dc5ada3aa3ff0464a918ae2af77adb890&shortUrl=https%253A%252F%252Fcmbt.cn%252Fa%252F456xRYghZ%253Fbehavior_entryid%253Dlff003001%2526behavior_pageid%253D31B15ED7%2526DeviceType%253DE%2526Version%253D9.9.0%2526SystemVersion%253D10%2526ATraceID%253De47883770b17411eb2449805822210bc%2526msid%253Dc5ada3aa3ff0464a918ae2af77adb890&appflag=0"; }
     else if (select_txt == "年末美食狂欢节M4") { url = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https%253A%252F%252Fmarket.cmbchina.com%252FMPage%252Fonline%252F211025170821628%252Fftbb.html%253Fbehavior_entryid%253Dlff003001%2526behavior_pageid%253D31B15ED7%2526DeviceType%253DE%2526Version%253D9.9.0%2526SystemVersion%253D10%2526ATraceID%253De47883770b17411eb2449805822210bc%2526msid%253Dc5ada3aa3ff0464a918ae2af77adb890&shortUrl=https%253A%252F%252Fcmbt.cn%252Fa%252F456xRYghZ%253Fbehavior_entryid%253Dlff003001%2526behavior_pageid%253D31B15ED7%2526DeviceType%253DE%2526Version%253D9.9.0%2526SystemVersion%253D10%2526ATraceID%253De47883770b17411eb2449805822210bc%2526msid%253Dc5ada3aa3ff0464a918ae2af77adb890&appflag=0"; }
     else if (select_txt == "啥也不选") { url = ""; }
@@ -79,7 +79,7 @@ function 招商便民生活() {
     page_text = "便民生活 遇见美好";
     wait_text = "选择奖品";
     popup_wait_text = "请选择奖品";
-    select_text = func.dialogsWin(["双立人", "洁柔", "九阳", "1.8元", "5000微克", "4000微克"]);
+    select_text = func.dialogs_select(["双立人", "洁柔", "九阳", "1.8元", "5000微克", "4000微克"]);
     sure_btn = "确认领取";
     url_target = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https://actship-activityui.paas.cmbchina.com/ActPage.html?activityId=AGP202112301606513rnnPfOT&behavior_entryid=undefined&shortUrl=https://cmbt.cn/a/htREAc?activityId=AGP202112301606513rnnPfOT&behavior_entryid=undefined&appflag=0"
     func.to_scheme(url_target);
@@ -155,15 +155,15 @@ function 云闪付() {
             let startTime, timeArea;
 
             timeArea = "北京时间";
-            if (func.dialogsWin(["日常11点券", "周三14点券"]) == "日常11点券") {
-                coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]));
+            if (func.dialogs_select(["日常11点券", "周三14点券"]) == "日常11点券") {
+                coupon_desc = func.dialogs_select(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"]));
                 url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc];
             } else {
-                coupon_desc = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年_周三14点"]));
+                coupon_desc = func.dialogs_select(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年_周三14点"]));
                 url_ysf = cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年_周三14点"][coupon_desc];
             }
 
-            // coupon_id = func.dialogsWin(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc]))
+            // coupon_id = func.dialogs_select(Object.keys(cfg["url_scheme"]["云闪付"]["云闪付_券_圆梦新年"][coupon_desc]))
 
 
             if (coupon_desc.substring(0, 5) == "周三14点") {
@@ -197,7 +197,7 @@ function 光大活动() {
     let actNames = ["必胜客50买100元", "青桔单车2.5买月卡",
         "饿了么1分买6元", "饿了么1分买10元"
     ];
-    let actName = func.dialogsWin(actNames);      // 设置查找的文本
+    let actName = func.dialogs_select(actNames);      // 设置查找的文本
     switch (actName) {
         // 10点
         case "必胜客50买100元":            //10点
@@ -272,7 +272,7 @@ function 交行9点5积分() {
     let timeArea = "北京时间";
     let startTime = "08,59,57,000"
     let actNames = ["加油卡充值30元红包", "缴费类15元红包", "话费20元红包", "话费10元红包", "本月2倍积分", "一键加油15元红包"];
-    let actName = func.dialogsWin(actNames);      // 设置查找的文本
+    let actName = func.dialogs_select(actNames);      // 设置查找的文本
     func.to_app(appName);
     // 等待进入指定页面
     let get_packet, packet_parent, packet_childcount;
@@ -302,14 +302,14 @@ function 中信活动() {
     let timeArea = "北京时间";
     let startTime, targetViewText;
     let actNames = ["10点-15点-9积分兑换", "周三六11点-5折必胜客百果园", "9积分捡漏"];
-    let actName = func.dialogsWin(actNames);      // 设置查找的文本
+    let actName = func.dialogs_select(actNames);      // 设置查找的文本
     let couDes, couClick;    // 券描述列表
     let nowDate = new Date();
     let item_page_text = "价格: 1个权益+9个积分";
 
     switch (actName) {
         case "10点-15点-9积分兑换":
-            if (func.dialogsWin(["基础权益", "额外权益"]) == "基础权益") {
+            if (func.dialogs_select(["基础权益", "额外权益"]) == "基础权益") {
                 couDes = ["京东支付券15元", "天猫15元", "奈雪18元", "百果园18元", "腾讯视频VIP"];
             }
             else {
@@ -328,7 +328,7 @@ function 中信活动() {
             if (couDes.length == 1) {
                 targetViewText = couDes[0];               // 设置查找的文本
             } else {
-                targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+                targetViewText = func.dialogs_select(couDes);               // 设置查找的文本
             }
 
             func.to_app(appName);             // 启动APP
@@ -367,7 +367,7 @@ function 中信活动() {
             toastLog("到点点击");
             startTime = "10,59,59,850";             // 设置时间点
             couDes = ["必胜客100元代金券", "必胜客50元代金券", "达美乐50元代金券", "肯德基50元", "呷哺呷哺"];             // 券名称
-            targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+            targetViewText = func.dialogs_select(couDes);               // 设置查找的文本
             func.to_app(appName);             // 启动APP
             // 等待进入指定页面
             couClick = textContains(targetViewText).findOnce();
@@ -393,7 +393,7 @@ function 中信活动() {
                 "星巴克中杯饮品电子券", "名创优品20", "网易严选20", "百果园20", "美团外卖20", "优酷VIP", "腾讯视频", "芒果TV", "爱奇艺VIP"];
             appName = "动卡空间"
             let cnt = 0;
-            targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+            targetViewText = func.dialogs_select(couDes);               // 设置查找的文本
             func.to_app(appName);             // 启动APP
             while (text(item_page_text).findOnce() == null) {
                 sleep(100);
@@ -487,7 +487,7 @@ function 中信活动() {
 /*------------------------------------NOT VALID------------------------------------
 this.云闪付捡漏 = function () {
         let targetViewText, targetText;
-        // targetViewText = func.dialogsWin(["10-2线上", "10-2线下"]);
+        // targetViewText = func.dialogs_select(["10-2线上", "10-2线下"]);
         while (text("奖励中心").findOnce() == null) {
             toastLog("请跳转到 \" 奖励中心 \"，直到提示  已到达等待页面");
             sleep(2000);
@@ -585,7 +585,7 @@ this.云闪付锦鲤活动 = function () {
                 break;
         }
         let selectFunc;
-        selectFunc = func.dialogsWin(["每日券", "云闪付捡漏", "周五六日10点", "周五六日15点"]);
+        selectFunc = func.dialogs_select(["每日券", "云闪付捡漏", "周五六日10点", "周五六日15点"]);
         let clockBefore, clockAfter;
         let clock9, clock10, clock15;
         let targetText;
@@ -596,7 +596,7 @@ this.云闪付锦鲤活动 = function () {
         switch (selectFunc) {
             case "每日券":
                 counponText = "满10可用";
-                targetText = func.dialogsWin(["线下指定商户", "线上指定商户"]);
+                targetText = func.dialogs_select(["线下指定商户", "线上指定商户"]);
                 startTime = "08,59,58,800";
                 clockAfter = clock9;
                 clockBefore = clock10;
@@ -616,7 +616,7 @@ this.云闪付锦鲤活动 = function () {
                 break;
         }
         let getCouponWay;       //定义领券方式
-        getCouponWay = func.dialogsWin(["提前1秒进入页面领取", "切换时间标签领券"]);
+        getCouponWay = func.dialogs_select(["提前1秒进入页面领取", "切换时间标签领券"]);
         func.to_app(appName);
         while (text("明日预告").findOnce() == null) {
             // 如果能点击按钮，就等待设置文本
@@ -744,7 +744,7 @@ function 京喜领券() {
     let timeArea = "京东时间";
     let startTime, targetViewText;
     let actNames = ["0点京喜95折", "京东券"];
-    let actName = func.dialogsWin(actNames);      // 设置查找的文本
+    let actName = func.dialogs_select(actNames);      // 设置查找的文本
     let coupon_url, url_页面;
     switch (actName) {
         case "0点京喜95折":
@@ -805,7 +805,7 @@ function 农行缴费() {
 function 掌上生活活动() {
     let startTime, targetViewText;
     let actNames = ["周三五折", "10点拼团星巴克"];
-    let actName = func.dialogsWin(actNames);      // 设置查找的文本
+    let actName = func.dialogs_select(actNames);      // 设置查找的文本
     let appName = "掌上生活";
     let timeArea = "北京时间";
     let cnt = 3;
@@ -814,7 +814,7 @@ function 掌上生活活动() {
         case "周三五折":            //10点
             toastLog("提前5秒进入");
             startTime = "09,59,55,000";
-            targetViewText = func.dialogsWin(["（周三5折）喜茶20元代金券",
+            targetViewText = func.dialogs_select(["（周三5折）喜茶20元代金券",
                 "（周三5折）必胜客50元代金券",
                 "（周三5折）肯德基20元全场通兑代金券"]);
             func.to_app(appName);
@@ -892,7 +892,7 @@ function 工行活动() {
 // 等待页面变价
 function 京东腾讯月() {
     let actNames = ["腾讯视频VIP月卡"]; //, "肯德基10元代金券"];
-    //let actName = func.dialogsWin(actNames);      // 设置查找的文本
+    //let actName = func.dialogs_select(actNames);      // 设置查找的文本
     toastLog("等待页面变化");
     let appName = "京东金融";
     func.to_app(appName);

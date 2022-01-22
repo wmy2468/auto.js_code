@@ -8,17 +8,77 @@ var mission_key_word = "0爆竹";
 titles = "asdfasf";
 inArr = [1, 23, 4, 5];
 last_indices = [0];
+var dev_model = device.model;
+var dev_mate30, dev_honor8, dev_redmi;
+dev_mate30 = "TAS-AL00";
+dev_honor8 = "FRD-AL00";
+dev_redmi = "Redmi Note 7";
 
-download_progress = dialogs.build(
-    {
-        title: "下载测试",
-        progress: {
-            max: 100
+url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3D";
+url_end = "%26greetingId%3D1%26baifuId%3D1&encryptAppId=46411c55b29f8b49&scenarioId=1006";
+url_dict = "cb895525e54c56e009b24face50d5a814ba088";
+
+func.to_scheme(url_head + url_dict + url_end);
+log(textContains("100%").findOne());
+
+function ccccc() {
+    log(123);
+    let find_text, find_object, find_object_parent, click_flag;	// 定义查找的变量
+    click_flag = false;
+    cnt = 0;
+    while (1) {
+        find_text = "有机会得大额现金";
+        find_object = textContains(find_text).findOnce();
+        try {
+            if (find_object != null && click_flag == false) {
+                find_object_parent = find_object.parent();
+                if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 1))) {
+                    click_flag = true;
+                    toastLog("已点击邀请好友按钮，退出");
+                    sleep(3000);
+                    continue;
+                }
+            }
+            if (click_flag == true) {
+                sleep(3000);
+                find_text = "京口令已复制";
+                find_object = className("TextView").text(find_text).findOnce();
+                if (find_object != null) {
+                    find_object_parent = find_object.parent();
+                    func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+                    func.sClick(find_object_parent.child(find_object_parent.childCount() - 1));
+                    toastLog("城城现金: 已点击 京口令 关闭按钮");
+                    sleep(2000);
+                    break;
+                }
+                cnt = cnt + 1;
+                toastLog("当前城城查找 城城京口令 ，第" + cnt + "/5 次，超时后将直接返回");
+                sleep(2500);
+                if (cnt > 5) {
+                    break;
+                }
+            }
+            find_text = "活动已结束";
+            find_object = textContains(find_text).findOnce();
+            // 如果活动结束 则退出
+            if (find_object != null) {
+                find_object_parent = find_object.parent().parent().parent();
+                if (func.sClick(find_object_parent.child(find_object_parent.childCount() - 2))) {
+                    toastLog("点击城城活动结束按钮");
+                    sleep(2500);
+                    break;
+                }
+            }
+
+        } catch (e) {
+            log("城城现金报错=" + e);
+            continue;
         }
+        toastLog("如果城城现金长时间未返回、未点击任何按钮，请手动处理");
+        sleep(3000);
     }
-).show();
+}
 
-download_progress.setProgress(5);
 
 function get_zfb() {
     let btn;
@@ -399,7 +459,7 @@ function 芭芭农场() {
             alert("已完成");
         }
     }
-    let select_item = func.dialogsWin(["淘宝", "支付宝"])
+    let select_item = func.dialogs_select(["淘宝", "支付宝"])
     if (select_item == "淘宝") {
         work.tb();
     } else {
@@ -774,7 +834,7 @@ function 什么值得买() {
         sleep(800);
         func.sClick(idContains("close").findOnce());
         sleep(800);
-        //func.passAd();
+        //;
     }
     sleep(800);
     func.sClick(signBtn);
@@ -789,7 +849,7 @@ function 中信活动() {
     var timeArea = "北京时间";
     var startTime, targetViewText;
     var actNames = ["10点-15点-9积分兑换", "周三六11点-5折必胜客百果园", "9积分捡漏"];
-    var actName = func.dialogsWin(actNames);      // 设置查找的文本
+    var actName = func.dialogs_select(actNames);      // 设置查找的文本
     var couDes;    // 券描述列表
     var nowDate = new Date();
     var item_page_text = "价格: 1个权益+9个积分";
@@ -810,7 +870,7 @@ function 中信活动() {
             if (couDes.length == 1) {
                 targetViewText = couDes[0];               // 设置查找的文本
             } else {
-                targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+                targetViewText = func.dialogs_select(couDes);               // 设置查找的文本
             }
 
             func.to_app(appName);             // 启动APP
@@ -846,7 +906,7 @@ function 中信活动() {
             toastLog("到点点击");
             startTime = "10,59,59,850";             // 设置时间点
             couDes = ["必胜客100元代金券", "达美乐50元代金券", "肯德基50元"];             // 券名称
-            targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+            targetViewText = func.dialogs_select(couDes);               // 设置查找的文本
             func.to_app(appName);             // 启动APP
             // 等待进入指定页面
             var couClick = textContains(targetViewText).findOnce();
@@ -872,7 +932,7 @@ function 中信活动() {
             var cnt = 0;
             couDes = ["App Store 充值卡20元", "迪士尼", "必胜客20元", "奈雪", "喜茶25元",
                 "苏宁支付券20元", "京东支付券20元", "天猫20元", "百果园20元", "滴滴出行20元", "美团外卖20元"];
-            targetViewText = func.dialogsWin(couDes);               // 设置查找的文本
+            targetViewText = func.dialogs_select(couDes);               // 设置查找的文本
             func.to_app(appName);             // 启动APP
             while (text(item_page_text).findOnce() == null) {
                 sleep(100);
@@ -1131,7 +1191,7 @@ function 买单吧() {
     //closeApp(appName);
     func.to_app(appName);
     while (className("TextView").id("tv_title").text("我的").findOnce() == null) {
-        func.passAd();
+        ;
         func.sClick(id("ivADClose").findOnce());
     }
     // func.sClick(text("我的").findOne().parent().parent().parent().parent().child(2));
@@ -1383,12 +1443,12 @@ function 云闪付锦鲤活动() {
             break;
     }
 
-    targetViewText = func.dialogsWin(["每日券", "周五六日10点", "周五六日15点"]);
+    targetViewText = func.dialogs_select(["每日券", "周五六日10点", "周五六日15点"]);
     var targetText, everyText;
     targetText = "线下指定商户";
     switch (targetViewText) {
         case "每日券":
-            targetText = func.dialogsWin(["线下指定商户", "线上指定商户"]);
+            targetText = func.dialogs_select(["线下指定商户", "线上指定商户"]);
             startTime = "08,59,59,600";
             counponText = "满10可用"
             break;

@@ -29,7 +29,7 @@ function sClick(element) {
 }
 
 function main() {
-    var targetText = dialogsWin(pointText);
+    var targetText = dialogs_select(pointText);
     var appName = "虚拟定位精灵";
     ToApp(appName);
     point = textContains(targetText).findOnce();
@@ -79,7 +79,7 @@ function main() {
 }
 
 
-function dialogsWin(inArr) {
+function dialogs_select(inArr) {
     var selIdx = dialogs.select("选择启动", inArr);
     if (selIdx == -1) {
         exit();
