@@ -18,21 +18,25 @@ main();
 function main() {
 	let sMission;
 	if (dev_model == dev_honor8 || dev_model == dev_mate30) {
-		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click", "城城助力", "助力"]);
+		sMission = func.dialogsWin(["京东任务", "金融任务", "图鉴Click", "京东+金融", "城城助力", "助力"]);
 	} else if (dev_model == dev_redmi) {
-		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click", "城城助力"]);
+		sMission = func.dialogsWin(["京东任务", "金融任务", "图鉴Click", "京东+金融", "城城助力"]);
 	} else {
-		sMission = func.dialogsWin(["做任务", "金融任务", "图鉴Click"]);
+		sMission = func.dialogsWin(["京东任务", "金融任务", "图鉴Click"]);
 	}
 	switch (sMission) {
-		case "做任务":
-			做任务();
+		case "京东任务":
+			京东任务();
 			break;
 		case "金融任务":
 			金融任务();
 			break;
 		case "图鉴Click":
 			图鉴();
+			break;
+		case "京东+金融":
+			京东任务();
+			金融任务();
 			break;
 		case "城城助力":
 			城城助力();
@@ -53,7 +57,7 @@ function main() {
 
 // --------------------------大任务汇总区-----------------------------
 // --------------------------京东任务-----------------------------
-function 做任务() {
+function 京东任务() {
 	toastLog("启动！！！");
 	首页banner启动();
 	开始做任务();
