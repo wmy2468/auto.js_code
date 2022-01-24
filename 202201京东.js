@@ -84,9 +84,9 @@ function 金融任务() {
 		// 		func.sClick(help_win_close_btn);
 		// 	} catch (e) { continue; }
 		// }
-		func.sClick(textContains("取消").findOnce());
-		func.sClick(textContains("我知道了").findOnce());
-		func.sClick(textContains("禁止").findOnce());
+		func.sClick(text("取消").findOnce());
+		func.sClick(text("我知道了").findOnce());
+		func.sClick(text("禁止").findOnce());
 		func.sClick(id("com.jd.jrapp:id/redPacketIV").findOnce());
 		toastLog("金融任务: 请跳转金融APP，如果没有弹窗，需手动跳转到活动界面");
 		sleep(2500);
