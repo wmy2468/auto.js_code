@@ -12,18 +12,19 @@ main();
 // toastLog(text("领取奖励").find().length);
 function main() {
     let select_func;
-    let selectedArr = ["芭芭农场", "万商3比", "ZFB相关", "JD相关", "YSF相关", "跳转指定Scheme"];
+    let selectedArr = ["万商3比", "ZFB相关", "JD相关", "YSF相关", "跳转指定Scheme"];
     //---------------配置区域-----------------
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行财富季") { 建行财富季(); }
     else if (scriptName == "ZFB相关") {
-        select_func = func.dialogs_select(["ZFB捐款", "余额宝转出", "余额宝转入"]);
+        select_func = func.dialogs_select(["芭芭农场", "ZFB捐款", "余额宝转出", "余额宝转入"]);
         if (select_func == "ZFB捐款") { 支付宝().ZFB捐款(); }
         else if (select_func == "余额宝转入") { 支付宝().余额宝转入(); }
         else if (select_func == "余额宝转出") { 支付宝().余额宝转出(); }
+        else if (scriptName == "芭芭农场") { 芭芭农场(); }
     }
     else if (scriptName == "JD相关") {
-        select_func = func.dialogs_select(["极速版领红包", "极速版助力", "京东评价"]);
+        select_func = func.dialogs_select(["极速版领红包", "京东评价"]);
         if (select_func == "极速版领红包") { jd().极速版领红包(); }
         else if (select_func == "极速版助力") { jd().极速版助力(); }
         else if (select_func == "京东评价") { 京东评价(); }
@@ -34,7 +35,7 @@ function main() {
     }
     else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
     else if (scriptName == "万商3比") { 万商3比(); }
-    else if (scriptName == "芭芭农场") { 芭芭农场(); }
+
 }
 
 function ysf() {
@@ -85,40 +86,6 @@ function ysf() {
     }
     return obj;
 }
-
-function jd() {
-    let obj_jd = {
-        极速版助力: function () {
-            let url1, url2;
-            if (dev_model == dev_honor8) {
-                url1 = cfg["url_scheme"]["京东"]["极速版挖宝"]["JJ"];
-                url2 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LM"];
-            } else if (dev_model == dev_redmi) {
-                url1 = cfg["url_scheme"]["京东"]["极速版挖宝"]["JJ"];
-                url2 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LP"];
-            } else if (dev_model == dev_mate30) {
-                url1 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LM"];
-                url2 = cfg["url_scheme"]["京东"]["极速版挖宝"]["LP"];
-            } else {
-                return 0;
-            }
-            [url1, url2].forEach(jump_url => {
-                func.to_scheme(jump_url);
-                toastLog("已跳转第一个URL");
-                sleep(2500);
-                while (!func.sClick(text("立即助力").findOnce())) {
-                    toastLog("等待点击立即助力按钮"); sleep(2500);
-                }
-                sleep(3500);
-                func.to_autojs();
-                sleep(3500);
-            })
-        }
-    }
-    return obj_jd;
-}
-
-
 
 function 芭芭农场() {
     let obj = {

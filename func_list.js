@@ -7,11 +7,11 @@ function config_dict() {
                 "小象2": "com.icbc.androidclient://startType=PORTALINJECT&menuId=taskCenter&injectParams=dGFyZ2V0PWVsZmxk&shareCurrentUUID=",
             },
             "京东": {
-                "极速版领红包": "openjdlite://virtual?params={\"category\":\"jump\",\"des\":\"m\",\"url\":\"https://prodev.m.jd.com/jdlite/active/31U4T6S4PbcK83HyLPioeCWrD63j/index.html\"}",
+                "极速版领红包": 'openjdlite://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/jdlite/active/31U4T6S4PbcK83HyLPioeCWrD63j/index.html"}',
                 "极速版挖宝": {
-                    "JJ": "jdlite://virtual?params={\"category\":\"jump\",\"des\":\"m\",\"url\":\"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=GPfTfqpoxK_2areokkk14n-eAjU2q2sAooXR8mdQZps&inviterCode=4b6897c9e34a41e1ba123b2ab0b7eff713671642474396464&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends\"}",
-                    "LP": "jdlite://virtual?params={\"category\":\"jump\",\"des\":\"m\",\"url\":\"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=YCQC5KqI8pcwIWRdZoUtoV1TkoIVm_064LWtTUNvKIg&inviterCode=49d6dac384ab45aabbb0d069023e2da698371642474397746&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends\"}",
-                    "LM": "jdlite://virtual?params={\"category\":\"jump\",\"des\":\"m\",\"url\":\"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=QXGSqDiCJNtOjdF5hkeTeg&inviterCode=410a8f7b3ace43eb8a0940821e8aa55a69811642474397931&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends\"}",
+                    "JJ": 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=GPfTfqpoxK_2areokkk14n-eAjU2q2sAooXR8mdQZps&inviterCode=4b6897c9e34a41e1ba123b2ab0b7eff713671642474396464&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}',
+                    "LP": 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=YCQC5KqI8pcwIWRdZoUtoV1TkoIVm_064LWtTUNvKIg&inviterCode=49d6dac384ab45aabbb0d069023e2da698371642474397746&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}',
+                    "LM": 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=QXGSqDiCJNtOjdF5hkeTeg&inviterCode=410a8f7b3ace43eb8a0940821e8aa55a69811642474397931&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}',
                 },
                 "陪伴计划": "openApp.jdMobile://virtual?params=%7B%22category%22%3A%22jump%22%2C%22des%22%3A%22m%22%2C%22url%22%3A%22https%3A%2F%2Fprodev.m.jd.com%2Fmall%2Factive%2FkPM3Xedz1PBiGQjY4ZYGmeVvrts%2Findex.html%22%7D",
                 "京喜_券": "openapp.jdpingou://virtual?params={%22des%22%3A%22m%22%2C%22category%22%3A%22jump%22%2C%22url%22%3A%22replace_url%22}",
@@ -31,46 +31,7 @@ function config_dict() {
                 "签到": "upwallet://html/open.95516.com/s/open/html/oauth.html?redirectUri=https://youhui.95516.com/newsign/unionpay/oauth",
                 // 云闪付_券 尾部拼接券ID
                 "云闪付_券": "upwallet://rn/rncoupondetail?couponId=",
-                "云闪付_券_圆梦新年": {
-                    "全国畅享-5折10电商券1": "upwallet://rn/rncoupondetail?couponId=3102021122031298",
-                    "全国畅享-5折10电商券2": "upwallet://rn/rncoupondetail?couponId=3102021122031260",
-                    "全国畅享-5折商超券30": "upwallet://rn/rncoupondetail?couponId=3102021122031319",
-                    "全国畅享-xyk还款券10": "upwallet://rn/rncoupondetail?couponId=3102021121630580",
 
-                    "本地-非厦门-商超30": "upwallet://rn/rncoupondetail?couponId=3102021122031140",
-                    "本地-非厦门-便利店10": "upwallet://rn/rncoupondetail?couponId=3102021122031124",
-                    "本地-非厦门-餐饮10": "upwallet://rn/rncoupondetail?couponId=3102021122031135",
-                    "本地-非厦门-线上券10": "upwallet://rn/rncoupondetail?couponId=3102021122031149",
-
-                    "精选-苏宁5折15": "upwallet://rn/rncoupondetail?couponId=3102021122131595",
-                    "精选-中石油5折20": "upwallet://rn/rncoupondetail?couponId=3102021122031343",
-
-                    "本地-厦门-商超30": "upwallet://rn/rncoupondetail?couponId=3102021121529747",
-                    "本地-厦门-便利店10": "upwallet://rn/rncoupondetail?couponId=3102021121529743",
-
-                    "闪付-50减10": "upwallet://rn/rncoupondetail?couponId=3102021122031281",
-                    "闪付-10减5": "upwallet://rn/rncoupondetail?couponId=3102021122031286",
-
-                    "全国畅享-生活缴费券6-3": "upwallet://rn/rncoupondetail?couponId=3102021122031307",
-                    "全国畅享-折扣汇5券": "upwallet://rn/rncoupondetail?couponId=3112021122031315",
-                },
-                "云闪付_券_圆梦新年_周三14点": {
-                    "周三14点-心愿大礼-华为P50": "upwallet://rn/rncoupondetail?couponId=3112021122332450",
-                    "周三14点-心愿大礼-红包5K": "upwallet://rn/rncoupondetail?couponId=3112021122332455",
-                    "周三14点-心愿大礼-Dyson": "upwallet://rn/rncoupondetail?couponId=3112021122332448",
-                    "周三14点-心愿大礼-switch": "upwallet://rn/rncoupondetail?couponId=3112021122332447",
-                    "周三14点-心愿大礼-携程": "upwallet://rn/rncoupondetail?couponId=3112021122432462",
-
-                    "周三14点-品质爆款-电动牙刷": "upwallet://rn/rncoupondetail?couponId=3112021122332449",
-                    "周三14点-品质爆款-家乐福800": "upwallet://rn/rncoupondetail?couponId=3112021122432757",
-                    "周三14点-品质爆款-悟空套装": "upwallet://rn/rncoupondetail?couponId=3112021122332454",
-                    "周三14点-品质爆款-三星堆套装": "upwallet://rn/rncoupondetail?couponId=3112021122332452",
-
-                    "周三14点-口碑好货-还款券50": "upwallet://rn/rncoupondetail?couponId=3112021122432463",
-                    "周三14点-口碑好货-美团券50": "upwallet://rn/rncoupondetail?couponId=3112021122332456",
-                    "周三14点-口碑好货-悟空单个": "upwallet://rn/rncoupondetail?couponId=3112021122332453",
-                    "周三14点-口碑好货-三星堆办单个": "upwallet://rn/rncoupondetail?couponId=3112021122332451",
-                },
             },
             "招商": {
                 "饭票签到": "cmbmobilebank://cmbls/functionjump?action=gocorpno&corpno=100856&cmb_app_trans_parms_start=here&param=v2&appflag=0",
@@ -788,3 +749,46 @@ module.exports = {
     dialogs_select: dialogs_select,
     dialogs_checkbox: dialogs_checkbox
 }
+
+
+
+// "云闪付_券_圆梦新年": {
+//     "全国畅享-5折10电商券1": "upwallet://rn/rncoupondetail?couponId=3102021122031298",
+//     "全国畅享-5折10电商券2": "upwallet://rn/rncoupondetail?couponId=3102021122031260",
+//     "全国畅享-5折商超券30": "upwallet://rn/rncoupondetail?couponId=3102021122031319",
+//     "全国畅享-xyk还款券10": "upwallet://rn/rncoupondetail?couponId=3102021121630580",
+
+//     "本地-非厦门-商超30": "upwallet://rn/rncoupondetail?couponId=3102021122031140",
+//     "本地-非厦门-便利店10": "upwallet://rn/rncoupondetail?couponId=3102021122031124",
+//     "本地-非厦门-餐饮10": "upwallet://rn/rncoupondetail?couponId=3102021122031135",
+//     "本地-非厦门-线上券10": "upwallet://rn/rncoupondetail?couponId=3102021122031149",
+
+//     "精选-苏宁5折15": "upwallet://rn/rncoupondetail?couponId=3102021122131595",
+//     "精选-中石油5折20": "upwallet://rn/rncoupondetail?couponId=3102021122031343",
+
+//     "本地-厦门-商超30": "upwallet://rn/rncoupondetail?couponId=3102021121529747",
+//     "本地-厦门-便利店10": "upwallet://rn/rncoupondetail?couponId=3102021121529743",
+
+//     "闪付-50减10": "upwallet://rn/rncoupondetail?couponId=3102021122031281",
+//     "闪付-10减5": "upwallet://rn/rncoupondetail?couponId=3102021122031286",
+
+//     "全国畅享-生活缴费券6-3": "upwallet://rn/rncoupondetail?couponId=3102021122031307",
+//     "全国畅享-折扣汇5券": "upwallet://rn/rncoupondetail?couponId=3112021122031315",
+// },
+// "云闪付_券_圆梦新年_周三14点": {
+//     "周三14点-心愿大礼-华为P50": "upwallet://rn/rncoupondetail?couponId=3112021122332450",
+//     "周三14点-心愿大礼-红包5K": "upwallet://rn/rncoupondetail?couponId=3112021122332455",
+//     "周三14点-心愿大礼-Dyson": "upwallet://rn/rncoupondetail?couponId=3112021122332448",
+//     "周三14点-心愿大礼-switch": "upwallet://rn/rncoupondetail?couponId=3112021122332447",
+//     "周三14点-心愿大礼-携程": "upwallet://rn/rncoupondetail?couponId=3112021122432462",
+
+//     "周三14点-品质爆款-电动牙刷": "upwallet://rn/rncoupondetail?couponId=3112021122332449",
+//     "周三14点-品质爆款-家乐福800": "upwallet://rn/rncoupondetail?couponId=3112021122432757",
+//     "周三14点-品质爆款-悟空套装": "upwallet://rn/rncoupondetail?couponId=3112021122332454",
+//     "周三14点-品质爆款-三星堆套装": "upwallet://rn/rncoupondetail?couponId=3112021122332452",
+
+//     "周三14点-口碑好货-还款券50": "upwallet://rn/rncoupondetail?couponId=3112021122432463",
+//     "周三14点-口碑好货-美团券50": "upwallet://rn/rncoupondetail?couponId=3112021122332456",
+//     "周三14点-口碑好货-悟空单个": "upwallet://rn/rncoupondetail?couponId=3112021122332453",
+//     "周三14点-口碑好货-三星堆办单个": "upwallet://rn/rncoupondetail?couponId=3112021122332451",
+// },

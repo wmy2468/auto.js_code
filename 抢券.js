@@ -6,8 +6,7 @@ var cfg = func.config_dict();
 main();
 
 function main() {
-    let selectedArr = ["光大活动", "中信活动", "交行5积分", "招商便民生活", "招商倒计时领取",
-        "云闪付2022新年", "云闪付2022新年捡漏"];
+    let selectedArr = ["光大活动", "中信活动", "交行5积分", "招商便民生活", "招商倒计时领取",];
     //---------------配置区域-----------------
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本        
     // 设置屏幕常亮6分钟
