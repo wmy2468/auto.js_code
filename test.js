@@ -18,7 +18,7 @@ url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2F
 url_end = "%26greetingId%3D1%26baifuId%3D1&encryptAppId=46411c55b29f8b49&scenarioId=1006";
 url_dict = "cb895525e54c56e009b24face50d5a814ba088";
 
-log(textContains("瓜分成功").findOnce());
+func.sClick(textContains("我知道了").findOnce());
 
 // func.to_scheme(url_head + url_dict + url_end);
 // log(textContains("100%").findOne());
