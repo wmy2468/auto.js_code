@@ -84,6 +84,7 @@ function 金融任务() {
 		// 		func.sClick(help_win_close_btn);
 		// 	} catch (e) { continue; }
 		// }
+		func.sClick(textContains("取消").findOnce());
 		func.sClick(id("com.jd.jrapp:id/redPacketIV").findOnce());
 		toastLog("金融任务: 请跳转金融APP，如果没有弹窗，需手动跳转到活动界面");
 		sleep(2500);
@@ -400,7 +401,7 @@ function clickComplete(apps) {
 				else if (arr_in_text(detailText, ["领百亿购物金", "榜单会场"])) { nextStepDetail = "20秒等待"; }
 				else if (arr_in_text(detailText, ["东东超市", "去财富岛"])) { nextStepDetail = "需要多次点击返回"; }
 				else if (arr_in_text(detailText, ["去企有此礼赢取好礼"])) { nextStepDetail = "页面含邀请好友"; }
-				else if (arr_in_text(detailText, ["浏览免费领保险"])) { nextStepDetail = "点击领取才会继续"; }
+				// else if (arr_in_text(detailText, ["浏览免费领保险"])) { nextStepDetail = "点击领取才会继续"; }
 
 				// 除了Mate 30外，另外2个台古董在小程序卡死
 				if ((dev_model == dev_honor8 || dev_model == dev_redmi) && nextStepDetail == "小程序") {
@@ -499,16 +500,19 @@ function after_click(textStr, details, apps) {
 			func.to_app(appName);
 		}
 	} else if (details == "点击领取才会继续") {
+		log("点击领取才会继续");
 		func.cClick(text("立即领取").findOne());
 		toastLog("已点击领取，等待");
 		sleep(random_second(10500, 100, 1000));
 	} else if (details == "需要多次点击返回") {
+		log("需要多次点击返回");
 		sleep(random_second(800, 100, 1000));
 		while (!is_in_invite_friend_page()) {
 			back();
 			sleep(random_second(2000, 100, 600));
 		}
 	} else if (details == "点击关闭返回") {
+		log("点击关闭返回");
 		while (!is_in_invite_friend_page()) {
 			if (func.sClick(desc("关闭页面").findOnce())) {
 				toastLog("after_click: 点击 desc 关闭按钮返回成功");
