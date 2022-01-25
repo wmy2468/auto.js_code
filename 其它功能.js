@@ -139,14 +139,14 @@ function 芭芭农场() {
                 toastLog("请手动跳转到农场任务界面");
                 sleep(3000);
                 try {
-                    zfb_ele = func_obj.zfb_element();
+                    zfb_ele = func_in_func.zfb_element();
                     if (zfb_ele != null) {
                         // log(zfb_ele);
                         // click(device.width / 2, zfb_ele.centerY());
                         func.sClick(zfb_ele);
                         sleep(2000);
                     }
-                    tb_ele = func_obj.tb_element();
+                    tb_ele = func_in_func.tb_element();
                     if (tb_ele != null) {
                         func.sClick(tb_ele.parent().child(2));
                         sleep(2000);
@@ -162,7 +162,7 @@ function 芭芭农场() {
             toastLog("已滑动，等待15秒");
             sleep(17000);
             toastLog("完成，准备返回");
-            while (func_obj.in_mission_view() == false) {
+            while (func_in_func.in_mission_view() == false) {
                 back();
                 sleep(4000);
             }
