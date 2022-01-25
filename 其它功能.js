@@ -37,7 +37,7 @@ function main() {
     }
     else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
     else if (scriptName == "万商3比") { 万商3比(); }
-
+    alert("已完成...");
 }
 
 function ysf() {
@@ -371,27 +371,6 @@ function 芭芭农场() {
     }
 
     return work;
-    // // 执行函数
-    // let select_item = func.dialogs_select(["淘宝支付宝浏览", "淘宝支付宝助力", "淘宝施肥", "淘宝", "支付宝"])
-    // if (select_item == "淘宝") {
-    //     work.tb();
-    // } else if (select_item == "淘宝施肥") {
-    //     work.tb施肥();
-    // } else if (select_item == "淘宝福气红包") {
-    //     work.tb(123);
-    // } else if (select_item == "淘宝支付宝浏览") {
-    //     work.tb();
-    //     work.zfb();
-    // } else if (select_item == "淘宝支付宝助力") {
-    //     work.zfb助力();
-    //     work.tb助力();
-    // } else if (select_item == "支付宝") {
-    //     work.zfb();
-    // } else {
-    //     toastLog("未选择");
-    // }
-    // setClip("");
-    // alert("已完成");
 }
 
 
@@ -804,7 +783,6 @@ function 支付宝() {
                 sleep(2500);
                 count = count - 1;
             }
-            alert("已完成");
         }
     }
     return zfb;
@@ -817,7 +795,6 @@ function 建行财富季() {
     func.to_appMulti("微信", 2);
     龙支付_戳泡泡();
     // 龙支付_日常任务();
-    alert("已完成");
     // 日常任务
     // 消保 答题
     // 外汇答题
