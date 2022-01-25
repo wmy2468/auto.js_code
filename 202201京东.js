@@ -17,13 +17,7 @@ main();
 
 function main() {
 	let sMission;
-	if (dev_model == dev_honor8 || dev_model == dev_mate30) {
-		sMission = func.dialogs_select(["京东任务", "金融任务", "图鉴Click", "京东+金融", "城城助力", "助力"]);
-	} else if (dev_model == dev_redmi) {
-		sMission = func.dialogs_select(["京东任务", "金融任务", "图鉴Click", "京东+金融", "城城助力"]);
-	} else {
-		sMission = func.dialogs_select(["京东任务", "金融任务", "图鉴Click"]);
-	}
+	sMission = func.dialogs_select(["京东+金融", "京东任务", "金融任务", "图鉴Click", "JJ小号互助"]);
 	switch (sMission) {
 		case "京东任务":
 			京东任务();
@@ -38,19 +32,10 @@ function main() {
 			京东任务();
 			金融任务();
 			break;
-		case "城城助力":
-			城城助力();
-			break;
-		case "助力":
-			if (dev_model == dev_honor8) {
-				互助点击("LM 23:/￥124lZFNIHwAAM%达kai→亰栋{a※pp}，✔﹎壹啓ɡμā汾10億!!!!!！ぷ");
-			} else {
-				互助点击("LM 23:/￥124lZFNIHwAAM%达kai→亰栋{a※pp}，✔﹎壹啓ɡμā汾10億!!!!!！ぷ");
-				互助点击("LP 28:/￥4CektFwm3dJSL%dakai》猄】崠】，⭐﹎壹啓ɡμā汾10億!!!!!！ぷ");
-			}
+		case "JJ小号互助":
+			互助点击();
 			break;
 	}
-	setClip("");
 	// console.clear();
 	alert("已完成");
 }
@@ -239,24 +224,6 @@ function 图鉴() {
 		toastLog("已返回 图鉴主界面...");
 	}
 }
-// -------------------------城城助力----------------------------
-function 城城助力() {
-	let kouling1, kouling2;
-	if (dev_model == dev_honor8) {
-		kouling1 = "LM城城 26:/￥75Y4k6QYe5Gfv￥祛→【猄〤崬】，✔そ點①點ひ领哯唫！"
-		kouling2 = "JJ城城 27:/￥152IQB39jbkOa￥去【京東】吧※，⛄帮我_點㊦﹎íぺ壹起领现金ㄚΙ"
-	} else if (dev_model == dev_redmi) {
-		kouling1 = "LP城城 29:/￥43vm3EC9HzoaM%祛→亰岽逛逛GO，⛄帮我_點㊦﹎íぺ壹起领现金ㄚΙ"
-		kouling2 = "JJ城城 27:/￥152IQB39jbkOa￥去【京東】吧※，⛄帮我_點㊦﹎íぺ壹起领现金ㄚΙ"
-	} else if (dev_model == dev_mate30) {
-		kouling1 = "LP城城 29:/￥43vm3EC9HzoaM%祛→亰岽逛逛GO，⛄帮我_點㊦﹎íぺ壹起领现金ㄚΙ"
-		kouling2 = "LM城城 26:/￥75Y4k6QYe5Gfv￥祛→【猄〤崬】，✔そ點①點ひ领哯唫！"
-	} else {
-		return 0;
-	}
-	互助点击(kouling1);
-	互助点击(kouling2);
-}
 // --------------------------大任务汇总区-----------------------------
 function 开始做任务() {
 	log("开始做任务: 正在等待进入活动页面");
@@ -364,7 +331,7 @@ function clickComplete(apps) {
 				// --------------------等待N秒区------------------
 				else if (arr_in_text(indexText, ["秒", "S可", "s可"])) { nextStep = "等待8秒"; }
 				// --------------------浏览区------------------
-				else if (arr_in_text(indexText, ["AR游戏", "浏览可得", "浏览领", "浏览会场可得", "逛晚会页可", "浏览即可得", "浏览并关注", "成功关注", "逛店可得"])) {
+				else if (arr_in_text(indexText, ["了解春晚攻略", "AR游戏", "浏览可得", "浏览领", "浏览会场可得", "逛晚会页可", "浏览即可得", "浏览并关注", "成功关注", "逛店可得"])) {
 					if (detailText.indexOf("去种草城") != -1) {
 						toastLog("clickComplete: 发现 种草城");
 						nextStep = "种草城";
@@ -670,30 +637,22 @@ function add_cart(isView) {
 
 
 // --------------------单独某项任务--------------------------------------
-function 互助点击(kouling, is_chengcheng) {
+function 互助点击() {
 	// let work = {
 	// 	action: function () {
-	setClip(kouling);
-	sleep(2000);
-	func.to_app(appName);
-	log("正在等待进入活动页面");
-	//等待点击 立即查看按钮
-	while (func.sClick(className("TextView").textContains("立即").findOne(10000)) == false) {
-		home();
-		sleep(4000);
-		func.to_app(appName);
+	let url_dict;
+	url_dict = {
+		"url_redmi": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://wbbny.m.jd.com/babelDiy/Zeus/41AJZXRUJeTqdBK9bPoPgUJiodcU/index.html?babelChannel=syfc&shareType=taskHelp&inviteId=ZXASTT018v_hwQBsZ8F3UJRqb1AFjRWn6W7zB55awQ&mpin=RnE2kWMPb2DRzdQUqod3WMyPN4RnPmZT&from=sc"}',
+		"url_honor": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://wbbny.m.jd.com/babelDiy/Zeus/41AJZXRUJeTqdBK9bPoPgUJiodcU/index.html?babelChannel=syfc&shareType=taskHelp&inviteId=ZXASTT0225KkcRUgf9VWFc07znf9eIgFjRWn6W7zB55awQ&mpin=RnFtxGMPOz2Iw9RP--tyC61CK8bqw3zPnf1J&from=sc"}',
+		"url_mate30": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://wbbny.m.jd.com/babelDiy/Zeus/41AJZXRUJeTqdBK9bPoPgUJiodcU/index.html?babelChannel=syfc&shareType=taskHelp&inviteId=ZXASTT0225KkcRhgc8VyFckjzkaFccQFjRWn6W7zB55awQ&mpin=RnE1kGNcbjCMy9RP--txW_9EV8uJtA6p-gpG&from=sc"}',
 	}
-	sleep(2000);
-	// 点击助力
-	if (is_chengcheng == undefined) {
-		func.sClick(textContains("为TA助力").findOne(10000));// 点击助力
-	}
-	// 延迟等待
-	sleep(2000);
-	home();
-	sleep(2000);
-	// 	}
-	// }
+	Object.keys(url_dict).forEach(obj_key => {
+		jump_url = url_dict[obj_key];
+		func.to_scheme(jump_url);
+		func.sClick(textContains("为TA助力").findOne(30000));// 点击助力
+		toastLog(obj_key + ",已点击助力");
+		sleep(5000);
+	})
 }
 
 function 品牌墙() {

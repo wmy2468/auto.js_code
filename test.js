@@ -20,7 +20,7 @@ url_dict = "cb895525e54c56e009b24face50d5a814ba088";
 
 app.startActivity({
     package: "com.jingdong.app.mall",
-    data: 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://api.m.jd.com/client.action?functionId=newBabelAwardCollection&body={%22activityId%22:%223WzqTqNgz2FzYetCe2XJnTsm8cUP%22,%22from%22:%22H5node%22,%22scene%22:%221%22,%22args%22:%22key=D651DC890AA761CC39C581557571EF35720127D95D4422B80E57E16A02124747AC25142AF604076FEF3739C893178A69_bingo,roleId=CDDD72A6BDA35006C390C9873C7D59EC26958060D8F8C64AA1C6D19CA06982B9_bingo,appid=123,strengthenKey=7CDF65D32D31A087810C2540194C287471087D838A60748BEF30AB602D6B765BADE2FEB15E22F25E2A6FBE5C2E46398EE6C61368B074BD5309909EB167F034E5_bingo%22,%22mitemAddrId%22:%22%22,%22geo%22:{%22lng%22:%22%22,%22lat%22:%22%22}}&client=wh5"}'
+    data: 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://wbbny.m.jd.com/babelDiy/Zeus/41AJZXRUJeTqdBK9bPoPgUJiodcU/index.html?babelChannel=syfc&shareType=taskHelp&inviteId=ZXASTT018v_hwQBsZ8F3UJRqb1AFjRWn6W7zB55awQ&mpin=RnE2kWMPb2DRzdQUqod3WMyPN4RnPmZT&from=sc"}'
 })
 
 // func.to_scheme(url_head + url_dict + url_end);

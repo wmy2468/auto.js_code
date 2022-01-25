@@ -17,11 +17,13 @@ function main() {
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行财富季") { 建行财富季(); }
     else if (scriptName == "ZFB相关") {
-        select_func = func.dialogs_select(["芭芭农场", "ZFB捐款", "余额宝转出", "余额宝转入"]);
+        select_func = func.dialogs_select(["芭芭农场-小号互助", "芭芭农场-支付宝淘宝浏览", "芭芭农场-淘宝施肥", "ZFB捐款", "余额宝转出", "余额宝转入"]);
         if (select_func == "ZFB捐款") { 支付宝().ZFB捐款(); }
         else if (select_func == "余额宝转入") { 支付宝().余额宝转入(); }
         else if (select_func == "余额宝转出") { 支付宝().余额宝转出(); }
-        else if (scriptName == "芭芭农场") { 芭芭农场(); }
+        else if (select_func == "芭芭农场-小号互助") { 芭芭农场().zfb助力(); 芭芭农场().tb助力(); }
+        else if (select_func == "芭芭农场-支付宝淘宝浏览") { 芭芭农场().tb(); 芭芭农场().zfb(); }
+        else if (select_func == "芭芭农场-淘宝施肥") { 芭芭农场().tb施肥(); }
     }
     else if (scriptName == "JD相关") {
         select_func = func.dialogs_select(["极速版领红包", "京东评价"]);
@@ -367,27 +369,29 @@ function 芭芭农场() {
             })
         }
     }
-    // 执行函数
-    let select_item = func.dialogs_select(["淘宝支付宝浏览", "淘宝支付宝助力", "淘宝施肥", "淘宝", "支付宝"])
-    if (select_item == "淘宝") {
-        work.tb();
-    } else if (select_item == "淘宝施肥") {
-        work.tb施肥();
-    } else if (select_item == "淘宝福气红包") {
-        work.tb(123);
-    } else if (select_item == "淘宝支付宝浏览") {
-        work.tb();
-        work.zfb();
-    } else if (select_item == "淘宝支付宝助力") {
-        work.zfb助力();
-        work.tb助力();
-    } else if (select_item == "支付宝") {
-        work.zfb();
-    } else {
-        toastLog("未选择");
-    }
-    setClip("");
-    alert("已完成");
+
+    return work;
+    // // 执行函数
+    // let select_item = func.dialogs_select(["淘宝支付宝浏览", "淘宝支付宝助力", "淘宝施肥", "淘宝", "支付宝"])
+    // if (select_item == "淘宝") {
+    //     work.tb();
+    // } else if (select_item == "淘宝施肥") {
+    //     work.tb施肥();
+    // } else if (select_item == "淘宝福气红包") {
+    //     work.tb(123);
+    // } else if (select_item == "淘宝支付宝浏览") {
+    //     work.tb();
+    //     work.zfb();
+    // } else if (select_item == "淘宝支付宝助力") {
+    //     work.zfb助力();
+    //     work.tb助力();
+    // } else if (select_item == "支付宝") {
+    //     work.zfb();
+    // } else {
+    //     toastLog("未选择");
+    // }
+    // setClip("");
+    // alert("已完成");
 }
 
 
