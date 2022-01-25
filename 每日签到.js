@@ -50,7 +50,7 @@ function 龙支付签到() {
 }
 
 function 云闪付() {
-    let obj = {
+    let func_obj = {
         领积点: function () {
             func.to_scheme(cfg["url_scheme"]["云闪付"]["会员中心"]);
             while (!(text("我的积点").findOnce() != null &&
@@ -91,7 +91,7 @@ function 云闪付() {
             sleep(1000);
         }
     }
-    return obj;
+    return func_obj;
 }
 
 
@@ -448,7 +448,7 @@ function 浦发_金豆签到() {
 }
 
 function 京东() {
-    let obj = {
+    let func_obj = {
         极速版领红包: function () {
             func.to_scheme(cfg["url_scheme"]["京东"]["极速版领红包"]);
             let left_today, left_today_parent, left_idx;
@@ -639,9 +639,28 @@ function 京东() {
             toastLog("双签奖励已领取");
             sleep(3000);
         },
+        common_sign: function (jump_url, wait_load_element, complete_element, click_element) {
+            /** 
+            * @param {String} jump_url 跳转app的data url
+            * @param {String} wait_load_element 判断是否加载的 文本 语句，用eval执行，
+            * @param {Array} complete_element 判断是否完成的 文本 语句，用eval执行
+            * @param {Function} click_element 跳转app的data url
+            */
+            func.to_scheme(jump_url);       //跳转app
+            while (eval(wait_load_element) == null) {
+                toast("等待页面元素加载...");
+                sleep(2500);
+            }
+            while (eval(complete_element) == null) {
+                click_element();
+                toast("等待页面元素加载...");
+                sleep(2500);
+            }
+
+        },
     }
 
-    return obj;
+    return func_obj;
 }
 
 // 买单吧
