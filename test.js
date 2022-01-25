@@ -18,10 +18,67 @@ url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2F
 url_end = "%26greetingId%3D1%26baifuId%3D1&encryptAppId=46411c55b29f8b49&scenarioId=1006";
 url_dict = "cb895525e54c56e009b24face50d5a814ba088";
 
-app.startActivity({
-    package: "com.jingdong.app.mall",
-    data: 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://wbbny.m.jd.com/babelDiy/Zeus/41AJZXRUJeTqdBK9bPoPgUJiodcU/index.html?babelChannel=syfc&shareType=taskHelp&inviteId=ZXASTT018v_hwQBsZ8F3UJRqb1AFjRWn6W7zB55awQ&mpin=RnE2kWMPb2DRzdQUqod3WMyPN4RnPmZT&from=sc"}'
-})
+jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=YCQC5KqI8pcwIWRdZoUtoV1TkoIVm_064LWtTUNvKIg&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}'
+
+极速版挖宝()
+
+function 极速版挖宝() {
+    func.to_scheme(cfg["url_scheme"]["京东"]["极速版挖宝"]);
+    while (textContains("元微信现金恭喜").findOnce() == null) {
+        toastLog("等待加载...");
+        sleep(2500);
+    }
+    toastLog("挖宝界面已加载...");
+    sleep(2500);
+    func.sClick(text("玩一玩").findOne());
+    toastLog("点击玩一玩 增加生命...");
+    sleep(6000);
+    back();
+    textContains("元微信现金恭喜").findOne();
+    let scroll_bar, bar_parent, click_parent;
+    let item, exflag;
+    // text = "本场奖励已领取完哦～"
+    while (1) {
+        exflag = true;
+        try {
+            scroll_bar = text("¥").depth(16).findOne();
+            bar_parent = scroll_bar.parent().parent();
+            click_parent = bar_parent.child(bar_parent.childCount() - 1).child(0).child(0);
+            log("click_parent.childCount():" + click_parent.childCount());
+            for (let i = 0; i < click_parent.childCount(); i++) {
+                item = click_parent.child(i);
+                log("item.childCount():" + item.childCount());
+                if (item.childCount() == 1) {
+                    func.sClick(item.child(0));
+                    sleep(2500);
+                    exflag = false;
+                } else {
+                    continue;
+                }
+            }
+        }
+        catch (e) {
+            continue;
+        }
+        if (exflag) {
+            break;
+        }
+    }
+}
+
+// app.startActivity({
+//     package: "com.jingdong.app.mall",
+//     data: jsb,
+// })
+
+
+
+超市签到 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://jdsupermarket.jd.com/game/?from=header"}'
+个护签到 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/mall/active/2tZssTgnQsiUqhmg5ooLSHY9XSeN/index.html#/"'
+种豆得豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/plantBean/index.action"}'
+url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
+
+
 
 // func.to_scheme(url_head + url_dict + url_end);
 // log(textContains("100%").findOne());

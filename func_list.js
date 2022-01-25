@@ -8,16 +8,12 @@ function config_dict() {
             },
             "京东": {
                 "极速版领红包": 'openjdlite://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/jdlite/active/31U4T6S4PbcK83HyLPioeCWrD63j/index.html"}',
-                "极速版挖宝": {
-                    "JJ": 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=GPfTfqpoxK_2areokkk14n-eAjU2q2sAooXR8mdQZps&inviterCode=4b6897c9e34a41e1ba123b2ab0b7eff713671642474396464&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}',
-                    "LP": 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=YCQC5KqI8pcwIWRdZoUtoV1TkoIVm_064LWtTUNvKIg&inviterCode=49d6dac384ab45aabbb0d069023e2da698371642474397746&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}',
-                    "LM": 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=QXGSqDiCJNtOjdF5hkeTeg&inviterCode=410a8f7b3ace43eb8a0940821e8aa55a69811642474397931&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}',
-                },
-                "陪伴计划": "openApp.jdMobile://virtual?params=%7B%22category%22%3A%22jump%22%2C%22des%22%3A%22m%22%2C%22url%22%3A%22https%3A%2F%2Fprodev.m.jd.com%2Fmall%2Factive%2FkPM3Xedz1PBiGQjY4ZYGmeVvrts%2Findex.html%22%7D",
-                "京喜_券": "openapp.jdpingou://virtual?params={%22des%22%3A%22m%22%2C%22category%22%3A%22jump%22%2C%22url%22%3A%22replace_url%22}",
-                "领京豆": "openapp.jdmobile://virtual?params=%7B%22category%22%3A%22jump%22%2C%22des%22%3A%22m%22%2C%22url%22%3A%22https%3A%2F%2Fbean.m.jd.com%22%7D",
-                "领券中心": "openapp.jdmobile://virtual?params=%7B%22category%22%3A%22jump%22%2C%22des%22%3A%22m%22%2C%22url%22%3A%22https%3A%2F%2Fcoupon.m.jd.com%2Fcenter%2FgetCouponCenter.action%22%7D",
-                "评价中心": "openApp.jdMobile://virtual?params=%7B%22des%22%3A%22commentCenter%22%2C%22business%22%3A%221%22%2C%22category%22%3A%22jump%22%7D",
+                "极速版挖宝": 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=YCQC5KqI8pcwIWRdZoUtoV1TkoIVm_064LWtTUNvKIg&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}',
+                "陪伴计划": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/mall/active/kPM3Xedz1PBiGQjY4ZYGmeVvrts/index.html"}',
+                "京喜_券": 'openapp.jdpingou://virtual?params={"des":"m","category":"jump","url":"replace_url"}',
+                "领京豆": 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com"}',
+                "领券中心": 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://coupon.m.jd.com/center/getCouponCenter.action"}',
+                "评价中心": 'openApp.jdMobile://virtual?params={"des":"commentCenter","business":"1","category":"jump"}',
             },
             "京东金融": {
                 "金融签到": "jdmobile://share?jumpType=7&jumpUrl=4120&channel=default&sourceUrl=1000*https://f.ua.jd.com/downloadApp/index.html?id=7038",

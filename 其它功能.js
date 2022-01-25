@@ -26,10 +26,9 @@ function main() {
         else if (select_func == "芭芭农场-淘宝施肥") { 芭芭农场().tb施肥(); }
     }
     else if (scriptName == "JD相关") {
-        select_func = func.dialogs_select(["极速版领红包", "京东评价"]);
-        if (select_func == "极速版领红包") { jd().极速版领红包(); }
-        else if (select_func == "极速版助力") { jd().极速版助力(); }
-        else if (select_func == "京东评价") { 京东评价(); }
+        select_func = func.dialogs_select(["极速版挖宝", "京东评价"]);
+        if (select_func == "极速版挖宝") { jd().极速版挖宝(); }
+        else if (select_func == "京东评价") { jd().京东评价(); }
     }
     else if (scriptName == "YSF相关") {
         select_func = func.dialogs_select(["YSF福气助力"]);
@@ -436,213 +435,263 @@ function 万商3比() {
     alert("已完成,共计:" + sum / 10 + "元");
 }
 
-function 京东评价() {
-    if (!requestScreenCapture()) {
-        toast("请求截图失败");
-        exit();
-    }
-    toastLog("请求截图成功");
-    sleep(1000);
-
-    // 1. 跳转评价中心
-    func.to_scheme(cfg["url_scheme"]["京东"]["评价中心"]);
-    // 2. 判断是否到达评价页面
-    while (className("TextView").text("已评价/追评").findOnce() == null) { toastLog("未到达,评价界面"); sleep(2500); }
-    while (text("待评价").findOne().parent().child(1).text() != "· 1") {
-        // 3. 点击评价商品
-        func.sClick(className("TextView").text("评价").findOne().parent().parent());
-        // fullId = com.jd.lib.evaluatecenter.feature:id/dm =>text == text = · 47
-        // fullId = com.jd.lib.evaluatecenter.feature:id/m8,text = 评价
-        // items = className = android.widget.ListView, fullId = android:id/list =>list[1]
-        // 4. 确保到达商品页面 下滑获取评价按钮
-        className("TextView").text("购物车").findOne();
-        sleep(1000);
-        scrollDown();
-        sleep(2500);
-        text("评价").findOne().parent().click();
-        // 5. 判断到评价详情界面
-        // while (textStartsWith("按").textEndsWith("查看评价").findOnce() == null) { toastLog("未到达,评价详情"); sleep(2500); }
-        while (className("RatingBar").depth(20).findOnce() == null) { toastLog("未到达,评价详情"); sleep(2500); }
-        toastLog("到达商品评价处");
-        sleep(2500);
-        // 记录评论内容
-        let comment_text_b, comment_text, comment = null;
-        while (comment == null) {
-            try {
-                comment = textStartsWith("按").textEndsWith("查看评价").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0);
-                sleep(800);
-            } catch (e) {
-                sleep(500);
-                continue;
-            }
-        }
-        comment_text = comment.text();
-        // 6. 选择是否有图
-        let pic_video, has_pic;
-        pic_video = className("android.widget.CheckBox").textContains("图/视频").findOnce();
-        if (pic_video == null) { has_pic = false } else {
-            has_pic = true;
-            func.sClick(pic_video);
-            toastLog("已点击 图/视频 按钮");
-            sleep(2500);
-            comment = null;
-            while (comment == null) {
-                try {
-                    comment = textStartsWith("按").textEndsWith("查看评价").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0);
-                    sleep(800);
-                } catch (e) {
-                    sleep(500);
-                    continue;
+function jd() {
+    let func_in_func = {
+        rate_click: function (element) {
+            if (element != null) {
+                if (!element.click()) {
+                    click(element.bounds().right - 1, element.bounds().centerY());
                 }
+                return true;
             }
-            comment_text_b = comment.text();
-            if (random(0, 9) >= 5) {
-                comment_text = comment_text_b;
-            }
-        };
-        // textContains("图/视频").findOne().click()
-
-        // 7. 没图就复制文案，有图就截屏
-        let big_pic, pic_text, cur_pic, all_pic;
-        let height, width, x, y;
-        if (has_pic) {
-            func.sClick(comment);
-            toastLog("已点击第一条评价");
-            // 有图：最新排序.parent.parent.parent.parent.parent.child(1).child(1)
-            // 8 判断到达评价详情
-            text("  说点儿什么呗~").findOne();
-            sleep(1000);
-            // 9. 获取文本
-            // fullId = com.jd.lib.evaluatecenter.feature:id/g5，depth = 9
-            // 点击图片
-            func.sClick(className("RatingBar").findOnce().parent().parent().parent().child(3).child(0));
-            // className = android.widget.ImageView，depth = 9
-            height = device.height;
-            width = device.width;
-            x = 0;
-            y = Math.floor(height / 6);
-            height = Math.floor(height / 4 * 3);
-            big_pic = textContains("1/").findOne();
-            toastLog("已打开大图");
-            sleep(2500);
-            pic_text = big_pic.text();
-            cur_pic = pic_text.substring(0, 1);
-            all_pic = pic_text.substring(pic_text.length - 1);
-            log("cur_pic:" + cur_pic);
-            log("all_pic:" + all_pic);
-            if (all_pic > 8) { all_pic = 8; }
-            // className = android.widget.ImageButton，depth = 5，fullId = com.jd.lib.evaluatecenter.feature:id/b2
-            let img, img_clip, file_path;
-            while (cur_pic <= all_pic) {
-                // 截屏
-                img = images.captureScreen();
-                img_clip = images.clip(img, x, y, width, height);
-                file_path = path_date_string();
-                images.save(img_clip, file_path);
-                // app.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, android.net.Uri.fromFile(java.io.File(file_path))));        //刷新图库
-                media.scanFile(file_path);
-                swipe(width - 1, y, 100, y, 300);
-                cur_pic = cur_pic * 1 + 1;
-                log("cur_pic in:" + cur_pic);
-                sleep(1500);
-            }
-            toastLog("截屏完成");
-            sleep(2500);
-        } else {
-            toastLog("无图片，直接返回");
-            sleep(2500);
+            return false;
         }
-        // 返回到评价页面，点击评价
-        while (className("TextView").text("已评价/追评").findOnce() == null) { back(); toastLog("未到达评价界面"); sleep(3500); }
-        // 点击评价商品
-        func.sClick(className("TextView").text("评价").findOne());
-        // 等待商品评价页面加载
-        textStartsWith("/").textEndsWith("京豆").findOne();
-        sleep(1500);
-        // 点击所有rate
-        className("android.widget.RatingBar").findOne();
-        let rating_bars, rating_count, cur_rate = 0;
-        rating_bars = className("android.widget.RatingBar").find();
-        rating_count = rating_bars.length;
-        while (cur_rate < rating_count) {
-            rate_click(rating_bars[cur_rate]);
-            toastLog("点击第" + (cur_rate + 1) + "个星级");
-            sleep(1000);
-            if (cur_rate == 0) { scrollDown(); sleep(800); scrollDown(); sleep(800); scrollDown(); sleep(800); }
-            rating_bars = null;
-            while (rating_bars == null) {
-                rating_bars = className("android.widget.RatingBar").find();
-                sleep(800);
-            }
-            cur_rate = cur_rate + 1;
-        }
-        // 设置文本
-        setText(comment_text);
-        toastLog("设置文本完成");
-        sleep(1500);
-        if (has_pic) {
-            // 点击选择图片
-            func.sClick(textContains("添加图片").findOnce());
-            className("android.widget.TextView").depth(6).text("最近添加").findOne();
-            sleep(1000);
-            let img_list, img_cnt;
-            img_cnt = 2;
-            while ((img_cnt - 1) <= all_pic) {
-                img_list = className("android.widget.ImageView").find();
-                if (img_list.nonEmpty()) {
-                    func.sClick(img_list[img_cnt].parent().child(1));
-                    sleep(800);
-                    img_cnt = img_cnt + 1
-                } else { continue; }
-            }
-            // func.sClick(className("android.widget.ImageView").find()[3].parent().child(1))
-            //点击下一步 =》 完成
-            func.sClick(textContains("下一步").findOne());
-            sleep(1500);
-            func.sClick(textContains("完成").findOne());
-            sleep(1500);
-        }
-        // 返回商品评价页面
-        textStartsWith("/").textEndsWith("京豆").findOne();
-        // 检查评价京豆是否已满
-        let beans_a, beans_b, text_a, text_b;
-        beans_a = textContains("京豆").findOne();
-        beans_b = beans_a.parent().child(0);
-        text_a = beans_a.text().substring(1, 3);
-        text_b = beans_b.text();
-        if (text_a != text_b) {
-            alert("豆子未满，请检查 是否有误，并手动提交");
-        } else {
-            // 提交
-            while (!func.sClick(textContains("提交").findOnce())) {
-                toastLog("未成功，点击提交");
+    }
+    let func_obj = {
+        极速版挖宝: function () {
+            func.to_scheme(cfg["url_scheme"]["京东"]["极速版挖宝"]);
+            while (textContains("元微信现金恭喜").findOnce() == null) {
+                toastLog("等待加载...");
                 sleep(2500);
             }
-            toastLog("已成功，点击提交");
+            toastLog("挖宝界面已加载...");
             sleep(2500);
-            // 评价成功    
-        }
-        while (text("评价成功，感谢您！").findOnce() == null) {
-            if (func.sClick(text("确认提交").findOnce())) { sleep(1500); }
-            // if (func.sClick(text("提交").findOnce())) { sleep(1500); }
+            func.sClick(text("玩一玩").findOne());
+            toastLog("点击玩一玩 增加生命...");
+            sleep(6000);
+            back();
+            textContains("元微信现金恭喜").findOne();
+            let scroll_bar, bar_parent, click_parent;
+            let item, exflag;
+            // text = "本场奖励已领取完哦～"
+            while (1) {
+                exflag = true;
+                try {
+                    scroll_bar = text("¥").depth(16).findOne();
+                    bar_parent = scroll_bar.parent().parent();
+                    click_parent = bar_parent.child(bar_parent.childCount() - 1).child(0).child(0);
+                    log("click_parent.childCount():" + click_parent.childCount());
+                    for (let i = 0; i < click_parent.childCount(); i++) {
+                        item = click_parent.child(i);
+                        log("item.childCount():" + item.childCount());
+                        if (item.childCount() == 1) {
+                            func.sClick(item.child(0));
+                            sleep(2500);
+                            exflag = false;
+                        } else {
+                            continue;
+                        }
+                    }
+                }
+                catch (e) {
+                    continue;
+                }
+                if (exflag) {
+                    break;
+                }
+            }
+        },
+        京东评价: function () {
+            if (!requestScreenCapture()) {
+                toast("请求截图失败");
+                exit();
+            }
+            toastLog("请求截图成功");
             sleep(1000);
-        }
-        toastLog("评价已完成，等待返回");
-        sleep(2500);
-        // 返回到评价页面，点击评价
-        while (className("TextView").text("已评价/追评").findOnce() == null) { back(); toastLog("未到达评价界面"); sleep(3500); }
-    }
-    // 评价成功    text = 评价成功，感谢您！
-}
 
-function rate_click(element) {
-    if (element != null) {
-        if (!element.click()) {
-            click(element.bounds().right - 1, element.bounds().centerY());
+            // 1. 跳转评价中心
+            func.to_scheme(cfg["url_scheme"]["京东"]["评价中心"]);
+            // 2. 判断是否到达评价页面
+            while (className("TextView").text("已评价/追评").findOnce() == null) { toastLog("未到达,评价界面"); sleep(2500); }
+            while (text("待评价").findOne().parent().child(1).text() != "· 1") {
+                // 3. 点击评价商品
+                func.sClick(className("TextView").text("评价").findOne().parent().parent());
+                // fullId = com.jd.lib.evaluatecenter.feature:id/dm =>text == text = · 47
+                // fullId = com.jd.lib.evaluatecenter.feature:id/m8,text = 评价
+                // items = className = android.widget.ListView, fullId = android:id/list =>list[1]
+                // 4. 确保到达商品页面 下滑获取评价按钮
+                className("TextView").text("购物车").findOne();
+                sleep(1000);
+                scrollDown();
+                sleep(2500);
+                text("评价").findOne().parent().click();
+                // 5. 判断到评价详情界面
+                // while (textStartsWith("按").textEndsWith("查看评价").findOnce() == null) { toastLog("未到达,评价详情"); sleep(2500); }
+                while (className("RatingBar").depth(20).findOnce() == null) { toastLog("未到达,评价详情"); sleep(2500); }
+                toastLog("到达商品评价处");
+                sleep(2500);
+                // 记录评论内容
+                let comment_text_b, comment_text, comment = null;
+                while (comment == null) {
+                    try {
+                        comment = textStartsWith("按").textEndsWith("查看评价").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0);
+                        sleep(800);
+                    } catch (e) {
+                        sleep(500);
+                        continue;
+                    }
+                }
+                comment_text = comment.text();
+                // 6. 选择是否有图
+                let pic_video, has_pic;
+                pic_video = className("android.widget.CheckBox").textContains("图/视频").findOnce();
+                if (pic_video == null) { has_pic = false } else {
+                    has_pic = true;
+                    func.sClick(pic_video);
+                    toastLog("已点击 图/视频 按钮");
+                    sleep(2500);
+                    comment = null;
+                    while (comment == null) {
+                        try {
+                            comment = textStartsWith("按").textEndsWith("查看评价").findOnce().parent().parent().parent().parent().parent().child(1).child(1).child(0).child(0).child(1).child(0).child(0);
+                            sleep(800);
+                        } catch (e) {
+                            sleep(500);
+                            continue;
+                        }
+                    }
+                    comment_text_b = comment.text();
+                    if (random(0, 9) >= 5) {
+                        comment_text = comment_text_b;
+                    }
+                };
+                // textContains("图/视频").findOne().click()
+
+                // 7. 没图就复制文案，有图就截屏
+                let big_pic, pic_text, cur_pic, all_pic;
+                let height, width, x, y;
+                if (has_pic) {
+                    func.sClick(comment);
+                    toastLog("已点击第一条评价");
+                    // 有图：最新排序.parent.parent.parent.parent.parent.child(1).child(1)
+                    // 8 判断到达评价详情
+                    text("  说点儿什么呗~").findOne();
+                    sleep(1000);
+                    // 9. 获取文本
+                    // fullId = com.jd.lib.evaluatecenter.feature:id/g5，depth = 9
+                    // 点击图片
+                    func.sClick(className("RatingBar").findOnce().parent().parent().parent().child(3).child(0));
+                    // className = android.widget.ImageView，depth = 9
+                    height = device.height;
+                    width = device.width;
+                    x = 0;
+                    y = Math.floor(height / 6);
+                    height = Math.floor(height / 4 * 3);
+                    big_pic = textContains("1/").findOne();
+                    toastLog("已打开大图");
+                    sleep(2500);
+                    pic_text = big_pic.text();
+                    cur_pic = pic_text.substring(0, 1);
+                    all_pic = pic_text.substring(pic_text.length - 1);
+                    log("cur_pic:" + cur_pic);
+                    log("all_pic:" + all_pic);
+                    if (all_pic > 8) { all_pic = 8; }
+                    // className = android.widget.ImageButton，depth = 5，fullId = com.jd.lib.evaluatecenter.feature:id/b2
+                    let img, img_clip, file_path;
+                    while (cur_pic <= all_pic) {
+                        // 截屏
+                        img = images.captureScreen();
+                        img_clip = images.clip(img, x, y, width, height);
+                        file_path = path_date_string();
+                        images.save(img_clip, file_path);
+                        // app.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, android.net.Uri.fromFile(java.io.File(file_path))));        //刷新图库
+                        media.scanFile(file_path);
+                        swipe(width - 1, y, 100, y, 300);
+                        cur_pic = cur_pic * 1 + 1;
+                        log("cur_pic in:" + cur_pic);
+                        sleep(1500);
+                    }
+                    toastLog("截屏完成");
+                    sleep(2500);
+                } else {
+                    toastLog("无图片，直接返回");
+                    sleep(2500);
+                }
+                // 返回到评价页面，点击评价
+                while (className("TextView").text("已评价/追评").findOnce() == null) { back(); toastLog("未到达评价界面"); sleep(3500); }
+                // 点击评价商品
+                func.sClick(className("TextView").text("评价").findOne());
+                // 等待商品评价页面加载
+                textStartsWith("/").textEndsWith("京豆").findOne();
+                sleep(1500);
+                // 点击所有rate
+                className("android.widget.RatingBar").findOne();
+                let rating_bars, rating_count, cur_rate = 0;
+                rating_bars = className("android.widget.RatingBar").find();
+                rating_count = rating_bars.length;
+                while (cur_rate < rating_count) {
+                    func_in_func.rate_click(rating_bars[cur_rate]);
+                    toastLog("点击第" + (cur_rate + 1) + "个星级");
+                    sleep(1000);
+                    if (cur_rate == 0) { scrollDown(); sleep(800); scrollDown(); sleep(800); scrollDown(); sleep(800); }
+                    rating_bars = null;
+                    while (rating_bars == null) {
+                        rating_bars = className("android.widget.RatingBar").find();
+                        sleep(800);
+                    }
+                    cur_rate = cur_rate + 1;
+                }
+                // 设置文本
+                setText(comment_text);
+                toastLog("设置文本完成");
+                sleep(1500);
+                if (has_pic) {
+                    // 点击选择图片
+                    func.sClick(textContains("添加图片").findOnce());
+                    className("android.widget.TextView").depth(6).text("最近添加").findOne();
+                    sleep(1000);
+                    let img_list, img_cnt;
+                    img_cnt = 2;
+                    while ((img_cnt - 1) <= all_pic) {
+                        img_list = className("android.widget.ImageView").find();
+                        if (img_list.nonEmpty()) {
+                            func.sClick(img_list[img_cnt].parent().child(1));
+                            sleep(800);
+                            img_cnt = img_cnt + 1
+                        } else { continue; }
+                    }
+                    // func.sClick(className("android.widget.ImageView").find()[3].parent().child(1))
+                    //点击下一步 =》 完成
+                    func.sClick(textContains("下一步").findOne());
+                    sleep(1500);
+                    func.sClick(textContains("完成").findOne());
+                    sleep(1500);
+                }
+                // 返回商品评价页面
+                textStartsWith("/").textEndsWith("京豆").findOne();
+                // 检查评价京豆是否已满
+                let beans_a, beans_b, text_a, text_b;
+                beans_a = textContains("京豆").findOne();
+                beans_b = beans_a.parent().child(0);
+                text_a = beans_a.text().substring(1, 3);
+                text_b = beans_b.text();
+                if (text_a != text_b) {
+                    alert("豆子未满，请检查 是否有误，并手动提交");
+                } else {
+                    // 提交
+                    while (!func.sClick(textContains("提交").findOnce())) {
+                        toastLog("未成功，点击提交");
+                        sleep(2500);
+                    }
+                    toastLog("已成功，点击提交");
+                    sleep(2500);
+                    // 评价成功    
+                }
+                while (text("评价成功，感谢您！").findOnce() == null) {
+                    if (func.sClick(text("确认提交").findOnce())) { sleep(1500); }
+                    // if (func.sClick(text("提交").findOnce())) { sleep(1500); }
+                    sleep(1000);
+                }
+                toastLog("评价已完成，等待返回");
+                sleep(2500);
+                // 返回到评价页面，点击评价
+                while (className("TextView").text("已评价/追评").findOnce() == null) { back(); toastLog("未到达评价界面"); sleep(3500); }
+            }
+            // 评价成功    text = 评价成功，感谢您！
         }
-        return true;
     }
-    return false;
+
+    return func_obj;
 }
 
 function path_date_string() {
