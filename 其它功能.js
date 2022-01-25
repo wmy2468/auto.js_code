@@ -298,23 +298,26 @@ function 芭芭农场() {
         },
         zfb助力: function () {
             let url_mate30, url_redmi, url_honor, url_lm, url_lp;
-            url_mate30 = "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjU2NjcxNDcyMDA5cDFyY0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802566714720&chInfo=ch_share__chsub_Weixin&apshareid=67021669-4f86-433a-b0f8-e9a3d92ffa4a";
-            url_redmi = "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgzMjgzNTY5OTY5MjBkMGk1MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088832835699692&chInfo=ch_share__chsub_Weixin&apshareid=b1f3a960-e284-41ad-a05b-893d49edbca1";
-            url_honor = "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODE0MjMxMzQ4OTE4ODBvNWR3MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088142313489188&chInfo=ch_share__chsub_Weixin&apshareid=f33b8fe2-57ba-468b-8179-708d640216c0";
-            url_lm = "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODMwMjgyNjc0MjM5NDE2MzF4dkFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088302826742394&chInfo=ch_share__chsub_Weixin&apshareid=984B5380-ACCD-4099-B658-FAE3E8F5D384";
-            url_lp = "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjQ1NTc3NTMzOTFsYnNoM0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802455775339&chInfo=ch_share__chsub_Weixin&apshareid=D4E9A701-E6F4-4622-A775-0AA2DF4C3E00";
+            let url_dict;
+            url_dict = {
+                "url_mate30": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjU2NjcxNDcyMDA5cDFyY0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802566714720&chInfo=ch_share__chsub_Weixin&apshareid=67021669-4f86-433a-b0f8-e9a3d92ffa4a",
+                "url_redmi": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgzMjgzNTY5OTY5MjBkMGk1MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088832835699692&chInfo=ch_share__chsub_Weixin&apshareid=b1f3a960-e284-41ad-a05b-893d49edbca1",
+                "url_honor": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODE0MjMxMzQ4OTE4ODBvNWR3MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088142313489188&chInfo=ch_share__chsub_Weixin&apshareid=f33b8fe2-57ba-468b-8179-708d640216c0",
+                "url_lm": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODMwMjgyNjc0MjM5NDE2MzF4dkFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088302826742394&chInfo=ch_share__chsub_Weixin&apshareid=984B5380-ACCD-4099-B658-FAE3E8F5D384",
+                "url_lp": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjQ1NTc3NTMzOTFsYnNoM0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802455775339&chInfo=ch_share__chsub_Weixin&apshareid=D4E9A701-E6F4-4622-A775-0AA2DF4C3E00",
+            }
             // if (dev_model == dev_mate30) { url1 = url_redmi; url2 = url_honor; url3 = url_lm; }
             // else if (dev_model == dev_honor8) { url1 = url_mate30; url2 = url_redmi; url3 = url_lm; }
             // else if (dev_model == dev_redmi) { url1 = url_mate30; url2 = url_honor; url3 = url_lm; }
-            [url_mate30, url_redmi, url_honor, url_lm, url_lp].forEach(jump_url => {
+            Object.keys(url_dict).forEach(obj_key => {
+                jump_url = url_dict[obj_key];
                 func.to_scheme(jump_url);
-                toastLog("已跳转URL");
+                toastLog("已跳转URL," + obj_key);
                 text("为Ta助力").findOne();
                 toastLog("已找到，为Ta助力");
                 sleep(2500);
                 while (text("为Ta助力").findOnce() != null) {
                     func.sClick(text("为Ta助力").findOnce());
-                    toastLog("点击 为Ta助力 失败");
                     sleep(2500);
                 }
                 toastLog("已点击，为Ta助力");
