@@ -20,7 +20,7 @@ url_dict = "cb895525e54c56e009b24face50d5a814ba088";
 
 jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=YCQC5KqI8pcwIWRdZoUtoV1TkoIVm_064LWtTUNvKIg&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}'
 
-极速版挖宝()
+log(text("¥").depth(16).findOnce());
 
 function 极速版挖宝() {
     func.to_scheme(cfg["url_scheme"]["京东"]["极速版挖宝"]);

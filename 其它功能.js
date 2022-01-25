@@ -462,12 +462,22 @@ function jd() {
             back();
             textContains("元微信现金恭喜").findOne();
             let scroll_bar, bar_parent, click_parent;
-            let item, exflag;
+            let item, ex_flag, ex_count;
+            ex_count = 0;
             // text = "本场奖励已领取完哦～"
             while (1) {
-                exflag = true;
+                ex_flag = true;
                 try {
-                    scroll_bar = text("¥").depth(16).findOne();
+                    scroll_bar = text("¥").depth(16).findOnce();
+                    if (scroll_bar == null) {
+                        if (ex_count > 6) {
+                            toastLog("查找钱币符号超时，表示已完成");
+                            break;
+                        }
+                        ex_count = ex_count + 1;
+                        sleep(1000);
+                        continue;
+                    }
                     bar_parent = scroll_bar.parent().parent();
                     click_parent = bar_parent.child(bar_parent.childCount() - 1).child(0).child(0);
                     log("click_parent.childCount():" + click_parent.childCount());
@@ -476,8 +486,9 @@ function jd() {
                         log("item.childCount():" + item.childCount());
                         if (item.childCount() == 1) {
                             func.sClick(item.child(0));
-                            sleep(2500);
-                            exflag = false;
+                            toastLog("已点击...");
+                            sleep(3500);
+                            ex_flag = false;
                         } else {
                             continue;
                         }
@@ -486,7 +497,8 @@ function jd() {
                 catch (e) {
                     continue;
                 }
-                if (exflag) {
+                ex_count = 0;
+                if (ex_flag) {
                     break;
                 }
             }
