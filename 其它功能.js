@@ -131,7 +131,7 @@ function 芭芭农场() {
         },
         unitl_in_mission_view: function () {
             let tb_ele, zfb_ele;
-            while (!func_obj.in_mission_view()) {
+            while (!func_in_func.in_mission_view()) {
                 // if (text("最近你的队友都有努力种树哦").findOnce() != null) {}
                 func.sClick(text("继续努力").findOnce());
                 // if (textContains("亲密度达到了").textEndsWith("获得了亲密度奖励").findOnce() != null) {}
@@ -462,6 +462,7 @@ function 京东() {
             return (save_path + dt.getFullYear().toString() + monthes + dates + "-" + hours + minutes + seconds + ".png");
         },
         clip_text_jump: function (target_app) {
+            func.to_autojs();
             let clip_text = getClip();
             if (clip_text == "") {
                 alert("剪贴板为空，");
