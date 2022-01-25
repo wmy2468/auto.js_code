@@ -20,52 +20,8 @@ url_dict = "cb895525e54c56e009b24face50d5a814ba088";
 
 jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=YCQC5KqI8pcwIWRdZoUtoV1TkoIVm_064LWtTUNvKIg&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}'
 
-log(text("¥").depth(16).findOnce());
 
-function 极速版挖宝() {
-    func.to_scheme(cfg["url_scheme"]["京东"]["极速版挖宝"]);
-    while (textContains("元微信现金恭喜").findOnce() == null) {
-        toastLog("等待加载...");
-        sleep(2500);
-    }
-    toastLog("挖宝界面已加载...");
-    sleep(2500);
-    func.sClick(text("玩一玩").findOne());
-    toastLog("点击玩一玩 增加生命...");
-    sleep(6000);
-    back();
-    textContains("元微信现金恭喜").findOne();
-    let scroll_bar, bar_parent, click_parent;
-    let item, exflag;
-    // text = "本场奖励已领取完哦～"
-    while (1) {
-        exflag = true;
-        try {
-            scroll_bar = text("¥").depth(16).findOne();
-            bar_parent = scroll_bar.parent().parent();
-            click_parent = bar_parent.child(bar_parent.childCount() - 1).child(0).child(0);
-            log("click_parent.childCount():" + click_parent.childCount());
-            for (let i = 0; i < click_parent.childCount(); i++) {
-                item = click_parent.child(i);
-                log("item.childCount():" + item.childCount());
-                if (item.childCount() == 1) {
-                    func.sClick(item.child(0));
-                    sleep(2500);
-                    exflag = false;
-                } else {
-                    continue;
-                }
-            }
-        }
-        catch (e) {
-            continue;
-        }
-        if (exflag) {
-            break;
-        }
-    }
-}
-
+log(getClip() == "")
 // app.startActivity({
 //     package: "com.jingdong.app.mall",
 //     data: jsb,

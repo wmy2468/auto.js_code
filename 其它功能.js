@@ -2,23 +2,23 @@ auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
 var cfg = func.config_dict();
-var dev_model = device.model;
-var dev_mate30, dev_honor8, dev_redmi;
-dev_mate30 = "TAS-AL00";
-dev_honor8 = "FRD-AL00";
-dev_redmi = "Redmi Note 7";
+// var dev_model = device.model;
+// var dev_mate30, dev_honor8, dev_redmi;
+// dev_mate30 = "TAS-AL00";
+// dev_honor8 = "FRD-AL00";
+// dev_redmi = "Redmi Note 7";
 
 main();
 // toastLog(text("领取奖励").find().length);
 function main() {
     let select_func;
-    let selectedArr = ["万商3比", "ZFB相关", "JD相关", "YSF相关", "跳转指定Scheme"];
+    let selectedArr = ["万商3比", "支付宝相关", "JD相关", "YSF相关", "跳转指定Scheme"];
     //---------------配置区域-----------------
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行财富季") { 建行财富季(); }
-    else if (scriptName == "ZFB相关") {
-        select_func = func.dialogs_select(["芭芭农场-小号互助", "芭芭农场-支付宝淘宝浏览", "芭芭农场-淘宝施肥", "ZFB捐款", "余额宝转出", "余额宝转入"]);
-        if (select_func == "ZFB捐款") { 支付宝().ZFB捐款(); }
+    else if (scriptName == "支付宝相关") {
+        select_func = func.dialogs_select(["芭芭农场-小号互助", "芭芭农场-支付宝淘宝浏览", "芭芭农场-淘宝施肥", "支付宝捐款", "余额宝转出", "余额宝转入"]);
+        if (select_func == "支付宝捐款") { 支付宝().支付宝捐款(); }
         else if (select_func == "余额宝转入") { 支付宝().余额宝转入(); }
         else if (select_func == "余额宝转出") { 支付宝().余额宝转出(); }
         else if (select_func == "芭芭农场-小号互助") { 芭芭农场().zfb助力(); 芭芭农场().tb助力(); }
@@ -26,21 +26,23 @@ function main() {
         else if (select_func == "芭芭农场-淘宝施肥") { 芭芭农场().tb施肥(); }
     }
     else if (scriptName == "JD相关") {
-        select_func = func.dialogs_select(["京东评价"]);
-        if (select_func == "极速版挖宝") { jd().极速版挖宝(); }
-        else if (select_func == "京东评价") { jd().京东评价(); }
+        select_func = func.dialogs_select(["京东评价", "跳转京东_剪贴板", "跳转极速版_剪贴板"]);
+        if (select_func == "极速版挖宝") { 京东().极速版挖宝(); }
+        else if (select_func == "跳转京东_剪贴板") { 京东().跳转京东_剪贴板(); }
+        else if (select_func == "跳转极速版_剪贴板") { 京东().跳转极速版_剪贴板(); }
+        else if (select_func == "京东评价") { 京东().京东评价(); }
     }
     else if (scriptName == "YSF相关") {
         select_func = func.dialogs_select(["YSF福气助力"]);
-        if (select_func == "YSF福气助力") { ysf().YSF福气助力(); }
+        if (select_func == "YSF福气助力") { 云闪付().YSF福气助力(); }
     }
     else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
     else if (scriptName == "万商3比") { 万商3比(); }
     alert("已完成...");
 }
 
-function ysf() {
-    let obj = {
+function 云闪付() {
+    let func_obj = {
         YSF福气助力: function () {
             let url_head, url_end;
             url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3D";
@@ -85,11 +87,11 @@ function ysf() {
             alert("已完成");
         }
     }
-    return obj;
+    return func_obj;
 }
 
 function 芭芭农场() {
-    let obj = {
+    let func_in_func = {
         zfb_element: function () {
             let btn;
             btn = className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).find();
@@ -129,7 +131,7 @@ function 芭芭农场() {
         },
         unitl_in_mission_view: function () {
             let tb_ele, zfb_ele;
-            while (!obj.in_mission_view()) {
+            while (!func_obj.in_mission_view()) {
                 // if (text("最近你的队友都有努力种树哦").findOnce() != null) {}
                 func.sClick(text("继续努力").findOnce());
                 // if (textContains("亲密度达到了").textEndsWith("获得了亲密度奖励").findOnce() != null) {}
@@ -137,14 +139,14 @@ function 芭芭农场() {
                 toastLog("请手动跳转到农场任务界面");
                 sleep(3000);
                 try {
-                    zfb_ele = obj.zfb_element();
+                    zfb_ele = func_obj.zfb_element();
                     if (zfb_ele != null) {
                         // log(zfb_ele);
                         // click(device.width / 2, zfb_ele.centerY());
                         func.sClick(zfb_ele);
                         sleep(2000);
                     }
-                    tb_ele = obj.tb_element();
+                    tb_ele = func_obj.tb_element();
                     if (tb_ele != null) {
                         func.sClick(tb_ele.parent().child(2));
                         sleep(2000);
@@ -160,7 +162,7 @@ function 芭芭农场() {
             toastLog("已滑动，等待15秒");
             sleep(17000);
             toastLog("完成，准备返回");
-            while (obj.in_mission_view() == false) {
+            while (func_obj.in_mission_view() == false) {
                 back();
                 sleep(4000);
             }
@@ -168,7 +170,7 @@ function 芭芭农场() {
         },
     }
     // 支付宝
-    let work = {
+    let func_obj = {
         tb: function (lucky_bag) {
             let click_text;
             click_text = ["去浏览", "去完成", "去逛逛"];
@@ -177,7 +179,7 @@ function 芭芭农场() {
             step = 1;
             func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
             sleep(2500);
-            obj.unitl_in_mission_view();
+            func_in_func.unitl_in_mission_view();
             if (lucky_bag == undefined) {
                 todo_idx = 8;
             } else {
@@ -204,7 +206,7 @@ function 芭芭农场() {
                 log("todo_detail_text=" + todo_detail_text);
                 if (click_text.indexOf(todo_btn_text) != -1) {
                     if (lucky_bag == undefined) {
-                        if (!obj.arr_in_text(todo_text, ["秒"])) {
+                        if (!func_in_func.arr_in_text(todo_text, ["秒"])) {
                             continue_flag = true;
                         }
                     } else {
@@ -220,14 +222,14 @@ function 芭芭农场() {
                         continue;
                     }
                     func.sClick(todo_btn);
-                    while (obj.in_mission_view()) { toastLog("等待任务视图消失"); sleep(2500); }
+                    while (func_in_func.in_mission_view()) { toastLog("等待任务视图消失"); sleep(2500); }
                     toastLog("Mission 视图已消失");
                     if (todo_detail_text == "逛逛'买多少返多少'(0/1)" || todo_detail_text == "浏览天天领现金(0/1)") {
                         toastLog("找到买返 红包");
                         func.sClick(text("打开链接").findOne());
                         sleep(3000);
                     }
-                    obj.view_15_second();
+                    func_in_func.view_15_second();
                     sleep(2500);
                 } else {
                     todo_idx = todo_idx + step;
@@ -242,7 +244,7 @@ function 芭芭农场() {
             func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
             let btn_ele = null;
             while (btn_ele == null) {
-                btn_ele = obj.tb_element();
+                btn_ele = func_in_func.tb_element();
                 if (btn_ele != null) {
                     break;
                 } else {
@@ -269,7 +271,7 @@ function 芭芭农场() {
             let todo_text, todo_btn, todo_idx, step, todo_btn_text;
             todo_idx = 1;
             step = 4
-            obj.unitl_in_mission_view();
+            func_in_func.unitl_in_mission_view();
             sleep(2000);
             while (1) {
                 views = className("android.view.View").scrollable(true).findOnce();
@@ -279,12 +281,12 @@ function 芭芭农场() {
                 todo_btn = views.child(todo_idx + 3).child(0);
                 todo_btn_text = todo_btn.text();
                 todo_text = views.child(todo_idx + 2).text();
-                if (obj.arr_in_text(todo_text, ["秒"]) && click_text.indexOf(todo_btn_text) != -1) {
+                if (func_in_func.arr_in_text(todo_text, ["秒"]) && click_text.indexOf(todo_btn_text) != -1) {
                     log(todo_text);
                     func.sClick(todo_btn);
-                    while (obj.in_mission_view()) { toastLog("等待任务视图消失"); sleep(2500); }
+                    while (func_in_func.in_mission_view()) { toastLog("等待任务视图消失"); sleep(2500); }
                     toastLog("Mission 视图已消失");
-                    obj.view_15_second();
+                    func_in_func.view_15_second();
                     sleep(2500);
                 } else {
                     todo_idx = todo_idx + step;
@@ -332,11 +334,7 @@ function 芭芭农场() {
             url_honor = "1 666:/微生起以么他之得年可么他嘻";
             url_lm = "7 2:/！她出她着他之天里家以那哈";
 
-            let url1, url2, url3, btn_detail, help_for;
-            if (dev_model == dev_mate30) { url1 = url_redmi; url2 = url_honor; url3 = url_lm; }
-            else if (dev_model == dev_honor8) { url1 = url_mate30; url2 = url_redmi; url3 = url_lm; }
-            else if (dev_model == dev_redmi) { url1 = url_mate30; url2 = url_honor; url3 = url_lm; }
-            [url1, url2, url3].forEach(jump_url => {
+            [url_mate30, url_redmi, url_honor, url_lm].forEach(jump_url => {
                 setClip(jump_url);          // 设置剪贴板
                 toastLog("已跳转URL");
                 btn_detail = null;
@@ -368,8 +366,7 @@ function 芭芭农场() {
             })
         }
     }
-
-    return work;
+    return func_obj;
 }
 
 
@@ -435,7 +432,7 @@ function 万商3比() {
     alert("已完成,共计:" + sum / 10 + "元");
 }
 
-function jd() {
+function 京东() {
     let func_in_func = {
         rate_click: function (element) {
             if (element != null) {
@@ -445,10 +442,50 @@ function jd() {
                 return true;
             }
             return false;
-        }
+        },
+        path_date_string: function () {
+            let dev_brand = device.brand;
+            if (dev_brand == "HUAWEI" || dev_brand == "honor") { save_path = "/sdcard/Pictures/Screenshots/Screenshot_" }
+            else if (dev_brand == "xiaomi") { save_path = "/sdcard/DCIM/screenshots/IMG_" }
+            let dt, monthes, dates, hours, minutes, seconds;
+            dt = new Date();
+            monthes = dt.getMonth() + 1;
+            dates = dt.getDate();
+            hours = dt.getHours();
+            minutes = dt.getMinutes();
+            seconds = dt.getSeconds();
+            if (monthes < 10) { monthes = "0" + monthes } else { monthes = monthes.toString(); }
+            if (dates < 10) { dates = "0" + dates } else { dates = dates.toString(); }
+            if (hours < 10) { hours = "0" + hours } else { hours = hours.toString(); }
+            if (minutes < 10) { minutes = "0" + minutes } else { minutes = minutes.toString(); }
+            if (seconds < 10) { seconds = "0" + seconds } else { seconds = seconds.toString(); }
+            return (save_path + dt.getFullYear().toString() + monthes + dates + "-" + hours + minutes + seconds + ".png");
+        },
+        clip_text_jump: function (target_app) {
+            let clip_text = getClip();
+            if (clip_text == "") {
+                alert("剪贴板为空，");
+            } else {
+                log("剪贴板文本:" + clip_text);
+                let jump_url_st, jump_url_ed;
+                jump_url_ed = '"}'
+                if (target_app == "京东极速版") {
+                    jump_url_st = 'jdlite://virtual?params={"category":"jump","des":"m","url":"';
+                } else {
+                    // (target_app == "京东")
+                    jump_url_st = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"';
+                }
+                func.to_scheme(jump_url_st + clip_text + jump_url_ed);
+            }
+        },
     }
     let func_obj = {
-
+        跳转京东_剪贴板: function () {
+            func_in_func.clip_text_jump("京东");
+        },
+        跳转极速版_剪贴板: function () {
+            func_in_func.clip_text_jump("京东极速版");
+        },
         京东评价: function () {
             if (!requestScreenCapture()) {
                 toast("请求截图失败");
@@ -550,7 +587,7 @@ function jd() {
                         // 截屏
                         img = images.captureScreen();
                         img_clip = images.clip(img, x, y, width, height);
-                        file_path = path_date_string();
+                        file_path = func_in_func.path_date_string();
                         images.save(img_clip, file_path);
                         // app.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, android.net.Uri.fromFile(java.io.File(file_path))));        //刷新图库
                         media.scanFile(file_path);
@@ -652,34 +689,15 @@ function jd() {
     return func_obj;
 }
 
-function path_date_string() {
-    let dev_brand = device.brand;
-    if (dev_brand == "HUAWEI" || dev_brand == "honor") { save_path = "/sdcard/Pictures/Screenshots/Screenshot_" }
-    else if (dev_brand == "xiaomi") { save_path = "/sdcard/DCIM/screenshots/IMG_" }
-    let dt, monthes, dates, hours, minutes, seconds;
-    dt = new Date();
-    monthes = dt.getMonth() + 1;
-    dates = dt.getDate();
-    hours = dt.getHours();
-    minutes = dt.getMinutes();
-    seconds = dt.getSeconds();
-    if (monthes < 10) { monthes = "0" + monthes } else { monthes = monthes.toString(); }
-    if (dates < 10) { dates = "0" + dates } else { dates = dates.toString(); }
-    if (hours < 10) { hours = "0" + hours } else { hours = hours.toString(); }
-    if (minutes < 10) { minutes = "0" + minutes } else { minutes = minutes.toString(); }
-    if (seconds < 10) { seconds = "0" + seconds } else { seconds = seconds.toString(); }
-    return (save_path + dt.getFullYear().toString() + monthes + dates + "-" + hours + minutes + seconds + ".png");
-}
-
 
 function 跳转指定Scheme() {
-    let obj, obj_key;
-    obj = cfg["url_scheme"];
-    while (typeof (obj) != "string") {
-        obj_key = func.dialogs_select(Object.keys(obj));
-        obj = obj[obj_key];
+    let func_obj, obj_key;
+    func_obj = cfg["url_scheme"];
+    while (typeof (func_obj) != "string") {
+        obj_key = func.dialogs_select(Object.keys(func_obj));
+        func_obj = func_obj[obj_key];
     }
-    func.to_scheme(obj);
+    func.to_scheme(func_obj);
 
 }
 
@@ -724,7 +742,7 @@ function 支付宝() {
             }
             toastLog("已完成。。。");
         },
-        ZFB捐款: function () {
+        支付宝捐款: function () {
             var defaultCount, count, cardNum, banks;
             banks = func.dialogs_select(["渣打5比", "交行3比"])
             switch (banks) {
