@@ -12,7 +12,7 @@ main();
 
 function main() {
     let show_arr;
-    show_arr = ["京东_签到领豆", "京东_金融签到", "京东_金融双签", "京东_极速版领红包", "京东_陪伴计划签到",
+    show_arr = ["京东_签到领豆", "京东_金融签到", "京东_金融双签", "京东_极速版领红包", "京东_极速版挖宝", "京东_陪伴计划签到",
         "ysf_签到", "ysf_领取积点",
         "沃钱包_泡泡签到", "浦发_金豆签到", "浦发xyk_积分签到", "农行_小豆签到", "值得买_签到", "买单吧_签到", "工商_小象乐园"]
     let select_items = func.dialogs_checkbox(show_arr, "每日签到记录", "多选");
@@ -21,6 +21,7 @@ function main() {
         else if (item == "京东_金融签到") { 京东().金融签到(); }
         else if (item == "京东_金融双签") { 京东().金融双签(); }
         else if (item == "京东_极速版领红包") { 京东().极速版领红包(); }
+        else if (item == "京东_极速版挖宝") { 京东().京东极速版挖宝(); }
         else if (item == "京东_陪伴计划签到") { 京东().陪伴签到(); }
         else if (item == "ysf_签到") { 云闪付().签到(); }
         else if (item == "ysf_领取积点") { 云闪付().领积点(); }
@@ -476,6 +477,61 @@ function 京东() {
                     func.sClick(left_today.parent().parent());
                 }
                 sleep(2500);
+            }
+        },
+        极速版挖宝: function () {
+            func.to_scheme(cfg["url_scheme"]["京东"]["极速版挖宝"]);
+            while (textContains("元微信现金恭喜").findOnce() == null) {
+                toastLog("等待加载...");
+                sleep(2500);
+            }
+            toastLog("挖宝界面已加载...");
+            sleep(2500);
+            func.sClick(text("玩一玩").findOne());
+            toastLog("点击玩一玩 增加生命...");
+            sleep(6000);
+            back();
+            textContains("元微信现金恭喜").findOne();
+            let scroll_bar, bar_parent, click_parent;
+            let item, ex_flag, ex_count;
+            ex_count = 0;
+            // text = "本场奖励已领取完哦～"
+            while (1) {
+                ex_flag = true;
+                try {
+                    scroll_bar = text("¥").depth(16).findOnce();
+                    if (scroll_bar == null) {
+                        if (ex_count > 6) {
+                            toastLog("查找钱币符号超时，表示已完成");
+                            break;
+                        }
+                        ex_count = ex_count + 1;
+                        sleep(1000);
+                        continue;
+                    }
+                    bar_parent = scroll_bar.parent().parent();
+                    click_parent = bar_parent.child(bar_parent.childCount() - 1).child(0).child(0);
+                    log("click_parent.childCount():" + click_parent.childCount());
+                    for (let i = 0; i < click_parent.childCount(); i++) {
+                        item = click_parent.child(i);
+                        log("item.childCount():" + item.childCount());
+                        if (item.childCount() == 1) {
+                            func.sClick(item.child(0));
+                            toastLog("已点击...");
+                            sleep(3500);
+                            ex_flag = false;
+                        } else {
+                            continue;
+                        }
+                    }
+                }
+                catch (e) {
+                    continue;
+                }
+                ex_count = 0;
+                if (ex_flag) {
+                    break;
+                }
             }
         },
         签到领豆: function () {
