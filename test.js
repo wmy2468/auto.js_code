@@ -21,15 +21,22 @@ url_dict = "cb895525e54c56e009b24face50d5a814ba088";
 jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=YCQC5KqI8pcwIWRdZoUtoV1TkoIVm_064LWtTUNvKIg&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}'
 
 
-let a = function () {
-    log(1233);
-}
+log(random(10, 20))
 
-function b(dd) {
-    dd();
+function wait_element_load(load_elements, load_action) {
+    /**
+     * @param {dict} load_elements {text:'123', id:'456'}  定位是否加载的判断条件链
+     * @param {function} load_action {text:'123', id:'456'}  定位是否加载的判断条件链
+     */
+    this.load_elements = load_elements || {};
+    this.load_action = load_action || function () { };
+    let find_rules = '';
+    for (let k in load_elements) {
+        find_rules = find_rules + k + '("' + load_elements[k] + '").';
+    }
+    find_rules = find_rules + 'findOnce()';
+    log(find_rules);
 }
-
-b(a);
 
 
 超市签到 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://jdsupermarket.jd.com/game/?from=header"}'
@@ -1251,7 +1258,7 @@ function random_second(second, st, ed) {
     if (st >= ed) {
         return second;
     } else {
-        return func.randomNum(st, ed) + second;
+        return random(st, ed) + second;
     }
 }
 

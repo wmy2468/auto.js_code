@@ -967,7 +967,7 @@ function random_second(second, st, ed) {
 	if (st >= ed) {
 		return second;
 	} else {
-		return func.randomNum(st, ed) + second;
+		return random(st, ed) + second;
 	}
 }
 

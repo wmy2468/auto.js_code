@@ -63,7 +63,7 @@ function 万商3比() {
     func.to_app(appName);
     sum = 0;
     while (count > 0) {
-        inputVal = func.randomNum(min, max, digit = 1);
+        inputVal = random(min * 10, max * 10) / 10;
         sum = sum + inputVal * 10
         while (text("请输入收款金额").findOnce() == null) {
             func.sClick(id("home_qrcodepay").findOnce());

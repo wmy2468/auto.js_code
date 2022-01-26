@@ -1,9 +1,21 @@
 // 
-function wait_element_load(ele_located_chains, load_process_chains) {
+function wait_element_load(load_elements, load_action) {
     /**
-     * @param {dict} ele_located_chains {text:'123', id:'456'}  定位是否加载的判断条件链
-     * @param {dict} load_process_chains {text:'123', id:'456'}  定位是否加载的判断条件链
+     * @param {dict} load_elements {text:'123', id:'456'}  定位是否加载的判断条件链
+     * @param {function} load_action 定位是否加载的判断条件链
      */
+    this.load_elements = load_elements || {};
+    this.load_action = load_action || function () { };
+    let find_rules = '';
+    for (let k in load_elements) {
+        find_rules = find_rules + k + '("' + load_elements[k] + '").';
+    }
+    find_rules = find_rules + 'findOnce()';
+    while (eval(find_rules) == null) {
+        this.load_action();
+        toastLog("等待元素加载:" + load_elements);
+        sleep(2500);
+    }
 }
 
 
@@ -311,27 +323,6 @@ function gesture_pwd(appName) {
     }
     execStr = execStr + ")";
     engines.execScript("hello", execStr);
-}
-
-//生成从minNum到maxNum的随机数
-function randomNum(min, max, digit) {
-    /**
-    @param  min 最小数
-    @param  max, 最大数
-    @param  digit, 保留的小数位
-    */
-    let powNum;
-    // 如果没有digit参数，默认没有小数点
-    if (digit == undefined) {
-        digit = 0;
-    }
-    switch (digit) {
-        case 0:
-            return Math.floor((Math.random() * (max - min) + min));
-        default:
-            powNum = Math.pow(10, digit);
-            return Math.floor((Math.random() * (max - min) + min) * powNum) / powNum;
-    }
 }
 // -----------通用功能区------------------
 function floatyMove(window, view, clickAction) {
@@ -747,7 +738,7 @@ module.exports = {
     // huaweiUnlock: huaweiUnlock,
     // xiaomiUnlock: xiaomiUnlock,
     gesture_pwd: gesture_pwd,
-    randomNum: randomNum,
+    wait_element_load: wait_element_load,
     getTimeDiff: getTimeDiff,
     calTimeDiff: calTimeDiff,
     dialogs_select: dialogs_select,

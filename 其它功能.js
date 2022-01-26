@@ -84,7 +84,6 @@ function 云闪付() {
                 toastLog("助力完成,等待下一个...");
                 sleep(3000);
             })
-            alert("已完成");
         }
     }
     return func_obj;
@@ -405,7 +404,7 @@ function 万商3比() {
     func.to_app(appName);
     sum = 0;
     while (count > 0) {
-        inputVal = func.randomNum(min, max, digit = 1);
+        inputVal = random(min * 10, max * 10) / 10;
         sum = sum + inputVal * 10
         while (text("请输入收款金额").findOnce() == null) {
             func.sClick(id("home_qrcodepay").findOnce());
@@ -818,185 +817,184 @@ function 支付宝() {
     return zfb;
 }
 // -----------------------建行财富季-----------------------
-function 建行财富季() {
-    func.to_appMulti("微信", 1);
-    龙支付_戳泡泡();
-    // 龙支付_日常任务();
-    func.to_appMulti("微信", 2);
-    龙支付_戳泡泡();
-    // 龙支付_日常任务();
-    // 日常任务
-    // 消保 答题
-    // 外汇答题
-    // 消保 眼力
-}
+// function 建行财富季() {
+//     func.to_appMulti("微信", 1);
+//     龙支付_戳泡泡();
+//     // 龙支付_日常任务();
+//     func.to_appMulti("微信", 2);
+//     龙支付_戳泡泡();
+//     // 龙支付_日常任务();
+//     // 日常任务
+//     // 消保 答题
+//     // 外汇答题
+//     // 消保 眼力
+// }
 
-function 龙支付_日常任务() {
-    var checkText = "每日签到涨财富";
-    var see, seeText;
-    seeText = "去完成";
-    while (text(checkText).findOnce() == null) {
-        toastLog("请跳转到龙支付 每日签到涨财富 界面");
-        sleep(2000);
-    }
-    func.sClick(text("立即签到").findOnce());
-    toastLog("已到达 龙支付 每日签到涨财富 界面");
-    sleep(2000);
-    see = text(seeText).find();
-    while (see.nonEmpty()) {
-        // 判断除邀请任务外是否都已经完成
-        if (see.length > 1) {
-            func.sClick(see[0]);                // 点击第一个元素
-            // 如果还能找到 每日签到涨财富,则等待
-            while (text(checkText).findOnce() != null) {
-                sleep(800);
-            }
-            log("LZF 每日签到涨财富 已消失");
-            sleep(2000);
-            back();
-            sleep(2500);                        // 返回
-            // 检查是否已返回
-            while (text(checkText).findOnce() == null) {
-                if (func.sClick(text("拒绝").findOnce())) { sleep(2000); }
-                if (func.sClick(text("否").findOnce())) { sleep(2000); }
-                back();
-                sleep(3000);
-            }
-            sleep(800);
-            log("LZF 每日签到涨财富 已找到");
-            func.sClick(text("领取奖励").findOne());   // 点击领取奖励
-            sleep(5000);
-            see = text(seeText).find();        // 重新检索
-        } else {
-            break;
-        }
-    }
-    toastLog(checkText + "，已完成！");
-}
+// function 龙支付_日常任务() {
+//     var checkText = "每日签到涨财富";
+//     var see, seeText;
+//     seeText = "去完成";
+//     while (text(checkText).findOnce() == null) {
+//         toastLog("请跳转到龙支付 每日签到涨财富 界面");
+//         sleep(2000);
+//     }
+//     func.sClick(text("立即签到").findOnce());
+//     toastLog("已到达 龙支付 每日签到涨财富 界面");
+//     sleep(2000);
+//     see = text(seeText).find();
+//     while (see.nonEmpty()) {
+//         // 判断除邀请任务外是否都已经完成
+//         if (see.length > 1) {
+//             func.sClick(see[0]);                // 点击第一个元素
+//             // 如果还能找到 每日签到涨财富,则等待
+//             while (text(checkText).findOnce() != null) {
+//                 sleep(800);
+//             }
+//             log("LZF 每日签到涨财富 已消失");
+//             sleep(2000);
+//             back();
+//             sleep(2500);                        // 返回
+//             // 检查是否已返回
+//             while (text(checkText).findOnce() == null) {
+//                 if (func.sClick(text("拒绝").findOnce())) { sleep(2000); }
+//                 if (func.sClick(text("否").findOnce())) { sleep(2000); }
+//                 back();
+//                 sleep(3000);
+//             }
+//             sleep(800);
+//             log("LZF 每日签到涨财富 已找到");
+//             func.sClick(text("领取奖励").findOne());   // 点击领取奖励
+//             sleep(5000);
+//             see = text(seeText).find();        // 重新检索
+//         } else {
+//             break;
+//         }
+//     }
+//     toastLog(checkText + "，已完成！");
+// }
 
-function 龙支付攒财富_浏览(keyWord) {
+// function 龙支付攒财富_浏览(keyWord) {
 
-    var checkText = "龙支付5周年 “5”限畅享";
-    var see, seeText, refreshCnt;
-    refreshCnt = 0;
-    seeText = "去看看";
-    // 如果没找到则刷新一下
-    while (text(seeText).findOnce() == null) {
-        WX_刷新();
-        refreshCnt = refreshCnt + 1;
-        if (refreshCnt > 3) {
-            break;
-        }
-    }
-    // 避免bug，刷新3次
-    see = text(seeText).find();
-    while (see.nonEmpty()) {
-        func.sClick(see[0]);       // 点击最后一个去看看
-        // 如果还能找到 龙支付分会场,则等待
-        while (text(checkText).findOnce() != null) {
-            sleep(800);
-        }
-        toastLog("LZF 会场 已消失");
-        sleep(2200);
-        back();                             // 返回
-        // 检查是否已返回
-        while (text(checkText).findOnce() == null) {
-            // 如果点击了 获取位置的否，需要等待1秒，再返回
-            if (func.sClick(text("否").findOnce()) == true) {
-                sleep(1000);
-                back();
-            }
-        }
-        sleep(1000);
-        log("LZF 会场 已找到");
-        if (keyWord != undefined) {
-            func.sClick(text(keyWord).findOne());   // 点击关键字
-        }
-        sleep(1500);
-        see = text(seeText).find();        // 重新检索
-    }
-}
+//     var checkText = "龙支付5周年 “5”限畅享";
+//     var see, seeText, refreshCnt;
+//     refreshCnt = 0;
+//     seeText = "去看看";
+//     // 如果没找到则刷新一下
+//     while (text(seeText).findOnce() == null) {
+//         WX_刷新();
+//         refreshCnt = refreshCnt + 1;
+//         if (refreshCnt > 3) {
+//             break;
+//         }
+//     }
+//     // 避免bug，刷新3次
+//     see = text(seeText).find();
+//     while (see.nonEmpty()) {
+//         func.sClick(see[0]);       // 点击最后一个去看看
+//         // 如果还能找到 龙支付分会场,则等待
+//         while (text(checkText).findOnce() != null) {
+//             sleep(800);
+//         }
+//         toastLog("LZF 会场 已消失");
+//         sleep(2200);
+//         back();                             // 返回
+//         // 检查是否已返回
+//         while (text(checkText).findOnce() == null) {
+//             // 如果点击了 获取位置的否，需要等待1秒，再返回
+//             if (func.sClick(text("否").findOnce()) == true) {
+//                 sleep(1000);
+//                 back();
+//             }
+//         }
+//         sleep(1000);
+//         log("LZF 会场 已找到");
+//         if (keyWord != undefined) {
+//             func.sClick(text(keyWord).findOne());   // 点击关键字
+//         }
+//         sleep(1500);
+//         see = text(seeText).find();        // 重新检索
+//     }
+// }
 
-function 龙支付_戳泡泡() {
+// function 龙支付_戳泡泡() {
 
-    var checkText = "龙支付5周年 “5”限畅享";
-    while (text(checkText).findOnce() == null) {
-        toastLog("请跳转到龙支付 攒财富 界面");
-        sleep(2000);
-    }
-    toastLog("已到达 龙支付 攒财富 界面");
-    sleep(2000);
-    龙支付攒财富_浏览();
-    // 切换到主会场
-    // var refresh, main_place;
-    // refresh = true;
-    // sleep(1000);
-    // while (text("每日签到涨财富").findOnce() == null) {
-    //     main_place = textEndsWith("次机会 >").findOnce();
-    //     if (main_place != null) {
-    //         if (func.sClick(main_place.parent().child(1))) {
-    //             toastLog("已点击 主会场 按钮，等待切换");
-    //             refresh = false;
-    //             sleep(4000);
-    //         }
-    //     } else {
-    //         if (refresh) {
-    //             WX_刷新();
-    //         }
-    //     }
-    //     // func.sClick(className("android.view.View").text("/").depth(22).findOnce());
-    //     if (func.sClick(text("做任务").findOnce())) {
-    //         refresh = false;
-    //     }
-    //     sleep(2000);
-    // }
-    sleep(1000);
-}
+//     var checkText = "龙支付5周年 “5”限畅享";
+//     while (text(checkText).findOnce() == null) {
+//         toastLog("请跳转到龙支付 攒财富 界面");
+//         sleep(2000);
+//     }
+//     toastLog("已到达 龙支付 攒财富 界面");
+//     sleep(2000);
+//     龙支付攒财富_浏览();
+//     // 切换到主会场
+//     // var refresh, main_place;
+//     // refresh = true;
+//     // sleep(1000);
+//     // while (text("每日签到涨财富").findOnce() == null) {
+//     //     main_place = textEndsWith("次机会 >").findOnce();
+//     //     if (main_place != null) {
+//     //         if (func.sClick(main_place.parent().child(1))) {
+//     //             toastLog("已点击 主会场 按钮，等待切换");
+//     //             refresh = false;
+//     //             sleep(4000);
+//     //         }
+//     //     } else {
+//     //         if (refresh) {
+//     //             WX_刷新();
+//     //         }
+//     //     }
+//     //     // func.sClick(className("android.view.View").text("/").depth(22).findOnce());
+//     //     if (func.sClick(text("做任务").findOnce())) {
+//     //         refresh = false;
+//     //     }
+//     //     sleep(2000);
+//     // }
+//     sleep(1000);
+// }
 
-function 龙支付_攒财富() {
-    var checkText = "龙支付5周年 “5”限畅享";
-    var keyList;
-    keyList = ["在路上", "商超日", "乐活日"];
-    while (text(checkText).findOnce() == null) {
-        toastLog("请跳转到龙支付 攒财富 界面");
-        sleep(2000);
-    }
-    toastLog("已到达 龙支付 攒财富 界面");
-    sleep(2000);
-    keyList.forEach(keyWord => {
-        func.sClick(text(keyWord).findOne());   // 点击关键字
-        sleep(2000);
-        龙支付攒财富_浏览(keyWord);
-    })
-    // 切换到主会场
-    var refresh;
-    refresh = true;
-    sleep(1000);
-    while (text("每日签到涨财富").findOnce() == null) {
-        if (func.sClick(text("btn_1").findOnce())) {
-            toastLog("已点击 主会场 按钮，等待切换");
-            refresh = false;
-            sleep(4000);
-        } else {
-            if (refresh) {
-                WX_刷新();
-            }
-        }
-        // func.sClick(className("android.view.View").text("/").depth(22).findOnce());
-        if (func.sClick(text("做任务").findOnce())) {
-            refresh = false;
-        }
-        sleep(2000);
-    }
-    sleep(1000);
-}
-// -----------------------建行财富季-----------------------
-
-function WX_刷新() {
-    toastLog("刷新");
-    // func.sClick(id("com.tencent.mm:id/kl1").findOne());
-    func.sClick(desc("更多信息").findOne());
-    sleep(2000);
-    func.sClick(text("刷新").findOne());
-    sleep(2000);
-}
+// function 龙支付_攒财富() {
+//     var checkText = "龙支付5周年 “5”限畅享";
+//     var keyList;
+//     keyList = ["在路上", "商超日", "乐活日"];
+//     while (text(checkText).findOnce() == null) {
+//         toastLog("请跳转到龙支付 攒财富 界面");
+//         sleep(2000);
+//     }
+//     toastLog("已到达 龙支付 攒财富 界面");
+//     sleep(2000);
+//     keyList.forEach(keyWord => {
+//         func.sClick(text(keyWord).findOne());   // 点击关键字
+//         sleep(2000);
+//         龙支付攒财富_浏览(keyWord);
+//     })
+//     // 切换到主会场
+//     var refresh;
+//     refresh = true;
+//     sleep(1000);
+//     while (text("每日签到涨财富").findOnce() == null) {
+//         if (func.sClick(text("btn_1").findOnce())) {
+//             toastLog("已点击 主会场 按钮，等待切换");
+//             refresh = false;
+//             sleep(4000);
+//         } else {
+//             if (refresh) {
+//                 WX_刷新();
+//             }
+//         }
+//         // func.sClick(className("android.view.View").text("/").depth(22).findOnce());
+//         if (func.sClick(text("做任务").findOnce())) {
+//             refresh = false;
+//         }
+//         sleep(2000);
+//     }
+//     sleep(1000);
+// }
+// // -----------------------建行财富季-----------------------
+// function WX_刷新() {
+//     toastLog("刷新");
+//     // func.sClick(id("com.tencent.mm:id/kl1").findOne());
+//     func.sClick(desc("更多信息").findOne());
+//     sleep(2000);
+//     func.sClick(text("刷新").findOne());
+//     sleep(2000);
+// }
