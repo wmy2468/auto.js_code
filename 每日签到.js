@@ -12,9 +12,11 @@ main();
 
 function main() {
     let show_arr;
-    show_arr = ["京东_签到领豆", "京东_金融签到", "京东_金融双签", "京东_极速版领红包", "京东_极速版挖宝", "京东_陪伴计划签到",
+    show_arr = ["京东_签到领豆", "京东_金融签到", "京东_金融双签", "京东_种豆得豆", "京东_个护签到", "京东_陪伴计划签到",
+        "京东_极速版领红包", "京东_极速版挖宝",
         "ysf_签到", "ysf_领取积点",
-        "沃钱包_泡泡签到", "浦发_金豆签到", "浦发xyk_积分签到", "农行_小豆签到", "值得买_签到", "买单吧_签到", "工商_小象乐园"]
+        "工商_小象乐园",
+        "沃钱包_泡泡签到", "浦发_金豆签到", "浦发xyk_积分签到", "农行_小豆签到", "值得买_签到", "买单吧_签到"]
     let select_items = func.dialogs_checkbox(show_arr, "每日签到记录", "多选");
     select_items.forEach(item => {
         if (item == "京东_签到领豆") { 京东().签到领豆(); }
@@ -23,15 +25,20 @@ function main() {
         else if (item == "京东_极速版领红包") { 京东().极速版领红包(); }
         else if (item == "京东_极速版挖宝") { 京东().极速版挖宝(); }
         else if (item == "京东_陪伴计划签到") { 京东().陪伴签到(); }
+        else if (item == "京东_种豆得豆") { 京东().种豆得豆(); }
+        else if (item == "京东_个护签到") { 京东().个护签到(); }
+
         else if (item == "ysf_签到") { 云闪付().签到(); }
         else if (item == "ysf_领取积点") { 云闪付().领积点(); }
+        else if (item == "工商_小象乐园") { 工商_小象乐园(); }
+
         else if (item == "沃钱包_泡泡签到") { 沃钱包(); }
         else if (item == "浦发_金豆签到") { 浦发_金豆签到(); }
         else if (item == "浦发xyk_积分签到") { 浦发xyk_积分签到(); }
         else if (item == "农行_小豆签到") { 农行_小豆签到(); }
         else if (item == "值得买_签到") { 值得买_签到(); }
         else if (item == "买单吧_签到") { 买单吧_签到(); }
-        else if (item == "工商_小象乐园") { 工商_小象乐园(); }
+
     });
     alert("已完成.");
 }
@@ -448,6 +455,26 @@ function 浦发_金豆签到() {
 }
 
 function 京东() {
+    let func_in_func = {
+        common_sign: function (jump_url, wait_element_load, complete_element, click_elements) {
+            /** 
+            * @param {String} jump_url 跳转app的data url
+            * @param {String} wait_element_load 判断是否加载的 文本 语句，用eval执行，
+            * @param {String} complete_element 判断是否完成的 文本 语句，用eval执行
+            * @param {Function} click_elements 跳转app的data url
+            */
+            func.to_scheme(jump_url);       //跳转app
+            while (eval(wait_element_load) == null) {
+                toast("等待 活动开始页面 加载...");
+                sleep(2500);
+            }
+            while (eval(complete_element) == null) {
+                click_elements();
+                toast("等待 完成页面 加载...");
+                sleep(2500);
+            }
+        },
+    }
     let func_obj = {
         极速版领红包: function () {
             func.to_scheme(cfg["url_scheme"]["京东"]["极速版领红包"]);
@@ -574,21 +601,12 @@ function 京东() {
             // }
         },
         陪伴签到: function () {
-            let signed, unsign, txt1, txt2;
-            txt1 = "陪伴频道签到赚京豆";
-            txt2 = "活动规则";
-            signed = "今日已签";
-            unsign = "签到";
-            func.to_scheme(cfg["url_scheme"]["京东"]["陪伴计划"]);
-            while (!(text(txt1).findOnce() != null && text(txt2).findOnce() != null)) {
-                sleep(800);
+            let jump_url = cfg["url_scheme"]["京东"]["陪伴计划"];
+            let click_func = function () {
+                func.sClick(text("签到").findOnce());
             }
-            sleep(3500);
-            if (text(signed).findOnce() == null) {
-                func.sClick(text(unsign).findOnce());
-            }
-            toastLog("已签到");
-            sleep(3000);
+            func_in_func.common_sign(jump_url, wait_element_load = 'textContains("陪伴频道签到赚京豆").findOnce()',
+                complete_element = 'textContains("今日已签").findOnce()', click_func);
         },
         金融签到: function () {
             func.to_scheme(cfg["url_scheme"]["京东金融"]["金融签到"]);
@@ -639,24 +657,25 @@ function 京东() {
             toastLog("双签奖励已领取");
             sleep(3000);
         },
-        common_sign: function (jump_url, wait_load_element, complete_element, click_element) {
-            /** 
-            * @param {String} jump_url 跳转app的data url
-            * @param {String} wait_load_element 判断是否加载的 文本 语句，用eval执行，
-            * @param {Array} complete_element 判断是否完成的 文本 语句，用eval执行
-            * @param {Function} click_element 跳转app的data url
-            */
-            func.to_scheme(jump_url);       //跳转app
-            while (eval(wait_load_element) == null) {
-                toast("等待页面元素加载...");
-                sleep(2500);
+        种豆得豆: function () {
+            let jump_url = cfg["url_scheme"]["京东"]["种豆得豆"];
+            let click_func = function () {
+                let beans_bottle;
+                beans_bottle = textContains("x").find();
+                if (beans_bottle.nonEmpty()) {
+                    beans_bottle.forEach(beans => { func.sClick(beans); sleep(1500) })
+                }
             }
-            while (eval(complete_element) == null) {
-                click_element();
-                toast("等待页面元素加载...");
-                sleep(2500);
+            func_in_func.common_sign(jump_url, wait_element_load = 'textContains("豆苗成长值").findOnce()',
+                complete_element = 'textContains("x0").findOnce()', click_func);
+        },
+        个护签到: function () {
+            let jump_url = cfg["url_scheme"]["京东"]["个护签到"];
+            let click_func = function () {
+                func.sClick(text("立即翻牌").findOnce());
             }
-
+            func_in_func.common_sign(jump_url, wait_element_load = 'textContains("个护签到领京豆").findOnce()',
+                complete_element = 'textContains("今日已签").findOnce()', click_func);
         },
     }
 

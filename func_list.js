@@ -52,6 +52,8 @@ function config_dict() {
                 "京喜_券": 'openapp.jdpingou://virtual?params={"des":"m","category":"jump","url":"replace_url"}',
                 "领京豆": 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com"}',
                 "领券中心": 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://coupon.m.jd.com/center/getCouponCenter.action"}',
+                "种豆得豆": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/plantBean/index.action"}',
+                "个护签到": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/mall/active/2tZssTgnQsiUqhmg5ooLSHY9XSeN/index.html#/"}',
                 "评价中心": 'openApp.jdMobile://virtual?params={"des":"commentCenter","business":"1","category":"jump"}',
             },
             "京东金融": {

@@ -21,47 +21,14 @@ url_dict = "cb895525e54c56e009b24face50d5a814ba088";
 jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=YCQC5KqI8pcwIWRdZoUtoV1TkoIVm_064LWtTUNvKIg&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}'
 
 
-log(typeof (wait_element_load))
-
-cc();
-
-
-function cc() {
-    let str = 'if (2==2) {log(456)} \
-                else {log(789)}'
-    [str].forEach(item => {
-        eval(item);
-    })
-}
-
-function wait_element_load(load_elements, load_action) {
-    /**
-     * @param {dict} load_elements {text:'123', id:'456'}  定位是否加载的判断条件链
-     * @param {function} load_action {text:'123', id:'456'}  定位是否加载的判断条件链
-     */
-    this.load_elements = load_elements || {};
-    this.load_action = load_action || function () { };
-    let find_rules = '';
-    for (let k in load_elements) {
-        find_rules = find_rules + k + '("' + load_elements[k] + '").';
-    }
-    find_rules = find_rules + 'findOnce()';
-    log(find_rules);
-}
-
-
 超市签到 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://jdsupermarket.jd.com/game/?from=header"}'
-个护签到 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/mall/active/2tZssTgnQsiUqhmg5ooLSHY9XSeN/index.html#/"'
+个护签到 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/mall/active/2tZssTgnQsiUqhmg5ooLSHY9XSeN/index.html#/"}'
 种豆得豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/plantBean/index.action"}'
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 
+func.sClick(text("立即翻牌").findOnce());
 
-
-// app.startActivity({
-
-//     data: 超市签到,
-// })
-
+log(textContains("x0").find().length);
 // func.to_scheme(url_head + url_dict + url_end);
 // log(textContains("100%").findOne());
 
