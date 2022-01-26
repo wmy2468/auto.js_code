@@ -1,4 +1,12 @@
 // 
+function wait_element_load(ele_located_chains, load_process_chains) {
+    /**
+     * @param {dict} ele_located_chains {text:'123', id:'456'}  定位是否加载的判断条件链
+     * @param {dict} load_process_chains {text:'123', id:'456'}  定位是否加载的判断条件链
+     */
+}
+
+
 function config_dict() {
     let cfg_dict = {
         "url_scheme": {
