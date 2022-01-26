@@ -21,7 +21,18 @@ url_dict = "cb895525e54c56e009b24face50d5a814ba088";
 jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=YCQC5KqI8pcwIWRdZoUtoV1TkoIVm_064LWtTUNvKIg&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}'
 
 
-log(random(10, 20))
+log(typeof (wait_element_load))
+
+cc();
+
+
+function cc() {
+    let str = 'if (2==2) {log(456)} \
+                else {log(789)}'
+    [str].forEach(item => {
+        eval(item);
+    })
+}
 
 function wait_element_load(load_elements, load_action) {
     /**

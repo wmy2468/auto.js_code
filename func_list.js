@@ -1,21 +1,40 @@
 // 
-function wait_element_load(load_elements, load_action) {
+function widget_wait_load(load_elements, action_chains, reverse) {
     /**
-     * @param {dict} load_elements {text:'123', id:'456'}  定位是否加载的判断条件链
-     * @param {function} load_action 定位是否加载的判断条件链
+     * 等待控件加载
+     * @param {dict} load_elements [{text:'123', id:'456'},{id:'456'}}]  定位是否加载的判断条件链
+     * @param {function / Array} action_chains 定位是否加载的判断条件链
+     * @param {boolean} reverse 是否反转条件，即为判断消失
      */
-    this.load_elements = load_elements || {};
-    this.load_action = load_action || function () { };
+    this.load_elements = load_elements || [];
+    this.reverse = reverse || false;
+    if (typeof (action_chains) == "Array") {
+        this.action_chains = function () {
+            for (let act in action_chains) { eval(act); }
+        };
+    } else {
+        this.action_chains = action_chains;
+    }
     let find_rules = '';
-    for (let k in load_elements) {
-        find_rules = find_rules + k + '("' + load_elements[k] + '").';
+    for (let k in this.load_elements) {
+        find_rules = find_rules + k + '("' + this.load_elements[k] + '").';
     }
     find_rules = find_rules + 'findOnce()';
-    while (eval(find_rules) == null) {
-        this.load_action();
-        toastLog("等待元素加载:" + load_elements);
-        sleep(2500);
+    if (this.reverse) {
+        while (eval(find_rules) != null) {
+            this.action_chains();
+            toastLog("控件" + this.load_elements + ", 未加载:");
+            sleep(2500);
+        }
+    } else {
+        while (eval(find_rules) == null) {
+            this.action_chains();
+            toastLog("控件" + this.load_elements + ", 未加载:");
+            sleep(2500);
+        }
     }
+    toastLog("控件" + this.load_elements + ", 已加载:");
+    sleep(2500);
 }
 
 
@@ -738,7 +757,7 @@ module.exports = {
     // huaweiUnlock: huaweiUnlock,
     // xiaomiUnlock: xiaomiUnlock,
     gesture_pwd: gesture_pwd,
-    wait_element_load: wait_element_load,
+    widget_wait_load: widget_wait_load,
     getTimeDiff: getTimeDiff,
     calTimeDiff: calTimeDiff,
     dialogs_select: dialogs_select,
