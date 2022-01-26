@@ -663,7 +663,7 @@ function 京东() {
                 let beans_bottle;
                 beans_bottle = textContains("x").find();
                 if (beans_bottle.nonEmpty()) {
-                    beans_bottle.forEach(beans => { func.sClick(beans); sleep(1500) })
+                    beans_bottle.forEach(beans => { func.cClick(beans); sleep(1500) })
                 }
             }
             func_in_func.common_sign(jump_url, wait_element_load = 'textContains("豆苗成长值").findOnce()',
