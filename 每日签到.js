@@ -489,7 +489,7 @@ function 京东() {
             sleep(2500);
             if (textContains("今日奖励已领取").findOnce() != null) {
                 toast("极速挖宝已签到");
-                exit();
+                return 0;
             }
             func.sClick(text("玩一玩").findOne());
             toastLog("点击玩一玩 增加生命...");
@@ -668,9 +668,6 @@ function 京东() {
         鞋靴馆签到: function () { func_in_func.多次重复签到("鞋靴馆签到", "签到领京豆"); },
         服饰馆签到: function () { func_in_func.多次重复签到("服饰馆签到", "签到赢好礼"); },
         箱包馆签到: function () { func_in_func.多次重复签到("箱包馆签到", "签到领京豆"); },
-
-
-
     }
 
     return func_obj;
