@@ -442,6 +442,7 @@ function 京东() {
             let jump_url = cfg["url_scheme"]["京东"][scheme_title];
             let click_func = function () {
                 func.sClick(text("签到").findOnce());
+                func.sClick(text("立即翻牌").findOnce());
             }
             func_in_func.common_sign(scheme_title, jump_url, wait_element_load = 'textContains("' + load_text + '").findOnce()',
                 complete_element = 'textContains("今日已签").findOnce()', click_func);
