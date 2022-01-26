@@ -12,24 +12,15 @@ main();
 
 function main() {
     let show_arr;
-    show_arr = ["京东_签到领豆", "京东_金融签到", "京东_金融双签", "京东_种豆得豆", "京东_个护签到", "京东_陪伴计划签到",
-        "京东_极速版领红包", "京东_极速版挖宝",
-        "ysf_签到", "ysf_领取积点",
+    show_arr = ["京东.领京豆", "京东.领券中心", "京东.金融签到", "京东.金融双签", "京东.种豆得豆",
+        "京东.校园签到", "京东.陪伴计划签到", "京东.个护签到", "京东.鞋靴馆签到", "京东.服饰馆签到", "京东.箱包馆签到",
+        "京东.极速版领红包", "京东.极速版挖宝",
+        "ysf.签到", "ysf.领积点",
         "工商_小象乐园",
         "沃钱包_泡泡签到", "浦发_金豆签到", "浦发xyk_积分签到", "农行_小豆签到", "值得买_签到", "买单吧_签到"]
     let select_items = func.dialogs_checkbox(show_arr, "每日签到记录", "多选");
     select_items.forEach(item => {
-        if (item == "京东_签到领豆") { 京东().签到领豆(); }
-        else if (item == "京东_金融签到") { 京东().金融签到(); }
-        else if (item == "京东_金融双签") { 京东().金融双签(); }
-        else if (item == "京东_极速版领红包") { 京东().极速版领红包(); }
-        else if (item == "京东_极速版挖宝") { 京东().极速版挖宝(); }
-        else if (item == "京东_陪伴计划签到") { 京东().陪伴签到(); }
-        else if (item == "京东_种豆得豆") { 京东().种豆得豆(); }
-        else if (item == "京东_个护签到") { 京东().个护签到(); }
-
-        else if (item == "ysf_签到") { 云闪付().签到(); }
-        else if (item == "ysf_领取积点") { 云闪付().领积点(); }
+        if (item.indexOf("京东") != -1 || item.indexOf("ysf") != -1) { eval(item.replace(".", "().") + "()"); }
         else if (item == "工商_小象乐园") { 工商_小象乐园(); }
 
         else if (item == "沃钱包_泡泡签到") { 沃钱包(); }
@@ -386,37 +377,6 @@ function 农行_小豆签到() {
     sleep(1000);
 }
 
-// 邮储银行
-function 邮储银行() {
-    let appName = "邮储银行";
-    //closeApp(appName);
-    func.to_app(appName);
-    while (className("RadioButton").text("我的").findOnce() == null) {
-        ;
-    }
-    sleep(1000);
-    func.sClick(text("我的").findOnce());
-    // 签到按钮
-    //toastLog("我的已点击");
-    while (textContains("上次登录").findOnce() == null) {
-        if (text("忘记手势").findOnce() != null) {
-            //toastLog("滑动手势");
-            sleep(500);
-            func.gesture_pwd(appName);
-            sleep(1000);
-        }
-    }
-    //toastLog("找签到");
-    while (text("已签到").findOnce() == null) {
-        func.sClick(id("tvName").text("签到有礼").findOnce());
-        sleep(1200);
-        func.sClick(text("签 到").findOnce());
-        sleep(1200);
-    }
-    toastLog(appName + "已签到");
-    sleep(1000);
-}
-
 // 浦发金豆签到
 function 浦发_金豆签到() {
     let appName = "浦发银行";
@@ -456,24 +416,36 @@ function 浦发_金豆签到() {
 
 function 京东() {
     let func_in_func = {
-        common_sign: function (jump_url, wait_element_load, complete_element, click_elements) {
+        common_sign: function (title, jump_url, wait_element_load, complete_element, click_elements) {
             /** 
+            * @param {String} title 任务标题
             * @param {String} jump_url 跳转app的data url
             * @param {String} wait_element_load 判断是否加载的 文本 语句，用eval执行，
             * @param {String} complete_element 判断是否完成的 文本 语句，用eval执行
             * @param {Function} click_elements 跳转app的data url
             */
+            toastLog("任务:" + title + ",开始");
             func.to_scheme(jump_url);       //跳转app
-            while (eval(wait_element_load) == null) {
+            while (eval("!" + wait_element_load)) {
                 toast("等待 活动开始页面 加载...");
                 sleep(2500);
             }
-            while (eval(complete_element) == null) {
+            while (eval("!" + complete_element)) {
                 click_elements();
                 toast("等待 完成页面 加载...");
                 sleep(2500);
             }
+            toastLog("任务:" + title + ", 已完成");
+            sleep(2500);
         },
+        多次重复签到: function (scheme_title, load_text) {
+            let jump_url = cfg["url_scheme"]["京东"][scheme_title];
+            let click_func = function () {
+                func.sClick(text("签到").findOnce());
+            }
+            func_in_func.common_sign(scheme_title, jump_url, wait_element_load = 'textContains("' + load_text + '").findOnce()',
+                complete_element = 'textContains("今日已签").findOnce()', click_func);
+        }
     }
     let func_obj = {
         极速版领红包: function () {
@@ -514,6 +486,10 @@ function 京东() {
             }
             toastLog("挖宝界面已加载...");
             sleep(2500);
+            if (textContains("今日奖励已领取").findOnce() != null) {
+                toast("极速挖宝已签到");
+                exit();
+            }
             func.sClick(text("玩一玩").findOne());
             toastLog("点击玩一玩 增加生命...");
             sleep(6000);
@@ -561,22 +537,45 @@ function 京东() {
                 }
             }
         },
-        签到领豆: function () {
-            func.to_scheme(cfg["url_scheme"]["京东"]["领京豆"])
-            while (textContains("已连").findOnce() == null) {
-                if (func.cClick(text("签到领京豆").findOnce())) {
-                    toastLog("已点击 签到领京豆");
-                    sleep(2000);
-                }
+        领京豆: function () {
+            let scheme_title = "领京豆";
+            let jump_url = cfg["url_scheme"]["京东"][scheme_title];
+            let click_func = function () {
+                func.cClick(text("签到领京豆").findOnce());
                 if (text("签到日历").findOnce() != null) {
                     sleep(2000);
                     back();
                     sleep(2000);
                 }
-                sleep(800);
             }
-            toastLog("已签到");
-            sleep(2500);
+            func_in_func.common_sign(scheme_title, jump_url, wait_element_load = 'textContains("领京豆").findOnce()',
+                complete_element = 'textContains("已连").findOnce()', click_func);
+        },
+        领券中心: function () {
+            let scheme_title = "领券中心";
+            let jump_url = cfg["url_scheme"]["京东"][scheme_title];
+            let click_func = function () {
+                func.sClick(text("签到领奖励").findOnce());
+            }
+            func_in_func.common_sign(scheme_title, jump_url, wait_element_load = 'className("ImageView").desc("领券中心").findOnce()',
+                complete_element = '!text("签到领奖励").findOnce()', click_func);
+        },
+        签到领豆: function () {
+            // func.to_scheme(cfg["url_scheme"]["京东"]["领京豆"])
+            // while (textContains("已连").findOnce() == null) {
+            //     if (func.cClick(text("签到领京豆").findOnce())) {
+            //         toastLog("已点击 签到领京豆");
+            //         sleep(2000);
+            //     }
+            //     if (text("签到日历").findOnce() != null) {
+            //         sleep(2000);
+            //         back();
+            //         sleep(2000);
+            //     }
+            //     sleep(800);
+            // }
+            // toastLog("已签到");
+            // sleep(2500);
             func.to_scheme(cfg["url_scheme"]["京东"]["领券中心"])
             while (className("ImageView").desc("领券中心").findOnce() == null) {
                 toastLog("等待领券中心加载");
@@ -599,14 +598,6 @@ function 京东() {
             //     back();
             //     sleep(2000);
             // }
-        },
-        陪伴签到: function () {
-            let jump_url = cfg["url_scheme"]["京东"]["陪伴计划"];
-            let click_func = function () {
-                func.sClick(text("签到").findOnce());
-            }
-            func_in_func.common_sign(jump_url, wait_element_load = 'textContains("陪伴频道签到赚京豆").findOnce()',
-                complete_element = 'textContains("今日已签").findOnce()', click_func);
         },
         金融签到: function () {
             func.to_scheme(cfg["url_scheme"]["京东金融"]["金融签到"]);
@@ -658,7 +649,8 @@ function 京东() {
             sleep(3000);
         },
         种豆得豆: function () {
-            let jump_url = cfg["url_scheme"]["京东"]["种豆得豆"];
+            let scheme_title = "种豆得豆";
+            let jump_url = cfg["url_scheme"]["京东"][scheme_title];
             let click_func = function () {
                 let beans_bottle;
                 beans_bottle = textContains("x").find();
@@ -666,17 +658,18 @@ function 京东() {
                     beans_bottle.forEach(beans => { func.cClick(beans); sleep(1500) })
                 }
             }
-            func_in_func.common_sign(jump_url, wait_element_load = 'textContains("豆苗成长值").findOnce()',
+            func_in_func.common_sign(scheme_title, jump_url, wait_element_load = 'textContains("豆苗成长值").findOnce()',
                 complete_element = 'textContains("x0").findOnce()', click_func);
         },
-        个护签到: function () {
-            let jump_url = cfg["url_scheme"]["京东"]["个护签到"];
-            let click_func = function () {
-                func.sClick(text("立即翻牌").findOnce());
-            }
-            func_in_func.common_sign(jump_url, wait_element_load = 'textContains("个护签到领京豆").findOnce()',
-                complete_element = 'textContains("今日已签").findOnce()', click_func);
-        },
+        校园签到: function () { func_in_func.多次重复签到("校园签到", "京东校园 天天签到赚京豆"); },
+        陪伴计划签到: function () { func_in_func.多次重复签到("陪伴计划签到", "陪伴频道签到赚京豆"); },
+        个护签到: function () { func_in_func.多次重复签到("个护签到", "个护签到领京豆"); },
+        鞋靴馆签到: function () { func_in_func.多次重复签到("鞋靴馆签到", "签到领京豆"); },
+        服饰馆签到: function () { func_in_func.多次重复签到("服饰馆签到", "签到赢好礼"); },
+        箱包馆签到: function () { func_in_func.多次重复签到("箱包馆签到", "签到领京豆"); },
+
+
+
     }
 
     return func_obj;
@@ -750,6 +743,27 @@ function 浦发xyk_积分签到() {
     sleep(1000);
 }
 
+
+function 值得买_签到() {
+    let appName = "什么值得买";
+    func.to_app(appName);
+    let signBtn = null;
+    while (signBtn == null) {
+        signBtn = id("tv_login_sign").findOnce();
+        func.sClick(id("tab_usercenter").text("我的").findOnce());
+        sleep(800);
+        func.sClick(idContains("close").findOnce());
+        sleep(800);
+        //;
+    }
+    sleep(800);
+    func.sClick(signBtn);
+    sleep(1000);
+    //textContains("已连续签到").findOne();
+    toastLog(appName + "已签到");
+    sleep(1200);
+}
+
 // 邮储信用卡
 function 邮储信用卡() {
     let appName = "邮储信用卡";
@@ -781,6 +795,36 @@ function 邮储信用卡() {
     sleep(1000);
 }
 
+// 邮储银行
+function 邮储银行() {
+    let appName = "邮储银行";
+    //closeApp(appName);
+    func.to_app(appName);
+    while (className("RadioButton").text("我的").findOnce() == null) {
+        ;
+    }
+    sleep(1000);
+    func.sClick(text("我的").findOnce());
+    // 签到按钮
+    //toastLog("我的已点击");
+    while (textContains("上次登录").findOnce() == null) {
+        if (text("忘记手势").findOnce() != null) {
+            //toastLog("滑动手势");
+            sleep(500);
+            func.gesture_pwd(appName);
+            sleep(1000);
+        }
+    }
+    //toastLog("找签到");
+    while (text("已签到").findOnce() == null) {
+        func.sClick(id("tvName").text("签到有礼").findOnce());
+        sleep(1200);
+        func.sClick(text("签 到").findOnce());
+        sleep(1200);
+    }
+    toastLog(appName + "已签到");
+    sleep(1000);
+}
 
 // 华彩生活
 function 华彩生活() {
@@ -842,24 +886,4 @@ function 工银e生活() {
 
     toastLog(appName + "已签到");
     sleep(1000);
-}
-
-function 值得买_签到() {
-    let appName = "什么值得买";
-    func.to_app(appName);
-    let signBtn = null;
-    while (signBtn == null) {
-        signBtn = id("tv_login_sign").findOnce();
-        func.sClick(id("tab_usercenter").text("我的").findOnce());
-        sleep(800);
-        func.sClick(idContains("close").findOnce());
-        sleep(800);
-        //;
-    }
-    sleep(800);
-    func.sClick(signBtn);
-    sleep(1000);
-    //textContains("已连续签到").findOne();
-    toastLog(appName + "已签到");
-    sleep(1200);
 }

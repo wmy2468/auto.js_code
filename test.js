@@ -25,11 +25,11 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 个护签到 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/mall/active/2tZssTgnQsiUqhmg5ooLSHY9XSeN/index.html#/"}'
 种豆得豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/plantBean/index.action"}'
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
+jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
+// func.sClick(text("立即翻牌").findOnce());
 
-func.sClick(text("立即翻牌").findOnce());
-
-log(textContains("x0").find().length);
-// func.to_scheme(url_head + url_dict + url_end);
+// log(textContains("营业额").findOnce());
+func.to_scheme(jd2);
 // log(textContains("100%").findOne());
 
 function ccccc() {

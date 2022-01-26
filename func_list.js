@@ -48,13 +48,19 @@ function config_dict() {
             "京东": {
                 "极速版领红包": 'openjdlite://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/jdlite/active/31U4T6S4PbcK83HyLPioeCWrD63j/index.html"}',
                 "极速版挖宝": 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=YCQC5KqI8pcwIWRdZoUtoV1TkoIVm_064LWtTUNvKIg&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}',
-                "陪伴计划": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/mall/active/kPM3Xedz1PBiGQjY4ZYGmeVvrts/index.html"}',
+                "评价中心": 'openApp.jdMobile://virtual?params={"des":"commentCenter","business":"1","category":"jump"}',
                 "京喜_券": 'openapp.jdpingou://virtual?params={"des":"m","category":"jump","url":"replace_url"}',
                 "领京豆": 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com"}',
                 "领券中心": 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://coupon.m.jd.com/center/getCouponCenter.action"}',
                 "种豆得豆": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/plantBean/index.action"}',
+
                 "个护签到": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/mall/active/2tZssTgnQsiUqhmg5ooLSHY9XSeN/index.html#/"}',
-                "评价中心": 'openApp.jdMobile://virtual?params={"des":"commentCenter","business":"1","category":"jump"}',
+                "陪伴计划签到": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/mall/active/kPM3Xedz1PBiGQjY4ZYGmeVvrts/index.html"}',
+                "校园签到": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/mall/active/2QUxWHx5BSCNtnBDjtt5gZTq7zdZ/index.html"}',
+                "鞋靴馆签到": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/mall/active/4RXyb1W4Y986LJW8ToqMK14BdTD/index.html"}',
+                "服饰馆签到": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://pro.m.jd.com/mall/active/4RBT3H9jmgYg1k2kBnHF8NAHm7m8/index.html"}',
+                "箱包馆签到": 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/mall/active/ZrH7gGAcEkY2gH8wXqyAPoQgk6t/index.html"}',
+
             },
             "京东金融": {
                 "金融签到": "jdmobile://share?jumpType=7&jumpUrl=4120&channel=default&sourceUrl=1000*https://f.ua.jd.com/downloadApp/index.html?id=7038",
