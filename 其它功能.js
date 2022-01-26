@@ -354,6 +354,10 @@ function 芭芭农场() {
                 help_for = text("为TA助力").findOnce();
                 while (help_for == null) {
                     func.sClick(idContains("update_imageview_cancel").findOnce());
+                    if (textContains("不能帮自己助力哦").findOnce() != null) {
+                        break;
+                    }
+                    toastLog("等待 为TA助力 加载");
                     sleep(2500);
                     help_for = text("为TA助力").findOnce();
                 }
