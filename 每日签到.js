@@ -20,7 +20,7 @@ function main() {
         "沃钱包_泡泡签到", "浦发_金豆签到", "浦发xyk_积分签到", "农行_小豆签到", "值得买_签到", "买单吧_签到"]
     let select_items = func.dialogs_checkbox(show_arr, "每日签到记录", "多选");
     select_items.forEach(item => {
-        if (item.indexOf("京东") != -1 || item.indexOf("ysf") != -1) { eval(item.replace(".", "().") + "()"); }
+        if (item.indexOf("京东") != -1 || item.indexOf("云闪付") != -1) { eval(item.replace(".", "().") + "()"); }
         else if (item == "工商_小象乐园") { 工商_小象乐园(); }
 
         else if (item == "沃钱包_泡泡签到") { 沃钱包(); }
