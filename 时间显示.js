@@ -21,7 +21,7 @@ if (selectIndex == "延迟测试") {
     targetAreas.forEach(area => {
         switch (area) {
             case "北京时间":
-                targetUrl = "http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1";
+                targetUrl = "http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp";
                 break;
             case "京东时间":
                 targetUrl = "https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5";
@@ -33,10 +33,10 @@ if (selectIndex == "延迟测试") {
                 targetUrl = "http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp";
                 break;
         }
+        http.__okhttp__.setTimeout(800);       // 设置超时2秒
 
-        stTimestamp = new Date();
         try {
-            http.__okhttp__.setTimeout(800);       // 设置超时2秒
+            stTimestamp = new Date();
             res = http.get(targetUrl);
             edTimestamp = new Date();
             resultStr = resultStr + area + "请求时差:" + (edTimestamp - stTimestamp) + "\n";
