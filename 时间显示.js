@@ -40,7 +40,7 @@ if (selectIndex == "延迟测试") {
             res = http.get(targetUrl);
             edTimestamp = new Date();
             resultStr = resultStr + area + "请求时差:" + (edTimestamp - stTimestamp) + "\n";
-            resultStr2 = resultStr2 + area + "请求时差:" + http.request_time() + "\n";
+            resultStr2 = resultStr2 + area + "请求时差:" + http.request_time().requestDelay + "\n";
         } catch (error) {
             resultStr = resultStr + area + "请求失败" + "\n";
             log(area + " :" + error);
