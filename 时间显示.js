@@ -16,8 +16,9 @@ if (selectIndex == "延迟测试") {
     targetAreas = ["北京时间", "京东时间", "苏宁时间", "淘宝时间"];
     // targetArea = func.dialogs_select(targetAreas);
 
-    var res, stTimestamp, edTimestamp, resultStr;
-    resultStr = ""
+    var res, stTimestamp, edTimestamp, resultStr, resultStr2;
+    resultStr = "BY_Timestamps\n";
+    resultStr2 = "BY_okHttpEvent\n";
     targetAreas.forEach(area => {
         switch (area) {
             case "北京时间":
@@ -34,19 +35,20 @@ if (selectIndex == "延迟测试") {
                 break;
         }
         http.__okhttp__.setTimeout(800);       // 设置超时2秒
-
         try {
             stTimestamp = new Date();
             res = http.get(targetUrl);
             edTimestamp = new Date();
             resultStr = resultStr + area + "请求时差:" + (edTimestamp - stTimestamp) + "\n";
+            resultStr2 = resultStr2 + area + "请求时差:" + http.request_time() + "\n";
         } catch (error) {
             resultStr = resultStr + area + "请求失败" + "\n";
             log(area + " :" + error);
         }
     })
     log(resultStr);
-    alert(resultStr);
+    log(resultStr2);
+    alert(resultStr + "\n\n" + resultStr2);
 } else {
     var halfHourFlag = 0;
     var timeDiff = 0;

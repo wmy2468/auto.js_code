@@ -28,16 +28,15 @@ url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 
 
-targetUrl = 'http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp';
+targetUrl = 'http://www.baidu.com';
 
 http.__okhttp__.setTimeout(5000);       // 设置超时2秒
 
 stTimestamp = new Date();
 res = http.get(targetUrl);
 edTimestamp = new Date();
+log(http.request_time());
 
-http.get()
-log(http.req_time());
 
 // log(typeof (httpp.eventListener))
 
