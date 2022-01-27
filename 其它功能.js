@@ -236,7 +236,8 @@ function 芭芭农场() {
                     sleep(300);
                 }
             }
-            // click("领取");
+            click("去领取");
+            click("去签到");
             sleep(2000);
         },
         tb施肥: function () {
