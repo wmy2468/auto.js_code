@@ -26,11 +26,19 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 种豆得豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/plantBean/index.action"}'
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
-// func.sClick(text("立即翻牌").findOnce());
+
+importPackage(Packages["okhttp3"]);
+
+let ev = new okhttp3.EventListener();
+log(ev)
+
+
+// log(typeof (httpp.eventListener))
 
 // log(textContains("营业额").findOnce());
-func.to_scheme(jd2);
-// log(textContains("100%").findOne());
+// targetUrl = "http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp";
+// log(eventlisten.callStart(http.get(targetUrl)));
+
 
 function ccccc() {
     log(123);
