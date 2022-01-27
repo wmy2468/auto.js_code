@@ -312,11 +312,10 @@ function 芭芭农场() {
                 text("为Ta助力").findOne();
                 toastLog("已找到，为Ta助力");
                 sleep(2500);
-                func.widget_wait_load({ text: "为Ta助力" }, ['func.sClick(text("为Ta助力").findOnce())'], reverse = true);
-                // while (text("为Ta助力").findOnce() != null) {
-                //     func.sClick(text("为Ta助力").findOnce());
-                //     sleep(2500);
-                // }
+                while (text("为Ta助力").findOnce() != null) {
+                    func.sClick(text("为Ta助力").findOnce());
+                    sleep(2500);
+                }
                 toastLog("已点击，为Ta助力");
                 sleep(2500);
                 back();
@@ -502,8 +501,7 @@ function 京东() {
             // 1. 跳转评价中心
             func.to_scheme(cfg["url_scheme"]["京东"]["评价中心"]);
             // 2. 判断是否到达评价页面
-            // while (className("TextView").text("已评价/追评").findOnce() == null) { toastLog("未到达,评价界面"); sleep(2500); }
-            func.widget_wait_load({ className: "TextView", text: "已评价/追评" });
+            while (className("TextView").text("已评价/追评").findOnce() == null) { toastLog("未到达,评价界面"); sleep(2500); }
             while (text("待评价").findOne().parent().child(1).text() != "· 1") {
                 // 3. 点击评价商品
                 func.sClick(className("TextView").text("评价").findOne().parent().parent());
