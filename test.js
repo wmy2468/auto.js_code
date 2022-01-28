@@ -30,12 +30,13 @@ jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"htt
 
 targetUrl = 'http://www.baidu.com';
 
-http.__okhttp__.setTimeout(5000);       // 设置超时2秒
+let htt = http;
+htt.__okhttp__.setTimeout(5000);       // 设置超时2秒
 
 stTimestamp = new Date();
-res = http.get(targetUrl);
+res = htt.get(targetUrl);
 edTimestamp = new Date();
-log(http.request_time());
+log(htt.request_time());
 
 
 // log(typeof (httpp.eventListener))

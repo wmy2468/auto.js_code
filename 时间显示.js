@@ -19,6 +19,8 @@ if (selectIndex == "延迟测试") {
     var res, stTimestamp, edTimestamp, resultStr, resultStr2;
     resultStr = "BY_Timestamps\n";
     resultStr2 = "BY_okHttpEvent\n";
+    let = http;
+    htt.__okhttp__.setTimeout(800);       // 设置超时2秒
     targetAreas.forEach(area => {
         switch (area) {
             case "北京时间":
@@ -34,10 +36,10 @@ if (selectIndex == "延迟测试") {
                 targetUrl = "http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp";
                 break;
         }
-        http.__okhttp__.setTimeout(800);       // 设置超时2秒
+
         try {
             stTimestamp = new Date();
-            res = http.get(targetUrl);
+            res = htt.get(targetUrl);
             edTimestamp = new Date();
             resultStr = resultStr + area + "请求时差:" + (edTimestamp - stTimestamp) + "\n";
             resultStr2 = resultStr2 + area + "请求时差:" + http.request_time().requestDelay + "\n";
