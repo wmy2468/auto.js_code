@@ -19,7 +19,7 @@ if (selectIndex == "延迟测试") {
     var res, stTimestamp, edTimestamp, resultStr, resultStr2;
     resultStr = "BY_Timestamps\n";
     resultStr2 = "BY_okHttpEvent\n";
-    let = http;
+    let htt = http;
     htt.__okhttp__.setTimeout(800);       // 设置超时2秒
     targetAreas.forEach(area => {
         switch (area) {
