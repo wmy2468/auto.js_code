@@ -434,6 +434,7 @@ function 万商3比() {
     }
     log("total amount = " + sum / 10);
     alert("已完成,共计:" + sum / 10 + "元");
+    exit();
 }
 
 function 京东() {
