@@ -208,6 +208,7 @@ function 光大活动() {
     let actNames = ["周五100-30微信立减金", "周五京东300-50",
         "周五30-10微信立减金",];
     let actName = func.dialogs_select(actNames);      // 设置查找的文本
+
     switch (actName) {
         // 10点
         case "周五100-30微信立减金":            //10点
@@ -234,26 +235,18 @@ function 光大活动() {
         sleep(1000);
     }
     toastLog("已到达指定页面，等待");
+    let click_btn;
+    click_btn = text("确认购买").findOnce();
+    if (click_btn == null) {
+        click_btn = textContains("立即抢购").findOnce();
+    }
     //   定位元素
     func.getTimeDiff(timeArea, startTime, get_server_delay('https://www.cebbank.com/'));
-    let cnt = 0, loopBreak;
-    while (1) {
-        loopBreak = 75;
-        func.sClick(className("android.view.View").text("确认购买").findOne());
-        // 如果15秒内没找到就自动退出 200毫秒一次1秒5次，30秒 150次
-        while (loopBreak >= 0) {
-            // 如果点击了按钮说明没抢到，需要继续
-            if (func.sClick(className("android.widget.Button").text("确定").findOnce())) {
-                break;
-            }
-            loopBreak = loopBreak - 1;
-            sleep(200)
-        }
-        if (loopBreak < 0) {
-            continue;
-        } else {
-            break;
-        }
+    if (click_btn == null) {
+        func.sClick(text("确认购买").findOnce());
+        func.sClick(textContains("立即抢购").findOnce());
+    } else {
+        func.sClick(click_btn);
     }
     toastLog("已点击，请确认结果");
     sleep(3000);
