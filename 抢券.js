@@ -22,6 +22,17 @@ function main() {
     device.cancelKeepingAwake();
 }
 
+function get_server_delay(req_url) {
+    try {
+        http.__okhttp__.setTimeout(1000);       // 设置超时2秒
+        http.get(req_url);
+        return http.request_time().requestDelay_dnsStart;
+    } catch (e) {
+        return 0;
+    }
+}
+
+
 // ------------------------------------------------------
 function 招商倒计时领取() {
     let select_txt, appName, url;
@@ -192,41 +203,25 @@ function 云闪付() {
 // 到点点击
 function 光大活动() {
     toastLog("到点点击");
+
     let startTime, targetViewText;
-    let actNames = ["必胜客50买100元", "青桔单车2.5买月卡",
-        "饿了么1分买6元", "饿了么1分买10元"
-    ];
+    let actNames = ["周五100-30微信立减金", "周五京东300-50",
+        "周五30-10微信立减金",];
     let actName = func.dialogs_select(actNames);      // 设置查找的文本
     switch (actName) {
         // 10点
-        case "必胜客50买100元":            //10点
+        case "周五100-30微信立减金":            //10点
             // 11点 650 太早 750太慢 700太慢
-            startTime = "09,59,59,700";
-            targetViewText = "【活动编号】39703";
+            startTime = "15,00,00,000";
+            targetViewText = "46459";
             break;
-        case "海底捞50买100元":            //11点
-            startTime = "10,59,59,700";
-            targetViewText = "【活动编号】33739";
+        case "周五京东300-50":            //11点
+            startTime = "15,00,00,000";
+            targetViewText = "46704";
             break;
-        case "必胜客80买100元":            //0点
-            startTime = "23,59,59,700";
-            targetViewText = "【活动编号】33748";
-            break;
-        case "青桔单车2.5买月卡":            //10点
-            startTime = "09,59,59,700";
-            targetViewText = "【活动编号】33819";
-            break;
-        case "饿了么1分买6元":            //10点
-            startTime = "09,59,59,700";
-            targetViewText = "【活动编号】34332";
-            break;
-        case "饿了么1分买10元":            //10点
-            startTime = "09,59,59,700";
-            targetViewText = "【活动编号】34331";
-            break;
-        case "肯德基10元吃套餐":            //10点
-            startTime = "09,59,59,700";
-            targetViewText = "【活动编号】34331";
+        case "周五30-10微信立减金":            //0点
+            startTime = "15,00,00,000";
+            targetViewText = "46458";
             break;
     }
 
@@ -240,7 +235,7 @@ function 光大活动() {
     }
     toastLog("已到达指定页面，等待");
     //   定位元素
-    func.getTimeDiff(timeArea, startTime);
+    func.getTimeDiff(timeArea, startTime, get_server_delay('https://www.cebbank.com/'));
     let cnt = 0, loopBreak;
     while (1) {
         loopBreak = 75;
@@ -364,7 +359,7 @@ function 中信活动() {
             break;
         case "周三六11点-5折必胜客百果园":
             toastLog("到点点击");
-            startTime = "10,59,59,850";             // 设置时间点
+            startTime = "11,00,00,000";             // 设置时间点
             couDes = ["必胜客100元代金券", "必胜客50元代金券", "达美乐50元代金券", "肯德基50元", "呷哺呷哺"];             // 券名称
             targetViewText = func.dialogs_select(couDes);               // 设置查找的文本
             func.to_app(appName);             // 启动APP
@@ -375,7 +370,7 @@ function 中信活动() {
                 toastLog("请跳转到券 列表 页面，直到提示  已到达等待页面");
             }
             toastLog("元素文本：" + couClick.text());
-            func.getTimeDiff(timeArea, startTime);              // 等待时间
+            func.getTimeDiff(timeArea, startTime, get_server_delay('https://creditcard.ecitic.com/'));              // 等待时间
             func.sClick(couClick);             // 点击元素
             // 点击元素
             while (func.sClick(text("确认").findOnce()) == false) {

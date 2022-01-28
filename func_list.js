@@ -447,10 +447,11 @@ function strTime_to_timestamp(strTime) {
 
 
 // 时间校准 获取时间差函数
-function getTimeDiff(area, targetTime) {
+function getTimeDiff(area, targetTime, serverDelay) {
     // 生成今天的时间戳
-    let targetTimestamp;
-    targetTimestamp = strTime_to_timestamp(targetTime);
+    let targetDelay = serverDelay || 0;
+    let targetTimestamp = strTime_to_timestamp(targetTime) - targetDelay;
+
     // 获取当前时间戳
     curTimestamp = new Date().getTime();
 
@@ -468,10 +469,10 @@ function getTimeDiff(area, targetTime) {
         setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000));
         //console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
         // toastLog("剩余时间:", targetTimestamp - curTimestamp);
-        sleep(999);
+        sleep(1000);
     }
-
-    let timeDiff = calTimeDiff(area);
+    // 剩余时间在15秒内时
+    let timeDiff = calTimeDiff(area);       // 统计时间差
 
     let cnt = 0;
     curTimestamp = new Date().getTime() + timeDiff;
@@ -479,7 +480,7 @@ function getTimeDiff(area, targetTime) {
         sleep(10);
         cnt = cnt + 1;
         if (cnt >= 99) {
-            setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000))
+            setFloatyVal(floatWin, "等待倒计时：" + Math.trunc((targetTimestamp - curTimestamp) / 1000));
             //console.log("等待倒计时：", Math.trunc((targetTimestamp - curTimestamp) / 1000));
             cnt = 0;
         }
@@ -494,21 +495,21 @@ function calTimeDiff(area) {
     // 获取时间误差
     switch (area) {
         case "京东时间":
-            timeDiff = Math.trunc((jdTime() + jdTime()) / 2);
+            timeDiff = Math.max(jdTime(), jdTime(), jdTime();
             break;
         case "北京时间":
             // timeDiff = Math.trunc((beiJingTime() + beiJingTime()) / 2);
-            timeDiff = Math.trunc((tbTime() + tbTime()) / 2);
+            timeDiff = Math.max(tbTime(), tbTime(), tbTime());
             break;
         case "淘宝时间":
-            timeDiff = Math.trunc((tbTime() + tbTime()) / 2);
+            timeDiff = Math.max(tbTime(), tbTime(), tbTime());
             break;
         case "苏宁时间":
-            timeDiff = Math.trunc((snTime() + snTime()) / 2);
+            timeDiff = Math.max(snTime(), snTime(), snTime());
             break;
-        default:
-            timeDiff = Math.trunc((beiJingTime() + beiJingTime()) / 2);
-            break;
+        // default:
+        //     timeDiff = Math.trunc((beiJingTime() + beiJingTime()) / 2);
+        //     break;
     }
     return timeDiff;
 }
@@ -529,38 +530,33 @@ function getToday(needNextDay) {
 
 //京东时间
 function jdTime() {
-    let res, resTime, resTimestamp, sigma, delta, timeLimit;
-    timeLimit = 1000;
-    delta = 0;
     log("请求京东时间");
+    let res, local_timestamp, response_data, response_timestamp, delta, req_delay;
+    let time_limit = 400;
+    delta = 0;
     // 获取取一次时间耗时
-    while (1) {
-        stTimestamp = new Date();
-        try {
-            http.__okhttp__.setTimeout(800);       // 设置超时2秒
-            res = http.get("https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5");
-        } catch (error) {
-            log(error);
-            toastLog("报错了 返回0");
-            return 0;
-        }
-        edTimestamp = new Date();
+    try {
+        http.__okhttp__.setTimeout(800);       // 设置超时2秒
+        local_timestamp = new Date();
+        res = http.get("https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5");
+    } catch (error) {
+        log(error);
+        toastLog("报错了 返回0");
+        return delta;
+    }
+    // edTimestamp = new Date();
+    if (res.statusCode != 200) {
+        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+        exit();
+    }
+    req_delay = http.request_time().requestDelay_callStart;
+    log("与服务器延迟:" + req_delay + "毫秒");
 
-        if (res.statusCode != 200) {
-            toast("请求失败: " + res.statusCode + " " + res.statusMessage);
-            exit();
-        }
-        log("请求总时长", edTimestamp - stTimestamp);
-
-        if (edTimestamp - stTimestamp <= timeLimit) {
-            resTime = res.body.json();
-            resTimestamp = Number(resTime.currentTime2);
-            sigma = edTimestamp - stTimestamp;
-            delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
-            log("时延", sigma);
-            log("误差", delta);
-            break;
-        }
+    if (req_delay <= time_limit) {
+        response_data = res.body.json();
+        response_timestamp = Number(response_data.currentTime2);
+        delta = response_timestamp - local_timestamp - req_delay;
+        log("误差", delta);
     }
     //返回时间差
     return delta;
@@ -608,37 +604,32 @@ function beiJingTime() {
 // 淘宝时间
 function tbTime() {
     log("请求淘宝时间");
-    let res, resTime, resTimestamp, sigma, delta, timeLimit;
-    timeLimit = 1000;
+    let res, local_timestamp, response_data, response_timestamp, delta, req_delay;
+    let time_limit = 300;
     delta = 0;
     // 获取取一次时间耗时
-    while (1) {
-        stTimestamp = new Date();
-        try {
-            http.__okhttp__.setTimeout(800);       // 设置超时2秒
-            res = http.get("http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp");
-        } catch (error) {
-            log(error);
-            toastLog("报错了 返回0");
-            return 0;
-        }
-        edTimestamp = new Date();
+    try {
+        http.__okhttp__.setTimeout(800);       // 设置超时2秒
+        local_timestamp = new Date();
+        res = http.get("http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp");
+    } catch (error) {
+        log(error);
+        toastLog("报错了 返回0");
+        return delta;
+    }
+    // edTimestamp = new Date();
+    if (res.statusCode != 200) {
+        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+        exit();
+    }
+    req_delay = http.request_time().requestDelay_callStart;
+    log("请求延迟:" + req_delay + "毫秒");
 
-        if (res.statusCode != 200) {
-            toast("请求失败: " + res.statusCode + " " + res.statusMessage);
-            exit();
-        }
-        log("请求总时长", edTimestamp - stTimestamp);
-
-        if (edTimestamp - stTimestamp <= timeLimit) {
-            resTime = res.body.json();
-            resTimestamp = Number(resTime.data.t);
-            sigma = edTimestamp - stTimestamp;
-            delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
-            log("时延", sigma);
-            log("误差", delta);
-            break;
-        }
+    if (req_delay <= time_limit) {
+        response_data = res.body.json();
+        response_timestamp = Number(response_data.data.t);
+        delta = response_timestamp - local_timestamp - req_delay;
+        log("误差", delta);
     }
     //返回时间差
     return delta;
@@ -646,39 +637,33 @@ function tbTime() {
 
 // 苏宁时间
 function snTime() {
-    let res, resTime, resTimestamp, sigma, delta, timeLimit;
-    timeLimit = 1000;
-    delta = 0;
     log("请求苏宁时间");
+    let res, local_timestamp, response_data, response_timestamp, delta, req_delay;
+    let time_limit = 300;
+    delta = 0;
     // 获取取一次时间耗时
-    while (1) {
-        stTimestamp = new Date();
-        try {
-            http.__okhttp__.setTimeout(800);       // 设置超时2秒
-            res = http.get("https://f.m.suning.com/api/ct.do");
-        } catch (error) {
-            log(error);
-            toastLog("报错了 返回0");
-            return 0;
-        }
-        edTimestamp = new Date();
+    try {
+        http.__okhttp__.setTimeout(800);       // 设置超时2秒
+        local_timestamp = new Date();
+        res = http.get("https://f.m.suning.com/api/ct.do");
+    } catch (error) {
+        log(error);
+        toastLog("报错了 返回0");
+        return delta;
+    }
+    // edTimestamp = new Date();
+    if (res.statusCode != 200) {
+        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+        exit();
+    }
+    req_delay = http.request_time().requestDelay_callStart;
+    log("请求延迟:" + req_delay + "毫秒");
 
-        if (res.statusCode != 200) {
-            toast("请求失败: " + res.statusCode + " " + res.statusMessage);
-            exit();
-        }
-        log("请求总时长", edTimestamp - stTimestamp);
-
-        if (edTimestamp - stTimestamp <= timeLimit) {
-            resTime = res.body.json();
-            resTimestamp = Number(resTime.currentTime);
-            sigma = edTimestamp - stTimestamp;
-            delta = resTimestamp - stTimestamp - Math.trunc(sigma / 2);
-            log("时延", sigma);
-            log("误差", delta);
-            break;
-        }
-        sleep(reqDelay);
+    if (req_delay <= time_limit) {
+        response_data = res.body.json();
+        response_timestamp = Number(response_data.currentTime);
+        delta = response_timestamp - local_timestamp - req_delay;
+        log("误差", delta);
     }
     //返回时间差
     return delta;

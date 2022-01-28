@@ -28,16 +28,120 @@ url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 
 
-targetUrl = 'http://www.baidu.com';
+targetUrl = "http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp";
 
-let htt = http;
-htt.__okhttp__.setTimeout(5000);       // 设置超时2秒
+function jdTime() {
+    log("请求京东时间");
+    let res, local_timestamp, response_data, response_timestamp, delta, req_delay;
+    let time_limit = 300;
+    delta = 0;
+    // 获取取一次时间耗时
+    try {
+        http.__okhttp__.setTimeout(800);       // 设置超时2秒
+        local_timestamp = new Date();
+        res = http.get("https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5");
+    } catch (error) {
+        log(error);
+        toastLog("报错了 返回0");
+        return delta;
+    }
+    // edTimestamp = new Date();
+    if (res.statusCode != 200) {
+        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+        exit();
+    }
+    req_delay = http.request_time().requestDelay_callStart;
+    log("请求延迟:" + req_delay + "毫秒");
 
-stTimestamp = new Date();
-res = htt.get(targetUrl);
-edTimestamp = new Date();
-log(htt.request_time());
+    if (req_delay <= time_limit) {
+        response_data = res.body.json();
+        response_timestamp = Number(response_data.currentTime2);
+        delta = response_timestamp - local_timestamp - req_delay;
+        log("误差", delta);
+    }
+    //返回时间差
+    return delta;
+}
 
+// 淘宝时间
+function tbTime() {
+    log("请求淘宝时间");
+    let res, local_timestamp, response_data, response_timestamp, delta, req_delay;
+    let time_limit = 300;
+    delta = 0;
+    // 获取取一次时间耗时
+    try {
+        http.__okhttp__.setTimeout(800);       // 设置超时2秒
+        local_timestamp = new Date();
+        res = http.get("http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp");
+    } catch (error) {
+        log(error);
+        toastLog("报错了 返回0");
+        return delta;
+    }
+    // edTimestamp = new Date();
+    if (res.statusCode != 200) {
+        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+        exit();
+    }
+    req_delay = http.request_time().requestDelay_callStart;
+    log("请求延迟:" + req_delay + "毫秒");
+
+    if (req_delay <= time_limit) {
+        response_data = res.body.json();
+        response_timestamp = Number(response_data.data.t);
+        delta = response_timestamp - local_timestamp - req_delay;
+        log("误差", delta);
+    }
+    //返回时间差
+    return delta;
+}
+
+// 苏宁时间
+function snTime() {
+    log("请求苏宁时间");
+    let res, local_timestamp, response_data, response_timestamp, delta, req_delay;
+    let time_limit = 300;
+    delta = 0;
+    // 获取取一次时间耗时
+    try {
+        http.__okhttp__.setTimeout(800);       // 设置超时2秒
+        local_timestamp = new Date();
+        res = http.get("https://f.m.suning.com/api/ct.do");
+    } catch (error) {
+        log(error);
+        toastLog("报错了 返回0");
+        return delta;
+    }
+    // edTimestamp = new Date();
+    if (res.statusCode != 200) {
+        toast("请求失败: " + res.statusCode + " " + res.statusMessage);
+        exit();
+    }
+    req_delay = http.request_time().requestDelay_callStart;
+    log("请求延迟:" + req_delay + "毫秒");
+
+    if (req_delay <= time_limit) {
+        response_data = res.body.json();
+        response_timestamp = Number(response_data.currentTime);
+        delta = response_timestamp - local_timestamp - req_delay;
+        log("误差", delta);
+    }
+    //返回时间差
+    return delta;
+}
+
+targetUrl = "https://www.cebbank.com/";
+
+res = http.get(targetUrl);
+log(http.request_time());
+
+// res = http.get(targetUrl);
+// log(http.request_time());
+// res = http.get(targetUrl);
+// log(http.request_time());
+// res = http.get(targetUrl);
+// log(http.request_time());
 
 // log(typeof (httpp.eventListener))
 
