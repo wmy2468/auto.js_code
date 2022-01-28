@@ -495,7 +495,7 @@ function calTimeDiff(area) {
     // 获取时间误差
     switch (area) {
         case "京东时间":
-            timeDiff = Math.max(jdTime(), jdTime(), jdTime();
+            timeDiff = Math.max(jdTime(), jdTime(), jdTime());
             break;
         case "北京时间":
             // timeDiff = Math.trunc((beiJingTime() + beiJingTime()) / 2);
