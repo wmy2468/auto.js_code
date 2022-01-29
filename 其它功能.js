@@ -24,7 +24,7 @@ function main() {
         else if (select_func == "芭芭农场-小号互助") { 芭芭农场().zfb助力(); 芭芭农场().tb助力(); }
         else if (select_func == "芭芭农场-支付宝淘宝浏览") { 芭芭农场().tb(); 芭芭农场().zfb(); }
         else if (select_func == "芭芭农场-淘宝施肥") { 芭芭农场().tb施肥(); }
-        else if (select_func == "芭芭农场-淘宝施肥") {
+        else if (select_func == "芭芭农场-助力浏览施肥") {
             let farms = 芭芭农场();
             farms.zfb助力(); farms.tb助力();
             farms.tb(); farms.zfb();
