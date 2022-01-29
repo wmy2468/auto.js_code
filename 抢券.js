@@ -158,7 +158,7 @@ function 云闪付() {
                 toast("未成功，等待3s继续...");
                 sleep(3000);
             }
-            alert("捡漏完成，退出");
+            func.dialogs_alert("捡漏完成，退出");
         },
         云闪付2022新年: function () {
             let url_ysf, coupon_desc;

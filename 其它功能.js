@@ -38,7 +38,7 @@ function main() {
     }
     else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
     else if (scriptName == "万商3比") { 万商3比(); }
-    alert("已完成...");
+    func.dialogs_alert("已完成...");
 }
 
 function 云闪付() {
@@ -381,17 +381,17 @@ function 万商3比() {
     m = now.getMinutes();
     if (h >= 7 && h <= 18) {
         if (m >= 39 && m <= 50) {
-            alert("宾馆不刷，退出");
+            func.dialogs_alert("宾馆不刷，退出");
             exit();
         }
     } else if (h >= 19 && h <= 22) {
         if (m >= 19 && m <= 30) {
-            alert("宾馆不刷，退出");
+            func.dialogs_alert("宾馆不刷，退出");
             exit();
         }
     } else if (h >= 23 || h <= 6) {
         if ((m >= 49 && m <= 60) || (m >= 9 && m <= 20)) {
-            alert("宾馆不刷，退出");
+            func.dialogs_alert("宾馆不刷，退出");
             exit();
         }
     }
@@ -433,7 +433,7 @@ function 万商3比() {
         count = count - 1;
     }
     log("total amount = " + sum / 10);
-    alert("已完成,共计:" + sum / 10 + "元");
+    func.dialogs_alert("已完成,共计:" + sum / 10 + "元");
     exit();
 }
 
@@ -470,7 +470,7 @@ function 京东() {
             func.to_autojs();
             let clip_text = getClip();
             if (clip_text == "") {
-                alert("剪贴板为空，");
+                func.dialogs_alert("剪贴板为空，");
             } else {
                 log("剪贴板文本:" + clip_text);
                 let jump_url_st, jump_url_ed;
@@ -667,7 +667,7 @@ function 京东() {
                 text_a = beans_a.text().substring(1, 3);
                 text_b = beans_b.text();
                 if (text_a != text_b) {
-                    alert("豆子未满，请检查 是否有误，并手动提交");
+                    func.dialogs_alert("豆子未满，请检查 是否有误，并手动提交");
                 } else {
                     // 提交
                     while (!func.sClick(textContains("提交").findOnce())) {

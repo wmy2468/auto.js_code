@@ -50,7 +50,7 @@ if (selectIndex == "延迟测试") {
     })
     log(resultStr);
     log(resultStr2);
-    alert(resultStr + "\n\n" + resultStr2);
+    func.dialogs_alert(resultStr + "\n\n" + resultStr2);
 } else {
     var halfHourFlag = 0;
     var timeDiff = 0;

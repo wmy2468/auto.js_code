@@ -27,7 +27,23 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 
+dialogs_func.dialogs_alert("已完成");
+// func.dialogs_alert("已完成")
 
+function dialogs_func.dialogs_alert(title) {
+    let dia_alear = dialogs.build({
+        title: title || "",
+        // contentColor: "#21211F",
+        positive: "确定"
+    });
+    dia_alear.on("show", () => {
+        setTimeout(function () {
+            log("准备退出");
+            exit();
+        }, 100);
+    })
+    dia_alear.show();
+}
 targetUrl = "http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp";
 
 function jdTime() {
@@ -131,10 +147,10 @@ function snTime() {
     return delta;
 }
 
-targetUrl = "https://www.cebbank.com/";
+// targetUrl = "https://www.cebbank.com/";
 
-res = http.get(targetUrl);
-log(http.request_time());
+// res = http.get(targetUrl);
+// log(http.request_time());
 
 // res = http.get(targetUrl);
 // log(http.request_time());
@@ -552,7 +568,7 @@ function 芭芭农场() {
             }
             click("领取");
             sleep(2000);
-            alert("已完成");
+            func.dialogs_alert("已完成");
         },
         zfb: function () {
             let click_text;
@@ -585,7 +601,7 @@ function 芭芭农场() {
             }
             click("领取");
             sleep(2000);
-            alert("已完成");
+            func.dialogs_alert("已完成");
         }
     }
     let select_item = func.dialogs_select(["淘宝", "支付宝"])
@@ -885,7 +901,7 @@ function 京东评价() {
     text_a = beans_a.text().substring(1, 3);
     text_b = beans_b.text();
     if (text_a != text_b) {
-        alert("豆子未满");
+        func.dialogs_alert("豆子未满");
     } else {
         // 提交
         func.sClick(text("提交").findOne());
@@ -1415,7 +1431,7 @@ function member_card() {
 // screenW = device.width;
 // log("screenW: " + screenW);
 // if (!requestScreenCapture()) {
-//     alert("请求截图权限失败！");
+//     func.dialogs_alert("请求截图权限失败！");
 //     exit();
 // }
 // sleep(800);

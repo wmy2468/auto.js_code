@@ -1,41 +1,41 @@
 // 
-function widget_wait_load(load_elements, action_chains, reverse) {
-    /**
-     * 等待控件加载
-     * @param {dict} load_elements [{text:'123', id:'456'},{id:'456'}}]  定位是否加载的判断条件链
-     * @param {function / Array} action_chains 定位是否加载的判断条件链
-     * @param {boolean} reverse 是否反转条件，即为判断消失
-     */
-    this.load_elements = load_elements || [];
-    this.reverse = reverse || false;
-    if (typeof (action_chains) == "Array") {
-        this.action_chains = function () {
-            for (let act in action_chains) { eval(act); }
-        };
-    } else {
-        this.action_chains = action_chains;
-    }
-    let find_rules = '';
-    for (let k in this.load_elements) {
-        find_rules = find_rules + k + '("' + this.load_elements[k] + '").';
-    }
-    find_rules = find_rules + 'findOnce()';
-    if (this.reverse) {
-        while (eval(find_rules) != null) {
-            this.action_chains();
-            toastLog("控件" + this.load_elements + ", 未加载:");
-            sleep(2500);
-        }
-    } else {
-        while (eval(find_rules) == null) {
-            this.action_chains();
-            toastLog("控件" + this.load_elements + ", 未加载:");
-            sleep(2500);
-        }
-    }
-    toastLog("控件" + this.load_elements + ", 已加载:");
-    sleep(2500);
-}
+// function widget_wait_load(load_elements, action_chains, reverse) {
+//     /**
+//      * 等待控件加载
+//      * @param {dict} load_elements [{text:'123', id:'456'},{id:'456'}}]  定位是否加载的判断条件链
+//      * @param {function / Array} action_chains 定位是否加载的判断条件链
+//      * @param {boolean} reverse 是否反转条件，即为判断消失
+//      */
+//     this.load_elements = load_elements || [];
+//     this.reverse = reverse || false;
+//     if (typeof (action_chains) == "Array") {
+//         this.action_chains = function () {
+//             for (let act in action_chains) { eval(act); }
+//         };
+//     } else {
+//         this.action_chains = action_chains;
+//     }
+//     let find_rules = '';
+//     for (let k in this.load_elements) {
+//         find_rules = find_rules + k + '("' + this.load_elements[k] + '").';
+//     }
+//     find_rules = find_rules + 'findOnce()';
+//     if (this.reverse) {
+//         while (eval(find_rules) != null) {
+//             this.action_chains();
+//             toastLog("控件" + this.load_elements + ", 未加载:");
+//             sleep(2500);
+//         }
+//     } else {
+//         while (eval(find_rules) == null) {
+//             this.action_chains();
+//             toastLog("控件" + this.load_elements + ", 未加载:");
+//             sleep(2500);
+//         }
+//     }
+//     toastLog("控件" + this.load_elements + ", 已加载:");
+//     sleep(2500);
+// }
 
 
 function config_dict() {
@@ -738,6 +738,23 @@ function dialogs_select(inArr, titles) {
     return inArr[selIdx];
 }
 
+
+// 自定义超时通知框
+function dialogs_alert(title) {
+    let dia_alear = dialogs.build({
+        title: title || "",
+        // contentColor: "#21211F",
+        positive: "确定"
+    });
+    dia_alear.on("show", () => {
+        setTimeout(function () {
+            log("准备退出");
+            exit();
+        }, 100);
+    })
+    dia_alear.show();
+}
+
 module.exports = {
     config_dict: config_dict,
     floatyMove: floatyMove,
@@ -750,9 +767,10 @@ module.exports = {
     // huaweiUnlock: huaweiUnlock,
     // xiaomiUnlock: xiaomiUnlock,
     gesture_pwd: gesture_pwd,
-    widget_wait_load: widget_wait_load,
+    // widget_wait_load: widget_wait_load,
     getTimeDiff: getTimeDiff,
     calTimeDiff: calTimeDiff,
+    dialogs_alert: dialogs_alert,
     dialogs_select: dialogs_select,
     dialogs_checkbox: dialogs_checkbox
 }
