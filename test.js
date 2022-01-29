@@ -27,10 +27,10 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 
-dialogs_func.dialogs_alert("已完成");
+dialogs_alert("已完成");
 // func.dialogs_alert("已完成")
 
-function dialogs_func.dialogs_alert(title) {
+function dialogs_alert(title) {
     let dia_alear = dialogs.build({
         title: title || "",
         // contentColor: "#21211F",
