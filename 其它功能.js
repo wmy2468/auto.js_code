@@ -196,6 +196,7 @@ function 芭芭农场() {
                 }
                 toastLog("已到达福袋页面");
             }
+            click("去签到");
             sleep(3000);
             let continue_flag = false;
             while (1) {
@@ -243,7 +244,6 @@ function 芭芭农场() {
                 }
             }
             click("去领取");
-            click("去签到");
             sleep(2000);
         },
         tb施肥: function () {
