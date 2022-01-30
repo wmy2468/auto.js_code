@@ -38,6 +38,8 @@ function main() {
     else if (scriptName == "YSF相关") {
         select_func = func.dialogs_select(["YSF福气助力"]);
         if (select_func == "YSF福气助力") { 云闪付().YSF福气助力(); }
+        else if (select_func == "YSF福气助力") { 云闪付().YSF点福气任务(); }
+
     }
     else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
     else if (scriptName == "万商3比") { 万商3比(); }
@@ -46,6 +48,19 @@ function main() {
 
 function 云闪付() {
     let func_obj = {
+        YSF点福气任务: function () {
+            let x, y;
+            x = device.width / 2;
+            y = device.height / 2;
+            func.to_scheme("upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3Dcb895525e54c56e009b24face50d5a814ba088%26greetingId%3D1%26baifuId%3D1&encryptAppId=46411c55b29f8b49&scenarioId=1006");
+            toast("请跳转到游戏页面");
+            sleep(3500);
+            while (1) {
+                click(x, y);
+                toast("点击中心，需要请手动停止");
+                sleep(2500);
+            }
+        },
         YSF福气助力: function () {
             let url_head, url_end;
             url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3D";
