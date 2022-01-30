@@ -22,7 +22,7 @@ function main() {
         else if (select_func == "余额宝转入") { 支付宝().余额宝转入(); }
         else if (select_func == "余额宝转出") { 支付宝().余额宝转出(); }
         else if (select_func == "芭芭农场-淘宝施肥") { 芭芭农场().tb施肥(); }
-        else if (select_func == "芭芭农场-助力浏览施肥") {
+        else if (select_func == "芭芭农场-助力浏览") {
             let farms = 芭芭农场();
             farms.zfb助力(); farms.tb助力();
             farms.tb(); farms.zfb();
