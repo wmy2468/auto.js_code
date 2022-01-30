@@ -36,9 +36,9 @@ function main() {
         else if (select_func == "京东评价") { 京东().京东评价(); }
     }
     else if (scriptName == "YSF相关") {
-        select_func = func.dialogs_select(["YSF福气助力"]);
+        select_func = func.dialogs_select(["YSF福气助力", "YSF点福气任务"]);
         if (select_func == "YSF福气助力") { 云闪付().YSF福气助力(); }
-        else if (select_func == "YSF福气助力") { 云闪付().YSF点福气任务(); }
+        else if (select_func == "YSF点福气任务") { 云闪付().YSF点福气任务(); }
 
     }
     else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
