@@ -17,7 +17,7 @@ function main() {
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行财富季") { 建行财富季(); }
     else if (scriptName == "支付宝相关") {
-        select_func = func.dialogs_select(["芭芭农场-助力浏览", "芭芭农场-淘宝施肥", "支付宝捐款", "余额宝转出", "余额宝转入"]);
+        select_func = func.dialogs_select(object.keys(支付宝()));
         if (select_func == "支付宝捐款") { 支付宝().支付宝捐款(); }
         else if (select_func == "余额宝转入") { 支付宝().余额宝转入(); }
         else if (select_func == "余额宝转出") { 支付宝().余额宝转出(); }
@@ -29,14 +29,15 @@ function main() {
         }
     }
     else if (scriptName == "JD相关") {
-        select_func = func.dialogs_select(["京东评价", "跳转京东_剪贴板", "跳转极速版_剪贴板"]);
+        // select_func = func.dialogs_select(["京东评价", "跳转京东_剪贴板", "跳转极速版_剪贴板"]);
+        select_func = func.dialogs_select([object.keys(京东())]);
         if (select_func == "极速版挖宝") { 京东().极速版挖宝(); }
         else if (select_func == "跳转京东_剪贴板") { 京东().跳转京东_剪贴板(); }
         else if (select_func == "跳转极速版_剪贴板") { 京东().跳转极速版_剪贴板(); }
         else if (select_func == "京东评价") { 京东().京东评价(); }
     }
     else if (scriptName == "YSF相关") {
-        select_func = func.dialogs_select(["YSF福气助力", "YSF点福气任务"]);
+        select_func = func.dialogs_select([object.keys(云闪付())]);
         if (select_func == "YSF福气助力") { 云闪付().YSF福气助力(); }
         else if (select_func == "YSF点福气任务") { 云闪付().YSF点福气任务(); }
 
@@ -48,34 +49,21 @@ function main() {
 
 function 云闪付() {
     let func_obj = {
-        YSF点福气任务: function () {
-            let x, y;
-            x = device.width / 2;
-            y = device.height / 2;
-            func.to_scheme("upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3Dcb895525e54c56e009b24face50d5a814ba088%26greetingId%3D1%26baifuId%3D1&encryptAppId=46411c55b29f8b49&scenarioId=1006");
-            toast("请跳转到游戏页面");
-            sleep(3500);
-            while (1) {
-                click(x, y);
-                toast("点击中心，需要请手动停止");
-                sleep(2500);
-            }
-        },
         YSF福气助力: function () {
             let url_head, url_end;
             url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3D";
             url_end = "%26greetingId%3D1%26baifuId%3D1&encryptAppId=46411c55b29f8b49&scenarioId=1006";
             url_dict = {
-                "JJ-MATE30": "cb895525e54c56e009b24face50d5a814ba088",
-                "luyi1": "cb895525e54c50e709b249a0ea0458814aad8a",
-                "luyi2": "cb895525e64a55e104b54aa1e00c58804dae84",
-                "luyi3": "cb895525e54c50e104b74ea5e50c5b8c4da088",
-                "luyi4": "cb895525e64852ef06b14aace50d5c864aa88c",
-                "BP1": "cb895525e64a57e201b749ade5045c8145a98e",
-                "BP2": "cb895525e64a54e103b549a0ea0754864ca084",
+                // "JJ-MATE30": "cb895525e54c56e009b24face50d5a814ba088",
+                // "luyi1": "cb895525e54c50e709b249a0ea0458814aad8a",
+                // "luyi2": "cb895525e64a55e104b54aa1e00c58804dae84",
+                // "luyi3": "cb895525e54c50e104b74ea5e50c5b8c4da088",
+                // "luyi4": "cb895525e64852ef06b14aace50d5c864aa88c",
+                // "BP1": "cb895525e64a57e201b749ade5045c8145a98e",
+                // "BP2": "cb895525e64a54e103b549a0ea0754864ca084",
                 "BP3": "cb895525e64d55ef04b04face20355874ea884",
-                "JJ-REDMI": "cb895525e64b5be602b64cace1035c834eaa88",
-                "LP-HONOR8": "cb895525e64b5bef08b641a7e206598049a888",
+                // "JJ-REDMI": "cb895525e64b5be602b64cace1035c834eaa88",
+                // "LP-HONOR8": "cb895525e64b5bef08b641a7e206598049a888",
                 "LP-IPHONE": "cb895525e64a53e601b34da6e50459854aac8c",
             }
             let user_id, cnt;
