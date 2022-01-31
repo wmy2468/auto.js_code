@@ -8,6 +8,8 @@ var cfg = func.config_dict();
 // dev_honor8 = "FRD-AL00";
 // dev_redmi = "Redmi Note 7";
 
+// log(Object.keys(京东()));
+
 main();
 // toastLog(text("领取奖励").find().length);
 function main() {
@@ -17,7 +19,7 @@ function main() {
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行财富季") { 建行财富季(); }
     else if (scriptName == "支付宝相关") {
-        select_func = func.dialogs_select(object.keys(支付宝()));
+        select_func = func.dialogs_select(["芭芭农场-助力浏览", "芭芭农场-淘宝施肥", "支付宝捐款", "余额宝转入", "余额宝转出"]);
         if (select_func == "支付宝捐款") { 支付宝().支付宝捐款(); }
         else if (select_func == "余额宝转入") { 支付宝().余额宝转入(); }
         else if (select_func == "余额宝转出") { 支付宝().余额宝转出(); }
@@ -30,14 +32,14 @@ function main() {
     }
     else if (scriptName == "JD相关") {
         // select_func = func.dialogs_select(["京东评价", "跳转京东_剪贴板", "跳转极速版_剪贴板"]);
-        select_func = func.dialogs_select([object.keys(京东())]);
+        select_func = func.dialogs_select(Object.keys(京东()));
         if (select_func == "极速版挖宝") { 京东().极速版挖宝(); }
         else if (select_func == "跳转京东_剪贴板") { 京东().跳转京东_剪贴板(); }
         else if (select_func == "跳转极速版_剪贴板") { 京东().跳转极速版_剪贴板(); }
         else if (select_func == "京东评价") { 京东().京东评价(); }
     }
     else if (scriptName == "YSF相关") {
-        select_func = func.dialogs_select([object.keys(云闪付())]);
+        select_func = func.dialogs_select(Object.keys(云闪付()));
         if (select_func == "YSF福气助力") { 云闪付().YSF福气助力(); }
         else if (select_func == "YSF点福气任务") { 云闪付().YSF点福气任务(); }
 
