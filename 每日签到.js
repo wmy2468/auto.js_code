@@ -13,7 +13,7 @@ main();
 function main() {
     let show_arr;
     show_arr = ["京东.领京豆", "京东.领券中心", "京东.金融签到", "京东.金融双签", "京东.种豆得豆",
-        "京东.校园签到", "京东.陪伴计划签到", "京东.个护签到", "京东.鞋靴馆签到", "京东.服饰馆签到", "京东.箱包馆签到",
+        //                                                                                                                                                           "京东.校园签到", "京东.陪伴计划签到", "京东.个护签到", "京东.鞋靴馆签到", "京东.服饰馆签到", "京东.箱包馆签到",
         "京东.极速版领红包", "京东.极速版挖宝",
         "云闪付.签到", "云闪付.领积点",
         "沃钱包_泡泡签到", "浦发_金豆签到", "浦发xyk_积分签到", "农行_小豆签到", "值得买_签到", "买单吧_签到",
@@ -558,6 +558,10 @@ function 京东() {
             let jump_url = cfg["url_scheme"]["京东"][scheme_title];
             let click_func = function () {
                 func.sClick(text("签到领奖励").findOnce());
+                let howto = textContains("怎么领").depth(7).findOnce();
+                if (howto != null) {
+                    func.sClick(howto.parent.child(howto.indexInParent() + 1));
+                }
             }
             func_in_func.common_sign(scheme_title, jump_url, wait_element_load = 'className("ImageView").desc("领券中心").findOnce()',
                 complete_element = '!text("签到领奖励").findOnce()', click_func);
