@@ -359,10 +359,10 @@ function 中信活动() {
             func.to_app(appName);             // 启动APP
             // 等待进入指定页面
             couClick = text(targetViewText).findOnce();
-            while (!couClick) {
-                couClick = textContains(targetViewText).findOnce();
+            while (couClick == null) {
+                couClick = text(targetViewText).findOnce();
                 toastLog("请跳转到，首页-精彩365--5折友券,\n直到提示已到达等待页面");
-                sleep(2000);
+                sleep(2500);
             }
             toastLog("元素文本：" + couClick.text());
             func.getTimeDiff(timeArea, startTime, get_server_delay('https://creditcard.ecitic.com/'));              // 等待时间
