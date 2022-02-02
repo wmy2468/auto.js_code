@@ -286,6 +286,7 @@ function 交行9点5积分() {
 // 等待页面变价
 function 中信活动() {
     let appName = "动卡空间";
+    let pkgName = "com.citiccard.harmony.app";
     let timeArea = "北京时间";
     let startTime, targetViewText;
     let actNames = ["10点-15点-9积分兑换", "周三六11点-5折必胜客百果园", "9积分捡漏"];
@@ -355,7 +356,7 @@ function 中信活动() {
             startTime = "11,00,00,000";             // 设置时间点
             couDes = ["必胜客100元代金券", "必胜客50元代金券", "达美乐50元代金券", "肯德基50元", "呷哺呷哺"];             // 券名称
             targetViewText = func.dialogs_select(couDes);               // 设置查找的文本
-            func.to_app(appName);             // 启动APP
+            func.to_pkg(pkgName);             // 启动APP
             // 等待进入指定页面
             couClick = textContains(targetViewText).findOnce();
             while (!couClick) {

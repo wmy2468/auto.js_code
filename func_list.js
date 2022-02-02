@@ -116,6 +116,13 @@ function to_scheme(data_url) {
     });
 }
 
+function to_pkg(pkg_name) {
+    to_autojs();
+    sleep(800);
+    app.launchPackage(pkg_name);
+    waitForPackage(pkg_name, period = 100);
+}
+
 function to_app(appName) {
     to_autojs();
     sleep(800);
@@ -761,6 +768,7 @@ module.exports = {
     cClick: cClick,
     sClick: sClick,
     to_app: to_app,
+    to_pkg: to_pkg,
     to_autojs: to_autojs,
     to_scheme: to_scheme,
     toAppMulti: toAppMulti,
