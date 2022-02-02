@@ -354,14 +354,15 @@ function 中信活动() {
         case "周三六11点-5折必胜客百果园":
             toastLog("到点点击");
             startTime = "11,00,00,000";             // 设置时间点
-            couDes = ["必胜客100元代金券", "必胜客50元代金券", "达美乐50元代金券", "肯德基50元代金券", "呷哺呷哺"];             // 券名称
+            couDes = ["必胜客100元代金券", "必胜客50元代金券", "达美乐50元代金券", "肯德基50元代金券"];             // 券名称
             targetViewText = func.dialogs_select(couDes);               // 设置查找的文本
-            func.to_pkg(pkgName);             // 启动APP
+            func.to_app(appName);             // 启动APP
             // 等待进入指定页面
-            couClick = textContains(targetViewText).findOnce();
+            couClick = text(targetViewText).findOnce();
             while (!couClick) {
                 couClick = textContains(targetViewText).findOnce();
-                toastLog("请跳转到，首页-精彩365--5折友券,直到提示  已到达等待页面");
+                toastLog("请跳转到，首页-精彩365--5折友券,\n直到提示已到达等待页面");
+                sleep(2000);
             }
             toastLog("元素文本：" + couClick.text());
             func.getTimeDiff(timeArea, startTime, get_server_delay('https://creditcard.ecitic.com/'));              // 等待时间

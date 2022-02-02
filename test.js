@@ -27,7 +27,10 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 
-dialogs_alert("已完成");
+// func.to_app("动卡空间")
+log(text("肯德基50元代金券").findOnce())
+
+// dialogs_alert("已完成");
 // func.dialogs_alert("已完成")
 
 function dialogs_alert(title) {

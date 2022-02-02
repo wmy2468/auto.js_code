@@ -128,7 +128,7 @@ function to_app(appName) {
     sleep(800);
     while (currentPackage() != getPackageName(appName)) {
         launchApp(appName);
-        sleep(2000);
+        sleep(2500);
     }
 }
 
@@ -687,21 +687,28 @@ function dialogs_checkbox(inArr, titles, multi_choice) {
     if (titles == undefined) {
         titles = "选择启动";
     }
-    let select_index_list, last_indices;
+    let select_index_list, last_indices, check_last_indices;
+    check_last_indices = new Array();
     if (local_config.contains(titles)) {
         try {
             last_indices = local_config.get(titles);
+            log("last_indices:" + last_indices);
+            last_indices.forEach(idx => {
+                if (idx < inArr.length) {
+                    check_last_indices.push(idx);
+                }
+            })
         } catch (e) {
-            last_indices = [0];
+            check_last_indices = [0];
         }
     } else {
-        last_indices = [0];
+        check_last_indices = [0];
     }
     // 根据不同传入参数，显示单选或多选
     if (multi_choice == "单选") {
-        select_index_list = dialogs.singleChoice(titles, inArr, last_indices[0]);
+        select_index_list = dialogs.singleChoice(titles, inArr, check_last_indices[0]);
     } else if (multi_choice == "多选") {
-        select_index_list = dialogs.multiChoice(titles, inArr, last_indices);
+        select_index_list = dialogs.multiChoice(titles, inArr, check_last_indices);
     } else {
         alert("传入参数有误");
         exit();
@@ -755,7 +762,7 @@ function dialogs_alert(title) {
     });
     dia_alear.on("show", () => {
         setTimeout(function () {
-            log("准备退出");
+            log("dialogs_alert 退出");
             exit();
         }, 100);
     })

@@ -21,15 +21,20 @@ function main() {
     ]
     let select_items = func.dialogs_checkbox(show_arr, "每日签到记录", "多选");
     select_items.forEach(item => {
-        if (item.indexOf("京东") != -1 || item.indexOf("云闪付") != -1) { eval(item.replace(".", "().") + "()"); }
-        else if (item == "工商_小象乐园") { 工商_小象乐园(); }
+        // log(item);
+        if (item == undefined) {
+            log('current is undefinde');
+        } else {
+            if (item.indexOf("京东") != -1 || item.indexOf("云闪付") != -1) { eval(item.replace(".", "().") + "()"); }
+            else if (item == "工商_小象乐园") { 工商_小象乐园(); }
 
-        else if (item == "沃钱包_泡泡签到") { 沃钱包(); }
-        else if (item == "浦发_金豆签到") { 浦发_金豆签到(); }
-        else if (item == "浦发xyk_积分签到") { 浦发xyk_积分签到(); }
-        else if (item == "农行_小豆签到") { 农行_小豆签到(); }
-        else if (item == "值得买_签到") { 值得买_签到(); }
-        else if (item == "买单吧_签到") { 买单吧_签到(); }
+            else if (item == "沃钱包_泡泡签到") { 沃钱包(); }
+            else if (item == "浦发_金豆签到") { 浦发_金豆签到(); }
+            else if (item == "浦发xyk_积分签到") { 浦发xyk_积分签到(); }
+            else if (item == "农行_小豆签到") { 农行_小豆签到(); }
+            else if (item == "值得买_签到") { 值得买_签到(); }
+            else if (item == "买单吧_签到") { 买单吧_签到(); }
+        }
 
     });
     func.dialogs_alert("已完成.");
@@ -173,6 +178,7 @@ function 工商_小象乐园() {
     sleep(2000);
     if (textStartsWith("sign_done").findOnce() == null) {
         func.sClick(textStartsWith("sign").findOnce());
+        sleep(2500);
     } else {
         toastLog("今日已签到");
         sleep(3000);
