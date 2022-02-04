@@ -104,6 +104,7 @@ function 沃钱包() {
     func.to_app(appName);
     let paopao, wode;
     while (textContains("第3天").textStartsWith("+").findOnce() == null) {
+        func.sClick(textContains("下次再说").findOnce());
         func.sClick(idContains("wopay_wallet_advertisement_dialog_cancel_iv").findOnce());
         wode = idContains("wopay_main_mine_tv").text("我的").findOnce();
         if (wode != null) { wode.parent().click(); }

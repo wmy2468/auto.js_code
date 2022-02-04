@@ -265,9 +265,14 @@ function 芭芭农场() {
             btn_x = device.width / 2;
             log(btn_x);
             log(btn_y);
+            let cnt = 0;
             while (1) {
+                cnt = cnt + 1;
+                if (cnt > 100) {
+                    break;
+                }
                 click(btn_x, btn_y);
-                toast("如需要停止，手动操作");
+                toast("如需要停止，手动操作, 超过100次 自动停止");
                 sleep(2500);
             }
         },
