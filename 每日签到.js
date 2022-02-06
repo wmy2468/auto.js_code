@@ -404,19 +404,30 @@ function 浦发_金豆签到() {
         sleep(1000);
     }
     sleep(2000);
-    textContains("+").findOne();
+    textStartsWith("+").findOne();
     sleep(800);
-    let signs = textContains("+").find();
-    try {
-        for (let i = 0; i < signs.length; i++) {
-            if (signs[i].text().length <= 10) {
-                func.sClick(signs[i]);
+    let cnt, signs, sign_text;
+    while (1) {
+        cnt = 0;
+        signs = textStartsWith("+").find();
+        try {
+            for (let i = 0; i < signs.length; i++) {
+                sign_text = signs[i].text().replace("元", "");
+                if (sign_text * 0 == 0) {
+                    func.sClick(signs[i]);
+                    cnt = cnt + 1;
+                }
+            }
+            if (cnt <= 8) {
+                log("当前cnt:" + cnt);
+                break;
             }
         }
-    }
-    catch (e) {
-        toastLog("未找到多余的连续签到");
-        sleep(2000);
+        catch (e) {
+            toastLog("未找到多余的连续签到");
+            sleep(2000);
+        }
+
     }
     toastLog(appName + "已签到");
     sleep(3000);
