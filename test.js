@@ -29,7 +29,7 @@ jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"htt
 
 // func.to_app("动卡空间")
 textStartsWith("+").find().forEach(item => {
-    log(item.text() * 0 == 0);
+    log(item.text());
 })
 
 // dialogs_alert("已完成");

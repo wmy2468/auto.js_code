@@ -412,22 +412,22 @@ function 浦发_金豆签到() {
         signs = textStartsWith("+").find();
         try {
             for (let i = 0; i < signs.length; i++) {
-                sign_text = signs[i].text().replace("元", "");
+                sign_text = signs[i].text();
                 if (sign_text * 0 == 0) {
                     func.sClick(signs[i]);
                     cnt = cnt + 1;
                 }
             }
+            log("当前cnt为：" + cnt);
             if (cnt <= 8) {
-                log("当前cnt:" + cnt);
                 break;
             }
+
         }
         catch (e) {
             toastLog("未找到多余的连续签到");
-            sleep(2000);
         }
-
+        sleep(2500);
     }
     toastLog(appName + "已签到");
     sleep(3000);
