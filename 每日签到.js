@@ -578,7 +578,10 @@ function 京东() {
                 func.sClick(text("签到领奖励").findOnce());
                 let howto = textContains("怎么领").depth(7).findOnce();
                 if (howto != null) {
-                    func.sClick(howto.parent.child(howto.indexInParent() + 1));
+                    try {
+                        func.sClick(howto.parent.child(howto.indexInParent() + 1));
+                    }
+                    catch (e) { log('查找错误') }
                 }
             }
             func_in_func.common_sign(scheme_title, jump_url, wait_element_load = 'className("ImageView").desc("领券中心").findOnce()',
