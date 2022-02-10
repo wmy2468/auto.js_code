@@ -734,14 +734,19 @@ function 浦发xyk_积分签到() {
     let appName = "浦大喜奔";
     //closeApp(appName);
     func.to_app(appName);
-    while (text("我的").findOnce() == null) {
+    while (!func.sClick(text("我的").findOnce())) {
         func.sClick(idContains("close").findOnce());
         toastLog("等待 我的 按钮加载");
         sleep(2500);
     }
-    func.sClick(text("我的").findOne());
+    // func.sClick(text("我的").findOne());
     // 等待我的页面加载
-    text("我的订单").findOne();
+    while (text("我的订单").findOnce() == null) {
+        toast("等待我的订单加载");
+        sleep(2600);
+    }
+    toast("我的订单已加载");
+    sleep(2600);
     while (text("签到").findOnce() == null) {
         func.to_autojs();
         func.to_app(appName);
