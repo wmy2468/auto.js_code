@@ -365,7 +365,8 @@ function 中信活动() {
                 sleep(2500);
             }
             toastLog("元素文本：" + couClick.text());
-            func.getTimeDiff(timeArea, startTime, get_server_delay('https://creditcard.ecitic.com/'));              // 等待时间
+            func.getTimeDiff(timeArea, startTime, get_server_delay('https://creditcard.ecitic.com/'));
+            sleep(200);              // 等待时间
             func.sClick(couClick);             // 点击元素
             // 点击元素
             while (func.sClick(text("确认").findOnce()) == false) {
