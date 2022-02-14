@@ -27,10 +27,17 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 
-// func.to_app("动卡空间")
-textStartsWith("+").find().forEach(item => {
-    log(item.text());
-})
+let howto, howto_idx, howto_parent;
+
+howto = textContains("怎么领").depth(7).findOnce();
+howto_idx = howto.indexInParent();
+howto_parent = howto.parent();
+if (howto != null) {
+    try {
+        func.sClick(howto_parent.child(howto_idx + 1));
+    }
+    catch (e) { log('查找错误') }
+}
 
 // dialogs_alert("已完成");
 // func.dialogs_alert("已完成")

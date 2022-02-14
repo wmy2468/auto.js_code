@@ -574,12 +574,15 @@ function 京东() {
         领券中心: function () {
             let scheme_title = "领券中心";
             let jump_url = cfg["url_scheme"]["京东"][scheme_title];
+            let howto, howto_idx, howto_parent;
             let click_func = function () {
                 func.sClick(text("签到领奖励").findOnce());
-                let howto = textContains("怎么领").depth(7).findOnce();
+                howto = textContains("怎么领").depth(7).findOnce();
                 if (howto != null) {
                     try {
-                        func.sClick(howto.parent.child(howto.indexInParent() + 1));
+                        howto_idx = howto.indexInParent();
+                        howto_parent = howto.parent();
+                        func.sClick(howto_parent.child(howto_idx + 1));
                     }
                     catch (e) { log('查找错误') }
                 }
