@@ -94,7 +94,7 @@ if (selectIndex == "延迟测试") {
         m = today.getMinutes();         //分
         s = today.getSeconds();         //秒
         ms = today.getMilliseconds();   //毫秒
-        if ((m == "29" || m == "59") && s >= "40" && (halfHourFlag <= 0)) {
+        if ((m == "29" || m == "59") && s >= "45" && (halfHourFlag <= 0)) {
             halfHourFlag = halfHourFlag + 1;
         }
         return util.format(selectIndex + ":%d:%s:%s:%s\n", h, m, s, ms);

@@ -241,7 +241,7 @@ function 光大活动() {
         click_btn = textContains("立即抢购").findOnce();
     }
     //   定位元素
-    func.getTimeDiff(timeArea, startTime, get_server_delay('https://www.cebbank.com/'));
+    func.getTimeDiff(timeArea, startTime);
     if (click_btn == null) {
         func.sClick(text("确认购买").findOnce());
         func.sClick(textContains("立即抢购").findOnce());
@@ -365,7 +365,7 @@ function 中信活动() {
                 sleep(2500);
             }
             toastLog("元素文本：" + couClick.text());
-            func.getTimeDiff(timeArea, startTime, get_server_delay('https://creditcard.ecitic.com/'));
+            func.getTimeDiff(timeArea, startTime);
             sleep(200);              // 等待时间
             func.sClick(couClick);             // 点击元素
             // 点击元素
