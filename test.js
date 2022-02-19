@@ -27,16 +27,26 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 
-let howto, howto_idx, howto_parent;
+华彩生活瑞幸();
 
-howto = textContains("怎么领").depth(7).findOnce();
-howto_idx = howto.indexInParent();
-howto_parent = howto.parent();
-if (howto != null) {
-    try {
-        func.sClick(howto_parent.child(howto_idx + 1));
+function 华彩生活瑞幸() {
+    let appName, startTime, select_txt, timeArea;
+    timeArea = "北京时间";
+    appName = "华彩生活";
+    startTime = "10,00,00,000";
+    select_txt = func.dialogs_select(["23元瑞幸咖啡", "26元瑞幸咖啡", "29元瑞幸咖啡"]);
+    func.to_app(appName);
+    let click_btn = text("确认购买").depth(13).findOnce();
+    while (click_btn == null) {
+        func.sClick(textContains(select_txt).depth(15).findOnce());
+        toast("请手动跳转到券页面");
+        sleep(2500);
+        click_btn = text("确认购买").depth(13).findOnce();
     }
-    catch (e) { log('查找错误') }
+    toastLog("已找到指定按钮，请勿切换页面");
+    sleep(3000);
+    func.getTimeDiff(timeArea, startTime);
+    func.sClick(click_btn);
 }
 
 // dialogs_alert("已完成");

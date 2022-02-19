@@ -6,7 +6,7 @@ var cfg = func.config_dict();
 main();
 
 function main() {
-    let selectedArr = ["光大活动", "中信活动", "交行5积分", "招商便民生活", "招商倒计时领取",];
+    let selectedArr = ["光大活动", "中信活动", "交行5积分", "华彩生活瑞幸", "招商便民生活", "招商倒计时领取",];
     //---------------配置区域-----------------
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本        
     // 设置屏幕常亮6分钟
@@ -14,6 +14,7 @@ function main() {
     if (scriptName == "光大活动") { 光大活动(); }
     else if (scriptName == "中信活动") { 中信活动(); }
     else if (scriptName == "交行5积分") { 交行9点5积分(); }
+    else if (scriptName == "华彩生活瑞幸") { 华彩生活瑞幸(); }
     else if (scriptName == "招商便民生活") { 招商便民生活(); }
     else if (scriptName == "招商倒计时领取") { 招商倒计时领取(); }
     else if (scriptName == "云闪付2022新年") { 云闪付().云闪付2022新年(); }
@@ -34,6 +35,27 @@ function get_server_delay(req_url) {
 
 
 // ------------------------------------------------------
+
+function 华彩生活瑞幸() {
+    let appName, startTime, select_txt, timeArea;
+    timeArea = "北京时间";
+    appName = "华彩生活";
+    startTime = "10,00,00,000";
+    select_txt = func.dialogs_select(["23元瑞幸咖啡", "26元瑞幸咖啡", "29元瑞幸咖啡"]);
+    func.to_app(appName);
+    let click_btn = text("确认购买").depth(13).findOnce();
+    while (click_btn == null) {
+        func.sClick(textContains(select_txt).depth(15).findOnce());
+        toast("请手动跳转到券页面");
+        sleep(2500);
+        click_btn = text("确认购买").depth(13).findOnce();
+    }
+    toastLog("已找到指定按钮，请勿切换页面");
+    sleep(3000);
+    func.getTimeDiff(timeArea, startTime);
+    func.sClick(click_btn);
+}
+
 function 招商倒计时领取() {
     let select_txt, appName, url;
     appName = "招商银行"
