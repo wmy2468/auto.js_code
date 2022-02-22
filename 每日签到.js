@@ -169,7 +169,13 @@ function 工商_小象乐园() {
             sleep(1000);
         }
     }
-    mission_btn = left_banana.parent().parent().child(0).child(2);
+
+    if (left_banana.depth() == 12) {
+        // 荣耀8
+        mission_btn = left_banana.parent().parent().parent().child(0).child(2);
+    } else {
+        mission_btn = left_banana.parent().parent().child(0).child(2);
+    }
     func.sClick(mission_btn);
     sleep(800);
     func.sClick(text("进入任务中心查看更多任务").findOne());
@@ -499,6 +505,12 @@ function 京东() {
             }
         },
         极速版挖宝: function () {
+            let local_config = storages.create("local_config");
+            if (local_config.contains("极速版挖宝")) {
+                if (local_config.get("极速版挖宝") == new Date().getDate()) {
+                    return 0;
+                }
+            }
             func.to_scheme(cfg["url_scheme"]["京东"]["极速版挖宝"]);
             while (textContains("元微信现金恭喜").findOnce() == null) {
                 toastLog("等待加载...");
@@ -526,6 +538,18 @@ function 京东() {
                     if (scroll_bar == null) {
                         if (ex_count > 6) {
                             toastLog("查找钱币符号超时，表示已完成");
+                            // 关闭按钮
+                            // 等待钱币符号重新出现
+                            // 尝试点击一个按钮
+                            try {
+                                bar_parent = scroll_bar.parent().parent();
+                                click_parent = bar_parent.child(bar_parent.childCount() - 1).child(0).child(0);
+                                func.sClick(child_parent.child(0).child(0));
+                            } catch (e) {
+                                log(e);
+                            }
+                            // 记录今天日期，避免重复执行
+                            local_config.put("极速版挖宝", new Date().getDate());
                             break;
                         }
                         ex_count = ex_count + 1;

@@ -57,20 +57,17 @@ function 华彩生活瑞幸() {
 }
 
 function 招商倒计时领取() {
-    let select_txt, appName, url;
+    let appName, url;
     appName = "招商银行"
-    select_txt = func.dialogs_select(["年末美食狂欢节M1", "年末美食狂欢节M4", "啥也不选"])
-    if (select_txt == "年末美食狂欢节M1") { url = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https%253A%252F%252Fmarket.cmbchina.com%252FMPage%252Fonline%252F211025170821628%252Fftbb.html%253Fbehavior_entryid%253Dlff003001%2526behavior_pageid%253D31B15ED7%2526DeviceType%253DE%2526Version%253D9.9.0%2526SystemVersion%253D10%2526ATraceID%253De47883770b17411eb2449805822210bc%2526msid%253Dc5ada3aa3ff0464a918ae2af77adb890&shortUrl=https%253A%252F%252Fcmbt.cn%252Fa%252F456xRYghZ%253Fbehavior_entryid%253Dlff003001%2526behavior_pageid%253D31B15ED7%2526DeviceType%253DE%2526Version%253D9.9.0%2526SystemVersion%253D10%2526ATraceID%253De47883770b17411eb2449805822210bc%2526msid%253Dc5ada3aa3ff0464a918ae2af77adb890&appflag=0"; }
-    else if (select_txt == "年末美食狂欢节M4") { url = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https%253A%252F%252Fmarket.cmbchina.com%252FMPage%252Fonline%252F211025170821628%252Fftbb.html%253Fbehavior_entryid%253Dlff003001%2526behavior_pageid%253D31B15ED7%2526DeviceType%253DE%2526Version%253D9.9.0%2526SystemVersion%253D10%2526ATraceID%253De47883770b17411eb2449805822210bc%2526msid%253Dc5ada3aa3ff0464a918ae2af77adb890&shortUrl=https%253A%252F%252Fcmbt.cn%252Fa%252F456xRYghZ%253Fbehavior_entryid%253Dlff003001%2526behavior_pageid%253D31B15ED7%2526DeviceType%253DE%2526Version%253D9.9.0%2526SystemVersion%253D10%2526ATraceID%253De47883770b17411eb2449805822210bc%2526msid%253Dc5ada3aa3ff0464a918ae2af77adb890&appflag=0"; }
-    else if (select_txt == "啥也不选") { url = ""; }
-
+    url = "";
     if (url != "") {
         func.to_scheme(url);
     } else {
         func.to_app(appName);
     }
+    let cnt = 0;
     toastLog("等待立即领取出现");
-    func.sClick(textContains("立即领取").findOne());
+    func.sClick(textContains("立即").findOne())
     toastLog("已点击");
 }
 
@@ -113,8 +110,10 @@ function 招商便民生活() {
     popup_wait_text = "请选择奖品";
     select_text = func.dialogs_select(["双立人", "洁柔", "九阳", "1.8元", "5000微克", "4000微克"]);
     sure_btn = "确认领取";
-    url_target = "cmbmobilebank://cmbls/functionjump?action=gofuncid&funcid=16604001&cmb_app_trans_parms_start=here&fullUrl=https://actship-activityui.paas.cmbchina.com/ActPage.html?activityId=AGP202112301606513rnnPfOT&behavior_entryid=undefined&shortUrl=https://cmbt.cn/a/htREAc?activityId=AGP202112301606513rnnPfOT&behavior_entryid=undefined&appflag=0"
-    func.to_scheme(url_target);
+    while (textContains("登陆体验便民频道").findOnce() == null) {
+        toast("请跳转到 生活-便民活动领取页面");
+        sleep(2600);
+    }
     招商领取(page_text, wait_text, popup_wait_text, select_text, sure_btn);
 }
 

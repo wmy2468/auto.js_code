@@ -27,7 +27,81 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 
-华彩生活瑞幸();
+let local_config = storages.create("local_config");
+// local_config.put("极速版挖宝", new Date().getDate());
+log(local_config.get("极速版挖宝") == new Date().getDate())
+// 工商_小象乐园();
+
+function 工商_小象乐园() {
+    let appName = "中国工商银行";
+    //closeApp(appName);
+    func.to_scheme(cfg["url_scheme"]["工商"]["小象1"]);
+
+    while (textContains("你已经陪小象").findOnce() == null) {
+        toastLog("等待小象界面加载...");
+        sleep(2500);
+        if (text("请输入手势密码登录").findOnce()) {
+            toastLog("已找到手势密码按钮");
+            sleep(500);
+            func.gesture_pwd(appName);
+            toastLog("已输入 mima");
+            sleep(6000);
+            func.to_autojs();
+            toastLog("已切换到autojs，等待回去");
+            sleep(8000);
+            func.to_scheme(cfg["url_scheme"]["工商"]["小象2"]);
+            toastLog("已切换回工商");
+            sleep(3000);
+        }
+    }
+    log("已跳转回工商，等待查找剩余香蕉");
+    sleep(2000);
+    // 点击香蕉
+    // 点击任务
+    let left_banana, mission_btn;
+    while (1) {
+        left_banana = textStartsWith("剩余").findOnce();
+        if (left_banana != null) { break; }
+        left_banana = textContains("加载中...").findOnce();
+        if (left_banana != null) { break; }
+        sleep(1000);
+    }
+    sleep(1000);
+    // 查找并点击香蕉
+    let bananas;
+    bananas = className("ListView").rowCount(5).findOnce();
+    if (bananas != null) {
+        for (let i = bananas.childCount() - 1; i >= 0; i--) {
+            // 点击喂小象
+            func.cClick(left_banana);
+            sleep(1000);
+            // 点击香蕉
+            func.cClick(bananas.child(i));
+            sleep(1000);
+        }
+    }
+    if (left_banana.depth() == 12) {
+        // 荣耀8
+        mission_btn = left_banana.parent().parent().parent().child(0).child(2);
+    } else {
+        mission_btn = left_banana.parent().parent().child(0).child(2);
+    }
+    // mission_btn = left_banana.parent().parent().child(0).child(2);
+    func.sClick(mission_btn);
+    sleep(800);
+    func.sClick(text("进入任务中心查看更多任务").findOne());
+    sleep(800);
+    text("任务中心").findOne();
+    toastLog("已到达任务中心");
+    sleep(2000);
+    if (textStartsWith("sign_done").findOnce() == null) {
+        func.sClick(textStartsWith("sign").findOnce());
+        sleep(2500);
+    } else {
+        toastLog("今日已签到");
+        sleep(3000);
+    }
+}
 
 function 华彩生活瑞幸() {
     let appName, startTime, select_txt, timeArea;
