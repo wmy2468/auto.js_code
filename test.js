@@ -27,10 +27,10 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 
-let local_config = storages.create("local_config");
-// local_config.put("极速版挖宝", new Date().getDate());
-log(local_config.get("极速版挖宝") == new Date().getDate())
-// 工商_小象乐园();
+log(textContains("获得本关奖励").findOnce() == null)
+log(textContains("按钮进行微信提现").findOnce() == null)
+log(textContains("优惠券奖励已直接").findOnce() == null)
+log(textContains("继续挖宝").findOnce() == null)
 
 function 工商_小象乐园() {
     let appName = "中国工商银行";

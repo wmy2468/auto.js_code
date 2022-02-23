@@ -538,10 +538,20 @@ function 京东() {
                     if (scroll_bar == null) {
                         if (ex_count > 6) {
                             toastLog("查找钱币符号超时，表示已完成");
-                            // 关闭按钮
-                            // 等待钱币符号重新出现
-                            // 尝试点击一个按钮
                             try {
+                                // 关闭按钮
+                                // textContains("获得本关奖励").findOnce().parent().child(0)
+                                // textContains("按钮进行微信提现").findOnce().parent().child(0)
+                                // textContains("优惠券奖励已直接").findOnce().parent().child(0)
+                                // textContains("继续挖宝").findOnce().parent().child(0)
+                                // 等待钱币符号重新出现
+                                while (scroll_bar == null) {
+                                    func.sClick(textContains("继续挖宝").findOnce());
+                                    scroll_bar = text("¥").depth(16).findOnce();
+                                    toast("等待钱币符号加载...");
+                                    sleep(2600);
+                                }
+                                // 尝试点击一个按钮
                                 bar_parent = scroll_bar.parent().parent();
                                 click_parent = bar_parent.child(bar_parent.childCount() - 1).child(0).child(0);
                                 func.sClick(child_parent.child(0).child(0));
