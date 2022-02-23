@@ -378,6 +378,7 @@ function 农行_小豆签到() {
             func.gesture_pwd(appName);
             sleep(2000);
         }
+        sleep(2000);
     }
     sleep(3000);
     while (text("已经签到").findOnce() == null) {
@@ -795,15 +796,22 @@ function 浦发xyk_积分签到() {
     }
     sleep(1000);
     func.gesture_pwd(appName);
+    toastLog("手势密码输入完成");
     sleep(1000);
     // 等待签到页面加载
-    text("天天领福利").findOne();
-    sleep(1000);
+    text("每日签到").findOne();
+    toastLog("已找到每日签到");
+    sleep(2600);
     if (text("已签到").findOnce() == null) {
-        let waitSign = text("立即签到").findOne();
-        sleep(1000);
+        // waitSign = text("立即签到").findOnce();
+        while (text("立即签到").findOnce() == null) {
+            sleep(1000);
+            if (text("已签到").findOnce() != null) {
+                break;
+            }
+        }
         // func.sClick(waitSign.parent().parent().parent().parent().child(4));
-        func.sClick(waitSign);
+        func.sClick(text("立即签到").findOnce());
     }
     toastLog(appName + "已签到");
     sleep(1000);
