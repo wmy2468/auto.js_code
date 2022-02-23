@@ -451,11 +451,11 @@ function 京东() {
             */
             toastLog("任务:" + title + ",开始");
             func.to_scheme(jump_url);       //跳转app
-            while (eval("!" + wait_element_load)) {
+            while (eval("!(" + wait_element_load + ")")) {
                 toast("等待 活动开始页面 加载...");
                 sleep(2500);
             }
-            while (eval("!" + complete_element)) {
+            while (eval("!(" + complete_element + ")")) {
                 click_elements();
                 toast("等待 完成页面 加载...");
                 sleep(2500);
