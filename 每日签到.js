@@ -171,10 +171,10 @@ function 工商_小象乐园() {
     }
 
     if (left_banana.depth() == 12) {
+        mission_btn = left_banana.parent().parent().child(0).child(2);
+    } else {
         // 荣耀8
         mission_btn = left_banana.parent().parent().parent().child(0).child(2);
-    } else {
-        mission_btn = left_banana.parent().parent().child(0).child(2);
     }
     func.sClick(mission_btn);
     sleep(800);
