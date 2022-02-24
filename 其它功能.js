@@ -272,6 +272,7 @@ function 芭芭农场() {
                     break;
                 }
                 click(btn_x, btn_y);
+                func.sClick(text("关闭").findOnce());
                 toast("如需要停止，手动操作, 超过100次 自动停止");
                 sleep(2500);
             }
