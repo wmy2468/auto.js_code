@@ -27,9 +27,8 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 
-log(textContains("x0").findOnce())
-complete_element = 'textContains("x0").findOnce() != null || textContains("7点再来领取").findOnce() != null';
-log(eval("!(" + complete_element + ")"));
+log(true || false)
+log(textContains("x0").findOnce() != null);
 // log(textContains("获得本关奖励").findOnce() == null)
 // log(textContains("按钮进行微信提现").findOnce() == null)
 // log(textContains("优惠券奖励已直接").findOnce() == null)
