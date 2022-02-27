@@ -418,7 +418,8 @@ function 万商3比() {
     max = numRange.substring(3, 5) * 1;
     func.to_app(appName);
     sum = 0;
-    let counting = 1;
+    let counting = 1, total_count;
+    total_count = count;
     while (count > 0) {
         inputVal = random(min * 10, max * 10) / 10;
         sum = sum + inputVal * 10
@@ -434,7 +435,7 @@ function 万商3比() {
             // 如果找到信用卡认证，则点击关闭
             func.sClick(idContains("cancel").findOnce());
         }
-        toastLog("当前第：" + counting + "次，总" + count + "次");
+        toastLog("当前第：" + counting + "次，总" + total_count + "次");
         setText(inputVal);
         sleep(500);
         while (text("将二维码/条码放入框内，即可自动扫描").findOnce() == null) {
@@ -445,6 +446,7 @@ function 万商3比() {
             sleep(500);
         }
         back();
+        counting = counting + 1;
         count = count - 1;
     }
     log("total amount = " + sum / 10);

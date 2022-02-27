@@ -27,8 +27,11 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 
-log(true || false)
-log(textContains("x0").findOnce() != null);
+left_today = textContains("今日剩余").findOnce();
+log(left_today.text() == "今日剩余")
+left_idx = left_today.indexInParent();
+left_today_parent = left_today.parent();
+left_times = left_today_parent.child(left_idx + 1).text();
 // log(textContains("获得本关奖励").findOnce() == null)
 // log(textContains("按钮进行微信提现").findOnce() == null)
 // log(textContains("优惠券奖励已直接").findOnce() == null)
