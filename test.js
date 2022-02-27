@@ -27,8 +27,8 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 
-func.sClick(text("完成任务").findOnce())
-
+log(text("立即领取").findOnce())
+func.sClick(className("Button").depth(15).text("立即领取").findOnce());
 // requestScreenCapture();
 
 // let pic_folder, file_name
