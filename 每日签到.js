@@ -491,10 +491,12 @@ function 京东() {
                 if (left_today != null) {
                     try {
                         if (left_today.text() == "今日剩余") {
+                            log("今日剩余-1");
                             left_idx = left_today.indexInParent();
                             left_today_parent = left_today.parent();
                             left_times = left_today_parent.child(left_idx + 1).text();
                         } else {
+                            log("今日剩余-2");
                             left_times = left_today.text().slice(4, 5);
                         }
                         toastLog("当前剩余次数=" + left_times);
