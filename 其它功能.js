@@ -273,6 +273,14 @@ function 芭芭农场() {
                 }
                 click(btn_x, btn_y);
                 func.sClick(text("关闭").findOnce());
+                func.sClick(textContains("立即领取").findOnce());
+                if (text("合种管理").findOnce()) {
+                    if (func.sClick(textContains("立即领取").findOnce())) { sleep(2000); }
+                    if (func.sClick(textContains("立即领取").findOnce())) { sleep(2000); }
+                    if (func.sClick(textContains("立即领取").findOnce())) { sleep(2000); }
+                    sleep(1500);
+                    func.sClick(text("完成任务").findOnce());
+                }
                 toast("如需要停止，手动操作, 超过100次 自动停止");
                 sleep(2500);
             }
