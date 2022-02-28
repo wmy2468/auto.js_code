@@ -83,18 +83,20 @@ if (selectIndex == -1) {
     // 更新图片
     let suffix = "piccs/";
     let pic_path = dir + "/" + suffix;
-    files.ensureDir(pic_path);          // 确保路径存在
     let pic_name = rawInput("请输入要下载的图片名,例:xxx.jpg,xxx.png，无后缀默认png");
     if (pic_name == null || pic_name == '') {
         toastLog("未输入文件名，退出");
         exit();
     }
+    files.ensureDir(pic_path);          // 确保路径存在
     if (pic_name.indexOf('.png') == -1 && pic_name.indexOf('.jpg') == -1 && pic_name.indexOf('.jpeg') == -1) {
         pic_name = pic_name + '.png';
     }
     // 路径
-    let save_path = pic_path + fileName;    // 文件路径
-    let req_url = originUrl + suffix + fileName;     // 网络文件路径
+    let save_path = pic_path + pic_name;    // 文件路径
+    let req_url = originUrl + suffix + pic_name;     // 网络文件路径
+    log(save_path);
+    log(req_url);
     // 请求
     req = http.get(req_url)
     if (req.statusCode != '200') {

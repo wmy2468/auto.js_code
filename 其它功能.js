@@ -249,6 +249,14 @@ function 芭芭农场() {
             sleep(2000);
         },
         tb施肥: function () {
+            requestScreenCapture();
+            let pic_folder, file_name
+            pic_folder = (files.cwd() + "/piccs/");
+            file_name = "芭芭农场施肥可拆开.png"
+            let template;
+            template = images.read(pic_folder + file_name);
+            let match_point;
+
             func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
             let btn_ele = null;
             while (btn_ele == null) {
@@ -271,7 +279,11 @@ function 芭芭农场() {
                 if (cnt > 100) {
                     break;
                 }
-
+                match_point = images.findImage(captureScreen(), template, options = {
+                    threshold: 0.8,
+                    region: [0, device.width / 3],
+                })
+                if (match_point) { click(match_point.x, match_point.y) }
                 func.sClick(className("Button").text("立即领取").findOnce());
                 if (text("合种管理").findOnce() != null) {
                     log("找到合种管理");
