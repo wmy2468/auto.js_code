@@ -52,7 +52,8 @@ if (selectIndex == -1) {
     update_files();
     files.ensureDir(pic_path);          // 确保路径存在
     // 路径
-    let file_name_list = ["芭芭农场施肥可拆开.png", "芭芭农场施肥点击领取.png"];
+    let file_name_list = ["芭芭农场施肥可拆开.png", "芭芭农场施肥点击领取.png",
+        "ccb福气任务签到按钮.png", "ccb福气任务去完成.png", "ccb福气任务刷新按钮.png", "ccb福气任务页面.png",];
     // 请求
     let save_path, req_url, update_count;
     update_count = 0;

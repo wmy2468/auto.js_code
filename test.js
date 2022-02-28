@@ -32,7 +32,7 @@ jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"htt
 // log(text("立即领取").findOnce())
 // func.sClick(className("Button").depth(15).text("立即领取").findOnce());
 
-log(device.height / 3);
+func.to_scheme("weixin://")
 // requestScreenCapture();
 // let pic_folder, file_name
 // pic_folder = (files.cwd() + "/piccs/");

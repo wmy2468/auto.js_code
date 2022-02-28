@@ -1,6 +1,7 @@
 auto.waitFor();
 var func = require("func_list.js");
 var cfg = func.config_dict();
+var pic_folder = files.cwd() + "/piccs/";
 
 // var dev_model = device.model;
 // var dev_mate30, dev_honor8, dev_redmi;
