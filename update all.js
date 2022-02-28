@@ -63,9 +63,11 @@ if (selectIndex == -1) {
         if (req.statusCode != '200') {
             toastLog('网络读取错误，可能文件不存在')
             sleep(800);
+            log(pic_name + ", 更新失败");
             // alert('更新失败 退出');
         } else {
             // 写入文件
+            log(pic_name + ", 更新成功");
             update_count = update_count + 1;
             // files.write(save_path, req.body.string());
             files.writeBytes(save_path, req.body.bytes());
