@@ -44,7 +44,7 @@ if (selectIndex == -1) {
         alert("更新完成，请刷新页面");
     }
 } else if (selectIndex == 0) {
-    update_files();
+    alert('更新' + update_files() + '/' + jsFiles.length + '个文件');
 } else if (selectIndex == 1) {
     // 更新图片
     let suffix = "piccs/";
@@ -110,5 +110,6 @@ function update_files() {
         }
     }
     download_progress.dismiss();
-    alert('更新' + successCnt + '/' + jsFiles.length + '个文件');
+    return successCnt;
+
 }
