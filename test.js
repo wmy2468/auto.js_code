@@ -32,19 +32,19 @@ jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"htt
 // log(text("立即领取").findOnce())
 // func.sClick(className("Button").depth(15).text("立即领取").findOnce());
 
-
-requestScreenCapture();
-let pic_folder, file_name
-pic_folder = (files.cwd() + "/piccs/");
-file_name = "芭芭农场施肥点击领取.png"
-let template;
-template = images.read(pic_folder + file_name);
-let match_point;
-match_point = images.findImage(captureScreen(), template, options = {
-    threshold: 0.8,
-    region: [0, device.width / 3],
-})
-log(click(match_point.x, match_point.y));
+log(device.height / 3);
+// requestScreenCapture();
+// let pic_folder, file_name
+// pic_folder = (files.cwd() + "/piccs/");
+// file_name = "芭芭农场施肥点击领取.png"
+// let template;
+// template = images.read(pic_folder + file_name);
+// let match_point;
+// match_point = images.findImage(captureScreen(), template, options = {
+//     threshold: 0.8,
+//     region: [0, device.width / 3],
+// })
+// log(click(match_point.x, match_point.y));
 // log(textContains("获得本关奖励").findOnce() == null)
 // log(textContains("按钮进行微信提现").findOnce() == null)
 // log(textContains("优惠券奖励已直接").findOnce() == null)

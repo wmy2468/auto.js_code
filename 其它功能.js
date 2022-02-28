@@ -250,11 +250,10 @@ function 芭芭农场() {
         },
         tb施肥: function () {
             requestScreenCapture();
-            let pic_folder, file_name
-            pic_folder = (files.cwd() + "/piccs/");
-            file_name = "芭芭农场施肥可拆开.png"
-            let template;
-            template = images.read(pic_folder + file_name);
+            let pic_folder = (files.cwd() + "/piccs/");
+            let template, template2;
+            template = images.read(pic_folder + "芭芭农场施肥可拆开.png");
+            template2 = images.read(pic_folder + "芭芭农场施肥点击领取.png");
             let match_point;
 
             func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
@@ -268,12 +267,15 @@ function 芭芭农场() {
                     sleep(3000);
                 }
             }
+
             let btn_x, btn_y;
             btn_y = btn_ele.bounds().top + btn_ele.bounds().height() / 2;
             btn_x = device.width / 2;
             log(btn_x);
             log(btn_y);
             let cnt = 0;
+            let screen_shot, find_region;
+            find_region = [0, device.height / 3];
             while (1) {
                 cnt = cnt + 1;
                 if (cnt > 50) {
@@ -292,10 +294,17 @@ function 芭芭农场() {
                 }
                 click(btn_x, btn_y);
                 func.sClick(text("关闭").findOnce());
+                screen_shot = captureScreen();
                 // toast("如需要停止，手动操作, 超过100次 自动停止");
-                match_point = images.findImage(captureScreen(), template, options = {
+                match_point = images.findImage(screen_shot, template, options = {
                     threshold: 0.8,
-                    region: [0, device.width / 3],
+                    region: find_region,
+                })
+                if (match_point) { click(match_point.x, match_point.y) }
+                // 进入页面后查找是否有 施肥立即领取按钮
+                match_point = images.findImage(screen_shot, template2, options = {
+                    threshold: 0.8,
+                    region: find_region,
                 })
                 if (match_point) { click(match_point.x, match_point.y) }
             }

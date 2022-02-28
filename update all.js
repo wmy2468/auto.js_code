@@ -44,6 +44,38 @@ if (selectIndex == -1) {
         alert("更新完成，请刷新页面");
     }
 } else if (selectIndex == 0) {
+    update_files();
+} else if (selectIndex == 1) {
+    // 更新图片
+    let suffix = "piccs/";
+    let pic_path = dir + "/" + suffix;
+    update_files();
+    files.ensureDir(pic_path);          // 确保路径存在
+    // 路径
+    let file_name_list = ["芭芭农场施肥可拆开.png", "芭芭农场施肥点击领取.png"];
+    // 请求
+    let save_path, req_url, update_count;
+    update_count = 0;
+    file_name_list.forEach(pic_name => {
+        save_path = pic_path + pic_name;    // 文件路径
+        req_url = originUrl + suffix + pic_name;     // 网络文件路径
+        req = http.get(req_url)
+        if (req.statusCode != '200') {
+            toastLog('网络读取错误，可能文件不存在')
+            sleep(800);
+            // alert('更新失败 退出');
+        } else {
+            // 写入文件
+            update_count = update_count + 1;
+            // files.write(save_path, req.body.string());
+            files.writeBytes(save_path, req.body.bytes());
+        }
+    })
+    alert("更新:" + update_count + "/" + file_name_list.length + "个文件");
+}
+
+
+function update_files() {
     let download_progress = dialogs.build(
         {
             title: "下载进度",
@@ -79,34 +111,4 @@ if (selectIndex == -1) {
     }
     download_progress.dismiss();
     alert('更新' + successCnt + '/' + jsFiles.length + '个文件');
-} else if (selectIndex == 1) {
-    // 更新图片
-    let suffix = "piccs/";
-    let pic_path = dir + "/" + suffix;
-    let pic_name = rawInput("请输入要下载的图片名,例:xxx.jpg,xxx.png，无后缀默认png");
-    if (pic_name == null || pic_name == '') {
-        toastLog("未输入文件名，退出");
-        exit();
-    }
-    files.ensureDir(pic_path);          // 确保路径存在
-    if (pic_name.indexOf('.png') == -1 && pic_name.indexOf('.jpg') == -1 && pic_name.indexOf('.jpeg') == -1) {
-        pic_name = pic_name + '.png';
-    }
-    // 路径
-    let save_path = pic_path + pic_name;    // 文件路径
-    let req_url = originUrl + suffix + pic_name;     // 网络文件路径
-    log(save_path);
-    log(req_url);
-    // 请求
-    req = http.get(req_url)
-    if (req.statusCode != '200') {
-        toastLog('网络读取错误，可能文件不存在')
-        sleep(800);
-        alert('更新失败 退出');
-    } else {
-        // 写入文件
-        // files.write(save_path, req.body.string());
-        files.writeBytes(save_path, req.body.bytes());
-        alert("更新完成，请刷新页面");
-    }
 }
