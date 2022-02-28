@@ -36,7 +36,7 @@ jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"htt
 requestScreenCapture();
 let pic_folder, file_name
 pic_folder = (files.cwd() + "/piccs/");
-file_name = "芭芭农场施肥可拆开.png"
+file_name = "芭芭农场施肥点击领取.png"
 let template;
 template = images.read(pic_folder + file_name);
 let match_point;
