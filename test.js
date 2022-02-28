@@ -2,6 +2,8 @@ auto.waitFor();
 //toastLog(id("com.jd.lib.cashier.feature:id/cd").findOnce().click());
 var func = require("func_list.js");
 var cfg = func.config_dict();
+var pic_folder = files.cwd() + "/piccs/";
+
 let url_jd = "openApp.jdMobile://"
 var invite_friend_img_text = "047afc56e31d6d4b";
 var mission_key_word = "0爆竹";
@@ -26,13 +28,28 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 种豆得豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/plantBean/index.action"}'
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
+images.requestScreenCapture();
+st = new Date();
+log(find_img("ccb福气任务签到按钮.png", [810, 790, 200, 200]))
+log(new Date() - st);
+
+function find_img(file_name, find_region) {
+    let template = images.read(pic_folder + file_name);
+    let screenshot = captureScreen();
+    let match_point = images.findImage(screenshot, template, options = {
+        threshold: 0.8,
+        region: find_region,
+    })
+    // screenshot.recyle();       //回收截图资源
+    return match_point;
+}
 
 // log(files.cwd())
 
 // log(text("立即领取").findOnce())
 // func.sClick(className("Button").depth(15).text("立即领取").findOnce());
 
-func.to_scheme("weixin://")
+// func.to_scheme("weixin://")
 // requestScreenCapture();
 // let pic_folder, file_name
 // pic_folder = (files.cwd() + "/piccs/");

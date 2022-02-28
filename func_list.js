@@ -184,7 +184,7 @@ function toAppMulti(appName, cnt) {
         while (!(text("使用以下方式打开").findOnce() != null || text("请选择要使用的应用").findOnce() != null)) {
             sleep(500);
         }
-        sleep(1000);
+        sleep(2000);
         // 小米
         if (cnt == 1) { click(248, 1905); }
         // 第二个微信 678,1824,846,1992

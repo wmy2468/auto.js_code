@@ -274,7 +274,7 @@ function 芭芭农场() {
             log(btn_x);
             log(btn_y);
             let cnt = 0;
-            let screen_shot, find_region;
+            let screenshot, find_region;
             find_region = [0, device.height / 3];
             while (1) {
                 cnt = cnt + 1;
@@ -294,18 +294,19 @@ function 芭芭农场() {
                 }
                 click(btn_x, btn_y);
                 func.sClick(text("关闭").findOnce());
-                screen_shot = captureScreen();
+                screenshot = captureScreen();
                 // toast("如需要停止，手动操作, 超过100次 自动停止");
-                match_point = images.findImage(screen_shot, template, options = {
+                match_point = images.findImage(screenshot, template, options = {
                     threshold: 0.8,
                     region: find_region,
                 })
                 if (match_point) { click(match_point.x, match_point.y) }
                 // 进入页面后查找是否有 施肥立即领取按钮
-                match_point = images.findImage(screen_shot, template2, options = {
+                match_point = images.findImage(screenshot, template2, options = {
                     threshold: 0.8,
                     region: find_region,
                 })
+                // screenshot.recyle();
                 if (match_point) { click(match_point.x, match_point.y) }
             }
         },
@@ -865,12 +866,22 @@ function 支付宝() {
 // -----------------------建行财富季-----------------------
 function 建行财富季() {
     images.requestScreenCapture();
+    let find_regions = {
+        刷新按钮: [900, 1500, 170, 200],
+        去完成按钮: [1700, 730],
+        领取奖励按钮: [1700, 730],
+        立即签到按钮: [810, 790, 200, 200],
+    }
     let func_in_func = {
-        find_img: function (file_name) {
+        find_img: function (file_name, find_region) {
+            // log("find_region:" + find_region)
             let template = images.read(pic_folder + file_name);
-            let match_point = images.findImage(captureScreen(), template, options = {
+            let screenshot = captureScreen();
+            let match_point = images.findImage(screenshot, template, options = {
                 threshold: 0.8,
+                region: find_region,
             })
+            // screenshot.recyle();       //回收截图资源
             return match_point;
         },
         find_img_click: function (file_name) {
@@ -883,39 +894,44 @@ function 建行财富季() {
             }
         }
     };
+
     let func_obj = {
         in_mission_view: function () {
-            while (func_in_func.find_img("ccb福气任务刷新按钮.png") == null) {
+            while (func_in_func.find_img("ccb福气任务刷新按钮.png", find_regions.刷新按钮) == null) {
                 toast("请跳转到 ccb福气任务界面"); sleep(2600);
             }
-            toast("已到达 ccb福气任务界面"); sleep(2600);
+            toastLog("已到达 ccb福气任务界面"); sleep(2600);
+        },
+        to_do_mission: function () {
+            // 点击签到
+            func_in_func.find_img_click("ccb福气任务签到按钮.png", find_regions.立即签到按钮)
+            // 循环
+            while (func_in_func.find_img_click("ccb福气任务去完成.png")) {
+                toastLog("已点击，去完成，等待3秒"); sleep(3000);
+                toastLog("等待页面加载5秒"); sleep(5000);
+                // 等待返回
+                while (!func_in_func.find_img("ccb福气任务刷新按钮.png", find_regions.刷新按钮)) {
+                    back(); toastLog("执行返回，等待4秒"); sleep(4000);
+                }
+                while (!func_in_func.find_img_click("ccb福气任务刷新按钮.png", find_regions.刷新按钮)) {
+                    toastLog("点击刷新,失败"); sleep(4000);
+                }
+                toastLog("点击刷新,成功"); sleep(4000);
+                if (func_in_func.find_img_click("ccb福气任务领取奖励.png", find_regions.领取奖励按钮)) {
+                    toastLog("点击领取奖励, 成功"); sleep(5000);
+                }
+            }
         }
     };
 
-
-    func_in_func.find_img_click("ccb福气任务去完成.png");
-    func_obj.in_mission_view();     //到达任务界面
-    // 点击签到
-    func_in_func.find_img_click("ccb福气任务签到按钮.png");
-    // 循环
-    while (!func_in_func.find_img_click("ccb福气任务去完成.png")) {
-        toast("已点击，去完成，等待3秒"); sleep(3000);
-        toast("等待页面加载5秒"); sleep(5000);
-        // 等待返回
-        while (!func_in_func.find_img("ccb福气任务刷新按钮.png")) {
-            back(); toast("执行返回，等待4秒"); sleep(4000);
-        }
-        while (!func_in_func.find_img_click("ccb福气任务刷新按钮.png")) {
-            toast("点击刷新,失败"); sleep(4000);
-        }
-        toast("点击刷新,成功"); sleep(4000);
-        if (func_in_func.find_img_click("ccb福气任务领取奖励.png")) {
-            toast("点击领取奖励, 成功"); sleep(5000);
-        }
-    }
-
-    // func.to_appMulti("微信", 1);
-    // func.to_appMulti("微信", 2);
+    func.toAppMulti("微信", 1);
+    func_obj.in_mission_view();     // 到达任务界面
+    func_obj.to_do_mission();     // 做任务
+    func.toAppMulti("微信", 2);
+    func_obj.in_mission_view();     // 到达任务界面
+    func_obj.to_do_mission();     // 做任务
+    // 
+    // 
 }
 
 // // -----------------------建行财富季-----------------------
