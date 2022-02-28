@@ -875,18 +875,42 @@ function 建行财富季() {
         },
         find_img_click: function (file_name) {
             let match_point = func_in_func.find_img(file_name);
-            if (match_point) { click(match_point.x, match_point.y) }
+            if (match_point) {
+                click(match_point.x, match_point.y);
+                return true;
+            } else {
+                return false;
+            }
         }
     };
     let func_obj = {
         in_mission_view: function () {
-            while (func_in_func.find_img("ccb福气任务页面.png") == null) {
+            while (func_in_func.find_img("ccb福气任务刷新按钮.png") == null) {
                 toast("请跳转到 ccb福气任务界面"); sleep(2600);
             }
+            toast("已到达 ccb福气任务界面"); sleep(2600);
         }
     };
 
-    func_obj.in_mission_view();
+
+    // func_in_func.find_img_click("ccb福气任务去完成.png");
+    // func_obj.in_mission_view();     //到达任务界面
+    // 点击签到
+    // func_in_func.find_img_click("ccb福气任务签到按钮.png");
+    // 循环
+    // while (!func_in_func.find_img_click("ccb福气任务去完成.png")) {
+    //     toast("已点击，去完成，等待3秒"); sleep(3000);
+    //     toast("等待页面加载5秒"); sleep(5000);
+    //     // 等待返回
+    //     while (!func_in_func.find_img("ccb福气任务刷新按钮.png")) {
+    //         back(); toast("执行返回，等待4秒"); sleep(4000);
+    //     }
+    //     while (!func_in_func.find_img_click("ccb福气任务刷新按钮.png")) {
+    //         toast("点击刷新,失败"); sleep(4000);
+    //     }
+    //     toast("点击刷新,成功"); sleep(4000);
+    // }
+
     // func.to_appMulti("微信", 1);
     // func.to_appMulti("微信", 2);
 }
