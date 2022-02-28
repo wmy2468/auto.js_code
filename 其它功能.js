@@ -276,14 +276,9 @@ function 芭芭农场() {
             let cnt = 0;
             while (1) {
                 cnt = cnt + 1;
-                if (cnt > 100) {
+                if (cnt > 50) {
                     break;
                 }
-                match_point = images.findImage(captureScreen(), template, options = {
-                    threshold: 0.8,
-                    region: [0, device.width / 3],
-                })
-                if (match_point) { click(match_point.x, match_point.y) }
                 func.sClick(className("Button").text("立即领取").findOnce());
                 if (text("合种管理").findOnce() != null) {
                     log("找到合种管理");
@@ -297,9 +292,12 @@ function 芭芭农场() {
                 }
                 click(btn_x, btn_y);
                 func.sClick(text("关闭").findOnce());
-                toast("如需要停止，手动操作, 超过100次 自动停止");
-                sleep(2500);
-
+                // toast("如需要停止，手动操作, 超过100次 自动停止");
+                match_point = images.findImage(captureScreen(), template, options = {
+                    threshold: 0.8,
+                    region: [0, device.width / 3],
+                })
+                if (match_point) { click(match_point.x, match_point.y) }
             }
         },
         zfb: function () {
