@@ -12,7 +12,7 @@ var jsFiles = files.listDir(dir, function (name) {
 });
 
 var fileName, filePath, fileUrl;
-var selectedArr = ["更新所有文件"];
+var selectedArr = ["更新所有文件", "更新图片文件"];
 var selectIndex = dialogs.select('选择功能', selectedArr);
 var req, successCnt = 0;
 // 设置超时5秒
@@ -43,7 +43,7 @@ if (selectIndex == -1) {
         files.write(filePath, req.body.string());
         alert("更新完成，请刷新页面");
     }
-} else {
+} else if (selectIndex == 0) {
     let download_progress = dialogs.build(
         {
             title: "下载进度",
@@ -79,4 +79,32 @@ if (selectIndex == -1) {
     }
     download_progress.dismiss();
     alert('更新' + successCnt + '/' + jsFiles.length + '个文件');
+} else if (selectIndex == 1) {
+    // 更新图片
+    let suffix = "piccs/";
+    let pic_path = dir + "/" + suffix;
+    files.ensureDir(pic_path);          // 确保路径存在
+    let pic_name = rawInput("请输入要下载的图片名,例:xxx.jpg,xxx.png，无后缀默认png");
+    if (pic_name == null || pic_name == '') {
+        toastLog("未输入文件名，退出");
+        exit();
+    }
+    if (pic_name.indexOf('.png') == -1 && pic_name.indexOf('.jpg') == -1 && pic_name.indexOf('.jpeg') == -1) {
+        pic_name = pic_name + '.png';
+    }
+    // 路径
+    let save_path = pic_path + fileName;    // 文件路径
+    let req_url = originUrl + suffix + fileName;     // 网络文件路径
+    // 请求
+    req = http.get(req_url)
+    if (req.statusCode != '200') {
+        toastLog('网络读取错误，可能文件不存在')
+        sleep(800);
+        alert('更新失败 退出');
+    } else {
+        // 写入文件
+        // files.write(save_path, req.body.string());
+        files.writeBytes(save_path, req.body.bytes());
+        alert("更新完成，请刷新页面");
+    }
 }
