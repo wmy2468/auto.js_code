@@ -27,13 +27,17 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 
-log(text("立即领取").findOnce())
-func.sClick(className("Button").depth(15).text("立即领取").findOnce());
+log(files.cwd())
+
+// log(text("立即领取").findOnce())
+// func.sClick(className("Button").depth(15).text("立即领取").findOnce());
+
+
 // requestScreenCapture();
 
 // let pic_folder, file_name
-// pic_folder = (files.cwd() + "/piccs/");
-// file_name = "test.jpg"
+// pic_folder = (files.cwd() + "/piccs/淘宝农场/");
+// file_name = "施肥-可拆开福袋.png"
 // let template, img;
 // template = images.read(pic_folder + file_name);
 // let match_result;
