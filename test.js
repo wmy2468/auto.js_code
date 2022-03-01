@@ -4,7 +4,7 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-log(new Date().getHours())
+scrollDown();
 
 // let screenshot = images.captureScreen();
 // let img = images.read(pic_folder + "ccb福气任务刷新按钮.png");

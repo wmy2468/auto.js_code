@@ -575,12 +575,14 @@ function 京东() {
                                 // 尝试点击一个按钮
                                 bar_parent = scroll_bar.parent().parent();
                                 click_parent = bar_parent.child(bar_parent.childCount() - 1).child(0).child(0);
-                                if (func.sClick(child_parent.child(0).child(0))) {
+                                if (func.sClick(click_parent.child(0).child(0))) {
                                     toastLog("已点击挖宝按钮"); sleep(2600);
                                 } else {
                                     toastLog("点击挖宝按钮, 失败..."); sleep(2600);
                                 }
                             } catch (e) {
+                                toastLog("点击第二次挖宝 报错了");
+                                sleep(2600);
                                 log(e);
                             }
                             // 记录今天日期，避免重复执行

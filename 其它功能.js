@@ -870,7 +870,6 @@ function 建行财富季() {
             sleep(2600);
         },
         to_do_mission: function () {
-            let screenshot;
             // 点击签到
             if (func.match_img_click("ccb福气任务签到按钮.png", null, find_regions.立即签到按钮)) {
                 toastLog("已点击 立即签到");
@@ -901,7 +900,8 @@ function 建行财富季() {
                     sleep(5000);
                 }
             }
-        }
+        },
+        to_main_page: function () { }
     };
 
     func.toAppMulti("微信", 1);
