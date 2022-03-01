@@ -789,7 +789,7 @@ function match_imgs(file_name, screenshot, find_region, max_match) {
             max: max_match || 15,
         })
     find_img.recycle();
-    big_img.recycle();
+    // big_img.recycle();
     return match_point.points;
 }
 
