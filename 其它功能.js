@@ -862,7 +862,7 @@ function 建行财富季() {
         ccb好友列表界面: [260, 330, 200, 200],
         ccb主会场按钮: [70, 2180, 200, 100],
         ccb我的好友: [70, 1580, 200, 200],
-        ccb好友列表界面: [260, 330, 200, 200],
+        ccb好友列表底部: [120, 2140],
         ccb好友列表界面: [260, 330, 200, 200],
     }
     let func_obj = {
@@ -917,7 +917,7 @@ function 建行财富季() {
                 if (func.match_img_click("ccb我的好友.png", null, find_regions.ccb我的好友)) {
                     toastLog("已点击 ccb我的好友"); sleep(2600);
                 }
-                sleep(2600);
+                toastLog("查找完毕，等待下一次查找"); sleep(2600);
             }
         },
         in_friends_page: function () {
@@ -928,8 +928,17 @@ function 建行财富季() {
             }
 
         },
-        to_ends: function () { },
-        help_friends: function () { },
+        to_ends: function () {
+            while (!func.match_img("ccb好友列表底部.png", null, find_regions.ccb好友列表底部)) {
+                swipe(300, 1300, 300, 400, 300);
+                sleep(900);
+            }
+        },
+        help_friends: function () {
+            if (func.match_img_click("ccb好友去助力.png", null, find_regions.ccb好友去助力)) {
+                toastLog("已点击，ccb主会场按钮"); sleep(2600);
+            }
+        },
         complete_flag: function () { },
     };
 

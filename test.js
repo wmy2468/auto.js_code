@@ -3,13 +3,24 @@ auto.waitFor();
 var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
+
+let find_regions = {
+    ccb福气任务签到按钮: [810, 790, 200, 200],
+    ccb福气任务去完成: [800, 1700],
+    ccb福气任务刷新按钮: [900, 1500, 179, 200],
+    ccb福气任务领取奖励: [790, 1700],
+    ccb好友列表界面: [260, 330, 200, 200],
+    ccb主会场按钮: [70, 2180, 200, 100],
+    ccb我的好友: [70, 1580, 200, 200],
+    ccb好友列表底部: [120, 2140],
+    ccb好友列表界面: [260, 330, 200, 200],
+}
+
 requestScreenCapture();
+func.match_imgs("ccb好友去助力.png");
 
-find_region = [70, 2180, 200, 100];
 
-func.match_img("ccb我的好友.png");
-// func.match_img("ccb主会场按钮.png", null, find_region);
-
+// swipe(300, 1300, 300, 400, 300);        // 一次滑动3个人头
 
 // let screenshot = images.captureScreen();
 // let img = images.read(pic_folder + "ccb福气任务刷新按钮.png");
