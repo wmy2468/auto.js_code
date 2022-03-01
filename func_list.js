@@ -769,6 +769,41 @@ function dialogs_alert(title) {
     dia_alear.show();
 }
 
+// 返回多个结果，默认5
+function match_imgs(file_name, screenshot, find_region, max_match) {
+    let pic_folder = files.cwd() + "/piccs/";
+    // log("find_region:" + find_region)
+    let find_img = images.read(pic_folder + file_name);
+    screenshot = screenshot || images.captureScreen();
+    let match_point = images.matchTemplate(
+        img = screenshot,
+        template = find_img,
+        options = {
+            threshold: 0.8,
+            region: find_region,
+            max: max_match || 15,
+        })
+    find_img.recycle(); //回收图资源
+    return match_point.points;
+}
+
+// 只返回一个结果
+function match_img(file_name, screenshot, find_region) {
+    return match_imgs(file_name, screenshot, find_region, 1);
+}
+
+function match_img_click(file_name, screenshot, find_region) {
+    let match_point;
+    match_point = match_img(file_name, screenshot, find_region);
+    if (match_point) {
+        click(match_point.x, match_point, y);
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 module.exports = {
     config_dict: config_dict,
     floatyMove: floatyMove,
@@ -787,7 +822,10 @@ module.exports = {
     calTimeDiff: calTimeDiff,
     dialogs_alert: dialogs_alert,
     dialogs_select: dialogs_select,
-    dialogs_checkbox: dialogs_checkbox
+    dialogs_checkbox: dialogs_checkbox,
+    match_imgs: match_imgs,
+    match_img: match_img,
+    match_img_click: match_img_click,
 }
 
 
