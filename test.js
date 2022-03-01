@@ -32,19 +32,8 @@ requestScreenCapture();
 sa();
 
 function sa() {
-    let find_regions = {
-        立即签到按钮: [810, 790, 200, 200],
-        去完成按钮: [800, 1700],
-        刷新按钮: [900, 1500, 200, 200],
-        领取奖励按钮: [790, 1700],
-
-    };
     log(func.match_img("ccb福气任务签到按钮.png"));
     log(func.match_img("ccb福气任务去完成.png"));
-    log(func.match_img("ccb福气任务去完成.png"));
-    log(func.match_img("ccb福气任务去完成.png"));
-
-    // log(func.match_img("ccb福气任务刷新按钮.png"));
     log(func.match_img("ccb福气任务领取奖励.png"));
 
     //     undefined

@@ -775,9 +775,8 @@ function match_imgs(file_name, screenshot, find_region, max_match) {
     let find_img = images.read(pic_folder + file_name);
     if (!screenshot) {
         sleep(100);
-        captureScreen();
+        images.captureScreen();
     }
-
     let match_point = images.matchTemplate(
         img = screenshot,
         template = find_img,
@@ -787,7 +786,7 @@ function match_imgs(file_name, screenshot, find_region, max_match) {
             max: max_match || 15,
         })
     find_img.recycle();
-    screenshot.recycle();
+    if (screenshot) { screenshot.recycle(); }
     return match_point.points;
 }
 
