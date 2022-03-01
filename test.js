@@ -4,43 +4,24 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-let url_jd = "openApp.jdMobile://"
-var invite_friend_img_text = "047afc56e31d6d4b";
-var mission_key_word = "0爆竹";
-titles = "asdfasf";
-inArr = [1, 23, 4, 5];
-last_indices = [0];
-var dev_model = device.model;
-var dev_mate30, dev_honor8, dev_redmi;
-dev_mate30 = "TAS-AL00";
-dev_honor8 = "FRD-AL00";
-dev_redmi = "Redmi Note 7";
 
-url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3D";
-url_end = "%26greetingId%3D1%26baifuId%3D1&encryptAppId=46411c55b29f8b49&scenarioId=1006";
-url_dict = "cb895525e54c56e009b24face50d5a814ba088";
+// for (tt in func) {
+//     log(tt);
+// }
 
-jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.jd.com/?activityId=pTTvJeSTrpthgk9ASBVGsw&inviterId=YCQC5KqI8pcwIWRdZoUtoV1TkoIVm_064LWtTUNvKIg&utm_user=plusmember&ad_od=share&utm_source=androidapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends"}'
+images.requestScreenCapture();
+log(func.match_img("ccb福气任务刷新按钮.png"));
+log(func.match_img("ccb福气任务刷新按钮.png"));
+log(func.match_img("ccb福气任务刷新按钮.png"));
+log(func.match_img("ccb福气任务刷新按钮.png"));
+log(func.match_img("ccb福气任务刷新按钮.png"));
+log(func.match_img("ccb福气任务刷新按钮.png"));
+log(func.match_img("ccb福气任务刷新按钮.png"));
 
 
-超市签到 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://jdsupermarket.jd.com/game/?from=header"}'
-个护签到 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://prodev.m.jd.com/mall/active/2tZssTgnQsiUqhmg5ooLSHY9XSeN/index.html#/"}'
-种豆得豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/plantBean/index.action"}'
-url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
-jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
-requestScreenCapture();
-sa();
-
-function sa() {
-    log(match_img("ccb福气任务签到按钮.png"));
-    log(match_img("ccb福气任务去完成.png"));
-    log(match_img("ccb福气任务领取奖励.png"));
-
-    //     undefined
-    // 13:12:12.752/D: {822.0, 1788.0}
-    // 13:12:13.570/D: {907.0, 1513.0}
-    // 13:20:39.705/D: {794.0, 1788.0}
-}
+// let screenshot = images.captureScreen();
+// let img = images.read(pic_folder + "ccb福气任务刷新按钮.png");
+// log(images.matchTemplate(screenshot, img))
 
 
 function match_imgs(file_name, screenshot, find_region, max_match) {
