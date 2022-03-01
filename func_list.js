@@ -792,7 +792,7 @@ function match_img(file_name, screenshot, find_region) {
     let match_result;
     match_result = match_imgs(file_name, screenshot, find_region, 1);
     if (match_result == []) {
-        return match_result;
+        return null;
     } else {
         return match_result[0];
     }
