@@ -3,8 +3,13 @@ auto.waitFor();
 var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
+requestScreenCapture();
 
-log(func.match_img("ccb好友列表界面.png"));
+find_region = [70, 2180, 200, 100];
+
+func.match_img("ccb我的好友.png");
+// func.match_img("ccb主会场按钮.png", null, find_region);
+
 
 // let screenshot = images.captureScreen();
 // let img = images.read(pic_folder + "ccb福气任务刷新按钮.png");

@@ -855,14 +855,19 @@ function 支付宝() {
 function 建行财富季() {
     requestScreenCapture();
     let find_regions = {
-        立即签到按钮: [810, 790, 200, 200],
-        去完成按钮: [800, 1700],
-        刷新按钮: [900, 1500, 179, 200],
-        领取奖励按钮: [790, 1700],
+        ccb福气任务签到按钮: [810, 790, 200, 200],
+        ccb福气任务去完成: [800, 1700],
+        ccb福气任务刷新按钮: [900, 1500, 179, 200],
+        ccb福气任务领取奖励: [790, 1700],
+        ccb好友列表界面: [260, 330, 200, 200],
+        ccb主会场按钮: [70, 2180, 200, 100],
+        ccb我的好友: [70, 1580, 200, 200],
+        ccb好友列表界面: [260, 330, 200, 200],
+        ccb好友列表界面: [260, 330, 200, 200],
     }
     let func_obj = {
         in_mission_view: function () {
-            while (!func.match_img("ccb福气任务刷新按钮.png", null, find_regions.刷新按钮)) {
+            while (!func.match_img("ccb福气任务刷新按钮.png", null, find_regions.ccb福气任务刷新按钮)) {
                 toast("请跳转到 ccb福气任务界面");
                 sleep(2600);
             }
@@ -871,45 +876,59 @@ function 建行财富季() {
         },
         to_do_mission: function () {
             // 点击签到
-            if (func.match_img_click("ccb福气任务签到按钮.png", null, find_regions.立即签到按钮)) {
+            if (func.match_img_click("ccb福气任务签到按钮.png", null, find_regions.ccb福气任务签到按钮)) {
                 toastLog("已点击 立即签到");
             } else {
                 toastLog("未找到 立即签到");
             }
             sleep(2000);
             // 循环
-            while (func.match_img_click("ccb福气任务去完成.png", null, find_regions.去完成按钮)) {
+            while (func.match_img_click("ccb福气任务去完成.png", null, find_regions.ccb福气任务去完成)) {
                 toastLog("已点击，去完成，等待3秒");
                 sleep(3000);
                 toastLog("等待页面加载5秒");
                 sleep(5000);
                 // 等待返回
-                while (!func.match_img("ccb福气任务刷新按钮.png", null, find_regions.刷新按钮)) {
+                while (!func.match_img("ccb福气任务刷新按钮.png", null, find_regions.ccb福气任务刷新按钮)) {
                     back();
                     toastLog("执行返回，等待4秒");
                     sleep(4000);
                 }
-                while (!func.match_img_click("ccb福气任务刷新按钮.png", null, find_regions.刷新按钮)) {
+                while (!func.match_img_click("ccb福气任务刷新按钮.png", null, find_regions.ccb福气任务刷新按钮)) {
                     toastLog("点击刷新,失败");
                     sleep(4000);
                 }
                 toastLog("点击刷新,成功");
                 sleep(4000);
-                if (func.match_img_click("ccb福气任务领取奖励.png", null, find_regions.领取奖励按钮)) {
+                if (func.match_img_click("ccb福气任务领取奖励.png", null, find_regions.ccb福气任务领取奖励)) {
                     toastLog("点击领取奖励, 成功");
                     sleep(5000);
                 }
             }
         },
         to_main_page: function () {
-            // 点击主会场按钮
-            // 点击我的好友按钮
+            while (!func_obj.in_friends_page()) {
+                // 点击主会场按钮
+                if (func.match_img_click("ccb主会场按钮.png", null, find_regions.ccb主会场按钮)) {
+                    toastLog("已点击，ccb主会场按钮"); sleep(2600);
+                }
+                sleep(800);
+                // 点击我的好友按钮
+                if (func.match_img_click("ccb我的好友.png", null, find_regions.ccb我的好友)) {
+                    toastLog("已点击 ccb我的好友"); sleep(2600);
+                }
+                sleep(2600);
+            }
         },
         in_friends_page: function () {
-                        ccb好友列表界面
+            if (func.match_img("ccb好友列表界面.png", null, find_regions.ccb好友列表界面)) {
+                return true;
+            } else {
+                return false;
+            }
 
-         },
-        to_luyi: function () { },
+        },
+        to_ends: function () { },
         help_friends: function () { },
         complete_flag: function () { },
     };
