@@ -883,8 +883,7 @@ function 建行财富季() {
                 threshold: 0.8,
                 region: find_region,
             })
-            template.recycle();
-            screenshot.recycle();       //回收截图资源
+            template.recycle(); //回收图资源
             return match_point;
         },
         find_img_click: function (file_name) {
