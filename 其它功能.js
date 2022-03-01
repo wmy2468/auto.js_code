@@ -863,7 +863,8 @@ function 建行财富季() {
         ccb主会场按钮: [70, 2180, 200, 100],
         ccb我的好友: [70, 1580, 200, 200],
         ccb好友列表底部: [120, 2140],
-        ccb好友列表界面: [260, 330, 200, 200],
+        ccb好友助力界面: [200, 1560, 200, 200],
+        ccb好友助力按钮: [450, 1880, 200, 200],
     }
     let func_obj = {
         in_mission_view: function () {
@@ -935,9 +936,14 @@ function 建行财富季() {
             }
         },
         help_friends: function () {
-            if (func.match_img_click("ccb好友去助力.png", null, find_regions.ccb好友去助力)) {
-                toastLog("已点击，ccb主会场按钮"); sleep(2600);
+            while (!func.match_img_click("ccb好友去助力.png", null, find_regions.ccb好友去助力)) {
+                toastLog("等待点击，ccb主会场按钮"); sleep(2600);
             }
+            while (!func.match_img("ccb好友助力界面.png", null, find_regions.ccb好友助力界面)) {
+                toastLog("等待 助力页面加载"); sleep(2600);
+            }
+            sleep(1500);
+            func.match_img_click("ccb好友助力按钮.png", null, find_regions.ccb好友助力按钮);
         },
         complete_flag: function () { },
     };
