@@ -294,7 +294,7 @@ function 芭芭农场() {
                 }
                 click(btn_x, btn_y);
                 func.sClick(text("关闭").findOnce());
-                screenshot = captureScreen();
+                screenshot = images.captureScreen();
                 // toast("如需要停止，手动操作, 超过100次 自动停止");
                 match_point = images.findImage(screenshot, template, options = {
                     threshold: 0.8,
@@ -306,9 +306,11 @@ function 芭芭农场() {
                     threshold: 0.8,
                     region: find_region,
                 })
-                // screenshot.recyle();
                 if (match_point) { click(match_point.x, match_point.y) }
+                screenshot.recycle();
             }
+            template.recycle();
+            template2.recycle();
         },
         zfb: function () {
             func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
@@ -876,12 +878,13 @@ function 建行财富季() {
         find_img: function (file_name, find_region) {
             // log("find_region:" + find_region)
             let template = images.read(pic_folder + file_name);
-            let screenshot = captureScreen();
+            let screenshot = images.captureScreen();
             let match_point = images.findImage(screenshot, template, options = {
                 threshold: 0.8,
                 region: find_region,
             })
-            // screenshot.recyle();       //回收截图资源
+            template.recycle();
+            screenshot.recycle();       //回收截图资源
             return match_point;
         },
         find_img_click: function (file_name) {
