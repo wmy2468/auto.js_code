@@ -32,9 +32,9 @@ requestScreenCapture();
 sa();
 
 function sa() {
-    log(func.match_img("ccb福气任务签到按钮.png"));
-    log(func.match_img("ccb福气任务去完成.png"));
-    log(func.match_img("ccb福气任务领取奖励.png"));
+    log(match_img("ccb福气任务签到按钮.png"));
+    log(match_img("ccb福气任务去完成.png"));
+    log(match_img("ccb福气任务领取奖励.png"));
 
     //     undefined
     // 13:12:12.752/D: {822.0, 1788.0}
@@ -43,12 +43,13 @@ function sa() {
 }
 
 
-
 function match_imgs(file_name, screenshot, find_region, max_match) {
     let pic_folder = files.cwd() + "/piccs/";
-    // log("find_region:" + find_region)
     let find_img = images.read(pic_folder + file_name);
-    screenshot = screenshot || images.captureScreen();
+    if (!screenshot) {
+        sleep(100);
+        images.captureScreen();
+    }
     let match_point = images.matchTemplate(
         img = screenshot,
         template = find_img,
@@ -57,8 +58,20 @@ function match_imgs(file_name, screenshot, find_region, max_match) {
             region: find_region,
             max: max_match || 15,
         })
-    find_img.recycle(); //回收图资源
+    find_img.recycle();
+    if (screenshot) { screenshot.recycle(); }
     return match_point.points;
+}
+
+// 只返回一个结果
+function match_img(file_name, screenshot, find_region) {
+    let match_result;
+    match_result = match_imgs(file_name, screenshot, find_region, 1);
+    if (match_result == []) {
+        return null;
+    } else {
+        return match_result[0];
+    }
 }
 
 
