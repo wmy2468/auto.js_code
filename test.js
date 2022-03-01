@@ -29,21 +29,31 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
 requestScreenCapture();
-res = match_img("ccb福气任务刷新按钮.png", null, null, 1);
-log(res.x);
+sa();
 
+function sa() {
+    let find_regions = {
+        立即签到按钮: [810, 790, 200, 200],
+        去完成按钮: [800, 1700],
+        刷新按钮: [900, 1500, 200, 200],
+        领取奖励按钮: [790, 1700],
 
-function match_img(file_name, screenshot, find_region) {
-    let match_result;
-    match_result = match_imgs(file_name, screenshot, find_region, 1);
-    if (match_result == []) {
-        log("empty")
-        return match_result;
-    } else {
-        log("return");
-        return match_result[0];
-    }
+    };
+    log(func.match_img("ccb福气任务签到按钮.png"));
+    log(func.match_img("ccb福气任务去完成.png"));
+    log(func.match_img("ccb福气任务去完成.png"));
+    log(func.match_img("ccb福气任务去完成.png"));
+
+    // log(func.match_img("ccb福气任务刷新按钮.png"));
+    log(func.match_img("ccb福气任务领取奖励.png"));
+
+    //     undefined
+    // 13:12:12.752/D: {822.0, 1788.0}
+    // 13:12:13.570/D: {907.0, 1513.0}
+    // 13:20:39.705/D: {794.0, 1788.0}
 }
+
+
 
 function match_imgs(file_name, screenshot, find_region, max_match) {
     let pic_folder = files.cwd() + "/piccs/";

@@ -772,9 +772,12 @@ function dialogs_alert(title) {
 // 返回多个结果，默认5
 function match_imgs(file_name, screenshot, find_region, max_match) {
     let pic_folder = files.cwd() + "/piccs/";
-    // log("find_region:" + find_region)
     let find_img = images.read(pic_folder + file_name);
-    screenshot = screenshot || images.captureScreen();
+    if (!screenshot) {
+        sleep(100);
+        captureScreen();
+    }
+
     let match_point = images.matchTemplate(
         img = screenshot,
         template = find_img,
@@ -783,7 +786,8 @@ function match_imgs(file_name, screenshot, find_region, max_match) {
             region: find_region,
             max: max_match || 15,
         })
-    find_img.recycle(); //回收图资源
+    find_img.recycle();
+    screenshot.recycle();
     return match_point.points;
 }
 
