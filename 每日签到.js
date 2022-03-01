@@ -454,14 +454,22 @@ function 京东() {
             */
             toastLog("任务:" + title + ",开始");
             func.to_scheme(jump_url);       //跳转app
-            while (eval("!(" + wait_element_load + ")")) {
-                toast("等待 活动开始页面 加载...");
-                sleep(2500);
+            while (1) {
+                if (eval("(" + wait_element_load + ")")) {
+                    break;
+                } else {
+                    toastLog("等待 活动开始页面 加载...");
+                    sleep(2500);
+                }
             }
-            while (eval("!(" + complete_element + ")")) {
+            while (1) {
                 click_elements();
-                toast("等待 完成页面 加载...");
-                sleep(2500);
+                if (eval("(" + complete_element + ")")) {
+                    break;
+                } else {
+                    toastLog("等待 完成页面 加载...");
+                    sleep(2500);
+                }
             }
             toastLog("任务:" + title + ", 已完成");
             sleep(2500);
@@ -502,9 +510,13 @@ function 京东() {
                         }
                         toastLog("当前剩余次数=" + left_times);
                     } catch (e) {
+                        toastLog("捕捉到错误,记录文本：" + left_today.text());
+                        sleep(2600);
                         continue;
                     }
                     func.sClick(left_today.parent().parent());
+                } else {
+                    toastLog("未找到文本：今日剩余");
                 }
                 sleep(2500);
             }
