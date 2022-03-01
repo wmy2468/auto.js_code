@@ -4,20 +4,7 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-
-// for (tt in func) {
-//     log(tt);
-// }
-
-images.requestScreenCapture();
-log(func.match_img("ccb福气任务刷新按钮.png"));
-log(func.match_img("ccb福气任务刷新按钮.png"));
-log(func.match_img("ccb福气任务刷新按钮.png"));
-log(func.match_img("ccb福气任务刷新按钮.png"));
-log(func.match_img("ccb福气任务刷新按钮.png"));
-log(func.match_img("ccb福气任务刷新按钮.png"));
-log(func.match_img("ccb福气任务刷新按钮.png"));
-
+log(new Date().getHours())
 
 // let screenshot = images.captureScreen();
 // let img = images.read(pic_folder + "ccb福气任务刷新按钮.png");

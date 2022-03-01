@@ -1,7 +1,6 @@
 auto.waitFor();
 var func = require("func_list.js");
 var cfg = func.config_dict();
-var pic_folder = files.cwd() + "/piccs/";
 
 // var dev_model = device.model;
 // var dev_mate30, dev_honor8, dev_redmi;
@@ -19,8 +18,13 @@ function main() {
         "云闪付.签到", "云闪付.领积点",
         "沃钱包_泡泡签到", "浦发_金豆签到", "浦发xyk_积分签到", "农行_小豆签到", "值得买_签到", "买单吧_签到",
         "工商_小象乐园",
-    ]
-    let select_items = func.dialogs_checkbox(show_arr, "每日签到记录", "多选");
+    ];
+    let select_items;
+    if (new Date().getHours() <= 3) {
+        select_items = ["京东.极速版挖宝"];
+    } else {
+        select_items = func.dialogs_checkbox(show_arr, "每日签到记录", "多选");
+    }
     select_items.forEach(item => {
         // log(item);
         if (item == undefined) {
