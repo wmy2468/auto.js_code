@@ -901,7 +901,17 @@ function 建行财富季() {
                 }
             }
         },
-        to_main_page: function () { }
+        to_main_page: function () {
+            // 点击主会场按钮
+            // 点击我的好友按钮
+        },
+        in_friends_page: function () {
+                        ccb好友列表界面
+
+         },
+        to_luyi: function () { },
+        help_friends: function () { },
+        complete_flag: function () { },
     };
 
     func.toAppMulti("微信", 1);

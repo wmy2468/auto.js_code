@@ -598,7 +598,7 @@ function 京东() {
                     log("click_parent.childCount():" + click_parent.childCount());
                     for (let i = 0; i < click_parent.childCount(); i++) {
                         item = click_parent.child(i);
-                        log("item.childCount():" + item.childCount());
+                        // log("item.childCount():" + item.childCount());
                         if (item.childCount() == 1) {
                             func.sClick(item.child(0));
                             toastLog("已点击...");
