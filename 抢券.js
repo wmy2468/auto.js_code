@@ -59,7 +59,7 @@ function 华彩生活瑞幸() {
 function 招商倒计时领取() {
     let appName, url;
     appName = "招商银行"
-    url = "";
+    url = ""; mmm
     if (url != "") {
         func.to_scheme(url);
     } else {
@@ -110,7 +110,7 @@ function 招商便民生活() {
     popup_wait_text = "请选择奖品";
     select_text = func.dialogs_select(["双立人", "洁柔", "九阳", "1.8元", "5000微克", "4000微克"]);
     sure_btn = "确认领取";
-    while (textContains("登陆体验便民频道").findOnce() == null) {
+    while (textContains("体验便民频道").findOnce() == null) {
         toast("请跳转到 生活-便民活动领取页面");
         sleep(2600);
     }

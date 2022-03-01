@@ -28,17 +28,7 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 种豆得豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/plantBean/index.action"}'
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
-images.requestScreenCapture();
-// st = new Date();
-// log(find_img("ccb福气任务签到按钮.png", [810, 790, 200, 200]))
-// log(new Date() - st);
-
-let screenshot = captureScreen();
-// let template = images.read(pic_folder + "ccb福气任务签到按钮.png");
-for (tt in screenshot) {
-    log(tt);
-}
-screenshot.recycle();
+log(textContains("便民频道").findOnce());
 
 function find_img(file_name, find_region) {
     let template = images.read(pic_folder + file_name);
