@@ -789,14 +789,20 @@ function match_imgs(file_name, screenshot, find_region, max_match) {
 
 // 只返回一个结果
 function match_img(file_name, screenshot, find_region) {
-    return match_imgs(file_name, screenshot, find_region, 1);
+    let match_result;
+    match_result = match_imgs(file_name, screenshot, find_region, 1);
+    if (match_result == []) {
+        return match_result;
+    } else {
+        return match_result[0];
+    }
 }
 
 function match_img_click(file_name, screenshot, find_region) {
     let match_point;
     match_point = match_img(file_name, screenshot, find_region);
     if (match_point) {
-        click(match_point.x, match_point, y);
+        click(match_point.x, match_point.y);
         return true;
     } else {
         return false;

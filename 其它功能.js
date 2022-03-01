@@ -2,7 +2,6 @@ auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
 var cfg = func.config_dict();
-var pic_folder = files.cwd() + "/piccs/";
 // var dev_model = device.model;
 // var dev_mate30, dev_honor8, dev_redmi;
 // dev_mate30 = "TAS-AL00";
@@ -251,11 +250,7 @@ function 芭芭农场() {
         },
         tb施肥: function () {
             requestScreenCapture();
-            let template, template2;
-            template = images.read(pic_folder + "芭芭农场施肥可拆开.png");
-            template2 = images.read(pic_folder + "芭芭农场施肥点击领取.png");
             let match_point;
-
             func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
             let btn_ele = null;
             while (btn_ele == null) {
@@ -275,7 +270,7 @@ function 芭芭农场() {
             log(btn_y);
             let cnt = 0;
             let screenshot, find_region;
-            find_region = [0, device.height / 3];
+            find_region = [0, device.height / 2];
             while (1) {
                 cnt = cnt + 1;
                 if (cnt > 50) {
@@ -296,21 +291,12 @@ function 芭芭农场() {
                 func.sClick(text("关闭").findOnce());
                 screenshot = images.captureScreen();
                 // toast("如需要停止，手动操作, 超过100次 自动停止");
-                match_point = images.findImage(screenshot, template, options = {
-                    threshold: 0.8,
-                    region: find_region,
-                })
+                match_point = func.match_img("芭芭农场施肥可拆开.png", screenshot, find_region);
                 if (match_point) { click(match_point.x, match_point.y) }
                 // 进入页面后查找是否有 施肥立即领取按钮
-                match_point = images.findImage(screenshot, template2, options = {
-                    threshold: 0.8,
-                    region: find_region,
-                })
+                match_point = func.match_img("芭芭农场施肥点击领取.png", screenshot, find_region);
                 if (match_point) { click(match_point.x, match_point.y) }
-                screenshot.recycle();
             }
-            template.recycle();
-            template2.recycle();
         },
         zfb: function () {
             func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
@@ -874,52 +860,29 @@ function 建行财富季() {
         领取奖励按钮: [1700, 730],
         立即签到按钮: [810, 790, 200, 200],
     }
-    let func_in_func = {
-        find_img: function (file_name, find_region) {
-            // log("find_region:" + find_region)
-            let template = images.read(pic_folder + file_name);
-            let screenshot = images.captureScreen();
-            let match_point = images.findImage(screenshot, template, options = {
-                threshold: 0.8,
-                region: find_region,
-            })
-            template.recycle(); //回收图资源
-            return match_point;
-        },
-        find_img_click: function (file_name) {
-            let match_point = func_in_func.find_img(file_name);
-            if (match_point) {
-                click(match_point.x, match_point.y);
-                return true;
-            } else {
-                return false;
-            }
-        }
-    };
-
     let func_obj = {
         in_mission_view: function () {
-            while (func_in_func.find_img("ccb福气任务刷新按钮.png", find_regions.刷新按钮) == null) {
+            while (!func.match_img("ccb福气任务刷新按钮.png", null, find_regions.刷新按钮)) {
                 toast("请跳转到 ccb福气任务界面"); sleep(2600);
             }
             toastLog("已到达 ccb福气任务界面"); sleep(2600);
         },
         to_do_mission: function () {
             // 点击签到
-            func_in_func.find_img_click("ccb福气任务签到按钮.png", find_regions.立即签到按钮)
+            func.match_img_click("ccb福气任务签到按钮.png", null, find_regions.立即签到按钮)
             // 循环
-            while (func_in_func.find_img_click("ccb福气任务去完成.png")) {
+            while (func.match_img_click("ccb福气任务去完成.png", null, find_regions.去完成按钮)) {
                 toastLog("已点击，去完成，等待3秒"); sleep(3000);
                 toastLog("等待页面加载5秒"); sleep(5000);
                 // 等待返回
-                while (!func_in_func.find_img("ccb福气任务刷新按钮.png", find_regions.刷新按钮)) {
+                while (!func.match_img("ccb福气任务刷新按钮.png", null, find_regions.刷新按钮)) {
                     back(); toastLog("执行返回，等待4秒"); sleep(4000);
                 }
-                while (!func_in_func.find_img_click("ccb福气任务刷新按钮.png", find_regions.刷新按钮)) {
+                while (!func.match_img_click("ccb福气任务刷新按钮.png", null, find_regions.刷新按钮)) {
                     toastLog("点击刷新,失败"); sleep(4000);
                 }
                 toastLog("点击刷新,成功"); sleep(4000);
-                if (func_in_func.find_img_click("ccb福气任务领取奖励.png", find_regions.领取奖励按钮)) {
+                if (func.match_img_click("ccb福气任务领取奖励.png", null, find_regions.领取奖励按钮)) {
                     toastLog("点击领取奖励, 成功"); sleep(5000);
                 }
             }

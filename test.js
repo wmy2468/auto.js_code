@@ -28,7 +28,40 @@ jsb = 'jdlite://virtual?params={"category":"jump","des":"m","url":"https://bnzf.
 种豆得豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/plantBean/index.action"}'
 url_jd_领京豆 = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","url":"https://bean.m.jd.com/rank/index.action"}';
 jd2 = 'openapp.jdmobile://virtual?params={"category":"jump","des":"m","url":"https://xinruimz-isv.isvjcloud.com/"}'
-log(textContains("便民频道").findOnce());
+requestScreenCapture();
+res = match_img("ccb福气任务刷新按钮.png", null, null, 1);
+log(res.x);
+
+
+function match_img(file_name, screenshot, find_region) {
+    let match_result;
+    match_result = match_imgs(file_name, screenshot, find_region, 1);
+    if (match_result == []) {
+        log("empty")
+        return match_result;
+    } else {
+        log("return");
+        return match_result[0];
+    }
+}
+
+function match_imgs(file_name, screenshot, find_region, max_match) {
+    let pic_folder = files.cwd() + "/piccs/";
+    // log("find_region:" + find_region)
+    let find_img = images.read(pic_folder + file_name);
+    screenshot = screenshot || images.captureScreen();
+    let match_point = images.matchTemplate(
+        img = screenshot,
+        template = find_img,
+        options = {
+            threshold: 0.8,
+            region: find_region,
+            max: max_match || 15,
+        })
+    find_img.recycle(); //回收图资源
+    return match_point.points;
+}
+
 
 function find_img(file_name, find_region) {
     let template = images.read(pic_folder + file_name);
