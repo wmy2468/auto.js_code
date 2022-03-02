@@ -765,9 +765,9 @@ function dialogs_alert(title) {
 }
 
 // 返回多个结果，默认5
-function match_imgs(file_name, screenshot, find_region, max_match) {
-    let pic_folder = files.cwd() + "/piccs/";
-    let find_img = images.read(pic_folder + file_name);
+function match_imgs(find_img, screenshot, find_region, max_match) {
+    // let pic_folder = files.cwd() + "/piccs/";
+    // let find_img = images.read(pic_folder + file_name);
     let big_img, recycle_flag;
     recycle_flag = false;
     if (screenshot) {
@@ -785,12 +785,12 @@ function match_imgs(file_name, screenshot, find_region, max_match) {
             region: find_region,
             max: max_match || 15,
         })
-    sleep(100);
-    find_img.recycle();
+    // sleep(100);
+    // find_img.recycle();
     sleep(100);
     if (recycle_flag) { big_img.recycle(); }
     sleep(100);
-    log(file_name + ", match result:" + match_point.matches);
+    log("match result:" + match_point.matches);
     // big_img.recycle();
     return match_point.points;
 }

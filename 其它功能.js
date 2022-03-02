@@ -271,6 +271,11 @@ function 芭芭农场() {
             let cnt = 0;
             let screenshot, find_region;
             find_region = [0, device.height / 2];
+            let pic_folder = files.cwd() + '/piccs/'
+            let img_list = {
+                芭芭农场施肥可拆开: images.read(pic_folder + "芭芭农场施肥可拆开.png"),
+                芭芭农场施肥点击领取: images.read(pic_folder + "芭芭农场施肥点击领取.png"),
+            }
             while (1) {
                 cnt = cnt + 1;
                 if (cnt > 50) {
@@ -291,12 +296,16 @@ function 芭芭农场() {
                 func.sClick(text("关闭").findOnce());
                 screenshot = images.captureScreen();
                 // toast("如需要停止，手动操作, 超过100次 自动停止");
-                match_point = func.match_img("芭芭农场施肥可拆开.png", screenshot, find_region);
+                match_point = func.match_img(img_list.芭芭农场施肥可拆开, screenshot, find_region);
                 if (match_point) { click(match_point.x, match_point.y) }
                 // 进入页面后查找是否有 施肥立即领取按钮
-                match_point = func.match_img("芭芭农场施肥点击领取.png", screenshot, find_region);
+                match_point = func.match_img(img_list.芭芭农场施肥点击领取, screenshot, find_region);
                 if (match_point) { click(match_point.x, match_point.y) }
             }
+            // 释放所有图片
+            Object.keys(img_list).forEach(opend_img => {
+                img_list[opend_img].recycle();
+            })
         },
         zfb: function () {
             func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
@@ -854,6 +863,7 @@ function 支付宝() {
 // -----------------------建行财富季-----------------------
 function 建行财富季() {
     let select_items = func.dialogs_select([1, 2, "1 + 2"], "CCB任务选择微信", "多选");
+    let pic_folder = files.cwd() + "/piccs/";
     requestScreenCapture();
     let find_regions = {
         ccb福气任务签到按钮: [810, 790, 200, 200],
@@ -870,9 +880,24 @@ function 建行财富季() {
         ccb好友助力完成按钮: [816, 670, 207, 81],
         ccb好友去助力: [870, 430],
     }
+    let img_list = {
+        ccb福气任务签到按钮: images.read(pic_folder + "ccb福气任务签到按钮.png"),
+        ccb福气任务去完成: images.read(pic_folder + "ccb福气任务去完成.png"),
+        ccb福气任务刷新按钮: images.read(pic_folder + "ccb福气任务刷新按钮.png"),
+        ccb福气任务领取奖励: images.read(pic_folder + "ccb福气任务领取奖励.png"),
+        ccb好友列表界面: images.read(pic_folder + "ccb好友列表界面.png"),
+        ccb主会场按钮: images.read(pic_folder + "ccb主会场按钮.png"),
+        ccb我的好友: images.read(pic_folder + "ccb我的好友.png"),
+        ccb好友列表底部: images.read(pic_folder + "ccb好友列表底部.png"),
+        ccb好友助力界面: images.read(pic_folder + "ccb好友助力界面.png"),
+        ccb好友助力按钮: images.read(pic_folder + "ccb好友助力按钮.png"),
+        ccb主会场弹窗关闭按钮: images.read(pic_folder + "ccb主会场弹窗关闭按钮.png"),
+        ccb好友助力完成按钮: images.read(pic_folder + "ccb好友助力完成按钮.png"),
+        ccb好友去助力: images.read(pic_folder + "ccb好友去助力.png"),
+    }
     let func_obj = {
         in_mission_view: function () {
-            while (!func.match_img("ccb福气任务刷新按钮.png", null, find_regions.ccb福气任务刷新按钮)) {
+            while (!func.match_img(img_list.ccb福气任务刷新按钮, null, find_regions.ccb福气任务刷新按钮)) {
                 toast("请跳转到 ccb福气任务界面");
                 sleep(2600);
             }
@@ -881,31 +906,31 @@ function 建行财富季() {
         },
         to_do_mission: function () {
             // 点击签到
-            if (func.match_img_click("ccb福气任务签到按钮.png", null, find_regions.ccb福气任务签到按钮)) {
+            if (func.match_img_click(img_list.ccb福气任务签到按钮, null, find_regions.ccb福气任务签到按钮)) {
                 toastLog("已点击 立即签到");
             } else {
                 toastLog("未找到 立即签到");
             }
             sleep(2000);
             // 循环
-            while (func.match_img_click("ccb福气任务去完成.png", null, find_regions.ccb福气任务去完成)) {
+            while (func.match_img_click(img_list.ccb福气任务去完成, null, find_regions.ccb福气任务去完成)) {
                 toastLog("已点击，去完成，等待3秒");
                 sleep(3000);
                 toastLog("等待页面加载5秒");
                 sleep(5000);
                 // 等待返回
-                while (!func.match_img("ccb福气任务刷新按钮.png", null, find_regions.ccb福气任务刷新按钮)) {
+                while (!func.match_img(img_list.ccb福气任务刷新按钮, null, find_regions.ccb福气任务刷新按钮)) {
                     back();
                     toastLog("执行返回，等待4秒");
                     sleep(4000);
                 }
-                while (!func.match_img_click("ccb福气任务刷新按钮.png", null, find_regions.ccb福气任务刷新按钮)) {
+                while (!func.match_img_click(img_list.ccb福气任务刷新按钮, null, find_regions.ccb福气任务刷新按钮)) {
                     toastLog("点击刷新,失败");
                     sleep(4000);
                 }
                 toastLog("点击刷新,成功");
                 sleep(4000);
-                if (func.match_img_click("ccb福气任务领取奖励.png", null, find_regions.ccb福气任务领取奖励)) {
+                if (func.match_img_click(img_list.ccb福气任务领取奖励, null, find_regions.ccb福气任务领取奖励)) {
                     toastLog("点击领取奖励, 成功");
                     sleep(5000);
                 }
@@ -913,19 +938,19 @@ function 建行财富季() {
             sleep(200);
         },
         to_friends_page: function () {
-            while (func.match_img("ccb好友列表界面.png", null, find_regions.ccb好友列表界面) == null) {
+            while (func.match_img(img_list.ccb好友列表界面, null, find_regions.ccb好友列表界面) == null) {
                 // 点击主会场按钮
-                if (func.match_img_click("ccb主会场按钮.png", null, find_regions.ccb主会场按钮)) {
+                if (func.match_img_click(img_list.ccb主会场按钮, null, find_regions.ccb主会场按钮)) {
                     toastLog("已点击 ccb主会场按钮"); sleep(2600);
                 }
                 sleep(800);
                 // 弹窗关闭按钮
-                if (func.match_img_click("ccb主会场弹窗关闭按钮.png", null, find_regions.ccb主会场弹窗关闭按钮)) {
+                if (func.match_img_click(img_list.ccb主会场弹窗关闭按钮, null, find_regions.ccb主会场弹窗关闭按钮)) {
                     toastLog("已点击 ccb主会场弹窗关闭按钮"); sleep(2600);
                 }
                 sleep(800);
                 // 点击我的好友按钮
-                if (func.match_img_click("ccb我的好友.png", null, find_regions.ccb我的好友)) {
+                if (func.match_img_click(img_list.ccb我的好友, null, find_regions.ccb我的好友)) {
                     toastLog("已点击 ccb我的好友"); sleep(2600);
                 }
                 toastLog("查找完毕，等待下一次查找"); sleep(2600);
@@ -935,7 +960,7 @@ function 建行财富季() {
         to_ends: function () {
             sleep(800);
             let cnt;
-            while (func.match_img("ccb好友列表底部.png", null, find_regions.ccb好友列表底部) == null) {
+            while (func.match_img(img_list.ccb好友列表底部, null, find_regions.ccb好友列表底部) == null) {
                 cnt = 7;
                 while (cnt--) {
                     swipe(300, 1300, 300, 400, 300);
@@ -948,16 +973,16 @@ function 建行财富季() {
             sleep(2600);
         },
         help_friend: function () {
-            while (func.match_img("ccb好友助力界面.png", null, find_regions.ccb好友助力界面) == null) {
+            while (func.match_img(img_list.ccb好友助力界面, null, find_regions.ccb好友助力界面) == null) {
                 toastLog("等待 助力页面加载"); sleep(2600);
             }
             sleep(1000);
-            if (func.match_img_click("ccb好友助力按钮.png", null, find_regions.ccb好友助力按钮)) {
+            if (func.match_img_click(img_list.ccb好友助力按钮, null, find_regions.ccb好友助力按钮)) {
                 toastLog("已点击助力，等待返回"); sleep(2600);
             } else {
                 toastLog("未成功 点击助力，等待返回"); sleep(2600);
             }
-            while (func.match_img("ccb好友列表界面.png", null, find_regions.ccb好友列表界面) == null) {
+            while (func.match_img(img_list.ccb好友列表界面, null, find_regions.ccb好友列表界面) == null) {
                 back();
                 toastLog("执行返回，等待4秒");
                 sleep(3000);
@@ -968,7 +993,7 @@ function 建行财富季() {
             let scroll_count, circle_count, click_count, help_btn, to_help_btns;
             click_count = 0;
             scroll_count = 0;
-            while (func.match_img("ccb好友助力完成按钮.png", null, find_regions.ccb好友助力完成按钮) == null) {
+            while (func.match_img(img_list.ccb好友助力完成按钮, null, find_regions.ccb好友助力完成按钮) == null) {
                 func_obj.to_ends();     //滑动到底部
                 circle_count = 0;
                 while (circle_count < scroll_count) {
@@ -978,7 +1003,7 @@ function 建行财富季() {
                     swipe(300, 400, 300, 1300, 300);        //向上
                     sleep(900);
                 }
-                to_help_btns = func.match_imgs("ccb好友去助力.png", null, find_regions.ccb好友去助力);
+                to_help_btns = func.match_imgs(img_list.ccb好友去助力, null, find_regions.ccb好友去助力);
                 if (click_count < to_help_btns.length) {
                     help_btn = to_help_btns[click_count];
                     click_count = click_count + 1;
@@ -1017,7 +1042,10 @@ function 建行财富季() {
         func_obj.to_friends_page();
         func_obj.help_process();
     }
-
+    // 释放所有图片
+    Object.keys(img_list).forEach(opend_img => {
+        img_list[opend_img].recycle();
+    })
 
     // ---------------------------------
     // 
