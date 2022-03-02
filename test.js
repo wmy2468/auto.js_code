@@ -20,16 +20,7 @@ let find_regions = {
 
 // swipe(300, 1300, 300, 400, 300);     //向下
 // swipe(300, 400, 300, 1300, 300);        //向上
-to_autojs();
-function to_autojs() {
-    let pkg_name = app.getPackageName("Autox.js") || app.getPackageName("Auto.js");
-    app.startActivity({
-        packageName: pkg_name,
-        className: "org.autojs.autojs.ui.main.MainActivity_",
-    });
-    waitForPackage(pkg_name, period = 100);
-    // toast("已到达autojs");
-}
+log(text("去助力").find()[12].click());
 
 
 // left_today = textContains("今日剩余").findOnce();
