@@ -17,9 +17,15 @@ let find_regions = {
     ccb好友助力按钮: [450, 1880, 200, 200],
 }
 
-requestScreenCapture();
-func.match_imgs("ccb好友助力按钮.png");
+// requestScreenCapture();
+// func.match_imgs("ccb好友助力按钮.png");
 
+
+left_today = textContains("今日剩余").findOnce();
+left_idx = left_today.indexInParent();
+left_today_parent = left_today.parent();
+left_times = left_today_parent.child(left_idx + 1).text();
+log(left_times == 0);
 
 // swipe(300, 1300, 300, 400, 300);        // 一次滑动3个人头
 

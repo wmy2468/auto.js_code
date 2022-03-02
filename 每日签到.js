@@ -508,11 +508,12 @@ function 京东() {
                             left_idx = left_today.indexInParent();
                             left_today_parent = left_today.parent();
                             left_times = left_today_parent.child(left_idx + 1).text();
+                            toastLog("当前剩余次数1=" + left_times);
                         } else {
                             log("今日剩余-2");
                             left_times = left_today.text().slice(4, 5);
+                            toastLog("当前剩余次数2=" + left_times);
                         }
-                        toastLog("当前剩余次数=" + left_times);
                     } catch (e) {
                         toastLog("捕捉到错误,记录文本：" + left_today.text());
                         sleep(2600);
