@@ -177,21 +177,16 @@ function sClick(element) {
 */
 function toAppMulti(appName, cnt) {
     to_autojs();
-    sleep(800);
-    launchApp(appName);
-    if (cnt != 0) {
-        // 等待弹窗
-        while (!(text("使用以下方式打开").findOnce() != null || text("请选择要使用的应用").findOnce() != null)) {
-            sleep(500);
-        }
-        sleep(2000);
-        // 小米
-        if (cnt == 1) { click(248, 1905); }
-        // 第二个微信 678,1824,846,1992
-        if (cnt == 2) { click(710, 1905); }
-    }
+    sleep(1000);
+    let app_btn;
     while (currentPackage() != getPackageName(appName)) {
-        sleep(1000);
+        launchApp(appName);
+        sleep(3000);
+        text(appName).findOne();
+        app_btn = text(appName).find();
+        func.sClick(app_btn[cnt - 1]);
+        toastLog("已点击指定APP，等待加载");
+        sleep(2600);
     }
 }
 

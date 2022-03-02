@@ -868,6 +868,7 @@ function 建行财富季() {
         ccb好友助力按钮: [450, 1880, 200, 200],
         ccb主会场弹窗关闭按钮: [900, 680, 100, 200],
         ccb好友助力完成按钮: [816, 670, 207, 81],
+        ccb好友去助力: [870, 430],
     }
     let func_obj = {
         in_mission_view: function () {
@@ -947,7 +948,7 @@ function 建行财富季() {
             while (func.match_img("ccb好友助力界面.png", null, find_regions.ccb好友助力界面) == null) {
                 toastLog("等待 助力页面加载"); sleep(2600);
             }
-            sleep(1500);
+            sleep(1000);
             if (func.match_img_click("ccb好友助力按钮.png", null, find_regions.ccb好友助力按钮)) {
                 toastLog("已点击助力，等待返回"); sleep(2600);
             } else {
@@ -960,7 +961,9 @@ function 建行财富季() {
             }
         },
         help_process: function () {
-            let scroll_count = 0, circle_count;
+            let scroll_count, circle_count, click_count, help_btn, to_help_btns;
+            click_count = 0;
+            scroll_count = 0;
             while (func.match_img("ccb好友助力完成按钮.png", null, find_regions.ccb好友助力完成按钮) == null) {
                 func_obj.to_ends();     //滑动到底部
                 circle_count = 0;
@@ -971,36 +974,50 @@ function 建行财富季() {
                     swipe(300, 400, 300, 1300, 300);        //向上
                     sleep(900);
                 }
-                if (func.match_img_click("ccb好友去助力.png", null, find_regions.ccb好友去助力)) {
-                    toastLog("已点击去完成按钮，等待页面加载");
-                    sleep(3000);
-                    func_obj.help_friend();
+                to_help_btns = func.match_imgs("ccb好友去助力.png", null, find_regions.ccb好友去助力);
+                if (click_count < to_help_btns.length) {
+                    help_btn = to_help_btns[click_count];
+                    click(help_btn.x, help_btn.y);
+                    click_count = click_count + 1;
                 } else {
+                    click_count = 0;
                     scroll_count = scroll_count + 1;
                     toastLog("未找到去助力按钮，计数+1");
                     sleep(2600);
                 }
+
+                // if (func.match_img_click("ccb好友去助力.png", null, find_regions.ccb好友去助力)) {
+                //     toastLog("已点击去完成按钮，等待页面加载");
+                //     sleep(3000);
+                //     func_obj.help_friend();
+                // } else {
+                //     scroll_count = scroll_count + 1;
+                //     toastLog("未找到去助力按钮，计数+1");
+                //     sleep(2600);
+                // }
             }
         },
     };
-    if (select_items == 1 || select_items == 2) {
-        func.toAppMulti("微信", select_items);
-        func_obj.in_mission_view();     // 到达任务界面
-        func_obj.to_do_mission();     // 做任务
-        func_obj.to_friends_page();
-        func_obj.help_process();
-    } else {
-        func.toAppMulti("微信", 1);
-        func_obj.in_mission_view();     // 到达任务界面
-        func_obj.to_do_mission();     // 做任务
-        func_obj.to_friends_page();
-        func_obj.help_process();
-        func.toAppMulti("微信", 2);
-        func_obj.in_mission_view();     // 到达任务界面
-        func_obj.to_do_mission();     // 做任务
-        func_obj.to_friends_page();
-        func_obj.help_process();
-    }
+    func_obj.help_process();
+    // if (select_items == 1 || select_items == 2) {
+    //     func.toAppMulti("微信", select_items);
+    //     func_obj.in_mission_view();     // 到达任务界面
+    //     func_obj.to_do_mission();     // 做任务
+    //     func_obj.to_friends_page();
+    //     func_obj.help_process();
+    // } else {
+    //     func.toAppMulti("微信", 1);
+    //     func_obj.in_mission_view();     // 到达任务界面
+    //     func_obj.to_do_mission();     // 做任务
+    //     func_obj.to_friends_page();
+    //     func_obj.help_process();
+    //     toastLog("第一个已完成，准备切换");
+    //     func.toAppMulti("微信", 2);
+    //     func_obj.in_mission_view();     // 到达任务界面
+    //     func_obj.to_do_mission();     // 做任务
+    //     func_obj.to_friends_page();
+    //     func_obj.help_process();
+    // }
 
 
     // ---------------------------------
