@@ -1066,9 +1066,9 @@ function 建行财富季() {
         func_obj.help_process();
     }
     // 释放所有图片
-    Object.keys(img_list).forEach(opend_img => {
-        img_list[opend_img].recycle();
-    })
+    // Object.keys(img_list).forEach(opend_img => {
+    //     img_list[opend_img].recycle();
+    // })
 
     // ---------------------------------
     // 

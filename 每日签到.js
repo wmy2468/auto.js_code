@@ -568,9 +568,13 @@ function 京东() {
                                 // textContains("继续挖宝").findOnce().parent().child(0)
                                 // 等待钱币符号重新出现
                                 while (scroll_bar == null) {
-                                    func.sClick(textContains("继续挖宝").findOnce());
                                     scroll_bar = text("¥").depth(16).findOnce();
-                                    toast("等待钱币符号加载..."); sleep(2600);
+                                    if (func.sClick(textContains("继续挖宝").findOnce())) {
+                                        toastLog("已点击继续挖宝按钮，等待5秒");
+                                        sleep(5000);
+                                    }
+                                    toast("等待钱币符号加载...");
+                                    sleep(2600);
                                 }
                                 toastLog("钱币符号, 已加载..."); sleep(2600);
                                 // 尝试点击一个按钮

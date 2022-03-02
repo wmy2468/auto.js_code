@@ -182,7 +182,11 @@ function toAppMulti(appName, cnt) {
     while (currentPackage() != getPackageName(appName)) {
         launchApp(appName);
         sleep(3000);
-        text(appName).findOne();
+        while (!(text(appName).findOnce() != null &&
+            (text("使用以下方式打开").findOnce() != null || text("请选择要使用的应用").findOnce() != null))) {
+            toastLog("等待弹窗加载");
+            sleep(2600);
+        }
         app_btn = text(appName).find();
         func.sClick(app_btn[cnt - 1]);
         toastLog("已点击指定APP，等待加载");
