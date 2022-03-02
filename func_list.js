@@ -784,12 +784,12 @@ function match_imgs(file_name, screenshot, find_region, max_match) {
         img = big_img,
         template = find_img,
         options = {
-            threshold: 0.8,
+            threshold: 0.82,
             region: find_region,
             max: max_match || 15,
         })
     find_img.recycle();
-    log("match result:" + match_point.matches);
+    log(file_name + ", match result:" + match_point.matches);
     // big_img.recycle();
     return match_point.points;
 }

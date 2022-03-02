@@ -44,7 +44,7 @@ if (selectIndex == -1) {
         file_name_list = ["芭芭农场施肥可拆开.png", "芭芭农场施肥点击领取.png",
             "ccb福气任务签到按钮.png", "ccb福气任务去完成.png", "ccb福气任务刷新按钮.png", "ccb福气任务领取奖励.png",
             "ccb主会场按钮.png", "ccb我的好友.png", "ccb好友列表界面.png", "ccb好友去助力.png", "ccb好友列表底部.png",
-            "ccb好友助力界面.png", "ccb好友助力按钮.png", "ccb主会场弹窗关闭按钮.png"];
+            "ccb好友助力界面.png", "ccb好友助力按钮.png", "ccb主会场弹窗关闭按钮.png", "ccb好友助力完成按钮.png"];
     } else {
         file_name_list = ["芭芭农场施肥可拆开.png", "芭芭农场施肥点击领取.png"];
     }
