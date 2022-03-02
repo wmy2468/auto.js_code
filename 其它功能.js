@@ -910,6 +910,7 @@ function 建行财富季() {
                     sleep(5000);
                 }
             }
+            sleep(200);
         },
         to_friends_page: function () {
             while (func.match_img("ccb好友列表界面.png", null, find_regions.ccb好友列表界面) == null) {
@@ -929,20 +930,22 @@ function 建行财富季() {
                 }
                 toastLog("查找完毕，等待下一次查找"); sleep(2600);
             }
+            sleep(200);
         },
         to_ends: function () {
+            sleep(800);
+            let cnt;
             while (func.match_img("ccb好友列表底部.png", null, find_regions.ccb好友列表底部) == null) {
-                swipe(300, 1300, 300, 400, 300);
-                sleep(500);
-                swipe(300, 1300, 300, 400, 300);
-                sleep(500);
-                swipe(300, 1300, 300, 400, 300);
-                sleep(500);
-                swipe(300, 1300, 300, 400, 300);
+                cnt = 7;
+                while (cnt--) {
+                    swipe(300, 1300, 300, 400, 300);
+                    sleep(300);
+                }
                 sleep(900);
             }
             swipe(300, 1300, 300, 400, 300);
-            toastLog("已到达页面底部"); sleep(2600);
+            toastLog("已到达页面底部");
+            sleep(2600);
         },
         help_friend: function () {
             while (func.match_img("ccb好友助力界面.png", null, find_regions.ccb好友助力界面) == null) {
@@ -959,6 +962,7 @@ function 建行财富季() {
                 toastLog("执行返回，等待4秒");
                 sleep(3000);
             }
+            sleep(200);
         },
         help_process: function () {
             let scroll_count, circle_count, click_count, help_btn, to_help_btns;
@@ -977,47 +981,42 @@ function 建行财富季() {
                 to_help_btns = func.match_imgs("ccb好友去助力.png", null, find_regions.ccb好友去助力);
                 if (click_count < to_help_btns.length) {
                     help_btn = to_help_btns[click_count];
-                    click(help_btn.x, help_btn.y);
                     click_count = click_count + 1;
+                    click(help_btn.x, help_btn.y);
+                    toastLog("已点击去完成按钮，等待页面加载");
+                    sleep(3000);
+                    func_obj.help_friend();
+
                 } else {
                     click_count = 0;
                     scroll_count = scroll_count + 1;
                     toastLog("未找到去助力按钮，计数+1");
                     sleep(2600);
                 }
-
-                // if (func.match_img_click("ccb好友去助力.png", null, find_regions.ccb好友去助力)) {
-                //     toastLog("已点击去完成按钮，等待页面加载");
-                //     sleep(3000);
-                //     func_obj.help_friend();
-                // } else {
-                //     scroll_count = scroll_count + 1;
-                //     toastLog("未找到去助力按钮，计数+1");
-                //     sleep(2600);
-                // }
             }
+            sleep(200);
         },
     };
-    func_obj.help_process();
-    // if (select_items == 1 || select_items == 2) {
-    //     func.toAppMulti("微信", select_items);
-    //     func_obj.in_mission_view();     // 到达任务界面
-    //     func_obj.to_do_mission();     // 做任务
-    //     func_obj.to_friends_page();
-    //     func_obj.help_process();
-    // } else {
-    //     func.toAppMulti("微信", 1);
-    //     func_obj.in_mission_view();     // 到达任务界面
-    //     func_obj.to_do_mission();     // 做任务
-    //     func_obj.to_friends_page();
-    //     func_obj.help_process();
-    //     toastLog("第一个已完成，准备切换");
-    //     func.toAppMulti("微信", 2);
-    //     func_obj.in_mission_view();     // 到达任务界面
-    //     func_obj.to_do_mission();     // 做任务
-    //     func_obj.to_friends_page();
-    //     func_obj.help_process();
-    // }
+    // func_obj.help_process();
+    if (select_items == 1 || select_items == 2) {
+        func.toAppMulti("微信", select_items);
+        func_obj.in_mission_view();     // 到达任务界面
+        func_obj.to_do_mission();     // 做任务
+        func_obj.to_friends_page();
+        func_obj.help_process();
+    } else {
+        func.toAppMulti("微信", 1);
+        func_obj.in_mission_view();     // 到达任务界面
+        func_obj.to_do_mission();     // 做任务
+        func_obj.to_friends_page();
+        func_obj.help_process();
+        toastLog("第一个已完成，准备切换");
+        func.toAppMulti("微信", 2);
+        func_obj.in_mission_view();     // 到达任务界面
+        func_obj.to_do_mission();     // 做任务
+        func_obj.to_friends_page();
+        func_obj.help_process();
+    }
 
 
     // ---------------------------------

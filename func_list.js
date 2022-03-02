@@ -768,11 +768,13 @@ function dialogs_alert(title) {
 function match_imgs(file_name, screenshot, find_region, max_match) {
     let pic_folder = files.cwd() + "/piccs/";
     let find_img = images.read(pic_folder + file_name);
-    let big_img;
+    let big_img, recycle_flag;
+    recycle_flag = false;
     if (screenshot) {
         big_img = screenshot;
     } else {
         sleep(100);
+        recycle_flag = true;
         big_img = images.captureScreen();
     }
     let match_point = images.matchTemplate(
@@ -783,7 +785,11 @@ function match_imgs(file_name, screenshot, find_region, max_match) {
             region: find_region,
             max: max_match || 15,
         })
+    sleep(100);
     find_img.recycle();
+    sleep(100);
+    if (recycle_flag) { big_img.recycle(); }
+    sleep(100);
     log(file_name + ", match result:" + match_point.matches);
     // big_img.recycle();
     return match_point.points;
