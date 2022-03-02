@@ -19,9 +19,9 @@ let find_regions = {
 
 
 // swipe(300, 1300, 300, 400, 300);     //向下
-swipe(300, 400, 300, 1300, 300);        //向上
-// requestScreenCapture();
-// func.match_img_click("ccb主会场弹窗关闭按钮.png");
+// swipe(300, 400, 300, 1300, 300);        //向上
+requestScreenCapture();
+func.match_img_click("ccb好友助力完成按钮.png", null, [816, 670, 207, 81]);
 
 
 // left_today = textContains("今日剩余").findOnce();
