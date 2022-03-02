@@ -20,8 +20,16 @@ let find_regions = {
 
 // swipe(300, 1300, 300, 400, 300);     //向下
 // swipe(300, 400, 300, 1300, 300);        //向上
-requestScreenCapture();
-func.match_img("ccb好友去助力.png");
+to_autojs();
+function to_autojs() {
+    let pkg_name = app.getPackageName("Autox.js") || app.getPackageName("Auto.js");
+    app.startActivity({
+        packageName: pkg_name,
+        className: "org.autojs.autojs.ui.main.MainActivity_",
+    });
+    waitForPackage(pkg_name, period = 100);
+    // toast("已到达autojs");
+}
 
 
 // left_today = textContains("今日剩余").findOnce();
