@@ -736,7 +736,7 @@ function 京东() {
                 }
             }
             func_in_func.common_sign(scheme_title, jump_url, wait_element_load = 'textContains("豆苗成长值").findOnce()',
-                complete_element = 'textContains("x0").findOnce() || textContains("7点再来领取").findOnce()',
+                complete_element = 'textEndsWith("0").findOnce() || textContains("7点再来领取").findOnce()',
                 click_func);
         },
         校园签到: function () { func_in_func.多次重复签到("校园签到", "京东校园 天天签到赚京豆"); },

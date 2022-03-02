@@ -935,7 +935,7 @@ function 建行财富季() {
                 sleep(900);
             }
         },
-        help_friends: function () {
+        help_friend: function () {
             while (!func.match_img_click("ccb好友去助力.png", null, find_regions.ccb好友去助力)) {
                 toastLog("等待点击，ccb主会场按钮"); sleep(2600);
             }
@@ -947,13 +947,15 @@ function 建行财富季() {
         },
         complete_flag: function () { },
     };
-
-    func.toAppMulti("微信", 1);
-    func_obj.in_mission_view();     // 到达任务界面
-    func_obj.to_do_mission();     // 做任务
-    func.toAppMulti("微信", 2);
-    func_obj.in_mission_view();     // 到达任务界面
-    func_obj.to_do_mission();     // 做任务
+    func_obj.to_main_page();
+    // ---------------------------------
+    // func.toAppMulti("微信", 1);
+    // func_obj.in_mission_view();     // 到达任务界面
+    // func_obj.to_do_mission();     // 做任务
+    // func.toAppMulti("微信", 2);
+    // func_obj.in_mission_view();     // 到达任务界面
+    // func_obj.to_do_mission();     // 做任务
+    // ---------------------------------
     // 
     // 
 }
