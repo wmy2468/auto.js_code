@@ -111,11 +111,10 @@ function 沃钱包() {
     while (textContains("第3天").textStartsWith("+").findOnce() == null) {
         func.sClick(textContains("下次再说").findOnce());
         func.sClick(idContains("wopay_wallet_advertisement_dialog_cancel_iv").findOnce());
-        wode = idContains("wopay_main_mine_tv").text("我的").findOnce();
-        if (wode != null) { wode.parent().click(); }
-        paopao = idContains("wopay_mine_item_name_tv").text("泡泡").findOnce();
-        if (paopao != null) { paopao.parent().click(); }
+        func.sClick(idContains("wopay_main_mine_tv").text("我的").findOnce());
+        func.sClick(idContains("wopay_mine_item_name_tv").text("泡泡").findOnce());
         func.sClick(text("每日签到得好礼").findOnce());
+        sleep(2000);
     }
     sleep(3500);
     if (textContains("今日已签到").findOnce() == null) {

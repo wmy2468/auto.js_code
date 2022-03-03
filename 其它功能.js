@@ -2,11 +2,11 @@ auto.waitFor();
 // 导入模块
 var func = require("func_list.js");
 var cfg = func.config_dict();
-// var dev_model = device.model;
-// var dev_mate30, dev_honor8, dev_redmi;
-// dev_mate30 = "TAS-AL00";
-// dev_honor8 = "FRD-AL00";
-// dev_redmi = "Redmi Note 7";
+var dev_model = device.model;
+var dev_mate30, dev_honor8, dev_redmi;
+dev_mate30 = "TAS-AL00";
+dev_honor8 = "FRD-AL00";
+dev_redmi = "Redmi Note 7";
 
 // log(Object.keys(京东()));
 
@@ -14,10 +14,19 @@ main();
 // toastLog(text("领取奖励").find().length);
 function main() {
     let select_func;
-    let selectedArr = ["万商3比", "支付宝相关", "建行财富季", "JD相关", "YSF相关", "跳转指定Scheme"];
+    let selectedArr;
+    if (dev_model == dev_mate30) {
+        selectedArr = ["万商3比", "支付宝相关", "建行相关", "JD相关", "跳转指定Scheme"];
+    } else {
+        selectedArr = ["万商3比", "支付宝相关", "JD相关", "跳转指定Scheme"];
+    }
     //---------------配置区域-----------------
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本  
-    if (scriptName == "建行财富季") { 建行财富季(); }
+    if (scriptName == "建行相关") {
+        select_func = func.dialogs_select(["财付季助力", "财付季答题助手"]);
+        if (select_func == "财付季助力") { 建行财富季().财付季助力(); }
+        else if (select_func == "财付季答题助手") { 建行财富季().财付季答题助手(); }
+    }
     else if (scriptName == "支付宝相关") {
         let farms;
         select_func = func.dialogs_select(["芭芭农场-助力浏览施肥", "支付宝捐款", "余额宝转入", "余额宝转出", "芭芭农场-助力浏览", "芭芭农场-淘宝施肥"]);
@@ -868,196 +877,282 @@ function 支付宝() {
 }
 // -----------------------建行财富季-----------------------
 function 建行财富季() {
-    // let select_items = func.dialogs_select([1, 2, "1 + 2"], "CCB任务选择微信", "多选");
-    requestScreenCapture(); sleep(1000);
-    let func_obj = {
-        to_wechat_favorite: function () {
-            sleep(800);
-            // 先找到 底部按钮 我
-            while (func.sClick(text("我").depth(13).findOnce()) == false) {
-                back(); toastLog("等待我的页面加载，等4秒"); sleep(4000);
-            }
-            toastLog("已点击 微信底部 我");
-            sleep(2600);
-            // 点击收藏
-            while (func.sClick(text("收藏").depth(24).findOnce()) == false) {
-                toastLog("等待收藏页面加载"); sleep(2600);
-            }
-            toastLog("已点击 收藏 按钮");
-            sleep(2600);
-            // 点击收藏内容
-            func.sClick(textStartsWith("主会场").findOne());
-            toastLog("已点击收藏夹的 主会场");
-            sleep(2600);
-            id("android:id/text1").text("详情").findOne();
-            toastLog("收藏夹 主会场 已加载");
-            sleep(2600);
-            let match_result, match_img;
-            let pic_folder = files.cwd() + '/piccs/';
-            match_img = images.read(pic_folder + "ccb收藏任务中心.png");
-            match_result = null;
-            while (match_result == null) {
-                match_result = func.match_img(match_img, null);
-                toastLog("等待找图出现...");
-                sleep(2600);
-            }
-            match_img.recycle();
-            click(match_result.x, match_result.y + 88);
-            toastLog("已点击链接...");
-            sleep(2600);
-        },
-        in_mission_view: function () {
-            while (text("刷新").findOnce() == null) {
-                toast("请跳转到 ccb福气任务界面");
-                sleep(2600);
-            }
-            toastLog("已到达 ccb福气任务界面");
-            sleep(2600);
-        },
-        to_do_mission: function () {
-            // 点击签到
-            if (func.sClick(text("立即签到").findOnce())) {
-                toastLog("已点击 立即签到");
-            } else {
-                toastLog("未找到 立即签到");
-            }
-            sleep(2000);
-            // 循环
-            let to_do;
-            while (1) {
-                to_do = text("去完成").findOnce();
-                if (to_do != null) {
-                    if (to_do.bounds().top > device.height) {
-                        toastLog("当前屏幕已完成");
-                        sleep(2600);
-                        break;
+    let ccb = {
+        财付季助力: function () {
+            // let select_items = func.dialogs_select([1, 2, "1 + 2"], "CCB任务选择微信", "多选");
+            requestScreenCapture(); sleep(1000);
+            let func_obj = {
+                to_wechat_favorite: function () {
+                    sleep(800);
+                    // 先找到 底部按钮 我
+                    while (func.sClick(text("我").depth(13).findOnce()) == false) {
+                        back(); toastLog("等待我的页面加载，等4秒"); sleep(4000);
                     }
-                } else {
-                    toastLog("等待去完成按钮加载");
-                    sleep(4000);
-                }
-                func.sClick(to_do);
-                toastLog("已点击，去完成，等待3秒");
-                sleep(3000);
-                toastLog("等待页面加载5秒");
-                sleep(5000);
-                // 等待返回
-                while (text("刷新").findOnce() == null) {
-                    back();
-                    toastLog("执行返回，等待4秒");
-                    sleep(4000);
-                }
-                while (!func.sClick(text("刷新").findOnce())) {
-                    toastLog("点击刷新,失败");
-                    sleep(4000);
-                }
-                toastLog("点击刷新,成功");
-                sleep(3000);
-                if (func.sClick(text("领取奖励").findOnce())) {
-                    toastLog("点击领取奖励, 成功");
-                    sleep(3000);
-                }
-            }
-        },
-        to_friends_page: function () {
-            let my_friend_btn, fuqi_btn, close_popup;
-            while (text("好友列表").findOnce() == null) {
-                // 点击主会场按钮
-                if (func.sClick(text("主会场").findOnce())) {
-                    toastLog("已点击 ccb主会场按钮"); sleep(2600);
-                }
-                sleep(400);
-                // 弹窗关闭按钮
-                close_popup = text("/").findOnce();
-                if (close_popup != null) {
-                    if (func.sClick(close_popup.parent())) {
-                        toastLog("已点击 ccb主会场弹窗关闭按钮");
+                    toastLog("已点击 微信底部 我");
+                    sleep(2600);
+                    // 点击收藏
+                    while (func.sClick(text("收藏").depth(24).findOnce()) == false) {
+                        toastLog("等待收藏页面加载"); sleep(2600);
+                    }
+                    toastLog("已点击 收藏 按钮");
+                    sleep(2600);
+                    // 点击收藏内容
+                    func.sClick(textStartsWith("主会场").findOne());
+                    toastLog("已点击收藏夹的 主会场");
+                    sleep(2600);
+                    id("android:id/text1").text("详情").findOne();
+                    toastLog("收藏夹 主会场 已加载");
+                    sleep(2600);
+                    let match_result, match_img;
+                    let pic_folder = files.cwd() + '/piccs/';
+                    match_img = images.read(pic_folder + "ccb收藏任务中心.png");
+                    match_result = null;
+                    while (match_result == null) {
+                        match_result = func.match_img(match_img, null);
+                        toastLog("等待找图出现...");
                         sleep(2600);
                     }
-                }
-                sleep(400);
-                // 点击我的好友按钮
-                fuqi_btn = textStartsWith("福气值Lv").findOnce();
-                if (fuqi_btn != null) {
+                    match_img.recycle();
+                    click(match_result.x, match_result.y + 88);
+                    toastLog("已点击链接...");
+                    sleep(2600);
+                },
+                in_mission_view: function () {
+                    while (text("刷新").findOnce() == null) {
+                        toast("请跳转到 ccb福气任务界面");
+                        sleep(2600);
+                    }
+                    toastLog("已到达 ccb福气任务界面");
+                    sleep(2600);
+                },
+                to_do_mission: function () {
+                    // 点击签到
+                    if (func.sClick(text("立即签到").findOnce())) {
+                        toastLog("已点击 立即签到");
+                    } else {
+                        toastLog("未找到 立即签到");
+                    }
+                    sleep(2000);
+                    // 循环
+                    let to_do;
+                    while (1) {
+                        to_do = text("去完成").findOnce();
+                        if (to_do != null) {
+                            if (to_do.bounds().top > device.height) {
+                                toastLog("当前屏幕已完成");
+                                sleep(2600);
+                                break;
+                            }
+                        } else {
+                            toastLog("等待去完成按钮加载");
+                            sleep(4000);
+                        }
+                        func.sClick(to_do);
+                        toastLog("已点击，去完成，等待3秒");
+                        sleep(3000);
+                        toastLog("等待页面加载5秒");
+                        sleep(5000);
+                        // 等待返回
+                        while (text("刷新").findOnce() == null) {
+                            back();
+                            toastLog("执行返回，等待4秒");
+                            sleep(4000);
+                        }
+                        while (!func.sClick(text("刷新").findOnce())) {
+                            toastLog("点击刷新,失败");
+                            sleep(4000);
+                        }
+                        toastLog("点击刷新,成功");
+                        sleep(3000);
+                        if (func.sClick(text("领取奖励").findOnce())) {
+                            toastLog("点击领取奖励, 成功");
+                            sleep(3000);
+                        }
+                    }
+                },
+                to_friends_page: function () {
+                    let my_friend_btn, fuqi_btn, close_popup;
+                    while (text("好友列表").findOnce() == null) {
+                        // 点击主会场按钮
+                        if (func.sClick(text("主会场").findOnce())) {
+                            toastLog("已点击 ccb主会场按钮"); sleep(2600);
+                        }
+                        sleep(400);
+                        // 弹窗关闭按钮
+                        close_popup = text("/").findOnce();
+                        if (close_popup != null) {
+                            if (func.sClick(close_popup.parent())) {
+                                toastLog("已点击 ccb主会场弹窗关闭按钮");
+                                sleep(2600);
+                            }
+                        }
+                        sleep(400);
+                        // 点击我的好友按钮
+                        fuqi_btn = textStartsWith("福气值Lv").findOnce();
+                        if (fuqi_btn != null) {
+                            try {
+                                my_friend_btn = fuqi_btn.parent().parent().child(5);
+                                func.sClick(my_friend_btn);
+                            }
+                            catch (e) {
+                                log(e);
+                            }
+                        }
+                        toastLog("查找完毕，等待下一次查找"); sleep(2600);
+                    }
+                    sleep(200);
+                },
+                help_friend: function () {
+                    while (textStartsWith("助力你：") == null) {
+                        toastLog("等待 助力页面加载"); sleep(2600);
+                    }
+                    toastLog("助力页面 已加载"); sleep(2600);
+                    if (func.sClick(text("助力好友").findOnce())) {
+                        toastLog("已点击助力，等待返回"); sleep(2600);
+                    } else {
+                        toastLog("未成功 点击助力，等待返回"); sleep(2600);
+                    }
+                    while (text("好友列表").findOnce() == null) {
+                        back();
+                        toastLog("执行返回，等待4秒");
+                        sleep(3000);
+                    }
+                    sleep(200);
+                },
+                help_process: function () {
+                    let to_help, to_visit, miss_count, last_length, help_length;
+                    last_length = 0;
+                    miss_count = 0;
+                    while (1) {
+                        try {
+                            to_visit = text("去拜访").find();
+                            if (to_visit.length > 10) {
+                                break;
+                            }
+                            to_help = text("去助力").find();
+                            help_length = to_help.length;
+                            // 如果执行完后，去完成的总数不变，则错过数+1
+                            if (last_length == help_length) {
+                                miss_count = miss_count + 1;
+                            }
+                            last_length = help_length;
+                            while (textStartsWith("助力你：").findOnce() == null) {
+                                if (func.sClick(to_help[help_length - miss_count - 1])) {
+                                    toastLog("已点击去助力按钮，等待加载"); sleep(2600);
+                                    break;
+                                }
+                            }
+                            func_obj.help_friend();
+                            help_count = help_count - 1;
+                        }
+                        catch (e) {
+                            continue;
+                        }
+                    }
+                },
+            };
+            [1, 2].forEach(app_count => {
+                func.toAppMulti("微信", app_count);
+                func_obj.to_wechat_favorite();
+                func_obj.in_mission_view();     // 到达任务界面
+                func_obj.to_do_mission();     // 做任务
+                func_obj.to_friends_page();
+                func_obj.help_process();
+                toastLog("第" + app_count + "个已完成，准备切换");
+            })
+        },
+        财付季答题助手: function () {
+            let func_obj = {
+                正面词汇: function () {
+                    let key_words = {
+                        "教导有方": 1, "格物致知": 1, "价格合理": 1, "自愿选择": 1, "诚实信用": 1, "尊重意愿": 1, "责任追究": 1, "知无不言": 1, "准确计价": 1,
+                        "安全保障": 1, "民事调解": 1, "以礼相待": 1, "自愿": 1, "真心实意": 1, "自由裁量": 1, "自由": 1, "敬老尊贤": 1, "举案齐眉": 1,
+                        "稳健投资": 1, "友好协商": 1, "货值其价": 1, "倾囊相授": 1, "符合原则": 1, "弥补损害": 1, "信息对称": 1, "合法使用": 1, "充分披露": 1,
+                        "严格保密": 1, "学海无涯": 1, "博古通今": 1,
+                    }
+                    let anwser, idx, triggers, trigger_text = "请选出所有正面词汇";
                     try {
-                        my_friend_btn = fuqi_btn.parent().parent().child(5);
-                        func.sClick(my_friend_btn);
+                        trigger = textContains(trigger_text).findOnce();
+                        if (trigger != null) {
+                            idx = trigger.indexInParent();
+                            triggers = trigger.parent().child(idx + 2);
+                            for (i = 0; i < triggers.childCount(); i++) {
+                                anwser = triggers.child(i).child(0).text();
+                                if (anwser in key_words) {
+                                    func.cClick(triggers.child(i));
+                                    log("正面词汇 已点击辅助答案");
+                                    sleep(200);
+                                }
+                            }
+                        }
                     }
                     catch (e) {
+                        log("正面词汇 查找报错");
+                        log(e);
+                    }
+                },
+                消保跨境答题: function () {
+                    let questions_dict = { "业务中的“南向通”": "内地投资者", "“北向通”可投资产品范围": "内地存款产品", "“跨境理财通”业务试点时": "无需审核客户投资资金" };
+                    let anwsers_dict = { "湛江": 1, "小红是美国人，持护照": 1, "仅限于本人账户之间、个人与近亲属账户之间": 1 };
+                    let trigger, triggers, trigger_text = "答对3题即算闯关成功";
+                    let question = "", anwser = "";
+                    try {
+                        trigger = textContains(trigger_text).findOnce();
+                        while (trigger == null) {
+                            toast("未找到匹配字符...");
+                            sleep(3000);
+                            trigger = textContains(trigger_text).findOnce();
+                        }
+                        triggers = trigger.parent().parent().child(0);
+                        let qu_keys, i;
+                        qu_keys = Object.keys(questions_dict);
+                        for (i = 0; i < triggers.childCount(); i++) {
+                            if (i == 0) {
+                                question = triggers.child(i).text();
+                            } else {
+                                anwser = triggers.child(i).text();
+                            }
+                            if (anwser in anwsers_dict) {
+                                func.sClick(triggers.child(i));
+                                toastLog("已点击辅助答案：" + anwser + ",等待3秒");
+                                sleep(3000);
+                            } else {
+                                for (i = 0; i < qu_keys.length; i++) {
+                                    if (question.indexOf(qu_keys[i]) != -1) {
+                                        func.sClick(textContains(qu_keys[i]).findOnce());
+                                        toastLog("已点击辅助答案：" + qu_keys[i] + ",等待3秒");
+                                        sleep(3000);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (e) {
+                        log("消保跨境答题 查找报错");
                         log(e);
                     }
                 }
-                toastLog("查找完毕，等待下一次查找"); sleep(2600);
             }
-            sleep(200);
-        },
-        help_friend: function () {
-            while (textStartsWith("助力你：") == null) {
-                toastLog("等待 助力页面加载"); sleep(2600);
-            }
-            toastLog("助力页面 已加载"); sleep(2600);
-            if (func.sClick(text("助力好友").findOnce())) {
-                toastLog("已点击助力，等待返回"); sleep(2600);
-            } else {
-                toastLog("未成功 点击助力，等待返回"); sleep(2600);
-            }
-            while (text("好友列表").findOnce() == null) {
-                back();
-                toastLog("执行返回，等待4秒");
-                sleep(3000);
-            }
-            sleep(200);
-        },
-        help_process: function () {
-            let to_help, to_visit, miss_count, last_length, help_length;
-            last_length = 0;
-            miss_count = 0;
             while (1) {
-                try {
-                    to_visit = text("去拜访").find();
-                    if (to_visit.length > 10) {
-                        break;
-                    }
-                    to_help = text("去助力").find();
-                    help_length = to_help.length;
-                    // 如果执行完后，去完成的总数不变，则错过数+1
-                    if (last_length == help_length) {
-                        miss_count = miss_count + 1;
-                    }
-                    last_length = help_length;
-                    while (textStartsWith("助力你：").findOnce() == null) {
-                        if (func.sClick(to_help[help_length - miss_count - 1])) {
-                            toastLog("已点击去助力按钮，等待加载"); sleep(2600);
-                            break;
-                        }
-                    }
-                    func_obj.help_friend();
-                    help_count = help_count - 1;
+                if (textContains("请选出所有正面词汇").findOnce() != null) {
+                    toastLog("已找到 正面词汇 标识");
+                    func_obj.正面词汇();
+                } else {
+                    sleep(2000);
                 }
-                catch (e) {
-                    continue;
+                if (textContains("答对3题即算闯关成功").findOnce() != null) {
+                    toastLog("已找到  消保跨境答题 标识");
+                    func_obj.消保跨境答题();
+                } else {
+                    sleep(2000);
                 }
+                toast("执行完，等待2秒，继续下次");
+                sleep(2600);
             }
-        },
-    };
-    [1, 2].forEach(app_count => {
-        func.toAppMulti("微信", app_count);
-        func_obj.to_wechat_favorite();
-        func_obj.in_mission_view();     // 到达任务界面
-        func_obj.to_do_mission();     // 做任务
-        func_obj.to_friends_page();
-        func_obj.help_process();
-        toastLog("第" + app_count + "个已完成，准备切换");
-    })
+        }
+
+    }
+    return ccb;
 
 }
-
-// // -----------------------建行财富季-----------------------
-// function WX_刷新() {
-//     toastLog("刷新");
-//     // func.sClick(id("com.tencent.mm:id/kl1").findOne());
-//     func.sClick(desc("更多信息").findOne());
-//     sleep(2000);
-//     func.sClick(text("刷新").findOne());
-//     sleep(2000);
-// }

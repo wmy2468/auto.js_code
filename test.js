@@ -31,7 +31,8 @@ let find_regions = {
 // log(left_times == 0);
 
 // swipe(300, 1300, 300, 400, 300);        // 一次滑动3个人头
-log(func.sClick(text("/").findOnce().parent()));
+a = {"as":1,"bcs":2};
+log("as" in a)
 // requestScreenCapture();
 // let screenshot = images.captureScreen();
 // let img = images.read(pic_folder + "ccb收藏任务中心.png");
