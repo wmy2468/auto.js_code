@@ -33,7 +33,7 @@ function main() {
             farms = 芭芭农场();
             farms.zfb助力(); farms.tb助力();
             farms.tb(); farms.zfb();
-            farms().tb施肥();
+            farms.tb施肥();
         }
     }
     else if (scriptName == "JD相关") {
