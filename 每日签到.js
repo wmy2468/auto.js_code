@@ -550,8 +550,9 @@ function 京东() {
             back();
             textContains("元微信现金恭喜").findOne();
             let scroll_bar, bar_parent, click_parent;
-            let item, ex_flag, ex_count;
+            let item, ex_flag, ex_count, continue_find_click;
             ex_count = 0;
+            continue_find_click = true;
             // text = "本场奖励已领取完哦～"
             while (1) {
                 ex_flag = true;
@@ -569,9 +570,12 @@ function 京东() {
                                 // 等待钱币符号重新出现
                                 while (scroll_bar == null) {
                                     scroll_bar = text("¥").depth(16).findOnce();
-                                    if (func.sClick(textContains("继续挖宝").findOnce())) {
-                                        toastLog("已点击继续挖宝按钮，等待5秒");
-                                        sleep(5000);
+                                    if (continue_find_click) {
+                                        if (func.sClick(textContains("继续挖宝").findOnce())) {
+                                            continue_find_click = false;
+                                            toastLog("已点击继续挖宝按钮，等待5秒");
+                                            sleep(2600);
+                                        }
                                     }
                                     toast("等待钱币符号加载...");
                                     sleep(2600);
