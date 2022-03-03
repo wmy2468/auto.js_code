@@ -271,7 +271,7 @@ function 芭芭农场() {
             let cnt = 0;
             let screenshot, find_region;
             find_region = [0, device.height / 2];
-            let pic_folder = files.cwd() + '/piccs/'
+            let pic_folder = files.cwd() + '/piccs/';
             let img_list = {
                 芭芭农场施肥可拆开: images.read(pic_folder + "芭芭农场施肥可拆开.png"),
                 芭芭农场施肥点击领取: images.read(pic_folder + "芭芭农场施肥点击领取.png"),
@@ -862,48 +862,43 @@ function 支付宝() {
 }
 // -----------------------建行财富季-----------------------
 function 建行财富季() {
-    let select_items = func.dialogs_select([1, 2, "1 + 2"], "CCB任务选择微信", "多选");
-    // let pic_folder = files.cwd() + "/piccs/";
-    // requestScreenCapture();
-    // let find_regions = {
-    //     ccb福气任务签到按钮: [810, 790, 200, 200],
-    //     ccb福气任务去完成: [800, 1700],
-    //     ccb福气任务刷新按钮: [900, 1500, 179, 200],
-    //     ccb福气任务领取奖励: [790, 1700],
-    //     ccb好友列表界面: [260, 330, 200, 200],
-    //     ccb主会场按钮: [70, 2180, 200, 100],
-    //     ccb我的好友: [70, 1580, 200, 200],
-    //     ccb好友列表底部: [120, 2140],
-    //     ccb好友助力界面: [200, 1560, 200, 200],
-    //     ccb好友助力按钮: [450, 1880, 200, 200],
-    //     ccb主会场弹窗关闭按钮: [900, 680, 100, 200],
-    //     ccb好友助力完成按钮: [816, 670, 207, 81],
-    //     ccb好友去助力: [870, 430],
-    // }
-    // let img_list = {
-    //     ccb福气任务签到按钮: images.read(pic_folder + "ccb福气任务签到按钮.png"),
-    //     ccb福气任务去完成: images.read(pic_folder + "ccb福气任务去完成.png"),
-    //     ccb福气任务刷新按钮: images.read(pic_folder + "ccb福气任务刷新按钮.png"),
-    //     ccb福气任务领取奖励: images.read(pic_folder + "ccb福气任务领取奖励.png"),
-    //     ccb好友列表界面: images.read(pic_folder + "ccb好友列表界面.png"),
-    //     ccb主会场按钮: images.read(pic_folder + "ccb主会场按钮.png"),
-    //     ccb我的好友: images.read(pic_folder + "ccb我的好友.png"),
-    //     ccb好友列表底部: images.read(pic_folder + "ccb好友列表底部.png"),
-    //     ccb好友助力界面: images.read(pic_folder + "ccb好友助力界面.png"),
-    //     ccb好友助力按钮: images.read(pic_folder + "ccb好友助力按钮.png"),
-    //     ccb主会场弹窗关闭按钮: images.read(pic_folder + "ccb主会场弹窗关闭按钮.png"),
-    //     ccb好友助力完成按钮: images.read(pic_folder + "ccb好友助力完成按钮.png"),
-    //     ccb好友去助力: images.read(pic_folder + "ccb好友去助力.png"),
-    // }
+    // let select_items = func.dialogs_select([1, 2, "1 + 2"], "CCB任务选择微信", "多选");
+    requestScreenCapture(); sleep(1000);
     let func_obj = {
         to_wechat_favorite: function () {
-            // 判断当前是否是微信package
+            sleep(800);
             // 先找到 底部按钮 我
-            text("我").depth(13).findOnce();
+            while (func.sClick(text("我").depth(13).findOnce()) == false) {
+                back(); toastLog("等待我的页面加载，等4秒"); sleep(4000);
+            }
+            toastLog("已点击 微信底部 我");
+            sleep(2600);
             // 点击收藏
-            text("收藏").depth(24).findOnce();
+            while (func.sClick(text("收藏").depth(24).findOnce()) == false) {
+                toastLog("等待收藏页面加载"); sleep(2600);
+            }
+            toastLog("已点击 收藏 按钮");
+            sleep(2600);
             // 点击收藏内容
             func.sClick(textStartsWith("主会场").findOne());
+            toastLog("已点击收藏夹的 主会场");
+            sleep(2600);
+            id("android:id/text1").text("详情").findOne();
+            toastLog("收藏夹 主会场 已加载");
+            sleep(2600);
+            let match_result, match_img;
+            let pic_folder = files.cwd() + '/piccs/';
+            match_img = images.read(pic_folder + "ccb收藏任务中心.png");
+            match_result = null;
+            while (match_result == null) {
+                match_result = func.match_img(match_img, null);
+                toastLog("等待找图出现...");
+                sleep(2600);
+            }
+            match_img.recycle();
+            click(match_result.x, match_result.y + 88);
+            toastLog("已点击链接...");
+            sleep(2600);
         },
         in_mission_view: function () {
             while (text("刷新").findOnce() == null) {
@@ -959,7 +954,7 @@ function 建行财富季() {
             }
         },
         to_friends_page: function () {
-            let my_friend_btn, fuqi_btn;
+            let my_friend_btn, fuqi_btn, close_popup;
             while (text("好友列表").findOnce() == null) {
                 // 点击主会场按钮
                 if (func.sClick(text("主会场").findOnce())) {
@@ -967,8 +962,12 @@ function 建行财富季() {
                 }
                 sleep(400);
                 // 弹窗关闭按钮
-                if (func.sClick(text("/").findOnce())) {
-                    toastLog("已点击 ccb主会场弹窗关闭按钮"); sleep(2600);
+                close_popup = text("/").findOnce();
+                if (close_popup != null) {
+                    if (func.sClick(close_popup.parent())) {
+                        toastLog("已点击 ccb主会场弹窗关闭按钮");
+                        sleep(2600);
+                    }
                 }
                 sleep(400);
                 // 点击我的好友按钮
@@ -985,25 +984,6 @@ function 建行财富季() {
                 toastLog("查找完毕，等待下一次查找"); sleep(2600);
             }
             sleep(200);
-        },
-        to_ends: function () {
-            sleep(800);
-            let cnt, page_end;
-            while (1) {
-                page_end = text("加好友攒福气").findOnce();
-                if (page_end != null) {
-                    if (page_end.bounds().top < 2200) {
-                        break;
-                    }
-                }
-                cnt = 7;
-                while (cnt--) {
-                    swipe(300, 1300, 300, 400, 300);
-                    sleep(300);
-                }
-            }
-            toastLog("已到达页面底部");
-            sleep(2600);
         },
         help_friend: function () {
             while (textStartsWith("助力你：") == null) {
@@ -1054,34 +1034,16 @@ function 建行财富季() {
             }
         },
     };
-    // func_obj.help_process();
-    if (select_items == 1 || select_items == 2) {
-        func.toAppMulti("微信", select_items);
+    [1, 2].forEach(app_count => {
+        func.toAppMulti("微信", app_count);
+        func_obj.to_wechat_favorite();
         func_obj.in_mission_view();     // 到达任务界面
         func_obj.to_do_mission();     // 做任务
         func_obj.to_friends_page();
         func_obj.help_process();
-    } else {
-        func.toAppMulti("微信", 1);
-        func_obj.in_mission_view();     // 到达任务界面
-        func_obj.to_do_mission();     // 做任务
-        func_obj.to_friends_page();
-        func_obj.help_process();
-        toastLog("第一个已完成，准备切换");
-        func.toAppMulti("微信", 2);
-        func_obj.in_mission_view();     // 到达任务界面
-        func_obj.to_do_mission();     // 做任务
-        func_obj.to_friends_page();
-        func_obj.help_process();
-    }
-    // 释放所有图片
-    // Object.keys(img_list).forEach(opend_img => {
-    //     img_list[opend_img].recycle();
-    // })
+        toastLog("第" + app_count + "个已完成，准备切换");
+    })
 
-    // ---------------------------------
-    // 
-    // 
 }
 
 // // -----------------------建行财富季-----------------------

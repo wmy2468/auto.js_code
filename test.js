@@ -21,7 +21,7 @@ let find_regions = {
 // swipe(300, 1300, 300, 400, 300);     //向下
 // swipe(300, 400, 300, 1300, 300);        //向上
 // app.launchApp("微信")
-func.to_scheme("weixin://dl/favorites")
+// func.to_scheme("weixin://dl/favorites")
 
 
 // left_today = textContains("今日剩余").findOnce();
@@ -31,9 +31,10 @@ func.to_scheme("weixin://dl/favorites")
 // log(left_times == 0);
 
 // swipe(300, 1300, 300, 400, 300);        // 一次滑动3个人头
-
+log(func.sClick(text("/").findOnce().parent()));
+// requestScreenCapture();
 // let screenshot = images.captureScreen();
-// let img = images.read(pic_folder + "ccb福气任务刷新按钮.png");
+// let img = images.read(pic_folder + "ccb收藏任务中心.png");
 // log(images.matchTemplate(screenshot, img))
 
 
