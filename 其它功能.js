@@ -951,9 +951,9 @@ function 建行财富季() {
         },
         to_friends_page: function () {
             let my_friend_btn, fuqi_btn;
-            while (text("好友列表").depth(21).findOnce() == null) {
+            while (text("好友列表").findOnce() == null) {
                 // 点击主会场按钮
-                if (func.sClick(text("主会场").depth(22).findOnce())) {
+                if (func.sClick(text("主会场").findOnce())) {
                     toastLog("已点击 ccb主会场按钮"); sleep(2600);
                 }
                 sleep(400);
@@ -1006,7 +1006,7 @@ function 建行财富季() {
             } else {
                 toastLog("未成功 点击助力，等待返回"); sleep(2600);
             }
-            while (text("好友列表").depth(21).findOnce() == null) {
+            while (text("好友列表").findOnce() == null) {
                 back();
                 toastLog("执行返回，等待4秒");
                 sleep(3000);
