@@ -989,7 +989,7 @@ function 建行财富季() {
             while (textStartsWith("助力你：") == null) {
                 toastLog("等待 助力页面加载"); sleep(2600);
             }
-            sleep(1000);
+            toastLog("助力页面 已加载"); sleep(2600);
             if (func.sClick(text("助力好友").findOnce())) {
                 toastLog("已点击助力，等待返回"); sleep(2600);
             } else {
