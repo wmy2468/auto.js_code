@@ -571,7 +571,7 @@ function 京东() {
                                 while (scroll_bar == null) {
                                     scroll_bar = text("¥").depth(16).findOnce();
                                     if (continue_find_click) {
-                                        if (func.sClick(textContains("继续挖宝").findOnce())) {
+                                        if (func.cClick(textContains("继续挖宝").findOnce())) {
                                             continue_find_click = false;
                                             toastLog("已点击继续挖宝按钮，等待5秒");
                                             sleep(2600);
