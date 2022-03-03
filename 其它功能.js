@@ -19,15 +19,21 @@ function main() {
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行财富季") { 建行财富季(); }
     else if (scriptName == "支付宝相关") {
-        select_func = func.dialogs_select(["芭芭农场-助力浏览", "芭芭农场-淘宝施肥", "支付宝捐款", "余额宝转入", "余额宝转出"]);
+        let farms;
+        select_func = func.dialogs_select(["芭芭农场-助力浏览施肥", "支付宝捐款", "余额宝转入", "余额宝转出", "芭芭农场-助力浏览", "芭芭农场-淘宝施肥"]);
         if (select_func == "支付宝捐款") { 支付宝().支付宝捐款(); }
         else if (select_func == "余额宝转入") { 支付宝().余额宝转入(); }
         else if (select_func == "余额宝转出") { 支付宝().余额宝转出(); }
         else if (select_func == "芭芭农场-淘宝施肥") { 芭芭农场().tb施肥(); }
         else if (select_func == "芭芭农场-助力浏览") {
-            let farms = 芭芭农场();
+            farms = 芭芭农场();
             farms.zfb助力(); farms.tb助力();
             farms.tb(); farms.zfb();
+        } else if (select_func == "芭芭农场-助力浏览施肥") {
+            farms = 芭芭农场();
+            farms.zfb助力(); farms.tb助力();
+            farms.tb(); farms.zfb();
+            farms().tb施肥();
         }
     }
     else if (scriptName == "JD相关") {
