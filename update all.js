@@ -41,7 +41,7 @@ if (selectIndex == -1) {
     let file_name_list;
     // Mate30 才需要更新ccb文件
     if (device.model == "TAS-AL00") {
-        file_name_list = ["芭芭农场施肥可拆开.png", "芭芭农场施肥点击领取.png",];
+        file_name_list = ["芭芭农场施肥可拆开.png", "芭芭农场施肥点击领取.png", "ccb收藏任务中心.png"];
     } else {
         file_name_list = ["芭芭农场施肥可拆开.png", "芭芭农场施肥点击领取.png"];
     }

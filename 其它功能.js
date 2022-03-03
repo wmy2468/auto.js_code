@@ -896,6 +896,15 @@ function 建行财富季() {
     //     ccb好友去助力: images.read(pic_folder + "ccb好友去助力.png"),
     // }
     let func_obj = {
+        to_wechat_favorite: function () {
+            // 判断当前是否是微信package
+            // 先找到 底部按钮 我
+            text("我").depth(13).findOnce();
+            // 点击收藏
+            text("收藏").depth(24).findOnce();
+            // 点击收藏内容
+            func.sClick(textStartsWith("主会场").findOne());
+        },
         in_mission_view: function () {
             while (text("刷新").findOnce() == null) {
                 toast("请跳转到 ccb福气任务界面");

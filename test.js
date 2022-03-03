@@ -20,7 +20,8 @@ let find_regions = {
 
 // swipe(300, 1300, 300, 400, 300);     //向下
 // swipe(300, 400, 300, 1300, 300);        //向上
-app.launchApp("微信")
+// app.launchApp("微信")
+func.to_scheme("weixin://dl/favorites")
 
 
 // left_today = textContains("今日剩余").findOnce();
