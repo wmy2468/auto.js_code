@@ -1063,7 +1063,7 @@ function 建行财富季() {
         },
         财付季答题助手: function () {
             let func_obj = {
-                正面词汇: function () {
+                正面词汇: function (in_positive_view) {
                     let key_words = {
                         "教导有方": 1, "格物致知": 1, "价格合理": 1, "自愿选择": 1, "诚实信用": 1, "尊重意愿": 1, "责任追究": 1, "知无不言": 1, "准确计价": 1,
                         "安全保障": 1, "民事调解": 1, "以礼相待": 1, "自愿": 1, "真心实意": 1, "自由裁量": 1, "自由": 1, "敬老尊贤": 1, "举案齐眉": 1,
@@ -1073,7 +1073,7 @@ function 建行财富季() {
                     let anwser, idx, triggers, trigger_text = "请选出所有正面词汇";
                     try {
                         trigger = textContains(trigger_text).findOnce();
-                        if (trigger != null) {
+                        if (trigger != null && in_positive_view) {
                             idx = trigger.indexInParent();
                             triggers = trigger.parent().child(idx + 2);
                             for (i = 0; i < triggers.childCount(); i++) {
@@ -1134,13 +1134,17 @@ function 建行财富季() {
                     }
                 }
             }
+            let is_in_positive = true;
             while (1) {
                 if (textContains("请选出所有正面词汇").findOnce() != null) {
                     toastLog("已找到 正面词汇 标识");
-                    func_obj.正面词汇();
+                    func_obj.正面词汇(is_in_positive);
+                    is_in_positive = false;
+                    continue;
                 } else {
                     sleep(2000);
                 }
+                is_in_positive = true;
                 if (textContains("答对3题即算闯关成功").findOnce() != null) {
                     toastLog("已找到  消保跨境答题 标识");
                     func_obj.消保跨境答题();
