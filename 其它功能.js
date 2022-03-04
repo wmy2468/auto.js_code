@@ -318,7 +318,7 @@ function 芭芭农场() {
                 click(btn_x, btn_y);
                 func.sClick(text("关闭").findOnce());
                 screenshot = images.captureScreen();
-                if (func.match_img_click(img_list.芭芭农场施肥兔子灯笼, screenshot, find_region)) { sleep(1000); }
+                // if (func.match_img_click(img_list.芭芭农场施肥兔子灯笼, screenshot, find_region)) { sleep(3000); }
                 if (func.match_img_click(img_list.芭芭农场施肥可拆开, screenshot, find_region)) { sleep(1000); }
                 if (func.match_img_click(img_list.芭芭农场施肥点击领取, screenshot, find_region)) { sleep(1000); }
             }
