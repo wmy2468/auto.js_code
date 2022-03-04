@@ -393,6 +393,7 @@ function 芭芭农场() {
                     }
                 }
                 if (refind) {
+                    i = i - 1; // 重新执行未助力的部分
                     continue;
                 }
                 toastLog("已找到，为Ta助力");
@@ -1093,22 +1094,27 @@ function 建行财富季() {
                         "教导有方": 1, "格物致知": 1, "价格合理": 1, "自愿选择": 1, "诚实信用": 1, "尊重意愿": 1, "责任追究": 1, "知无不言": 1, "准确计价": 1,
                         "安全保障": 1, "民事调解": 1, "以礼相待": 1, "自愿": 1, "真心实意": 1, "自由裁量": 1, "自由": 1, "敬老尊贤": 1, "举案齐眉": 1,
                         "稳健投资": 1, "友好协商": 1, "货值其价": 1, "倾囊相授": 1, "符合原则": 1, "弥补损害": 1, "信息对称": 1, "合法使用": 1, "充分披露": 1,
-                        "严格保密": 1, "学海无涯": 1, "博古通今": 1,
+                        "严格保密": 1, "学海无涯": 1, "博古通今": 1, "保护弱小": 1, "真实": 1, "资金安全": 1, "力学不倦": 1, "你敬我爱": 1, "及时受理": 1,
+                        "受理依据": 1, "春风中坐": 1, "内容检查": 1, "交易自主": 1, "心口如一": 1, "奉若神明": 1, "受理有效": 1, "彬彬有礼": 1, "求知若渴": 1,
+                        "个人权益": 1, "敬如上宾": 1, "风险警示": 1, "耳提面命": 1, "数据字典": 1, "数据安全": 1, "坦诚相对": 1,
                     }
-                    let anwser, idx, triggers, trigger_text = "请选出所有正面词汇";
+                    let answer, idx, triggers, trigger_text = "请选出所有正面词汇";
                     try {
                         trigger = textContains(trigger_text).findOnce();
                         if (trigger != null && in_positive_view) {
                             idx = trigger.indexInParent();
                             triggers = trigger.parent().child(idx + 2);
                             for (i = 0; i < triggers.childCount(); i++) {
-                                anwser = triggers.child(i).child(0).text();
-                                if (anwser in key_words) {
+                                answer = triggers.child(i).child(0).text();
+                                log("题目词汇：" + answer);
+                                if (answer in key_words) {
                                     func.cClick(triggers.child(i));
                                     log("正面词汇 已点击辅助答案");
                                     sleep(200);
                                 }
                             }
+                            toastLog("已点击所有符合条件数据");
+                            sleep(2600);
                         }
                     }
                     catch (e) {
@@ -1117,10 +1123,21 @@ function 建行财富季() {
                     }
                 },
                 消保跨境答题: function () {
-                    let questions_dict = { "业务中的“南向通”": "内地投资者", "“北向通”可投资产品范围": "内地存款产品", "“跨境理财通”业务试点时": "无需审核客户投资资金" };
-                    let anwsers_dict = { "湛江": 1, "小红是美国人，持护照": 1, "仅限于本人账户之间、个人与近亲属账户之间": 1 };
+                    let questions_dict = {
+                        "业务中的“南向通”": "内地投资者", "“跨境理财通”业务试点时": "无需审核客户投资资金", "搭售一双鞋": "不正确",
+                        "向您普及存款保险知识": "对", "一定不会建议他在大学期": "沉迷网络游戏", "留有空白内容的合同": "否", "买不起就别看": "不正确",
+                        "自行为客户关注了": "不正确", "没有说明清楚产品“起购金额”": "否", "不懂藏文": "不正确", "介绍了产品特点": "对", "关于《个人购汇申请书》": "只有在柜面办理",
+                        "需更换办理": "全部都是", "资金境内划转": "本人账户之间", "“南向通”资金用途": "所得收益可不受", "": "", "": "", "": "",
+                    };
+                    let answers_dict = {
+                        "湛江": 1, "小红是美国人，持护照": 1, "仅限于本人账户之间、个人与近亲属账户之间": 1, "“南向通”投资本金来源可以不是汇款户": 1,
+                        "银行告知小明不能办理": 1, "风险承受能力为稳健型及以上": 1, "100万": 1, "内地存款产品": 1, "不纳入": 1, "港澳投资者业务资格需由内地银行进行审核": 1,
+                        "内地代销银行和内地合作银行无需审核客户投资资金来源": 1, "向银行申领《携带外汇出境许可证》": 1, "1500亿": 1, "只需提供本人有效身份证件": 1,
+                        "内地代销银行故意隐瞒相关产品风险": 1, "自助取款机": 1, "1家": 1, "业务环节发生地原则": 1, "境内个人办理外汇汇出，银行有权对其购汇用途和付汇用途进行一致性审核": 1, 
+                        "": 1, "": 1,
+                    };
                     let trigger, triggers, trigger_text = "答对3题即算闯关成功";
-                    let question = "", anwser = "";
+                    let question = "", answer = "";
                     try {
                         trigger = textContains(trigger_text).findOnce();
                         while (trigger == null) {
@@ -1129,23 +1146,30 @@ function 建行财富季() {
                             trigger = textContains(trigger_text).findOnce();
                         }
                         triggers = trigger.parent().parent().child(0);
-                        let qu_keys, i;
-                        qu_keys = Object.keys(questions_dict);
+                        let question_keys, question_key, i;
+
                         for (i = 0; i < triggers.childCount(); i++) {
                             if (i == 0) {
                                 question = triggers.child(i).text();
+                                log("question:" + question);
+                                continue;
                             } else {
-                                anwser = triggers.child(i).text();
+                                answer = triggers.child(i).text();
+                                log("answer:" + answer);
                             }
-                            if (anwser in anwsers_dict) {
+                            if (answer in answers_dict) {
                                 func.sClick(triggers.child(i));
-                                toastLog("已点击辅助答案：" + anwser + ",等待3秒");
+                                toastLog("已点击 答案：" + answer + ",等待3秒");
                                 sleep(3000);
+                                break;
                             } else {
-                                for (i = 0; i < qu_keys.length; i++) {
-                                    if (question.indexOf(qu_keys[i]) != -1) {
-                                        func.sClick(textContains(qu_keys[i]).findOnce());
-                                        toastLog("已点击辅助答案：" + qu_keys[i] + ",等待3秒");
+                                question_keys = Object.keys(questions_dict);
+                                for (i = 0; i < question_keys.length; i++) {
+                                    question_key = question_keys[i];
+                                    if (question.indexOf(question_key) != -1) {
+                                        answer = questions_dict[question_key];
+                                        func.sClick(textContains(answer).findOnce());
+                                        toastLog("已点击问题：" + question_key + ",答案：" + answer + ",等待3秒");
                                         sleep(3000);
                                         break;
                                     }
@@ -1162,19 +1186,16 @@ function 建行财富季() {
             let is_in_positive = true;
             while (1) {
                 if (textContains("请选出所有正面词汇").findOnce() != null) {
-                    toastLog("已找到 正面词汇 标识");
+                    toastLog("已找到 正面词汇 标识, 答题完成后，等待提示继续下次后再开始答题");
+                    sleep(2600);
                     func_obj.正面词汇(is_in_positive);
                     is_in_positive = false;
                     continue;
-                } else {
-                    sleep(2000);
                 }
                 is_in_positive = true;
                 if (textContains("答对3题即算闯关成功").findOnce() != null) {
-                    toastLog("已找到  消保跨境答题 标识");
+                    toastLog("已找到  消保跨境答题 标识, 答题完成后，等待提示继续下次后再开始答题");
                     func_obj.消保跨境答题();
-                } else {
-                    sleep(2000);
                 }
                 toast("执行完，等待2秒，继续下次");
                 sleep(2600);
