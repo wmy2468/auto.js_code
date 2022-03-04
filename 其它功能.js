@@ -357,7 +357,7 @@ function 芭芭农场() {
             sleep(2000);
         },
         zfb助力: function () {
-            let url_dict;
+            let url_dict, url_keys;
             url_dict = {
                 "url_redmi": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgzMjgzNTY5OTY5MjBkMGk1MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088832835699692&chInfo=ch_share__chsub_Weixin&apshareid=2e39b639-86a2-425f-bac9-e59cfa6f729c",
                 "url_mate30": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjU2NjcxNDcyMDA5cDFyY0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802566714720&chInfo=ch_share__chsub_Weixin&apshareid=67021669-4f86-433a-b0f8-e9a3d92ffa4a",
@@ -365,13 +365,30 @@ function 芭芭农场() {
                 "url_lm": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODMwMjgyNjc0MjM5NDE2MzF4dkFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088302826742394&chInfo=ch_share__chsub_Weixin&apshareid=984B5380-ACCD-4099-B658-FAE3E8F5D384",
                 // "url_lp": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjQ1NTc3NTMzOTFsYnNoM0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802455775339&chInfo=ch_share__chsub_Weixin&apshareid=D4E9A701-E6F4-4622-A775-0AA2DF4C3E00",
             }
-            Object.keys(url_dict).forEach(obj_key => {
+            // Object.keys(url_dict).forEach(obj_key => { }
+            url_keys = Object.keys(url_dict);
+            let obj_key, cnt, refind;
+            for (let i = 0; i < url_keys.length; i++) {
+                refind = false;
+                cnt = 0;
+                obj_key = url_keys[i];
                 jump_url = url_dict[obj_key];
                 func.to_scheme(jump_url);
                 toastLog("已跳转URL," + obj_key);
                 while (text("为Ta助力").findOnce() == null) {
                     func.sClick(text("抽取今日肥料奖励>").findOnce());
+                    cnt = cnt + 1;
                     sleep(2000);
+                    if (cnt > 6) {
+                        toastLog("超过10秒未找到, 后退一下，重新执行");
+                        back();
+                        sleep(3000);
+                        refind = true;
+                        break;
+                    }
+                }
+                if (refind) {
+                    continue;
                 }
                 toastLog("已找到，为Ta助力");
                 sleep(2500);
