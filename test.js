@@ -4,9 +4,14 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
+test_case_img("芭芭农场施肥兔子灯笼.png")
 
-function test_case_img(filename) {
-
+function test_case_img(file_name) {
+    requestScreenCapture();
+    sleep(2000);
+    let find_img = images.read(pic_folder + file_name);
+    log(func.match_imgs(find_img));
+    find_img.recycle();
 }
 
 function match_imgs(file_name, screenshot, find_region, max_match) {
