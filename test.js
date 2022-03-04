@@ -8,9 +8,10 @@ test_case_img("芭芭农场施肥兔子灯笼.png")
 
 function test_case_img(file_name) {
     requestScreenCapture();
-    sleep(2000);
+    sleep(500);
     let find_img = images.read(pic_folder + file_name);
-    log(func.match_imgs(find_img));
+    // log(func.match_imgs(find_img));
+    log(func.match_img_click(find_img));
     find_img.recycle();
 }
 

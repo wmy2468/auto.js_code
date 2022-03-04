@@ -290,6 +290,7 @@ function 芭芭农场() {
             let img_list = {
                 芭芭农场施肥可拆开: images.read(pic_folder + "芭芭农场施肥可拆开.png"),
                 芭芭农场施肥点击领取: images.read(pic_folder + "芭芭农场施肥点击领取.png"),
+                芭芭农场施肥兔子灯笼: images.read(pic_folder + "芭芭农场施肥兔子灯笼.png"),
             }
             while (1) {
                 cnt = cnt + 1;
@@ -317,12 +318,9 @@ function 芭芭农场() {
                 click(btn_x, btn_y);
                 func.sClick(text("关闭").findOnce());
                 screenshot = images.captureScreen();
-                // toast("如需要停止，手动操作, 超过100次 自动停止");
-                match_point = func.match_img(img_list.芭芭农场施肥可拆开, screenshot, find_region);
-                if (match_point) { click(match_point.x, match_point.y) }
-                // 进入页面后查找是否有 施肥立即领取按钮
-                match_point = func.match_img(img_list.芭芭农场施肥点击领取, screenshot, find_region);
-                if (match_point) { click(match_point.x, match_point.y) }
+                if (func.match_img_click(img_list.芭芭农场施肥兔子灯笼, screenshot, find_region)) { sleep(1000); }
+                if (func.match_img_click(img_list.芭芭农场施肥可拆开, screenshot, find_region)) { sleep(1000); }
+                if (func.match_img_click(img_list.芭芭农场施肥点击领取, screenshot, find_region)) { sleep(1000); }
             }
             // 释放所有图片
             Object.keys(img_list).forEach(opend_img => {
