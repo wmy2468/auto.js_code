@@ -4,7 +4,30 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-log(func.sClick(textContains("到银行").findOnce()));
+
+let answers_dict = {
+    "湛江": 1, "小红是美国人，持护照": 1, "仅限于本人账户之间、个人与近亲属账户之间": 1, "“南向通”投资本金来源可以不是汇款户": 1,
+    "银行告知小明不能办理": 1, "风险承受能力为稳健型及以上": 1, "100万": 1, "内地存款产品": 1, "不纳入": 1, "港澳投资者业务资格需由内地银行进行审核": 1,
+    "内地代销银行和内地合作银行无需审核客户投资资金来源": 1, "向银行申领《携带外汇出境许可证》": 1, "1500亿": 1, "只需提供本人有效身份证件": 1,
+    "内地代销银行故意隐瞒相关产品风险": 1, "自助取款机": 1, "1家": 1, "业务环节发生地原则": 1, "境内个人办理外汇汇出，银行有权对其购汇用途和付汇用途进行一致性审核": 1,
+    "": 1, "": 1,
+};
+
+trigger_text = "答对3题即算闯关成功";
+log(textContains(trigger_text).find().length)
+trigger = textContains(trigger_text).findOnce();
+triggers = trigger.parent().parent().child(0);
+
+for (i = 0; i < triggers.childCount(); i++) {
+    log(last_level_text(triggers.child(i)));
+}
+function last_level_text(ele_obj) {
+    let ele = ele_obj;
+    while (ele.childCount() != 0) {
+        ele = ele.child(0);
+    }
+    return ele.text();
+}
 
 function test_case_img(file_name) {
     requestScreenCapture();
