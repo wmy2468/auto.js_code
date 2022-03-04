@@ -4,40 +4,10 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-let find_regions = {
-    ccb福气任务签到按钮: [810, 790, 200, 200],
-    ccb福气任务去完成: [800, 1700],
-    ccb福气任务刷新按钮: [900, 1500, 179, 200],
-    ccb福气任务领取奖励: [790, 1700],
-    ccb好友列表界面: [260, 330, 200, 200],
-    ccb主会场按钮: [70, 2180, 200, 100],
-    ccb我的好友: [70, 1580, 200, 200],
-    ccb好友列表底部: [120, 2140],
-    ccb好友助力界面: [200, 1560, 200, 200],
-    ccb好友助力按钮: [450, 1880, 200, 200],
+
+function test_case_img(filename) {
+
 }
-
-
-// swipe(300, 1300, 300, 400, 300);     //向下
-// swipe(300, 400, 300, 1300, 300);        //向上
-// app.launchApp("微信")
-// func.to_scheme("weixin://dl/favorites")
-
-
-// left_today = textContains("今日剩余").findOnce();
-// left_idx = left_today.indexInParent();
-// left_today_parent = left_today.parent();
-// left_times = left_today_parent.child(left_idx + 1).text();
-// log(left_times == 0);
-
-// swipe(300, 1300, 300, 400, 300);        // 一次滑动3个人头
-a = {"as":1,"bcs":2};
-log("as" in a)
-// requestScreenCapture();
-// let screenshot = images.captureScreen();
-// let img = images.read(pic_folder + "ccb收藏任务中心.png");
-// log(images.matchTemplate(screenshot, img))
-
 
 function match_imgs(file_name, screenshot, find_region, max_match) {
     let pic_folder = files.cwd() + "/piccs/";
