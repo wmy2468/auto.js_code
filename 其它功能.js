@@ -313,7 +313,7 @@ function 芭芭农场() {
                         toastLog("未找到合种管理 按钮");
                         sleep(2600);
                     }
-                    func.sClick(className("Button").text("完成任务").findOnce());
+                    func.sClick(className("Button").text("立即领取").findOnce());
                 }
                 click(btn_x, btn_y);
                 func.sClick(text("关闭").findOnce());

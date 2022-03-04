@@ -4,7 +4,7 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-test_case_img("芭芭农场施肥兔子灯笼.png")
+log(func.sClick(className("Button").text("完成任务").findOnce()));
 
 function test_case_img(file_name) {
     requestScreenCapture();
