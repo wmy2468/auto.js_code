@@ -404,7 +404,7 @@ function 芭芭农场() {
                 func.to_autojs();
                 toastLog("切换到autojs，等待3秒，继续下一个");
                 sleep(3500);
-            })
+            }
         },
         tb助力: function () {
             let url_mate30, url_redmi, url_honor, url_lm;
