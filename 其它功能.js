@@ -1127,7 +1127,7 @@ function 建行财富季() {
                         "业务中的“南向通”": "内地投资者", "“跨境理财通”业务试点时": "无需审核客户投资资金", "搭售一双鞋": "不正确",
                         "向您普及存款保险知识": "对", "一定不会建议他在大学期": "沉迷网络游戏", "留有空白内容的合同": "否", "买不起就别看": "不正确",
                         "自行为客户关注了": "不正确", "没有说明清楚产品“起购金额”": "否", "不懂藏文": "不正确", "介绍了产品特点": "对", "关于《个人购汇申请书》": "只有在柜面办理",
-                        "需更换办理": "全部都是", "资金境内划转": "本人账户之间", "“南向通”资金用途": "所得收益可不受", "": "", "": "", "": "",
+                        "需更换办理": "全部都是", "资金境内划转": "本人账户之间", "“南向通”资金用途": "所得收益可不受",
                     };
                     let answers_dict = {
                         "湛江": 1, "小红是美国人，持护照": 1, "仅限于本人账户之间、个人与近亲属账户之间": 1, "“南向通”投资本金来源可以不是汇款户": 1,
@@ -1168,7 +1168,11 @@ function 建行财富季() {
                                     question_key = question_keys[i];
                                     if (question.indexOf(question_key) != -1) {
                                         answer = questions_dict[question_key];
-                                        func.sClick(textContains(answer).findOnce());
+                                        if (answer.length == 1) {
+                                            func.sClick(textStartsWith(answer).textEndsWith(answer).findOnce()
+                                        } else {
+                                            func.sClick(textContains(answer).findOnce());
+                                        }
                                         toastLog("已点击问题：" + question_key + ",答案：" + answer + ",等待3秒");
                                         sleep(3000);
                                         break;

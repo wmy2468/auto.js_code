@@ -4,7 +4,7 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-log(func.sClick(className("Button").text("完成任务").findOnce()));
+log(func.sClick(textContains("到银行").findOnce()));
 
 function test_case_img(file_name) {
     requestScreenCapture();
