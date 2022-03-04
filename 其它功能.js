@@ -296,16 +296,23 @@ function 芭芭农场() {
                 if (cnt > 50) {
                     break;
                 }
-                func.sClick(className("Button").text("立即领取").findOnce());
-                if (text("合种管理").findOnce() != null) {
-                    log("找到合种管理");
-                    sleep(1500);
-                    if (func.sClick(className("Button").depth(15).text("立即领取").findOnce())) { sleep(2000); }
-                    if (func.sClick(className("Button").depth(15).text("立即领取").findOnce())) { sleep(2000); }
-                    if (func.sClick(className("Button").depth(15).text("立即领取").findOnce())) { sleep(2000); }
-                    sleep(1500);
-                    continue;
-                    // func.sClick(text("完成任务").findOnce());
+                if (func.sClick(className("Button").text("立即领取").findOnce())) {
+                    toastLog("找到亲密度立即领取按钮, 等待5秒");
+                    sleep(5000);
+                    if (textContains("合种管理").findOnce() != null) {
+                        log("找到合种管理");
+                        sleep(1500);
+                        if (func.sClick(className("Button").depth(15).text("立即领取").findOnce())) { sleep(2000); }
+                        if (func.sClick(className("Button").depth(15).text("立即领取").findOnce())) { sleep(2000); }
+                        if (func.sClick(className("Button").depth(15).text("立即领取").findOnce())) { sleep(2000); }
+                        toastLog("已点击亲密度 领取 按钮");
+                        sleep(2600);
+                        // func.sClick(text("完成任务").findOnce());
+                    } else {
+                        toastLog("未找到合种管理 按钮");
+                        sleep(2600);
+                    }
+                    func.sClick(className("Button").text("完成任务").findOnce());
                 }
                 click(btn_x, btn_y);
                 func.sClick(text("关闭").findOnce());
