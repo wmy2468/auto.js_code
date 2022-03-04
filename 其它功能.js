@@ -369,7 +369,10 @@ function 芭芭农场() {
                 jump_url = url_dict[obj_key];
                 func.to_scheme(jump_url);
                 toastLog("已跳转URL," + obj_key);
-                text("为Ta助力").findOne();
+                while (text("为Ta助力").findOnce() == null) {
+                    func.sClick(text("抽取今日肥料奖励>").findOnce());
+                    sleep(2000);
+                }
                 toastLog("已找到，为Ta助力");
                 sleep(2500);
                 while (text("为Ta助力").findOnce() != null) {
