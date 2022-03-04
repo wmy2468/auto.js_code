@@ -408,13 +408,10 @@ function 浦发_金豆签到() {
     sleep(500);
     func.gesture_pwd(appName);
     toastLog("已输入登陆密码..."); sleep(2600);
-    text("开启签到提醒").findOne();
-    toastLog("已查找到 签到提醒"); sleep(2600);
-    // 当签到0天 表示未加载完成
-    while (text("已连续签到0天").findOnce() != null) {
-        sleep(1000);
+    while (text("开启签到提醒").findOnce() == null) {
+        toastLog("等待签到页面加载"); sleep(2600);
     }
-    toastLog("已到达 金豆签到页面"); sleep(2600);
+    toastLog("已查找到 签到提醒"); sleep(2600);
     textStartsWith("+").findOne();
     toastLog("已找到 金豆+号按钮"); sleep(2600);
     sleep(800);
@@ -434,10 +431,9 @@ function 浦发_金豆签到() {
             if (cnt <= 8) {
                 break;
             }
-
-        }
-        catch (e) {
-            toastLog("未找到多余的连续签到");
+        } catch (e) {
+            log(e);
+            toastLog("报错了，未找到多余的连续签到");
         }
         sleep(2500);
     }
@@ -497,7 +493,7 @@ function 京东() {
                 toastLog("等待加载");
                 sleep(3500);
             }
-            let left_times = 1;
+            let left_times = 10;
             while (left_times != 0) {
                 left_today = textContains("今日剩余").findOnce();
                 if (left_today != null) {
