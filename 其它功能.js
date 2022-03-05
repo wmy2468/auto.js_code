@@ -1134,12 +1134,6 @@ function 建行财富季() {
                     return ele.text();
                 },
                 消保跨境答题: function () {
-                    let questions_dict = {
-                        "业务中的“南向通”": "内地投资者", "“跨境理财通”业务试点时": "无需审核客户投资资金", "搭售一双鞋": "不正确",
-                        "向您普及存款保险知识": "对", "一定不会建议他在大学期": "沉迷网络游戏", "留有空白内容的合同": "否", "买不起就别看": "不正确",
-                        "自行为客户关注了": "不正确", "没有说明清楚产品“起购金额”": "否", "不懂藏文": "不正确", "介绍了产品特点": "对", "关于《个人购汇申请书》": "只有在柜面办理",
-                        "需更换办理": "全部都是", "资金境内划转": "本人账户之间", "“南向通”资金用途": "所得收益可不受",
-                    };
                     let answers_dict = {
                         "湛江": 1, "小红是美国人，持护照": 1, "仅限于本人账户之间、个人与近亲属账户之间": 1, "“南向通”投资本金来源可以不是汇款户": 1,
                         "银行告知小明不能办理": 1, "风险承受能力为稳健型及以上": 1, "100万": 1, "内地存款产品": 1, "不纳入": 1, "港澳投资者业务资格需由内地银行进行审核": 1,
@@ -1158,7 +1152,6 @@ function 建行财富季() {
                         }
                         triggers = trigger.parent().parent().child(0);
                         let question_keys, question_key, i;
-
                         for (i = 0; i < triggers.childCount(); i++) {
                             if (i == 0) {
                                 question = func_obje.last_level_text(triggers.child(i));
@@ -1174,28 +1167,32 @@ function 建行财富季() {
                                 sleep(3000);
                                 break;
                             } else {
-                                question_keys = Object.keys(questions_dict);
-                                for (i = 0; i < question_keys.length; i++) {
-                                    question_key = question_keys[i];
-                                    if (question.indexOf(question_key) != -1) {
-                                        log("question_key" + question_key);
-                                        answer = questions_dict[question_key];
-                                        if (answer.length == 1) {
-                                            func.sClick(textStartsWith(answer).textEndsWith(answer).findOnce());
-                                        } else {
-                                            func.sClick(textContains(answer).findOnce());
-                                        }
-                                        toastLog("已点击问题：" + question_key + ",答案：" + answer + ",等待3秒");
-                                        click_question = true;
-                                        sleep(3000);
-                                        break;
-                                    }
-                                }
-                                if (click_question) {
-                                    toastLog("无匹配答案");
-                                    sleep(2000);
-                                }
+                                toastLog("无满足条件的答案，请手动执行");
+                                sleep(3000);
                             }
+                            // } else {
+                            //     question_keys = Object.keys(questions_dict);
+                            //     for (i = 0; i < question_keys.length; i++) {
+                            //         question_key = question_keys[i];
+                            //         if (question.indexOf(question_key) != -1) {
+                            //             log("question_key" + question_key);
+                            //             answer = questions_dict[question_key];
+                            //             if (answer.length == 1) {
+                            //                 func.sClick(textStartsWith(answer).textEndsWith(answer).findOnce());
+                            //             } else {
+                            //                 func.sClick(textContains(answer).findOnce());
+                            //             }
+                            //             toastLog("已点击问题：" + question_key + ",答案：" + answer + ",等待3秒");
+                            //             click_question = true;
+                            //             sleep(3000);
+                            //             break;
+                            //         }
+                            //     }
+                            //     if (click_question) {
+                            //         toastLog("无匹配答案");
+                            //         sleep(2000);
+                            //     }
+                            // }
                         }
                     }
                     catch (e) {
@@ -1214,10 +1211,10 @@ function 建行财富季() {
                     continue;
                 }
                 is_in_positive = true;
-                // if (textContains("答对3题即算闯关成功").findOnce() != null) {
-                //     toastLog("已找到  消保跨境答题 标识, 答题完成后，等待提示继续下次后再开始答题");
-                //     func_obj.消保跨境答题();
-                // }
+                if (textContains("答对3题即算闯关成功").findOnce() != null) {
+                    toastLog("已找到  消保跨境答题 标识, 答题完成后，等待提示继续下次后再开始答题");
+                    func_obj.消保跨境答题();
+                }
                 toast("执行完，等待2秒，继续下次");
                 sleep(2600);
             }
