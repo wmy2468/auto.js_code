@@ -4,24 +4,7 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-let cnt = 0;
-signs = textStartsWith("+").find();
-try {
-    for (let i = 0; i < signs.length; i++) {
-        sign_text = signs[i].text();
-        if (sign_text * 0 == 0) {
-            func.sClick(signs[i]);
-            cnt = cnt + 1;
-        }
-    }
-    log("当前cnt为：" + cnt);
-    if (cnt <= 8) {
-        log("当前cnt为：" + cnt);
-    }
-} catch (e) {
-    log(e);
-    toastLog("未找到多余的连续签到");
-}
+log(textContains("说法是正确").findOnce());
 
 // let answers_dict = {
 //     "湛江": 1, "小红是美国人，持护照": 1, "仅限于本人账户之间、个人与近亲属账户之间": 1, "“南向通”投资本金来源可以不是汇款户": 1,
