@@ -495,6 +495,7 @@ function 京东() {
             }
             let left_times = 10;
             while (left_times != 0) {
+                auto.service.resources.flushLayoutCache();
                 left_today = textContains("今日剩余").findOnce();
                 if (left_today != null) {
                     try {

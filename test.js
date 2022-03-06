@@ -4,12 +4,20 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-get_now = className("Button").text("立即领取").find();
-if (get_now.length != 0) {
-    for (i = get_now.length - 1; i >= 0; i--) {
-        func.sClick(get_now[i]);
-    }
-}
+// function a() { }
+// log(a());
+// selector().clearAccessibilityFocus();
+// log(auto.service.resources.flushLayoutCache());
+
+// for (sel in auto.service.resources.flushLayoutCache) {
+//     log(sel);
+// }
+
+// left_today = textContains("今日剩余").findOnce();
+// left_idx = left_today.indexInParent();
+// left_today_parent = left_today.parent();
+// left_times = left_today_parent.child(left_idx + 1).text();
+// toastLog("当前剩余次数1=" + left_times);
 // let answers_dict = {
 //     "湛江": 1, "小红是美国人，持护照": 1, "仅限于本人账户之间、个人与近亲属账户之间": 1, "“南向通”投资本金来源可以不是汇款户": 1,
 //     "银行告知小明不能办理": 1, "风险承受能力为稳健型及以上": 1, "100万": 1, "内地存款产品": 1, "不纳入": 1, "港澳投资者业务资格需由内地银行进行审核": 1,
@@ -18,14 +26,16 @@ if (get_now.length != 0) {
 //     "": 1, "": 1,
 // };
 
-// trigger_text = "答对3题即算闯关成功";
-// log(textContains(trigger_text).find().length)
-// trigger = textContains(trigger_text).findOnce();
-// triggers = trigger.parent().parent().child(0);
+auto.service.resources.flushLayoutCache();
+trigger_text = "答对3题即算闯关成功";
+log(textContains(trigger_text).find().length)
+trigger = textContains(trigger_text).findOnce();
+triggers = trigger.parent().parent().child(0);
 
-// for (i = 0; i < triggers.childCount(); i++) {
-//     log(last_level_text(triggers.child(i)));
-// }
+for (i = 0; i < triggers.childCount(); i++) {
+    log(last_level_text(triggers.child(i)));
+}
+
 function last_level_text(ele_obj) {
     let ele = ele_obj;
     while (ele.childCount() != 0) {
