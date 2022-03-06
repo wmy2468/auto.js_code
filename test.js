@@ -28,7 +28,7 @@ var pic_folder = files.cwd() + "/piccs/";
 
 // let a = textContains("去抽奖").findOnce();
 // log(a.isVisibleToUser())
-for (k in auto.service.resources) {
+for (k in auto.service.setServiceInfo) {
     log(k);
 }
 

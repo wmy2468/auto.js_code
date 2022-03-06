@@ -20,7 +20,7 @@ function main() {
         "工商_小象乐园",
     ];
     let select_items;
-    if (new Date().getHours() <= 3) {
+    if (new Date().getHours() <= 1) {
         select_items = ["京东.极速版挖宝"];
     } else {
         select_items = func.dialogs_checkbox(show_arr, "每日签到记录", "多选");
@@ -495,7 +495,8 @@ function 京东() {
             }
             let left_times = 10;
             while (left_times != 0) {
-                auto.service.resources.flushLayoutCache();
+                // auto.service.resources.flushLayoutCache();
+                auto.service.onCreate();
                 left_today = textContains("今日剩余").findOnce();
                 if (left_today != null) {
                     try {
