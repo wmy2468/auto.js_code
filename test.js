@@ -26,15 +26,23 @@ var pic_folder = files.cwd() + "/piccs/";
 //     "": 1, "": 1,
 // };
 
-auto.service.resources.flushLayoutCache();
-trigger_text = "答对3题即算闯关成功";
-log(textContains(trigger_text).find().length)
-trigger = textContains(trigger_text).findOnce();
-triggers = trigger.parent().parent().child(0);
-
-for (i = 0; i < triggers.childCount(); i++) {
-    log(last_level_text(triggers.child(i)));
+// let a = textContains("去抽奖").findOnce();
+// log(a.isVisibleToUser())
+for (k in auto.service.resources) {
+    log(k);
 }
+
+
+// auto.service.resources.flushLayoutCache();
+// log(textContains("去抽奖").findOnce());
+// trigger_text = "答对3题即算闯关成功";
+// log(textContains(trigger_text).find().length)
+// trigger = textContains(trigger_text).findOnce();
+// triggers = trigger.parent().parent().child(0);
+
+// for (i = 0; i < triggers.childCount(); i++) {
+//     log(last_level_text(triggers.child(i)));
+// }
 
 function last_level_text(ele_obj) {
     let ele = ele_obj;
