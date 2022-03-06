@@ -39,6 +39,7 @@ function main() {
             farms.zfb助力(); farms.tb助力();
             farms.tb(); farms.zfb();
         } else if (select_func == "芭芭农场-助力浏览施肥") {
+            requestScreenCapture();
             farms = 芭芭农场();
             farms.zfb助力(); farms.tb助力();
             farms.tb(); farms.zfb();
