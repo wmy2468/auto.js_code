@@ -293,6 +293,7 @@ function 芭芭农场() {
                 芭芭农场施肥点击领取: images.read(pic_folder + "芭芭农场施肥点击领取.png"),
                 芭芭农场施肥兔子灯笼: images.read(pic_folder + "芭芭农场施肥兔子灯笼.png"),
             }
+            let get_now, i;
             while (1) {
                 cnt = cnt + 1;
                 if (cnt > 50) {
@@ -304,9 +305,13 @@ function 芭芭农场() {
                     if (textContains("合种管理").findOnce() != null) {
                         log("找到合种管理");
                         sleep(1500);
-                        if (func.sClick(className("Button").depth(15).text("立即领取").findOnce())) { sleep(2000); }
-                        if (func.sClick(className("Button").depth(15).text("立即领取").findOnce())) { sleep(2000); }
-                        if (func.sClick(className("Button").depth(15).text("立即领取").findOnce())) { sleep(2000); }
+                        get_now = className("Button").text("立即领取").find();
+                        if (get_now.length != 0) {
+                            for (i = get_now.length - 1; i >= 0; i--) {
+                                func.sClick(get_now[i]);
+                                sleep(1000);
+                            }
+                        }
                         toastLog("已点击亲密度 领取 按钮");
                         sleep(2600);
                         // func.sClick(text("完成任务").findOnce());
