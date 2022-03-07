@@ -33,13 +33,16 @@ function main() {
         if (select_func == "支付宝捐款") { 支付宝().支付宝捐款(); }
         else if (select_func == "余额宝转入") { 支付宝().余额宝转入(); }
         else if (select_func == "余额宝转出") { 支付宝().余额宝转出(); }
-        else if (select_func == "芭芭农场-淘宝施肥") { 芭芭农场().tb施肥(); }
+        else if (select_func == "芭芭农场-淘宝施肥") {
+            requestScreenCapture();
+            芭芭农场().tb施肥();
+        }
         else if (select_func == "芭芭农场-助力浏览") {
             farms = 芭芭农场();
             farms.zfb助力(); farms.tb助力();
             farms.tb(); farms.zfb();
         } else if (select_func == "芭芭农场-助力浏览施肥") {
-            // requestScreenCapture();
+            requestScreenCapture();
             farms = 芭芭农场();
             farms.zfb助力(); farms.tb助力();
             farms.tb(); farms.zfb();
@@ -265,7 +268,6 @@ function 芭芭农场() {
             sleep(2000);
         },
         tb施肥: function () {
-            requestScreenCapture();
             let match_point;
             func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
             let btn_ele = null;
