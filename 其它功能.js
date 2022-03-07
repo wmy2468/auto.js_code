@@ -16,9 +16,9 @@ function main() {
     let select_func;
     let selectedArr;
     if (dev_model == dev_mate30) {
-        selectedArr = ["万商3比", "支付宝相关", "建行相关", "JD相关", "跳转指定Scheme"];
+        selectedArr = ["支付宝相关", "万商3比", "建行相关", "JD相关", "跳转指定Scheme"];
     } else {
-        selectedArr = ["万商3比", "支付宝相关", "JD相关", "跳转指定Scheme"];
+        selectedArr = ["支付宝相关", "万商3比", "JD相关", "跳转指定Scheme"];
     }
     //---------------配置区域-----------------
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本  
@@ -68,12 +68,31 @@ function main() {
 
     }
     else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
-    else if (scriptName == "万商3比") { 万商3比(); }
+    else if (scriptName == "万商3比") {
+        select_func = func.dialogs_select(["万商3比", "ysf码",]);
+        if (select_func == "万商3比") { 万商3比(); }
+        else if (select_func == "ysf码") { 云闪付().ysf码(); }
+    }
     func.dialogs_alert("已完成...");
 }
 
 function 云闪付() {
     let func_obj = {
+        ysf码: function () {
+            func.to_scheme("upwallet://pay");
+            sleep(3000);
+            while (1) {
+                if (text("付款成功").findOnce() != null) {
+                    func.to_scheme("upwallet://pay");
+                    toastLog("已执行跳转 fuk码");
+                    sleep(5000);
+                }
+                if (textEndsWith("商家付款").findOnce() != null) {
+                    toastLog("等待被扫，有需要请手动停止");
+                    sleep(3000);
+                }
+            }
+        },
         YSF福气助力: function () {
             let url_head, url_end;
             url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3D";
