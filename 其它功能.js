@@ -82,8 +82,11 @@ function 云闪付() {
             func.to_scheme("upwallet://pay");
             sleep(3000);
             while (1) {
-                if (text("付款成功").findOnce() != null) {
-                    func.to_scheme("upwallet://pay");
+                if (textEndsWith("成功").findOnce() != null) {
+                    back();
+                    toastLog("已执行跳转 fuk码");
+                    sleep(4000);
+                    func.sClick(textContains("付款码").findOne());
                     toastLog("已执行跳转 fuk码");
                     sleep(5000);
                 }
