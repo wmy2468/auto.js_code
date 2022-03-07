@@ -767,6 +767,7 @@ function 京东() {
             let jump_url = cfg["url_scheme"]["京东"][scheme_title];
             let click_func = function () {
                 let beans_bottle;
+                func.sClick(textContains("收下京豆").findOnce());
                 beans_bottle = textContains("x").find();
                 if (beans_bottle.nonEmpty()) {
                     beans_bottle.forEach(beans => { func.cClick(beans); sleep(1500) })
