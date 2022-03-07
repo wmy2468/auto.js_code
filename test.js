@@ -25,20 +25,13 @@ var pic_folder = files.cwd() + "/piccs/";
 //     "内地代销银行故意隐瞒相关产品风险": 1, "自助取款机": 1, "1家": 1, "业务环节发生地原则": 1, "境内个人办理外汇汇出，银行有权对其购汇用途和付汇用途进行一致性审核": 1,
 //     "": 1, "": 1,
 // };
-
-if (!requestScreenCapture()) {
-    toast("请求截图失败");
-    exit();
+let btn;
+btn = className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).find();
+log(btn.length);
+if (btn.length != 0) {
+    func.sClick(btn[btn.length - 1]);
 }
-if (!requestScreenCapture()) {
-    toast("请求截图失败");
-    exit();
-}
-log(123);
-textStartsWith("+").find().forEach(element => {
-    log(element.text() * 0 == 0);
 
-});
 
 // let a = textContains("去抽奖").findOnce();
 // log(a.isVisibleToUser())

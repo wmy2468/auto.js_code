@@ -267,22 +267,51 @@ function 芭芭农场() {
             click("去领取");
             sleep(2000);
         },
+        zfb施肥: function () {
+            func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
+            let zfb_element, btn_x, btn_y;
+            zfb_element = func_in_func.zfb_element();
+            while (zfb_element == null) {
+                toastLog("如长时间未跳转到支付宝农场页面，请手动跳转");
+                sleep(3000);
+                zfb_element = func_in_func.zfb_element();
+            }
+            btn_x = device.width / 2;
+            btn_y = zfb_element.bounds().centerY();
+        },
         tb施肥: function () {
-            let match_point;
-            func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
+            let img_list = {
+                芭芭农场施肥可拆开: images.read(pic_folder + "芭芭农场施肥可拆开.png"),
+                芭芭农场施肥点击领取: images.read(pic_folder + "芭芭农场施肥点击领取.png"),
+                芭芭农场施肥兔子灯笼: images.read(pic_folder + "芭芭农场施肥兔子灯笼.png"),
+            }
+            let 施肥app;
+            施肥app = "支付宝";
             let btn_ele = null;
-            while (btn_ele == null) {
-                btn_ele = func_in_func.tb_element();
-                if (btn_ele != null) {
-                    break;
-                } else {
+            if (施肥app == "支付宝") {
+                func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
+                btn_ele = func_in_func.zfb_element();
+                while (btn_ele == null) {
+                    toastLog("如长时间未跳转到支付宝农场页面，请手动跳转");
+                    sleep(3000);
+                }
+                img_list = {
+                    芭芭农场施肥点击领取: images.read(pic_folder + "支付宝芭芭农场点击领取.png"),
+                }
+            } else if (施肥app == "淘宝") {
+                func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
+                while (btn_ele == null) {
+                    btn_ele = func_in_func.tb_element();
                     toastLog("如长时间未跳转到淘宝农场页面，请手动跳转");
                     sleep(3000);
                 }
+                img_list = {
+                    芭芭农场施肥可拆开: images.read(pic_folder + "芭芭农场施肥可拆开.png"),
+                    芭芭农场施肥点击领取: images.read(pic_folder + "芭芭农场施肥点击领取.png"),
+                }
             }
-
             let btn_x, btn_y;
-            btn_y = btn_ele.bounds().top + btn_ele.bounds().height() / 2;
+            btn_y = btn_ele.bounds().centerY();
             btn_x = device.width / 2;
             log(btn_x);
             log(btn_y);
@@ -290,11 +319,7 @@ function 芭芭农场() {
             let screenshot, find_region;
             find_region = [0, device.height / 2];
             let pic_folder = files.cwd() + '/piccs/';
-            let img_list = {
-                芭芭农场施肥可拆开: images.read(pic_folder + "芭芭农场施肥可拆开.png"),
-                芭芭农场施肥点击领取: images.read(pic_folder + "芭芭农场施肥点击领取.png"),
-                芭芭农场施肥兔子灯笼: images.read(pic_folder + "芭芭农场施肥兔子灯笼.png"),
-            }
+
             let get_now, i;
             while (1) {
                 cnt = cnt + 1;
@@ -326,9 +351,11 @@ function 芭芭农场() {
                 click(btn_x, btn_y);
                 func.sClick(text("关闭").findOnce());
                 screenshot = images.captureScreen();
-                // if (func.match_img_click(img_list.芭芭农场施肥兔子灯笼, screenshot, find_region)) { sleep(3000); }
-                if (func.match_img_click(img_list.芭芭农场施肥可拆开, screenshot, find_region)) { sleep(1000); }
-                if (func.match_img_click(img_list.芭芭农场施肥点击领取, screenshot, find_region)) { sleep(1000); }
+                Object.keys(img_list).forEach(opend_img => {
+                    if (func.match_img_click(opend_img, screenshot, find_region)) {
+                        sleep(1000);
+                    }
+                })
             }
             // 释放所有图片
             Object.keys(img_list).forEach(opend_img => {
