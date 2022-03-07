@@ -52,7 +52,7 @@ function 华彩生活瑞幸() {
     }
     toastLog("已找到指定按钮，请勿切换页面");
     sleep(3000);
-    func.getTimeDiff(timeArea, startTime, 700);
+    func.getTimeDiff(timeArea, startTime, 1000);
     func.sClick(click_btn);
 }
 

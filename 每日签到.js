@@ -405,6 +405,15 @@ function 农行_小豆签到() {
 // 浦发金豆签到
 function 浦发_金豆签到() {
     let appName = "浦发银行";
+    let today_is_done = false;
+    let local_config = storages.create("local_config");
+    if (local_config.contains("浦发_金豆签到")) {
+        if (local_config.get("浦发_金豆签到") == new Date().getDate()) {
+            toastLog(appName + "已签到");
+            sleep(3000);
+            return 0;
+        }
+    }
     //closeApp(appName);
     func.to_scheme(cfg["url_scheme"]["浦发"]["金豆"]);
 
@@ -418,13 +427,21 @@ function 浦发_金豆签到() {
         toastLog("等待签到页面加载"); sleep(2600);
     }
     toastLog("已查找到 签到提醒"); sleep(2600);
-    textStartsWith("+").findOne();
+    while (textStartsWith("+").findOnce() == null) {
+        toastLog("等待加载 金豆+号按钮"); sleep(2600);
+    }
     toastLog("已找到 金豆+号按钮"); sleep(2600);
-    sleep(800);
     let cnt, signs, sign_text;
     while (1) {
         cnt = 0;
         signs = textStartsWith("+").find();
+        log("当前sign_length:" + signs.length);
+        if (signs.length > 8 && today_is_done == false) {
+            today_is_done = true;
+        } else {
+            toastLog("当前查找+号结果数量不足8个,异常，请检查"); sleep(2600);
+            continue;
+        }
         try {
             for (let i = 0; i < signs.length; i++) {
                 sign_text = signs[i].text();
@@ -434,7 +451,7 @@ function 浦发_金豆签到() {
                 }
             }
             log("当前cnt为：" + cnt);
-            if (cnt <= 8) {
+            if (cnt <= 8 && today_is_done) {
                 break;
             }
         } catch (e) {
@@ -443,6 +460,7 @@ function 浦发_金豆签到() {
         }
         sleep(2500);
     }
+    local_config.put("浦发_金豆签到", new Date().getDate());
     toastLog(appName + "已签到");
     sleep(3000);
 }
@@ -534,6 +552,7 @@ function 京东() {
             let local_config = storages.create("local_config");
             if (local_config.contains("极速版挖宝")) {
                 if (local_config.get("极速版挖宝") == new Date().getDate()) {
+                    toastLog("极速版挖宝 今日已签到");
                     return 0;
                 }
             }
@@ -572,6 +591,7 @@ function 京东() {
                                 // textContains("优惠券奖励已直接").findOnce().parent().child(0)
                                 // textContains("继续挖宝").findOnce().parent().child(0)
                                 // 等待钱币符号重新出现
+                                let timeout_cnt = 0;
                                 while (scroll_bar == null) {
                                     scroll_bar = text("¥").depth(16).findOnce();
                                     if (continue_find_click) {
@@ -581,8 +601,13 @@ function 京东() {
                                             sleep(2600);
                                         }
                                     }
+                                    timeout_cnt = timeout_cnt + 1;
                                     toast("等待钱币符号加载...");
                                     sleep(2600);
+                                    if (timeout_cnt > 5) {
+                                        toastLog("钱币符号超时未加载，直接记录完成");
+                                        break;
+                                    }
                                 }
                                 toastLog("钱币符号, 已加载..."); sleep(2600);
                                 // 尝试点击一个按钮

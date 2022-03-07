@@ -26,11 +26,25 @@ var pic_folder = files.cwd() + "/piccs/";
 //     "": 1, "": 1,
 // };
 
+if (!requestScreenCapture()) {
+    toast("请求截图失败");
+    exit();
+}
+if (!requestScreenCapture()) {
+    toast("请求截图失败");
+    exit();
+}
+log(123);
+textStartsWith("+").find().forEach(element => {
+    log(element.text() * 0 == 0);
+
+});
+
 // let a = textContains("去抽奖").findOnce();
 // log(a.isVisibleToUser())
-for (k in auto.service.setServiceInfo) {
-    log(k);
-}
+// for (k in auto.service.setServiceInfo) {
+//     log(k);
+// }
 
 
 // auto.service.resources.flushLayoutCache();
