@@ -84,7 +84,7 @@ function 云闪付() {
             while (1) {
                 if (textEndsWith("成功").findOnce() != null) {
                     back();
-                    toastLog("已执行跳转 fuk码");
+                    toastLog("返回一下");
                     sleep(4000);
                     func.sClick(textContains("付款码").findOne());
                     toastLog("已执行跳转 fuk码");
