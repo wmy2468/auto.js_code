@@ -114,11 +114,17 @@ function 沃钱包() {
         func.sClick(idContains("wopay_main_mine_tv").text("我的").findOnce());
         func.sClick(idContains("wopay_mine_item_name_tv").text("泡泡").findOnce());
         func.sClick(text("每日签到得好礼").findOnce());
+        toastLog("等待加载 签到页面");
         sleep(2000);
     }
+    toastLog("已到达 签到页面");
     sleep(3500);
-    if (textContains("今日已签到").findOnce() == null) {
-        func.sClick(textContains("签到领奖励").findOne());
+    while (textContains("今日已签到").findOnce() == null) {
+        if (func.sClick(textContains("签到领奖励").findOnce())) {
+            toastLog("已点击 签到领奖励按钮");
+        } else {
+            toastLog("未找到/点击失败 签到领奖励按钮");
+        }
         sleep(2500);
     }
     toastLog(appName + ",已签到");
@@ -468,6 +474,7 @@ function 京东() {
                 } else {
                     toastLog("等待 完成页面 加载...");
                     sleep(2500);
+                    auto.service.resources.flushLayoutCache();
                 }
             }
             toastLog("任务:" + title + ", 已完成");
@@ -495,8 +502,8 @@ function 京东() {
             }
             let left_times = 10;
             while (left_times != 0) {
-                // auto.service.resources.flushLayoutCache();
-                auto.service.onCreate();
+                auto.service.resources.flushLayoutCache();
+                // auto.service.onCreate();
                 left_today = textContains("今日剩余").findOnce();
                 if (left_today != null) {
                     try {
