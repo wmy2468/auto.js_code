@@ -5,7 +5,9 @@ var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
 
-func.to_scheme("upwallet://pay")
+let a;
+a = 0 || 1 || 2;
+log(a);
 // function a() { }
 // log(a());
 // selector().clearAccessibilityFocus();

@@ -99,7 +99,7 @@ function config_dict() {
 // ----------------------通用功能区-----------------------
 // 切换到autojs
 function to_autojs() {
-    let pkg_name = app.getPackageName("Autox.js") || app.getPackageName("Auto.js");
+    let pkg_name = app.getPackageName("Autox.js") || app.getPackageName("Auto.js") || app.getPackageName("sj.xotuA");
     app.startActivity({
         packageName: pkg_name,
         className: "org.autojs.autojs.ui.main.MainActivity_",
