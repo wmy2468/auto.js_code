@@ -305,6 +305,7 @@ function 芭芭农场() {
                 }
                 img_list = {
                     芭芭农场施肥点击领取: images.read(pic_folder + "支付宝芭芭农场点击领取.png"),
+                    芭芭农场施肥点击领取: images.read(pic_folder + "支付宝芭芭农场点击领取2.png"),
                 }
             } else if (施肥app == "淘宝") {
                 func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
