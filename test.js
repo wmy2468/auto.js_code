@@ -4,7 +4,17 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-test_case_img("支付宝芭芭农场点击领取2.png");
+requestScreenCapture();
+
+find_img = images.read(pic_folder + "支付宝芭芭农场点击领取2.png");
+big_img = captureScreen();
+log(images.matchTemplate(
+    img = big_img,
+    template = find_img,
+    options = {
+        threshold: 0.5,
+    }))
+find_img.recycle();
 
 // auto.service.resources.flushLayoutCache();
 // log(textContains("去抽奖").findOnce());
