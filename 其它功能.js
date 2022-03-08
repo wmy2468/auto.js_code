@@ -336,6 +336,7 @@ function 芭芭农场() {
                 if (cnt > 50) {
                     break;
                 }
+                func.sClick(text("收下去施肥").findOnce());
                 if (func.sClick(className("Button").text("立即领取").findOnce())) {
                     toastLog("找到亲密度立即领取按钮, 等待5秒");
                     sleep(5000);
