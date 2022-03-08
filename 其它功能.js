@@ -50,7 +50,7 @@ function main() {
             farms = 芭芭农场();
             farms.zfb助力(); farms.tb助力();
             farms.tb(); farms.zfb();
-            farms.施肥(支付宝);
+            farms.施肥("支付宝");
         }
     }
     else if (scriptName == "JD相关") {
@@ -317,6 +317,9 @@ function 芭芭农场() {
                     芭芭农场施肥可拆开: images.read(pic_folder + "芭芭农场施肥可拆开.png"),
                     芭芭农场施肥点击领取: images.read(pic_folder + "芭芭农场施肥点击领取.png"),
                 }
+            } else {
+                toastLog("未设置app名称，退出");
+                exit();
             }
             let btn_x, btn_y;
             btn_y = btn_ele.bounds().centerY();
