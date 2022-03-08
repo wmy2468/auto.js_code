@@ -436,11 +436,13 @@ function 浦发_金豆签到() {
         cnt = 0;
         signs = textStartsWith("+").find();
         log("当前sign_length:" + signs.length);
-        if (signs.length > 8 && today_is_done == false) {
-            today_is_done = true;
-        } else {
-            toastLog("当前查找+号结果数量不足8个,异常，请检查"); sleep(2600);
-            continue;
+        if (today_is_done == false) {
+            if (signs.length > 8) {
+                today_is_done = true;
+            } else {
+                toastLog("当前查找+号结果数量不足8个,异常，请检查"); sleep(2600);
+                continue;
+            }
         }
         try {
             for (let i = 0; i < signs.length; i++) {
