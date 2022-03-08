@@ -296,6 +296,30 @@ function 芭芭农场() {
         施肥: function (施肥app) {
             let img_list, pic_folder = files.cwd() + '/piccs/';;
             let btn_ele = null, current_pkg;
+            // 1. 先去淘宝点击领取
+            func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
+            while (func_in_func.tb_element() == null) {
+                toastLog("如长时间未跳转到淘宝农场页面，请手动跳转");
+                sleep(3000);
+            }
+            let tb_img;
+            tb_img = images.read(pic_folder + "芭芭农场施肥点击领取.png");
+            if (func.match_img_click(tb_img, screenshot, find_region)) {
+                toastLog("已点击淘宝立即领取");
+            } else {
+                if (func.match_img_click(tb_img, screenshot, find_region)) {
+                    toastLog("已点击淘宝立即领取");
+                } else {
+                    if (func.match_img_click(tb_img, screenshot, find_region)) {
+                        toastLog("已点击淘宝立即领取");
+                    } else {
+                        toastLog("未成功 点击 淘宝立即领取");
+                    }
+                }
+            }
+            tb_img.recycle();
+            sleep(2000);
+            // 2. 再区分app施肥
             if (施肥app == "支付宝") {
                 current_pkg = "com.eg.android.AlipayGphone";
                 func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
