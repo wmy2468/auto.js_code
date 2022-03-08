@@ -165,6 +165,7 @@ function sClick(element) {
             }
         } else {
             click(element.bounds().centerX(), element.bounds().centerY());
+            log("sClick: click center x y")
         }
         return true;
     }

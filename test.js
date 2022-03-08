@@ -4,7 +4,9 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-for (k in auto.service.getServiceInfo) {
+// log(auto.service.notify());
+
+for (k in auto.service) {
     log(k);
 }
 // auto.service.resources.flushLayoutCache();

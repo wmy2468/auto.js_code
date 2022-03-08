@@ -523,7 +523,7 @@ function 京东() {
             }
             let left_times = 10;
             while (left_times != 0) {
-                auto.service.resources.flushLayoutCache();
+                auto.service.notifyAll();
                 // auto.service.onCreate();
                 left_today = textContains("今日剩余").findOnce();
                 if (left_today != null) {
