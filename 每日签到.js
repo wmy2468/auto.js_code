@@ -523,12 +523,11 @@ function 京东() {
             }
             let left_times = 10;
             while (left_times != 0) {
-                auto.service.notifyAll();
-                // auto.service.onCreate();
                 left_today = textContains("今日剩余").findOnce();
                 if (left_today != null) {
                     try {
                         if (left_today.text() == "今日剩余") {
+                            left_today.select();
                             log("今日剩余-1");
                             left_idx = left_today.indexInParent();
                             left_today_parent = left_today.parent();

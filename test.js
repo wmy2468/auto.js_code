@@ -6,9 +6,10 @@ var pic_folder = files.cwd() + "/piccs/";
 
 // log(auto.service.notify());
 
-for (k in auto.service) {
-    log(k);
-}
+log(selector().select().toString());
+// for (k in selector()) {
+//     log(k);
+// }
 // auto.service.resources.flushLayoutCache();
 // log(textContains("去抽奖").findOnce());
 // trigger_text = "答对3题即算闯关成功";
