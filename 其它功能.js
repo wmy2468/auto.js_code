@@ -336,7 +336,10 @@ function 芭芭农场() {
                 if (cnt > 50) {
                     break;
                 }
-                func.sClick(text("收下去施肥").findOnce());
+                if (func.sClick(text("收下去施肥").findOnce())) {
+                    toastLog("点击收下施肥");
+                    sleep(2600);
+                }
                 if (func.sClick(className("Button").text("立即领取").findOnce())) {
                     toastLog("找到亲密度立即领取按钮, 等待5秒");
                     sleep(5000);
@@ -367,7 +370,7 @@ function 芭芭农场() {
                         sleep(1000);
                     }
                 })
-                sleep(2500);
+                sleep(2000);
             }
             // 释放所有图片
             Object.keys(img_list).forEach(opend_img => {
