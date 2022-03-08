@@ -295,8 +295,9 @@ function 芭芭农场() {
         },
         施肥: function (施肥app) {
             let img_list, pic_folder = files.cwd() + '/piccs/';;
-            let btn_ele = null;
+            let btn_ele = null, current_pkg;
             if (施肥app == "支付宝") {
+                current_pkg = "com.eg.android.AlipayGphone";
                 func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
                 while (btn_ele == null) {
                     btn_ele = func_in_func.zfb_element();
@@ -309,6 +310,7 @@ function 芭芭农场() {
                     芭芭农场施肥点击领取3: images.read(pic_folder + "支付宝芭芭农场点击领取3.png"),
                 }
             } else if (施肥app == "淘宝") {
+                current_pkg = "com.taobao.taobao";
                 func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
                 while (btn_ele == null) {
                     btn_ele = func_in_func.tb_element();
@@ -335,11 +337,16 @@ function 芭芭农场() {
             let get_now, i;
             while (1) {
                 cnt = cnt + 1;
+                if (current_pkg != currentPackage()) {
+                    toastLog("当前pkg已经不同，退出");
+                    sleep(2600);
+                    break;
+                }
                 if (cnt > 50) {
                     break;
                 }
                 if (func.sClick(text("收下去施肥").findOnce())) {
-                    toastLog("点击收下施肥");
+                    toastLog("已点击 收下施肥");
                     sleep(2600);
                 }
                 if (func.sClick(className("Button").text("立即领取").findOnce())) {
