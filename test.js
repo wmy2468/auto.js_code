@@ -4,56 +4,18 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-
-// let a;
-// a = 0 || 1 || 2;
-// log(a);
-// function a() { }
-// log(a());
-// selector().clearAccessibilityFocus();
-// log(auto.service.resources.flushLayoutCache());
-
-// for (sel in auto.service.resources.flushLayoutCache) {
-//     log(sel);
-// }
-
-// left_today = textContains("今日剩余").findOnce();
-// left_idx = left_today.indexInParent();
-// left_today_parent = left_today.parent();
-// left_times = left_today_parent.child(left_idx + 1).text();
-// toastLog("当前剩余次数1=" + left_times);
-// let answers_dict = {
-//     "湛江": 1, "小红是美国人，持护照": 1, "仅限于本人账户之间、个人与近亲属账户之间": 1, "“南向通”投资本金来源可以不是汇款户": 1,
-//     "银行告知小明不能办理": 1, "风险承受能力为稳健型及以上": 1, "100万": 1, "内地存款产品": 1, "不纳入": 1, "港澳投资者业务资格需由内地银行进行审核": 1,
-//     "内地代销银行和内地合作银行无需审核客户投资资金来源": 1, "向银行申领《携带外汇出境许可证》": 1, "1500亿": 1, "只需提供本人有效身份证件": 1,
-//     "内地代销银行故意隐瞒相关产品风险": 1, "自助取款机": 1, "1家": 1, "业务环节发生地原则": 1, "境内个人办理外汇汇出，银行有权对其购汇用途和付汇用途进行一致性审核": 1,
-//     "": 1, "": 1,
-// };
-// let btn;
-// btn = className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).find();
-// log(btn.length);
-// if (btn.length != 0) {
-//     func.sClick(btn[btn.length - 1]);
-// }
-
-
-// let a = textContains("去抽奖").findOnce();
-// log(a.isVisibleToUser())
-// for (k in auto.service.setServiceInfo) {
-//     log(k);
-// }
-
+test_case_img("支付宝芭芭农场点击领取2.png");
 
 // auto.service.resources.flushLayoutCache();
 // log(textContains("去抽奖").findOnce());
-trigger_text = "答对3题即算闯关成功";
-log(textContains(trigger_text).find().length)
-trigger = textContains(trigger_text).findOnce();
-triggers = trigger.parent().parent().child(0);
+// trigger_text = "答对3题即算闯关成功";
+// log(textContains(trigger_text).find().length)
+// trigger = textContains(trigger_text).findOnce();
+// triggers = trigger.parent().parent().child(0);
 
-for (i = 0; i < triggers.childCount(); i++) {
-    log(last_level_text(triggers.child(i)));
-}
+// for (i = 0; i < triggers.childCount(); i++) {
+//     log(last_level_text(triggers.child(i)));
+// }
 
 function last_level_text(ele_obj) {
     let ele = ele_obj;
@@ -68,7 +30,7 @@ function test_case_img(file_name) {
     sleep(500);
     let find_img = images.read(pic_folder + file_name);
     // log(func.match_imgs(find_img));
-    log(func.match_img_click(find_img));
+    log(func.match_img(find_img));
     find_img.recycle();
 }
 
