@@ -35,7 +35,7 @@ if (selectIndex == -1) {
     // 更新图片
     let suffix = "piccs/";
     let pic_path = files.cwd() + "/" + suffix;
-    update_files("update all.js");
+    // update_files("update all.js");
     files.ensureDir(pic_path);          // 确保路径存在
     // 路径
     let file_name_list;
