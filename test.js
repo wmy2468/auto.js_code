@@ -4,8 +4,9 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-log(currentPackage());
-log(currentActivity());
+for (k in auto.service.getServiceInfo) {
+    log(k);
+}
 // auto.service.resources.flushLayoutCache();
 // log(textContains("去抽奖").findOnce());
 // trigger_text = "答对3题即算闯关成功";

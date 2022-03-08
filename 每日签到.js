@@ -379,6 +379,7 @@ function 农行_小豆签到() {
     while (textContains("小豆订单").findOnce() == null) {
         if (func.sClick(desc("我的").depth(6).findOnce())) { sleep(1500); }
         else if (func.sClick(text("我的").depth(6).findOnce())) { sleep(1500); }
+        sleep(1500);
         if (func.sClick(text("小豆").depth(15).findOnce())) { sleep(1500); }
         else if (func.sClick(desc("小豆").depth(15).findOnce())) { sleep(1500); }
 
