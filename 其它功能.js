@@ -372,7 +372,6 @@ function 芭芭农场() {
                         sleep(1000);
                     }
                 })
-                sleep(2000);
             }
             // 释放所有图片
             Object.keys(img_list).forEach(opend_img => {
