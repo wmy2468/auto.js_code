@@ -367,7 +367,7 @@ function 芭芭农场() {
                 if (cnt > 50) {
                     break;
                 }
-                if (packageName(current_pkg).func.sClick(text("收下去施肥").findOnce())) {
+                if (func.sClick(packageName(current_pkg).text("收下去施肥").findOnce())) {
                     toastLog("已点击 收下施肥");
                     sleep(2600);
                 }
