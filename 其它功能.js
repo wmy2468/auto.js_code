@@ -367,13 +367,21 @@ function 芭芭农场() {
                 if (cnt > 50) {
                     break;
                 }
-                if (func.sClick(packageName(current_pkg).text("收下去施肥").findOnce())) {
-                    toastLog("已点击 收下施肥");
-                    sleep(2600);
-                }
+
                 if (func.sClick(packageName(current_pkg).text("点击领取").findOnce())) {
                     toastLog("已点击 施肥次数奖励");
-                    sleep(2600);
+                    sleep(3000);
+                    if (func.sClick(packageName(current_pkg).text("收下去施肥").findOnce())) {
+                        toastLog("已点击 收下施肥");
+                        sleep(2600);
+                    } else {
+                        if (func.sClick(packageName(current_pkg).text("收下去施肥").findOnce())) {
+                            toastLog("已点击 收下施肥");
+                            sleep(2600);
+                        } else {
+                            toastLog("点击失败 收下施肥"); sleep(2600);
+                        }
+                    }
                 }
                 if (func.sClick(packageName(current_pkg).className("Button").text("立即领取").findOnce())) {
                     toastLog("找到亲密度立即领取按钮, 等待5秒");
