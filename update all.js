@@ -40,8 +40,9 @@ if (selectIndex == -1) {
     // 路径
     let file_name_list;
     // Mate30 才需要更新ccb文件
-    file_name_list = ["支付宝芭芭农场点击领取.png", "芭芭农场施肥可拆开.png", "芭芭农场施肥点击领取.png", "芭芭农场施肥兔子灯笼.png",
-        "ccb收藏任务中心.png", "支付宝芭芭农场点击领取2.png", "支付宝芭芭农场点击领取3.png"];
+    file_name_list = ["支付宝芭芭农场每日领取.png", "淘宝芭芭农场可拆开.png", "淘宝芭芭农场每日领取.png", "淘宝芭芭农场兔子灯笼.png",
+        "ccb收藏任务中心.png"];
+    // "支付宝芭芭农场点击领取.png", "支付宝芭芭农场点击领取2.png", "支付宝芭芭农场点击领取3.png"
     // 请求
     let save_path, req_url, update_count;
     update_count = 0;

@@ -303,7 +303,7 @@ function 芭芭农场() {
                 sleep(3000);
             }
             let tb_img;
-            tb_img = images.read(pic_folder + "芭芭农场施肥点击领取.png");
+            tb_img = images.read(pic_folder + "淘宝芭芭农场每日领取.png");
             if (func.match_img_click(tb_img, screenshot, find_region)) {
                 toastLog("已点击淘宝立即领取");
             } else {
@@ -329,9 +329,9 @@ function 芭芭农场() {
                     sleep(3000);
                 }
                 img_list = {
-                    芭芭农场施肥点击领取: images.read(pic_folder + "支付宝芭芭农场点击领取.png"),
-                    芭芭农场施肥点击领取2: images.read(pic_folder + "支付宝芭芭农场点击领取2.png"),
-                    芭芭农场施肥点击领取3: images.read(pic_folder + "支付宝芭芭农场点击领取3.png"),
+                    淘宝芭芭农场每日领取: images.read(pic_folder + "支付宝芭芭农场点击领取.png"),
+                    淘宝芭芭农场每日领取2: images.read(pic_folder + "支付宝芭芭农场点击领取2.png"),
+                    淘宝芭芭农场每日领取3: images.read(pic_folder + "支付宝芭芭农场点击领取3.png"),
                 }
             } else if (施肥app == "淘宝") {
                 current_pkg = "com.taobao.taobao";
@@ -342,8 +342,8 @@ function 芭芭农场() {
                     sleep(3000);
                 }
                 img_list = {
-                    芭芭农场施肥可拆开: images.read(pic_folder + "芭芭农场施肥可拆开.png"),
-                    芭芭农场施肥点击领取: images.read(pic_folder + "芭芭农场施肥点击领取.png"),
+                    淘宝芭芭农场可拆开: images.read(pic_folder + "淘宝芭芭农场可拆开.png"),
+                    淘宝芭芭农场每日领取: images.read(pic_folder + "淘宝芭芭农场每日领取.png"),
                 }
             } else {
                 toastLog("未设置app名称，退出");

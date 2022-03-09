@@ -4,9 +4,11 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
+
+log(test_case_img("支付宝芭芭农场每日领取.png"));
 // log(auto.service.notify());
 
-log(selector().select().toString());
+// log(selector().select().toString());
 // for (k in selector()) {
 //     log(k);
 // }
@@ -90,7 +92,7 @@ function find_img(file_name, find_region) {
 // requestScreenCapture();
 // let pic_folder, file_name
 // pic_folder = (files.cwd() + "/piccs/");
-// file_name = "芭芭农场施肥点击领取.png"
+// file_name = "淘宝芭芭农场每日领取.png"
 // let template;
 // template = images.read(pic_folder + file_name);
 // let match_point;
