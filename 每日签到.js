@@ -581,6 +581,10 @@ function 京东() {
             // text = "本场奖励已领取完哦～"
             while (1) {
                 ex_flag = true;
+                if (text("奖励已锁定，复活后可正常领奖！").findOnce() != null) {
+                    toastLog("任务失败"); sleep(2600);
+                    break;
+                }
                 try {
                     scroll_bar = text("¥").depth(16).findOnce();
                     if (scroll_bar == null) {
@@ -625,8 +629,6 @@ function 京东() {
                                 sleep(2600);
                                 log(e);
                             }
-                            // 记录今天日期，避免重复执行
-                            local_config.put("极速版挖宝", new Date().getDate());
                             break;
                         }
                         ex_count = ex_count + 1;
@@ -650,6 +652,7 @@ function 京东() {
                     }
                 }
                 catch (e) {
+                    log("极速版挖宝 报错：" + e);
                     continue;
                 }
                 ex_count = 0;
@@ -657,6 +660,8 @@ function 京东() {
                     break;
                 }
             }
+            // 记录今天日期，避免重复执行
+            local_config.put("极速版挖宝", new Date().getDate());
         },
         领京豆: function () {
             let scheme_title = "领京豆";
