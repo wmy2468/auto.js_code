@@ -371,7 +371,10 @@ function 芭芭农场() {
                     toastLog("已点击 收下施肥");
                     sleep(2600);
                 }
-                func.sClick(packageName(current_pkg).text("点击领取").findOnce());
+                if (func.sClick(packageName(current_pkg).text("点击领取").findOnce())) {
+                    toastLog("已点击 ");
+                    sleep(2600);
+                }
                 if (func.sClick(packageName(current_pkg).className("Button").text("立即领取").findOnce())) {
                     toastLog("找到亲密度立即领取按钮, 等待5秒");
                     sleep(5000);
