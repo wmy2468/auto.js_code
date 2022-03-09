@@ -442,6 +442,7 @@ function 浦发_金豆签到() {
                 today_is_done = true;
             } else {
                 toastLog("当前查找+号结果数量不足8个,异常，请检查"); sleep(2600);
+                auto.service.serviceInfo = auto.service.serviceInfo;
                 continue;
             }
         }
@@ -495,7 +496,7 @@ function 京东() {
                 } else {
                     toastLog("等待 完成页面 加载...");
                     sleep(2500);
-                    auto.service.resources.flushLayoutCache();
+                    auto.service.serviceInfo = auto.service.serviceInfo;
                 }
             }
             toastLog("任务:" + title + ", 已完成");
@@ -527,7 +528,7 @@ function 京东() {
                 if (left_today != null) {
                     try {
                         if (left_today.text() == "今日剩余") {
-                            left_today.select();
+                            auto.service.serviceInfo = auto.service.serviceInfo;
                             log("今日剩余-1");
                             left_idx = left_today.indexInParent();
                             left_today_parent = left_today.parent();
@@ -588,7 +589,7 @@ function 京东() {
                 try {
                     scroll_bar = text("¥").depth(16).findOnce();
                     if (scroll_bar == null) {
-                        if (ex_count > 6) {
+                        if (ex_count > 3) {
                             toastLog("查找钱币符号超时，表示已完成");
                             try {
                                 // 关闭按钮
@@ -639,6 +640,11 @@ function 京东() {
                     click_parent = bar_parent.child(bar_parent.childCount() - 1).child(0).child(0);
                     log("click_parent.childCount():" + click_parent.childCount());
                     for (let i = 0; i < click_parent.childCount(); i++) {
+                        if (text("奖励已锁定，复活后可正常领奖！").findOnce() != null) {
+                            toastLog("任务失败"); sleep(2600);
+                            ex_flag = true;
+                            break;
+                        }
                         item = click_parent.child(i);
                         // log("item.childCount():" + item.childCount());
                         if (item.childCount() == 1) {
@@ -774,6 +780,7 @@ function 京东() {
             let jump_url = cfg["url_scheme"]["京东"][scheme_title];
             let click_func = function () {
                 let beans_bottle;
+
                 func.sClick(textContains("收下京豆").findOnce());
                 beans_bottle = textContains("x").find();
                 if (beans_bottle.nonEmpty()) {

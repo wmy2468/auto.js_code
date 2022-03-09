@@ -5,7 +5,7 @@ var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
 // func.sClick(packageName("com.eg.android.AlipayGphone").text("点击领取").findOnce());
-log(text("奖励已锁定，复活后可正常领奖！").findOnce());
+auto.service.serviceInfo = auto.service.serviceInfo;
 // log(auto.service.notify());
 
 // log(selector().select().toString());
