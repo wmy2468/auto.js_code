@@ -329,9 +329,7 @@ function 芭芭农场() {
                     sleep(3000);
                 }
                 img_list = {
-                    淘宝芭芭农场每日领取: images.read(pic_folder + "支付宝芭芭农场点击领取.png"),
-                    淘宝芭芭农场每日领取2: images.read(pic_folder + "支付宝芭芭农场点击领取2.png"),
-                    淘宝芭芭农场每日领取3: images.read(pic_folder + "支付宝芭芭农场点击领取3.png"),
+                    支付宝芭芭农场每日领取: images.read(pic_folder + "支付宝芭芭农场每日领取.png"),
                 }
             } else if (施肥app == "淘宝") {
                 current_pkg = "com.taobao.taobao";
@@ -369,11 +367,12 @@ function 芭芭农场() {
                 if (cnt > 50) {
                     break;
                 }
-                if (func.sClick(text("收下去施肥").findOnce())) {
+                if (packageName(current_pkg).func.sClick(text("收下去施肥").findOnce())) {
                     toastLog("已点击 收下施肥");
                     sleep(2600);
                 }
-                if (func.sClick(className("Button").text("立即领取").findOnce())) {
+                func.sClick(packageName(current_pkg).text("点击领取").findOnce());
+                if (func.sClick(packageName(current_pkg).className("Button").text("立即领取").findOnce())) {
                     toastLog("找到亲密度立即领取按钮, 等待5秒");
                     sleep(5000);
                     if (textContains("合种管理").findOnce() != null) {
@@ -393,7 +392,7 @@ function 芭芭农场() {
                         toastLog("未找到合种管理 按钮");
                         sleep(2600);
                     }
-                    func.sClick(className("Button").text("立即领取").findOnce());
+                    func.sClick(packageName(current_pkg).className("Button").text("立即领取").findOnce());
                 }
                 click(btn_x, btn_y);
                 func.sClick(text("关闭").findOnce());

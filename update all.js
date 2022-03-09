@@ -35,6 +35,7 @@ if (selectIndex == -1) {
     // 更新图片
     let suffix = "piccs/";
     let pic_path = files.cwd() + "/" + suffix;
+    log("删除文件夹：" + files.removeDir(pic_path));
     // update_files("update all.js");
     files.ensureDir(pic_path);          // 确保路径存在
     // 路径
