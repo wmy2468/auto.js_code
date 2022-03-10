@@ -1020,18 +1020,18 @@ function 建行财富季() {
                     sleep(2600);
                     id("android:id/text1").text("详情").findOne();
                     toastLog("收藏夹 主会场 已加载");
-                    sleep(2600);
-                    let match_result, match_img;
-                    let pic_folder = files.cwd() + '/piccs/';
-                    match_img = images.read(pic_folder + "ccb收藏任务中心.png");
-                    match_result = null;
-                    while (match_result == null) {
-                        match_result = func.match_img(match_img, null);
-                        toastLog("等待找图出现...");
-                        sleep(2600);
-                    }
-                    match_img.recycle();
-                    click(match_result.x, match_result.y + 88);
+                    sleep(3600);
+                    // let match_result, match_img;
+                    // let pic_folder = files.cwd() + '/piccs/';
+                    // match_img = images.read(pic_folder + "ccb收藏任务中心.png");
+                    // match_result = null;
+                    // while (match_result == null) {
+                    //     match_result = func.match_img(match_img, null);
+                    //     toastLog("等待找图出现...");
+                    //     sleep(2600);
+                    // }
+                    // match_img.recycle();
+                    click(70, 886 + 88);
                     toastLog("已点击链接...");
                     sleep(2600);
                 },
