@@ -998,7 +998,7 @@ function 建行财富季() {
     let ccb = {
         财付季助力: function () {
             // let select_items = func.dialogs_select([1, 2, "1 + 2"], "CCB任务选择微信", "多选");
-            requestScreenCapture(); sleep(1000);
+            // requestScreenCapture(); sleep(1000);
             let func_obj = {
                 to_wechat_favorite: function () {
                     sleep(800);
