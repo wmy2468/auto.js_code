@@ -434,6 +434,7 @@ function 浦发_金豆签到() {
     let cnt, signs, sign_text;
     while (1) {
         cnt = 0;
+        auto.service.serviceInfo = auto.service.serviceInfo;
         signs = textStartsWith("+").find();
         log("当前sign_length:" + signs.length);
         if (today_is_done == false) {
@@ -441,7 +442,6 @@ function 浦发_金豆签到() {
                 today_is_done = true;
             } else {
                 toastLog("当前查找+号结果数量不足8个,异常，请检查"); sleep(2600);
-                auto.service.serviceInfo = auto.service.serviceInfo;
                 continue;
             }
         }
