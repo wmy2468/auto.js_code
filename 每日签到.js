@@ -107,8 +107,7 @@ function 云闪付() {
 function 沃钱包() {
     let appName = "沃钱包";
     func.to_app(appName);
-    let paopao, wode;
-    while (textEndsWith("天").textStartsWith("+").findOnce() == null) {
+    while (text("领福利 有惊喜").findOnce() == null) {
         func.sClick(textContains("下次再说").findOnce());
         func.sClick(idContains("wopay_wallet_advertisement_dialog_cancel_iv").findOnce());
         func.sClick(idContains("wopay_main_mine_tv").text("我的").findOnce());
