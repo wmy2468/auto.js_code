@@ -639,7 +639,8 @@ function 京东() {
                     click_parent = bar_parent.child(bar_parent.childCount() - 1).child(0).child(0);
                     log("click_parent.childCount():" + click_parent.childCount());
                     for (let i = 0; i < click_parent.childCount(); i++) {
-                        if (text("奖励已锁定，复活后可正常领奖！").findOnce() != null) {
+                        if (text("奖励已锁定，复活后可正常领奖！").findOnce() != null ||
+                            i > 7) {
                             toastLog("任务失败"); sleep(2600);
                             ex_flag = true;
                             break;
