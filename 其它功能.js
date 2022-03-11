@@ -367,7 +367,7 @@ function 芭芭农场() {
                 try {
                     if (btn_ele.parent().parent().parent().child(4).child(0).click()) {
                         toastLog("已点击 新人礼包"); sleep(2600);
-                        while (text("今日已领奖，去施肥>").findOnce() == null) {
+                        while (!func.sClick(text("今日已领奖，去施肥>").findOnce())) {
                             func.sClick(text("抽取今日肥料奖励>").findOnce());
                             toastLog("等待 今日领奖成功"); sleep(2600);
                         }
