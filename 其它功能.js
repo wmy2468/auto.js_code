@@ -144,12 +144,26 @@ function 云闪付() {
 
 function 芭芭农场() {
     let func_in_func = {
-        zfb_element: function () {
+        zfb_element: function (up_and_down) {
+            up_and_down = up_and_down || 1;     //2表示上半个屏幕 1表示下半个,默认为1
+            let left, top, right, bottom;
+            if (up_and_down == 1) {
+                left = 0;
+                top = device.height / 2;
+                right = device.width;
+                bottom = device.height;
+            } else {
+                left = 0;
+                top = 0;
+                right = device.width;
+                bottom = device.height / 2;
+            }
             let btn;
-            btn = className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).find();
-            if (btn.length != 0) { return btn[btn.length - 1]; }
-            else { return null; }
-            // return className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).findOnce();
+            btn = className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).
+                boundsInside(left, top, right, bottom).findOnce();
+            return btn;
+            // if (btn.length != 0) { return btn[btn.length - 1]; }
+            // else { return null; }
         },
         tb_element: function () {
             // return text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
@@ -346,6 +360,23 @@ function 芭芭农场() {
             } else {
                 toastLog("未设置app名称，退出");
                 exit();
+            }
+            // 领取新人礼包
+            btn_ele = func_in_func.zfb_element(2);
+            if (btn_ele != null) {
+                try {
+                    if (btn_ele.parent().parent().parent().child(4).child(0).click()) {
+                        toastLog("已点击 新人礼包"); sleep(2600);
+                        while (text("今日已领奖，去施肥>").findOnce() == null) {
+                            func.sClick(text("抽取今日肥料奖励>").findOnce());
+                            toastLog("等待 今日领奖成功"); sleep(2600);
+                        }
+                        toastLog("今日领奖成功"); sleep(2600);
+                    }
+                }
+                catch (e) {
+                    toastLog("点击失败 新人礼包"); sleep(2600);
+                }
             }
             let btn_x, btn_y;
             btn_y = btn_ele.bounds().centerY();
@@ -1200,7 +1231,8 @@ function 建行财富季() {
                         "毕恭毕敬": 1, "鸿儒硕学": 1, "及时规避": 1, "程门立雪": 1, "尊年尚齿": 1, "代位追偿": 1, "投诉畅通": 1, "财产安全": 1, "公平竞争": 1,
                         "自主选择": 1, "证据确凿": 1, "诚实守信": 1, "博学多才": 1, "坦诚相对": 1, "满腹经纶": 1, "公正": 1, "实不相瞒": 1, "信息对等": 1, "合理使用": 1,
                         "虹膜技术": 1, "电子签名": 1, "情真意切": 1, "电话畅通": 1, "指纹安全": 1, "自由谈判": 1, "分散风险": 1, "有法可依": 1, "洗耳恭听": 1, "获利公平": 1,
-                        "": 1, "": 1,
+                        "开诚布公": 1, "尊重": 1, "笃实好学": 1, "履行义务": 1, "充分尊重": 1, "仗气直书": 1, "合法权益": 1, "公平互惠": 1, "杜绝侵害": 1, "负弩前驱": 1,
+                        "倒履相迎": 1, "": 1, "": 1, "": 1, "": 1, "": 1, "": 1, "": 1, "": 1, "": 1, "": 1, "": 1, "": 1, "": 1, "": 1, "": 1, "": 1, "": 1,
                     }
                     let answer, idx, triggers, trigger_text = "请选出所有正面词汇";
                     try {
@@ -1293,16 +1325,16 @@ function 建行财富季() {
             let is_in_positive = true;
             while (1) {
                 if (textContains("请选出所有正面词汇").findOnce() != null) {
-                    toastLog("已找到 正面词汇 标识, 答题完成后，等待提示继续下次后再开始答题");
-                    sleep(2600);
+                    // toastLog("已找到 正面词汇 标识, 答题完成后，等待提示继续下次后再开始答题");
+                    // sleep(2600);
                     func_obj.正面词汇(is_in_positive);
                     is_in_positive = false;
                     continue;
                 }
                 is_in_positive = true;
                 if (textContains("答对3题即算闯关成功").findOnce() != null) {
-                    toastLog("👇👇👇 已找到  消保跨境答题 标识, 答题完成后，等待提示继续下次后再开始答题");
-                    sleep(2600);
+                    // toastLog("👇👇👇 已找到  消保跨境答题 标识, 答题完成后，等待提示继续下次后再开始答题");
+                    // sleep(2600);
                     func_obj.消保跨境答题();
                 }
                 toast("执行完，等待2秒，继续下次");

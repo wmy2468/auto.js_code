@@ -5,23 +5,30 @@ var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
 // func.sClick(packageName("com.eg.android.AlipayGphone").text("点击领取").findOnce());
-auto.service.serviceInfo = auto.service.serviceInfo;
+log(text("今日已领奖，去施肥>").findOnce());
 // log(auto.service.notify());
-
-// log(selector().select().toString());
-// for (k in selector()) {
-//     log(k);
-// }
-// auto.service.resources.flushLayoutCache();
-// log(textContains("去抽奖").findOnce());
-// trigger_text = "答对3题即算闯关成功";
-// log(textContains(trigger_text).find().length)
-// trigger = textContains(trigger_text).findOnce();
-// triggers = trigger.parent().parent().child(0);
-
-// for (i = 0; i < triggers.childCount(); i++) {
-//     log(last_level_text(triggers.child(i)));
-// }
+function zfb_element(up_and_down) {
+    up_and_down = up_and_down || 1;     //0表示上半个屏幕 1表示下半个,默认为1
+    let left, top, right, bottom;
+    if (up_and_down == 1) {
+        left = 0;
+        top = device.height / 2;
+        right = device.width;
+        bottom = device.height;
+    } else {
+        left = 0;
+        top = 0;
+        right = device.width;
+        bottom = device.height / 2;
+    }
+    // log(left, top, right, bottom);
+    let btn;
+    btn = className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).
+        boundsInside(left, top, right, bottom).findOnce();
+    return btn;
+    // if (btn.length != 0) { return btn[btn.length - 1]; }
+    // else { return null; }
+}
 
 function last_level_text(ele_obj) {
     let ele = ele_obj;
