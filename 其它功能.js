@@ -361,6 +361,12 @@ function 芭芭农场() {
                 toastLog("未设置app名称，退出");
                 exit();
             }
+
+            let btn_x, btn_y;
+            btn_y = btn_ele.bounds().centerY();
+            btn_x = device.width / 2;
+            log(btn_x);
+            log(btn_y);
             // 领取新人礼包
             btn_ele = func_in_func.zfb_element(2);
             if (btn_ele != null) {
@@ -378,11 +384,7 @@ function 芭芭农场() {
                     toastLog("点击失败 新人礼包"); sleep(2600);
                 }
             }
-            let btn_x, btn_y;
-            btn_y = btn_ele.bounds().centerY();
-            btn_x = device.width / 2;
-            log(btn_x);
-            log(btn_y);
+
             let cnt = 0;
             let screenshot, find_region;
             find_region = [0, device.height / 2];
