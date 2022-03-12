@@ -84,13 +84,13 @@ function 云闪付() {
             while (1) {
                 if (textEndsWith("成功").findOnce() != null) {
                     sleep(800);
-                    func.to_autojs();
+                    // func.to_autojs();
                     toastLog("返回一下");
-                    sleep(4000);
-                    // func.sClick(text("付款码").findOne());
-                    func.to_scheme("upwallet://pay");
+                    sleep(3000);
+                    func.sClick(text("付款码").findOne());
+                    // func.to_scheme("upwallet://pay");
                     toastLog("已执行跳转 fuk码");
-                    sleep(5000);
+                    sleep(3000);
                 }
                 if (textEndsWith("商家付款").findOnce() != null) {
                     toastLog("等待被扫，有需要请手动停止");
