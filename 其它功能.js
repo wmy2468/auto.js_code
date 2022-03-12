@@ -84,6 +84,7 @@ function 云闪付() {
             while (1) {
                 if (textEndsWith("成功").findOnce() != null) {
                     sleep(800);
+                    back();
                     // func.to_autojs();
                     toastLog("返回一下");
                     sleep(3000);
