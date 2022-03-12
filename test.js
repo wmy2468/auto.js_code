@@ -5,7 +5,24 @@ var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
 // func.sClick(packageName("com.eg.android.AlipayGphone").text("点击领取").findOnce());
-log(text("今日已领奖，去施肥>").findOnce());
+// log(text("今日已领奖，去施肥>").findOnce());
+
+btn_ele = zfb_element(2);
+if (btn_ele != null) {
+    try {
+        if (btn_ele.parent().parent().parent().child(4).child(0).click()) {
+            toastLog("已点击 新人礼包"); sleep(2600);
+            while (!func.sClick(text("今日已领奖，去施肥>").findOnce())) {
+                func.sClick(text("抽取今日肥料奖励>").findOnce());
+                toastLog("等待 今日领奖成功"); sleep(2600);
+            }
+            toastLog("今日领奖成功"); sleep(2600);
+        }
+    }
+    catch (e) {
+        toastLog("点击失败 新人礼包"); sleep(2600);
+    }
+}
 // log(auto.service.notify());
 function zfb_element(up_and_down) {
     up_and_down = up_and_down || 1;     //0表示上半个屏幕 1表示下半个,默认为1
