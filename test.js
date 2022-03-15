@@ -7,8 +7,9 @@ var pic_folder = files.cwd() + "/piccs/";
 // func.sClick(packageName("com.eg.android.AlipayGphone").text("点击领取").findOnce());
 // log(text("今日已领奖，去施肥>").findOnce());
 
-aa = textContains("同意上述提示").findOnce()
-func.sClick(aa.parent().child(aa.indexInParent() - 1))
+aa = textContains("外汇账户").findOnce();
+log(aa)
+// func.sClick(aa.parent().child(aa.indexInParent() - 1))
 
 // btn_ele = zfb_element(2);
 // if (btn_ele != null) {
