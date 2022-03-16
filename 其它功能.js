@@ -495,11 +495,11 @@ function 芭芭农场() {
         zfb助力: function () {
             let url_dict, url_keys;
             url_dict = {
-                "url_redmi": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgzMjgzNTY5OTY5MjBkMGk1MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088832835699692&chInfo=ch_share__chsub_Weixin&apshareid=2e39b639-86a2-425f-bac9-e59cfa6f729c",
+                "url_lm": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODMwMjgyNjc0MjM5NDE2MzF4dkFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088302826742394&chInfo=ch_share__chsub_Weixin&apshareid=984B5380-ACCD-4099-B658-FAE3E8F5D384",
+                "url_lp": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjQ1NTc3NTMzOTFsYnNoM0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802455775339&chInfo=ch_share__chsub_Weixin&apshareid=D4E9A701-E6F4-4622-A775-0AA2DF4C3E00",
                 "url_mate30": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjU2NjcxNDcyMDA5cDFyY0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802566714720&chInfo=ch_share__chsub_Weixin&apshareid=67021669-4f86-433a-b0f8-e9a3d92ffa4a",
                 "url_honor": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODE0MjMxMzQ4OTE4ODBvNWR3MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088142313489188&chInfo=ch_share__chsub_Weixin&apshareid=f33b8fe2-57ba-468b-8179-708d640216c0",
-                "url_lm": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODMwMjgyNjc0MjM5NDE2MzF4dkFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088302826742394&chInfo=ch_share__chsub_Weixin&apshareid=984B5380-ACCD-4099-B658-FAE3E8F5D384",
-                // "url_lp": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjQ1NTc3NTMzOTFsYnNoM0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802455775339&chInfo=ch_share__chsub_Weixin&apshareid=D4E9A701-E6F4-4622-A775-0AA2DF4C3E00",
+                // "url_redmi": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgzMjgzNTY5OTY5MjBkMGk1MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088832835699692&chInfo=ch_share__chsub_Weixin&apshareid=2e39b639-86a2-425f-bac9-e59cfa6f729c",
             }
             // Object.keys(url_dict).forEach(obj_key => { }
             url_keys = Object.keys(url_dict);
@@ -549,8 +549,9 @@ function 芭芭农场() {
             url_redmi = "8 666:/信里心看她他之得年着学和信";
             url_honor = "1 666:/微生起以么他之得年可么他嘻";
             url_lm = "7 2:/！她出她着他之天里家以那哈";
+            url_lp = "3啊都来上以有他在时时是心微"
 
-            [url_mate30, url_redmi, url_honor, url_lm].forEach(jump_url => {
+            [url_lp, url_lm, url_mate30, url_honor].forEach(jump_url => {
                 setClip(jump_url);          // 设置剪贴板
                 toastLog("已跳转URL");
                 btn_detail = null;

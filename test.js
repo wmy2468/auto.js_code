@@ -7,8 +7,8 @@ var pic_folder = files.cwd() + "/piccs/";
 // func.sClick(packageName("com.eg.android.AlipayGphone").text("点击领取").findOnce());
 // log(text("今日已领奖，去施肥>").findOnce());
 
-aa = textContains("外汇账户").findOnce();
-log(aa)
+url_lp = "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjQ1NTc3NTMzOTFsYnNoM0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802455775339&chInfo=ch_share__chsub_Weixin&apshareid=D4E9A701-E6F4-4622-A775-0AA2DF4C3E00",
+    func.to_scheme(url_lp);
 // func.sClick(aa.parent().child(aa.indexInParent() - 1))
 
 // btn_ele = zfb_element(2);
