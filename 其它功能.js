@@ -43,7 +43,8 @@ function main() {
         }
         else if (select_func == "芭芭农场-助力浏览") {
             farms = 芭芭农场();
-            farms.zfb助力(); farms.tb助力();
+            farms.zfb助力();
+            farms.tb助力();
             farms.tb(); farms.zfb();
         } else if (select_func == "芭芭农场-助力浏览施肥") {
             requestScreenCapture();
@@ -544,15 +545,19 @@ function 芭芭农场() {
             }
         },
         tb助力: function () {
-            let url_mate30, url_redmi, url_honor, url_lm;
-            url_mate30 = "6，去一是要他之得你他么的嘻";
-            url_redmi = "8 666:/信里心看她他之得年着学和信";
-            url_honor = "1 666:/微生起以么他之得年可么他嘻";
-            url_lm = "7 2:/！她出她着他之天里家以那哈";
-            url_lp = "3啊都来上以有他在时时是心微"
+            let url_dict, url_keys;
+            url_dict = {
+                "url_lm": "7 2:/！她出她着他之天里家以那哈",
+                "url_lp": "3啊都来上以有他在时时是心微",
+                "url_mate30": "6，去一是要他之得你他么的嘻",
+                "url_honor": "1 666:/微生起以么他之得年可么他嘻",
+                "url_redmi": "8 666:/信里心看她他之得年着学和信",
+            }
+            // Object.keys(url_dict).forEach(obj_key => { }
+            url_keys = Object.keys(url_dict);
 
-            [url_lp, url_lm, url_mate30, url_honor].forEach(jump_url => {
-                setClip(jump_url);          // 设置剪贴板
+            url_keys.forEach(jump_url => {
+                setClip(url_dict[jump_url]);          // 设置剪贴板
                 toastLog("已跳转URL");
                 btn_detail = null;
                 func.to_app("淘宝");
