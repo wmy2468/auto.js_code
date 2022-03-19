@@ -1155,8 +1155,9 @@ function 建行财富季() {
                         fuqi_btn = textStartsWith("福气值Lv").findOnce();
                         if (fuqi_btn != null) {
                             try {
-                                my_friend_btn = fuqi_btn.parent().parent().child(5);
-                                func.sClick(my_friend_btn);
+                                // my_friend_btn = fuqi_btn.parent().parent().child(5);
+                                func.sClick(fuqi_btn.parent().parent().child(5));
+                                func.sClick(fuqi_btn.parent().parent().child(6));
                             }
                             catch (e) {
                                 log(e);
