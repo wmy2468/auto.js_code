@@ -1117,12 +1117,12 @@ function 建行财富季() {
                         toastLog("等待页面加载5秒");
                         sleep(5000);
                         // 等待返回
-                        while (text("刷新").findOnce() == null) {
+                        while (textStartsWith("刷新").findOnce() == null) {
                             back();
                             toastLog("执行返回，等待4秒");
                             sleep(4000);
                         }
-                        while (!func.sClick(text("刷新").findOnce())) {
+                        while (!func.sClick(textStartsWith("刷新").findOnce())) {
                             toastLog("点击刷新,失败");
                             sleep(4000);
                         }

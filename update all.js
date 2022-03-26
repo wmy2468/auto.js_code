@@ -9,6 +9,9 @@ let dir = files.cwd();
 var jsFiles = files.listDir(dir, function (name) {
     return name.endsWith(".js") && files.isFile(files.join(dir, name));
 });
+var req_headers = {
+    "Referer": "https://gitee.com/"
+}
 
 let selectedArr = ["更新所有文件", "更新图片文件"];
 let selectIndex = dialogs.select('选择功能', selectedArr);
@@ -50,7 +53,7 @@ if (selectIndex == -1) {
     file_name_list.forEach(pic_name => {
         save_path = pic_path + pic_name;    // 文件路径
         req_url = originUrl + suffix + pic_name;     // 网络文件路径
-        req = http.get(req_url)
+        req = http.get(req_url, { headers: req_headers })
         if (req.statusCode != '200') {
             toastLog('网络读取错误，可能文件不存在')
             sleep(800);
@@ -73,7 +76,7 @@ function update_files(specific_file_name) {
     if (specific_file_name) {
         save_path = js_folder + specific_file_name;    // 文件路径
         req_url = originUrl + specific_file_name;     // 网络文件路径
-        req = http.get(req_url);
+        req = http.get(req_url, { headers: req_headers });
         if (req.statusCode != '200') {
             toastLog("文件更新失败...");
             sleep(2600);
@@ -99,7 +102,7 @@ function update_files(specific_file_name) {
             save_path = js_folder + file_name;    // 文件路径
             req_url = originUrl + file_name;     // 网络文件路径
             try {
-                req = http.get(req_url);
+                req = http.get(req_url, { headers: req_headers });
                 if (req.statusCode != '200') {
                     log(file_name + '网络读取错误，可能文件不存在')
                     sleep(800);
