@@ -1081,7 +1081,7 @@ function 建行财富季() {
                     sleep(2600);
                 },
                 in_mission_view: function () {
-                    while (text("刷新").findOnce() == null) {
+                    while (textStartsWith("刷新").findOnce() == null) {
                         func.sClick(text("允许").findOnce());
                         toast("请跳转到 ccb福气任务界面");
                         sleep(2600);
