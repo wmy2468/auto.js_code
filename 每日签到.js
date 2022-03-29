@@ -192,11 +192,14 @@ function 工商_小象乐园() {
     text("任务中心").findOne();
     toastLog("已到达任务中心");
     sleep(2000);
-    if (textStartsWith("sign_done").findOnce() == null) {
-        func.sClick(textStartsWith("sign").findOnce());
-        sleep(2500);
-    } else {
-        toastLog("今日已签到");
+    while (text("今日签到成功").findOnce() == null) {
+        try {
+            func.sClick(text("可用香蕉").findOnce().parent().parent().child(2));
+        }
+        catch (e) {
+            continue;
+        }
+        toastLog("等待签到成功");
         sleep(3000);
     }
 }
@@ -887,20 +890,25 @@ function 值得买_签到() {
     let appName = "什么值得买";
     func.to_app(appName);
     let signBtn = null;
-    while (signBtn == null) {
-        signBtn = id("tv_login_sign").findOnce();
-        func.sClick(id("tab_usercenter").text("我的").findOnce());
-        sleep(800);
-        func.sClick(idContains("close").findOnce());
-        sleep(800);
-        //;
-    }
+
     sleep(800);
-    func.sClick(signBtn);
-    sleep(1000);
+    while (text("已连续签到").findOnce() == null) {
+        if (signBtn == null) {
+            signBtn = id("tv_login_sign").findOnce();
+            func.sClick(id("tab_usercenter").text("我的").findOnce());
+            sleep(800);
+            func.sClick(idContains("close").findOnce());
+            sleep(800);
+            //;
+        } else {
+            func.sClick(signBtn);
+        }
+        toastLog("等待签到加载");
+        sleep(2000);
+    }
     //textContains("已连续签到").findOne();
     toastLog(appName + "已签到");
-    sleep(1200);
+    sleep(2200);
 }
 
 // 邮储信用卡

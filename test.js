@@ -7,14 +7,7 @@ var pic_folder = files.cwd() + "/piccs/";
 // func.sClick(packageName("com.eg.android.AlipayGphone").text("点击领取").findOnce());
 // log(text("今日已领奖，去施肥>").findOnce());
 
-headers = {
-    "Referer": "https://gitee.com/"
-}
-var origin_url = 'https://gitee.com/JJ1573/auto.js_code/raw/master/';
-// res = http.get(origin_url + "test.js");
-res = http.get(origin_url + "update all.js", { headers: headers });
-log(res.statusCode);
-log(res.body.string());
+log(text("已连续签到").findOnce());
 // func.sClick(aa.parent().child(aa.indexInParent() - 1))
 
 // btn_ele = zfb_element(2);
