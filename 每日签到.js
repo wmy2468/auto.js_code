@@ -903,6 +903,7 @@ function 值得买_签到() {
         } else {
             func.sClick(signBtn);
         }
+        id("com.smzdm.client.android:id/iv_close").findOnce().click();
         toastLog("等待签到加载");
         sleep(2000);
     }
