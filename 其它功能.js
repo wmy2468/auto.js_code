@@ -545,13 +545,13 @@ function 芭芭农场() {
             }
         },
         tb助力: function () {
-            let url_dict, url_keys;
+            let url_dict, url_keys, cnt;
             url_dict = {
                 "url_lm": "7 2:/！她出她着他之天里家以那哈",
                 "url_lp": "3啊都来上以有他在时时是心微",
                 "url_mate30": "6，去一是要他之得你他么的嘻",
                 "url_honor": "1 666:/微生起以么他之得年可么他嘻",
-                "url_redmi": "8 666:/信里心看她他之得年着学和信",
+                // "url_redmi": "8 666:/信里心看她他之得年着学和信",
             }
             // Object.keys(url_dict).forEach(obj_key => { }
             url_keys = Object.keys(url_dict);
@@ -561,6 +561,7 @@ function 芭芭农场() {
                 toastLog("已跳转URL");
                 btn_detail = null;
                 func.to_app("淘宝");
+                cnt = 0;
                 while (btn_detail == null) {
                     btn_detail = text("查看详情").findOnce();
                     if (btn_detail == null) { btn_detail = desc("查看详情").findOnce(); }
@@ -569,6 +570,10 @@ function 芭芭农场() {
                     func.sClick(idContains("update_imageview_cancel").findOnce());
                     toastLog("等待淘口令弹窗加载");
                     sleep(2500);
+                    cnt = cnt + 1;
+                    if (cnt >= 5) {
+                        continue;
+                    }
                 }
                 func.sClick(btn_detail);
                 toastLog("已点击查看详情")
