@@ -550,14 +550,16 @@ function 芭芭农场() {
                 "url_lm": "7 2:/！她出她着他之天里家以那哈",
                 "url_lp": "3啊都来上以有他在时时是心微",
                 "url_mate30": "6，去一是要他之得你他么的嘻",
-                "url_honor": "1 666:/微生起以么他之得年可么他嘻",
+                "url_honor": "0！上的过上有们你他也于以微👉",
                 // "url_redmi": "8 666:/信里心看她他之得年着学和信",
             }
             // Object.keys(url_dict).forEach(obj_key => { }
             url_keys = Object.keys(url_dict);
 
-            url_keys.forEach(jump_url => {
-                setClip(url_dict[jump_url]);          // 设置剪贴板
+            for (let i = 0; i < url_keys.length; i++) {
+                obj_key = url_keys[i];
+                jump_url = url_dict[obj_key];
+                setClip(jump_url);          // 设置剪贴板
                 toastLog("已跳转URL");
                 btn_detail = null;
                 func.to_app("淘宝");
@@ -572,6 +574,8 @@ function 芭芭农场() {
                     sleep(2500);
                     cnt = cnt + 1;
                     if (cnt >= 5) {
+                        toastLog("淘口令弹窗 超时");
+                        sleep(2500);
                         continue;
                     }
                 }
