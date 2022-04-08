@@ -598,7 +598,7 @@ function 芭芭农场() {
                 func.to_autojs();
                 toastLog("切换到autojs，等待3秒");
                 sleep(2000);
-            })
+            }
         }
     }
     return func_obj;
