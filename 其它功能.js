@@ -464,7 +464,7 @@ function 芭芭农场() {
             sleep(2500);
             let click_text;
             click_text = ["去浏览", "去完成", "去逛逛"];
-            let todo_text, todo_btn, todo_idx, step, todo_btn_text;
+            let todo_text, todo_btn, todo_idx, step, cnt, todo_btn_text;
             todo_idx = 1;
             step = 4
             func_in_func.unitl_in_mission_view();
@@ -478,9 +478,19 @@ function 芭芭农场() {
                 todo_btn_text = todo_btn.text();
                 todo_text = views.child(todo_idx + 2).text();
                 if (func_in_func.arr_in_text(todo_text, ["秒"]) && click_text.indexOf(todo_btn_text) != -1) {
-                    log(todo_text);
+                    log("todo_text=" + todo_text);
                     func.sClick(todo_btn);
-                    while (func_in_func.in_mission_view()) { toastLog("等待任务视图消失"); sleep(2500); }
+                    cnt = 0;
+                    while (func_in_func.in_mission_view()) {
+                        toastLog("等待任务视图消失");
+                        sleep(2500);
+                        cnt = cnt + 1;
+                        if (cnt > 5) {
+                            toastLog("任务视图长时间未加载，退出");
+                            sleep(2500);
+                            break;
+                        }
+                    }
                     toastLog("Mission 视图已消失");
                     func_in_func.view_15_second();
                     sleep(2500);
@@ -1161,7 +1171,7 @@ function 建行财富季() {
                         }
                         sleep(400);
                         // 点击我的好友按钮
-                        fuqi_btn = textStartsWith("福气值Lv").findOnce();
+                        fuqi_btn = textContains("Lv").findOnce();
                         if (fuqi_btn != null) {
                             try {
                                 // my_friend_btn = fuqi_btn.parent().parent().child(5);
