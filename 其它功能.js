@@ -567,6 +567,10 @@ function 芭芭农场() {
             url_keys = Object.keys(url_dict);
 
             for (let i = 0; i < url_keys.length; i++) {
+                func.to_autojs();
+                toastLog("切换到autojs，等待3秒");
+                sleep(2000);
+
                 obj_key = url_keys[i];
                 jump_url = url_dict[obj_key];
                 setClip(jump_url);          // 设置剪贴板
@@ -605,9 +609,6 @@ function 芭芭农场() {
                 func.sClick(help_for);
                 toastLog("已点击助力，等待下一个");
                 sleep(3000);
-                func.to_autojs();
-                toastLog("切换到autojs，等待3秒");
-                sleep(2000);
             }
         }
     }
