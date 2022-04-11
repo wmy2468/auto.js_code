@@ -477,8 +477,9 @@ function 芭芭农场() {
                 todo_btn = views.child(todo_idx + 3).child(0);
                 todo_btn_text = todo_btn.text();
                 todo_text = views.child(todo_idx + 2).text();
+                log("任务描述：" + views.child(todo_idx + 1).text());
                 if (func_in_func.arr_in_text(todo_text, ["秒"]) && click_text.indexOf(todo_btn_text) != -1) {
-                    log("todo_text=" + todo_text);
+                    // log("todo_text=" + todo_text);
                     func.sClick(todo_btn);
                     cnt = 0;
                     while (func_in_func.in_mission_view()) {
