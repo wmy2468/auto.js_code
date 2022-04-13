@@ -372,25 +372,25 @@ function 芭芭农场() {
             log(btn_x);
             log(btn_y);
             // 领取新人礼包
-            btn_ele = func_in_func.zfb_element(2);
-            if (btn_ele != null) {
-                try {
-                    if (btn_ele.parent().parent().parent().child(4).child(0).click()) {
-                        toastLog("已点击 新人礼包"); sleep(2600);
-                        while (!func.sClick(text("今日已领奖，去施肥>").findOnce())) {
-                            if (func.sClick(text("抽取今日肥料奖励>").findOnce())) {
-                                toastLog("今日抽取肥料成功"); sleep(2600);
-                                break;
-                            }
-                            toastLog("等待 今日领奖成功"); sleep(2600);
-                        }
-                        toastLog("今日领奖成功"); sleep(2600);
-                    }
-                }
-                catch (e) {
-                    toastLog("点击失败 新人礼包"); sleep(2600);
-                }
-            }
+            // btn_ele = func_in_func.zfb_element(2);
+            // if (btn_ele != null) {
+            //     try {
+            //         if (btn_ele.parent().parent().parent().child(4).child(0).click()) {
+            //             toastLog("已点击 新人礼包"); sleep(2600);
+            //             while (!func.sClick(text("今日已领奖，去施肥>").findOnce())) {
+            //                 if (func.sClick(text("抽取今日肥料奖励>").findOnce())) {
+            //                     toastLog("今日抽取肥料成功"); sleep(2600);
+            //                     break;
+            //                 }
+            //                 toastLog("等待 今日领奖成功"); sleep(2600);
+            //             }
+            //             toastLog("今日领奖成功"); sleep(2600);
+            //         }
+            //     }
+            //     catch (e) {
+            //         toastLog("点击失败 新人礼包"); sleep(2600);
+            //     }
+            // }
 
             let cnt = 0;
             let screenshot, find_region;
