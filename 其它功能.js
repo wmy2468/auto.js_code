@@ -278,7 +278,7 @@ function 芭芭农场() {
                 if (click_text.indexOf(todo_btn_text) != -1) {
                     if (lucky_bag == undefined) {
                         if ((!func_in_func.arr_in_text(todo_text, ["秒"])) ||
-                            !func_in_func.arr_in_text(todo_detail_text, ["心仪的宝贝"])) {
+                            func_in_func.arr_in_text(todo_detail_text, ["心仪的宝贝"])) {
                             continue_flag = true;
                         }
                     } else {
