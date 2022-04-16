@@ -89,7 +89,10 @@ function 云闪付() {
                     // func.to_autojs();
                     toastLog("返回一下");
                     sleep(3000);
-                    func.sClick(text("付款码").findOne());
+                    while (func.sClick(text("付款码").findOnce())) {
+                        func.sClick(text("首页").findOnce());
+                        sleep(2000);
+                    }
                     // func.to_scheme("upwallet://pay");
                     toastLog("已执行跳转 fuk码");
                     sleep(3000);
