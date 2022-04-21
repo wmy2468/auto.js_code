@@ -297,7 +297,10 @@ function 芭芭农场() {
                         continue;
                     }
                     func.sClick(todo_btn);
-                    while (func_in_func.in_mission_view()) { toastLog("等待任务视图消失"); sleep(2500); }
+                    while (func_in_func.in_mission_view()) {
+                        toastLog("等待任务视图消失");
+                        sleep(2500);
+                    }
                     toastLog("Mission 视图已消失");
                     if (todo_detail_text == "逛逛'买多少返多少'(0/1)" || todo_detail_text == "浏览天天领现金(0/1)") {
                         toastLog("找到买返 红包");
@@ -593,7 +596,12 @@ function 芭芭农场() {
                     sleep(2500);
                     cnt = cnt + 1;
                     if (cnt >= 5) {
+                        setClip(jump_url);          // 设置剪贴板
+                        home();
                         toastLog("淘口令弹窗 超时");
+                        sleep(3000);
+                        func.to_app("淘宝");
+                        toastLog("已重新设置 淘口令，等待跳转加载");
                         sleep(2500);
                         continue;
                     }

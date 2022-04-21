@@ -178,15 +178,23 @@ function 工商_小象乐园() {
             sleep(1000);
         }
     }
-
-    if (left_banana.depth() == 12) {
-        mission_btn = left_banana.parent().parent().child(0).child(2);
-    } else {
-        // 荣耀8
-        mission_btn = left_banana.parent().parent().parent().child(0).child(2);
+    while (text("进入任务中心查看更多任务").findOnce() == null) {
+        try {
+            if (left_banana.depth() == 12) {
+                mission_btn = left_banana.parent().parent().child(0).child(2);
+            } else {
+                // 荣耀8
+                mission_btn = left_banana.parent().parent().parent().child(0).child(2);
+            }
+            func.sClick(mission_btn);
+            sleep(800);
+        } catch (e) {
+            toastLog("查找任务按钮 报错"); sleep(2500);
+            continue;
+        }
+        toastLog("等待任务界面加载");
+        sleep(2500);
     }
-    func.sClick(mission_btn);
-    sleep(800);
     func.sClick(text("进入任务中心查看更多任务").findOne());
     sleep(800);
     text("任务中心").findOne();
