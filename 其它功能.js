@@ -1192,6 +1192,7 @@ function 建行财富季() {
 
                                 // if (!func.sClick(fuqi_btn.parent().parent().child(5))) {
                                 func.sClick(fuqi_btn.parent().parent().child(5));
+                                func.sClick(fuqi_btn.parent().parent().child(6));
                                 // }
                             }
                             catch (e) {
