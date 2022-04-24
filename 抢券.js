@@ -122,13 +122,17 @@ function 招商便民生活() {
 function 云闪付() {
     let work = {
         云闪付APPStore: function () {
-            let appName, startTime, click_text, timeArea, wait_text;
+            let appName, startTime, click_text, timeArea;
             timeArea = "北京时间";
             appName = "云闪付";
 
-            let select_func = func.dialogs_select(["9点签到金兑换", "10点积点兑换"]);
-            if (select_func == "9点签到金兑换") {
-                startTime = "09,00,00,000";
+            let select_func = func.dialogs_select(["9点签到金兑换", "14点签到金兑换", "10点积点兑换"]);
+            if (select_func == "9点签到金兑换" || select_func == "14点签到金兑换") {
+                if (select_func == "9点签到金兑换") {
+                    startTime = "09,00,00,000";
+                } else {
+                    startTime = "14,00,00,000";
+                }
                 click_text = "去兑换";
                 func.to_app(appName);
                 let click_btn = text(click_text).findOnce();
