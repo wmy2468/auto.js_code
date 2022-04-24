@@ -7,7 +7,16 @@ var pic_folder = files.cwd() + "/piccs/";
 // func.sClick(packageName("com.eg.android.AlipayGphone").text("点击领取").findOnce());
 // log(text("今日已领奖，去施肥>").findOnce());
 
-log(textStartsWith("App").textEndsWith("00起兑").findOnce());
+// act = { action: "android.settings.DATE_SETTINGS", txt: "日期和时间设置" }
+// var intent = new Intent();
+// intent.setAction("android.settings.DATE_SETTINGS");
+// app.startActivity(intent);
+
+app.startActivity({
+    action: "android.settings.DATE_SETTINGS",
+});
+
+// log(textStartsWith("App").textEndsWith("00起兑").findOnce());
 // func.sClick(aa.parent().child(aa.indexInParent() - 1))
 
 // btn_ele = zfb_element(2);

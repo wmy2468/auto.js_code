@@ -122,11 +122,11 @@ function 招商便民生活() {
 function 云闪付() {
     let work = {
         云闪付APPStore: function () {
-            let appName, startTime, click_text, timeArea;
+            let appName, startTime, click_text, timeArea, click_btn, cnt;
             timeArea = "北京时间";
             appName = "云闪付";
 
-            let select_func = func.dialogs_select(["9点签到金兑换", "14点签到金兑换", "10点积点兑换"]);
+            let select_func = func.dialogs_select(["9点签到金兑换", "14点签到金兑换", "10点积点兑换", "10点积点-时间大法"]);
             if (select_func == "9点签到金兑换" || select_func == "14点签到金兑换") {
                 if (select_func == "9点签到金兑换") {
                     startTime = "09,00,00,000";
@@ -143,7 +143,7 @@ function 云闪付() {
                 }
                 toastLog("已找到指定按钮，请勿切换页面");
                 sleep(3000);
-                let cnt = 4;
+                cnt = 6;
                 func.getTimeDiff(timeArea, startTime);
                 while (cnt--) {
                     func.sClick(click_btn);
@@ -151,6 +151,7 @@ function 云闪付() {
                 }
             } else if (select_func == "10点积点兑换") {
                 startTime = "09,59,50,000";
+                func.to_app(appName);
                 while (textStartsWith("App").textEndsWith("00起兑").findOnce() == null) {
                     toast("请手动跳转到券页面");
                     sleep(2500);
@@ -167,8 +168,24 @@ function 云闪付() {
                         cnt = 0;
                     }
                 }
+            } else if (select_func == "10点积点-时间大法") {
+                startTime = "10,00,00,000";
+                app.startActivity({
+                    action: "android.settings.DATE_SETTINGS",
+                });
+                click_btn = text("确认兑换").findOnce();
+                while (click_btn == null) {
+                    toast("请手动跳转到券页面");
+                    sleep(2500);
+                }
+                toastLog("已找到指定按钮，请勿切换页面");
+                func.getTimeDiff(timeArea, startTime);
+                cnt = 6;
+                while (cnt--) {
+                    func.sClick(click_btn);
+                    sleep(222);
+                }
             }
-
         },
         云闪付2022新年捡漏: function () {
             let coupon_id, url_jump, coupon_dict, coupon_id_list;
