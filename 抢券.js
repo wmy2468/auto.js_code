@@ -6,7 +6,7 @@ var cfg = func.config_dict();
 main();
 
 function main() {
-    let selectedArr = ["光大活动", "中信活动", "交行5积分", "华彩生活瑞幸", "招商便民生活", "招商倒计时领取",];
+    let selectedArr = ["光大活动", "中信活动", "交行5积分", "云闪付APPStore", "招商便民生活", "招商倒计时领取",];
     //---------------配置区域-----------------
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本        
     // 设置屏幕常亮6分钟
@@ -17,7 +17,7 @@ function main() {
     else if (scriptName == "华彩生活瑞幸") { 华彩生活瑞幸(); }
     else if (scriptName == "招商便民生活") { 招商便民生活(); }
     else if (scriptName == "招商倒计时领取") { 招商倒计时领取(); }
-    else if (scriptName == "云闪付2022新年") { 云闪付().云闪付2022新年(); }
+    else if (scriptName == "云闪付APPStore") { 云闪付().云闪付APPStore(); }
     else if (scriptName == "云闪付2022新年捡漏") { 云闪付().云闪付2022新年捡漏(); }
     toastLog("结束");
     device.cancelKeepingAwake();
@@ -59,7 +59,7 @@ function 华彩生活瑞幸() {
 function 招商倒计时领取() {
     let appName, url;
     appName = "招商银行"
-    url = ""; mmm
+    url = "";
     if (url != "") {
         func.to_scheme(url);
     } else {
@@ -121,6 +121,51 @@ function 招商便民生活() {
 
 function 云闪付() {
     let work = {
+        云闪付APPStore: function () {
+            let appName, startTime, click_text, timeArea, wait_text;
+            timeArea = "北京时间";
+            appName = "云闪付";
+
+            let select_func = func.dialogs_select(["9点签到金兑换", "10点积点兑换"]);
+            if (select_func == "9点签到金兑换") {
+                startTime = "09,00,00,000";
+                click_text = "去兑换";
+                func.to_app(appName);
+                let click_btn = text(click_text).findOnce();
+                while (click_btn == null) {
+                    toast("请手动跳转到券页面");
+                    sleep(2500);
+                    click_btn = text(click_text).findOnce();
+                }
+                toastLog("已找到指定按钮，请勿切换页面");
+                sleep(3000);
+                let cnt = 4;
+                func.getTimeDiff(timeArea, startTime);
+                while (cnt--) {
+                    func.sClick(click_btn);
+                    sleep(222);
+                }
+            } else if (select_func == "10点积点兑换") {
+                startTime = "09,59,50,000";
+                while (textStartsWith("App").textEndsWith("00起兑").findOnce() == null) {
+                    toast("请手动跳转到券页面");
+                    sleep(2500);
+                }
+                toastLog("已找到指定按钮，请勿切换页面");
+                func.getTimeDiff(timeArea, startTime);
+                let cnt = 0;
+                while (!func.sClick(text("立即兑换").findOnce())) {
+                    func.sClick(text("确认兑换").findOnce());
+                    sleep(50);
+                    cnt = cnt + 1;
+                    if (cnt > 40) {
+                        toast("等待点击按钮出现");
+                        cnt = 0;
+                    }
+                }
+            }
+
+        },
         云闪付2022新年捡漏: function () {
             let coupon_id, url_jump, coupon_dict, coupon_id_list;
             coupon_id_list = [];
