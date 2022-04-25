@@ -134,7 +134,7 @@ function 云闪付() {
                     startTime = "14,00,00,000";
                 }
                 click_text = "去兑换";
-                func.to_app(appName);
+                func.to_scheme(cfg["url_scheme"]["云闪付"]["签到"]);
                 let click_btn = text(click_text).findOnce();
                 while (click_btn == null) {
                     toast("请手动跳转到券页面");
@@ -151,7 +151,7 @@ function 云闪付() {
                 }
             } else if (select_func == "10点积点兑换") {
                 startTime = "09,59,50,000";
-                func.to_app(appName);
+                func.to_scheme(cfg["url_scheme"]["云闪付"]["会员中心"]);
                 while (textStartsWith("App").textEndsWith("00起兑").findOnce() == null) {
                     toast("请手动跳转到券页面");
                     sleep(2500);
@@ -173,12 +173,20 @@ function 云闪付() {
                 app.startActivity({
                     action: "android.settings.DATE_SETTINGS",
                 });
+                while (text("确认兑换").findOnce() == null) {
+                    toast("请手动跳转到券页面");
+                    sleep(2500);
+                }
+                toastLog("已找到指定按钮，调整回原有时间");
+                app.startActivity({
+                    action: "android.settings.DATE_SETTINGS",
+                });
+                sleep(2500);
                 click_btn = text("确认兑换").findOnce();
                 while (click_btn == null) {
                     toast("请手动跳转到券页面");
                     sleep(2500);
                 }
-                toastLog("已找到指定按钮，请勿切换页面");
                 func.getTimeDiff(timeArea, startTime);
                 cnt = 6;
                 while (cnt--) {
