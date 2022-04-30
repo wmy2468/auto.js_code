@@ -126,7 +126,7 @@ function 云闪付() {
             timeArea = "北京时间";
             appName = "云闪付";
 
-            let select_func = func.dialogs_select(["9点签到金兑换", "14点签到金兑换", "10点积点兑换", "10点积点-时间大法"]);
+            let select_func = func.dialogs_select(["9点签到金兑换", "14点签到金兑换", "10点积点兑换"]);
             if (select_func == "9点签到金兑换" || select_func == "14点签到金兑换") {
                 if (select_func == "9点签到金兑换") {
                     startTime = "09,00,00,000";
@@ -159,39 +159,14 @@ function 云闪付() {
                 toastLog("已找到指定按钮，请勿切换页面");
                 func.getTimeDiff(timeArea, startTime);
                 let cnt = 0;
-                while (!func.sClick(text("立即兑换").findOnce())) {
-                    func.sClick(text("确认兑换").findOnce());
+                while (!func.sClick(text("确认兑换").findOnce())) {
+                    func.sClick(text("立即兑换").findOnce());
                     sleep(50);
                     cnt = cnt + 1;
                     if (cnt > 40) {
                         toast("等待点击按钮出现");
                         cnt = 0;
                     }
-                }
-            } else if (select_func == "10点积点-时间大法") {
-                startTime = "10,00,00,000";
-                app.startActivity({
-                    action: "android.settings.DATE_SETTINGS",
-                });
-                while (text("确认兑换").findOnce() == null) {
-                    toast("请手动跳转到券页面");
-                    sleep(2500);
-                }
-                toastLog("已找到指定按钮，调整回原有时间");
-                app.startActivity({
-                    action: "android.settings.DATE_SETTINGS",
-                });
-                sleep(2500);
-                click_btn = text("确认兑换").findOnce();
-                while (click_btn == null) {
-                    toast("请手动跳转到券页面");
-                    sleep(2500);
-                }
-                func.getTimeDiff(timeArea, startTime);
-                cnt = 6;
-                while (cnt--) {
-                    func.sClick(click_btn);
-                    sleep(222);
                 }
             }
         },
