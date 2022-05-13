@@ -12,7 +12,7 @@ var pic_folder = files.cwd() + "/piccs/";
 // intent.setAction("android.settings.DATE_SETTINGS");
 // app.startActivity(intent);
 
-log(textContains("成长值").findOnce());
+log(text("奋斗小店").findOnce().depth());
 
 // log(textStartsWith("App").textEndsWith("00起兑").findOnce());
 // func.sClick(aa.parent().child(aa.indexInParent() - 1))

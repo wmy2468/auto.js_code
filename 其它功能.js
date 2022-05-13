@@ -1174,10 +1174,15 @@ function 建行财富季() {
                     }
                 },
                 to_friends_page: function () {
-                    let my_friend_btn, fuqi_btn, close_popup;
+                    let fuqi_btn, close_popup;
+                    let left, top, right, bottom;
+                    left = 0;
+                    top = device.height / 2;
+                    right = device.width;
+                    bottom = device.height
                     while (text("好友列表").findOnce() == null) {
                         // 点击主会场按钮
-                        if (func.sClick(text("主会场").findOnce()) || func.sClick(text("奋斗小店").findOnce())) {
+                        if (func.sClick(text("主会场").findOnce()) || func.sClick(text("奋斗小店").boundsInside(left, top, right, bottom).findOnce())) {
                             toastLog("已点击 ccb主会场按钮"); sleep(2600);
                         }
                         sleep(400);
@@ -1237,7 +1242,7 @@ function 建行财富季() {
                     while (1) {
                         try {
                             to_visit = text("去拜访").find();
-                            if (to_visit.length > 10) {
+                            if (to_visit.length > 10 && text("去点赞").findOnce() == null) {
                                 break;
                             }
                             to_help = text("去点赞").find();
