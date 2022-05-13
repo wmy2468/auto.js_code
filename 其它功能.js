@@ -1177,7 +1177,7 @@ function 建行财富季() {
                     let my_friend_btn, fuqi_btn, close_popup;
                     while (text("好友列表").findOnce() == null) {
                         // 点击主会场按钮
-                        if (func.sClick(text("主会场").findOnce())) {
+                        if (func.sClick(text("主会场").findOnce()) || func.sClick(text("奋斗小店").findOnce())) {
                             toastLog("已点击 ccb主会场按钮"); sleep(2600);
                         }
                         sleep(400);
@@ -1191,12 +1191,13 @@ function 建行财富季() {
                         }
                         sleep(400);
                         // 点击我的好友按钮
-                        fuqi_btn = textContains("Lv").findOnce();
+                        fuqi_btn = textContains("成长值").findOnce() || textContains("Lv").findOnce();
                         if (fuqi_btn != null) {
                             try {
                                 // my_friend_btn = fuqi_btn.parent().parent().child(5);
 
                                 // if (!func.sClick(fuqi_btn.parent().parent().child(5))) {
+                                func.sClick(fuqi_btn.parent().parent().parent().child(7));
                                 func.sClick(fuqi_btn.parent().parent().child(5));
                                 func.sClick(fuqi_btn.parent().parent().child(6));
                                 // }
@@ -1210,11 +1211,14 @@ function 建行财富季() {
                     sleep(200);
                 },
                 help_friend: function () {
-                    while (textStartsWith("助力你：") == null) {
+                    while (textEndsWith("人给他点赞").findOnce() == null) {
+                        // while (textStartsWith("助力你：").findOnce() == null) {
                         toastLog("等待 助力页面加载"); sleep(2600);
                     }
-                    toastLog("助力页面 已加载"); sleep(2600);
-                    if (func.sClick(text("助力好友").findOnce())) {
+                    toastLog("助力页面 已加载"); sleep(2300);
+
+                    if (func.sClick(text("快来点赞吧").findOnce())) {
+                        // if (func.sClick(text("助力好友").findOnce())) {
                         toastLog("已点击助力，等待返回"); sleep(2600);
                     } else {
                         toastLog("未成功 点击助力，等待返回"); sleep(2600);
@@ -1236,14 +1240,14 @@ function 建行财富季() {
                             if (to_visit.length > 10) {
                                 break;
                             }
-                            to_help = text("去助力").find();
+                            to_help = text("去点赞").find();
                             help_length = to_help.length;
                             // 如果执行完后，去完成的总数不变，则错过数+1
                             if (last_length == help_length) {
                                 miss_count = miss_count + 1;
                             }
                             last_length = help_length;
-                            while (textStartsWith("助力你：").findOnce() == null) {
+                            while (textEndsWith("人给他点赞").findOnce() == null) {
                                 if (func.sClick(to_help[help_length - miss_count - 1])) {
                                     toastLog("已点击去助力按钮，等待加载"); sleep(2600);
                                     break;
@@ -1294,7 +1298,7 @@ function 建行财富季() {
                         "安老怀少": 1, "自主决定": 1, "书通二酉": 1, "防范意识": 1, "正大光明": 1, "开门见山": 1, "实话实说": 1, "手不释卷": 1, "账户安全": 1, "信息隐私": 1,
                         "妥善处理": 1, "信息加密": 1, "合理收费": 1, "规范文本": 1, "信息透明": 1, "买卖公平": 1, "去伪存真": 1, "风险防范": 1, "智周万物": 1, "严格准入": 1,
                         "公开": 1, "维护权益": 1, "有教无类": 1, "承担责任": 1, "尊闻行知": 1, "一目了然": 1, "数据准确": 1, "快速核查": 1, "尊师重道": 1, "合理申诉": 1,
-                        "公平": 1, "稳若泰山": 1, "履职履责": 1, "学贯中西": 1, "明显": 1, "敞开心扉": 1, "将心比心": 1, "质价相符": 1,"电子签约": 1,
+                        "公平": 1, "稳若泰山": 1, "履职履责": 1, "学贯中西": 1, "明显": 1, "敞开心扉": 1, "将心比心": 1, "质价相符": 1, "电子签约": 1,
                     }
                     let answer, idx, triggers, trigger_text = "请选出所有正面词汇";
                     try {

@@ -12,9 +12,7 @@ var pic_folder = files.cwd() + "/piccs/";
 // intent.setAction("android.settings.DATE_SETTINGS");
 // app.startActivity(intent);
 
-app.startActivity({
-    action: "android.settings.DATE_SETTINGS",
-});
+log(textContains("成长值").findOnce());
 
 // log(textStartsWith("App").textEndsWith("00起兑").findOnce());
 // func.sClick(aa.parent().child(aa.indexInParent() - 1))
