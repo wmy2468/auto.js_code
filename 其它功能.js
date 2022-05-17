@@ -1202,6 +1202,7 @@ function 建行财富季() {
                                 // my_friend_btn = fuqi_btn.parent().parent().child(5);
 
                                 // if (!func.sClick(fuqi_btn.parent().parent().child(5))) {
+                                func.sClick(fuqi_btn.parent().parent().parent().child(8));
                                 func.sClick(fuqi_btn.parent().parent().parent().child(7));
                                 func.sClick(fuqi_btn.parent().parent().child(5));
                                 func.sClick(fuqi_btn.parent().parent().child(6));
