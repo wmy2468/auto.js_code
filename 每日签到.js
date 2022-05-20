@@ -20,11 +20,11 @@ function main() {
         "工商_小象乐园",
     ];
     let select_items;
-    if (new Date().getHours() <= 1) {
-        select_items = ["京东.极速版挖宝"];
-    } else {
-        select_items = func.dialogs_checkbox(show_arr, "每日签到记录", "多选");
-    }
+//     if (new Date().getHours() <= 1) {
+//         select_items = ["京东.极速版挖宝"];
+//     } else {
+    select_items = func.dialogs_checkbox(show_arr, "每日签到记录", "多选");
+//     }
     select_items.forEach(item => {
         // log(item);
         if (item == undefined) {
