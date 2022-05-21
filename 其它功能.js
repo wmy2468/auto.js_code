@@ -70,16 +70,16 @@ function main() {
     }
     else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
     else if (scriptName == "万商3比") {
-        select_func = func.dialogs_select(["万商3比", "ysf码",]);
+        select_func = func.dialogs_select(["万商3比", "云闪付玛",]);
         if (select_func == "万商3比") { 万商3比(); }
-        else if (select_func == "ysf码") { 云闪付().ysf码(); }
+        else if (select_func == "云闪付玛") { 云闪付().云闪付玛(); }
     }
     func.dialogs_alert("已完成...");
 }
 
 function 云闪付() {
     let func_obj = {
-        ysf码: function () {
+        云闪付玛: function () {
             func.to_scheme("upwallet://pay");
             sleep(3000);
             while (1) {
