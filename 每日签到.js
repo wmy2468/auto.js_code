@@ -48,9 +48,15 @@ function main() {
 
 // ======================签到代码==================================
 function 南航打卡() {
+    let find_text, find_idx;
     func.to_scheme("csa://android.mbp.csair.com:80?action=PullUp&activityID=98&utm_source=yd&utm_campaign=ttdk&utm_channel=app");
+
     while (text("已打卡").findOnce() == null) {
-        if (func.sClick(text("立即打卡").findOnce())) {
+        find_text = textStartsWith("您已连续打卡").textEndsWith("天").findOnce();
+
+        if (find_text != null) {
+            find_idx = find_text.indexInParent();
+            func.sClick(find_text.parent().child(find_idx - 1));
             toast("已点击 立即打卡");
             sleep(3000);
         }
