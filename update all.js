@@ -53,7 +53,7 @@ if (selectIndex == -1) {
     file_name_list.forEach(pic_name => {
         save_path = pic_path + pic_name;    // 文件路径
         req_url = originUrl + suffix + pic_name;     // 网络文件路径
-        req_headers["Referer"] = req_url;
+        req_headers["Referer"] = encodeURIComponent(req_url);
         req = http.get(req_url, { headers: req_headers })
         if (req.statusCode != '200') {
             toastLog('网络读取错误，可能文件不存在')
@@ -77,7 +77,7 @@ function update_files(specific_file_name) {
     if (specific_file_name) {
         save_path = js_folder + specific_file_name;    // 文件路径
         req_url = originUrl + specific_file_name;     // 网络文件路径
-        req_headers["Referer"] = req_url;
+        req_headers["Referer"] = encodeURIComponent(req_url);
         req = http.get(req_url, { headers: req_headers });
         if (req.statusCode != '200') {
             toastLog("文件更新失败...");
@@ -104,7 +104,7 @@ function update_files(specific_file_name) {
             save_path = js_folder + file_name;    // 文件路径
             req_url = originUrl + file_name;     // 网络文件路径
             try {
-                req_headers["Referer"] = req_url;
+                req_headers["Referer"] = encodeURIComponent(req_url);
                 req = http.get(req_url, { headers: req_headers });
                 if (req.statusCode != '200') {
                     log(file_name + '网络读取错误，可能文件不存在')
