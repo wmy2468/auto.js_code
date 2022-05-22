@@ -17,14 +17,14 @@ function main() {
         "京东.极速版领红包", "京东.极速版挖宝",
         "云闪付.签到", "云闪付.领积点",
         "沃钱包_泡泡签到", "浦发_金豆签到", "浦发xyk_积分签到", "农行_小豆签到", "值得买_签到", "买单吧_签到",
-        "工商_小象乐园",
+        "工商_小象乐园", "南航打卡"
     ];
     let select_items;
-//     if (new Date().getHours() <= 1) {
-//         select_items = ["京东.极速版挖宝"];
-//     } else {
+    //     if (new Date().getHours() <= 1) {
+    //         select_items = ["京东.极速版挖宝"];
+    //     } else {
     select_items = func.dialogs_checkbox(show_arr, "每日签到记录", "多选");
-//     }
+    //     }
     select_items.forEach(item => {
         // log(item);
         if (item == undefined) {
@@ -39,6 +39,7 @@ function main() {
             else if (item == "农行_小豆签到") { 农行_小豆签到(); }
             else if (item == "值得买_签到") { 值得买_签到(); }
             else if (item == "买单吧_签到") { 买单吧_签到(); }
+            else if (item == "南航打卡") { 南航打卡(); }
         }
 
     });
@@ -46,6 +47,20 @@ function main() {
 }
 
 // ======================签到代码==================================
+function 南航打卡() {
+    func.to_scheme("csa://android.mbp.csair.com:80?action=PullUp&activityID=98&utm_source=yd&utm_campaign=ttdk&utm_channel=app");
+    while (text("已打卡").findOnce() == null) {
+        if (func.sClick(text("立即打卡").findOnce())) {
+            toast("已点击 立即打卡");
+            sleep(3000);
+        }
+        toast("等待完成 打卡完成");
+        sleep(2500);
+    }
+    toastLog("南航 打卡完成");
+    sleep(2500);
+}
+
 function 龙支付签到() {
     func.to_scheme(cfg["url_scheme"]["建行"]["lzf签到"]);
     text("今天").findOne();
