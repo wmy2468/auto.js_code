@@ -1,35 +1,12 @@
 auto.waitFor();
 //toastLog(id("com.jd.lib.cashier.feature:id/cd").findOnce().click());
-// var func = require("func_list.js");
-// var cfg = func.config_dict();
+var func = require("func_list.js");
+var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-// func.sClick(packageName("com.eg.android.AlipayGphone").text("点击领取").findOnce());
-// log(text("今日已领奖，去施肥>").findOnce());
-
-// act = { action: "android.settings.DATE_SETTINGS", txt: "日期和时间设置" }
-// var intent = new Intent();
-// intent.setAction("android.settings.DATE_SETTINGS");
-// app.startActivity(intent);
-
-// var start_text = "抽奖 "
-// log(className("android.view.View").descStartsWith(start_text).findOnce());
-// log(mission_page_check());
-// log(123);
-
-jg_user = "mw03251214@163.com";
-jg_key = "arncqibcyzuv5msh";
-var jg_headers = {
-    "Authorization": "Basic " + java.lang.String(android.util.Base64.encode(java.lang.String(jg_user + ':' + jg_key).getBytes(), 2)),
-    "Content-Type": "text/plain;charset=UTF-8",
-    "Connection": "Keep-Alive",
-    "Accept-Encoding": "gzip",
-    "User-Agent": "okhttp/3.12.1"
-};
-let js_folder = files.cwd() + "/";
-save_path = js_folder + "其它功能.js";    // 文件路径
-
-files.write(save_path, jianguoyun("auto.js_code\\", "其它功能.js"));
+for (md in media) {
+    log(md);
+}
 
 function jianguoyun(path, file_name, is_pics) {
     let is_pics = is_pics || false;

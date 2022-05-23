@@ -393,7 +393,7 @@ function clickComplete(apps) {
 				}
 				after_click(nextStep, nextStepDetail, apps);
 				// after click之后，如果在时间范围内，将计数值置0
-				auto.service.serviceInfo = auto.service.serviceInfo;
+				// auto.service.serviceInfo = auto.service.serviceInfo;
 				lock.lock();
 				log("----------------thread count 重置");
 				run_count = 0;
