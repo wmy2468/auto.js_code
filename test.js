@@ -1,7 +1,7 @@
 auto.waitFor();
 //toastLog(id("com.jd.lib.cashier.feature:id/cd").findOnce().click());
-var func = require("func_list.js");
-var cfg = func.config_dict();
+// var func = require("func_list.js");
+// var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
 // func.sClick(packageName("com.eg.android.AlipayGphone").text("点击领取").findOnce());
@@ -12,7 +12,48 @@ var pic_folder = files.cwd() + "/piccs/";
 // intent.setAction("android.settings.DATE_SETTINGS");
 // app.startActivity(intent);
 
-log(encodeURIComponent("其他功能.js"));
+// var start_text = "抽奖 "
+// log(className("android.view.View").descStartsWith(start_text).findOnce());
+// log(mission_page_check());
+// log(123);
+
+jg_user = "mw03251214@163.com";
+jg_key = "arncqibcyzuv5msh";
+var jg_headers = {
+    "Authorization": "Basic " + java.lang.String(android.util.Base64.encode(java.lang.String(jg_user + ':' + jg_key).getBytes(), 2)),
+    "Content-Type": "text/plain;charset=UTF-8",
+    "Connection": "Keep-Alive",
+    "Accept-Encoding": "gzip",
+    "User-Agent": "okhttp/3.12.1"
+};
+let js_folder = files.cwd() + "/";
+save_path = js_folder + "其它功能.js";    // 文件路径
+
+files.write(save_path, jianguoyun("auto.js_code\\", "其它功能.js"));
+
+function jianguoyun(path, file_name, is_pics) {
+    let is_pics = is_pics || false;
+    log("is_pics:", is_pics);
+    try {
+        http.__okhttp__.setTimeout(5000);
+        let res = http.get('https://dav.jianguoyun.com/dav/' + path + file_name,
+            {
+                headers: jg_headers
+            }
+        );
+        // threads.shutDownAll();
+        if (is_pics) {
+            return res.body.bytes();
+        } else {
+            return res.body.string();
+        }
+        // engines.execScript(CONFIG.scriptName, res);
+    } catch (error) {
+        alert("加载超时,请重启脚本,请检查网络.或者该文件已经被作者删除~~~");
+        return "";
+    }
+}
+
 
 // log(textStartsWith("App").textEndsWith("00起兑").findOnce());
 // func.sClick(aa.parent().child(aa.indexInParent() - 1))
