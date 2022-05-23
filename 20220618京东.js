@@ -274,7 +274,6 @@ function clickComplete(apps) {
 	})
 	// while (is_in_invite_friend_page()) {
 	while (is_in_invite_friend_page()) {
-		auto.service.serviceInfo = auto.service.serviceInfo;
 		log("clickComplete: 进入查找环节");
 		let nextStep, nextStepDetail;
 		nextStep = "";
@@ -384,7 +383,8 @@ function clickComplete(apps) {
 				}
 
 				func.sClick(btn_todo);
-				toastLog("clickComplete: 已点击按钮");
+				// toastLog("clickComplete: 已点击按钮");
+				toastLog("clickComplete: 任务大标题detailText：" + detailText);
 				log("clickComplete: 下一步动作nextStep：" + nextStep);
 				log("clickComplete: 下一步动作细节描述nextStepDetail：" + nextStepDetail);
 				sleep(1500);
@@ -393,6 +393,7 @@ function clickComplete(apps) {
 				}
 				after_click(nextStep, nextStepDetail, apps);
 				// after click之后，如果在时间范围内，将计数值置0
+				auto.service.serviceInfo = auto.service.serviceInfo;
 				lock.lock();
 				log("----------------thread count 重置");
 				run_count = 0;
