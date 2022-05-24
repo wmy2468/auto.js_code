@@ -38,6 +38,7 @@
 // }
 
 
+
 function config_dict() {
     let cfg_dict = {
         "url_scheme": {
@@ -126,10 +127,10 @@ function to_pkg(pkg_name) {
 function to_app(appName) {
     to_autojs();
     sleep(800);
-    while (currentPackage() != getPackageName(appName)) {
-        launchApp(appName);
-        sleep(2500);
-    }
+    // while (currentPackage() != getPackageName(appName)) {
+    launchApp(appName);
+    // sleep(2500);
+    // }
 }
 
 function cClick(element) {
@@ -427,7 +428,7 @@ function setFloatyVal(window, textVal) {
     });
 }
 
-function countDownInit() {
+function floaty_win_init() {
     let floatyWin = floaty.window(
         <frame gravity="center" bg="#1F1F1F" h="25dp" >
             <text id="text" textSize="16sp" textStyle="bold" typeface="monospace" textColor="#00FFFF"></text>
@@ -468,7 +469,7 @@ function getTimeDiff(area, targetTime, serverDelay) {
         return 0;
     }
 
-    let floatWin = countDownInit();
+    let floatWin = floaty_win_init();
     //当剩余时间超过15秒的时候 等待
     while (targetTimestamp - curTimestamp > 15000) {
         curTimestamp = new Date().getTime();
@@ -824,7 +825,7 @@ function match_img_click(file_name, screenshot, find_region) {
 
 module.exports = {
     config_dict: config_dict,
-    floatyMove: floatyMove,
+    floaty_win_init: floaty_win_init,
     cClick: cClick,
     sClick: sClick,
     to_app: to_app,

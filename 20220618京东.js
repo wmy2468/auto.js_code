@@ -1,4 +1,8 @@
+auto("fast");
 auto.waitFor();
+// auto.setFlags(["findOnUiThread", "useUsageStats"]);
+
+
 var func = require("func_list.js");
 
 var cnt = 0;
@@ -393,7 +397,7 @@ function clickComplete(apps) {
 				}
 				after_click(nextStep, nextStepDetail, apps);
 				// after click之后，如果在时间范围内，将计数值置0
-				// auto.service.serviceInfo = auto.service.serviceInfo;
+				auto.service.serviceInfo = auto.service.serviceInfo;
 				lock.lock();
 				log("----------------thread count 重置");
 				run_count = 0;
@@ -513,7 +517,7 @@ function after_click(textStr, details, apps) {
 	if (!is_in_invite_friend_page()) {
 		back_way();
 	}
-	is_in_apps(apps);
+	// is_in_apps(apps);
 	back_way();
 	back_way();
 	sleep(random_second(800, 100, 1000));
@@ -521,12 +525,13 @@ function after_click(textStr, details, apps) {
 }
 
 function is_in_apps(appss) {
-	log("is_in_apps-currentPackage():" + currentPackage());
-	log("is_in_apps:-getPackageName(appss):" + app.getPackageName(appss));
 	// 判断是否在当前app
 	while (currentPackage() != app.getPackageName(appss)) {
+		log("is_in_apps-currentPackage():" + currentPackage());
+		log("is_in_apps:-getPackageName(appss):" + app.getPackageName(appss));
 		func.to_app(appss);
-		sleep(3500);
+		toast("已切换到目标APP，等待");
+		sleep(2600);
 	}
 	log("is_in_apps: back way")
 	sleep(2500);

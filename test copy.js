@@ -4,33 +4,23 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-auto.service.updateDisplay
+let w = func.floaty_win_init()
+setInterval(() => { }, 1000);
+ui.run(function () {
+    w.text.setFocusable(true);
+})
 
-for (au in auto.service) {
-    log(au);
-}
-// auto.setFlags(["findOnUiThread", "useUsageStats"]);
-
-// let w = func.floaty_win_init();
-// setInterval(() => { }, 1000);
-// ui.run(function () {
-//     w.text.setFocusable(true);
-// })
-
-// sleep(2000);
-// log("thread start");
-// let thd = threads.start(function () {
-//     ui.run(function () {
-//         w.requestFocus();
-//         w.text.requestFocus();
-//         ui.post(function () {
-//             w.text.clearFocus();
-//             w.disableFocus();
-//         }, 200);
-//     });
-// });
-// sleep(500);
-// thd.interrupt();
+threads.start(function () {
+    ui.run(function () {
+        w.requestFocus();
+        w.text.requestFocus();
+        ui.post(function () {
+            w.text.clearFocus();
+            w.disableFocus();
+        }, 200);
+    });
+});
+sleep(500);
 
 function jianguoyun(path, file_name, is_pics) {
     let is_pics = is_pics || false;
