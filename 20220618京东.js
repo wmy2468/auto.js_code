@@ -326,11 +326,6 @@ function clickComplete(apps) {
 					toastLog("clickComplete: 当前任务" + detailText + "完成， index + 1");
 					continue;
 				}
-				if (reset_flag) {
-					reset_flag = false;
-					total_count = detailText.slice(-2, -1) - detailText.slice(-4, -3);
-					log("total_count:" + total_count);
-				}
 
 				if (indexText.indexOf("扩大商圈可得") != -1) {
 					index_todo_now = index_todo_now + 1;
@@ -389,6 +384,17 @@ function clickComplete(apps) {
 				else if (arr_in_text(detailText, ["东东超市", "去财富岛"])) { nextStepDetail = "需要多次点击返回"; }
 				else if (arr_in_text(detailText, ["去企有此礼赢取好礼"])) { nextStepDetail = "页面含邀请好友"; }
 				// else if (arr_in_text(detailText, ["浏览免费领保险"])) { nextStepDetail = "点击领取才会继续"; }
+
+				// 设置是否需要 重新进入APP
+				if (reset_flag) {
+					reset_flag = false;
+					if (nextStep == "种草城") {
+						total_count = 1;
+					} else {
+						total_count = detailText.slice(-2, -1) - detailText.slice(-4, -3);
+					}
+					log("total_count:" + total_count);
+				}
 
 				// 除了Mate 30外，另外2个台古董在小程序卡死
 				if ((dev_model == dev_honor8 || dev_model == dev_redmi) && nextStepDetail == "小程序") {
@@ -804,24 +810,41 @@ function 城城现金() {
 
 function 种草城() {
 	let find_text, find_object, find_object_text, find_object_parent;	// 定义查找的变量
+	let total_count = 100, cur_count = 0, reset_flag;
+	reset_flag = true;
 	// find_text = "/3)";
-	find_text = "/4）";
+	find_text = "每逛一家";
 	find_object = textContains(find_text).findOnce();
 	while (find_object == null) {
 		find_object = textContains(find_text).findOnce();
-		toastLog("种草城: 等待种草城页面加载");
-		sleep(2000);
+		toastLog("种草城: 等待种草城页面, 未加载");
+		sleep(2600);
 	}
+
+	toastLog("种草城: 等待种草城页面, 已加载");
+	sleep(2600);
 	find_object_text = find_object.text();
+	log("find_object_text:" + find_object_text);
+	total_count = find_object_text.slice(-2, -1) - find_object_text.slice(-4, -3);
+	log("total_count:" + total_count);
+	let like_zhongcao;
+	let like_cnt = 0;
 	// while (find_object_text != "(3/3)") {
-	while (find_object_text != "（4/4）") {
-		find_object = textContains(find_text).findOnce();
-		if (find_object != null) {
-			// find_object_parent = find_object.parent().parent();
-			if (func.sClick(text("喜欢").findOnce())) {
+	// while (find_object_text.indexOf("4/4") == -1) {
+	while (total_count >= cur_count) {
+		// find_object_parent = find_object.parent().parent();
+		like_zhongcao = text("喜欢").find();
+		if (!like_zhongcao.empty()) {
+			if (like_cnt >= like_zhongcao.length - 1) {
+				like_cnt = 0;
+			}
+			if (func.sClick(like_zhongcao[like_cnt])) {
 				toastLog("已点击种草城");
 				sleep(3000);
+				cur_count = cur_count + 1;
+				like_cnt = like_cnt + 1;
 			}
+
 			// 等待查找文本消失
 			while (textContains(find_text).findOnce() != null) {
 				toast("等待种草城页面消失");
@@ -838,9 +861,14 @@ function 种草城() {
 				toast("已点击下一个");
 				sleep(2600);
 			}
-			find_object_text = find_object.text();
+			find_object = textContains(find_text).findOnce();
+			if (find_object != null) {
+				find_object_text = find_object.text();
+			}
 			toastLog("种草城: 当前文本:" + find_object_text + "目标文本: (5/5)");
 		} else {
+			toastLog("未查找到喜欢按钮");
+			sleep(2500);
 			find_object_text = "";
 			continue;
 		}
