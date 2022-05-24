@@ -834,7 +834,10 @@ function 种草城() {
 				toastLog("种草城: 种草城返回");
 				sleep(random_second(4000, 500, 1000));
 			}
-			func.sClick(text("下一个").findOnce());
+			if (func.sClick(text("下一个").findOnce())) {
+				toast("已点击下一个");
+				sleep(2600);
+			}
 			find_object_text = find_object.text();
 			toastLog("种草城: 当前文本:" + find_object_text + "目标文本: (5/5)");
 		} else {
