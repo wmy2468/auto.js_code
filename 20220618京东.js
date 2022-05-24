@@ -815,7 +815,6 @@ function 种草城() {
 	find_object_text = find_object.text();
 	// while (find_object_text != "(3/3)") {
 	while (find_object_text != "（4/4）") {
-
 		find_object = textContains(find_text).findOnce();
 		if (find_object != null) {
 			// find_object_parent = find_object.parent().parent();
@@ -835,6 +834,7 @@ function 种草城() {
 				toastLog("种草城: 种草城返回");
 				sleep(random_second(4000, 500, 1000));
 			}
+			func.sClick(text("下一个").findOnce());
 			find_object_text = find_object.text();
 			toastLog("种草城: 当前文本:" + find_object_text + "目标文本: (5/5)");
 		} else {
