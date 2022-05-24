@@ -3,11 +3,33 @@ var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
 
-authority = textContains("确认授权即同意").findOnce();
-if (authority != null) {
-    authority_idx = authority.indexInParent();
-    authority.parent().child(authority_idx - 1).click();
-}
+let find_object, find_object_parent;	// 定义查找的变量
+try {
+    let target_text = ["不要断签哦~别让大红包飞走", "距离下一个红包还要签到",
+        "爆竹又增加啦~", "继续环游", "欢迎回来", "欢迎您", "立即抽奖", "开启今日", "开心收下"];
+    for (let i = 0; i < target_text.length; i++) {
+        // 关闭助力
+        find_object = textContains(target_text[i]).findOnce();
+        if (find_object != null) {
+            if (target_text[i] == "欢迎您") {
+                find_object_parent = find_object.parent().parent();
+            } else {
+                find_object_parent = find_object.parent();
+            }
+            if (func.sClick(find_object_parent.child(0)) == true) {
+                // if (func.sClick(find_object_parent.child(0))) {
+                toastLog("开始做任务2: 点击了," + target_text[i]);
+                sleep(2000);
+                break;
+            }		// 点击领取
+            if (func.sClick(find_object_parent.child(1)) == true) {
+                toastLog("开始做任务1: 点击了," + target_text[i]);
+                sleep(2000);
+                break;
+            }
+        }
+    }
+} catch (e) { }
 function jianguoyun(path, file_name, is_pics) {
     let is_pics = is_pics || false;
     log("is_pics:", is_pics);

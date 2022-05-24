@@ -804,7 +804,8 @@ function 城城现金() {
 
 function 种草城() {
 	let find_text, find_object, find_object_text, find_object_parent;	// 定义查找的变量
-	find_text = "/3)";
+	// find_text = "/3)";
+	find_text = "/4）";
 	find_object = textContains(find_text).findOnce();
 	while (find_object == null) {
 		find_object = textContains(find_text).findOnce();
@@ -812,23 +813,28 @@ function 种草城() {
 		sleep(2000);
 	}
 	find_object_text = find_object.text();
-	while (find_object_text != "(3/3)") {
+	// while (find_object_text != "(3/3)") {
+	while (find_object_text != "（4/4）") {
+
 		find_object = textContains(find_text).findOnce();
 		if (find_object != null) {
-			find_object_parent = find_object.parent().parent();
-			func.sClick(find_object_parent.child(2).child(4));
+			// find_object_parent = find_object.parent().parent();
+			if (func.sClick(text("喜欢").findOnce())) {
+				toastLog("已点击种草城");
+				sleep(3000);
+			}
 			// 等待查找文本消失
-			while (textContains(find_text).findOnce() != null) {
-				sleep(2000);
-			}
-			toastLog("种草城: 种草城页面已消失");
-			while (textContains(find_text).findOnce() == null) {
-				sleep(random_second(500, 100, 500));
-				back_way();
-				toastLog("种草城: 种草城返回");
-				sleep(random_second(4000, 500, 1000));
-			}
-			find_object_text = find_object.text();
+			// while (textContains(find_text).findOnce() != null) {
+			// 	sleep(2000);
+			// }
+			// toastLog("种草城: 种草城页面已消失");
+			// while (textContains(find_text).findOnce() == null) {
+			// 	sleep(random_second(500, 100, 500));
+			// 	back_way();
+			// 	toastLog("种草城: 种草城返回");
+			// 	sleep(random_second(4000, 500, 1000));
+			// }
+			// find_object_text = find_object.text();
 			toastLog("种草城: 当前文本:" + find_object_text + "目标文本: (5/5)");
 		} else {
 			find_object_text = "";
@@ -916,7 +922,7 @@ function close_popup() {
 	let find_object, find_object_parent;	// 定义查找的变量
 	try {
 		let target_text = ["不要断签哦~别让大红包飞走", "距离下一个红包还要签到",
-			"爆竹又增加啦~", "继续环游", "欢迎回来", "欢迎您", "立即抽奖", "开启今日环游", "开心收下"];
+			"爆竹又增加啦~", "继续环游", "欢迎回来", "欢迎您", "立即抽奖", "开启今日", "开心收下"];
 		for (let i = 0; i < target_text.length; i++) {
 			// 关闭助力
 			find_object = textContains(target_text[i]).findOnce();
@@ -926,17 +932,17 @@ function close_popup() {
 				} else {
 					find_object_parent = find_object.parent();
 				}
-				if (func.sClick(find_object_parent.child(1)) == true) {
-					toastLog("开始做任务: 点击了 关闭助力");
-					sleep(2000);
-					break;
-				}
 				if (func.sClick(find_object_parent.child(0)) == true) {
 					// if (func.sClick(find_object_parent.child(0))) {
-					toastLog("开始做任务: 点击了 关闭助力");
+					toastLog("开始做任务2: 点击了," + target_text[i]);
 					sleep(2000);
 					break;
 				}		// 点击领取
+				if (func.sClick(find_object_parent.child(1)) == true) {
+					toastLog("开始做任务1: 点击了," + target_text[i]);
+					sleep(2000);
+					break;
+				}
 			}
 		}
 
