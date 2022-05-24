@@ -1,27 +1,13 @@
-auto.waitFor();
-//toastLog(id("com.jd.lib.cashier.feature:id/cd").findOnce().click());
 var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-let w = func.floaty_win_init()
-setInterval(() => { }, 1000);
-ui.run(function () {
-    w.text.setFocusable(true);
-})
 
-threads.start(function () {
-    ui.run(function () {
-        w.requestFocus();
-        w.text.requestFocus();
-        ui.post(function () {
-            w.text.clearFocus();
-            w.disableFocus();
-        }, 200);
-    });
-});
-sleep(500);
-
+authority = textContains("确认授权即同意").findOnce();
+if (authority != null) {
+    authority_idx = authority.indexInParent();
+    authority.parent().child(authority_idx - 1).click();
+}
 function jianguoyun(path, file_name, is_pics) {
     let is_pics = is_pics || false;
     log("is_pics:", is_pics);

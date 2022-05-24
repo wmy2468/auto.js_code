@@ -1,4 +1,4 @@
-auto("fast");
+// auto("fast");
 auto.waitFor();
 // auto.setFlags(["findOnUiThread", "useUsageStats"]);
 
@@ -276,6 +276,11 @@ function clickComplete(apps) {
 			}
 		}
 	})
+
+	let total_count, cur_count, reset_flag;  // 当前运行次数
+	reset_flag = true;
+	cur_count = 0;
+	total_count = -1;
 	// while (is_in_invite_friend_page()) {
 	while (is_in_invite_friend_page()) {
 		log("clickComplete: 进入查找环节");
@@ -320,6 +325,11 @@ function clickComplete(apps) {
 					// console.clear();			// 当前任务正常完成，可以清除前面的日志
 					toastLog("clickComplete: 当前任务" + detailText + "完成， index + 1");
 					continue;
+				}
+				if (reset_flag) {
+					reset_flag = false;
+					total_count = detailText.slice(-2, -1) - detailText.slice(-4, -3);
+					log("total_count:" + total_count);
 				}
 
 				if (indexText.indexOf("扩大商圈可得") != -1) {
@@ -397,11 +407,25 @@ function clickComplete(apps) {
 				}
 				after_click(nextStep, nextStepDetail, apps);
 				// after click之后，如果在时间范围内，将计数值置0
-				auto.service.serviceInfo = auto.service.serviceInfo;
+				// auto.service.serviceInfo = auto.service.serviceInfo;
 				lock.lock();
 				log("----------------thread count 重置");
 				run_count = 0;
 				lock.unlock();
+				cur_count = cur_count + 1;
+				if (cur_count == total_count) {
+					cur_count = 0;
+					reset_flag = true;
+					func.to_scheme(jd_scheme);
+					while (!is_in_invite_friend_page()) {
+						close_popup(); // --------------关闭各种弹窗----------------
+						if (click_mission_btn()) {
+							toastLog("已切换完成，等待3秒");
+							sleep(3000);
+							break;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -571,7 +595,7 @@ function member_card() {
 			authority = textContains("确认授权即同意").findOnce();
 			if (authority != null) {
 				authority_idx = authority.indexInParent();
-				if (func.cClick(authority.parent().child(authority_idx - 1))) {
+				if (func.sClick(authority.parent().child(authority_idx - 1))) {
 					sleep(random_second(1800, 100, 1000));
 					break;
 				}
