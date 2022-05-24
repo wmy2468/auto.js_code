@@ -823,18 +823,19 @@ function 种草城() {
 				toastLog("已点击种草城");
 				sleep(3000);
 			}
-			// 等待查找文本消失
-			// while (textContains(find_text).findOnce() != null) {
-			// 	sleep(2000);
-			// }
-			// toastLog("种草城: 种草城页面已消失");
-			// while (textContains(find_text).findOnce() == null) {
-			// 	sleep(random_second(500, 100, 500));
-			// 	back_way();
-			// 	toastLog("种草城: 种草城返回");
-			// 	sleep(random_second(4000, 500, 1000));
-			// }
-			// find_object_text = find_object.text();
+			等待查找文本消失
+			while (textContains(find_text).findOnce() != null) {
+				toast("等待种草城页面消失");
+				sleep(2400);
+			}
+			toastLog("种草城: 种草城页面已消失");
+			while (textContains(find_text).findOnce() == null) {
+				sleep(random_second(500, 100, 500));
+				back_way();
+				toastLog("种草城: 种草城返回");
+				sleep(random_second(4000, 500, 1000));
+			}
+			find_object_text = find_object.text();
 			toastLog("种草城: 当前文本:" + find_object_text + "目标文本: (5/5)");
 		} else {
 			find_object_text = "";
