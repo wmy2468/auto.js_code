@@ -174,8 +174,10 @@ function 芭芭农场() {
         },
         tb_element: function () {
             // return text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
-            btn = className("Image").textContains("jpg").depth(13).findOnce();
+            btn = className("Image").text("图片").depth(13).findOnce();
             if (btn == null) {
+                btn = className("Image").textContains("jpg").depth(13).findOnce();
+            } if (btn == null) {
                 btn = className("Image").textContains("png").depth(13).findOnce();
                 if (btn == null) {
                     btn = className("Image").textContains("gif").depth(13).findOnce();
