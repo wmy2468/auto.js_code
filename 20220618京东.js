@@ -327,7 +327,7 @@ function clickComplete(apps) {
 					continue;
 				}
 
-				if (indexText.indexOf("扩大商圈可得") != -1) {
+				if (indexText.indexOf("扩大商圈可得") != -1 || indexText.indexOf("去逛逛并下单") != -1) {
 					index_todo_now = index_todo_now + 1;
 					continue;
 				}
@@ -364,10 +364,6 @@ function clickComplete(apps) {
 					nextStep = "品牌墙";
 				} else if (indexText.indexOf("参与可得") != -1) {
 					nextStep = "参与返回";
-				} else if (indexText.indexOf("浏览5个品牌墙店铺") != -1) {
-					index_todo_now = index_todo_now + 1;
-					toastLog("clickComplete: 浏览品牌墙-跳过，index + 1");
-					continue;
 				} else if (indexText.indexOf("小程序") != -1) {
 					nextStep = "小程序";
 				} else {
