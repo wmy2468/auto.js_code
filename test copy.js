@@ -3,8 +3,7 @@ var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
 
-let aa = text("喜欢").find();
-log(aa.empty())
+
 
 // let find_object, find_object_parent;	// 定义查找的变量
 // try {
