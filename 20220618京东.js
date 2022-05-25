@@ -327,7 +327,8 @@ function clickComplete(apps) {
 					continue;
 				}
 
-				if (indexText.indexOf("扩大商圈可得") != -1 || indexText.indexOf("去逛逛并下单") != -1) {
+				if (indexText.indexOf("扩大商圈可得") != -1 ||
+					detailText.indexOf("去逛逛并下单") != -1) {
 					index_todo_now = index_todo_now + 1;
 					continue;
 				}
