@@ -1083,6 +1083,7 @@ function 支付宝() {
 function 建行财富季() {
     let func_in_func = {
         click_mission_items: function () {
+            let close_btn;
             // -----------------主会场
             click(300, 358);  //链接
             textContains("本月成长值").findOne(); sleep(1000);
@@ -1110,11 +1111,13 @@ function 建行财富季() {
                     if (text("已完成").findOnce() == null) {
                         // 判断海报任务
                         if (textContains("截图或长按保存海报").findOnce() != null) {
-                            log("海报");
-                            func.sClick(text("/").findOne());
-                            sleep(1000);
+                            toastLog("海报"); sleep(2000);
+                            while (textContains("截图或长按保存海报").findOnce() != null) {
+                                click("/");
+                                sleep(2000);
+                            }
                         } else {
-                            log("非海报");
+                            toastLog("非海报");
                             sleep(3000);
                             back();
                         }
@@ -1130,14 +1133,14 @@ function 建行财富季() {
             textContains("刮卡机会").findOne(); sleep(1000);
             while (textContains("0次刮卡机会").findOnce() == null) {
                 swipe(259, 1471, 751, 1471, 500); sleep(3000);
-                func.sClick(text("/").findOnce()); sleep(3000);
+                click("/"); sleep(3000);
             }
             id("fz").findOnce().click(); toastLog("已点击，关闭窗口"); sleep(2000); // 关闭窗口按钮
             // -----------助力
             scrollDown();
             [[300, 760], [300, 1040], [300, 1330], [300, 1611], [300, 1880]].forEach(xy => {
-                click(xy[0], xy[1]); sleep(3500);
-                func.sClick(text("/").findOnce()); sleep(1500);
+                click(xy[0], xy[1]); toastLog("点击链接," + xy); sleep(3500);
+                id("fz").findOnce().click(); sleep(1500);
                 id("android:id/text1").text("详情").findOne();
                 sleep(800);
             })
