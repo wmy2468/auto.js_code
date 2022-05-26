@@ -1083,7 +1083,6 @@ function 支付宝() {
 function 建行财富季() {
     let func_in_func = {
         click_mission_items: function () {
-            let close_btn;
             // -----------------主会场
             click(300, 358);  //链接
             textContains("本月成长值").findOne(); sleep(1000);
@@ -1278,13 +1277,15 @@ function 建行财富季() {
             sleep(200);
         },
         help_friend: function () {
+            log(123);
             while (textEndsWith("人给他点赞").findOnce() == null) {
                 // while (textStartsWith("助力你：").findOnce() == null) {
                 toastLog("等待 助力页面加载"); sleep(2600);
             }
             toastLog("助力页面 已加载"); sleep(2300);
 
-            if (func.sClick(text("快来点赞吧").findOnce())) {
+            if (func.sClick(text("快来点赞吧").findOnce()) || func.sClick(text("快来点赞吧").findOnce())
+                || func.sClick(text("快来点赞吧").findOnce())) {
                 // if (func.sClick(text("助力好友").findOnce())) {
                 toastLog("已点击助力，等待返回"); sleep(2600);
             } else {
@@ -1320,7 +1321,8 @@ function 建行财富季() {
                             break;
                         }
                     }
-                    func_obj.help_friend();
+                    log(456);
+                    func_in_func.help_friend();
                     help_count = help_count - 1;
                 }
                 catch (e) {

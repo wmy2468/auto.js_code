@@ -3,15 +3,12 @@ var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
 
-id("fz").findOnce().click(); toastLog("已点击，关闭窗口"); sleep(2000); // 关闭窗口按钮
-// -----------助力
-scrollDown(); sleep(800); scrollDown(); sleep(800); scrollDown(); sleep(800);
-[[300, 760], [300, 1040], [300, 1330], [300, 1611], [300, 1880]].forEach(xy => {
-    click(xy[0], xy[1]); toastLog("点击链接," + xy); sleep(3500);
-    id("fz").findOnce().click(); sleep(1500);
-    id("android:id/text1").text("详情").findOne();
-    sleep(800);
-})
+log(123);
+while (textEndsWith("人给他点赞").findOnce() == null) {
+    // while (textStartsWith("助力你：").findOnce() == null) {
+    toastLog("等待 助力页面加载"); sleep(2600);
+}
+toastLog("助力页面 已加载"); sleep(2300);
 
 // let find_object, find_object_parent;	// 定义查找的变量
 // try {
