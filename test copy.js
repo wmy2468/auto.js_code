@@ -2,13 +2,19 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
+brand_walls = className("Image").depth(19).find();
+log("brand_walls.length:" + brand_walls.length)
+// if (cur_img_count == brand_walls.length) {
+// brand_walls = className("Image").find();
+log(brand_walls[0].text());
+brand_wall_parent = brand_walls[1].parent().parent().parent().parent().parent().parent();
+brand_walls_idx = brand_wall_parent.childCount() - 2;
+brand_wall_back_btn = brand_wall_parent.child(brand_walls_idx);
+func.sClick(brand_wall_back_btn);
+// }
 
-log(123);
-while (textEndsWith("人给他点赞").findOnce() == null) {
-    // while (textStartsWith("助力你：").findOnce() == null) {
-    toastLog("等待 助力页面加载"); sleep(2600);
-}
-toastLog("助力页面 已加载"); sleep(2300);
+
+
 
 // let find_object, find_object_parent;	// 定义查找的变量
 // try {

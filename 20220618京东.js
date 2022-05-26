@@ -342,6 +342,16 @@ function clickComplete(apps) {
 				// 正常任务
 				// --------------------加入会员专区------------------
 				if (arr_in_text(indexText, ["成功入会", "开通品牌会员", "LV1会员"])) { nextStep = "加入会员"; }
+				// --------------------疑难杂症区------------------
+				else if (indexText.indexOf("城城") != -1) {
+					nextStep = "点击分现金按钮";
+				} else if (indexText.indexOf("品牌墙") != -1) {
+					nextStep = "品牌墙";
+				} else if (indexText.indexOf("参与可得") != -1) {
+					nextStep = "参与返回";
+				} else if (indexText.indexOf("小程序") != -1) {
+					nextStep = "小程序";
+				}
 				// --------------------等待N秒区------------------
 				else if (arr_in_text(indexText, ["秒", "S可", "s可"])) { nextStep = "等待8秒"; }
 				// --------------------浏览区------------------
@@ -358,16 +368,7 @@ function clickComplete(apps) {
 				// --------------------浏览加购N个区------------------
 				else if (arr_in_text(indexText, ["浏览5个", "浏览4个"])) { nextStep = "浏览商品"; }
 				else if (arr_in_text(indexText, ["加购5个", "加购4个"])) { nextStep = "加购物车"; }
-				// --------------------其它疑难杂症区------------------
-				else if (indexText.indexOf("城城") != -1) {
-					nextStep = "点击分现金按钮";
-				} else if (indexText.indexOf("品牌墙") != -1) {
-					nextStep = "品牌墙";
-				} else if (indexText.indexOf("参与可得") != -1) {
-					nextStep = "参与返回";
-				} else if (indexText.indexOf("小程序") != -1) {
-					nextStep = "小程序";
-				} else {
+				else {
 					index_todo_now = index_todo_now + 1;
 					toastLog("clickComplete: 未找到满足条件的任务描述-小字，index + 1");
 					continue;
@@ -385,7 +386,7 @@ function clickComplete(apps) {
 				// 设置是否需要 重新进入APP
 				if (reset_flag) {
 					reset_flag = false;
-					if (nextStep == "种草城") {
+					if (nextStep == "种草城" || nextStep == "品牌墙") {
 						total_count = 1;
 					} else {
 						total_count = detailText.slice(-2, -1) - detailText.slice(-4, -3);
@@ -708,22 +709,22 @@ function 品牌墙() {
 	}
 	sleep(3000);
 	let cur_img_count, brand_walls, brand_walls_idx, brand_wall_back_btn, brand_wall_parent;
-	brand_walls = className("Image").find();
+	brand_walls = className("Image").depth(19).find();
 	cur_img_count = brand_walls.length;
 	let i = 0;
-	while (i < 4) {
-		brand_walls = className("Image").find();
+	while (i < 10) {
+		brand_walls = className("Image").depth(19).find();
 		log("brand_walls.length:" + brand_walls.length)
 		if (cur_img_count == brand_walls.length) {
-			brand_walls = className("Image").find();
-			brand_wall_parent = brand_walls[1].parent().parent().parent().parent().parent().parent();
-			brand_walls_idx = brand_wall_parent.childCount() - 1;
+			brand_walls = className("Image").depth(19).find();
+			brand_wall_parent = brand_walls[0].parent().parent().parent().parent().parent().parent();
+			brand_walls_idx = brand_wall_parent.childCount() - 2;
 			brand_wall_back_btn = brand_wall_parent.child(brand_walls_idx);
-			if (i >= 3) {
+			if (i >= 6) {
 				break;
 			}
 			func.sClick(brand_walls[i + 1]);
-			while (className("Image").find().length == cur_img_count) {
+			while (className("Image").depth(19).find().length == cur_img_count) {
 				toastLog("已点击品牌墙，等待跳转");
 				sleep(3000);
 			}
