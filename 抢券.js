@@ -275,24 +275,31 @@ function 光大活动() {
     toastLog("到点点击");
 
     let startTime, targetViewText;
-    let actNames = ["周五100-30微信立减金", "周五京东300-50",
-        "周五30-10微信立减金",];
+    let actNames = ["周五石化200-120", "周五京东200-50", "10点美团30-15", "10点美团50-25", "11点美团60-30"];
     let actName = func.dialogs_select(actNames);      // 设置查找的文本
 
     switch (actName) {
         // 10点
-        case "周五100-30微信立减金":            //10点
+        case "10点美团50-25":            //10点
+            startTime = "10,00,00,000";
+            targetViewText = "49345";
+            break;
+        case "10点美团30-15":            //10点
+            startTime = "10,00,00,000";
+            targetViewText = "49346";
+            break;
+        case "11点美团60-30":            //10点
+            startTime = "11,00,00,000";
+            targetViewText = "49565";
+            break;
+        case "周五石化200-120":            //10点
             // 11点 650 太早 750太慢 700太慢
             startTime = "15,00,00,000";
-            targetViewText = "46459";
+            targetViewText = "49136";
             break;
-        case "周五京东300-50":            //11点
+        case "周五京东200-50":            //11点
             startTime = "15,00,00,000";
-            targetViewText = "46704";
-            break;
-        case "周五30-10微信立减金":            //0点
-            startTime = "15,00,00,000";
-            targetViewText = "46458";
+            targetViewText = "48161";
             break;
     }
 
