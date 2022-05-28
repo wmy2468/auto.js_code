@@ -776,7 +776,8 @@ function 京东() {
                 toastLog("金融 已签到");
             } else {
                 while (!(textContains("签到成功获").findOnce() != null ||
-                    textContains("恭喜瓜分成功").findOnce() != null)) {
+                    textContains("恭喜瓜分成功").findOnce() != null ||
+                    textContains("恭喜你获得").findOnce() != null)) {
                     func.sClick(already_sign);
                     toastLog("金融 已点击签到按钮，等待...");
                     sleep(2500);
