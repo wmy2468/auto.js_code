@@ -2,17 +2,10 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-brand_walls = className("Image").depth(19).find();
-log("brand_walls.length:" + brand_walls.length)
-// if (cur_img_count == brand_walls.length) {
-// brand_walls = className("Image").find();
-log(brand_walls[0].text());
-brand_wall_parent = brand_walls[1].parent().parent().parent().parent().parent().parent();
-brand_walls_idx = brand_wall_parent.childCount() - 2;
-brand_wall_back_btn = brand_wall_parent.child(brand_walls_idx);
-func.sClick(brand_wall_back_btn);
-// }
-
+let res = func.jianguoyun("auto.js_code/", "BP_LIST.txt");
+log(res);
+let res_json = JSON.parse(res);
+log(res_json.length);
 
 
 

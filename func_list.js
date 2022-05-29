@@ -98,6 +98,38 @@ function config_dict() {
 }
 
 // ----------------------通用功能区-----------------------
+// jgy
+function jianguoyun(path, file_name, is_pics) {
+    let jg_user = "mw03251214@163.com";
+    let jg_key = "arncqibcyzuv5msh";
+    let jg_headers = {
+        "Authorization": "Basic " + java.lang.String(android.util.Base64.encode(java.lang.String(jg_user + ':' + jg_key).getBytes(), 2)),
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Connection": "Keep-Alive",
+        "Accept-Encoding": "gzip",
+        "User-Agent": "okhttp/3.12.1"
+    };
+    let is_pics = is_pics || false;
+    // log("is_pics:", is_pics);
+    try {
+        let res = http.get('https://dav.jianguoyun.com/dav/' + path + file_name,
+            {
+                headers: jg_headers
+            }
+        );
+        // threads.shutDownAll();
+        if (is_pics) {
+            return res.body.bytes();
+        } else {
+            return res.body.string();
+        }
+        // engines.execScript(CONFIG.scriptName, res);
+    } catch (error) {
+        alert("加载超时,请重启脚本,请检查网络.或者该文件已经被作者删除~~~");
+        return "";
+    }
+}
+
 // 切换到autojs
 function to_autojs() {
     let pkg_name = app.getPackageName("Autox.js") || app.getPackageName("Auto.js") || app.getPackageName("sj.xotuA");
@@ -824,6 +856,7 @@ function match_img_click(file_name, screenshot, find_region) {
 
 
 module.exports = {
+    jianguoyun: jianguoyun,
     config_dict: config_dict,
     floaty_win_init: floaty_win_init,
     cClick: cClick,
