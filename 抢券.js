@@ -45,7 +45,7 @@ function BP直达() {
     let select_item = func.dialogs_select(["---增加新BP链接", "---云端获取BP"].concat(Object.keys(storage_bps)));
 
     let bp_scheme;
-    if (select_item == "增加新BP链接") {
+    if (select_item == "---增加新BP链接") {
         let input_name;
         // select_item = func.dialogs_select(["京东", "淘宝"]);
         input_name = rawInput("请输入BP名称");
@@ -56,7 +56,7 @@ function BP直达() {
         local_config.put("BP直达", storage_bps);
         func.to_scheme(bp_scheme);
         toast("已跳转BP链接");
-    } else if (select_item == "云端获取BP") {
+    } else if (select_item == "---云端获取BP") {
         http.__okhttp__.setTimeout(3000);
         let res = func.jianguoyun("auto.js_code/", "BP_LIST.txt");
         let res_json = JSON.parse(res);
