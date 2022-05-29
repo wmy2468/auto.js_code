@@ -54,18 +54,19 @@ function BP直达() {
             storage_bps = { input_name: bp_scheme }
         }
         local_config.put("BP直达", storage_bps);
+        func.to_scheme(bp_scheme);
+        toast("已跳转BP链接");
     } else if (select_item == "云端获取BP") {
         http.__okhttp__.setTimeout(3000);
         let res = func.jianguoyun("auto.js_code/", "BP_LIST.txt");
         let res_json = JSON.parse(res);
         local_config.put("BP直达", res_json);
-        return 0;
     }
     else {
         bp_scheme = storage_bps[select_item];
+        func.to_scheme(bp_scheme);
+        toast("已跳转BP链接");
     }
-    func.to_scheme(bp_scheme);
-    toast("已跳转BP链接");
 }
 function 招商倒计时领取() {
     let appName, url;
