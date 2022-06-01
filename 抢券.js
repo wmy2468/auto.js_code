@@ -6,13 +6,15 @@ var cfg = func.config_dict();
 main();
 
 function main() {
-    let selectedArr = ["光大活动", "中信活动", "BP直达", "招商便民生活", "招商倒计时领取",];
+    let selectedArr = ["光大活动", "中信活动", "京东618惊喜券", "BP直达", "招商便民生活", "招商倒计时领取",];
     //---------------配置区域-----------------
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本        
     // 设置屏幕常亮6分钟
     device.keepScreenOn(1000 * 60 * 6);
     if (scriptName == "光大活动") { 光大活动(); }
     else if (scriptName == "中信活动") { 中信活动(); }
+    else if (scriptName == "京东618惊喜券") { 京东618惊喜券(); }
+
     else if (scriptName == "BP直达") { BP直达(); }
     // else if (scriptName == "交行5积分") { 交行9点5积分(); }
     // else if (scriptName == "华彩生活瑞幸") { 华彩生活瑞幸(); }
@@ -36,6 +38,65 @@ function get_server_delay(req_url) {
 
 
 // ------------------------------------------------------
+function 京东618惊喜券() {
+    let scheme_url = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","sourceValue":"babel-act","sourceType":"babel","url":"https://prodev.m.jd.com/mall/active/21Shup6BDitJApvnfuc8AjHnzfZ4/index.html?cu=true&utm_source=www.linkstars.com&utm_medium=tuiguang&utm_campaign=t_1000089893_157_0_184__b3106242b6736605&utm_term=09fd51f0f1734fd795f36f133d00296c&_openapp=1&toappactive=1"}';
+    func.to_scheme(scheme_url);
+    let click_btn = null;
+    let element, count;
+    count = 0;
+    while (click_btn == null) {
+        element = textContains("大促惊喜券").findOnce();
+        if (element == null) {
+            if (count == 0) {
+                toastLog("等待加载");
+            } else if (count > 9) {
+                count = 0;
+            } else {
+                sleep(300);
+            }
+        } else {
+            try {
+                click_btn = element.parent().child(1).child(2);
+            }
+            catch (e) {
+                log("报错了:" + e);
+                continue;
+            }
+        }
+        count = count + 1;
+    }
+    // func.sClick(click_btn);              // 点击标签
+    toastLog("已加载......");
+    整点点击(click_btn, 41, "北京时间");
+    // var today, h;
+    // let startTime;
+    // today = new Date(new Date().getTime());
+    // h = today.getHours();           //时
+    // let timeArea = "京东时间";
+    // startTime = h + ",59,59,500"
+    // func.getTimeDiff(timeArea, startTime);              // 等待到15秒的时候再进入
+    // count = 41;
+    // while (count--) {
+    //     func.cClick(click_btn);              // 点击标签
+    //     sleep(300);
+    // }
+    // TEST 整点点击(click_btn, 4, "北京时间"); 
+}
+
+function 整点点击(click_element, count, time_area, count_delay) {
+    let count_delay = count_delay || 300;
+    let time_area = time_area || "北京时间";
+    let start_time;
+    let h = new Date().getHours();           //时
+    start_time = h + ",59,59,500";
+    // TEST start_time = h + ",21,30,500";   // TEST
+    func.getTimeDiff(time_area, start_time);              // 等待到15秒的时候再进入
+    while (count--) {
+        func.cClick(click_element);              // 点击标签
+        sleep(count_delay);
+    }
+}
+
 function BP直达() {
     let local_config = storages.create("local_config");
     let storage_bps = {};

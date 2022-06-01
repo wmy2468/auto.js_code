@@ -2,10 +2,7 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-let res = func.jianguoyun("auto.js_code/", "BP_LIST.txt");
-log(res);
-let res_json = JSON.parse(res);
-log(res_json.length);
+log(new Date().getHours());
 
 
 
