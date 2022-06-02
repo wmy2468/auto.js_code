@@ -23,11 +23,9 @@ function main() {
     //---------------配置区域-----------------
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本  
     if (scriptName == "建行相关") {
-        // select_func = func.dialogs_select(["财付季助力", "财付季答题助手"]);
         select_func = func.dialogs_select(Object.keys(建行财富季()));
         eval("建行财富季()." + select_func + "()");
-    }
-    else if (scriptName == "支付宝相关") {
+    } else if (scriptName == "支付宝相关") {
         let farms;
         select_func = func.dialogs_select(["芭芭农场-助力浏览施肥", "支付宝捐款", "余额宝转入", "余额宝转出", "芭芭农场-助力", "芭芭农场-浏览", "芭芭农场-支付宝施肥"]);
         if (select_func == "支付宝捐款") { 支付宝().支付宝捐款(); }
@@ -53,56 +51,23 @@ function main() {
             farms.tb(); farms.zfb();
             farms.施肥("支付宝");
         }
-    }
-    else if (scriptName == "JD相关") {
-        // select_func = func.dialogs_select(["京东评价", "跳转京东_剪贴板", "跳转极速版_剪贴板"]);
+    } else if (scriptName == "JD相关") {
         select_func = func.dialogs_select(Object.keys(京东()));
-        if (select_func == "极速版挖宝") { 京东().极速版挖宝(); }
-        else if (select_func == "跳转京东_剪贴板") { 京东().跳转京东_剪贴板(); }
-        else if (select_func == "跳转极速版_剪贴板") { 京东().跳转极速版_剪贴板(); }
-        else if (select_func == "京东评价") { 京东().京东评价(); }
-    }
-    else if (scriptName == "YSF相关") {
+        eval("京东()." + select_func + "()");
+    } else if (scriptName == "YSF相关") {
         select_func = func.dialogs_select(Object.keys(云闪付()));
-        if (select_func == "YSF福气助力") { 云闪付().YSF福气助力(); }
-        else if (select_func == "YSF点福气任务") { 云闪付().YSF点福气任务(); }
-
-    }
-    else if (scriptName == "跳转指定Scheme") { 跳转指定Scheme(); }
-    else if (scriptName == "万商3比") {
-        select_func = func.dialogs_select(["万商3比", "云闪付玛",]);
-        if (select_func == "万商3比") { 万商3比(); }
-        else if (select_func == "云闪付玛") { 云闪付().云闪付玛(); }
+        eval("云闪付()." + select_func + "()");
+    } else if (scriptName == "跳转指定Scheme") {
+        跳转指定Scheme();
+    } else if (scriptName == "万商3比") {
+        select_func = func.dialogs_select(Object.keys(万商云()));
+        eval("万商云()." + select_func + "()");
     }
     func.dialogs_alert("已完成...");
 }
 
 function 云闪付() {
     let func_obj = {
-        云闪付玛: function () {
-            func.to_scheme("upwallet://pay");
-            sleep(3000);
-            while (1) {
-                if (textEndsWith("成功").findOnce() != null) {
-                    sleep(800);
-                    back();
-                    // func.to_autojs();
-                    toastLog("返回一下");
-                    sleep(3000);
-                    while (!func.sClick(text("付款码").findOnce())) {
-                        func.sClick(text("首页").findOnce());
-                        sleep(2000);
-                    }
-                    // func.to_scheme("upwallet://pay");
-                    toastLog("已执行跳转 fuk码");
-                    sleep(3000);
-                }
-                if (textEndsWith("商家付款").findOnce() != null) {
-                    toastLog("等待被扫，有需要请手动停止");
-                    sleep(3000);
-                }
-            }
-        },
         YSF福气助力: function () {
             let url_head, url_end;
             url_head = "upwallet://applet?toLink=https%3A%2F%2Fyouhui.95516.com%2Fnewsign%2Fysfsfq%2Findex.html%3FuserId%3D";
@@ -323,29 +288,6 @@ function 芭芭农场() {
         施肥: function (施肥app) {
             let img_list, pic_folder = files.cwd() + '/piccs/';;
             let btn_ele = null, current_pkg;
-            // 1. 先去淘宝点击领取
-            func.to_scheme(cfg["url_scheme"]["支付宝"]["淘宝农场"]);
-            while (func_in_func.tb_element() == null) {
-                toastLog("如长时间未跳转到淘宝农场页面，请手动跳转");
-                sleep(3000);
-            }
-            let tb_img;
-            tb_img = images.read(pic_folder + "淘宝芭芭农场每日领取.png");
-            if (func.match_img_click(tb_img, screenshot, find_region)) {
-                toastLog("已点击淘宝立即领取");
-            } else {
-                if (func.match_img_click(tb_img, screenshot, find_region)) {
-                    toastLog("已点击淘宝立即领取");
-                } else {
-                    if (func.match_img_click(tb_img, screenshot, find_region)) {
-                        toastLog("已点击淘宝立即领取");
-                    } else {
-                        toastLog("未成功 点击 淘宝立即领取");
-                    }
-                }
-            }
-            tb_img.recycle();
-            sleep(2000);
             // 2. 再区分app施肥
             if (施肥app == "支付宝") {
                 current_pkg = "com.eg.android.AlipayGphone";
@@ -380,27 +322,6 @@ function 芭芭农场() {
             btn_x = device.width / 2;
             log(btn_x);
             log(btn_y);
-            // 领取新人礼包
-            // btn_ele = func_in_func.zfb_element(2);
-            // if (btn_ele != null) {
-            //     try {
-            //         if (btn_ele.parent().parent().parent().child(4).child(0).click()) {
-            //             toastLog("已点击 新人礼包"); sleep(2600);
-            //             while (!func.sClick(text("今日已领奖，去施肥>").findOnce())) {
-            //                 if (func.sClick(text("抽取今日肥料奖励>").findOnce())) {
-            //                     toastLog("今日抽取肥料成功"); sleep(2600);
-            //                     break;
-            //                 }
-            //                 toastLog("等待 今日领奖成功"); sleep(2600);
-            //             }
-            //             toastLog("今日领奖成功"); sleep(2600);
-            //         }
-            //     }
-            //     catch (e) {
-            //         toastLog("点击失败 新人礼包"); sleep(2600);
-            //     }
-            // }
-
             let cnt = 0;
             let screenshot, find_region;
             find_region = [0, device.height / 2];
@@ -637,70 +558,99 @@ function 芭芭农场() {
 }
 
 
-function 万商3比() {
-    var now, h, m;
-    now = new Date();
-    h = now.getHours();
-    m = now.getMinutes();
-    if (h >= 7 && h <= 18) {
-        if (m >= 39 && m <= 50) {
-            func.dialogs_alert("宾馆不刷，退出");
-            exit();
-        }
-    } else if (h >= 19 && h <= 22) {
-        if (m >= 19 && m <= 30) {
-            func.dialogs_alert("宾馆不刷，退出");
-            exit();
-        }
-    } else if (h >= 23 || h <= 6) {
-        if ((m >= 49 && m <= 60) || (m >= 9 && m <= 20)) {
-            func.dialogs_alert("宾馆不刷，退出");
-            exit();
-        }
-    }
-    var count, inputVal, appName;
-    count = dialogs.rawInput("请输入次数", 3);
-    numRange = func.dialogs_select(["11-15", "16-20", "20-23"]);
-    appName = "万商云";
-    var min, max;
-    min = numRange.substring(0, 2) * 1;
-    max = numRange.substring(3, 5) * 1;
-    func.to_app(appName);
-    sum = 0;
-    let counting = 1, total_count;
-    total_count = count;
-    while (count > 0) {
-        inputVal = random(min * 10, max * 10) / 10;
-        sum = sum + inputVal * 10
-        while (text("请输入收款金额").findOnce() == null) {
-            func.sClick(id("home_qrcodepay").findOnce());
-            if (text("请绘制手势密码登录").findOnce()) {
-                sleep(1000);
-                func.gesture_pwd(appName);
-                sleep(4000);
+function 万商云() {
+    let quick = {
+        云闪付玛: function () {
+            func.to_scheme("upwallet://pay");
+            sleep(3000);
+            while (1) {
+                if (textEndsWith("成功").findOnce() != null) {
+                    sleep(800);
+                    back();
+                    // func.to_autojs();
+                    toastLog("返回一下");
+                    sleep(3000);
+                    while (!func.sClick(text("付款码").findOnce())) {
+                        func.sClick(text("首页").findOnce());
+                        sleep(2000);
+                    }
+                    // func.to_scheme("upwallet://pay");
+                    toastLog("已执行跳转 fuk码");
+                    sleep(3000);
+                }
+                if (textEndsWith("商家付款").findOnce() != null) {
+                    toastLog("等待被扫，有需要请手动停止");
+                    sleep(3000);
+                }
             }
-            func.sClick(text("扫一扫").findOnce());
-            sleep(500);
-            // 如果找到信用卡认证，则点击关闭
-            func.sClick(idContains("cancel").findOnce());
+        },
+        刷几笔: function () {
+            var now, h, m;
+            now = new Date();
+            h = now.getHours();
+            m = now.getMinutes();
+            if (h >= 7 && h <= 18) {
+                if (m >= 39 && m <= 50) {
+                    func.dialogs_alert("宾馆不刷，退出");
+                    exit();
+                }
+            } else if (h >= 19 && h <= 22) {
+                if (m >= 19 && m <= 30) {
+                    func.dialogs_alert("宾馆不刷，退出");
+                    exit();
+                }
+            } else if (h >= 23 || h <= 6) {
+                if ((m >= 49 && m <= 60) || (m >= 9 && m <= 20)) {
+                    func.dialogs_alert("宾馆不刷，退出");
+                    exit();
+                }
+            }
+            var count, inputVal, appName;
+            count = dialogs.rawInput("请输入次数", 3);
+            numRange = func.dialogs_select(["11-15", "16-20", "20-23"]);
+            appName = "万商云";
+            var min, max;
+            min = numRange.substring(0, 2) * 1;
+            max = numRange.substring(3, 5) * 1;
+            func.to_app(appName);
+            sum = 0;
+            let counting = 1, total_count;
+            total_count = count;
+            while (count > 0) {
+                inputVal = random(min * 10, max * 10) / 10;
+                sum = sum + inputVal * 10
+                while (text("请输入收款金额").findOnce() == null) {
+                    func.sClick(id("home_qrcodepay").findOnce());
+                    if (text("请绘制手势密码登录").findOnce()) {
+                        sleep(1000);
+                        func.gesture_pwd(appName);
+                        sleep(4000);
+                    }
+                    func.sClick(text("扫一扫").findOnce());
+                    sleep(500);
+                    // 如果找到信用卡认证，则点击关闭
+                    func.sClick(idContains("cancel").findOnce());
+                }
+                toastLog("当前第：" + counting + "次，总" + total_count + "次");
+                setText(inputVal);
+                sleep(500);
+                while (text("将二维码/条码放入框内，即可自动扫描").findOnce() == null) {
+                    func.sClick(text("确定").findOnce());
+                    sleep(500);
+                }
+                while (text("支付成功！").findOnce() == null) {
+                    sleep(500);
+                }
+                back();
+                counting = counting + 1;
+                count = count - 1;
+            }
+            log("total amount = " + sum / 10);
+            func.dialogs_alert("已完成,共计:" + sum / 10 + "元");
+            exit();
         }
-        toastLog("当前第：" + counting + "次，总" + total_count + "次");
-        setText(inputVal);
-        sleep(500);
-        while (text("将二维码/条码放入框内，即可自动扫描").findOnce() == null) {
-            func.sClick(text("确定").findOnce());
-            sleep(500);
-        }
-        while (text("支付成功！").findOnce() == null) {
-            sleep(500);
-        }
-        back();
-        counting = counting + 1;
-        count = count - 1;
     }
-    log("total amount = " + sum / 10);
-    func.dialogs_alert("已完成,共计:" + sum / 10 + "元");
-    exit();
+    return quick;
 }
 
 function 京东() {
@@ -1333,6 +1283,10 @@ function 建行财富季() {
         },
     };
     let ccb = {
+        基础任务和助力: function () {
+            ccb.财富季基础任务();
+            ccb.财付季助力();
+        },
         财富季基础任务: function () {
             [1, 2].forEach(app_count => {
                 func.toAppMulti("微信", app_count);
