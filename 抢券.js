@@ -67,7 +67,7 @@ function 京东618惊喜券() {
     }
     // func.sClick(click_btn);              // 点击标签
     toastLog("已加载......");
-    整点点击(click_btn, 41, "北京时间");
+    整点点击(click_btn, 26, "北京时间");
     // var today, h;
     // let startTime;
     // today = new Date(new Date().getTime());
@@ -84,7 +84,7 @@ function 京东618惊喜券() {
 }
 
 function 整点点击(click_element, count, time_area, count_delay) {
-    let count_delay = count_delay || 300;
+    let count_delay = count_delay || 200;
     let time_area = time_area || "北京时间";
     let start_time;
     let h = new Date().getHours();           //时
@@ -92,7 +92,7 @@ function 整点点击(click_element, count, time_area, count_delay) {
     // TEST start_time = h + ",21,30,500";   // TEST
     func.getTimeDiff(time_area, start_time);              // 等待到15秒的时候再进入
     while (count--) {
-        func.cClick(click_element);              // 点击标签
+        func.sClick(click_element);              // 点击标签
         sleep(count_delay);
     }
 }
