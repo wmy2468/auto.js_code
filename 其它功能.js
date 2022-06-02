@@ -1090,7 +1090,7 @@ function 建行财富季() {
             id("fz").findOnce().click(); toastLog("已点击，关闭窗口"); sleep(2000); // 关闭窗口按钮
             // -----------------安心会场
             click(300, 775);  //链接
-            toastLog("已点击 安心会场") sleep(2000);
+            toastLog("已点击 安心会场"); sleep(2000);
             textContains("观看更多视频").findOne(); sleep(1000);
             while (text("已签到").findOnce() == null) {
                 func.sClick(textContains("签到CC").findOne()); sleep(1000);    //签到
