@@ -193,9 +193,13 @@ function 招商便民生活() {
 // 到点点击
 function 光大活动() {
     toastLog("到点点击");
-
+    let scheme_url = {
+        "10点朴朴20": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121596&jsonData=&sign=3e14f6bd4538cd3c46218dd01a195cba&channelName=shanquan&batchId=121596&tag=shareDetail&newSign=61e017e3da70bae55df501e8aa5ac987",
+        "10点朴朴15": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121592&channelName=shanquan&batchId=121592&tag=shareDetail",
+        "10点美团50-25": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121046&channelName=shanquan&batchId=121046&tag=shareDetail",
+    }
     let startTime, targetViewText;
-    let actNames = ["周五石化200-120", "周五京东200-50", "10点美团30-15", "10点美团50-25", "11点美团60-30"];
+    let actNames = ["周五石化200-120", "周五京东200-50", "10点美团30-15", "10点美团50-25", "10点朴朴20", "10点朴朴15"];
     let actName = func.dialogs_select(actNames);      // 设置查找的文本
 
     switch (actName) {
@@ -208,9 +212,13 @@ function 光大活动() {
             startTime = "10,00,00,000";
             targetViewText = "49346";
             break;
-        case "11点美团60-30":            //10点
-            startTime = "11,00,00,000";
-            targetViewText = "49565";
+        case "10点朴朴20":            //10点
+            startTime = "10,00,00,000";
+            targetViewText = "49620";
+            break;
+        case "10点朴朴15":            //10点
+            startTime = "10,00,00,000";
+            targetViewText = "49618";
             break;
         case "周五石化200-120":            //10点
             // 11点 650 太早 750太慢 700太慢
@@ -225,7 +233,11 @@ function 光大活动() {
 
     let appName = "阳光惠生活";
     let timeArea = "北京时间";
-    func.to_app(appName);
+    if (!!scheme_url[actName]) {
+        func.to_scheme(scheme_url[actName]);
+    } else {
+        func.to_app(appName);
+    }
     // 等待进入指定页面
     while (!textContains(targetViewText).findOnce()) {
         toastLog("请跳转到券领取页面，直到提示  已到达等待页面");
@@ -239,11 +251,15 @@ function 光大活动() {
     }
     //   定位元素
     func.getTimeDiff(timeArea, startTime);
-    if (click_btn == null) {
-        func.sClick(text("确认购买").findOnce());
-        func.sClick(textContains("立即抢购").findOnce());
-    } else {
-        func.sClick(click_btn);
+    let count = 5;
+    while (count--) {
+        if (click_btn == null) {
+            func.sClick(text("确认购买").findOnce());
+            func.sClick(textContains("立即抢购").findOnce());
+        } else {
+            func.sClick(click_btn);
+        }
+        sleep(300);
     }
     toastLog("已点击，请确认结果");
     sleep(3000);

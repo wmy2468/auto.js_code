@@ -4,6 +4,13 @@ var pic_folder = files.cwd() + "/piccs/";
 
 log(new Date().getHours());
 
+let scheme_url = {
+    "10点朴朴20": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121596&jsonData=&sign=3e14f6bd4538cd3c46218dd01a195cba&channelName=shanquan&batchId=121596&tag=shareDetail&newSign=61e017e3da70bae55df501e8aa5ac987",
+    "10点朴朴15": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121592&channelName=shanquan&batchId=121592&tag=shareDetail",
+    "10点美团50-25": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121046&channelName=shanquan&batchId=121046&tag=shareDetail",
+}
+
+log(!!scheme_url["0点朴朴15"]);
 
 
 // let find_object, find_object_parent;	// 定义查找的变量
