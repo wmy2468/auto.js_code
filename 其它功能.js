@@ -47,8 +47,10 @@ function main() {
         } else if (select_func == "芭芭农场-助力浏览施肥") {
             requestScreenCapture();
             farms = 芭芭农场();
-            farms.zfb助力(); farms.tb助力();
-            farms.tb(); farms.zfb();
+            farms.zfb助力();
+            farms.tb助力();
+            farms.tb();
+            farms.zfb();
             farms.施肥("支付宝");
         }
     } else if (scriptName == "JD相关") {
@@ -286,6 +288,7 @@ function 芭芭农场() {
             sleep(2000);
         },
         施肥: function (施肥app) {
+            let count = 0;
             let img_list, pic_folder = files.cwd() + '/piccs/';;
             let btn_ele = null, current_pkg;
             // 2. 再区分app施肥
@@ -294,8 +297,14 @@ function 芭芭农场() {
                 func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
                 while (btn_ele == null) {
                     btn_ele = func_in_func.zfb_element();
+                    count = count + 1;
                     toastLog("如长时间未跳转到支付宝农场页面，请手动跳转");
                     sleep(3000);
+                    // 超时重载
+                    if (count > 5) {
+                        func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
+                        count = 0;
+                    }
                 }
                 img_list = {
                     支付宝芭芭农场每日领取: images.read(pic_folder + "支付宝芭芭农场每日领取.png"),

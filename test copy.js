@@ -10,7 +10,8 @@ let scheme_url = {
     "10点美团50-25": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121046&channelName=shanquan&batchId=121046&tag=shareDetail",
 }
 
-log(!!scheme_url["0点朴朴15"]);
+func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
+// log(!!scheme_url["0点朴朴15"]);
 
 
 // let find_object, find_object_parent;	// 定义查找的变量
