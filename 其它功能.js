@@ -37,7 +37,7 @@ function main() {
         }
         else if (select_func == "芭芭农场-助力") {
             farms = 芭芭农场();
-            farms.zfb助力();
+            // farms.zfb助力();
             farms.tb助力();
         }
         else if (select_func == "芭芭农场-浏览") {
@@ -495,9 +495,9 @@ function 芭芭农场() {
             let url_dict, url_keys, cnt;
             url_dict = {
                 "url_lm": "7 2:/！她出她着他之天里家以那哈",
-                "url_lp": "3啊都来上以有他在时时是心微",
+                "url_lp": "8哈对是能于有年下看时之天信",
                 "url_mate30": "6，去一是要他之得你他么的嘻",
-                "url_honor": "0！上的过上有们你他也于以微👉",
+                "url_honor": "2微不过都天有年而一可么的信",
                 // "url_redmi": "8 666:/信里心看她他之得年着学和信",
             }
             // Object.keys(url_dict).forEach(obj_key => { }
@@ -525,6 +525,7 @@ function 芭芭农场() {
                     sleep(2500);
                     cnt = cnt + 1;
                     if (cnt >= 5) {
+                        cnt = 0;
                         setClip(jump_url);          // 设置剪贴板
                         home();
                         toastLog("淘口令弹窗 超时");
@@ -560,30 +561,6 @@ function 芭芭农场() {
 
 function 万商云() {
     let quick = {
-        云闪付玛: function () {
-            func.to_scheme("upwallet://pay");
-            sleep(3000);
-            while (1) {
-                if (textEndsWith("成功").findOnce() != null) {
-                    sleep(800);
-                    back();
-                    // func.to_autojs();
-                    toastLog("返回一下");
-                    sleep(3000);
-                    while (!func.sClick(text("付款码").findOnce())) {
-                        func.sClick(text("首页").findOnce());
-                        sleep(2000);
-                    }
-                    // func.to_scheme("upwallet://pay");
-                    toastLog("已执行跳转 fuk码");
-                    sleep(3000);
-                }
-                if (textEndsWith("商家付款").findOnce() != null) {
-                    toastLog("等待被扫，有需要请手动停止");
-                    sleep(3000);
-                }
-            }
-        },
         刷几笔: function () {
             var now, h, m;
             now = new Date();
@@ -648,6 +625,30 @@ function 万商云() {
             log("total amount = " + sum / 10);
             func.dialogs_alert("已完成,共计:" + sum / 10 + "元");
             exit();
+        },
+        云闪付玛: function () {
+            func.to_scheme("upwallet://pay");
+            sleep(3000);
+            while (1) {
+                if (textEndsWith("成功").findOnce() != null) {
+                    sleep(800);
+                    back();
+                    // func.to_autojs();
+                    toastLog("返回一下");
+                    sleep(3000);
+                    while (!func.sClick(text("付款码").findOnce())) {
+                        func.sClick(text("首页").findOnce());
+                        sleep(2000);
+                    }
+                    // func.to_scheme("upwallet://pay");
+                    toastLog("已执行跳转 fuk码");
+                    sleep(3000);
+                }
+                if (textEndsWith("商家付款").findOnce() != null) {
+                    toastLog("等待被扫，有需要请手动停止");
+                    sleep(3000);
+                }
+            }
         }
     }
     return quick;
