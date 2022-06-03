@@ -444,15 +444,21 @@ function 芭芭农场() {
                         toastLog("等待任务视图消失");
                         sleep(2500);
                         cnt = cnt + 1;
-                        if (cnt > 5) {
+                        if (cnt > 4) {
+                            cnt = 0;
                             toastLog("任务视图长时间未加载，退出");
                             sleep(2500);
                             break;
                         }
                     }
-                    toastLog("Mission 视图已消失");
-                    func_in_func.view_15_second();
-                    sleep(2500);
+
+                    if (cnt == 0) {
+                        toastLog("Mission 视图加载失败");
+                        sleep(2500);
+                    } else {
+                        toastLog("Mission 视图已加载");
+                        func_in_func.view_15_second();
+                    }
                 } else {
                     todo_idx = todo_idx + step;
                     log("todo_idx 增加 step");
