@@ -191,15 +191,22 @@ function 芭芭农场() {
                     tb_ele = func_in_func.tb_element();
                     if (tb_ele != null) {
                         // 去除青提果园
-                        if (btn.parent.childCount() < 5) {
+                        if (btn.parent().childCount() < 5) {
                             func.sClick(tb_ele.parent().child(2));
                             sleep(4000);
+                            if (func.sClick(text("继续努力").findOnce()) ||
+                                func.sClick(text("关闭").depth(13).findOnce())) {
+                                sleep(3500);
+                            }
                             tb_ele = func_in_func.tb_element();
                         }
                         func.sClick(tb_ele.parent().child(2));
                         sleep(2000);
                     }
-                } catch (e) { sleep(500); continue; }
+                } catch (e) {
+                    log("error:" + e);
+                    sleep(500); continue;
+                }
 
             }
             toastLog("已到达农场任务界面");

@@ -2,16 +2,34 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-log(className("Image").text("图片").depth(13).findOnce().parent().child(2).click());
 
-let scheme_url = {
-    "10点朴朴20": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121596&jsonData=&sign=3e14f6bd4538cd3c46218dd01a195cba&channelName=shanquan&batchId=121596&tag=shareDetail&newSign=61e017e3da70bae55df501e8aa5ac987",
-    "10点朴朴15": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121592&channelName=shanquan&batchId=121592&tag=shareDetail",
-    "10点美团50-25": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121046&channelName=shanquan&batchId=121046&tag=shareDetail",
+let func_in_func = {
+    tb_element: function () {
+        // return text("gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==").depth(13).findOnce();
+        btn = className("Image").text("图片").depth(13).findOnce();
+        if (btn == null) {
+            btn = className("Image").textContains("jpg").depth(13).findOnce()
+                ||
+                className("Image").textContains("png").depth(13).findOnce()
+                ||
+                className("Image").textContains("gif").depth(13).findOnce();
+
+        }
+        return btn;
+    }
 }
 
-// func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
-// log(!!scheme_url["0点朴朴15"]);
+tb_ele = func_in_func.tb_element();
+if (tb_ele != null) {
+    // 去除青提果园
+    if (btn.parent().childCount() < 5) {
+        func.sClick(tb_ele.parent().child(2));
+        sleep(4000);
+        tb_ele = func_in_func.tb_element();
+    }
+    func.sClick(tb_ele.parent().child(2));
+    sleep(2000);
+}
 
 
 // let find_object, find_object_parent;	// 定义查找的变量

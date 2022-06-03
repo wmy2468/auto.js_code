@@ -201,8 +201,9 @@ function sClick(element) {
             log("sClick: click center x y")
         }
         return true;
+    } else {
+        log("sclick_null")
     }
-    log("sclick_failed");
     return false;
 }
 
