@@ -2,7 +2,7 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-log(new Date().getHours());
+log(className("Image").text("图片").depth(13).findOnce().parent().child(2).click());
 
 let scheme_url = {
     "10点朴朴20": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121596&jsonData=&sign=3e14f6bd4538cd3c46218dd01a195cba&channelName=shanquan&batchId=121596&tag=shareDetail&newSign=61e017e3da70bae55df501e8aa5ac987",
@@ -10,7 +10,7 @@ let scheme_url = {
     "10点美团50-25": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121046&channelName=shanquan&batchId=121046&tag=shareDetail",
 }
 
-func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
+// func.to_scheme(cfg["url_scheme"]["支付宝"]["芭芭农场"]);
 // log(!!scheme_url["0点朴朴15"]);
 
 
