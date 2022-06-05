@@ -1192,18 +1192,16 @@ function 建行财富季() {
                 }
                 func.sClick(to_do);
                 toastLog("已点击，去完成，等待3秒");
-                sleep(3000);
-                toastLog("等待页面加载5秒");
-                sleep(5000);
+                sleep(4500);
                 // 等待返回
                 while (textStartsWith("刷新").findOnce() == null) {
                     back();
-                    toastLog("执行返回，等待4秒");
-                    sleep(4000);
+                    toastLog("执行返回，等待6秒");
+                    sleep(6000);
                 }
                 while (!func.sClick(textStartsWith("刷新").findOnce())) {
                     toastLog("点击刷新,失败");
-                    sleep(4000);
+                    sleep(3000);
                 }
                 toastLog("点击刷新,成功");
                 sleep(3000);
