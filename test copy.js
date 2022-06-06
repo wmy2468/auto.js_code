@@ -9,7 +9,9 @@ var pic_folder = files.cwd() + "/piccs/";
 //     sleep(800);
 // }
 // func.sClick(textContains("该商品在当前区域无货").findOnce());
-京东评价();
+let a = "asdfasdfas";
+log(a.length);
+log(a.substring(1, a.length));
 
 function 京东评价() {
     let func_in_func = {

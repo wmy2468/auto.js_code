@@ -833,7 +833,12 @@ function 京东() {
                     toastLog("已点击图片");
                     // 有图：最新排序.parent.parent.parent.parent.parent.child(1).child(1)
                     // 8 判断到达评价详情
-                    text("晒图相册").findOne();
+                    let album = text("晒图相册").findOne();
+                    let pic_text = album.parent().child(1).child(1).text();
+                    all_pic = pic_text.substring(1, pic_text.length);
+                    if (all_pic * 1 <= 2) {
+                        random_pic_count = 2;
+                    }
                     sleep(1000);
                     // 9. 获取文本
                     height = device.height;
