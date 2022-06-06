@@ -865,6 +865,7 @@ function 京东() {
                     toastLog("截屏完成");
                     sleep(2500);
                 } else {
+                    random_pic_count = 2;
                     toastLog("无图片，直接返回");
                     sleep(2500);
                 }
@@ -900,6 +901,9 @@ function 京东() {
                         sleep(800);
                     }
                     cur_rate = cur_rate + 1;
+                }
+                while (content.length < 60) {
+                    content = content + "，" + content;
                 }
                 // 设置文本
                 setText(content);
