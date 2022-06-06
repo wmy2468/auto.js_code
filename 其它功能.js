@@ -835,7 +835,7 @@ function 京东() {
                     // 8 判断到达评价详情
                     let album = text("晒图相册").findOne();
                     let pic_text = album.parent().child(1).child(1).text();
-                    all_pic = pic_text.substring(1, pic_text.length);
+                    let all_pic = pic_text.substring(1, pic_text.length);
                     if (all_pic * 1 <= 2) {
                         random_pic_count = 2;
                     }
