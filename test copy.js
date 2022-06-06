@@ -19,16 +19,10 @@ let func_in_func = {
     }
 }
 
-tb_ele = func_in_func.tb_element();
-if (tb_ele != null) {
-    // 去除青提果园
-    if (btn.parent().childCount() < 5) {
-        func.sClick(tb_ele.parent().child(2));
-        sleep(4000);
-        tb_ele = func_in_func.tb_element();
-    }
-    func.sClick(tb_ele.parent().child(2));
-    sleep(2000);
+random_count = random(2, 4);
+log(random_count);
+while (random_count--) {
+    log(123);
 }
 
 

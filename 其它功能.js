@@ -655,9 +655,10 @@ function 万商云() {
             exit();
         },
         云闪付玛: function () {
+            let random_count = random(2, 4);
             func.to_scheme("upwallet://pay");
             sleep(3000);
-            while (1) {
+            while (random_count--) {
                 if (textEndsWith("成功").findOnce() != null) {
                     sleep(800);
                     back();
