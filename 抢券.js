@@ -213,16 +213,16 @@ function 光大活动() {
             targetViewText = "49346";
             break;
         case "10点朴朴20":            //10点
-            startTime = "10,00,00,000";
+            startTime = "09,59,59,500";
             targetViewText = "49620";
             break;
         case "10点朴朴15":            //10点
-            startTime = "10,00,00,000";
+            startTime = "09,59,59,500";
             targetViewText = "49618";
             break;
         case "周五石化200-120":            //10点
             // 11点 650 太早 750太慢 700太慢
-            startTime = "15,00,00,000";
+            startTime = "09,59,59,500";
             targetViewText = "49136";
             break;
         case "周五京东200-50":            //11点
@@ -251,15 +251,12 @@ function 光大活动() {
     }
     //   定位元素
     func.getTimeDiff(timeArea, startTime);
-    let count = 5;
+    let count = 15;
     while (count--) {
-        if (click_btn == null) {
-            func.sClick(text("确认购买").findOnce());
-            func.sClick(textContains("立即抢购").findOnce());
-        } else {
-            func.sClick(click_btn);
-        }
-        sleep(300);
+        func.sClick(text("确认购买").findOnce());
+        func.sClick(textContains("立即抢购").findOnce());
+        func.sClick(text("确认").findOnce());
+        sleep(100);
     }
     toastLog("已点击，请确认结果");
     sleep(3000);
