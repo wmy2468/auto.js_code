@@ -655,7 +655,9 @@ function 万商云() {
             exit();
         },
         云闪付玛: function () {
-            let random_count = random(2, 4);
+            let total_count;
+            let random_count = random(2, 5);
+            total_count = random_count;
             func.to_scheme("upwallet://pay");
             sleep(3000);
             while (1) {
@@ -678,7 +680,7 @@ function 万商云() {
                     sleep(3000);
                 }
                 if (textEndsWith("商家付款").findOnce() != null) {
-                    toastLog("等待被扫，有需要请手动停止");
+                    toastLog("等待被扫，当前次数:" + (total_count - random_count + 1) + "/" + total_count);
                     sleep(3000);
                 }
             }
