@@ -3,16 +3,27 @@ var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
 
-// img_list = className("android.widget.ImageView").find();
-// if (img_list.nonEmpty()) {
-//     func.sClick(img_list[2].parent().child(1));
-//     sleep(800);
-// }
-// func.sClick(textContains("该商品在当前区域无货").findOnce());
-let a = "asdfasdfas";
-log(a.length);
-log(a.substring(1, a.length));
-
+className("TextView").text("购物车").findOne();
+sleep(1000);
+scrollDown();
+sleep(2500);
+if (dev_model == dev_honor8) {
+    scrollDown();
+    sleep(2500);
+    scrollDown();
+    sleep(2500);
+}
+// text("评价").findOne().parent().click();
+// 5. 判断到评价详情界面
+let pingjia;
+while (textStartsWith("商品好评度").findOnce() == null) {
+    pingjia = text("评价").findOnce();
+    if (pingjia != null) {
+        pingjia.parent().click();
+    }
+    toastLog("未到达, 商品评价处");
+    sleep(2500);
+}
 function 京东评价() {
     let func_in_func = {
         rate_click: function (element) {

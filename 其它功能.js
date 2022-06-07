@@ -771,17 +771,27 @@ function 京东() {
                 sleep(1000);
                 scrollDown();
                 sleep(2500);
-                text("评价").findOne().parent().click();
+                if (dev_model == dev_honor8) {
+                    scrollDown();
+                    sleep(2500);
+                }
+                // text("评价").findOne().parent().click();
                 // 5. 判断到评价详情界面
-                // while (textStartsWith("按").textEndsWith("查看评价").findOnce() == null) { toastLog("未到达,评价详情"); sleep(2500); }
+                let pingjia;
                 while (textStartsWith("商品好评度").findOnce() == null) {
+                    pingjia = text("评价").findOnce();
+                    if (pingjia != null) {
+                        pingjia.parent().click();
+                    }
                     toastLog("未到达, 商品评价处");
                     sleep(2500);
                 }
                 toastLog("到达，商品评价处");
                 sleep(2500);
                 let no_stock;
-                no_stock = textContains("该商品在当前区域无货").findOnce();
+                func.sClick(id("com.jd.lib.productdetail.feature:id/ug").findOnce());
+                no_stock = textContains("该商品在当前区域无货").findOnce() ||
+                    textContains("该商品已下架").findOnce();
                 if (no_stock != null) {
                     // 关闭无货提示
                     func.sClick(no_stock.parent().child(2));
@@ -830,12 +840,15 @@ function 京东() {
                 let height, width, x, y;
                 if (has_pic && pics != null) {
                     func.sClick(pics);
-                    toastLog("已点击图片");
+                    toastLog("已点击,图片");
+                    sleep(2000);
                     // 有图：最新排序.parent.parent.parent.parent.parent.child(1).child(1)
                     // 8 判断到达评价详情
                     let album = text("晒图相册").findOne();
+                    toastLog("已找到，晒图相册");
                     let pic_text = album.parent().child(1).child(1).text();
                     let all_pic = pic_text.substring(1, pic_text.length);
+                    log("all_pic:" + all_pic);
                     if (all_pic * 1 <= 2) {
                         random_pic_count = 2;
                     }
@@ -849,7 +862,13 @@ function 京东() {
                     // className = android.widget.ImageButton，depth = 5，fullId = com.jd.lib.evaluatecenter.feature:id/b2
                     let img, img_clip, file_path;
                     cur_pic = 0;
+                    // log("not_in_caperture");
                     while (cur_pic < random_pic_count) {
+                        // log("in_caperture");
+                        if (func.sClick(id("com.jingdong.app.mall:id/b61").findOnce())) {
+                            toastLog("点击了，关闭分享按钮")
+                            sleep(1500);
+                        }
                         // 截屏
                         img = images.captureScreen();
                         img_clip = images.clip(img, x, y, width, height);
@@ -901,6 +920,14 @@ function 京东() {
                         sleep(800);
                     }
                     cur_rate = cur_rate + 1;
+                }
+                // 点击一键发布种草秀
+                let zhongcao;
+                zhongcao = textStartsWith("一键同步发种草秀").findOnce();
+                if (zhongcao != null) {
+                    func.sClick(zhongcao.parent().child(0));
+                    toastLog("已点击，同步种草秀");
+                    sleep(2000);
                 }
                 while (content.length < 60) {
                     content = content + "，" + content;
