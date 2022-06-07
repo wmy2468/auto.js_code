@@ -814,6 +814,13 @@ function 京东() {
                 scroll_count = random(2, 18);
                 log("滑动随机数:" + scroll_count);
                 while (scroll_count--) {
+                    no_stock = textContains("该商品在当前区域无货").findOnce() ||
+                        textContains("该商品已下架").findOnce();
+                    if (no_stock != null) {
+                        // 关闭无货提示
+                        func.sClick(no_stock.parent().child(2));
+                        sleep(1500);
+                    }
                     swipe(540, 1500, 540, 500, 300);
                     sleep(500);
                 }
