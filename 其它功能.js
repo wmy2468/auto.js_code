@@ -928,14 +928,6 @@ function 京东() {
                     }
                     cur_rate = cur_rate + 1;
                 }
-                // 点击一键发布种草秀
-                let zhongcao;
-                zhongcao = textStartsWith("一键同步发种草秀").findOnce();
-                if (zhongcao != null) {
-                    func.sClick(zhongcao.parent().child(0));
-                    toastLog("已点击，同步种草秀");
-                    sleep(2000);
-                }
                 while (content.length < 60) {
                     content = content + "，" + content;
                 }
@@ -966,6 +958,14 @@ function 京东() {
                     sleep(1500);
                     func.sClick(textContains("完成").findOne());
                     sleep(1500);
+                }
+                // 点击一键发布种草秀
+                let zhongcao;
+                zhongcao = textStartsWith("一键同步发种草秀").findOnce();
+                if (zhongcao != null) {
+                    func.sClick(zhongcao.parent().child(0));
+                    toastLog("已点击，同步种草秀");
+                    sleep(2000);
                 }
                 // 返回商品评价页面
                 textStartsWith("/").textEndsWith("京豆").findOne();

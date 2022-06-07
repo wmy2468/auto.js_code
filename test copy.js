@@ -3,27 +3,16 @@ var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
 
-className("TextView").text("购物车").findOne();
-sleep(1000);
-scrollDown();
-sleep(2500);
-if (dev_model == dev_honor8) {
-    scrollDown();
-    sleep(2500);
-    scrollDown();
-    sleep(2500);
+let zhongcao;
+zhongcao = textStartsWith("一键同步发种草秀").findOnce();
+if (zhongcao != null) {
+    // log(zhongcao.parent().child(0).click())
+    func.sClick(zhongcao.parent().child(0));
+    toastLog("已点击，同步种草秀");
+    sleep(2000);
 }
-// text("评价").findOne().parent().click();
-// 5. 判断到评价详情界面
-let pingjia;
-while (textStartsWith("商品好评度").findOnce() == null) {
-    pingjia = text("评价").findOnce();
-    if (pingjia != null) {
-        pingjia.parent().click();
-    }
-    toastLog("未到达, 商品评价处");
-    sleep(2500);
-}
+
+
 function 京东评价() {
     let func_in_func = {
         rate_click: function (element) {
