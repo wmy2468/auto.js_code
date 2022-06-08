@@ -2,16 +2,36 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
+// if (!requestScreenCapture()) {
+//     toast("请求截图失败");
+//     exit();
+// }
+// sleep(2500);
 
-let zhongcao;
-zhongcao = textStartsWith("一键同步发种草秀").findOnce();
-if (zhongcao != null) {
-    // log(zhongcao.parent().child(0).click())
-    func.sClick(zhongcao.parent().child(0));
-    toastLog("已点击，同步种草秀");
-    sleep(2000);
+
+height = device.height;
+width = device.width;
+y = 780;
+swipe(width - 150, y, 100, y, 600);
+
+function path_date_string() {
+    let dev_brand = device.brand;
+    if (dev_brand == "HUAWEI" || dev_brand == "honor") { save_path = "/sdcard/Pictures/Screenshots/Screenshot_" }
+    else if (dev_brand == "xiaomi") { save_path = "/sdcard/DCIM/screenshots/IMG_" }
+    let dt, monthes, dates, hours, minutes, seconds;
+    dt = new Date();
+    monthes = dt.getMonth() + 1;
+    dates = dt.getDate();
+    hours = dt.getHours();
+    minutes = dt.getMinutes();
+    seconds = dt.getSeconds();
+    if (monthes < 10) { monthes = "0" + monthes } else { monthes = monthes.toString(); }
+    if (dates < 10) { dates = "0" + dates } else { dates = dates.toString(); }
+    if (hours < 10) { hours = "0" + hours } else { hours = hours.toString(); }
+    if (minutes < 10) { minutes = "0" + minutes } else { minutes = minutes.toString(); }
+    if (seconds < 10) { seconds = "0" + seconds } else { seconds = seconds.toString(); }
+    return (save_path + dt.getFullYear().toString() + monthes + dates + "-" + hours + minutes + seconds + ".png");
 }
-
 
 function 京东评价() {
     let func_in_func = {

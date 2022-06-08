@@ -656,7 +656,7 @@ function 万商云() {
         },
         云闪付玛: function () {
             let total_count;
-            let random_count = random(2, 5);
+            let random_count = random(2, 4);
             total_count = random_count;
             func.to_scheme("upwallet://pay");
             sleep(3000);
@@ -762,6 +762,7 @@ function 京东() {
             toastLog("已到达,评价中心");
             sleep(2500);
             let scroll_count;
+            let yuqi_word = ["就是", "一样", "吧", "家", "么", "了", "也", "不", "呀", "吗", "给", "的", "来", "阿", "哪", "连", "呢", "哈", "呗", "啊", "啦", "咧", "哩", "哇", "则", "罢了", "喽", "价", "罗", "般", "呵", "耶", "否", "哉", "罢", "咯", "哟", "噢", "嘛", "呕", "呐", "呦", "而已", "起见", "不过", "一般", "得了", "再说", "便了", "着呢", "啰", "来着", "已而", "不成", "着哩", "也好", "也罢", "了得", "欤", "嚜", "呃", "啵", "噻", "呸"];
             while (text("待评价").findOne().parent().child(1).text() != "· 1") {
                 // 3. 点击评价商品
                 func.sClick(className("TextView").text("评价").findOne().parent().parent());
@@ -813,7 +814,7 @@ function 京东() {
                 // textContains("图/视频").findOne().click()
 
                 // 随机向下滑动N次
-                scroll_count = random(2, 18);
+                scroll_count = random(2, 20);
                 log("滑动随机数:" + scroll_count);
                 while (scroll_count--) {
                     no_stock = textContains("该商品在当前区域无货").findOnce() ||
@@ -866,8 +867,10 @@ function 京东() {
                     height = device.height;
                     width = device.width;
                     x = 0;
-                    y = Math.floor(height / 6);
-                    height = Math.floor(height / 4 * 3);
+                    // y = Math.floor(height / 6);
+                    // height = Math.floor(height / 4 * 3);
+                    y = Math.floor(height / 3);
+                    height = Math.floor(height / 3);
                     // className = android.widget.ImageButton，depth = 5，fullId = com.jd.lib.evaluatecenter.feature:id/b2
                     let img, img_clip, file_path;
                     cur_pic = 0;
@@ -885,7 +888,7 @@ function 京东() {
                         images.save(img_clip, file_path);
                         // app.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, android.net.Uri.fromFile(java.io.File(file_path))));        //刷新图库
                         media.scanFile(file_path);
-                        swipe(width - 1, y, 100, y, 300);
+                        swipe(width - 150, y, 100, y, 300);
                         cur_pic = cur_pic * 1 + 1;
                         log("cur_pic in:" + cur_pic);
                         sleep(1500);
@@ -933,6 +936,7 @@ function 京东() {
                 while (content.length < 60) {
                     content = content + "，" + content;
                 }
+                content = yuqi_word[random(0, yuqi_word.length - 1)] + "," + content;
                 // 设置文本
                 setText(content);
                 toastLog("设置文本完成");
@@ -960,14 +964,6 @@ function 京东() {
                     sleep(1500);
                     func.sClick(textContains("完成").findOne());
                     sleep(1500);
-                }
-                // 点击一键发布种草秀
-                let zhongcao;
-                zhongcao = textStartsWith("一键同步发种草秀").findOnce();
-                if (zhongcao != null) {
-                    func.sClick(zhongcao.parent().child(0));
-                    toastLog("已点击，同步种草秀");
-                    sleep(2000);
                 }
                 // 返回商品评价页面
                 textStartsWith("/").textEndsWith("京豆").findOne();
