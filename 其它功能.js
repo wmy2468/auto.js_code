@@ -517,7 +517,7 @@ function 芭芭农场() {
             }
         },
         tb助力: function () {
-            let url_dict, url_keys, cnt;
+            let url_dict, url_keys, cnt, break_flag;
             url_dict = {
                 "url_lm": "7 2:/！她出她着他之天里家以那哈",
                 "url_lp": "8哈对是能于有年下看时之天信",
@@ -540,6 +540,7 @@ function 芭芭农场() {
                 btn_detail = null;
                 func.to_app("淘宝");
                 cnt = 0;
+                break_flag = false;
                 while (btn_detail == null) {
                     btn_detail = text("查看详情").findOnce();
                     if (btn_detail == null) { btn_detail = desc("查看详情").findOnce(); }
@@ -547,32 +548,39 @@ function 芭芭农场() {
                     if (btn_detail == null) { btn_detail = desc("打开").findOnce(); }
                     func.sClick(idContains("update_imageview_cancel").findOnce());
                     toastLog("等待淘口令弹窗加载");
-                    sleep(2500);
+                    sleep(3000);
                     cnt = cnt + 1;
-                    if (cnt >= 5) {
-                        cnt = 0;
-                        setClip(jump_url);          // 设置剪贴板
-                        home();
-                        toastLog("淘口令弹窗 超时");
-                        sleep(3000);
-                        func.to_app("淘宝");
-                        toastLog("已重新设置 淘口令，等待跳转加载");
-                        sleep(2500);
-                        continue;
+                    if (cnt > 5) {
+                        break_flag = true;
+                        break;
                     }
+                }
+                if (break_flag) {
+                    i = i - 1;
+                    continue;
                 }
                 func.sClick(btn_detail);
                 toastLog("已点击查看详情")
                 sleep(2400);
                 help_for = text("为TA助力").findOnce();
+                cnt = 0;
                 while (help_for == null) {
                     func.sClick(idContains("update_imageview_cancel").findOnce());
                     if (textContains("不能帮自己助力哦").findOnce() != null) {
                         break;
                     }
                     toastLog("等待 为TA助力 加载");
-                    sleep(2500);
+                    sleep(3000);
                     help_for = text("为TA助力").findOnce();
+                    cnt = cnt + 1;
+                    if (cnt > 5) {
+                        break_flag = true;
+                        break;
+                    }
+                }
+                if (break_flag) {
+                    i = i - 1;
+                    continue;
                 }
                 func.sClick(help_for);
                 toastLog("已点击助力，等待下一个");
