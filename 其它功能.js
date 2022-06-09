@@ -27,7 +27,7 @@ function main() {
         eval("建行财富季()." + select_func + "()");
     } else if (scriptName == "支付宝相关") {
         let farms;
-        select_func = func.dialogs_select(["芭芭农场-助力浏览施肥", "支付宝捐款", "余额宝转入", "余额宝转出", "芭芭农场-助力", "芭芭农场-浏览", "芭芭农场-支付宝施肥"]);
+        select_func = func.dialogs_select(["芭芭农场-助力浏览施肥", "支付宝捐款", "余额宝转入", "余额宝转出", "芭芭农场-浏览施肥", "芭芭农场-支付宝施肥"]);
         if (select_func == "支付宝捐款") { 支付宝().支付宝捐款(); }
         else if (select_func == "余额宝转入") { 支付宝().余额宝转入(); }
         else if (select_func == "余额宝转出") { 支付宝().余额宝转出(); }
@@ -35,15 +35,12 @@ function main() {
             requestScreenCapture();
             芭芭农场().施肥("支付宝");
         }
-        else if (select_func == "芭芭农场-助力") {
-            farms = 芭芭农场();
-            // farms.zfb助力();
-            farms.tb助力();
-        }
-        else if (select_func == "芭芭农场-浏览") {
+        else if (select_func == "芭芭农场-浏览施肥") {
+            requestScreenCapture();
             farms = 芭芭农场();
             farms.tb();
             farms.zfb();
+            farms.施肥("支付宝");
         } else if (select_func == "芭芭农场-助力浏览施肥") {
             requestScreenCapture();
             farms = 芭芭农场();
