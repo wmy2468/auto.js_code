@@ -222,11 +222,11 @@ function 光大活动() {
             break;
         case "周五石化200-120":            //10点
             // 11点 650 太早 750太慢 700太慢
-            startTime = "09,59,59,500";
+            startTime = "14,59,59,500";
             targetViewText = "49136";
             break;
         case "周五京东200-50":            //11点
-            startTime = "15,00,00,000";
+            startTime = "14,59,59,500";
             targetViewText = "48161";
             break;
     }
