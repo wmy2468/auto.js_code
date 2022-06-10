@@ -8,11 +8,7 @@ var pic_folder = files.cwd() + "/piccs/";
 // }
 // sleep(2500);
 
-
-height = device.height;
-width = device.width;
-y = 780;
-swipe(width - 150, y, 100, y, 600);
+func.sClick(text("收付款").findOnce())
 
 function path_date_string() {
     let dev_brand = device.brand;

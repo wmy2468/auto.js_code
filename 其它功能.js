@@ -676,7 +676,7 @@ function 万商云() {
                     // func.to_autojs();
                     toastLog("返回一下");
                     sleep(3000);
-                    while (!func.sClick(text("付款码").findOnce())) {
+                    while (!(func.sClick(text("付款码").findOnce() || func.sClick(text("收付款").findOnce())))) {
                         func.sClick(text("首页").findOnce());
                         sleep(2000);
                     }
