@@ -520,7 +520,7 @@ function 芭芭农场() {
             let url_dict, url_keys, cnt, break_flag;
             url_dict = {
                 "url_lm": "7 2:/！她出她着他之天里家以那哈",
-                "url_lp": "8哈对是能于有年下看时之天信",
+                "url_lp": "2！得和子中有就你对去来对嘻",
                 "url_mate30": "6，去一是要他之得你他么的嘻",
                 "url_honor": "2微不过都天有年而一可么的信",
                 // "url_redmi": "8 666:/信里心看她他之得年着学和信",
