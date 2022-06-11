@@ -1361,10 +1361,11 @@ function 建行财富季() {
                     }
                     last_length = help_length;
                     while (textEndsWith("人给他点赞").findOnce() == null) {
-                        if (func.sClick(to_help[help_length - miss_count - 1])) {
-                            toastLog("已点击去助力按钮，等待加载"); sleep(2600);
-                            break;
-                        }
+                        // if (func.sClick(to_help[help_length - miss_count - 1])) {
+                        func.sClick(to_help[help_length - miss_count - 1]);
+                        toastLog("已点击去助力按钮，等待加载"); sleep(2600);
+                        break;
+                        // }
                     }
                     log(456);
                     func_in_func.help_friend();
