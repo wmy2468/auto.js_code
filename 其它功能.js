@@ -1337,9 +1337,13 @@ function 建行财富季() {
                 toastLog("未成功 点击助力，等待返回"); sleep(2600);
             }
             while (text("好友列表").findOnce() == null) {
+                if (textEndsWith("小店").findOnce()) {
+                    toastLog("还在小店，等待4秒");
+                    sleep(4000);
+                }
                 back();
                 toastLog("执行返回，等待4秒");
-                sleep(3000);
+                sleep(4000);
             }
             sleep(200);
         },
