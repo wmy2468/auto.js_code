@@ -7,8 +7,7 @@ var pic_folder = files.cwd() + "/piccs/";
 //     exit();
 // }
 // sleep(2500);
-
-func.sClick(text("收付款").findOnce())
+log(null || false)
 
 function path_date_string() {
     let dev_brand = device.brand;

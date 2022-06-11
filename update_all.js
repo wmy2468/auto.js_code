@@ -52,8 +52,9 @@ if (selectIndex == -1) {
     let save_path, update_count;
     update_count = 0;
     file_name_list.forEach(pic_name => {
+        update_count = update_count + 1;
         save_path = pic_path + pic_name;    // 文件路径
-        update_files(pic_name, "auto.js_code/" + suffix, true);
+        update_files(pic_name, suffix, true);
     })
     alert("更新:" + update_count + "/" + file_name_list.length + "个文件");
 }
@@ -64,19 +65,25 @@ function update_files(specific_file_name, specific_path, is_pic) {
     let is_pic = is_pic || false;
     let specific_path = specific_path || "";
     let jg_path = "auto.js_code/" + specific_path;
+
     // log(jg_path);
     // 更新指定文件名
     if (specific_file_name) {
-        save_path = js_folder + specific_file_name;    // 文件路径
-        res_text = jianguoyun(jg_path, specific_file_name);
+        save_path = js_folder + specific_path + specific_file_name;    // 文件路径
+        // log(jg_path);
+        res_text = jianguoyun(jg_path, specific_file_name, is_pic);
         if (res_text == "") {
             toastLog("文件更新失败...");
             sleep(2600);
         }
         else {
-            files.write(save_path, res_text);
-            toastLog("文件更新成功...");
-            sleep(2600);
+            // toastLog(specific_file_name + ",更新成功...");
+            // sleep(2600);
+            if (is_pic) {
+                files.writeBytes(save_path, res_text);
+            } else {
+                files.write(save_path, res_text);
+            }
         }
     } else {
         let dir = files.cwd();
@@ -105,11 +112,7 @@ function update_files(specific_file_name, specific_path, is_pic) {
                     sleep(2600);
                 }
                 else {
-                    if (is_pic) {
-                        files.writeBytes(save_path, res_text);
-                    } else {
-                        files.write(save_path, res_text);
-                    }
+                    files.write(save_path, res_text);
                     log(file_name + "，文件更新成功...");
                     successCnt = successCnt + 1;
                     // sleep(2600);
