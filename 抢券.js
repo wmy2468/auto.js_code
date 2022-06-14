@@ -251,8 +251,7 @@ function 光大活动() {
     }
     //   定位元素
     func.getTimeDiff(timeArea, startTime);
-    let count = 15;
-    while (count--) {
+    while (text("收银台").findOnce() == null) {
         func.sClick(text("确认购买").findOnce());
         func.sClick(textContains("立即抢购").findOnce());
         func.sClick(text("确认").findOnce());
