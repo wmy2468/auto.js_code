@@ -1153,7 +1153,10 @@ function 建行财富季() {
             while (!(text("领取").findOnce() == null && text("去完成").findOnce() == null)) {
                 func.sClick(text("领取").findOnce());
                 if (func.sClick(text("去完成").findOnce())) {
-                    sleep(2000);
+                    while (text("去完成").findOnce() != null) {
+                        sleep(2000);
+                    }
+                    sleep(2500);
                     if (text("已完成").findOnce() == null) {
                         // 判断海报任务
                         if (textContains("截图或长按保存海报").findOnce() != null) {
