@@ -133,11 +133,16 @@ function jianguoyun(path, file_name, is_pics) {
 // 切换到autojs
 function to_autojs() {
     let pkg_name = app.getPackageName("Autox.js") || app.getPackageName("Auto.js") || app.getPackageName("sj.xotuA");
-    app.startActivity({
-        packageName: pkg_name,
-        className: "org.autojs.autojs.ui.main.MainActivity_",
-    });
-    waitForPackage(pkg_name, period = 100);
+    if (currentPackage() != pkg_name) {
+        log("started package");
+        app.startActivity({
+            packageName: pkg_name,
+            className: "org.autojs.autojs.ui.main.MainActivity_",
+        });
+    } else {
+        log("already in package");
+    }
+    waitForPackage(pkg_name, period = 50);
     // toast("已到达autojs");
 }
 

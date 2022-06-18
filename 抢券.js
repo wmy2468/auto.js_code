@@ -6,14 +6,17 @@ var cfg = func.config_dict();
 main();
 
 function main() {
-    let selectedArr = ["光大活动", "中信活动", "京东618惊喜券", "BP直达", "招商便民生活", "招商倒计时领取",];
+    let selectedArr = ["光大活动", "中信活动", "京东相关", "BP直达", "招商便民生活", "招商倒计时领取",];
     //---------------配置区域-----------------
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本        
     // 设置屏幕常亮6分钟
     device.keepScreenOn(1000 * 60 * 6);
     if (scriptName == "光大活动") { 光大活动(); }
     else if (scriptName == "中信活动") { 中信活动(); }
-    else if (scriptName == "京东618惊喜券") { 京东618惊喜券(); }
+    else if (scriptName == "京东相关") {
+        select_func = func.dialogs_select(Object.keys(京东()));
+        eval("京东()." + select_func + "()");
+    }
 
     else if (scriptName == "BP直达") { BP直达(); }
     // else if (scriptName == "交行5积分") { 交行9点5积分(); }
@@ -38,63 +41,101 @@ function get_server_delay(req_url) {
 
 
 // ------------------------------------------------------
-function 京东618惊喜券() {
-    let scheme_url = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","sourceValue":"babel-act","sourceType":"babel","url":"https://prodev.m.jd.com/mall/active/21Shup6BDitJApvnfuc8AjHnzfZ4/index.html?cu=true&utm_source=www.linkstars.com&utm_medium=tuiguang&utm_campaign=t_1000089893_157_0_184__b3106242b6736605&utm_term=09fd51f0f1734fd795f36f133d00296c&_openapp=1&toappactive=1"}';
-    func.to_scheme(scheme_url);
-    let click_btn = null;
-    let element, count;
-    count = 0;
-    while (click_btn == null) {
-        element = textContains("大促惊喜券").findOnce();
-        if (element == null) {
-            if (count == 0) {
-                toastLog("等待加载");
-            } else if (count > 9) {
-                count = 0;
-            } else {
-                sleep(300);
+function 京东() {
+    let jd_func = {
+        到点切换领取: function (scheme_url, func_string, count, start_second, count_delay) {
+            let count_delay = count_delay || 200;
+            let time_area = time_area || "北京时间";
+            let start_time;
+            let h = new Date().getHours();           //时
+            // start_second = '58,000'
+            start_time = h + start_second || ",59,59,600";
+            log(start_time);
+            // TEST start_time = h + ",21,30,500";   // TEST
+            if (new Date().getMinutes() < 59) {
+                func.to_scheme(scheme_url);
+                toastLog("切换到指定页面 测试等待");
+                sleep(2500);
+                toastLog("等待几秒");
+                sleep(7000);
             }
-        } else {
-            try {
-                click_btn = element.parent().child(1).child(2);
+            func.to_autojs();
+            func.getTimeDiff(time_area, start_time);              // 等待到15秒的时候再进入
+            func.to_scheme(scheme_url);
+            while (count--) {
+                func_string();              // 点击标签
+                sleep(count_delay);
             }
-            catch (e) {
-                log("报错了:" + e);
-                continue;
+        },
+        整点点击: function (click_element, count, time_area, count_delay) {
+            let count_delay = count_delay || 200;
+            let time_area = time_area || "北京时间";
+            let start_time;
+            let h = new Date().getHours();           //时
+            start_time = h + ",59,59,500";
+            // TEST start_time = h + ",21,30,500";   // TEST
+            func.getTimeDiff(time_area, start_time);              // 等待到15秒的时候再进入
+            while (count--) {
+                func.sClick(click_element);              // 点击标签
+                sleep(count_delay);
             }
         }
-        count = count + 1;
     }
-    // func.sClick(click_btn);              // 点击标签
-    toastLog("已加载......");
-    整点点击(click_btn, 26, "北京时间");
-    // var today, h;
-    // let startTime;
-    // today = new Date(new Date().getTime());
-    // h = today.getHours();           //时
-    // let timeArea = "京东时间";
-    // startTime = h + ",59,59,500"
-    // func.getTimeDiff(timeArea, startTime);              // 等待到15秒的时候再进入
-    // count = 41;
-    // while (count--) {
-    //     func.cClick(click_btn);              // 点击标签
-    //     sleep(300);
-    // }
-    // TEST 整点点击(click_btn, 4, "北京时间"); 
-}
+    let jd = {
+        苹果券: function () {
+            let scheme_url = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","sourceValue":"babel-act","sourceType":"babel","url":"https://pro.m.jd.com/mall/active/3KwXX8TkUoxiYL5ZfDPzs7w7xqEV/index.html?utm_user=plusmember&gx=RnE1l2ANOjXdydTCOBKuwaU&ad_od=share&hideyl=1&cu=true&utm_source=weixin&utm_medium=weixin&utm_campaign=t_1000072672_17053_001&utm_term=500879a71fb64499ba0adf506754815d&PTAG=17053.1.1&_openapp=1"}';
+            let func_string = function () {
+                click("立即领取");
+            }
+            jd_func.到点切换领取(scheme_url, func_string, 20);
+        },
+        切换领取618惊喜券: function () {
+            let scheme_url = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","sourceValue":"babel-act","sourceType":"babel","url":"https://prodev.m.jd.com/mall/active/21Shup6BDitJApvnfuc8AjHnzfZ4/index.html?cu=true&utm_source=www.linkstars.com&utm_medium=tuiguang&utm_campaign=t_1000089893_157_0_184__b3106242b6736605&utm_term=09fd51f0f1734fd795f36f133d00296c&_openapp=1&toappactive=1"}';
+            let func_string = function () {
+                element = textContains("大促惊喜券").findOnce();
+                if (element != null) {
+                    try {
+                        log('click');
+                        func.sClick(element.parent().child(1).child(2));
+                    } catch (e) {
+                        log(e);
+                    }
+                }
+            }
+            jd_func.到点切换领取(scheme_url, func_string, 2, ',59,58,500');
+        },
+        京东618惊喜券: function () {
+            let scheme_url = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","sourceValue":"babel-act","sourceType":"babel","url":"https://prodev.m.jd.com/mall/active/21Shup6BDitJApvnfuc8AjHnzfZ4/index.html?cu=true&utm_source=www.linkstars.com&utm_medium=tuiguang&utm_campaign=t_1000089893_157_0_184__b3106242b6736605&utm_term=09fd51f0f1734fd795f36f133d00296c&_openapp=1&toappactive=1"}';
+            func.to_scheme(scheme_url);
+            let click_btn = null;
+            let element, count;
+            count = 0;
+            while (click_btn == null) {
+                element = textContains("大促惊喜券").findOnce();
+                if (element == null) {
+                    if (count == 0) {
+                        toastLog("等待加载");
+                    } else if (count > 9) {
+                        count = 0;
+                    } else {
+                        sleep(300);
+                    }
+                } else {
+                    try {
+                        click_btn = element.parent().child(1).child(2);
+                    }
+                    catch (e) {
+                        log("报错了:" + e);
+                        continue;
+                    }
+                }
+                count = coun
+                t + 1;
+            }
+        }
+    }
+    return jd;
 
-function 整点点击(click_element, count, time_area, count_delay) {
-    let count_delay = count_delay || 200;
-    let time_area = time_area || "北京时间";
-    let start_time;
-    let h = new Date().getHours();           //时
-    start_time = h + ",59,59,500";
-    // TEST start_time = h + ",21,30,500";   // TEST
-    func.getTimeDiff(time_area, start_time);              // 等待到15秒的时候再进入
-    while (count--) {
-        func.sClick(click_element);              // 点击标签
-        sleep(count_delay);
-    }
 }
 
 function BP直达() {

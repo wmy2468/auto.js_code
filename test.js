@@ -4,11 +4,14 @@ var func = require("func_list.js");
 var cfg = func.config_dict();
 var pic_folder = files.cwd() + "/piccs/";
 
-auto.service.updateDisplay
+// func.to_scheme('openApp.jdMobile://virtual?params={"category":"jump","des":"m","sourceValue":"babel-act","sourceType":"babel","url":"https://pro.m.jd.com/mall/active/3KwXX8TkUoxiYL5ZfDPzs7w7xqEV/index.html?utm_user=plusmember&gx=RnE1l2ANOjXdydTCOBKuwaU&ad_od=share&hideyl=1&cu=true&utm_source=weixin&utm_medium=weixin&utm_campaign=t_1000072672_17053_001&utm_term=500879a71fb64499ba0adf506754815d&PTAG=17053.1.1&_openapp=1"}');
+// // sleep(5000);
+// log(currentPackage())
+// func.to_autojs();
+// sleep(5000);
+let scheme_url = 'openApp.jdMobile://virtual?params={"category":"jump","des":"m","sourceValue":"babel-act","sourceType":"babel","url":"https://wqdeal.jd.com/deal/confirmorder/main?commlist=100012043978,,1,100012043978,1,0,0"}';
 
-for (au in auto.service) {
-    log(au);
-}
+func.to_scheme(scheme_url);
 // auto.setFlags(["findOnUiThread", "useUsageStats"]);
 
 // let w = func.floaty_win_init();
