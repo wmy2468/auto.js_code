@@ -44,8 +44,8 @@ function main() {
         } else if (select_func == "芭芭农场-助力浏览施肥") {
             requestScreenCapture();
             farms = 芭芭农场();
-            farms.zfb助力();
             farms.tb助力();
+            farms.zfb助力();
             farms.tb();
             farms.zfb();
             farms.施肥("支付宝");
@@ -471,7 +471,7 @@ function 芭芭农场() {
                 "url_lm": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODMwMjgyNjc0MjM5NDE2MzF4dkFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088302826742394&chInfo=ch_share__chsub_Weixin&apshareid=984B5380-ACCD-4099-B658-FAE3E8F5D384",
                 "url_lp": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjQ1NTc3NTMzOTFsYnNoM0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802455775339&chInfo=ch_share__chsub_Weixin&apshareid=D4E9A701-E6F4-4622-A775-0AA2DF4C3E00",
                 "url_mate30": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgwMjU2NjcxNDcyMDA5cDFyY0FOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088802566714720&chInfo=ch_share__chsub_Weixin&apshareid=67021669-4f86-433a-b0f8-e9a3d92ffa4a",
-                "url_honor": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODE0MjMxMzQ4OTE4ODBvNWR3MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088142313489188&chInfo=ch_share__chsub_Weixin&apshareid=f33b8fe2-57ba-468b-8179-708d640216c0",
+                "url_lp2": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODE0MjMxMzQ4OTE4ODBvNWR3MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088142313489188&chInfo=ch_share__chsub_Weixin&apshareid=f33b8fe2-57ba-468b-8179-708d640216c0",
                 // "url_redmi": "alipays://platformapi/startapp?appId=68687599&nbversion=0.1.2101201150.51&nbupdate=synctry&startMultApp=YES&appClearTop=NO&source=share&shareId=MjA4ODgzMjgzNTY5OTY5MjBkMGk1MUFOVEZBUk1fT1JDSEFSRF9TSEFSRV9QMlA=&userId=2088832835699692&chInfo=ch_share__chsub_Weixin&apshareid=2e39b639-86a2-425f-bac9-e59cfa6f729c",
             }
             // Object.keys(url_dict).forEach(obj_key => { }
@@ -483,12 +483,12 @@ function 芭芭农场() {
                 obj_key = url_keys[i];
                 jump_url = url_dict[obj_key];
                 func.to_scheme(jump_url);
-                toastLog("已跳转URL," + obj_key);
+                toastLog("已跳转ZFB," + obj_key);
                 while (text("为Ta助力").findOnce() == null) {
                     func.sClick(text("抽取今日肥料奖励>").findOnce());
                     cnt = cnt + 1;
                     sleep(2000);
-                    if (cnt > 6) {
+                    if (cnt > 4) {
                         toastLog("超过10秒未找到, 后退一下，重新执行");
                         back();
                         sleep(3000);
@@ -520,9 +520,9 @@ function 芭芭农场() {
             let url_dict, url_keys, cnt, break_flag;
             url_dict = {
                 "url_lm": "7 2:/！她出她着他之天里家以那哈",
-                "url_lp": "2！得和子中有就你对去来对嘻",
+                "url_lp": "7微说么来天有和来是起是后啊👉🍑~Ьáò👈或点̸击̸",
                 "url_mate30": "6，去一是要他之得你他么的嘻",
-                "url_honor": "0哈他也和能有就你然了们他啊👉🍑✨Ьáò👈或点缶链节 ",
+                "url_lp2": "2！中好之也有和来要到起多啊táoぉЬáò或点几链节",
                 // "url_redmi": "8 666:/信里心看她他之得年着学和信",
             }
             // Object.keys(url_dict).forEach(obj_key => { }
@@ -531,12 +531,12 @@ function 芭芭农场() {
             for (let i = 0; i < url_keys.length; i++) {
                 func.to_autojs();
                 toastLog("切换到autojs，等待3秒");
-                sleep(2000);
+                sleep(3000);
 
                 obj_key = url_keys[i];
                 jump_url = url_dict[obj_key];
                 setClip(jump_url);          // 设置剪贴板
-                toastLog("已跳转URL");
+                toastLog("已跳转TB，" + obj_key);
                 btn_detail = null;
                 func.to_app("淘宝");
                 cnt = 0;
@@ -547,15 +547,19 @@ function 芭芭农场() {
                     if (btn_detail == null) { btn_detail = text("打开").findOnce(); }
                     if (btn_detail == null) { btn_detail = desc("打开").findOnce(); }
                     func.sClick(idContains("update_imageview_cancel").findOnce());
-                    toastLog("等待淘口令弹窗加载");
+                    toastLog("等待淘口令弹窗加载," + obj_key);
                     sleep(3000);
                     cnt = cnt + 1;
-                    if (cnt > 5) {
+                    if (cnt > 4) {
                         break_flag = true;
                         break;
                     }
                 }
                 if (break_flag) {
+                    back();
+                    sleep(2000);
+                    home();
+                    sleep(2000);
                     i = i - 1;
                     continue;
                 }
