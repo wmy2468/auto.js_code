@@ -130,8 +130,11 @@ function 芭芭农场() {
                 bottom = device.height / 2;
             }
             let btn;
-            btn = className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).
-                boundsInside(left, top, right, bottom).findOnce();
+            btn = text("任务列表").findOnce();
+            if (btn == null) {
+                btn = className("android.widget.Image").textStartsWith("A*").textEndsWith("AAARQnAQ").depth(16).
+                    boundsInside(left, top, right, bottom).findOnce();
+            }
             return btn;
             // if (btn.length != 0) { return btn[btn.length - 1]; }
             // else { return null; }
@@ -1132,12 +1135,20 @@ function 支付宝() {
 function 建行财富季() {
     let func_in_func = {
         click_mission_items: function () {
+            let close_page = function () {
+                while (func.sClick(idContains("fz").findOnce()) == false) {
+                    toastLog("点击，关闭窗口，失败");
+                    sleep(2000); // 关闭窗口按钮
+                }
+                toastLog("已点击，关闭窗口");
+                sleep(2000); // 关闭窗口按钮
+            }
             // -----------------主会场
             click(300, 358);  //链接
             textContains("本月成长值").findOne(); sleep(1000);
             if (func.sClick(text("/").findOnce())) { sleep(1000); }
             click(906, 1000); toastLog("已点击领取CC豆"); sleep(2000);   // 领取每日CCb
-            id("fz").findOnce().click(); toastLog("已点击，关闭窗口"); sleep(2000); // 关闭窗口按钮
+            close_page();
             // -----------------安心会场
             click(300, 775);  //链接
             toastLog("已点击 安心会场"); sleep(2000);
@@ -1148,14 +1159,17 @@ function 建行财富季() {
             }
             sleep(400); click(548, 1774); sleep(800);   // 点击关闭按钮
             click(269, 1950); toastLog("已点击，浏览视频"); sleep(2000);       //点击视频
-            id("fz").findOnce().click(); toastLog("已点击，关闭窗口"); sleep(2000); // 关闭窗口按钮
+            close_page();
             // -----------------商户会场
             click(300, 1229);  //链接
-            textContains("摇骰子").findOne(); sleep(1000);
+            textContains("摇骰子x").findOne(); sleep(1000);
             click(557, 1802); sleep(1000);    //签到
             textContains("建行收单商户").findOne(); sleep(1000);
             while (!(text("领取").findOnce() == null && text("去完成").findOnce() == null)) {
-                func.sClick(text("领取").findOnce());
+                if (func.sClick(text("领取").depth(26).findOnce())) {
+                    toastLog("已点击 领取按钮");
+                    sleep(2600);
+                }
                 if (func.sClick(text("去完成").findOnce())) {
                     while (text("去完成").findOnce() != null) {
                         sleep(2000);
@@ -1176,11 +1190,19 @@ function 建行财富季() {
                         }
                     }
                 }
-                textContains("摇骰子").findOne(); sleep(1000);
-                click(557, 1802); sleep(1000);    //签到
-                textContains("建行收单商户").findOne(); sleep(1000);
+                textContains("摇骰子x").findOne();
+                toastLog("摇骰子已加载");
+                sleep(1000);
+                click(557, 1802);
+                sleep(1000);    //签到
+                while (textContains("建行收单商户").findOnce() == null) {
+                    toastLog("等待收单商户，加载");
+                    sleep(2600);
+                }
+                // textContains("建行收单商户").findOne();
+                sleep(1000);
             }
-            id("fz").findOnce().click(); toastLog("已点击，关闭窗口"); sleep(2000); // 关闭窗口按钮
+            close_page();
             // --------------渔农会场
             click(300, 1489);  //链接
             textContains("刮卡机会").findOne(); sleep(1000);
@@ -1188,12 +1210,12 @@ function 建行财富季() {
                 swipe(259, 1471, 751, 1471, 500); sleep(3000);
                 click("/"); sleep(3000);
             }
-            id("fz").findOnce().click(); toastLog("已点击，关闭窗口"); sleep(2000); // 关闭窗口按钮
+            close_page();
             // -----------助力
             scrollDown(); sleep(800); scrollDown(); sleep(800); scrollDown(); sleep(800);
             [[300, 760], [300, 1040], [300, 1330], [300, 1611], [300, 1880]].forEach(xy => {
                 click(xy[0], xy[1]); toastLog("点击链接," + xy); sleep(3500);
-                id("fz").findOnce().click(); sleep(1500);
+                close_page();
                 id("android:id/text1").text("详情").findOne();
                 sleep(800);
             })

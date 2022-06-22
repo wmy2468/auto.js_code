@@ -935,7 +935,6 @@ function 值得买_签到() {
         }
         // 关闭更新提示
         func.sClick(id("com.smzdm.client.android:id/iv_content_cancel").findOnce());
-
         func.sClick(id("com.smzdm.client.android:id/iv_close").findOnce());
         toastLog("等待签到加载");
         sleep(2000);
