@@ -1165,10 +1165,22 @@ function 建行财富季() {
             textContains("摇骰子x").findOne(); sleep(1000);
             click(557, 1802); sleep(1000);    //签到
             textContains("建行收单商户").findOne(); sleep(1000);
+            let shanghu_flag = false;
             while (!(text("领取").findOnce() == null && text("去完成").findOnce() == null)) {
                 if (func.sClick(text("领取").depth(26).findOnce())) {
                     toastLog("已点击 领取按钮");
-                    sleep(2600);
+                    sleep(4000);
+                    while (textContains("摇骰子x").findOnce() == null) {
+                        shanghu_flag = true;
+                        back();
+                        toastLog("领取后未发现摇骰子，返回等待4秒");
+                        sleep(4000);
+                    }
+                }
+                if (shanghu_flag) {
+                    shanghu_flag = false;
+                    click(557, 1802);       // 点击中间按钮
+                    sleep(1000);    //签到
                 }
                 if (func.sClick(text("去完成").findOnce())) {
                     while (text("去完成").findOnce() != null) {
@@ -1190,7 +1202,10 @@ function 建行财富季() {
                         }
                     }
                 }
-                textContains("摇骰子x").findOne();
+                while (textContains("摇骰子x").findOnce() == null) {
+                    toastLog("等待 摇骰子加载");
+                    sleep(2500);
+                }
                 toastLog("摇骰子已加载");
                 sleep(1000);
                 click(557, 1802);

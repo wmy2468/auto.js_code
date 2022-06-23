@@ -11,43 +11,7 @@ var pic_folder = files.cwd() + "/piccs/";
 
 // sleep(5000);
 
-textContains("摇骰子x").findOne(); sleep(1000);
-click(557, 1802); sleep(1000);    //签到
-textContains("建行收单商户").findOne(); sleep(1000);
-while (!(text("领取").findOnce() == null && text("去完成").findOnce() == null)) {
-    func.sClick(text("领取").depth(26).findOnce());
-    if (func.sClick(text("去完成").findOnce())) {
-        while (text("去完成").findOnce() != null) {
-            sleep(2000);
-        }
-        sleep(2500);
-        if (text("已完成").findOnce() == null) {
-            // 判断海报任务
-            if (textContains("截图或长按保存海报").findOnce() != null) {
-                toastLog("海报"); sleep(2000);
-                while (textContains("截图或长按保存海报").findOnce() != null) {
-                    click("/");
-                    sleep(2000);
-                }
-            } else {
-                toastLog("非海报");
-                sleep(4500);
-                back();
-            }
-        }
-    }
-    textContains("摇骰子x").findOne();
-    toastLog("摇骰子已加载");
-    sleep(1000);
-    click(557, 1802);
-    sleep(1000);    //签到
-    while (textContains("建行收单商户").findOnce() == null) {
-        toastLog("等待收单商户，加载");
-        sleep(2600);
-    }
-    // textContains("建行收单商户").findOne();
-    sleep(1000);
-}
+log(textContains("摇骰子x").findOnce())
 // auto.setFlags(["findOnUiThread", "useUsageStats"]);
 
 // let w = func.floaty_win_init();
