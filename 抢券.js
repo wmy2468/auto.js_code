@@ -148,9 +148,8 @@ function BP直达() {
 
     let bp_scheme;
     if (select_item == "---增加新BP链接") {
-        let input_name;
         // select_item = func.dialogs_select(["京东", "淘宝"]);
-        input_name = rawInput("请输入BP名称");
+        let input_name = rawInput("请输入BP名称");
         bp_scheme = rawInput("请输入BP链接");
         if (storage_bps == {}) {
             storage_bps = { input_name: bp_scheme }
@@ -163,9 +162,14 @@ function BP直达() {
         let res = func.jianguoyun("auto.js_code/", "BP_LIST.txt");
         let res_json = JSON.parse(res);
         local_config.put("BP直达", res_json);
-    }
-    else {
+    } else {
         bp_scheme = storage_bps[select_item];
+        let jump_way = func.dialogs_select(["整点跳转", "直接跳转"]);
+        if (jump_way == "整点跳转") {
+            let h = new Date().getHours();
+            log(h + "59,59,999");
+            func.getTimeDiff("北京时间", h + ",59,59,999");
+        }
         func.to_scheme(bp_scheme);
         toast("已跳转BP链接");
     }

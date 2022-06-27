@@ -11,7 +11,11 @@ var pic_folder = files.cwd() + "/piccs/";
 
 // sleep(5000);
 
-log(textContains("摇骰子x").findOnce())
+http.__okhttp__.setTimeout(3000);
+let res = func.jianguoyun("auto.js_code/", "BP_LIST.txt");
+// log("{" + res.replace("{", "%7B").replace("}", "%7D").replace('"', "%22") + "}");
+let res_json = JSON.parse(res);
+log(res_json);
 // auto.setFlags(["findOnUiThread", "useUsageStats"]);
 
 // let w = func.floaty_win_init();
