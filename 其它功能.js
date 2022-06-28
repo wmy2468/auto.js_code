@@ -1134,6 +1134,10 @@ function 支付宝() {
 // -----------------------建行财富季-----------------------
 function 建行财富季() {
     let func_in_func = {
+        re_load: function () {
+            // func.sClick(text("重新加载").findOnce());
+            func.cClick(text("重新加载").findOnce());
+        },
         click_mission_items: function () {
             let close_page = function () {
                 while (func.sClick(idContains("fz").findOnce()) == false) {
@@ -1228,7 +1232,7 @@ function 建行财富季() {
             close_page();
             // -----------助力
             scrollDown(); sleep(800); scrollDown(); sleep(800); scrollDown(); sleep(800);
-            [[300, 760], [300, 1040], [300, 1330], [300, 1611], [300, 1880]].forEach(xy => {
+            [[300, 760], [300, 1040], [300, 1330], [300, 1611], [300, 1880], [300, 2100]].forEach(xy => {
                 click(xy[0], xy[1]); toastLog("点击链接," + xy); sleep(3500);
                 close_page();
                 id("android:id/text1").text("详情").findOne();
@@ -1272,6 +1276,7 @@ function 建行财富季() {
             toastLog("已点击链接...");
             sleep(2600);
             while (textStartsWith("刷新").findOnce() == null) {
+                func_in_func.re_load();
                 func.sClick(text("允许").findOnce());
                 toast("请跳转到 ccb福气任务界面");
                 sleep(2600);
@@ -1330,6 +1335,7 @@ function 建行财富季() {
             right = device.width;
             bottom = device.height
             while (text("好友列表").findOnce() == null) {
+                func_in_func.re_load();
                 // 点击主会场按钮
                 if (func.sClick(text("主会场").findOnce()) || func.sClick(text("奋斗小店").boundsInside(left, top, right, bottom).findOnce())) {
                     toastLog("已点击 ccb主会场按钮"); sleep(2600);
@@ -1368,6 +1374,7 @@ function 建行财富季() {
         help_friend: function () {
             log(123);
             while (textEndsWith("人给他点赞").findOnce() == null) {
+                func_in_func.re_load();
                 // while (textStartsWith("助力你：").findOnce() == null) {
                 toastLog("等待 助力页面加载"); sleep(2600);
             }
@@ -1381,6 +1388,7 @@ function 建行财富季() {
                 toastLog("未成功 点击助力，等待返回"); sleep(2600);
             }
             while (text("好友列表").findOnce() == null) {
+                func_in_func.re_load();
                 if (textEndsWith("小店").findOnce()) {
                     toastLog("还在小店，等待4秒");
                     sleep(4000);
