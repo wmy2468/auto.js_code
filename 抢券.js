@@ -6,6 +6,7 @@ var cfg = func.config_dict();
 main();
 
 function main() {
+    device.setMusicVolume(0);       //设为静音
     let selectedArr = ["光大活动", "中信活动", "京东相关", "BP直达", "招商便民生活", "招商倒计时领取",];
     //---------------配置区域-----------------
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本        

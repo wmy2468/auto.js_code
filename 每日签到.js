@@ -11,6 +11,7 @@ var cfg = func.config_dict();
 main();
 
 function main() {
+    device.setMusicVolume(0);       //设为静音
     let show_arr;
     show_arr = ["京东.领京豆", "京东.领券中心", "京东.金融签到", "京东.金融双签", "京东.种豆得豆",
         //                                                                                                                                                           "京东.校园签到", "京东.陪伴计划签到", "京东.个护签到", "京东.鞋靴馆签到", "京东.服饰馆签到", "京东.箱包馆签到",

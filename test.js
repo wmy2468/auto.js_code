@@ -11,7 +11,9 @@ var pic_folder = files.cwd() + "/piccs/";
 
 // sleep(5000);
 
-log(device.brand);
+for (de in device) {
+    log(de);
+}
 // auto.setFlags(["findOnUiThread", "useUsageStats"]);
 
 // let w = func.floaty_win_init();

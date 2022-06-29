@@ -13,6 +13,7 @@ dev_redmi = "Redmi Note 7";
 main();
 // toastLog(text("领取奖励").find().length);
 function main() {
+    device.setMusicVolume(0);       //设为静音
     let select_func;
     let selectedArr;
     if (dev_model == dev_mate30) {
