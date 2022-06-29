@@ -714,8 +714,8 @@ function 京东() {
         },
         path_date_string: function () {
             let dev_brand = device.brand;
-            if (dev_brand == "HUAWEI" || dev_brand == "honor") { save_path = "/sdcard/Pictures/Screenshots/Screenshot_" }
-            else if (dev_brand == "xiaomi") { save_path = "/sdcard/DCIM/screenshots/IMG_" }
+            if (dev_brand == "HUAWEI" || dev_brand == "honor" || dev_brand == "HONOR") { save_path = "/sdcard/Pictures/Screenshots/Screenshot_" }
+            else if (dev_brand == "xiaomi" || dev_brand == "XIAOMI") { save_path = "/sdcard/DCIM/screenshots/IMG_" }
             let dt, monthes, dates, hours, minutes, seconds;
             dt = new Date();
             monthes = dt.getMonth() + 1;
