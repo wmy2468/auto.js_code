@@ -11,9 +11,20 @@ var pic_folder = files.cwd() + "/piccs/";
 
 // sleep(5000);
 
-for (de in device) {
-    log(de);
+// log(idContains("opr").findOnce());
+
+func.to_scheme(cfg["url_scheme"]["others"]["和包签到"]);
+while (text("月签礼连续3个月（任一天）签到").findOnce() == null) {
+    toastLog("等待，签到页面，加载");
+    sleep(2600);
 }
+sleep(1000);
+while (textContains("已完成签到").findOnce() == null) {
+    func.sClick(idContains("opr").findOnce());
+    sleep(1000);
+}
+
+// func.to_scheme("cmpay:// ?actionId=1515&channelId=k7zaPN2hQcxiPqM2GMzisdkYNH8TB0Gd");
 // auto.setFlags(["findOnUiThread", "useUsageStats"]);
 
 // let w = func.floaty_win_init();

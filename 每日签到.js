@@ -18,7 +18,7 @@ function main() {
         "京东.极速版领红包", "京东.极速版挖宝",
         "云闪付.签到", "云闪付.领积点",
         "沃钱包_泡泡签到", "浦发_金豆签到", "浦发xyk_积分签到", "农行_小豆签到", "值得买_签到", "买单吧_签到",
-        "工商_小象乐园", "南航打卡"
+        "和包签到", "建行生活签到", "工商_小象乐园"
     ];
     let select_items;
     //     if (new Date().getHours() <= 1) {
@@ -40,7 +40,8 @@ function main() {
             else if (item == "农行_小豆签到") { 农行_小豆签到(); }
             else if (item == "值得买_签到") { 值得买_签到(); }
             else if (item == "买单吧_签到") { 买单吧_签到(); }
-            else if (item == "南航打卡") { 南航打卡(); }
+            else if (item == "和包签到") { 和包签到(); }
+            else if (item == "建行生活签到") { 建行生活签到(); }
         }
 
     });
@@ -48,38 +49,37 @@ function main() {
 }
 
 // ======================签到代码==================================
-function 南航打卡() {
-    let find_text, find_idx;
-    func.to_scheme("csa://android.mbp.csair.com:80?action=PullUp&activityID=98&utm_source=yd&utm_campaign=ttdk&utm_channel=app");
-
-    while (text("已打卡").findOnce() == null) {
-        find_text = textStartsWith("您已连续打卡").textEndsWith("天").findOnce();
-
-        if (find_text != null) {
-            find_idx = find_text.indexInParent();
-            func.sClick(find_text.parent().child(find_idx - 1));
-            toast("已点击 立即打卡");
-            sleep(3000);
+function 建行生活签到() {
+    func.to_app("建行生活");
+    let vipp, vipp_parent;
+    while (text("优惠适用商户").findOnce() == null) {
+        vipp = text("会员有礼").findOnce();
+        if (vipp != null) {
+            vipp_parent = vipp.parent();
+            func.sClick(vipp_parent.child(vipp.indexInParent() + 1).child(0));
         }
-        toast("等待完成 打卡完成");
-        sleep(2500);
+        toastLog("等待，签到页面，加载");
+        sleep(2600);
     }
-    toastLog("南航 打卡完成");
-    sleep(2500);
+    while (!(textContains("获得奖励").findOnce() != null || text("今日已签到").findOnce() != null)) {
+        func.sClick(text("立即签到").findOnce());
+        toastLog("等待，签到完成，加载");
+        sleep(2600);
+    }
 }
 
-function 龙支付签到() {
-    func.to_scheme(cfg["url_scheme"]["建行"]["lzf签到"]);
-    text("今天").findOne();
-    while (text("今日已签到").findOnce() == null) {
-        if (func.sClick(text("立即签到").findOnce())) {
-            sleep(3000);
-        }
+function 和包签到() {
+    func.to_scheme(cfg["url_scheme"]["others"]["和包签到"]);
+    while (text("月签礼连续3个月（任一天）签到").findOnce() == null) {
+        toastLog("等待，签到页面，加载");
+        sleep(2600);
     }
-    toast("LZF已签到");
-    sleep(3000);
+    sleep(1000);
+    while (textContains("已完成签到").findOnce() == null) {
+        func.sClick(idContains("opr").findOnce());
+        sleep(1000);
+    }
 }
-
 function 云闪付() {
     let func_obj = {
         领积点: function () {
@@ -946,125 +946,159 @@ function 值得买_签到() {
 }
 
 // 邮储信用卡
-function 邮储信用卡() {
-    let appName = "邮储信用卡";
-    func.to_app(appName);
-    while (text("我的").findOnce() == null) {
-        ;
-        func.sClick(text("确认").findOnce());
-        let Continue = className("TextView").text("继续使用").findOnce();
-        if (Continue != null) {
-            func.sClick(Continue);
-        }
-    }
-    sleep(800);
-    func.sClick(text("我的").findOnce());
-    sleep(800);
-    // 等待我的页面加载
-    sleep(800);
-    func.sClick(text("签到有礼").findOne());
-    while (!(text("明天再来哦").findOnce() != null || textContains("恭喜获得").findOnce() != null)) {
-        func.sClick(text("立即签到").findOnce());
-        sleep(800);
-        if (text("忘记手势密码").findOnce() != null) {
-            sleep(500);
-            func.gesture_pwd(appName);
-            sleep(1000);
-        }
-    }
-    toastLog(appName + "已签到");
-    sleep(1000);
-}
+// function 邮储信用卡() {
+//     let appName = "邮储信用卡";
+//     func.to_app(appName);
+//     while (text("我的").findOnce() == null) {
+//         ;
+//         func.sClick(text("确认").findOnce());
+//         let Continue = className("TextView").text("继续使用").findOnce();
+//         if (Continue != null) {
+//             func.sClick(Continue);
+//         }
+//     }
+//     sleep(800);
+//     func.sClick(text("我的").findOnce());
+//     sleep(800);
+//     // 等待我的页面加载
+//     sleep(800);
+//     func.sClick(text("签到有礼").findOne());
+//     while (!(text("明天再来哦").findOnce() != null || textContains("恭喜获得").findOnce() != null)) {
+//         func.sClick(text("立即签到").findOnce());
+//         sleep(800);
+//         if (text("忘记手势密码").findOnce() != null) {
+//             sleep(500);
+//             func.gesture_pwd(appName);
+//             sleep(1000);
+//         }
+//     }
+//     toastLog(appName + "已签到");
+//     sleep(1000);
+// }
 
 // 邮储银行
-function 邮储银行() {
-    let appName = "邮储银行";
-    //closeApp(appName);
-    func.to_app(appName);
-    while (className("RadioButton").text("我的").findOnce() == null) {
-        ;
-    }
-    sleep(1000);
-    func.sClick(text("我的").findOnce());
-    // 签到按钮
-    //toastLog("我的已点击");
-    while (textContains("上次登录").findOnce() == null) {
-        if (text("忘记手势").findOnce() != null) {
-            //toastLog("滑动手势");
-            sleep(500);
-            func.gesture_pwd(appName);
-            sleep(1000);
-        }
-    }
-    //toastLog("找签到");
-    while (text("已签到").findOnce() == null) {
-        func.sClick(id("tvName").text("签到有礼").findOnce());
-        sleep(1200);
-        func.sClick(text("签 到").findOnce());
-        sleep(1200);
-    }
-    toastLog(appName + "已签到");
-    sleep(1000);
-}
+// function 邮储银行() {
+//     let appName = "邮储银行";
+//     //closeApp(appName);
+//     func.to_app(appName);
+//     while (className("RadioButton").text("我的").findOnce() == null) {
+//         ;
+//     }
+//     sleep(1000);
+//     func.sClick(text("我的").findOnce());
+//     // 签到按钮
+//     //toastLog("我的已点击");
+//     while (textContains("上次登录").findOnce() == null) {
+//         if (text("忘记手势").findOnce() != null) {
+//             //toastLog("滑动手势");
+//             sleep(500);
+//             func.gesture_pwd(appName);
+//             sleep(1000);
+//         }
+//     }
+//     //toastLog("找签到");
+//     while (text("已签到").findOnce() == null) {
+//         func.sClick(id("tvName").text("签到有礼").findOnce());
+//         sleep(1200);
+//         func.sClick(text("签 到").findOnce());
+//         sleep(1200);
+//     }
+//     toastLog(appName + "已签到");
+//     sleep(1000);
+// }
 
 // 华彩生活
-function 华彩生活() {
-    let appName = "华彩生活";
-    //closeApp(appName);
-    func.to_app(appName);
-    while (text("我的").findOnce() == null) {
-        ;
-    }
-    sleep(1000);
-    func.sClick(text("我的").findOnce());
-    // 等待我的页面加载
-    text("自动还款").findOne();
-    // 签到按钮
-    while (id("iv_sign").findOnce() == null) {
-        func.to_autojs();
-        func.to_app(appName);
-        sleep(3000);
-    }
-    sleep(800);
-    func.sClick(id("iv_sign").findOnce());
+// function 华彩生活() {
+//     let appName = "华彩生活";
+//     //closeApp(appName);
+//     func.to_app(appName);
+//     while (text("我的").findOnce() == null) {
+//         ;
+//     }
+//     sleep(1000);
+//     func.sClick(text("我的").findOnce());
+//     // 等待我的页面加载
+//     text("自动还款").findOne();
+//     // 签到按钮
+//     while (id("iv_sign").findOnce() == null) {
+//         func.to_autojs();
+//         func.to_app(appName);
+//         sleep(3000);
+//     }
+//     sleep(800);
+//     func.sClick(id("iv_sign").findOnce());
 
-    while (textContains("恭喜您获得").findOnce() == null && text("今日已签").findOnce() == null) {
-        func.sClick(text("连续签到抽大奖").findOnce());
-        sleep(800);
-        if (text("请输入手势密码").findOnce() != null) {
-            sleep(500);
-            func.gesture_pwd(appName);
-            sleep(1000);
-        }
-    }
-    toastLog(appName + "已签到");
-    sleep(1000);
-}
+//     while (textContains("恭喜您获得").findOnce() == null && text("今日已签").findOnce() == null) {
+//         func.sClick(text("连续签到抽大奖").findOnce());
+//         sleep(800);
+//         if (text("请输入手势密码").findOnce() != null) {
+//             sleep(500);
+//             func.gesture_pwd(appName);
+//             sleep(1000);
+//         }
+//     }
+//     toastLog(appName + "已签到");
+//     sleep(1000);
+// }
 
-function 工银e生活() {
-    let appName = "工银e生活";
-    //closeApp(appName);
-    func.to_app(appName);
-    while (id("radio_button1").text("生活").findOnce() == null) {
-        ;
-    }
-    func.sClick(id("radio_button1").text("生活").findOne());
-    // 点击输入框
-    func.sClick(text("扫一扫").findOne().parent().child(1));
-    // 商城
-    id("tv_title").text("历史搜索").findOne();
-    sleep(1000);
-    func.sClick(className("TextView").id("tv_name").text("购物日").findOne());
-    sleep(1000);
-    id("tv_title").text("特色活动").findOne();
-    sleep(1000);
-    // 第二个商城
-    func.sClick(id("tv_name").text("购物日").findOne());
-    sleep(800);
-    text("点击签到").findOne();
-    sleep(2000);
-    func.sClick(text("点击签到").findOnce());
+// function 工银e生活() {
+//     let appName = "工银e生活";
+//     //closeApp(appName);
+//     func.to_app(appName);
+//     while (id("radio_button1").text("生活").findOnce() == null) {
+//         ;
+//     }
+//     func.sClick(id("radio_button1").text("生活").findOne());
+//     // 点击输入框
+//     func.sClick(text("扫一扫").findOne().parent().child(1));
+//     // 商城
+//     id("tv_title").text("历史搜索").findOne();
+//     sleep(1000);
+//     func.sClick(className("TextView").id("tv_name").text("购物日").findOne());
+//     sleep(1000);
+//     id("tv_title").text("特色活动").findOne();
+//     sleep(1000);
+//     // 第二个商城
+//     func.sClick(id("tv_name").text("购物日").findOne());
+//     sleep(800);
+//     text("点击签到").findOne();
+//     sleep(2000);
+//     func.sClick(text("点击签到").findOnce());
 
-    toastLog(appName + "已签到");
-    sleep(1000);
-}
+//     toastLog(appName + "已签到");
+//     sleep(1000);
+// }
+
+
+
+// function 南航打卡() {
+//     let find_text, find_idx;
+//     func.to_scheme("csa://android.mbp.csair.com:80?action=PullUp&activityID=98&utm_source=yd&utm_campaign=ttdk&utm_channel=app");
+
+//     while (text("已打卡").findOnce() == null) {
+//         find_text = textStartsWith("您已连续打卡").textEndsWith("天").findOnce();
+
+//         if (find_text != null) {
+//             find_idx = find_text.indexInParent();
+//             func.sClick(find_text.parent().child(find_idx - 1));
+//             toast("已点击 立即打卡");
+//             sleep(3000);
+//         }
+//         toast("等待完成 打卡完成");
+//         sleep(2500);
+//     }
+//     toastLog("南航 打卡完成");
+//     sleep(2500);
+// }
+
+// function 龙支付签到() {
+//     func.to_scheme(cfg["url_scheme"]["建行"]["lzf签到"]);
+//     text("今天").findOne();
+//     while (text("今日已签到").findOnce() == null) {
+//         if (func.sClick(text("立即签到").findOnce())) {
+//             sleep(3000);
+//         }
+//     }
+//     toast("LZF已签到");
+//     sleep(3000);
+// }

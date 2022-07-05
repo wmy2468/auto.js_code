@@ -91,6 +91,9 @@ function config_dict() {
                 "余额宝": "alipays://platformapi/startapp?appId=20000032",
                 "芭芭农场": "alipays://platformapi/startapp?appId=68687599",
                 "淘宝农场": "tbopen://m.taobao.com/tbopen/index.html?action=ali.open.nav&module=h5&bootImage=0&bc_fl_src=zfb_spare1&visa=&h5Url=https://pages.tmall.com/wow/hdwk/act/2020nhj-single?wh_biz=tm&disableNav=YES&disableProgress=YES&hd_from=alipay_mayifarm"
+            },
+            "others": {
+                "和包签到": "cmpay:// ?actionId=1515&channelId=k7zaPN2hQcxiPqM2GMzisdkYNH8TB0Gd",
             }
         },
     }
