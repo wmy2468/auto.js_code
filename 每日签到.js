@@ -461,7 +461,9 @@ function 浦发_金豆签到() {
     }
     toastLog("已查找到 签到提醒"); sleep(2600);
     while (textStartsWith("+").findOnce() == null) {
-        toastLog("等待加载 金豆+号按钮"); sleep(2600);
+        func.sClick(text("稍后更新").findOnce());
+        toastLog("等待加载 金豆+号按钮");
+        sleep(2600);
     }
     toastLog("已找到 金豆+号按钮"); sleep(2600);
     let cnt, signs, sign_text;
