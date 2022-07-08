@@ -135,17 +135,28 @@ function jianguoyun(path, file_name, is_pics) {
 
 // 切换到autojs
 function to_autojs() {
+    let cnt = 0;
     let pkg_name = app.getPackageName("Autox.js") || app.getPackageName("Auto.js") || app.getPackageName("sj.xotuA");
-    if (currentPackage() != pkg_name) {
-        log("started package");
-        app.startActivity({
-            packageName: pkg_name,
-            className: "org.autojs.autojs.ui.main.MainActivity_",
-        });
-    } else {
-        log("already in package");
+    while (currentPackage() != pkg_name) {
+        if (cnt == 0) {
+            log("....started package");
+            app.startActivity({
+                packageName: pkg_name,
+                className: "org.autojs.autojs.ui.main.MainActivity_",
+            });
+        } else if (cnt > 50) {
+            cnt = 0;
+            toastLog("超时重新启动....started package");
+            app.startActivity({
+                packageName: pkg_name,
+                className: "org.autojs.autojs.ui.main.MainActivity_",
+            });
+        }
+        cnt = cnt + 1;
+        sleep(100);
     }
-    waitForPackage(pkg_name, period = 50);
+    log("already in package");
+    // waitForPackage(pkg_name, period = 50);
     // toast("已到达autojs");
 }
 
