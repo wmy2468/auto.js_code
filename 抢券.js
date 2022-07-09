@@ -7,7 +7,7 @@ main();
 
 function main() {
     device.setMusicVolume(0);       //设为静音
-    let selectedArr = ["光大活动", "中信活动", "京东相关", "BP直达", "招商便民生活", "招商倒计时领取",];
+    let selectedArr = ["光大活动", "中信活动", "京东相关", "BP直达", "招商便民生活", "招商倒计时领取", "刷库存"];
     //---------------配置区域-----------------
     let scriptName = func.dialogs_select(selectedArr);      // 设置查找的文本        
     // 设置屏幕常亮6分钟
@@ -24,6 +24,10 @@ function main() {
     // else if (scriptName == "华彩生活瑞幸") { 华彩生活瑞幸(); }
     else if (scriptName == "招商便民生活") { 招商便民生活(); }
     else if (scriptName == "招商倒计时领取") { 招商倒计时领取(); }
+    else if (scriptName == "刷库存") {
+        select_func = func.dialogs_select(Object.keys(刷库存()));
+        eval("刷库存()." + select_func + "()");
+    }
     // else if (scriptName == "云闪付APPStore") { 云闪付().云闪付APPStore(); }
     // else if (scriptName == "云闪付2022新年捡漏") { 云闪付().云闪付2022新年捡漏(); }
     toastLog("结束");
@@ -42,6 +46,46 @@ function get_server_delay(req_url) {
 
 
 // ------------------------------------------------------
+function 刷库存() {
+    let stock_refresh = {
+        来伊份刷库存: function () {
+            let cnt = 8;
+            let payed, click_type;
+            while (text("收银台").findOnce() == null) {
+                cnt = 8;
+                click_type = ""
+                func.sClick(text("立即购买").findOnce());
+                func.sClick(className("android.view.View").text("已售罄").findOnce());
+                while (cnt--) {
+                    payed = text("实付款 ：").findOnce();
+                    if (payed != null) {
+                        // log("click_pay");
+                        func.sClick(payed.parent().child(payed.parent().childCount() - 1));
+                        click_type = "click_pay";
+                    } else {
+                        // log("click_sure");
+                        func.sClick(text("确认").findOnce());
+                        func.sClick(className("android.view.View").text("已售罄").findOnce());
+                        click_type = "click_sure";
+                    }
+                    sleep(2250);
+                    log("当前cnt：" + cnt);
+                    if (click_type == "") {
+                        cnt = 8;
+                        break;
+                    }
+                }
+                log("click_type:" + click_type);
+                if (click_type == "click_pay") {
+                    back();
+                }
+
+            }
+        },
+        苏宁刷第一个: function () { },
+    }
+    return stock_refresh;
+}
 function 京东() {
     let jd_func = {
         到点切换领取: function (scheme_url, func_string, count, start_second, count_delay) {
@@ -186,7 +230,16 @@ function 招商倒计时领取() {
     }
     let cnt = 0;
     toastLog("等待立即领取出现");
-    func.sClick(textContains("立即").findOne())
+    while (func.sClick(textStartsWith("立即").findOne()) == false) {
+        if (cnt == 0) {
+            toastLog("等待立即领取加载...")
+        }
+        cnt = cnt + 1;
+        sleep(50);
+        if (cnt > 1000 / 50 * 3) {
+            cnt = 0;
+        }
+    }
     toastLog("已点击");
 }
 

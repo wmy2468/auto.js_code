@@ -11,10 +11,7 @@ var pic_folder = files.cwd() + "/piccs/";
 
 // sleep(5000);
 
-// log(idContains("opr").findOnce());
-
-func.to_scheme("android.settings.USER_DICTIONARY_SETTINGS");
-
+back();
 
 // func.to_scheme("cmpay:// ?actionId=1515&channelId=k7zaPN2hQcxiPqM2GMzisdkYNH8TB0Gd");
 // auto.setFlags(["findOnUiThread", "useUsageStats"]);
