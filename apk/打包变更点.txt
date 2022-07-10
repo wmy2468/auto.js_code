@@ -1,0 +1,10 @@
+1. 包名变更为com.taobao.alihouse.broker
+2. 源码上增加	http.request_time()，增加以下请求时间函数
+			callStartTime: ht.callStartTime,
+            dnsStartTime: ht.dnsStartTime,
+            connectStartTime: ht.connectStartTime,
+            responseHeadStartTime: ht.responseHeadStartTime,
+            responseHeadEndTime: ht.responseHeadEndTime,
+            requestDelay_callStart: ht.responseHeadStartTime - ht.callStartTime,
+            requestDelay_dnsStart: ht.responseHeadStartTime - ht.dnsStartTime,
+            requestDelay_connectStart: ht.responseHeadStartTime - ht.connectStartTime,
