@@ -1311,7 +1311,7 @@ function 建行财富季() {
                 toastLog("已点击，去完成，等待3秒");
                 sleep(4500);
                 // 等待返回
-                while (textStartsWith("刷新").findOnce() == null) {
+                while (text("刷新奖励").depth(22).findOnce() == null) {
                     back();
                     toastLog("执行返回，等待6秒");
                     sleep(6000);
