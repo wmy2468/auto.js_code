@@ -48,6 +48,21 @@ function get_server_delay(req_url) {
 // ------------------------------------------------------
 function 刷库存() {
     let stock_refresh = {
+        饿了么提交订单() {
+            func.to_app("饿了么");
+            let time_area = "北京时间";
+            let dat, h, m;
+            dat = new Date();
+            h = dat.getHours();
+            m = dat.getMinutes();
+            let start_time = h + "," + m + ",59,990";
+            func.getTimeDiff(time_area, start_time);              // 等待到15秒的时候再进入
+            while (1) {
+                func.sClick(text("提交订单").findOnce());
+                func.sClick(text("知道了").findOnce());
+                sleep(50);
+            }
+        },
         来伊份刷库存: function () {
             let cnt = 8;
             let payed, click_type;
@@ -295,39 +310,35 @@ function 招商便民生活() {
 function 光大活动() {
     toastLog("到点点击");
     let scheme_url = {
-        "10点朴朴20": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121596&jsonData=&sign=3e14f6bd4538cd3c46218dd01a195cba&channelName=shanquan&batchId=121596&tag=shareDetail&newSign=61e017e3da70bae55df501e8aa5ac987",
-        "10点朴朴15": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121592&channelName=shanquan&batchId=121592&tag=shareDetail",
-        "10点美团50-25": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/121046&channelName=shanquan&batchId=121046&tag=shareDetail",
+        "朴朴50-25周六日10点": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/126291&channelName=shanquan&batchId=126291&tag=shareDetail",
+        "朴朴50-10平日10点": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/126279&jsonData=&channelName=shanquan&batchId=126279&tag=shareDetail",
+        "美团30-15": "yghsh://jump?channel=FUNGUIDE_VOUCHERS_TEMPB&platform=FUNGUIDE&skipUrl=https://yghsh.cebbank.com/static/coupon/page/VouchersNew/index.html#/couponslist/listdetail/couponsdetail/126291&jsonData=&channelName=shanquan&batchId=126291&tag=shareDetail",
     }
     let startTime, targetViewText;
-    let actNames = ["周五石化200-120", "周五京东200-50", "10点美团30-15", "10点美团50-25", "10点朴朴20", "10点朴朴15"];
+    let actNames = ["周五石化200-120", "周五京东200-50", "10点美团30-15", "朴朴50-25周六日10点", "朴朴50-10平日10点"];
     let actName = func.dialogs_select(actNames);      // 设置查找的文本
 
     switch (actName) {
         // 10点
-        case "10点美团50-25":            //10点
-            startTime = "10,00,00,000";
-            targetViewText = "49345";
-            break;
         case "10点美团30-15":            //10点
             startTime = "10,00,00,000";
             targetViewText = "49346";
             break;
-        case "10点朴朴20":            //10点
+        case "朴朴50-25周六日10点":            //10点
             startTime = "09,59,59,500";
-            targetViewText = "49620";
+            targetViewText = "51977";
             break;
-        case "10点朴朴15":            //10点
+        case "朴朴50-10平日10点":            //10点
             startTime = "09,59,59,500";
-            targetViewText = "49618";
+            targetViewText = "51971";
             break;
         case "周五石化200-120":            //10点
             // 11点 650 太早 750太慢 700太慢
-            startTime = "14,59,59,500";
+            startTime = "14,59,58,500";
             targetViewText = "49136";
             break;
         case "周五京东200-50":            //11点
-            startTime = "14,59,59,500";
+            startTime = "14,59,58,500";
             targetViewText = "48161";
             break;
     }
