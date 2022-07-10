@@ -11,7 +11,13 @@ var pic_folder = files.cwd() + "/piccs/";
 
 // sleep(5000);
 
-back();
+
+http.get("http://www.baidu.com");
+let htt = http.request_time();
+log("responseHeadStartTime:" + htt.responseHeadStartTime);
+log("responseHeadEndTime:" + htt.responseHeadEndTime);
+log("dnsStartTime:" + htt.dnsStartTime);
+log("requestDelay_dnsStart:" + htt.requestDelay_dnsStart);
 
 // func.to_scheme("cmpay:// ?actionId=1515&channelId=k7zaPN2hQcxiPqM2GMzisdkYNH8TB0Gd");
 // auto.setFlags(["findOnUiThread", "useUsageStats"]);
