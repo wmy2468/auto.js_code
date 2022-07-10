@@ -52,6 +52,7 @@ function 刷库存() {
             let cnt = 8;
             let payed, click_type;
             while (text("收银台").findOnce() == null) {
+                toastLog("开始执行，等待一下");
                 cnt = 8;
                 click_type = ""
                 func.sClick(text("立即购买").findOnce());
@@ -68,8 +69,8 @@ function 刷库存() {
                         func.sClick(className("android.view.View").text("已售罄").findOnce());
                         click_type = "click_sure";
                     }
-                    sleep(2250);
-                    log("当前cnt：" + cnt);
+                    toast("当前cnt：" + cnt);
+                    sleep(2500);
                     if (click_type == "") {
                         cnt = 8;
                         break;
@@ -77,9 +78,10 @@ function 刷库存() {
                 }
                 log("click_type:" + click_type);
                 if (click_type == "click_pay") {
+                    toastLog("执行完一轮，返回一下");
                     back();
+                    sleep(2000);
                 }
-
             }
         },
         苏宁刷第一个: function () { },
