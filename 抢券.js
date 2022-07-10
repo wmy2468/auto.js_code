@@ -99,7 +99,6 @@ function 刷库存() {
                 }
             }
         },
-        苏宁刷第一个: function () { },
     }
     return stock_refresh;
 }
