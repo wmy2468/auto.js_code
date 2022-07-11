@@ -55,7 +55,7 @@ function 刷库存() {
             dat = new Date();
             h = dat.getHours();
             m = dat.getMinutes();
-            let start_time = h + "," + m + ",59,990";
+            let start_time = h + "," + m + ",59,980";
             func.getTimeDiff(time_area, start_time);              // 等待到15秒的时候再进入
             while (1) {
                 func.sClick(text("提交订单").findOnce());
