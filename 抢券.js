@@ -56,7 +56,8 @@ function 刷库存() {
             h = func.dialogs_select(["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"], "选择开始的小时数");
             m = dialogs.rawInput("请输入分钟:");
             let max_count;
-            max_count = Math.trunc(minger / 1200) * 20; //按照每秒1200人次，得到秒数*1000除50毫秒一次
+            let sleep_time = 42;
+            max_count = Math.trunc(minger / 10000 * 7.5 * 1000 / sleep_time); //按照每万人名额 7.5秒计算
             let start_time = h + "," + m + ",00,000";
             log("start_time:" + start_time);
             func.to_app("饿了么");
@@ -64,7 +65,7 @@ function 刷库存() {
             while (max_count--) {
                 func.sClick(text("提交订单").findOnce());
                 func.sClick(text("知道了").findOnce());
-                sleep(50);
+                sleep(sleep_time);
             }
         },
         来伊份刷库存: function () {
