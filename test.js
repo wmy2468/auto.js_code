@@ -10,8 +10,7 @@ var pic_folder = files.cwd() + "/piccs/";
 // func.to_autojs();
 
 // sleep(5000);
-
-log(text("刷新奖励").findOnce());
+log(Math.trunc(10000 / 1200))
 
 // func.to_scheme("cmpay:// ?actionId=1515&channelId=k7zaPN2hQcxiPqM2GMzisdkYNH8TB0Gd");
 // auto.setFlags(["findOnUiThread", "useUsageStats"]);

@@ -50,15 +50,18 @@ function 刷库存() {
     let stock_refresh = {
         饿了么提交订单() {
             let time_area = "北京时间";
-            let h, m;
+            let h, m, minger;
             // dat = new Date();
-            h = func.dialogs_select(["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]);
+            minger = func.dialogs_select([10000, 20000, 30000, 40000, 50000], "选择名额数量");
+            h = func.dialogs_select(["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"], "选择开始的小时数");
             m = dialogs.rawInput("请输入分钟:");
+            let max_count;
+            max_count = Math.trunc(minger / 1200) * 20; //按照每秒1200人次，得到秒数*1000除50毫秒一次
             let start_time = h + "," + m + ",00,000";
             log("start_time:" + start_time);
             func.to_app("饿了么");
             func.getTimeDiff(time_area, start_time, 30);              // 等待到15秒的时候再进入
-            while (1) {
+            while (max_count--) {
                 func.sClick(text("提交订单").findOnce());
                 func.sClick(text("知道了").findOnce());
                 sleep(50);
