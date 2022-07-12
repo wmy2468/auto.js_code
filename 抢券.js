@@ -49,13 +49,14 @@ function get_server_delay(req_url) {
 function 刷库存() {
     let stock_refresh = {
         饿了么提交订单() {
-            func.to_app("饿了么");
             let time_area = "北京时间";
             let dat, h, m;
-            dat = new Date();
-            h = dat.getHours();
-            m = dat.getMinutes();
-            let start_time = h + "," + m + ",59,980";
+            // dat = new Date();
+            h = dialogs.rawInput("请输入小时:(24小时制)");
+            m = dialogs.rawInput("请输入分钟:");
+            let start_time = h + "," + m + ",00,000";
+            log("start_time:" + start_time);
+            func.to_app("饿了么");
             func.getTimeDiff(time_area, start_time);              // 等待到15秒的时候再进入
             while (1) {
                 func.sClick(text("提交订单").findOnce());
