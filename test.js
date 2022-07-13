@@ -8,9 +8,27 @@ var pic_folder = files.cwd() + "/piccs/";
 // // sleep(5000);
 // log(currentPackage())
 // func.to_autojs();
+let s_time = 1000;
+let st = new Date().getTime();
+threads.start(function () {
+    sleep(s_time);
+    log(new Date().getTime() - st);
+    exit();
+});
+while (1) {
+    log(123);
+    sleep(100);
+}
 
-// sleep(5000);
-log(Math.trunc(10000 / 1200))
+function get_server_delay(req_url) {
+    try {
+        http.__okhttp__.setTimeout(1000);       // 设置超时2秒
+        http.get(req_url);
+        return http.request_time().requestDelay_dnsStart;
+    } catch (e) {
+        return 40;
+    }
+}
 
 // func.to_scheme("cmpay:// ?actionId=1515&channelId=k7zaPN2hQcxiPqM2GMzisdkYNH8TB0Gd");
 // auto.setFlags(["findOnUiThread", "useUsageStats"]);
