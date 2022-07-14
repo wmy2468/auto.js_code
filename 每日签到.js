@@ -17,7 +17,7 @@ function main() {
         //                                                                                                                                                           "京东.校园签到", "京东.陪伴计划签到", "京东.个护签到", "京东.鞋靴馆签到", "京东.服饰馆签到", "京东.箱包馆签到",
         "京东.极速版领红包", "京东.极速版挖宝",
         "云闪付.签到", "云闪付.领积点",
-        "沃钱包_泡泡签到", "浦发_金豆签到", "浦发xyk_积分签到", "农行_小豆签到", "值得买_签到", "买单吧_签到",
+        "浦发_金豆签到", "浦发xyk_积分签到", "农行_小豆签到", "值得买_签到", "买单吧_签到",
         "和包签到", "建行生活签到", "工商_小象乐园"
     ];
     let select_items;
@@ -52,7 +52,7 @@ function main() {
 function 建行生活签到() {
     func.to_app("建行生活");
     let vipp, vipp_parent;
-    while (text("优惠适用商户").findOnce() == null) {
+    while (!(text("优惠适用商户").findOnce() != null || text("优惠券发放说明").findOnce() != null)) {
         vipp = text("会员有礼").findOnce();
         if (vipp != null) {
             vipp_parent = vipp.parent();
