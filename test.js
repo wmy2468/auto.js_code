@@ -9,7 +9,17 @@ var pic_folder = files.cwd() + "/piccs/";
 // log(currentPackage())
 // func.to_autojs();
 // log(get_server_delay("http://buy.ele.me"));
-log(get_server_delay("http://cube.elemecdn.com"));
+// log(get_server_delay("http://cube.elemecdn.com"));
+
+let huakuai = idContains("nc_1_n1z").findOnce();
+let x1, y1, x2, x3, huakuai_bound;
+huakuai_bound = huakuai.bounds();
+// log(huakuai_bound.left);
+x1 = huakuai_bound.centerX();
+y1 = huakuai_bound.centerY();
+y2 = y1;
+x2 = device.width - huakuai_bound.left
+gesture(600, [x1, y1], [x2, y2]);
 
 
 function get_server_delay(req_url) {

@@ -62,6 +62,7 @@ function 刷库存() {
             log("start_time:" + start_time);
             func.to_app("饿了么");
             func.getTimeDiff(time_area, start_time, server_delay);              // 等待到15秒的时候再进入
+            let huakuai, x1, y1, x2, y2, huakuai_bound;
             // 线程用于处理执行时间
             threads.start(function () {
                 sleep(minger / 10 * 7.5);
@@ -71,6 +72,16 @@ function 刷库存() {
                 func.sClick(text("提交订单").findOnce());
                 func.sClick(text("知道了").findOnce());
                 func.sClick(text("确定").findOnce());
+                huakuai = idContains("nc_1_n1z").findOnce();
+                if (huakuai != null) {
+                    huakuai_bound = huakuai.bounds();
+                    // log(huakuai_bound.left);
+                    x1 = huakuai_bound.centerX();
+                    y1 = huakuai_bound.centerY();
+                    y2 = y1;
+                    x2 = device.width - huakuai_bound.left
+                    gesture(630, [x1, y1], [x2, y2]);
+                }
                 sleep(23);
             }
         },
