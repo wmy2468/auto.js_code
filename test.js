@@ -8,24 +8,17 @@ var pic_folder = files.cwd() + "/piccs/";
 // // sleep(5000);
 // log(currentPackage())
 // func.to_autojs();
-let s_time = 1000;
-let st = new Date().getTime();
-threads.start(function () {
-    sleep(s_time);
-    log(new Date().getTime() - st);
-    exit();
-});
-while (1) {
-    log(123);
-    sleep(100);
-}
+// log(get_server_delay("http://buy.ele.me"));
+log(get_server_delay("http://cube.elemecdn.com"));
+
 
 function get_server_delay(req_url) {
     try {
-        http.__okhttp__.setTimeout(1000);       // 设置超时2秒
+        http.__okhttp__.setTimeout(2000);       // 设置超时2秒
         http.get(req_url);
         return http.request_time().requestDelay_dnsStart;
     } catch (e) {
+        log("超时了");
         return 40;
     }
 }
