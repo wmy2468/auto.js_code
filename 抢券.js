@@ -70,6 +70,7 @@ function 刷库存() {
             while (1) {
                 func.sClick(text("提交订单").findOnce());
                 func.sClick(text("知道了").findOnce());
+                func.sClick(text("确定").findOnce());
                 sleep(23);
             }
         },
