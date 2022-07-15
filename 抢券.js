@@ -52,7 +52,7 @@ function 刷库存() {
         饿了么提交订单() {
             let time_area = "北京时间";
             let h, m, minger;
-            let server_delay = get_server_delay("http://cube.elemecdn.com") - 10;
+            let server_delay = get_server_delay("http://cube.elemecdn.com") - 5;
             log("server_delay:" + server_delay);
             // dat = new Date();
             minger = func.dialogs_select([10000, 20000, 30000, 40000, 50000], "选择名额数量");
@@ -355,11 +355,11 @@ function 光大活动() {
             break;
         case "周五石化200-120":            //10点
             // 11点 650 太早 750太慢 700太慢
-            startTime = "14,59,58,500";
+            startTime = "14,59,59,500";
             targetViewText = "49136";
             break;
         case "周五京东200-50":            //11点
-            startTime = "14,59,58,500";
+            startTime = "14,59,59,500";
             targetViewText = "48161";
             break;
     }
@@ -383,12 +383,12 @@ function 光大活动() {
         click_btn = textContains("立即抢购").findOnce();
     }
     //   定位元素
-    func.getTimeDiff(timeArea, startTime);
+    func.getTimeDiff(timeArea, startTime,);
     while (text("收银台").findOnce() == null) {
         func.sClick(text("确认购买").findOnce());
         func.sClick(textContains("立即抢购").findOnce());
         func.sClick(text("确认").findOnce());
-        sleep(100);
+        sleep(23);
     }
     toastLog("已点击，请确认结果");
     sleep(3000);
