@@ -60,7 +60,11 @@ function 刷库存() {
             m = dialogs.rawInput("请输入分钟:");
             let start_time = h + "," + m + ",00,000";
             log("start_time:" + start_time);
-            func.to_app("饿了么");
+            while (text("提交订单").findOnce() == null) {
+                toast("请手动跳转到 饿了么APP");
+                sleep(2600);
+            }
+            toast("已转到 饿了么APP");
             func.getTimeDiff(time_area, start_time, server_delay);              // 等待到15秒的时候再进入
             let huakuai, x1, y1, x2, y2, huakuai_bound;
             // 线程用于处理执行时间
